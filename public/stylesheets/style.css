@@ -156,7 +156,7 @@ img.aligncenter {
 #header {
     margin-top: 20px;
 	position: relative;
-    min-height: 200px;
+    min-height: 70px;
 }
 
 #header-wrapper {
@@ -546,6 +546,16 @@ div.language .fieldWithErrors {
 
 #loginform .button, .forgot_password, .meld_deg_paa {
 	margin-left: 5em;
+}
+
+.announce {
+	font-size: 2em;
+	margin-bottom: 1em;
+}
+
+.highlight {
+	font-size: 1.3em;
+	font-weight: bold;
 }
 
 .forgot_password {

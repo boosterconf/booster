@@ -46,9 +46,11 @@ Booster2013::Application.routes.draw do
   #     resources :products
   #   end
 
+  match 'info/organizers' => 'info#organizers'
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   # root :to => 'welcome#index'
+  root :to => 'info#index' #'/' resolves to info/index.html
 
   # See how all your routes lay out with "rake routes"
 
