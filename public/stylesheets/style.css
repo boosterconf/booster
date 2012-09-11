@@ -107,13 +107,8 @@ img.aligncenter {
 #content, #page, #header, #social_media, #footer {
 	max-width: 980px;
 	margin: 0 auto;
-	padding: 0 20px;
+	padding: 0 1em;
 }
-
-#social_media {
-	white-space: nowrap;
-}
-
 
 /* Header */
 
@@ -124,8 +119,10 @@ img.aligncenter {
 
 #social_media li {
 	display: inline;
-	margin-right: 8px;
-    margin-left: 2px;
+	margin-right: 0.5em;
+    margin-left: 0.125em;
+    padding-bottom: 0.5em;
+    float: left;
 }
 
 #social_media .facebook {
