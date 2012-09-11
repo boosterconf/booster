@@ -105,9 +105,15 @@ img.aligncenter {
 }
 
 #content, #page, #header, #social_media, #footer {
-	width: 980px;
+	max-width: 980px;
 	margin: 0 auto;
+	padding: 0 20px;
 }
+
+#social_media {
+	white-space: nowrap;
+}
+
 
 /* Header */
 
