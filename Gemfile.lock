@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/binarylogic/authlogic.git
+  revision: 40c0e16d13329a9a1dc81a1598e5eaa38a7acc39
+  specs:
+    authlogic (3.1.3)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -110,6 +118,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic!
   coffee-rails (~> 3.2.1)
   jquery-rails
   pg

@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.8'
+gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 
 group :production do
   gem 'pg'

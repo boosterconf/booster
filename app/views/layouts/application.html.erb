@@ -15,6 +15,7 @@ booster, roots conference, roots, it conference, software conference, methodolog
 
 
     <link href="/stylesheets/style.css?1336503206" media="screen" rel="stylesheet" type="text/css" />
+    <%= stylesheet_link_tag :all %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tag %>
     <!--<link href="/stylesheets/program.css?1336503206" media="screen" rel="stylesheet" type="text/css" />
@@ -80,6 +81,10 @@ booster, roots conference, roots, it conference, software conference, methodolog
 
 
             </ul> -->
+            <div id="nav">
+                <%= link_to "Register", new_user_path%> | <%= link_to "Login", :login %>
+            </div>
+
         </div>
 
 

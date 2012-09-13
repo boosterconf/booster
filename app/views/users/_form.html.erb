@@ -16,113 +16,13 @@
     <%= f.text_field :email %>
   </div>
   <div class="field">
-    <%= f.label :crypted_password %><br />
-    <%= f.text_field :crypted_password %>
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
   </div>
   <div class="field">
-    <%= f.label :password_salt %><br />
-    <%= f.text_field :password_salt %>
-  </div>
-  <div class="field">
-    <%= f.label :persistence_token %><br />
-    <%= f.text_field :persistence_token %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :company %><br />
-    <%= f.text_field :company %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.text_field :phone_number %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :login_count %><br />
-    <%= f.number_field :login_count %>
-  </div>
-  <div class="field">
-    <%= f.label :failed_login_count %><br />
-    <%= f.number_field :failed_login_count %>
-  </div>
-  <div class="field">
-    <%= f.label :last_request_at %><br />
-    <%= f.datetime_select :last_request_at %>
-  </div>
-  <div class="field">
-    <%= f.label :current_login_at %><br />
-    <%= f.datetime_select :current_login_at %>
-  </div>
-  <div class="field">
-    <%= f.label :last_login_at %><br />
-    <%= f.datetime_select :last_login_at %>
-  </div>
-  <div class="field">
-    <%= f.label :current_login_ip %><br />
-    <%= f.text_field :current_login_ip %>
-  </div>
-  <div class="field">
-    <%= f.label :is_admin %><br />
-    <%= f.check_box :is_admin %>
-  </div>
-  <div class="field">
-    <%= f.label :perishable_token %><br />
-    <%= f.text_field :perishable_token %>
-  </div>
-  <div class="field">
-    <%= f.label :registration_ip %><br />
-    <%= f.text_field :registration_ip %>
-  </div>
-  <div class="field">
-    <%= f.label :accepted_privacy_guidelines %><br />
-    <%= f.check_box :accepted_privacy_guidelines %>
-  </div>
-  <div class="field">
-    <%= f.label :accept_optional_email %><br />
-    <%= f.check_box :accept_optional_email %>
-  </div>
-  <div class="field">
-    <%= f.label :hometown %><br />
-    <%= f.text_field :hometown %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br />
-    <%= f.text_field :role %>
-  </div>
-  <div class="field">
-    <%= f.label :female %><br />
-    <%= f.check_box :female %>
-  </div>
-  <div class="field">
-    <%= f.label :birthyear %><br />
-    <%= f.number_field :birthyear %>
-  </div>
-  <div class="field">
-    <%= f.label :member_dnd %><br />
-    <%= f.check_box :member_dnd %>
-  </div>
-  <div class="field">
-    <%= f.label :featured_speaker %><br />
-    <%= f.check_box :featured_speaker %>
-  </div>
-  <div class="field">
-    <%= f.label :feature_as_organizer %><br />
-    <%= f.check_box :feature_as_organizer %>
-  </div>
-  <div class="field">
-    <%= f.label :invited %><br />
-    <%= f.check_box :invited %>
-  </div>
-  <div class="field">
-    <%= f.label :dietary_requirements %><br />
-    <%= f.text_field :dietary_requirements %>
-  </div>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>
