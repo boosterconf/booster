@@ -1,0 +1,65 @@
+<%= form_for(@sponsor) do |f| %>
+  <% if @sponsor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
+
+      <ul>
+      <% @sponsor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :user %><br />
+    <%= f.collection_select :user_id, @users, :id, :name, :prompt => "Velg ansvarlig" %>
+  </div>
+  <div class="field">     
+    <%= f.label :invoiced %><br />
+    <%= f.date_select :invoiced, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
+  </div>
+  <div class="field">
+    <%= f.label :paid %><br />
+    <%= f.date_select :paid, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
+  </div>
+  <div class="field">
+    <%= f.label :comment %><br />
+    <%= f.text_field :comment %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_person %><br />
+    <%= f.text_field :contact_person %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br />
+    <%= f.collection_select :status, Sponsor::STATES, :first, :last %>
+  </div>
+  <div class="field">
+    <%= f.label :contact_person_phone %><br />
+    <%= f.text_field :contact_person_phone %>
+  </div>
+  <div class="field">
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </div>
+  <div class="field">
+    <%= f.label :was_sponsor_last_year %><br />
+    <%= f.check_box :was_sponsor_last_year %>
+  </div>
+  <div class="field">
+    <%= f.label :last_contacted_at %><br />
+    <%= f.datetime_select :last_contacted_at %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

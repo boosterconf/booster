@@ -1,0 +1,61 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  email: MyString
+  crypted_password: MyString
+  password_salt: MyString
+  persistence_token: MyString
+  name: MyString
+  company: MyString
+  phone_number: MyString
+  description: MyText
+  login_count: 1
+  failed_login_count: 1
+  last_request_at: 2012-09-13 21:42:29
+  current_login_at: 2012-09-13 21:42:29
+  last_login_at: 2012-09-13 21:42:29
+  current_login_ip: MyString
+  is_admin: false
+  perishable_token: MyString
+  registration_ip: MyString
+  accepted_privacy_guidelines: false
+  accept_optional_email: false
+  hometown: MyString
+  role: MyString
+  female: false
+  birthyear: 1
+  member_dnd: false
+  featured_speaker: false
+  feature_as_organizer: false
+  invited: false
+  dietary_requirements: MyString
+
+two:
+  email: MyString
+  crypted_password: MyString
+  password_salt: MyString
+  persistence_token: MyString
+  name: MyString
+  company: MyString
+  phone_number: MyString
+  description: MyText
+  login_count: 1
+  failed_login_count: 1
+  last_request_at: 2012-09-13 21:42:29
+  current_login_at: 2012-09-13 21:42:29
+  last_login_at: 2012-09-13 21:42:29
+  current_login_ip: MyString
+  is_admin: false
+  perishable_token: MyString
+  registration_ip: MyString
+  accepted_privacy_guidelines: false
+  accept_optional_email: false
+  hometown: MyString
+  role: MyString
+  female: false
+  birthyear: 1
+  member_dnd: false
+  featured_speaker: false
+  feature_as_organizer: false
+  invited: false
+  dietary_requirements: MyString

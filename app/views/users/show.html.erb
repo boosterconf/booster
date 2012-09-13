@@ -1,0 +1,145 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Crypted password:</b>
+  <%= @user.crypted_password %>
+</p>
+
+<p>
+  <b>Password salt:</b>
+  <%= @user.password_salt %>
+</p>
+
+<p>
+  <b>Persistence token:</b>
+  <%= @user.persistence_token %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Company:</b>
+  <%= @user.company %>
+</p>
+
+<p>
+  <b>Phone number:</b>
+  <%= @user.phone_number %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @user.description %>
+</p>
+
+<p>
+  <b>Login count:</b>
+  <%= @user.login_count %>
+</p>
+
+<p>
+  <b>Failed login count:</b>
+  <%= @user.failed_login_count %>
+</p>
+
+<p>
+  <b>Last request at:</b>
+  <%= @user.last_request_at %>
+</p>
+
+<p>
+  <b>Current login at:</b>
+  <%= @user.current_login_at %>
+</p>
+
+<p>
+  <b>Last login at:</b>
+  <%= @user.last_login_at %>
+</p>
+
+<p>
+  <b>Current login ip:</b>
+  <%= @user.current_login_ip %>
+</p>
+
+<p>
+  <b>Is admin:</b>
+  <%= @user.is_admin %>
+</p>
+
+<p>
+  <b>Perishable token:</b>
+  <%= @user.perishable_token %>
+</p>
+
+<p>
+  <b>Registration ip:</b>
+  <%= @user.registration_ip %>
+</p>
+
+<p>
+  <b>Accepted privacy guidelines:</b>
+  <%= @user.accepted_privacy_guidelines %>
+</p>
+
+<p>
+  <b>Accept optional email:</b>
+  <%= @user.accept_optional_email %>
+</p>
+
+<p>
+  <b>Hometown:</b>
+  <%= @user.hometown %>
+</p>
+
+<p>
+  <b>Role:</b>
+  <%= @user.role %>
+</p>
+
+<p>
+  <b>Female:</b>
+  <%= @user.female %>
+</p>
+
+<p>
+  <b>Birthyear:</b>
+  <%= @user.birthyear %>
+</p>
+
+<p>
+  <b>Member dnd:</b>
+  <%= @user.member_dnd %>
+</p>
+
+<p>
+  <b>Featured speaker:</b>
+  <%= @user.featured_speaker %>
+</p>
+
+<p>
+  <b>Feature as organizer:</b>
+  <%= @user.feature_as_organizer %>
+</p>
+
+<p>
+  <b>Invited:</b>
+  <%= @user.invited %>
+</p>
+
+<p>
+  <b>Dietary requirements:</b>
+  <%= @user.dietary_requirements %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

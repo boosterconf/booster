@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    $(document).ready(function()
+        {
+            $("#sponsors").tablesorter();
+        }
+    );
+</script>
+<h1>Listing sponsors</h1>
+
+Accepted: <%= Sponsor.count(:conditions => "status = 'accepted'") %>,
+Declined: <%= Sponsor.count(:conditions => "status = 'declined'") %>,
+In Dialogue: <%= Sponsor.count(:conditions => "status = 'dialogue'") %>,
+Suggested: <%= Sponsor.count(:conditions => "status = 'suggested'") %>,
+Contacted: <%= Sponsor.count(:conditions => "status = 'contacted'") %>,
+Reminded: <%= Sponsor.count(:conditions => "status = 'reminded'") %>,
+Last year: <%= Sponsor.count(:conditions => "was_sponsor_last_year = 't'") %>,
+Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %>
+
+<table id="sponsors" class="tablesorter">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Invoiced</th>
+            <th>Paid</th>
+            <th>User</th>
+            <th>Status</th>
+            <th>L.Yr.</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+    <% @sponsors.each do |sponsor| %>
+        <tr>
+            <td><%=h sponsor.name %></td>
+            <td><%=h sponsor.invoiced %></td>
+            <td><%=h sponsor.paid %></td>
+            <td><%=h sponsor.user ? sponsor.user.name : "" %></td>
+            <td><%=h sponsor.status_text %></td>
+            <td><%=h sponsor.was_sponsor_last_year? ? "Yes" : "" %></td>
+            <td><%=h sponsor.comment %></td>
+            <td><%= link_to 'Show', sponsor %></td>
+            <td><%= link_to 'Edit', edit_sponsor_path(sponsor) %></td>
+            <td><%= button_to 'Destroy', sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td>
+                <% if sponsor.is_ready_for_email? %>
+                    <%= button_to 'Send Email', 'Add path', :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post  %>
+                <% end %>
+            </td>
+        </tr>
+    <% end %>
+
+    </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New sponsor', new_sponsor_path %>

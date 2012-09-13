@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sponsor.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @sponsor.email %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @sponsor.user_id %>
+</p>
+
+<p>
+  <b>Invoiced:</b>
+  <%= @sponsor.invoiced %>
+</p>
+
+<p>
+  <b>Paid:</b>
+  <%= @sponsor.paid %>
+</p>
+
+<p>
+  <b>Comment:</b>
+  <%= @sponsor.comment %>
+</p>
+
+<p>
+  <b>Contact person:</b>
+  <%= @sponsor.contact_person %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%= @sponsor.status %>
+</p>
+
+<p>
+  <b>Contact person phone:</b>
+  <%= @sponsor.contact_person_phone %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @sponsor.location %>
+</p>
+
+<p>
+  <b>Was sponsor last year:</b>
+  <%= @sponsor.was_sponsor_last_year %>
+</p>
+
+<p>
+  <b>Last contacted at:</b>
+  <%= @sponsor.last_contacted_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
+<%= link_to 'Back', sponsors_path %>
