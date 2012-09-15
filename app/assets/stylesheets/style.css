@@ -488,7 +488,7 @@ table ul {
     padding: 0px;
 }
 
-div.fieldWithErrors input {
+div.field_with_errors input {
 	border: 1px solid red;
 	margin: 0;
 }
@@ -501,18 +501,18 @@ div.fieldWithErrors input {
 
 /* Error display */
 
-#railserrordisplaysux div.fieldWithErrors  {
+#railserrordisplaysux div.field_with_errors  {
 	border: 1px solid red;
 	padding: 0 1px;
 	margin: 0 2px 0 2px;
 }
 
-#railserrordisplaysux div.fieldWithErrors input  {
+#railserrordisplaysux div.field_with_errors input  {
 	vertical-align: -2px;
 	border: 0;
  }
 
-#railserrordisplaysux div.fieldWithErrors:first-child  {
+#railserrordisplaysux div.field_with_errors:first-child  {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -522,17 +522,17 @@ div.errorExplanation li {
     color: red;
 }
 
-div.fieldWithErrors, #railserrordisplaysux {
+div.field_with_errors, #railserrordisplaysux {
 	display: inline;
 	overflow: hidden;
 }
 
-div.fieldWithErrors input {
+div.field_with_errors input {
 	border: 1px solid red;
 	margin: 0;
 }
 
-div.language .fieldWithErrors {
+div.language .field_with_errors {
     display: inline;
 }
 
