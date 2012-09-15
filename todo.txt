@@ -8,3 +8,4 @@ todo
 -- register lightning talk
 -- register workshop/tutorial
 -- register sponsor if organizer
+- add remember-me functionality?
