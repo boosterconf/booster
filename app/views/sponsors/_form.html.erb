@@ -11,55 +11,51 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.collection_select :user_id, @users, :id, :name, :prompt => "Velg ansvarlig" %>
-  </div>
-  <div class="field">     
-    <%= f.label :invoiced %><br />
-    <%= f.date_select :invoiced, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
-  </div>
-  <div class="field">
-    <%= f.label :paid %><br />
-    <%= f.date_select :paid, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
-  </div>
-  <div class="field">
-    <%= f.label :comment %><br />
-    <%= f.text_field :comment %>
-  </div>
-  <div class="field">
+  </p>
+  <p>
     <%= f.label :contact_person %><br />
     <%= f.text_field :contact_person %>
-  </div>
-  <div class="field">
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+   <p>
+    <%= f.label :invoiced %><br />
+    <%= f.date_select :invoiced, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
+  </p>
+  <p>
+    <%= f.label :paid %><br />
+    <%= f.date_select :paid, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
+  </p>
+  <p>
+    <%= f.label :user %><br />
+    <%= f.collection_select :user_id, @users, :id, :name, :prompt => "Velg ansvarlig" %>
+  </p>
+  <p>
     <%= f.label :status %><br />
     <%= f.collection_select :status, Sponsor::STATES, :first, :last %>
-  </div>
-  <div class="field">
-    <%= f.label :contact_person_phone %><br />
-    <%= f.text_field :contact_person_phone %>
-  </div>
-  <div class="field">
-    <%= f.label :location %><br />
-    <%= f.text_field :location %>
-  </div>
-  <div class="field">
+  </p>
+  <p>
     <%= f.label :was_sponsor_last_year %><br />
     <%= f.check_box :was_sponsor_last_year %>
-  </div>
-  <div class="field">
-    <%= f.label :last_contacted_at %><br />
-    <%= f.datetime_select :last_contacted_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  </p>
+  <p>
+    <%= f.label :contact_person_phone_number %><br />
+    <%= f.text_field :contact_person_phone_number %>
+  </p>
+  <p>
+    <%= f.label :location %><br />
+    <%= f.text_field :location %>
+  </p>
+  <p>
+    <%= f.label :comment %><br />
+    <%= f.text_area :comment, :cols => 30, :rows => 5 %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
 <% end %>

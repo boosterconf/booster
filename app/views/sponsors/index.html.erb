@@ -5,8 +5,9 @@
         }
     );
 </script>
-<h1>Listing sponsors</h1>
+<h1>Sponsor list</h1>
 
+<p>
 Accepted: <%= Sponsor.count(:conditions => "status = 'accepted'") %>,
 Declined: <%= Sponsor.count(:conditions => "status = 'declined'") %>,
 In Dialogue: <%= Sponsor.count(:conditions => "status = 'dialogue'") %>,
@@ -15,7 +16,7 @@ Contacted: <%= Sponsor.count(:conditions => "status = 'contacted'") %>,
 Reminded: <%= Sponsor.count(:conditions => "status = 'reminded'") %>,
 Last year: <%= Sponsor.count(:conditions => "was_sponsor_last_year = 't'") %>,
 Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %>
-
+</p>
 <table id="sponsors" class="tablesorter">
     <thead>
         <tr>
@@ -24,19 +25,17 @@ Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponso
             <th>Paid</th>
             <th>User</th>
             <th>Status</th>
-            <th>L.Yr.</th>
             <th>Comment</th>
         </tr>
     </thead>
     <tbody>
     <% @sponsors.each do |sponsor| %>
-        <tr>
+        <tr class='<%= sponsor.was_sponsor_last_year? ? "sponsor_last_year" : "" %>'>
             <td><%=h sponsor.name %></td>
             <td><%=h sponsor.invoiced %></td>
             <td><%=h sponsor.paid %></td>
             <td><%=h sponsor.user ? sponsor.user.name : "" %></td>
             <td><%=h sponsor.status_text %></td>
-            <td><%=h sponsor.was_sponsor_last_year? ? "Yes" : "" %></td>
             <td><%=h sponsor.comment %></td>
             <td><%= link_to 'Show', sponsor %></td>
             <td><%= link_to 'Edit', edit_sponsor_path(sponsor) %></td>

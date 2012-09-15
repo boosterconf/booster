@@ -1,3 +1,13 @@
+<div id="notifications">
+<%# TODO: Dette ser jævlig ut. Fikse! %>
+<% if flash[:notice] %>
+    <p class="flash-notice"><%= flash[:notice] %></p>
+<% end %>
+
+  <p style="color: orange"><%= flash[:warn] %></p>
+
+  <p style="color: red"><%= flash[:error] %></p>
+</div>
 <%= form_for @user_session do |f| %>
   <% if @user_session.errors.any? %>
   <div id="error_explanation">

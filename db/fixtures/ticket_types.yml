@@ -1,0 +1,48 @@
+earlybird:
+  id: 1
+  name: Earlybird-ticket for Booster 2013
+  description: Earlybird ticket
+  price: 5000
+
+full_price:
+  id: 2
+  name: Ticket for Booster 2013
+  description: Normal full price ticket
+  price: 7500
+
+sponsor_price:
+  id: 3
+  name: Sponsor Booster 2013
+  description: Free ticket for sponsors onlly
+  price: 0
+
+volunteer_price:
+  id: 4
+  name: Volunteer at Booster 2013
+  description: Free ticket for volunteers only
+  price: 0
+
+student_price:
+  id: 5
+  name: Student ticket for Booster 2013
+  description: Student ticket for ROOTS 2011
+  price: 1000
+
+organizer_price:
+  id: 6
+  name: Organizer for Booster 2013
+  description: Free ticket for organizers of the conference
+  price: 0
+
+speaker_price:
+  id: 7
+  name: Speaker at Booster 2013
+  description: Free ticket for speakers only
+  price: 0
+
+dnd_full_price:
+  id: 8
+  name: DnD ticket for Booster 2013
+  description: Rabated ticket for DnD members
+  price: 6000
+

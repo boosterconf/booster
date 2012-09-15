@@ -107,16 +107,6 @@ booster, roots conference, roots, it conference, software conference, methodolog
 <div id="content-wrapper">
 
     <div id="content">
-        <div id="notifications">
-        <%# TODO: Dette ser jævlig ut. Fikse! %>
-        <% if flash[:notice] %>
-            <p class="flash-notice"><%= flash[:notice] %></p>
-        <% end %>
-
-          <p style="color: orange"><%= flash[:warn] %></p>
-
-          <p style="color: red"><%= flash[:error] %></p>
-        </div>
 
         <%= yield %>
 

@@ -2,62 +2,62 @@
 
 <p>
   <b>Name:</b>
-  <%= @sponsor.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%= @sponsor.email %>
-</p>
-
-<p>
-  <b>User:</b>
-  <%= @sponsor.user_id %>
-</p>
-
-<p>
-  <b>Invoiced:</b>
-  <%= @sponsor.invoiced %>
-</p>
-
-<p>
-  <b>Paid:</b>
-  <%= @sponsor.paid %>
-</p>
-
-<p>
-  <b>Comment:</b>
-  <%= @sponsor.comment %>
+  <%=h @sponsor.name %>
 </p>
 
 <p>
   <b>Contact person:</b>
-  <%= @sponsor.contact_person %>
+  <%=h @sponsor.contact_person %>
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @sponsor.status %>
-</p>
-
-<p>
-  <b>Contact person phone:</b>
-  <%= @sponsor.contact_person_phone %>
+  <b>Contact person phone number:</b>
+  <%= h @sponsor.contact_person_phone_number %>
 </p>
 
 <p>
   <b>Location:</b>
-  <%= @sponsor.location %>
+  <%= h @sponsor.location %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @sponsor.email %>
+</p>
+
+<p>
+  <b>Last contacted:</b>
+  <%=h @sponsor.last_contacted_at %>
+</p>
+
+<p>
+  <b>Status:</b>
+  <%=h Sponsor::STATES[@sponsor.status] %>
+</p>
+
+<p>
+  <b>Invoiced:</b>
+  <%=h @sponsor.invoiced %>
+</p>
+
+<p>
+  <b>Paid:</b>
+  <%=h @sponsor.paid %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%=h @sponsor.user ? @sponsor.user.name : "" %>
 </p>
 
 <p>
   <b>Was sponsor last year:</b>
-  <%= @sponsor.was_sponsor_last_year %>
+  <%=h @sponsor.was_sponsor_last_year ? "Yes" : "No" %>
 </p>
 
 <p>
-  <b>Last contacted at:</b>
-  <%= @sponsor.last_contacted_at %>
+  <b>Comment:</b>
+  <%=h @sponsor.comment %>
 </p>
 
 

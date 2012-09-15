@@ -11,3 +11,5 @@ todo
 - add remember-me functionality?
 - add reset password functionality
 - login with facebook/openId/oAuth? 
+- send email (to sponsors, participants, others?)
+- table sorter på sponsorliste.
