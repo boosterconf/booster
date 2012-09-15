@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
+  helper :all 
   helper_method :current_user_session, :current_user
 
 	def current_user_session
@@ -19,8 +20,8 @@ class ApplicationController < ActionController::Base
 
 	def require_admin
 		unless admin?
-	    store_location
-	    redirect_to(new_user_session_url, :notice => "Bare administratorer har tilgang til den siden.")
+	    	store_location
+	    	redirect_to new_user_session_url, :notice => "I'm sorry, but that page is not meant for you."
 	    return false
 		end
 	end
@@ -28,7 +29,7 @@ class ApplicationController < ActionController::Base
 	def require_user
 	  unless current_user
 	    store_location
-	    redirect_to(new_user_session_url, :notice => "You must be logged in to access this page.")
+	    redirect_to new_user_session_url, :notice => "You must be logged in to access this page."
 	    return false
 	  end
 	end

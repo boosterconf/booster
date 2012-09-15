@@ -1,0 +1,10 @@
+todo
+
+- login redirect to a) root or b) requested secure page
+- edit user screen
+- vurdere databaseskjemaet - er det noe vi kan skrelle vekk? 
+- menu of sorts 
+-- register participant
+-- register lightning talk
+-- register workshop/tutorial
+-- register sponsor if organizer
