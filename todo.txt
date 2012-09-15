@@ -8,4 +8,7 @@ todo
 -- register lightning talk
 -- register workshop/tutorial
 -- register sponsor if organizer
+- make user/current work
 - add remember-me functionality?
+- add reset password functionality
+- login with facebook/openId/oAuth? 

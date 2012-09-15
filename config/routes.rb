@@ -5,6 +5,16 @@ Booster2013::Application.routes.draw do
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
+
+  match 'info/organizers' => 'info#organizers'
+  match 'info/sponsors' => 'info#sponsors'
+
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  # root :to => 'welcome#index'
+
+  root :to => 'info#index' #'/' resolves to info/index.html
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -52,13 +62,6 @@ Booster2013::Application.routes.draw do
   #     resources :products
   #   end
 
-  match 'info/organizers' => 'info#organizers'
-  
-  match 'info/sponsors' => 'info#sponsors'
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
-  root :to => 'info#index' #'/' resolves to info/index.html
 
   # See how all your routes lay out with "rake routes"
 

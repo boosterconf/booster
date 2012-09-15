@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  before_filter :require_user, :except => [:new, :create]
+  before_filter :require_admin, :only => [:index, :delete_bio, :speaker, :create_speaker, :phone_list, :dietary_requirements]
+  before_filter :require_admin_or_self, :only => [:show, :edit, :update]
+  
   # GET /users
   # GET /users.json
   def index

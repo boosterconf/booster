@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user, :logged_in?
+  helper_method :current_user_session, :current_user, :logged_in?, :return_to
 
   private
   def current_user_session
@@ -25,8 +25,18 @@ class ApplicationController < ActionController::Base
   def require_admin
     unless admin?
       store_location
-      redirect_to root_url, :notice => "I'm sorry, but that page is not meant for you."
+      redirect_to new_user_session_url, :notice => "You must be a magician to access this page."
     return false
+    end
+  end
+
+  def require_admin_or_self
+    unless params[:id] == 'favicon'
+      user = User.find(params[:id])
+      unless (current_user.is_admin? || user == current_user)
+        flash[:error] = "You are not allowed to look at other users' information"
+        access_denied
+      end
     end
   end
 
@@ -45,5 +55,24 @@ class ApplicationController < ActionController::Base
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
+  end
+
+  def return_to 
+    session[:return_to]
+  end
+
+  def access_denied
+    respond_to do |format|
+      format.html do
+        if current_user
+          redirect_to root_path
+        else
+          redirect_to new_user_session_path
+        end
+      end
+      format.any(:json, :xml) do
+        request_http_basic_authentication 'Web Password'
+      end
+    end
   end
 end
