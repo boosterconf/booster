@@ -1,145 +1,43 @@
-<p id="notice"><%= notice %></p>
+<% content_for :title, @user.name %>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<h2 class="page_title">User details</h2>
+You are logged in, <%=link_to_unless_current "Log out", logout_path %>.<br /><br />
 
-<p>
-  <b>Crypted password:</b>
-  <%= @user.crypted_password %>
-</p>
+We have registered the following information about you:
 
-<p>
-  <b>Password salt:</b>
-  <%= @user.password_salt %>
-</p>
+<ul>
+  <li><strong>Name:</strong> <%=h @user.name %></li>
+  <li><strong>Company:</strong> <%=h @user.company %></li>
+  <li><strong>Role: </strong> <%=h @user.role %></li>
+  <li><strong>E-mail:</strong> <%=h @user.email %></li>
+  <li><strong>Phone number:</strong> <%=h @user.phone_number %></li>
+  <li><strong>Hometown:</strong> <%=h @user.hometown %></li>
+  <li><strong>Sex:</strong> <%=h @user.female ? "Female" : "Male" %></li>
+  <li><strong>Birthyear:</strong> <%=h @user.birthyear %></li>
 
-<p>
-  <b>Persistence token:</b>
-  <%= @user.persistence_token %>
-</p>
+  <%# if @user.registration %>
+    <li><strong>Ticket type:</strong> <%#=h @user.registration.description %></li>
+    <li><strong>Conference dinner:</strong> <%#= @user.registration.includes_dinner ? "Yes" : "No" %></li>
+    <li><strong>Price:</strong> <%#= @user.registration.ticket_price %></li>
+  <%# end %>
+  <% if admin? %>
+    <li class="admin"><strong>Status:</strong> <%#= @user.registration.status%></li>
+  <% end %>
+</ul>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<%= link_to "Make changes to your registration", edit_user_path(@user) %>
 
-<p>
-  <b>Company:</b>
-  <%= @user.company %>
-</p>
+<%# unless @user.talks.blank? %>
+  <h3>Suggested talks</h3>
 
-<p>
-  <b>Phone number:</b>
-  <%= @user.phone_number %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @user.description %>
-</p>
-
-<p>
-  <b>Login count:</b>
-  <%= @user.login_count %>
-</p>
-
-<p>
-  <b>Failed login count:</b>
-  <%= @user.failed_login_count %>
-</p>
-
-<p>
-  <b>Last request at:</b>
-  <%= @user.last_request_at %>
-</p>
-
-<p>
-  <b>Current login at:</b>
-  <%= @user.current_login_at %>
-</p>
-
-<p>
-  <b>Last login at:</b>
-  <%= @user.last_login_at %>
-</p>
-
-<p>
-  <b>Current login ip:</b>
-  <%= @user.current_login_ip %>
-</p>
-
-<p>
-  <b>Is admin:</b>
-  <%= @user.is_admin %>
-</p>
-
-<p>
-  <b>Perishable token:</b>
-  <%= @user.perishable_token %>
-</p>
-
-<p>
-  <b>Registration ip:</b>
-  <%= @user.registration_ip %>
-</p>
-
-<p>
-  <b>Accepted privacy guidelines:</b>
-  <%= @user.accepted_privacy_guidelines %>
-</p>
-
-<p>
-  <b>Accept optional email:</b>
-  <%= @user.accept_optional_email %>
-</p>
-
-<p>
-  <b>Hometown:</b>
-  <%= @user.hometown %>
-</p>
-
-<p>
-  <b>Role:</b>
-  <%= @user.role %>
-</p>
-
-<p>
-  <b>Female:</b>
-  <%= @user.female %>
-</p>
-
-<p>
-  <b>Birthyear:</b>
-  <%= @user.birthyear %>
-</p>
-
-<p>
-  <b>Member dnd:</b>
-  <%= @user.member_dnd %>
-</p>
-
-<p>
-  <b>Featured speaker:</b>
-  <%= @user.featured_speaker %>
-</p>
-
-<p>
-  <b>Feature as organizer:</b>
-  <%= @user.feature_as_organizer %>
-</p>
-
-<p>
-  <b>Invited:</b>
-  <%= @user.invited %>
-</p>
-
-<p>
-  <b>Dietary requirements:</b>
-  <%= @user.dietary_requirements %>
-</p>
+  <ul>
+    <%# for talk in @user.talks %>
+      <li><%#= link_to h(talk.title), talk %></li>
+    <%# end %>
+  </ul>
+<%# end %>
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<h3>Participant information</h3>
+
+<%#= render :partial => @user.registration %>

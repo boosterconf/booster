@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user, :logged_in?, :return_to
+  helper_method :current_user_session, :current_user, :logged_in?, :admin?
 
   private
   def current_user_session
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_admin_or_self
-    unless params[:id] == 'favicon'
+    if params[:id]  =~ /^[-+]?[1-9]([0-9]*)?$/
       user = User.find(params[:id])
       unless (current_user.is_admin? || user == current_user)
         flash[:error] = "You are not allowed to look at other users' information"
