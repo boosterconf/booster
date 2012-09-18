@@ -15,13 +15,13 @@ We have registered the following information about you:
   <li><strong>Sex:</strong> <%=h @user.female ? "Female" : "Male" %></li>
   <li><strong>Birthyear:</strong> <%=h @user.birthyear %></li>
 
-  <%# if @user.registration %>
-    <li><strong>Ticket type:</strong> <%#=h @user.registration.description %></li>
-    <li><strong>Conference dinner:</strong> <%#= @user.registration.includes_dinner ? "Yes" : "No" %></li>
-    <li><strong>Price:</strong> <%#= @user.registration.ticket_price %></li>
-  <%# end %>
+  <% if @user.registration %>
+    <li><strong>Ticket type:</strong> <%=h @user.registration.description %></li>
+    <li><strong>Conference dinner:</strong> <%= @user.registration.includes_dinner ? "Yes" : "No" %></li>
+    <li><strong>Price:</strong> <%= @user.registration.ticket_price %></li>
+  <% end %>
   <% if admin? %>
-    <li class="admin"><strong>Status:</strong> <%#= @user.registration.status%></li>
+    <li class="admin"><strong>Status:</strong> <%= @user.registration.status%></li>
   <% end %>
 </ul>
 
@@ -40,4 +40,4 @@ We have registered the following information about you:
 
 <h3>Participant information</h3>
 
-<%#= render :partial => @user.registration %>
+<%= render :partial => @user.registration %>

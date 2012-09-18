@@ -11,6 +11,14 @@
     </div>
   <% end %>
 
+          <% if @user.registration.ticket_type_old == 'mod251' %>
+            You're buying a MOD251 student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+        <% elsif @user.registration.ticket_type_old == 'student' %>
+           You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+        <% else %>
+            <%= render :partial => 'price_info', :locals => {:f => f} %>
+        <% end %>
+
   <fieldset id="personal_details">
     <div class="field name">
       <%= f.label :name, "Name" %><br />
@@ -90,6 +98,65 @@
     </div>
 
 </fieldset>
+
+<fieldset id="registration_details">
+        <% f.fields_for :registration do |reg| %>
+            <%= reg.hidden_field :free_ticket %>
+            <%= reg.hidden_field :manual_payment %>
+
+
+            <% if @user.registration.free_ticket %>
+                <div class="field type">
+                  <%= reg.label :ticket_type_old, "Ticket type" %>
+                  <%= reg.select                                       :ticket_type_old, [
+                          ['I have a sponsor ticket that I would like to use (please state the name of the sponsoring company)', 'sponsor'],
+                          ['I am a co-speaker at the conference (please state the title of the talk) ', 'speaker'],
+                          ['I want to participate as a volunteer during the conference', 'volunteer'],
+                          ['I am a member of the press or an invited guest', 'guest'],
+                          ['I organize the conference', 'organizer']], :include_blank => true %>
+                </div>
+                <div class="field kommentarer">
+                  <%= reg.label :invoice_description, "Comments" %>
+                  <%= reg.text_area :invoice_description, :rows => 4 %>
+                </div>
+                <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+                <div class="field buttons"><%= f.submit "Register" %></div>
+            <% else %>
+                <%= reg.hidden_field :ticket_type_old %>
+                <% if @user.registration.manual_payment %>
+                    <div class="field adresse">
+                      <%= reg.label :invoice_address, "Payment address" %>
+                      <%= reg.text_area :invoice_address, :rows => 4 %>
+                    </div>
+                    <div class="field kommentarer">
+                      <%= reg.label :invoice_description, "Addional payment info" %>
+                      <%= reg.text_area :invoice_description, :rows => 4 %>
+                    </div>
+                    <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+                    <div class="field buttons"><%= f.submit "Register" %></div>
+                <% else %>
+                    <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+                    <div><%= f.submit "Register and proceed to payment" %></div>
+                <% end %>
+            <% end %>
+
+            <div class="field buttons">
+              <% if Time.now < App.speakers_close_date %>
+                  <div><%= f.submit "Register as a speaker", :name => "speaker", :id => "lyntale_submit" %>
+                    <% help_tooltip() do %>
+                        <p> In the next step you will propose a tutorial or a lightning talk. If you get a lightning
+                          talk
+                          accepted the ticket price will be NOK <%= PAYMENT_CONFIG[:prices]['lightning'].to_i %> and if
+                          you get a tutorial accepted it will be free. If not the price will be the price at the time
+                          of registration.
+                        </p>
+                    <% end %>
+                  </div>
+              <% end %>
+            </div>
+
+        <% end %>
+      </fieldset>
 
   <div class="actions">
     <%= f.submit %>

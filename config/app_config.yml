@@ -1,0 +1,20 @@
+development:
+  max_users_limit: 200
+  tutorial_registration_open: true
+  program_released: true
+
+test:
+  max_users_limit: 200
+  tutorial_registration_open: true
+  program_released: true
+
+staging:
+  max_users_limit: 200
+  tutorial_registration_open: true
+  program_released: true
+
+production:
+  max_users_limit: 200
+  tutorial_registration_open: true
+  program_released: true
+

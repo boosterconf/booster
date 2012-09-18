@@ -28,15 +28,16 @@ class UsersController < ApplicationController
     end
   end
 
-  # GET /users/new
-  # GET /users/new.json
   def new
     @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
+    @user.registration = Registration.new
+    @user.registration.manual_payment = params[:manual_payment]
+    @user.registration.free_ticket = !params[:free_ticket].blank?
+    @user.registration.ticket_type_old = params[:free_ticket] || params[:ticket_type_old] || params[:ticket_type] || 'full_price'
+    if @user.registration.ticket_type_old == 'full_price' && Time.now < App.early_bird_end_date
+      @user.registration.ticket_type_old = 'early_bird'
     end
+    @user.registration.includes_dinner = @user.registration.discounted_ticket?
   end
 
   # GET /users/1/edit
@@ -44,18 +45,47 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  # POST /users
-  # POST /users.json
   def create
-    @user = User.new(params[:user])
+    User.transaction do
+      @user = User.new(params[:user])
+      @user.email.strip! if @user.email.present?
+      @user.registration_ip = request.remote_ip
 
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
+      if @user.valid?
+        unless @user.registration.free_ticket || @user.registration.discounted_ticket?
+          Time.now < App.early_bird_end_date ? @user.registration.ticket_type_old = 'early_bird' : @user.registration.ticket_type_old = 'full_price'
+        end
+        @user.save
+        if !@user.registration.save
+          raise @user.registration.errors.inspect
+        end
+
+        UserSession.login(@user.email, @user.password)
+
+        if @user.registration.manual_payment
+          flash[:notice] = "We will contact you to confirm the details"
+          #RootsMailer.deliver_manual_registration_confirmation(@user)
+          #RootsMailer.deliver_manual_registration_notification(@user, user_url(@user))
+          redirect_to @user
+        elsif params[:speaker]
+          @user.registration.ticket_type_old = 'new_speaker'
+          @user.save
+          flash[:notice] = "Register details for your talk/tutorial"
+          #RootsMailer.deliver_speaker_registration_confirmation(@user)
+          #RootsMailer.deliver_speaker_registration_notification(@user, user_url(@user))
+          redirect_to new_talk_url
+        elsif @user.registration.free_ticket
+          flash[:notice] = "We will contact you to confirm the details"
+          #RootsMailer.deliver_free_registration_confirmation(@user)
+          #RootsMailer.deliver_free_registration_notification(@user, user_url(@user))
+          redirect_to @user
+        else
+          #RootsMailer.deliver_registration_confirmation(@user)
+          redirect_to @user.registration.payment_url(payment_notifications_url, user_url(@user))
+        end
       else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        flash[:error] = "An error occured. Please follow the instructions below."
+        render :action => 'new'
       end
     end
   end

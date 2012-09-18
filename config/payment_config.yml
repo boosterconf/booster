@@ -1,0 +1,52 @@
+free_prices: &free_prices
+  speaker: 0
+  organizer: 0
+  volunteer: 0
+  sponsor: 0
+
+prices: &prices
+  mod251: 600
+  early_bird: 6250
+  early_bird_dnd: 6250
+  full_price: 7500
+  lightning: 5625
+  student: 1600
+  dinner: 0
+  <<: *free_prices
+
+development: &development
+  prices:
+    <<: *prices
+  paypal_email: paypal_1297107898_biz@rootsconf.no
+  paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+
+test:
+  prices:
+    <<: *prices
+  paypal_email: paypal_1297107898_biz@rootsconf.no
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+
+experimental:
+  prices:
+    <<: *prices
+  paypal_email: paypal-test@rootsconf.no
+  paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+
+
+production: &production
+  prices:
+    <<: *prices
+  paypal_email: paypal@rootsconf.no
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+
+staging:
+  prices:
+    early_bird: 10
+    early_bird_dnd: 10
+    full_price: 12
+    lightning: 5
+    student: 1
+    mod251: 2
+    <<: *free_prices
+  paypal_email: paypal@rootsconf.no
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"

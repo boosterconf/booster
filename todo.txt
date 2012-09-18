@@ -13,3 +13,4 @@ todo
 - login with facebook/openId/oAuth? 
 - send email (to sponsors, participants, others?)
 - table sorter på sponsorliste.
+- ticket_type_old?? Må fikses.
