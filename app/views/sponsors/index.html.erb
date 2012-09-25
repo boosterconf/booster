@@ -42,7 +42,7 @@ Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponso
             <td><%= button_to 'Destroy', sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
             <td>
                 <% if sponsor.is_ready_for_email? %>
-                    <%= button_to 'Send Email', 'Add path', :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post  %>
+                    <%= button_to 'Send Email', email_sponsor_path(sponsor), :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post  %>
                 <% end %>
             </td>
         </tr>

@@ -2,7 +2,11 @@ Booster2013::Application.routes.draw do
 
   #resources :users
   resources :user_sessions
-  resources :sponsors
+  resources :sponsors do
+    member do
+      post :email
+    end
+  end
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
