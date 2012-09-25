@@ -16,7 +16,7 @@
     <% elsif @user.registration.ticket_type_old == 'student' %>
         You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
     <% else %>
-        <%= render :partial => 'price_info', :locals => {:f => f} %>
+        <%= render :partial => 'price_info', :locals => {:f => f } %>
     <% end %>
 
     <fieldset id="personal_details">
@@ -101,9 +101,7 @@
     </fieldset>
 
     <fieldset id="registration_details">
-      <%= f.fields_for :registration do |reg| %>
-          <%= reg.hidden_field :free_ticket %>
-          <%= reg.hidden_field :manual_payment %>
+      <%= f.fields_for @user.registration do |reg| %>
           <%= reg.hidden_field :ticket_type_old %>
           <% if @user.registration.manual_payment %>
               <div class="field adresse">

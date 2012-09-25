@@ -34,7 +34,8 @@ class Registration < ActiveRecord::Base
   end
 
   def description
-    ticket_description + " " + (registration_complete ? " (Paid)" : "")
+    "" + ticket_type_old + " " + (registration_complete ? " (Paid)" : "")
+    #ticket_description + " " + (registration_complete ? " (Paid)" : "")
   end
 
   def speaker?

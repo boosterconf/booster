@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   def create
     User.transaction do
       @user = User.new(params[:user])
-      #@user.registration = @user.build_registration
+      @user.registration = @user.build_registration
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
 

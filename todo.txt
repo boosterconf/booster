@@ -15,3 +15,5 @@ todo
 - table sorter på sponsorliste.
 - ticket_type_old?? Må fikses.
 - Har to session-cookies? Både for roots2011 og booster2013. Må undersøke.
+
+- Ved valideringsfeil mister vi ticket_type_old variabel.
