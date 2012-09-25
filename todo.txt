@@ -14,3 +14,4 @@ todo
 - send email (to sponsors, participants, others?)
 - table sorter på sponsorliste.
 - ticket_type_old?? Må fikses.
+- Har to session-cookies? Både for roots2011 og booster2013. Må undersøke.

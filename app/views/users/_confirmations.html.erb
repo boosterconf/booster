@@ -4,9 +4,9 @@
     <div>
         <%= reg.check_box :includes_dinner %>
         <%= reg.label :includes_dinner,  "I want to attend the conference dinner" %>
-        <% help_tooltip() do  %>
-           <p>Check this box if you would like to attend the official conference dinner</p>
-        <% end %>
+        <%# help_tooltip() do  %>
+           <!--<p>Check this box if you would like to attend the official conference dinner</p>-->
+        <%# end %>
     </div>
   <% end %>
 
@@ -16,18 +16,18 @@
         </div>
         <%= f.label 'accepted_privacy_guidelines',
           "I agree that the organizers will send me conference information on email." %>
-        <% help_tooltip() do %>
-            <p>Examples: Confirmation of registration or lightning talks, conference reminders, etc. If you choose to unregister for the conference, you will no longer receive emails from us.</p>
-        <% end %>
+        <%#= help_tooltip() do %>
+            <!--<p>Examples: Confirmation of registration or lightning talks, conference reminders, etc. If you choose to unregister for the conference, you will no longer receive emails from us.</p>-->
+        <%# end %>
     </div>
 
     <div id="last">
             <%= f.check_box 'accept_optional_email' %>
         <%= f.label 'accept_optional_email',
         "I would like to receive information about similar conferences." %>
-        <% help_tooltip() do %>
-            <p>Examples: Relevant conferences, user group meetings, seminars, etc. You can choose to unsubscribe to these emails at any time simply by <a href="/users/current">edit your profile</a> or click on the "unsubscribe"-link in the email itself</p>
-        <% end %>
+        <%#= help_tooltip() do %>
+            <!--<p>Examples: Relevant conferences, user group meetings, seminars, etc. You can choose to unsubscribe to these emails at any time simply by <a href="/users/current">edit your profile</a> or click on the "unsubscribe"-link in the email itself</p>-->
+        <%# end %>
     </div>
 
 </fieldset>

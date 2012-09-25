@@ -1,0 +1,20 @@
+Hi, <%= @speaker.name %>
+
+We regret to inform you that your presentation
+    "<%= @talk.title %>"
+for Roots 2012 has not been accepted. We received a lot of great
+abstracts this year, and unfortunately we do not have room for all of
+them.
+
+If all your abstracts have been refused, we hope that you still want to
+attend the conference. In that case, we will convert your registration
+to a regular registration. The ticket price at the time of your
+registration applies. If you still want to attend, please go to
+<%= @current_user_url %> and pay for the ticket.
+
+If you do not want to participate, please let us know by replying to
+this email, and we will delete your registration.
+
+--
+Best regards,
+The Roots 2012 committee

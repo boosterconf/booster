@@ -1,164 +1,124 @@
 <%= form_for(@user) do |f| %>
-  <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
 
-      <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-          <% if @user.registration.ticket_type_old == 'mod251' %>
-            You're buying a MOD251 student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
-        <% elsif @user.registration.ticket_type_old == 'student' %>
-           You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
-        <% else %>
-            <%= render :partial => 'price_info', :locals => {:f => f} %>
-        <% end %>
+    <% if @user.registration.ticket_type_old == 'mod251' %>
+        You're buying a MOD251 student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+    <% elsif @user.registration.ticket_type_old == 'student' %>
+        You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+    <% else %>
+        <%= render :partial => 'price_info', :locals => {:f => f} %>
+    <% end %>
 
-  <fieldset id="personal_details">
-    <div class="field name">
-      <%= f.label :name, "Name" %><br />
-      <%= text_field(:user, :name, :placeholder => "Please tell us your name", :size => 50, :required => true) %>
-    </div>
-    <div class="field firma">
-      <%= f.label :company, "Company" %><br />
-      <%= text_field(:user, :company, :placeholder => "and where you work", :size => 50, :required => true) %>
-    </div>
-    <div class="field rolle">
-      <%= f.label :role, "Primary role" %><br />
-      <%= select("user", "role", [["Select one...", ""], ["Developer", "Developer"], ["Architect", "Architect"], ["Tester/Test lead", "Tester/Test lead"], ["Project manager", "Project manager"], ["Scrum master", "Scrum master"], ["UX specialist", "UX specialist"], ["Manager", "Manager"], ["Sales representative", "Sales representative"], ["Other", "Other"]]) %>
-    </div>
+    <fieldset id="personal_details">
+      <div class="field name">
+        <%= f.label :name, "Name" %>
+        <br/>
+        <%= text_field(:user, :name, :placeholder => "Please tell us your name", :size => 50, :required => true) %>
+      </div>
+      <div class="field firma">
+        <%= f.label :company, "Company" %>
+        <br/>
+        <%= text_field(:user, :company, :placeholder => "and where you work", :size => 50, :required => true) %>
+      </div>
+      <div class="field rolle">
+        <%= f.label :role, "Primary role" %>
+        <br/>
+        <%= select("user", "role",
+                   [["Select one...", ""],
+                    ["Developer", "Developer"],
+                    ["Architect", "Architect"],
+                    ["Tester/Test lead", "Tester/Test lead"],
+                    ["Project manager", "Project manager"],
+                    ["Scrum master", "Scrum master"],
+                    ["UX specialist", "UX specialist"],
+                    ["Manager", "Manager"],
+                    ["Sales representative", "Sales representative"],
+                    ["Other", "Other"]]) %>
+      </div>
 
-    <div class="field email">
-      <%= f.label :email %><br />
-      <%= email_field(:user, :email, :placeholder => "Where can we email you?", :size => 50, :required => true) %>
-    </div>
-    <div class="field passord">
-      <%= f.label :password %><br />
-      <%= password_field(:user, :password, :placeholder => "Sshhh. It's a secret.", :size => 50, :required => true)%>
-    </div>
-    <div class="field bekreft">
-        <%= f.label :password_confirmation, "Confirm password" %><br />
-        <%= password_field(:user, :password_confirmation, 
-          :placeholder => "Repeat, please.", :size => 50, :required => true)%>
-    </div>
-    <!-- <div class="field telefon">
+      <div class="field email">
+        <%= f.label :email %>
+        <br/>
+        <%= email_field(:user, :email, :placeholder => "Where can we email you?", :size => 50, :required => true) %>
+      </div>
+      <div class="field passord">
+        <%= f.label :password %>
+        <br/>
+        <%= password_field(:user, :password, :placeholder => "Sshhh. It's a secret.", :size => 50, :required => true) %>
+      </div>
+      <div class="field bekreft">
+        <%= f.label :password_confirmation, "Confirm password" %>
+        <br/>
+        <%= password_field(:user, :password_confirmation,
+                           :placeholder => "Repeat, please.", :size => 50, :required => true) %>
+      </div>
+      <!-- <div class="field telefon">
       <%= f.label :phone_number, "Phone" %><br />
       <%= text_field(:user, :phone_number, :placeholder => "If we need to call you", :size => 50) %>
     </div> -->
 
-    <div class="field dietary_requirements">
-      <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %><br />
-      <%= text_field(:user, :dietary_requirements, :placeholder => "Do you need something special for dinner?", 
-        :size => 50) %>
-    </div>
+      <div class="field dietary_requirements">
+        <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
+        <br/>
+        <%= text_field(:user, :dietary_requirements, :placeholder => "Do you need something special for dinner?",
+                       :size => 50) %>
+      </div>
 
-    <div class="geeky">
-      <%= f.label "For geeky statistical purposes:" %>
-    </div>
+      <div class="geeky">
+        <%= f.label "For geeky statistical purposes:" %>
+      </div>
 
-    <div class="field">
-      <fieldset>
-        <%= f.label :female, "Male" %>
-        <%= f.radio_button :female, false %> 
-        <%= f.label :female, "Female" %>
-        <%= f.radio_button :female, true %>
-      </fieldset>
-    </div>
+      <div class="field">
+        <fieldset>
+          <%= f.label :female, "Male" %>
+          <%= f.radio_button :female, false %>
+          <%= f.label :female, "Female" %>
+          <%= f.radio_button :female, true %>
+        </fieldset>
+      </div>
 
-    <div class="field hjemby">
-      <%= f.label :hometown, "City of residence" %><br />
-      <%= text_field(:user, :hometown, :placeholder => "Where do you live?", :size => 50) %>
-    </div>
+      <div class="field hjemby">
+        <%= f.label :hometown, "City of residence" %>
+        <br/>
+        <%= text_field(:user, :hometown, :placeholder => "Where do you live?", :size => 50) %>
+      </div>
 
-    <div class="field fødselsår">
-      <%= f.label :birthyear, "Birth year" %><br />
-      <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :size => 50) %>
-    </div>
-  </fieldset>
+      <div class="field fødselsår">
+        <%= f.label :birthyear, "Birth year" %>
+        <br/>
+        <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :size => 50) %>
+      </div>
+    </fieldset>
 
-  <fieldset id="confirmations">
-
-    <div>
-        <div id="railserrordisplaysux">
-            <%= f.check_box 'accepted_privacy_guidelines' %>
-        </div>
-        <%= f.label 'accepted_privacy_guidelines',
-          "I agree that the organizers will send me conference information on email." %>
-    </div>
-
-    <div id="last">
-            <%= f.check_box 'accept_optional_email' %>
-        <%= f.label 'accept_optional_email',
-        "I would like to receive information about similar conferences." %>
-    </div>
-
-</fieldset>
-
-<fieldset id="registration_details">
-        <% f.fields_for :registration do |reg| %>
-            <%= reg.hidden_field :free_ticket %>
-            <%= reg.hidden_field :manual_payment %>
-
-
-            <% if @user.registration.free_ticket %>
-                <div class="field type">
-                  <%= reg.label :ticket_type_old, "Ticket type" %>
-                  <%= reg.select                                       :ticket_type_old, [
-                          ['I have a sponsor ticket that I would like to use (please state the name of the sponsoring company)', 'sponsor'],
-                          ['I am a co-speaker at the conference (please state the title of the talk) ', 'speaker'],
-                          ['I want to participate as a volunteer during the conference', 'volunteer'],
-                          ['I am a member of the press or an invited guest', 'guest'],
-                          ['I organize the conference', 'organizer']], :include_blank => true %>
-                </div>
-                <div class="field kommentarer">
-                  <%= reg.label :invoice_description, "Comments" %>
-                  <%= reg.text_area :invoice_description, :rows => 4 %>
-                </div>
-                <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
-                <div class="field buttons"><%= f.submit "Register" %></div>
-            <% else %>
-                <%= reg.hidden_field :ticket_type_old %>
-                <% if @user.registration.manual_payment %>
-                    <div class="field adresse">
-                      <%= reg.label :invoice_address, "Payment address" %>
-                      <%= reg.text_area :invoice_address, :rows => 4 %>
-                    </div>
-                    <div class="field kommentarer">
-                      <%= reg.label :invoice_description, "Addional payment info" %>
-                      <%= reg.text_area :invoice_description, :rows => 4 %>
-                    </div>
-                    <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
-                    <div class="field buttons"><%= f.submit "Register" %></div>
-                <% else %>
-                    <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
-                    <div><%= f.submit "Register and proceed to payment" %></div>
-                <% end %>
-            <% end %>
-
-            <div class="field buttons">
-              <% if Time.now < App.speakers_close_date %>
-                  <div><%= f.submit "Register as a speaker", :name => "speaker", :id => "lyntale_submit" %>
-                    <% help_tooltip() do %>
-                        <p> In the next step you will propose a tutorial or a lightning talk. If you get a lightning
-                          talk
-                          accepted the ticket price will be NOK <%= PAYMENT_CONFIG[:prices]['lightning'].to_i %> and if
-                          you get a tutorial accepted it will be free. If not the price will be the price at the time
-                          of registration.
-                        </p>
-                    <% end %>
-                  </div>
-              <% end %>
-            </div>
-
-        <% end %>
-      </fieldset>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <fieldset id="registration_details">
+      <%= f.fields_for :registration do |reg| %>
+          <%= reg.hidden_field :free_ticket %>
+          <%= reg.hidden_field :manual_payment %>
+          <%= reg.hidden_field :ticket_type_old %>
+          <% if @user.registration.manual_payment %>
+              <div class="field adresse">
+                <%= reg.label :invoice_address, "Payment address" %>
+                <%= reg.text_area :invoice_address, :rows => 4 %>
+              </div>
+              <div class="field kommentarer">
+                <%= reg.label :invoice_description, "Addional payment info" %>
+                <%= reg.text_area :invoice_description, :rows => 4 %>
+              </div>
+              <div class="field buttons"><%= f.submit "Register" %></div>
+          <% else %>
+              <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+              <div><%= f.submit "Register and proceed to payment" %></div>
+          <% end %>
+      <% end %>
+    </fieldset>
 <% end %>

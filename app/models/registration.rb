@@ -14,7 +14,7 @@ class Registration < ActiveRecord::Base
   }
 
   attr_accessible :comments, :includes_dinner, :description,
-                  :ticket_type_old, :free_ticket,
+                  :ticket_type_old, :free_ticket, :user_id,
                   :manual_payment, :invoice_address, :invoice_description
 
   default_scope :order => 'registrations.created_at desc'
@@ -137,7 +137,7 @@ class Registration < ActiveRecord::Base
     end
     self.registration_complete = false
     update_price
-    return true
+    true
   end
 
   def update_price

@@ -32,7 +32,6 @@ class UsersController < ApplicationController
     @user = User.new
     @user.registration = Registration.new
     @user.registration.manual_payment = params[:manual_payment]
-    @user.registration.free_ticket = !params[:free_ticket].blank?
     @user.registration.ticket_type_old = params[:free_ticket] || params[:ticket_type_old] || params[:ticket_type] || 'full_price'
     if @user.registration.ticket_type_old == 'full_price' && Time.now < App.early_bird_end_date
       @user.registration.ticket_type_old = 'early_bird'
@@ -40,7 +39,6 @@ class UsersController < ApplicationController
     @user.registration.includes_dinner = @user.registration.discounted_ticket?
   end
 
-  # GET /users/1/edit
   def edit
     @user = User.find(params[:id])
   end
@@ -48,6 +46,7 @@ class UsersController < ApplicationController
   def create
     User.transaction do
       @user = User.new(params[:user])
+      #@user.registration = @user.build_registration
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
 
@@ -60,61 +59,26 @@ class UsersController < ApplicationController
           raise @user.registration.errors.inspect
         end
 
-        UserSession.login(@user.email, @user.password)
+        UserSession.create(:login => @user.email, :password => @user.password)
 
         if @user.registration.manual_payment
           flash[:notice] = "We will contact you to confirm the details"
-          #RootsMailer.deliver_manual_registration_confirmation(@user)
-          #RootsMailer.deliver_manual_registration_notification(@user, user_url(@user))
+          RootsMailer.manual_registration_confirmation(@user).deliver
+          RootsMailer.manual_registration_notification(@user, user_url(@user)).deliver
           redirect_to @user
-        elsif params[:speaker]
-          @user.registration.ticket_type_old = 'new_speaker'
-          @user.save
-          flash[:notice] = "Register details for your talk/tutorial"
-          #RootsMailer.deliver_speaker_registration_confirmation(@user)
-          #RootsMailer.deliver_speaker_registration_notification(@user, user_url(@user))
-          redirect_to new_talk_url
         elsif @user.registration.free_ticket
           flash[:notice] = "We will contact you to confirm the details"
-          #RootsMailer.deliver_free_registration_confirmation(@user)
-          #RootsMailer.deliver_free_registration_notification(@user, user_url(@user))
+          RootsMailer.free_registration_confirmation(@user).deliver
+          RootsMailer.free_registration_notification(@user, user_url(@user)).deliver
           redirect_to @user
         else
-          #RootsMailer.deliver_registration_confirmation(@user)
+          RootsMailer.registration_confirmation(@user).deliver
           redirect_to @user.registration.payment_url(payment_notifications_url, user_url(@user))
         end
       else
         flash[:error] = "An error occured. Please follow the instructions below."
         render :action => 'new'
       end
-    end
-  end
-
-  # PUT /users/1
-  # PUT /users/1.json
-  def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    @user = User.find(params[:id])
-    @user.destroy
-
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
     end
   end
 end

@@ -1,0 +1,28 @@
+Hello <%= @talk.speaker_name %>,
+
+As you may have registered, we had feedback from the participants at Roots 2012. This year, we had such a differenciated feedback system, that we feel that we may give our participants valuable information that they may use in future presentations. The participants could give each presentation a grade with one of five different smileys, from "very sour" to "very happy". We have in the average numbers below translated the smileys into a table based scale from 1-5, where 1 represents "very sour" and 5 represents "very happy".
+
+Your presentation received a total of <%= @talk.num_of_votes %> feedbacks. The average of the feedback you got was <%= @talk.average_feedback_score  %>. To give you an impression of how you stand relative to the others, we have split the presentations in four categories, based on the average feedback.
+
+Gruppe 1: xx% with the highest average on their feedback  (over 86. percentil)
+Gruppe 2: xx% with second highest average on their feedback (between 70. and 86. percentil)
+Gruppe 3: xx% with second lowest average on their feedback (between 40. and 70. percentil)
+Gruppe 4: xx% with lowest average on their feedback (under 40. percentil)
+
+Your presentation ended up in group <%= @group %>.
+
+<% if(@talk.feedback_comments) %>
+You also received the following comments from those who attended your presentation of @talk.feedback_comments %>
+  * <%= comment.comment %>
+<% end %>
+
+We had an extremely high quality on the presentations this year, something the feedback reflects. The feedback from the participants is valuable information you can take advantage of to be able to improve. Use them! Comments and scores are not published. They are for you alone. 
+
+We hope that you will submit a proposal for a lightning talk next year too!
+
+With greetings from
+  The organizing committee at Roots 2011
+
+---
+
+Disclaimer: Average numbers, particularly on such a small data sample as ours, is but an indication of the quality of your presentation, at best. In our survey, we did not distinguish between the quality of the content and the quality of the way that the topic was presented. Neither have we taken into consideration  the outliers, the difference between the average feedback between the conference days (.... percentages) or the difference between the average feedback from the 25% with the lowest number of feedback vs the rest (... prosentpoeng). Additionally, an average value assumes that a number 4 feedback ("happy smiley") is twice as good as a 2 response ("sour smiley"), something that is not necessarily true for those who have given the feedback. As a conclusion, this is an indication, and not the truth!
