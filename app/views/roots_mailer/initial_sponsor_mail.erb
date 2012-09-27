@@ -1,22 +1,31 @@
-Hei <%= @name %>
+<html>
+<body>
+<h3>Hei <%= @name %></h3>
 
-Bli sponsor av Booster 2013
+<h3>Bli sponsor av Booster 2013</h3>
 
 
+<p>
 Booster 2013 arrangeres 13.-15. mars 2013 i Scandic Bergen City konferansesenter.
-
+</p>
+<p>
 Vi som står bak Booster 2013 har vært med på å organisere Roots - noen av oss helt fra den aller første Roots-konferansen i år 2000. Roots har i denne perioden vært Bergens største IT-konferanse, der rundt 200 deltakere gjennom tre dager har deltatt på en lang rekke foredrag, workshops og lyntaler av høy faglig kvalitet. Disse ble levert både av internasjonale stjerner som Dan North, Michael Feathers og Jim Webber (2011) og Linda Rising, Kevin Henney, Fred George, Paolo Perrotta og Matt Barcomb (2012). I tillegg bidro en rekke nasjonale og lokale helter. Tilbakemeldingene fra deltakerne var overveldende positive.
-
+</p>
+<p>
 Konferanser som Booster er svært viktige for å opprettholde et høyt faglig nivå i det lokale IT-miljøet. Erfaringsutveksling, nye idéer og tankevekkende innspill er hva Booster dreier seg om. Etter konferansen vender deltagerne tilbake til arbeidet med ny inspirasjon, lærdom og nye bekjentskaper som bidrar til at vi alle er i stand til å gjøre en bedre jobb. En investering i Booster er dermed en investering
 i din bedrifts faglige utvikling, og bidrar til å øke kompetansen i <%if @sponsor.is_in_bergen? %>Bergens<% else %>Norges<% end %> IT-miljø.
-
+</p>
+<p>
 Booster henvender seg til systemutviklere, prosjektledere, testere, designere, arkitekter, sikkerhetseksperter og de som jobber med brukeropplevelser.
-
+</p>
+<p>
 Booster fokuserer på godt håndverk, metoder og kvalitet, og legger til rette for å knytte nettverk.
+</p>
 
-
+<p>
 For mer informasjon om konferansen se http://boosterconf.no.
-
+</p>
+<p>
 For å kunne gjennomføre arrangementet trenger vi sponsorer som ønsker å bidra til fortsatt kvalitet i det <%if @sponsor.is_in_bergen? %>bergenske<% else %>norske<% end %> IT-miljøet. Sponsorer får følgende fordeler:
 Logo på trykt materiell, slik som program, flyvebrev, osv
 Logo på konferansens nettsider
@@ -24,12 +33,19 @@ Ha roll-up-banner i plenumsalen “Dragefjellet”
 Bruke Boosterkonferansens logo i markedsføring
 To billetter til konferansen og konferansemiddagen
 Sponsorer som ønsker det kan også få distribuere markedsføringsmateriell sammen med materiellet som blir delt ut til deltagerne. Dette må forhåndsgodkjennes av hensyn til plass og praktisk gjennomførbarhet.
-
+</p>
+<p>
 Prisen på sponsorpakken er kr. 25.000,- + MVA.
-
+</p>
+<p>
 Hvis dere er interessert i å sponse Booster 2013, svar pr e-post.  Hvis det er noe dere lurer på, så svarer vi gjerne på spørsmål.
-
+<p>
+<p>
 Med vennlig hilsen
-
+<br />
 <%= @sender %>
+<br />
 for Booster 2013
+</p>
+</body>
+</html>
