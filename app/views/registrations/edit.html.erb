@@ -1,0 +1,143 @@
+<h2>Information about payment for <%=h @registration.user.name %> (registrert <%= @registration.created_at.to_date %>)</h2>
+
+<% if @registration.registration_complete %>
+
+  We have registered your payment. We'll see you at Roots 2012!
+
+  <%# TODO: Transfer ticket to <email>. %>
+
+<% elsif @registration.free_ticket %>
+
+  <% form_for @registration do |reg| %>
+    <% if @registration.user.talks.empty? %>
+      <p>
+      <%= reg.label :ticket_type_old, "Type billett" %><br>
+      <%= reg.select :ticket_type_old, [
+          ['I want to use a free sponsor ticket (name the company)', 'sponsor'],
+          ['I will make a presentation together with somebody else (name the presenter)', 'speaker'],
+          ['I want to contribute as a volunteer during the conference', 'volunteer'],
+          ['I am a student', 'student'],
+          ['I am a MOD251 student', 'mod251'],
+          ['I am a member of the organizing committee of the conference', 'organizer']], :include_blank => true %>
+      </p>
+      <p>
+        <%= reg.label :invoice_description, "Comments about the registration" %><br/>
+        <%= reg.text_area :invoice_description, :rows => 4 %>
+      </p>
+    <% end %>
+    <p>
+      <%= reg.check_box :includes_dinner %>
+      <%= reg.label :includes_dinner,  "I want to participate in the dinner reception (it is included in the price)" %>
+    </p>
+    <p><%= reg.submit "Update your information" %></p>
+  <% end %>
+
+<% else %>
+
+  <% form_for @registration do |reg| %>
+    <p>
+      <%= reg.check_box :manual_payment %>
+      <%= reg.label :manual_payment,  "I want to receive an invoice of NOK #{@registration.price}" %>
+    </p>
+    <div id="invoice_information">
+      <p>
+        <%= reg.label :invoice_address, "Invoice address" %><br/>
+        <%= reg.text_area :invoice_address, :rows => 4 %>
+      </p>
+      <p>
+        <%= reg.label :invoice_description, "Comments about invoicing" %><br/>
+        <%= reg.text_area :invoice_description, :rows => 4 %>
+      </p>
+    </div>
+    <% if admin? %>
+      <p class="admin">
+      <%= reg.check_box :invoiced %>
+      <%= reg.label :invoiced, "Has been invoiced "%>
+      </p>
+    <% end %>
+    <p><%= reg.submit "Update the invoicing information" %></p>
+  <% end %>
+<% end %>
+
+<% if admin? %>
+
+<div class="admin">
+
+  <h3>Admin: Register payment for <%= @registration.user.name %></h3>
+
+  <p>
+       Før du gjør dette, vær vennlig og dobbeltsjekk epostadressen. Noen brukere
+  	registrerer seg med flere epostadresser, og det er viktig at du oppdaterer
+  	den riktige adressen
+  </p>
+
+  <h3>Epost: <%= @registration.user.email %></h3>
+
+  <% unless @registration.registration_complete %>
+    <h4>Update ticket information</h4>
+
+    <% form_for @registration do |f| %>
+      <%= hidden_field_tag :ticket_change %>
+      <p>
+        <%= f.label :ticket_type_old, "Type of ticket" %><br>
+        <%= f.select :ticket_type_old, [
+            ['Early bird', 'early_bird'],
+            ['Full price', 'full_price'],
+            ["Take advantage of a sponsor's free ticket - free (name the company)", 'sponsor'],
+            ['Will talk - free', 'speaker'],
+            ['Speaker Without Abstract', 'new_speaker'],
+            ['Contributes as a volunteer at the conference - free', 'volunteer'],
+            ['Am a student', 'student'],
+            ['Am a MOD251 student', 'mod251'],
+            ['Am a guest at the conference', 'guest'],
+            ['Am a member of the organizing committee - free', 'organizer']] %>
+      </p>
+      <p>
+        <%= f.label :invoice_description, "Comments about the registration" %><br/>
+        <%= f.text_area :invoice_description, :rows => 4 %>
+      </p>
+      <p>
+        <%= f.check_box :includes_dinner %>
+        <%= f.label :includes_dinner,  "Participates at the dinner" %>
+      </p>
+      <p>
+        <%= f.submit "Change ticket information" %>
+      </p>
+    <% end %>
+  <% end %>
+
+  <h4>Update payment information</h4>
+
+  <% form_for @registration do |f| %>
+  	<p>
+  		<%= f.label :comments, "Comments" %><br/>
+  		<%= f.text_area :comments, :rows => 5 %>
+  	</p>
+  	<p>
+  		<%= f.label :payment_reference, "Payment reference" %>
+  		<%= f.text_field :payment_reference %>
+  	</p>
+  	<p>
+  		<%= f.label :paid_amount, "Paid amount" %>
+  		<%= f.text_field :paid_amount %>
+  	</p>
+  	<p>
+  		<%= f.check_box :registration_complete %>
+  		<%= f.label :registration_complete,
+  		  case @registration.ticket_type_old
+  		    when "speaker" then "Presentation accepted"
+  		    when "volunteer" then "Registration confirmed"
+  		    when "organizer" then "Registration confirmed"
+  		    when "early_bird" then "Payment received"
+  		    when "full_price" then "Payment received"
+  		    else "Registration is paid/confirmed"
+    		end
+  		%>
+  	</p>
+    <p>
+      <%= f.submit "Register payment" %>
+    </p>
+  <% end %>
+
+</div>
+<% end %>

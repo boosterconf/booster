@@ -10,6 +10,10 @@ group :development, :test do
   gem 'sqlite3'
 end
 
+group :plugins do
+  gem 'prawn', '= 0.6.3'
+  gem 'prawnto'
+end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

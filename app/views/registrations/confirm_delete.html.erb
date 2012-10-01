@@ -1,0 +1,12 @@
+<h2>Deleting the user <%=@registration.user.name%></h2>
+  
+<p>
+  Deletion is non-reversable on this system. If you are certain that you will remove <%=@registration.user.name%>, type
+  the first three letters of the name in the text box below.
+</p>
+
+<% form_tag("/registrations/delete/#{@registration.id}", :method => :post) do -%> 
+  <%= hidden_field_tag 'name', @registration.user.name %>
+  <%= text_field_tag "confirmation" %> 
+  <%= submit_tag 'Slett bruker'%>
+<% end -%>

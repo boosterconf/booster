@@ -1,0 +1,39 @@
+<h3>Users</h3>
+
+<ul>
+  <li><%= link_to "Alle", :conditions => '' %></li>
+  <% for ticket_type_old in @ticket_type_olds %>
+    <li><%= link_to ticket_type_old, :conditions => { :ticket_type_old => ticket_type_old }  %></li>
+  <% end %>
+  <li><%= link_to "Completed", :conditions => { :registration_complete => 1 }  %></li>
+  <li><%= link_to "Not completed", :conditions => { :registration_complete => 0 }  %></li>
+  <li><%= link_to "Dinner registrations", :conditions => { :includes_dinner => 1 }  %></li>
+</ul>
+
+<h3><%= @registrations.length %> brukere:</h3>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Email</th>
+    <th>Ticket</th>
+    <th>Phone</th>
+  </tr>
+<% for registration in @registrations %>
+<tr>
+    <td>
+      <%=link_to h(registration.user.name), registration.user %>
+      (<%=h registration.user.company %>)
+    </td>
+    <td>
+      <%= link_to h(registration.user.email), "mailto:#{h(registration.user.email)}" %>
+    </td>
+    <td>
+      <%=h registration.ticket_type_old %>
+    </td>
+    <td>
+      <%=h registration.user.phone_number %>
+    </td>
+  </tr>
+<% end %>
+</table>
