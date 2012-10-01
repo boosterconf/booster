@@ -21,28 +21,29 @@ Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponso
     <thead>
         <tr>
             <th>Name</th>
-            <th>Invoiced</th>
-            <th>Paid</th>
+            <th style="min-width: 80px;">Invoiced</th>
+            <th style="min-width: 80px;">Paid</th>
             <th>User</th>
             <th>Status</th>
             <th>Comment</th>
+            <th colspan="4"></th>
         </tr>
     </thead>
     <tbody>
     <% @sponsors.each do |sponsor| %>
         <tr class='<%= sponsor.was_sponsor_last_year? ? "sponsor_last_year" : "" %>'>
-            <td><%=h sponsor.name %></td>
+            <td><%=h sponsor.name[0..25] %></td>
             <td><%=h sponsor.invoiced %></td>
             <td><%=h sponsor.paid %></td>
             <td><%=h sponsor.user ? sponsor.user.name : "" %></td>
             <td><%=h sponsor.status_text %></td>
-            <td><%=h sponsor.comment %></td>
-            <td><%= link_to 'Show', sponsor %></td>
-            <td><%= link_to 'Edit', edit_sponsor_path(sponsor) %></td>
-            <td><%= button_to 'Destroy', sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%=h sponsor.comment[0..30] %></td>
+            <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
+            <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
+            <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
             <td>
                 <% if sponsor.is_ready_for_email? %>
-                    <%= button_to 'Send Email', email_sponsor_path(sponsor), :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post  %>
+                    <%= link_to image_tag('mimiglyphs/57.png'), email_sponsor_path(sponsor), :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post  %>
                 <% end %>
             </td>
         </tr>

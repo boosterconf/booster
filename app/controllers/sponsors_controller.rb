@@ -5,7 +5,7 @@ class SponsorsController < ApplicationController
   # GET /sponsors
   # GET /sponsors.json
   def index
-    @sponsors = Sponsor.all
+    @sponsors = Sponsor.all.sort
 
     respond_to do |format|
       format.html # index.html.erb
