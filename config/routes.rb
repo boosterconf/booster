@@ -1,12 +1,22 @@
 Booster2013::Application.routes.draw do
 
-  #resources :users
+  resources :users
   resources :user_sessions
+  resources :registrations do
+    member do
+      get :confirm_delete
+    end
+  end
+
   resources :sponsors do
     member do
       post :email
     end
   end
+
+  resources :nametags
+
+  resources :payment_notifications
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
@@ -14,6 +24,7 @@ Booster2013::Application.routes.draw do
   match 'info/organizers' => 'info#organizers'
   match 'info/sponsors' => 'info#sponsors'
   match 'info/about' => 'info#about'
+
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
