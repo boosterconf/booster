@@ -1,6 +1,6 @@
 // Place all the styles related to the Sponsors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.tablesorter tr.sponsor_last_year {
+table.tablesorter tbody tr td.sponsor_last_year {
 	background: lightgreen;
 }
