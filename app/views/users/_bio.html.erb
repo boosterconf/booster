@@ -55,16 +55,16 @@
         <% if show_links %>
             <% if admin? %>
                 <p>
-                  <%= link_to('Publish abstract', {:controller => 'talks', :action => 'assign', :id => @user.id}) %>
+                  <%#= link_to('Publish abstract', {:controller => 'talks', :action => 'assign', :id => @user.id}) %>
                 </p>
             <% end %>
             Accepted abstracts that will be displayed on speaker page:
             <ul style="list-style-type: none;">
-              <% @user.talks.each do |talk| %>
-                  <% if   talk.accepted? %>
-                      <li><%= link_to h(talk.title), talk %></li>
-                  <% end %>
-              <% end %>
+              <%# @user.talks.each do |talk| %>
+                  <%# if   talk.accepted? %>
+                      <li><%#= link_to h(talk.title), talk %></li>
+                  <%#end %>
+              <%# end %>
             </ul>
         <% end %>
       </div>

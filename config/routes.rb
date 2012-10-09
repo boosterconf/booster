@@ -1,6 +1,7 @@
 Booster2013::Application.routes.draw do
 
   resources :users
+
   resources :user_sessions
   resources :registrations do
     member do
@@ -20,6 +21,9 @@ Booster2013::Application.routes.draw do
 
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
+  match 'users/current' => 'users#current', :as => :current_user
+  match 'users/:id/create_bio' => 'users#create_bio'
+  match 'users/:id/delete_bio' => 'users#delete_bio'
 
   match 'info/organizers' => 'info#organizers'
   match 'info/sponsors' => 'info#sponsors'

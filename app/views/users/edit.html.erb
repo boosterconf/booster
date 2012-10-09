@@ -2,7 +2,7 @@
 
 
 <% if @user.bio == nil && admin? %>
-    <%= link_to "Add user bio", :controller=>"users", :action=>"create_bio", :id => params[:id] %>
+    <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
 <% end %>
 <h2 class="page_title">Change your registration</h2>
 
