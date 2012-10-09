@@ -72,8 +72,14 @@ booster, roots conference, roots, it conference, software conference, methodolog
                 <!--li><a href="/info/videos">Videos</a></li -->
                 <li><a href="/info/sponsors">Be a sponsor</a></li>
                 <li><a href="/info/about">About Booster</a></li>
-
-                <li><a href="/login">Log in</a></li>
+              <% if logged_in %>
+                  <li><%= link_to 'My registration', '/users/current'  %></li>
+              <% else %>
+                  <li><%= link_to 'Log in', '/login' %></li>
+              <% end %>
+              <% if admin? %>
+                  <li><%#= link_to 'Admin', :controller => 'admin', :action => 'index' %></li>
+              <% end %>
             </ul>
         </div>
 

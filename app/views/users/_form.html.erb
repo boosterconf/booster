@@ -101,7 +101,7 @@
     </fieldset>
 
     <fieldset id="registration_details">
-      <%= f.fields_for @user.registration do |reg| %>
+      <%= f.fields_for :registration do |reg| %>
           <%= reg.hidden_field :ticket_type_old %>
           <% if @user.registration.manual_payment %>
               <div class="field adresse">

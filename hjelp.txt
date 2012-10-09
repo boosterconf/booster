@@ -1,0 +1,12 @@
+--- Hjelp, jeg får ikke lagret nøstede objekter ---
+Her er det fjorten lag med magi som kan bite deg i r?*$#%$&%en.
+
+Husk å (eksemplifisert ved assosiasjon fra User til Registration):
+- sett opp assosiasjonen på vanlig måte (belongs_to, has_one, etc)
+- bruke fields_for i erb-filen, og bruk :registration, ikke @user.registration
+- sett registration_attributes til å være attr_accessible
+- sett accepts_nested_attributes_for :registration på User
+- vift med tryllestaven og vips:
+=> du har lagret en user, _og_ en registration.
+
+* * * A P P L A U S * * *

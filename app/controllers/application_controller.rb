@@ -40,6 +40,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin_or_speaker
+    unless params[:id] == 'favicon'
+      user = User.find(params[:id])
+      unless (current_user.is_admin? || user.registration.ticket_type_old == 'speaker')
+        flash[:error] = "You are not allowed to look at other users' information"
+        access_denied
+      end
+    end
+  end
+
   def require_user
     unless current_user
       store_location

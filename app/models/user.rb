@@ -3,9 +3,13 @@ class User < ActiveRecord::Base
   	:current_login_at, :current_login_ip, :description, :dietary_requirements, :email, :password, :password_confirmation,
   	:failed_login_count, :feature_as_organizer, :featured_speaker, :female, :hometown, 
   	:invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name, 
-  	:password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role
+  	:password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role,
+    :registration_attributes, :bio_attributes
   
   has_one :registration
+  has_one :bio
+
+  accepts_nested_attributes_for :registration, :bio
 
   default_scope :order => 'users.created_at desc'
 
@@ -13,7 +17,6 @@ class User < ActiveRecord::Base
     c.login_field = :email
   end
 
-  accepts_nested_attributes_for :registration
 
   validates_format_of :phone_number, :with => /\A(\s*(\(\+\s*\d{2}\))?\s*(\d\s*){4,10})\Z/,
                       :message             => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true

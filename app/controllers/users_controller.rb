@@ -46,7 +46,6 @@ class UsersController < ApplicationController
   def create
     User.transaction do
       @user = User.new(params[:user])
-      @user.registration = @user.build_registration
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
 
@@ -81,4 +80,86 @@ class UsersController < ApplicationController
       end
     end
   end
+
+  def create_bio
+    @user = User.find(params[:id])
+    if @user.bio == nil
+      @user.bio = Bio.new
+    end
+    render :action => 'edit'
+  end
+
+  def update
+    @user = User.find(params[:id])
+    update_user
+  end
+
+  def updated_dinner_attendance(dinner_status)
+    flash[:notice] = "Thank you for updating your dinner attendance. #{dinner_status}"
+    redirect_to current_users_path
+  end
+
+  def attending_dinner
+    current_user.attending_dinner!
+    updated_dinner_attendance("You are registered as attending the dinner.")
+  end
+
+  def not_attending_dinner
+    current_user.not_attending_dinner!
+    updated_dinner_attendance("You are registered as not attending the dinner")
+  end
+
+  def delete_bio
+    @user = User.find(params[:id])
+    if @user.bio.delete
+      flash[:notice] = "Removed bio"
+    else
+      flash[:notice] = "Couldn't remove bio"
+    end
+    redirect_to @user
+  end
+
+  def phone_list
+    @users = User.find(:all, :order => "registrations.ticket_type_old, name", :include => :registration, :conditions => "registrations.ticket_type_old = 'volunteer' OR registrations.ticket_type_old = 'organizer'")
+  end
+
+  def dietary_requirements
+    @users = User.find(:all, :order => "registrations.ticket_type_old, name", :include => :registration, :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
+  end
+
+  protected
+
+  def update_user
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Updated profile."
+      redirect_to @user
+    else
+      render :action => 'edit'
+    end
+  end
+
+  def total_by_date(users, date_range)
+    users_by_date = users.group_by { |u| u.created_at.to_date }
+    per_date = []
+    total = 0
+    for day in date_range do
+      total += users_by_date[day].size if users_by_date[day]
+      per_date << total
+    end
+    per_date
+  end
+
+  def total_price_per_date(users, date_range)
+    users_by_date = users.group_by { |u| u.created_at.to_date }
+    per_date = []
+    total = 0
+    for day in date_range do
+      for user in users_by_date[day] || []
+        total += user.registration.price || 0 if user.registration && user.registration.paid?
+      end
+      per_date << total
+    end
+    per_date
+  end
+
 end
