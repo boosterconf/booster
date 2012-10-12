@@ -51,15 +51,17 @@
     <th>Name</th>
     <th>Responsible committee member</th>
     <th>Status</th>
+    <th>Sponsor last year</th>
     <th colspan="4"></th>
   </tr>
   </thead>
   <tbody>
   <% @sponsors.each do |sponsor| %>
-      <tr class='<%= sponsor.was_sponsor_last_year? ? "sponsor_last_year" : "" %>'>
+      <tr>
         <td><%= h sponsor.name[0..25] %></td>
         <td><%= h sponsor.user ? sponsor.user.name : "" %></td>
         <td><%= h sponsor.status_text %></td>
+        <td><%= h sponsor.was_sponsor_last_year? ? "Yes" : "No" %></td>
         <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
         <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
         <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
