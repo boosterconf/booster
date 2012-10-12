@@ -26,7 +26,7 @@
   </tr>
   <tr>
       <td>Suggested (missing email):</td>
-      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email == ''") %></td>
+      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email = ''") %></td>
     </tr>
   <tr>
     <td>Contacted:</td>
