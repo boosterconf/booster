@@ -1,6 +1,5 @@
 <div style="background-color: #d3d3d3;">
   <p>
-    <strong>Id:</strong> <%= event.id %> <br/>
     <strong>Date:</strong> <%= event.created_at %> <br/>
     <strong>Created by:</strong> <%= event.user ? event.user.name : 'System' %> <br/>
     <%= simple_format event.comment %>

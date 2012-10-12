@@ -1,55 +1,79 @@
 <script type="text/javascript">
-    $(document).ready(function()
-        {
-            $("#sponsors").tablesorter();
-        }
+    $(document).ready(function () {
+                $("#sponsors").tablesorter();
+            }
     );
 </script>
 <h1>Sponsor list</h1>
 
-<p>
-Accepted: <%= Sponsor.count(:conditions => "status = 'accepted'") %>,
-Declined: <%= Sponsor.count(:conditions => "status = 'declined'") %>,
-In Dialogue: <%= Sponsor.count(:conditions => "status = 'dialogue'") %>,
-Suggested: <%= Sponsor.count(:conditions => "status = 'suggested'") %>,
-Contacted: <%= Sponsor.count(:conditions => "status = 'contacted'") %>,
-Reminded: <%= Sponsor.count(:conditions => "status = 'reminded'") %>,
-Last year: <%= Sponsor.count(:conditions => "was_sponsor_last_year = 't'") %>,
-Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %>
-</p>
-<table id="sponsors" class="tablesorter">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th style="min-width: 80px;">Invoiced</th>
-            <th style="min-width: 80px;">Paid</th>
-            <th>User</th>
-            <th>Status</th>
-            <th colspan="4"></th>
-        </tr>
-    </thead>
-    <tbody>
-    <% @sponsors.each do |sponsor| %>
-        <tr class='<%= sponsor.was_sponsor_last_year? ? "sponsor_last_year" : "" %>'>
-            <td><%=h sponsor.name[0..25] %></td>
-            <td><%=h sponsor.invoiced %></td>
-            <td><%=h sponsor.paid %></td>
-            <td><%=h sponsor.user ? sponsor.user.name : "" %></td>
-            <td><%=h sponsor.status_text %></td>
-            <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
-            <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
-            <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
-            <td>
-                <% if sponsor.is_ready_for_email? %>
-                    <%= link_to image_tag('mimiglyphs/57.png'), email_sponsor_path(sponsor), :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post  %>
-                <% end %>
-            </td>
-        </tr>
-    <% end %>
+<table>
+  <tr>
+    <td>Accepted:</td>
+    <td><%= Sponsor.count(:conditions => "status = 'accepted'") %></td>
+  </tr>
 
-    </tbody>
+  <tr>
+    <td>Declined:</td>
+    <td><%= Sponsor.count(:conditions => "status = 'declined'") %></td>
+  </tr>
+  <tr>
+    <td>In Dialogue:</td>
+    <td><%= Sponsor.count(:conditions => "status = 'dialogue'") %></td>
+  </tr>
+  <tr>
+    <td>Suggested (with email):</td>
+    <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email != '' ") %></td>
+  </tr>
+  <tr>
+      <td>Suggested (missing email):</td>
+      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email == ''") %></td>
+    </tr>
+  <tr>
+    <td>Contacted:</td>
+    <td><%= Sponsor.count(:conditions => "status = 'contacted'") %></td>
+  </tr>
+  <tr>
+    <td>Reminded:</td>
+    <td><%= Sponsor.count(:conditions => "status = 'reminded'") %></td>
+  </tr>
+  <tr>
+    <td>Last year:</td>
+    <td><%= Sponsor.count(:conditions => "was_sponsor_last_year = 't'") %></td>
+  </tr>
+  <tr>
+    <td>Both years:</td>
+    <td><%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %></td>
+  </tr>
+</table>
+<table id="sponsors" class="tablesorter">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Responsible committee member</th>
+    <th>Status</th>
+    <th colspan="4"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @sponsors.each do |sponsor| %>
+      <tr class='<%= sponsor.was_sponsor_last_year? ? "sponsor_last_year" : "" %>'>
+        <td><%= h sponsor.name[0..25] %></td>
+        <td><%= h sponsor.user ? sponsor.user.name : "" %></td>
+        <td><%= h sponsor.status_text %></td>
+        <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
+        <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
+        <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
+        <td>
+          <% if sponsor.is_ready_for_email? %>
+              <%= link_to image_tag('mimiglyphs/57.png'), email_sponsor_path(sponsor), :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
+
+  </tbody>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New sponsor', new_sponsor_path %>

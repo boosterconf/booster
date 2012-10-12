@@ -2,17 +2,30 @@ class Sponsor < ActiveRecord::Base
   belongs_to :user
 
   has_many :events
-  
+
   attr_accessible :comment, :contact_person, :contact_person_phone_number, :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id, :was_sponsor_last_year, :events
 
-  STATES = { 'suggested' => "Suggested", 'dialogue' => 'In Dialogue', 'contacted' => "Contacted", 'reminded' => "Reminded", 'declined' => "Declined", 'accepted' => "Accepted" }
+  STATES = {'suggested' => "Suggested", 'dialogue' => 'In Dialogue', 'contacted' => "Contacted", 'reminded' => "Reminded", 'declined' => "Declined", 'accepted' => "Accepted"}
 
   def status_text
-    STATES[status]
+    state = STATES[status]
+
+    p "Paid " + paid.to_s
+    p "invoiced " + invoiced.to_s
+
+    if status == 'accepted'
+      if paid != nil
+        state = "Paid"
+      elsif invoiced != nil
+        state = "Invoiced, not paid"
+      end
+    end
+
+    state
   end
 
   def self.all_accepted
-      self.find_all_by_status("accepted")
+    self.find_all_by_status("accepted")
   end
 
   def is_ready_for_email?
