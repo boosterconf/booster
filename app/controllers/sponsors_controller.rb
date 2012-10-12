@@ -20,7 +20,7 @@ class SponsorsController < ApplicationController
 
   def edit
     @users = User.all_organizers
-    @sponsor = Sponsor.find(params[:id], :include => :events )
+    @sponsor = Sponsor.find(params[:id], :include => :events)
 
     @event = Event.new(:sponsor => @sponsor)
   end
@@ -38,7 +38,14 @@ class SponsorsController < ApplicationController
   def update
     @sponsor = Sponsor.find(params[:id])
 
-    if @sponsor.update_attributes(params[:sponsor])
+    @sponsor.assign_attributes(params[:sponsor])
+
+    if @sponsor.status_changed?
+      event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Sponsor status changed to #{@sponsor.status_text}")
+      event.save
+    end
+
+    if @sponsor.save
       redirect_to @sponsor, notice: 'Sponsor was successfully updated.'
     else
       render action: "edit"
@@ -59,6 +66,10 @@ class SponsorsController < ApplicationController
       @sponsor.status = 'contacted'
       @sponsor.last_contacted_at = Time.now.to_datetime
       @sponsor.save
+
+      event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+      event.save
+
       redirect_to(sponsors_path, :notice => 'Email was sent and sponsor status set to \'Contacted\'.')
     else
       flash[:error] = 'No email sent: must have status suggested and responsible set'
