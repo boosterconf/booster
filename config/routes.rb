@@ -10,6 +10,7 @@ Booster2013::Application.routes.draw do
   end
 
   resources :sponsors do
+    resources :events
     member do
       post :email
     end

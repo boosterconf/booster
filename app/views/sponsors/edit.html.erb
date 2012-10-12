@@ -2,5 +2,24 @@
 
 <%= render 'form' %>
 
+<div id="new_comment">
+  <%= form_for [@sponsor, @event], :remote => true do |f| %>
+
+      <p>
+        <%= f.label :comment %>
+        <%= f.text_area :comment, :rows => '8', :cols => 35 %>
+      </p>
+
+      <p>
+        <%= f.submit %>
+      </p>
+  <% end %>
+</div>
+
+<h3>Comments</h3>
+<div id="comments">
+  <%= render @sponsor.events %>
+</div>
+
 <%= link_to 'Show', @sponsor %> |
 <%= link_to 'Back', sponsors_path %>

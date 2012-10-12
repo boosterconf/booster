@@ -25,7 +25,6 @@ Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponso
             <th style="min-width: 80px;">Paid</th>
             <th>User</th>
             <th>Status</th>
-            <th>Comment</th>
             <th colspan="4"></th>
         </tr>
     </thead>
@@ -37,7 +36,6 @@ Both years: <%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponso
             <td><%=h sponsor.paid %></td>
             <td><%=h sponsor.user ? sponsor.user.name : "" %></td>
             <td><%=h sponsor.status_text %></td>
-            <td><%=h sponsor.comment[0..30] %></td>
             <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
             <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
             <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>

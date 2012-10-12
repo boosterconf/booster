@@ -213,7 +213,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_organizers
-      self.all.select { |u| u.registration != NIL && u.registration.ticket_type_old == "organizer" }
+      self.all(:include => :registration).select { |u| u.registration != NIL && u.registration.ticket_type_old == "organizer" }
   end
 
   def self.featured_speakers
@@ -229,11 +229,11 @@ class User < ActiveRecord::Base
   end
 
   def self.all_normal_participants
-    User.find(:all, :conditions => ['registrations.ticket_type_old IN (?)', ['early_bird', 'full_price', 'sponsor', 'organizer']], :include => [:registration])
+    User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(early_bird full_price sponsor organizer)], :include => [:registration])
   end
 
   def self.all_speakers
-    User.find(:all, :conditions => ['registrations.ticket_type_old IN (?)', ['lightning', 'speaker']], :include => [:registration])
+    User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
   end
   
 end

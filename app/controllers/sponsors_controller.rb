@@ -1,92 +1,57 @@
 class SponsorsController < ApplicationController
-  
+
   before_filter :require_admin
 
-  # GET /sponsors
-  # GET /sponsors.json
+  respond_to :html, :js
+
   def index
     @sponsors = Sponsor.all.sort
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @sponsors }
-    end
   end
 
-  # GET /sponsors/1
-  # GET /sponsors/1.json
   def show
     @sponsor = Sponsor.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @sponsor }
-    end
   end
 
-  # GET /sponsors/new
-  # GET /sponsors/new.json
   def new
     @users = User.all_organizers
     @sponsor = Sponsor.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @sponsor }
-    end
   end
 
-  # GET /sponsors/1/edit
   def edit
     @users = User.all_organizers
-    @sponsor = Sponsor.find(params[:id])
+    @sponsor = Sponsor.find(params[:id], :include => :events )
+
+    @event = Event.new(:sponsor => @sponsor)
   end
 
-  # POST /sponsors
-  # POST /sponsors.json
   def create
     @sponsor = Sponsor.new(params[:sponsor])
 
-    respond_to do |format|
-      if @sponsor.save
-        format.html { redirect_to @sponsor, notice: 'Sponsor was successfully created.' }
-        format.json { render json: @sponsor, status: :created, location: @sponsor }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @sponsor.errors, status: :unprocessable_entity }
-      end
+    if @sponsor.save
+      redirect_to @sponsor, notice: 'Sponsor was successfully created.'
+    else
+      render action: "new"
     end
   end
 
-  # PUT /sponsors/1
-  # PUT /sponsors/1.json
   def update
     @sponsor = Sponsor.find(params[:id])
 
-    respond_to do |format|
-      if @sponsor.update_attributes(params[:sponsor])
-        format.html { redirect_to @sponsor, notice: 'Sponsor was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @sponsor.errors, status: :unprocessable_entity }
-      end
+    if @sponsor.update_attributes(params[:sponsor])
+      redirect_to @sponsor, notice: 'Sponsor was successfully updated.'
+    else
+      render action: "edit"
     end
   end
 
-  # DELETE /sponsors/1
-  # DELETE /sponsors/1.json
   def destroy
     @sponsor = Sponsor.find(params[:id])
     @sponsor.destroy
 
-    respond_to do |format|
-      format.html { redirect_to sponsors_url }
-      format.json { head :no_content }
-    end
+    redirect_to sponsors_url
   end
 
-    # POST /sponsors/1/email
   def email
     @sponsor = Sponsor.find(params[:id])
     if @sponsor.is_ready_for_email?
@@ -101,3 +66,4 @@ class SponsorsController < ApplicationController
     end
   end
 end
+
