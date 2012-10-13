@@ -23,7 +23,7 @@ class Talk < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :language
 
-  attr_accessible :talk_type, :language, :title, :description, :audience_level, :max_participants,
+  attr_accessible :talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
                   :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status
 
   def after_initialize

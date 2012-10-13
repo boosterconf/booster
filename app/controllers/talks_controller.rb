@@ -34,7 +34,7 @@ class TalksController < ApplicationController
   def new
     if current_user
       @talk = Talk.new
-      @tags = Tag.find(:all)
+      @tags = Tag.all
       @user = current_user
       @types = TalkType.all
     else
