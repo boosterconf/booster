@@ -10,9 +10,6 @@ class Sponsor < ActiveRecord::Base
   def status_text
     state = STATES[status]
 
-    p "Paid " + paid.to_s
-    p "invoiced " + invoiced.to_s
-
     if status == 'accepted'
       if paid != nil
         state = "Paid"
