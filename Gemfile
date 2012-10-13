@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'paperclip', '~>3.0'
-gem 'aws-s3', '~>0.6.2'
+gem 'aws-sdk', '~> 1.3.4'
 
 
 group :production do
