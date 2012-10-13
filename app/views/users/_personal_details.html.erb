@@ -1,0 +1,55 @@
+<fieldset id="personal_details">
+  <div class="field name">
+    <%= f.label :name, "Name" %>
+    <br/>
+    <%= text_field(:user, :name, :placeholder => "Please tell us your name", :size => 50, :required => true) %>
+  </div>
+  <div class="field firma">
+    <%= f.label :company, "Company" %>
+    <br/>
+    <%= text_field(:user, :company, :placeholder => "and where you work", :size => 50, :required => true) %>
+  </div>
+  <div class="field rolle">
+    <%= f.label :role, "Primary role" %>
+    <br/>
+    <%= select("user", "role",
+               [["Select one...", ""],
+                ["Developer", "Developer"],
+                ["Architect", "Architect"],
+                ["Tester/Test lead", "Tester/Test lead"],
+                ["Project manager", "Project manager"],
+                ["Scrum master", "Scrum master"],
+                ["UX specialist", "UX specialist"],
+                ["Manager", "Manager"],
+                ["Sales representative", "Sales representative"],
+                ["Other", "Other"]]) %>
+  </div>
+
+  <div class="field email">
+    <%= f.label :email %>
+    <br/>
+    <%= email_field(:user, :email, :placeholder => "Where can we email you?", :size => 50, :required => true) %>
+  </div>
+  <div class="field passord">
+    <%= f.label :password %>
+    <br/>
+    <%= password_field(:user, :password, :placeholder => "Sshhh. It's a secret.", :size => 50, :required => true) %>
+  </div>
+  <div class="field bekreft">
+    <%= f.label :password_confirmation, "Confirm password" %>
+    <br/>
+    <%= password_field(:user, :password_confirmation,
+                       :placeholder => "Repeat, please.", :size => 50, :required => true) %>
+  </div>
+  <div class="field telefon">
+    <%= f.label :phone_number, "Phone" %><br />
+    <%= text_field(:user, :phone_number, :placeholder => "If we need to call you", :size => 50) %>
+  </div>
+
+  <div class="field dietary_requirements">
+    <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
+    <br/>
+    <%= text_field(:user, :dietary_requirements, :placeholder => "Do you need something special for dinner?",
+                   :size => 50) %>
+  </div>
+</fieldset>

@@ -1,0 +1,26 @@
+<fieldset>
+<div class="geeky">
+  <%= f.label "For geeky statistical purposes:" %>
+</div>
+
+<div class="field">
+  <fieldset>
+    <%= f.label :female, "Male" %>
+    <%= f.radio_button :female, false %>
+    <%= f.label :female, "Female" %>
+    <%= f.radio_button :female, true %>
+  </fieldset>
+</div>
+
+<div class="field hjemby">
+  <%= f.label :hometown, "City of residence" %>
+  <br/>
+  <%= text_field(:user, :hometown, :placeholder => "Where do you live?", :size => 50) %>
+</div>
+
+<div class="field fødselsår">
+  <%= f.label :birthyear, "Birth year" %>
+  <br/>
+  <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :size => 50) %>
+</div>
+</fieldset>
