@@ -75,7 +75,7 @@ class RootsMailer < ActionMailer::Base
 
   def talk_confirmation(talk, talk_url)
     @speaker = talk.speaker_name
-    @email = talk_speaker_email
+    @email = talk.speaker_email
     @talk = talk.title
     @talk_url = talk_url
     mail(:to => talk.users.map(&:email), :subject => "#{SUBJECT_PREFIX} Confirmation on submission #{talk.title}")
@@ -85,7 +85,7 @@ class RootsMailer < ActionMailer::Base
     @speaker = comment.talk.speaker_name
     @talk = comment.talk.title
     @comment_url = comment_url
-    mail(:to => coment.talk.users.map(&:email), :subject => "#{SUBJECT_PREFIX} Comment for #{comment.talk.title}")
+    mail(:to => comment.talk.users.map(&:email), :subject => "#{SUBJECT_PREFIX} Comment for #{comment.talk.title}")
   end
 
   def talk_acceptance_confirmation(talk, speaker, current_user_url)

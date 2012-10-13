@@ -1,0 +1,90 @@
+<% content_for :title, h(@talk.title) %>
+<div id="breadcrumbs"><%= link_to "Back to list of talks", talks_path %></div>
+<h2 class="page_title"><%= h @talk.title %></h2>
+<p><%= @talk.language %></p>
+
+<% if @talk.accepted? %>
+    <p><%= image_tag("approved_talk.png") %> approved</p>
+<% end %>
+
+<div class="tags">
+  <b>Tags:</b>
+  <% @talk.tags.each do |tag| %>
+      <%= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
+  <% end %>
+</div>
+<br/>
+<h3><%= render :partial => @talk.users %></h3>
+
+<% if @talk.users.include?(current_user)|| admin? %>
+    <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
+
+    <% unless @talk.slide_file_name.nil? %>
+        <h3>Presentation slides</h3>
+        <p><%= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
+    <% else %>
+        <h3>Upload presentation</h3>
+    <% end %>
+    <%= render :partial => "talks/upload_slide" %>
+    <hr/>
+
+    <p>
+      <strong>Extra equipment:</strong>
+      <%= h @talk.equipment %>
+    </p>
+
+    <p>
+      <strong>Room setup:</strong>
+      <%= h @talk.room_setup %>
+    </p>
+
+    <p>
+      <strong>Maximum number of participants:</strong>
+      <%= h @talk.max_participants %>
+    </p>
+
+<% end %>
+
+<div class="description">
+  <h4>Description</h4>
+  <% if contains_html @talk.description %>
+      <%= sanitize @talk.description %>
+  <% else %>
+      <%= simple_format h(@talk.description) %>
+  <% end %>
+</div>
+
+<p>
+  <strong>Participant requirements:</strong>
+  <%= h @talk.participant_requirements %>
+</p>
+
+<p>
+  <strong>Target audience:</strong>
+  <%= h @talk.describe_audience_level %>
+</p>
+
+
+<%= link_to image_tag("#{@talk.license}.png", :title => 'Presentation is shared under a Creative Commons license.'),
+            "http://creativecommons.org/licenses/#{@talk.license}/3.0/no/", :rel => 'license' %>
+
+
+<%= render :partial => "talks/video" %>
+<% if false %>
+    <%# TODO: Legge til slides igjen   %>
+    <%= render :partial => "talks/slides" %>
+<% end %>
+
+<div id="comments">
+  <%= render :partial => @talk.comments %>
+</div>
+
+<% if logged_in %>
+    <h3 id="new_comment">Add new comment:</h3>
+    <%= render :partial => "comments/new" %>
+<% else %>
+
+    <h3><%= link_to "Log in to write a new comment", new_user_session_url(:save => true) %></h3>
+<% end %>
+
+

@@ -16,6 +16,10 @@ Booster2013::Application.routes.draw do
     end
   end
 
+  resources :talks do
+    resources :comments
+  end
+
   resources :nametags
 
   resources :payment_notifications

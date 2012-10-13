@@ -1,13 +1,15 @@
 class User < ActiveRecord::Base
-  attr_accessible :accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password, 
-  	:current_login_at, :current_login_ip, :description, :dietary_requirements, :email, :password, :password_confirmation,
-  	:failed_login_count, :feature_as_organizer, :featured_speaker, :female, :hometown, 
-  	:invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name, 
-  	:password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role,
-    :registration_attributes, :bio_attributes
-  
+  attr_accessible :accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
+                  :current_login_at, :current_login_ip, :description, :dietary_requirements, :email, :password, :password_confirmation,
+                  :failed_login_count, :feature_as_organizer, :featured_speaker, :female, :hometown,
+                  :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name,
+                  :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role,
+                  :registration_attributes, :bio_attributes
+
   has_one :registration
   has_one :bio
+  has_many :speakers
+  has_many :talks, :through => :speakers
 
   accepts_nested_attributes_for :registration, :bio
 
@@ -19,14 +21,14 @@ class User < ActiveRecord::Base
 
 
   validates_format_of :phone_number, :with => /\A(\s*(\(\+\s*\d{2}\))?\s*(\d\s*){4,10})\Z/,
-                      :message             => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true
+                      :message => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true
   #validates_length_of :phone_number, :in => 4..30
   validates_length_of :hometown, :minimum => 2
-  validates_numericality_of :birthyear, :greater_than => 1900, :less_than =>2000
+  validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
   validates_presence_of :role, :message => "You must specify role."
-  
+
   validates_each :accepted_privacy_guidelines do |record, attr, value|
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
   end
@@ -74,11 +76,11 @@ class User < ActiveRecord::Base
       if self.has_accepted_tutorial?
         unless self.registration.registration_complete?
           self.registration.registration_complete = true
-          self.registration.completed_by          = current_user.email
+          self.registration.completed_by = current_user.email
         end
       else
         self.registration.registration_complete = false
-        self.registration.completed_by          = ""
+        self.registration.completed_by = ""
       end
 
       self.registration.update_price
@@ -126,7 +128,6 @@ class User < ActiveRecord::Base
   def update_to_lightning_talk_speaker
     self.registration.ticket_type_old = 'lightning'
   end
-
 
 
   def update_to_paying_user
@@ -200,9 +201,9 @@ class User < ActiveRecord::Base
   end
 
   def self.all_invited_speakers
-      self.find_all_by_invited(true)
+    self.find_all_by_invited(true)
   end
-  
+
 
   def self.all_tutorial_speakers
     self.all.select { |u| u.has_accepted_tutorial? }
@@ -213,7 +214,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_organizers
-      self.all(:include => :registration).select { |u| u.registration != NIL && u.registration.ticket_type_old == "organizer" }
+    self.all(:include => :registration).select { |u| u.registration != NIL && u.registration.ticket_type_old == "organizer" }
   end
 
   def self.featured_speakers
@@ -235,5 +236,5 @@ class User < ActiveRecord::Base
   def self.all_speakers
     User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
   end
-  
+
 end
