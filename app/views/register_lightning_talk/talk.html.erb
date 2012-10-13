@@ -1,0 +1,28 @@
+<h2>What's your passion?</h2>
+
+<%= form_for @talk, :url => '/register_lightning_talk/create_talk' do |f| %>
+
+    <% @talk.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+
+    <div class="field language">
+      <input id="talk_language_english" name="talk[language]" type="radio" value="English" style="display:inline" <%= @talk.language == 'English' ? "checked" : "" %> />
+      <label for="talk_language_english">English</label><br/>
+      <input id="talk_language_norwegian" name="talk[language]" type="radio" value="Norwegian" style="display:inline" <%= @talk.language == 'Norwegian ' ? "checked" : "" %>/>
+      <label for="talk_language_norwegian">Norwegian</label>
+    </div>
+
+    <div class="field title">
+      <%= f.label :title, "Title" %>
+
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field abstract">
+      <%= f.label :description, "Abstract" %>
+
+      <%= f.text_area :description, :class => "mceEditor" %>
+    </div>
+    <%= f.submit "Next" %>
+<% end %>

@@ -1,0 +1,24 @@
+<h2>Who are you?</h2>
+
+<%= form_for @user, :url => '/register_lightning_talk/create_user' do |f| %>
+
+    <% @user.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+
+    <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
+    <%#= render :partial => 'users/confirmations', :locals => {:f => f} %>
+
+
+    <ul>
+      <% Roles.all.each do |role| %>
+          <li><%= check_box_tag 'roles[]', role %>
+                  <%= role %></li>
+      <% end %>
+    </ul>
+
+    <%= render :partial => 'users/passwords', :locals => {:f => f} %>
+
+
+    <%= f.submit "Next" %>
+<% end %>

@@ -1,0 +1,12 @@
+<h2>Could you help us understand more about who you are?</h2>
+
+<%= form_for @user, :url => '/register_lightning_talk/create_details' do |f| %>
+
+    <% @user.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+
+    <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
+
+    <%= f.submit "Finish" %>
+<% end %>

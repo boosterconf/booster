@@ -24,6 +24,15 @@ Booster2013::Application.routes.draw do
 
   resources :payment_notifications
 
+
+  match '/register_lightning_talk/start' => 'register_lightning_talk#start'
+  match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user'
+  match '/register_lightning_talk/talk' => 'register_lightning_talk#talk'
+  match '/register_lightning_talk/create_talk' => 'register_lightning_talk#create_talk'
+  match '/register_lightning_talk/details' => 'register_lightning_talk#details'
+  match '/register_lightning_talk/create_details' => 'register_lightning_talk#create_details'
+  match '/register_lightning_talk/finish' => 'register_lightning_talk#finish'
+
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'users/current' => 'users#current', :as => :current_user

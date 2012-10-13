@@ -23,8 +23,8 @@ class User < ActiveRecord::Base
   validates_format_of :phone_number, :with => /\A(\s*(\(\+\s*\d{2}\))?\s*(\d\s*){4,10})\Z/,
                       :message => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true
   #validates_length_of :phone_number, :in => 4..30
-  validates_length_of :hometown, :minimum => 2
-  validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
+  #validates_length_of :hometown, :minimum => 2
+  #validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
   validates_presence_of :role, :message => "You must specify role."

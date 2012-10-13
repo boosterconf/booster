@@ -3,13 +3,13 @@ class Talk < ActiveRecord::Base
 
   has_many :speakers
   has_many :users, :through => :speakers
-  has_many :slots
-  has_many :periods, :through => :slots
   has_many :comments, :order => "created_at", :include => :user
   has_and_belongs_to_many :tags
-  has_many :feedback_comments
   belongs_to :talk_type
+  has_many :slots
+  has_many :periods, :through => :slots
   has_many :participants, :include => :user, :dependent => :destroy
+  has_many :feedback_comments
 
   #has_attached_file :slide, PAPERCLIP_CONFIG
 
