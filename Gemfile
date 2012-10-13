@@ -3,7 +3,10 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'paperclip', '~>3.0'
+
+gem 'tiny_mce'
 gem 'aws-sdk', '~> 1.3.4'
+
 
 
 group :production do
@@ -12,6 +15,7 @@ end
 group :development, :test do
   gem 'sqlite3'
 end
+
 
 group :plugins do
   gem 'prawn', '= 0.6.3'

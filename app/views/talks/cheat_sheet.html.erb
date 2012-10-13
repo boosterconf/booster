@@ -1,0 +1,25 @@
+<h1>Room cheat sheet</h1>
+<hr/>
+<% for day in @days.keys.sort
+
+%>
+    <h2><%= day %></h2>
+
+     <% for talk in @days[day] %>
+        <h3><%= link_to h(talk.title), talk %></h3>
+        <ul>
+          <li>
+          <%= talk.participants.count %> out of <%= talk.max_participants %> spots filled
+          <% if talk.is_full? %>
+              <span style="font-color: red; font-weight: bold;">FULL</span>
+          <% end %>
+            </li>
+          <li><strong>Slot: </strong><%= talk.start_time.strftime("%H:%M") %>-<%= talk.end_time.strftime("%H:%M") %></li>
+          <li><strong>Room setup:</strong> <%= talk.room_setup %></li>
+          <li><strong>Participant requirements:</strong> <%= talk.participant_requirements %></li>
+          <li><strong>Extra equipment needed:</strong> <%= talk.equipment %></li>
+        </ul>
+
+    <% end %>
+    <hr/>
+<% end %>

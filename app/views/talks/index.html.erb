@@ -1,0 +1,12 @@
+<% content_for :title, "Suggested topics" %>
+<h2 class="page_title">Do you have something to share?</h2>
+<% link_to 'Suggest a lightning talk topic!', new_talk_path %>
+
+<p>Every abstract is visible to everyone, in order to encourage discussion. Comments from both organizers and
+others are also visible.</p>
+
+<h2>Suggested talks<%= feed_link "Watch new talks", talks_path(:format => :rss) %></h2>
+
+<%= render :partial => @talks %>
+<br>
+<p>Missing anything? <%= link_to 'Suggest your own talk!', new_talk_path %></p>
