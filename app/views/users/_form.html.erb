@@ -21,8 +21,9 @@
 
     <%= render :partial => 'personal_details', :locals => {:f => f}  %>
 
+    <%= render :partial => 'passwords', :locals => {:f => f}  %>
 
-   <%= render :partial => 'user_stats', :locals => {:f => f}  %>
+    <%= render :partial => 'user_stats', :locals => {:f => f}  %>
 
     <fieldset id="registration_details">
       <%= f.fields_for :registration do |reg| %>

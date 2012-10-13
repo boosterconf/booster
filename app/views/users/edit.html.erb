@@ -1,65 +1,38 @@
 <% content_for :title, @user.name %>
 
-
 <% if @user.bio == nil && admin? %>
     <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
 <% end %>
+
 <h2 class="page_title">Change your registration</h2>
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
 
-<% form_for(@user, :html => {:multipart => true}) do |f| %>
-        <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
-
-              <ul>
-                <% @user.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-    <fieldset id="personal_details">
-      <div class="name field">
-        <%= f.label :name, "Name" %>
-        <%= f.text_field :name %>
-      </div>
-      <div class="firma field">
-        <%= f.label :company, "Company" %>
-        <%= f.text_field :company %>
-      </div>
-      <div class="epost field">
-        <%= f.label :email, "E-mail" %>
-        <%= f.text_field :email %>
-      </div>
-      <div class="telefon field">
-        <%= f.label :phone_number, "Phone number" %>
-        <%= f.text_field :phone_number %>
-      </div>
-
-      <div class="field dietary_requirements">
-        <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
-        <%= f.text_field :dietary_requirements %>
-      </div>
-
-      <% if admin? %>
-          <div class="field invited">
-            <%= f.label :invited, "Invited speaker? " %>
-            <%= f.check_box :invited %>
-          </div>
-      <% end %>
-
-    </fieldset>
-
-    <% if not @user.registration.student? %>
-        <% f.fields_for :registration do |reg| %>
-            <p>
-              <%= reg.check_box :includes_dinner %>
-              <%= reg.label :includes_dinner, "I wish to attend the conference dinner" %>
-            </p>
-        <% end %>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
     <% end %>
 
-    <%= render :partial => 'bio', :locals => {:f => f, :show_links => true} %>
-    <p><%= f.submit "Save details" %></p>
-<% end %>
+    <% if @user.registration.ticket_type_old == 'mod251' %>
+        You're buying a MOD251 student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+    <% elsif @user.registration.ticket_type_old == 'student' %>
+        You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+    <% else %>
+        <%= render :partial => 'price_info', :locals => {:f => f } %>
+    <% end %>
+
+    <%= render :partial => 'personal_details', :locals => {:f => f}  %>
+
+    <%= render :partial => 'user_stats', :locals => {:f => f}  %>
+
+    <%= render :partial => 'bio', :locals => {:f => f, :show_links => true}  %>
+
+
+    <div><%= f.submit "Update" %></div>
+
+<% end  %>
