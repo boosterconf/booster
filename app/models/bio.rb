@@ -1,5 +1,6 @@
 class Bio < ActiveRecord::Base
   belongs_to :user
+  attr_accessible :picture, :title, :twitter_handle, :blog, :bio
   has_attached_file :picture, PAPERCLIP_CONFIG.merge({:styles => {:thumb => '100x100#', :normal => '160x'}, :default_style => :normal})
   validates_attachment_content_type :picture,
                                     :content_type =>

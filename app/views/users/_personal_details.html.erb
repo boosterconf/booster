@@ -30,17 +30,7 @@
     <br/>
     <%= email_field(:user, :email, :placeholder => "Where can we email you?", :size => 50, :required => true) %>
   </div>
-  <div class="field passord">
-    <%= f.label :password %>
-    <br/>
-    <%= password_field(:user, :password, :placeholder => "Sshhh. It's a secret.", :size => 50, :required => true) %>
-  </div>
-  <div class="field bekreft">
-    <%= f.label :password_confirmation, "Confirm password" %>
-    <br/>
-    <%= password_field(:user, :password_confirmation,
-                       :placeholder => "Repeat, please.", :size => 50, :required => true) %>
-  </div>
+
   <div class="field telefon">
     <%= f.label :phone_number, "Phone" %><br />
     <%= text_field(:user, :phone_number, :placeholder => "If we need to call you", :size => 50) %>
