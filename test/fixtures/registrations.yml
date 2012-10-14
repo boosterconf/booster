@@ -1,0 +1,49 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: quentin
+  comments: MyText
+  price: 9.99
+  invoiced_at: 2008-10-18
+  ticket_type_old: early_bird
+  registration_complete: false
+  created_at: 2010-02-01
+
+two:
+  user: god
+  comments: MyText
+  price: 19.99
+  invoiced_at: 2008-10-18
+  ticket_type_old: lightning
+  created_at: 2020-01-05
+
+three:
+  user: test
+  comments: MyText
+  price: 19.99
+  invoiced_at: 2008-10-18
+  ticket_type_old: speaker
+  created_at: 2010-10-10
+
+four:
+  user: sponsor
+  comments: MyText
+  price: 19.99
+  invoiced_at: 2008-10-18
+  ticket_type_old: sponsor
+  created_at: 2010-10-10
+
+five:
+  user: multispeaker
+  comments: MyText
+  price: 19.99
+  invoiced_at: 2008-10-18
+  ticket_type_old: speaker
+  created_at: 2010-10-10
+
+six:
+  user: singlespeaker
+  comments: MyText
+  price: 19.99
+  ticket_type_old: early_bird
+  created_at: 2010-10-10

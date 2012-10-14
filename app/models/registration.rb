@@ -132,7 +132,6 @@ class Registration < ActiveRecord::Base
   end
 
   def create_or_update_payment_info
-    p "Hello!!"
     if paid?
       raise "Cannot change a completed payment!"
     end

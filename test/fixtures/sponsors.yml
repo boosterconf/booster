@@ -1,29 +1,15 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
   name: MyString
   email: MyString
-  user_id: 1
-  invoiced: 2012-09-13
-  paid: 2012-09-13
-  comment: MyString
-  contact_person: MyString
-  status: MyString
-  contact_person_phone: MyString
-  location: MyString
-  was_sponsor_last_year: false
-  last_contacted_at: 2012-09-13 20:10:57
+  invoiced: 2011-09-19
+  paid: 2011-09-19
+  user: god
 
 two:
   name: MyString
   email: MyString
-  user_id: 1
-  invoiced: 2012-09-13
-  paid: 2012-09-13
-  comment: MyString
-  contact_person: MyString
-  status: MyString
-  contact_person_phone: MyString
-  location: MyString
-  was_sponsor_last_year: false
-  last_contacted_at: 2012-09-13 20:10:57
+  invoiced: 2011-09-19
+  paid: 2011-09-19
+  user: 

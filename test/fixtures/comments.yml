@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  talk: one
+  user: quentin
+  title: MyString
+  description: MyText
+  is_displayed: false
+  is_a_review: false
+
+two:
+  talk: two
+  user: god
+  title: MyString
+  description: MyText
+  is_displayed: false
+  is_a_review: false

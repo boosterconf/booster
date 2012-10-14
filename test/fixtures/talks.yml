@@ -1,0 +1,155 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: One
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: refused
+  talk_type: lightning_talk
+  language: English
+
+two:
+  title: Two
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: accepted
+  talk_type: lightning_talk
+  language: English
+
+three:
+  title: Three
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: pending
+  talk_type: lightning_talk
+  language: English
+
+four:
+  title: Four
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: pending
+  talk_type: lightning_talk
+  language: English
+
+five:
+  title: Five
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: pending
+  talk_type: lightning_talk
+  language: English
+
+six:
+  title: Six
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: pending
+  talk_type: tutorial
+  language: English
+
+seven:
+  title: Seven
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: pending
+  talk_type: lightning_talk
+  language: English
+
+eight:
+  title: Eight
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: pending
+  talk_type: tutorial
+  language: English
+
+nine:
+  title: Nine
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 1
+  acceptance_status: refused
+  talk_type: tutorial
+  language: English
+
+ten:
+  title: Ten
+  description: MyText
+  presenting_naked: false
+  video_url: MyString
+  position: 1
+  submitted: false
+  audience_level: MyString
+  comments_count: 0
+  acceptance_status: accepted
+  talk_type: tutorial
+  language: English
+
+full_tutorial:
+  title: Full tutorial
+  max_participants: 1
+  acceptance_status: accepted
+  talk_type: tutorial
+  participants_count: 1
+  language: English
+
+not_full_tutorial:
+  title: Not full tutorial
+  max_participants: 100
+  acceptance_status: accepted
+  talk_type: tutorial
+  participants_count: 1
+  language: English
+
+spans_several_slots:
+  title: Spans several slots
+  max_participants: 100
+  acceptance_status: accepted
+  talk_type: tutorial
+  participants_count: 1
+  language: English

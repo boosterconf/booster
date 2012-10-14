@@ -1,61 +1,54 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+quentin:
+  email: whatever@whatever.com
+  name: Quentin
+  company: MyCo
+  phone_number: 99887766
+  role: Developer
+  birthyear: 1984
+  hometown: Bergen
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("quentin" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
 
-one:
-  email: MyString
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
-  name: MyString
-  company: MyString
-  phone_number: MyString
-  description: MyText
-  login_count: 1
-  failed_login_count: 1
-  last_request_at: 2012-09-13 21:42:29
-  current_login_at: 2012-09-13 21:42:29
-  last_login_at: 2012-09-13 21:42:29
-  current_login_ip: MyString
-  is_admin: false
-  perishable_token: MyString
-  registration_ip: MyString
-  accepted_privacy_guidelines: false
-  accept_optional_email: false
-  hometown: MyString
-  role: MyString
-  female: false
-  birthyear: 1
-  member_dnd: false
-  featured_speaker: false
-  feature_as_organizer: false
-  invited: false
-  dietary_requirements: MyString
+god:
+  email: god@paradise.net
+  name: Jahve
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("god" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+  is_admin: true
+    
+test:
+  email: test@whatever.com
+  name: Test
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
 
-two:
-  email: MyString
-  crypted_password: MyString
-  password_salt: MyString
-  persistence_token: MyString
-  name: MyString
-  company: MyString
-  phone_number: MyString
-  description: MyText
-  login_count: 1
-  failed_login_count: 1
-  last_request_at: 2012-09-13 21:42:29
-  current_login_at: 2012-09-13 21:42:29
-  last_login_at: 2012-09-13 21:42:29
-  current_login_ip: MyString
-  is_admin: false
-  perishable_token: MyString
-  registration_ip: MyString
-  accepted_privacy_guidelines: false
-  accept_optional_email: false
-  hometown: MyString
-  role: MyString
-  female: false
-  birthyear: 1
-  member_dnd: false
-  featured_speaker: false
-  feature_as_organizer: false
-  invited: false
-  dietary_requirements: MyString
+other:
+  email: other@whatever.com
+  name: Other Guy
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+
+sponsor:
+  email: sponsor@whatever.com
+  name: Sponsor Dude
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+
+multispeaker:
+  email: very@expressive.com
+  name: Mr Talk Talkative
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+
+singlespeaker:
+  email: not@much.com
+  name: C. Oncise
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
