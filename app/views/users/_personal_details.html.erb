@@ -9,21 +9,6 @@
     <br/>
     <%= text_field(:user, :company, :placeholder => "and where you work", :size => 50, :required => true) %>
   </div>
-  <div class="field rolle">
-    <%= f.label :role, "Primary role" %>
-    <br/>
-    <%= select("user", "role",
-               [["Select one...", ""],
-                ["Developer", "Developer"],
-                ["Architect", "Architect"],
-                ["Tester/Test lead", "Tester/Test lead"],
-                ["Project manager", "Project manager"],
-                ["Scrum master", "Scrum master"],
-                ["UX specialist", "UX specialist"],
-                ["Manager", "Manager"],
-                ["Sales representative", "Sales representative"],
-                ["Other", "Other"]]) %>
-  </div>
 
   <div class="field email">
     <%= f.label :email %>
@@ -39,7 +24,7 @@
   <div class="field dietary_requirements">
     <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
     <br/>
-    <%= text_field(:user, :dietary_requirements, :placeholder => "Do you need something special for dinner?",
-                   :size => 50) %>
+    <%= text_area(:user, :dietary_requirements, :placeholder => "Do you need something special for dinner?",
+                   :rows => 5, :cols => 37) %>
   </div>
 </fieldset>

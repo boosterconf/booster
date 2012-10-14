@@ -1,9 +1,9 @@
 class App < ActiveRecord::Base
   def self.early_bird_end_date
-    Time.zone.parse("2013-01-12 23:59:59")
+    AppConfig.early_bird_ends
   end
 
   def self.speakers_close_date
-    Time.zone.parse("2013-01-01 23:59:59")
+    Time.zone.parse("2013-01-28 23:59:59")
   end
 end

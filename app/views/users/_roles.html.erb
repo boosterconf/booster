@@ -1,0 +1,7 @@
+<%= f.label :roles,  "What role(s) do you have?" %>
+<ul id="roles_list">
+  <% Roles.all.each do |role| %>
+      <li><%= check_box_tag 'roles[]', role %>
+        <%= Roles.label[role] %></li>
+  <% end %>
+</ul>

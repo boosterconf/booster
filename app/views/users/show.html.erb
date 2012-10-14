@@ -27,15 +27,15 @@ We have registered the following information about you:
 
 <%= link_to "Make changes to your registration", edit_user_path(@user) %>
 
-<%# unless @user.talks.blank? %>
+<% unless @user.talks.blank? %>
   <h3>Suggested talks</h3>
 
   <ul>
-    <%# for talk in @user.talks %>
-      <li><%#= link_to h(talk.title), talk %></li>
-    <%# end %>
+    <% for talk in @user.talks %>
+      <li><%= link_to h(talk.title), talk %></li>
+    <% end %>
   </ul>
-<%# end %>
+<% end %>
 
 
 <h3>Participant information</h3>

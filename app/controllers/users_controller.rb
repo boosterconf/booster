@@ -29,11 +29,22 @@ class UsersController < ApplicationController
   end
 
   def new
+    p current_user.inspect
+    if current_user && !current_user.is_admin
+      redirect_to current_user_url
+      return
+    end
+
+    if no_more_registrations_allowed
+      redirect_to_front_page
+      return
+    end
+
     @user = User.new
     @user.registration = Registration.new
     @user.registration.manual_payment = params[:manual_payment]
     @user.registration.ticket_type_old = params[:free_ticket] || params[:ticket_type_old] || params[:ticket_type] || 'full_price'
-    if @user.registration.ticket_type_old == 'full_price' && Time.now < App.early_bird_end_date
+    if @user.registration.ticket_type_old == 'full_price' && Time.now < AppConfig.early_bird_ends
       @user.registration.ticket_type_old = 'early_bird'
     end
     @user.registration.includes_dinner = @user.registration.discounted_ticket?
@@ -46,14 +57,25 @@ class UsersController < ApplicationController
   end
 
   def create
+    if current_user && !current_user.is_admin
+      redirect_to current_user_url
+      return
+    end
+
+    if no_more_registrations_allowed
+      redirect_to_front_page
+      return
+    end
+
     User.transaction do
       @user = User.new(params[:user])
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
+      @user.roles = params[:roles].join(",") unless params[:roles] == nil
 
       if @user.valid?
         unless @user.registration.free_ticket || @user.registration.discounted_ticket?
-          Time.now < App.early_bird_end_date ? @user.registration.ticket_type_old = 'early_bird' : @user.registration.ticket_type_old = 'full_price'
+          Time.now < AppConfig.early_bird_ends ? @user.registration.ticket_type_old = 'early_bird' : @user.registration.ticket_type_old = 'full_price'
         end
         @user.save
         if !@user.registration.save
@@ -81,6 +103,17 @@ class UsersController < ApplicationController
         render :action => 'new'
       end
     end
+  end
+
+  def no_more_registrations_allowed
+    User.count >= AppConfig.max_users_limit
+  end
+
+  def redirect_to_front_page
+    flash[:error] = "We have reached the limit on the number of participants for this conference. Please contact us at kontakt@rootsconf.no and we will see what we can do."
+    logger.error("Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.")
+    RootsMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver
+    redirect_to root_path
   end
 
   def create_bio

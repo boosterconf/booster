@@ -4,7 +4,6 @@ class RegistrationsController < ApplicationController
   before_filter :require_admin, :only => [:index, :delete, :confirm_delete, :phone_list]
 
   def index
-
     @registrations = Registration.find_by_params(params)
 
     @ticket_type_olds = @registrations.collect { |r| r.ticket_type_old }.uniq
@@ -16,13 +15,12 @@ class RegistrationsController < ApplicationController
     @paid_per_date = total_by_date(@registrations, @date_range)
 
     @income_per_date = total_price_per_date(@registrations, @date_range)
-
   end
-
 
   def edit
     @registration = Registration.find(params[:id])
-    @registration.payment_notification ||= PaymentNotification.new
+    p @registration.inspect
+    @registration.payment_notification ||= @registration.build_payment_notification
   end
 
   # PUT /registrations/1

@@ -34,7 +34,7 @@
 
 <% else %>
 
-  <% form_for @registration do |reg| %>
+  <%= form_for @registration do |reg| %>
     <p>
       <%= reg.check_box :manual_payment %>
       <%= reg.label :manual_payment,  "I want to receive an invoice of NOK #{@registration.price}" %>

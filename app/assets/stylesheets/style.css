@@ -630,9 +630,11 @@ fieldset {
 	display: inline-block;
 }
 
-#personal_details .geeky {
-        padding-top: 20px;
+#user_stats .geeky {
+    padding-top: 20px;
+    padding-bottom: 20px;
 	display: inline-block;
+    max-width: 600px;
 }
 
 #personal_details .privacy {
@@ -641,6 +643,11 @@ fieldset {
 
 #personal_details .optional {
 	padding-top: 0;
+}
+
+ul#roles_list {
+    list-style: none;
+    display: inline;
 }
 
 .confirmations, #registration_details {padding: .75em 0}

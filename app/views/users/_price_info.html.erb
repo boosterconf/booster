@@ -1,16 +1,10 @@
 <div id="price_info">
   <% unless @user.registration.free_ticket %>
-      <ul>
-        <li>Early bird-ticket: NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>
-          (ends <%= App.early_bird_end_date.strftime('%b %d %Y') %>)
-        </li>
-        <li>Full price ticket: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %></li>
-        <!-- li>Students: NOK <%= PAYMENT_CONFIG[:prices]['student'].to_i %></li -->
-        <li>Lightning talk speakers: NOK <%= PAYMENT_CONFIG[:prices]['lightning'].to_i %></li>
-        <li>Tutorial speakers: Free of charge</li>
-      </ul>
-      <p>
-        All prices are <strong>including</strong> VAT.
-      </p>
+      <% if Time.now < AppConfig.early_bird_ends %>
+        <p>You're in time for an early bird special!</p>
+        <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>,- (<strong>including VAT</strong>).</p>
+      <% else %>
+          <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %>,- (<strong>including VAT</strong>).</p>
+      <% end %>
   <% end %>
 </div>

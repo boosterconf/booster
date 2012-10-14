@@ -1,6 +1,6 @@
-<fieldset>
+<fieldset id="user_stats">
 <div class="geeky">
-  <%= f.label "For geeky statistical purposes:" %>
+  To better understand our audience and create a better conference, we hope you will indulge us and provide us with some additional information about yourself.
 </div>
 
 <div class="field">
@@ -12,13 +12,13 @@
   </fieldset>
 </div>
 
-<div class="field hjemby">
+<div class="field">
   <%= f.label :hometown, "City of residence" %>
   <br/>
   <%= text_field(:user, :hometown, :placeholder => "Where do you live?", :size => 50) %>
 </div>
 
-<div class="field fødselsår">
+<div class="field">
   <%= f.label :birthyear, "Birth year" %>
   <br/>
   <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :size => 50) %>

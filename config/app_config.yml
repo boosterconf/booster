@@ -2,6 +2,7 @@ development:
   max_users_limit: 200
   tutorial_registration_open: true
   program_released: true
+  early_bird_ends: 2013-01-15 23:59:59
 
 test:
   max_users_limit: 200

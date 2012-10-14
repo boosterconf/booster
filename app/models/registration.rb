@@ -34,8 +34,7 @@ class Registration < ActiveRecord::Base
   end
 
   def description
-    "" + ticket_type_old + " " + (registration_complete ? " (Paid)" : "")
-    #ticket_description + " " + (registration_complete ? " (Paid)" : "")
+    ticket_description + " " + (registration_complete ? " (Paid)" : "")
   end
 
   def speaker?
@@ -133,6 +132,7 @@ class Registration < ActiveRecord::Base
   end
 
   def create_or_update_payment_info
+    p "Hello!!"
     if paid?
       raise "Cannot change a completed payment!"
     end

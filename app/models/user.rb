@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
   #validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
-  validates_presence_of :role, :message => "You must specify role."
+  #validates_presence_of :role, :message => "You must specify role."
 
   validates_each :accepted_privacy_guidelines do |record, attr, value|
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 
   def deliver_password_reset_instructions!
     reset_perishable_token!
-    #RootsMailer.deliver_password_reset_instructions(self)
+    RootsMailer.password_reset_instructions(self).deliver
   end
 
   def confirmed_speaker?
@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
   end
 
   def is_early_bird?
-    self.registration.created_at < App.early_bird_end_date
+    self.registration.created_at < AppConfig.early_bird_ends
   end
 
   def is_featured?
