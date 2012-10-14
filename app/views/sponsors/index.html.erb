@@ -1,6 +1,11 @@
 <script type="text/javascript">
     $(document).ready(function () {
-                $("#sponsors").tablesorter();
+                $("#sponsors").tablesorter({
+                    theme: 'blue',
+                    // use save sort widget
+                    widgets: ["saveSort"]
+
+                });
             }
     );
 </script>
