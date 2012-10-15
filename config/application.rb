@@ -9,8 +9,16 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
+module Dates
+	CFP_LIGHTNING_BEGINS = Date.parse("2012-10-30")
+	CFP_LIGHTNING_ENDS = Date.parse("2013-01-28")
+	CFP_TUTORIALS_BEGINS = Date.parse("2012-10-30")
+	CFP_TUTORIAL_ENDS = Date.parse("2013-01-21")
+end
+
 module Booster2013
   class Application < Rails::Application
+	  include Dates
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
