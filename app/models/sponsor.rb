@@ -3,7 +3,7 @@ class Sponsor < ActiveRecord::Base
 
   has_many :events
 
-  attr_accessible :comment, :contact_person, :contact_person_phone_number, :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id, :was_sponsor_last_year, :events
+  attr_accessible :comment, :contact_person_first_name, :contact_person_last_name, :contact_person_phone_number, :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id, :was_sponsor_last_year, :events
 
   STATES = {'suggested' => "Suggested", 'dialogue' => 'In Dialogue', 'contacted' => "Contacted", 'reminded' => "Reminded", 'declined' => "Declined", 'accepted' => "Accepted"}
 
@@ -19,6 +19,10 @@ class Sponsor < ActiveRecord::Base
     end
 
     state
+  end
+
+  def contact_person_name
+    "#{contact_person_first_name} #{contact_person_last_name}"
   end
 
   def self.all_accepted

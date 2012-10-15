@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015162854) do
+ActiveRecord::Schema.define(:version => 20121015165824) do
 
   create_table "bios", :force => true do |t|
     t.integer   "user_id"
@@ -144,19 +144,21 @@ ActiveRecord::Schema.define(:version => 20121015162854) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string    "name"
-    t.string    "email"
-    t.date      "invoiced"
-    t.date      "paid"
-    t.integer   "user_id"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "contact_person"
-    t.string    "status"
-    t.string    "contact_person_phone_number"
-    t.string    "location"
-    t.boolean   "was_sponsor_last_year"
-    t.timestamp "last_contacted_at"
+    t.string   "name"
+    t.string   "email"
+    t.date     "invoiced"
+    t.date     "paid"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "contact_person"
+    t.string   "status"
+    t.string   "contact_person_phone_number"
+    t.string   "location"
+    t.boolean  "was_sponsor_last_year"
+    t.datetime "last_contacted_at"
+    t.string   "contact_person_first_name"
+    t.string   "contact_person_last_name"
   end
 
   create_table "tags", :force => true do |t|

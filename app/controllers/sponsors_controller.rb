@@ -61,6 +61,7 @@ class SponsorsController < ApplicationController
 
   def email
     @sponsor = Sponsor.find(params[:id])
+    
     if @sponsor.is_ready_for_email?
       RootsMailer.initial_sponsor_mail(@sponsor).deliver
       @sponsor.status = 'contacted'
