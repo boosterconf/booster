@@ -1,7 +1,7 @@
 class RegisterLightningTalkController < ApplicationController
 
   def start
-    @user = User.new
+	  @user = User.new
   end
 
   def create_user

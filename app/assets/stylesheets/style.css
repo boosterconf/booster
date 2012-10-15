@@ -1,8 +1,3 @@
-/*
-	Design by Daniel Strietzel / Bouvet ASA
-	http://www.bouvet.no
-*/
-
 body {
 	margin: 0;
 	padding: 0;
@@ -747,4 +742,20 @@ textarea.emails {
     width: 100%;
     height: 6em;
     display: block;
+}
+
+
+.steps {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.steps div {
+    display:inline;
+    padding-right: 10px;
+    color: #cccccc;
+}
+
+.steps .active {
+    color: black;
 }
