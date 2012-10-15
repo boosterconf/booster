@@ -166,8 +166,7 @@ class RootsMailer < ActionMailer::Base
 	end
 
 	def initial_sponsor_mail(sponsor)
-    @name = sponsor.contact_person
-    @sender = sponsor.user.name
+    @sender = sponsor.user
     @sponsor = sponsor
     mail(:to => sponsor.email, :from => "#{sponsor.user.name} <#{sponsor.user.email}>",
         :cc => FROM_EMAIL, :bcc => sponsor.user.email,

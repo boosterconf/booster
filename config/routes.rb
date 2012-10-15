@@ -18,6 +18,9 @@ Booster2013::Application.routes.draw do
 
   resources :talks do
     resources :comments
+    member do
+    get :article_tags
+      end
   end
 
   resources :nametags

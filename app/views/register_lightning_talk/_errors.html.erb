@@ -1,0 +1,11 @@
+<% unless item.errors.empty? %>
+    <div class="alert alert-error">
+      <p>There were some problems...</p>
+      <ul>
+        <% item.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+
+<% end %>
