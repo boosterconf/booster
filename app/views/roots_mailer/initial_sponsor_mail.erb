@@ -1,77 +1,64 @@
 <html>
 <body>
-<p>Hei <%= @name %>,</p>
-
 <p>
-  Booster 2013 arrangeres 13.-15. mars 2013 i Scandic Bergen City konferansesenter.
+  Hei <%= @sponsor.contact_person_first_name %>,
 </p>
 
 <p>
-  Vi som står bak Booster 2013 har vært med på å organisere <a href="http://www.rootsconf.no">Roots</a> - noen av oss helt fra den aller første
-  Roots-konferansen i år 2000. Roots har i denne perioden vært Bergens største IT-konferanse, der rundt 200 deltakere
-  gjennom tre dager har deltatt på en lang rekke foredrag, workshops og lyntaler av høy faglig kvalitet.
-  Disse ble levert både av internasjonale stjerner som Dan North, Michael Feathers og Jim Webber (2011) og Linda Rising,
-  Kevin Henney, Fred George, Paolo Perrotta og Matt Barcomb (2012). I tillegg bidro en rekke nasjonale og lokale helter.
-  Tilbakemeldingene fra deltakerne var overveldende positive.
+  Jeg er en av arrangørene av IT-konferansen Booster, som arrangeres 13.-15. mars neste år. For å arrangere konferansen
+  er vi avhengig av sponsormidler, og i den forbindelse vil vi gjerne invitere <%= @sponsor.name %> til å bli sponsor
+  av Booster 2013.
 </p>
 
 <p>
-  Konferanser som Booster er svært viktige for å opprettholde et høyt faglig nivå i det lokale IT-miljøet.
-  Erfaringsutveksling, nye idéer og tankevekkende innspill er hva Booster dreier seg om. Etter konferansen vender
-  deltagerne tilbake til arbeidet med ny inspirasjon, lærdom og nye bekjentskaper som bidrar til at vi alle er i stand
-  til å gjøre en bedre jobb. En investering i Booster er dermed en investering
-  i din bedrifts faglige utvikling, og bidrar til å øke kompetansen i
-  <% if @sponsor.is_in_bergen? %>Bergens
-  <% else %>Norges
-  <% end %> IT-miljø.
-</p>
-
-<p>
-  Booster henvender seg til systemutviklere, prosjektledere, testere, designere, arkitekter, sikkerhetseksperter og de
-  som jobber med brukeropplevelse.
-</p>
-
-<p>
-  Booster fokuserer på godt håndverk, metoder og kvalitet, og legger til rette for å knytte nettverk.
-</p>
-
-<p>
-  For mer informasjon om konferansen, se <a href="http://boosterconf.no">boosterconf.no</a>.
-</p>
-
-<p>
-  For å kunne gjennomføre arrangementet trenger vi sponsorer som ønsker å bidra til fortsatt kvalitet i det
-  <% if @sponsor.is_in_bergen? %>bergenske
-  <% else %>norske
-  <% end %> IT-miljøet. Sponsorer får følgende fordeler:
+  Prisen på sponsorpakken er kr. 25.000,- + MVA. For denne prisen vil dere motta følgende fordeler:
 </p>
 <ul>
   <li>Logo på trykt materiell, slik som program, flyvebrev, osv</li>
   <li>Logo på konferansens nettsider</li>
-  <li>Ha roll-up-banner i plenumsalen “Dragefjellet”</li>
+  <li>Ha roll-up-banner i konferansens plenumsal</li>
   <li>Bruke Boosterkonferansens logo i markedsføring</li>
   <li>To billetter til konferansen og konferansemiddagen</li>
+  <li>Adgang til å distribuere markedsføringsmateriell som blir delt ut til deltagerne. Dette må forhåndsgodkjennes av
+    hensyn til plass og praktisk gjennomførbarhet.
+  </li>
 </ul>
 <p>
-  Sponsorer som ønsker det kan også få distribuere markedsføringsmateriell sammen med materiellet som blir delt ut til
-  deltagerne. Dette må forhåndsgodkjennes av hensyn til plass og praktisk gjennomførbarhet.
+  Booster er en helt ny konferanse som ble opprettet i år. Arrangørene bak Booster er imidlertid de samme som i mange år
+  har arrangert konferansen <a href="http://www.rootsconf.no">Roots</a>. Roots har vært en enorm suksess de siste årene,
+  med over 200 deltakere og en rekke
+  internasjonale foredragsholdere som Dan North, Kevlin Henney, Jim Webber, David Evans, Linda Rising og Michael
+  Feathers.
+  Tilbakemeldingene fra deltakerne har vært overveldende positive, og vi har en stor andel av deltakerne som kommer
+  tilbake år etter år.
 </p>
 
 <p>
-  Prisen på sponsorpakken er kr. 25.000,- + MVA.
+  Booster skiller seg ut fra mange andre konferanser ved at vi er en konferanse som passer for alle som jobber på et
+  utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter og de som jobber med
+  brukeropplevelse. Vi legger også vekt på praktisk læring, ved at deltakerne på konferansen faktisk får forsøke seg på
+  å
+  jobbe med teknologier og problemstillinger i mindre grupper. Vårt mål er at deltakerne skal vende tilbake til
+  arbeidsplassen sin etter konferansen med ny inspirasjon, lærdom og nye bekjentskaper som bidrar til at vi alle er i
+  stand til å gjøre en bedre jobb.
+  <% if @sponsor.is_in_bergen? %> Et sponsorat av Booster er en investering i det lokale fagmiljøet som vi alle er så
+      avhengige av, og en god
+      arena for rekruttering av nye ansatte. Vi har et vidt spekter av deltakere, alt fra studenter til folk med over
+      tjue års erfaring.
+  <% end %>
+  For mer informasjon om oss, besøk våre nettsider på <a href="http://www.boosterconf.no">boosterconf.no</a>.
 </p>
 
 <p>
-  Hvis dere er interessert i å sponse Booster 2013, svar pr e-post. Hvis det er noe dere lurer på, så svarer vi gjerne
-  på spørsmål.
+  Jeg håper at både du og
+  <%= @sponsor.name %> synes dette er et interessant tilbud og vil vurdere det. Dersom dere har spørsmål er det bare å
+  kontakte
+  meg, enten på epost
+  <%= @sender.email %> eller telefon
+  <%= @sender.phone_number %>.
 
-<p>
-
-<p>
   Med vennlig hilsen
-  <br/>
-  <%= @sender %>
-  <br/>
+  <%= @sender.name %>
   for Booster 2013
 </p>
 </body>
