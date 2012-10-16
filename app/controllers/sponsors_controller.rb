@@ -5,7 +5,10 @@ class SponsorsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @sponsors = Sponsor.all.sort
+    @sponsors = Sponsor.all(:include => :user).sort
+
+    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map {|user, sponsors| [user != nil ? user.name : "(none)", sponsors.length]}.sort { |a, b| a[1] <=> b[1] }.reverse!
+
   end
 
   def show

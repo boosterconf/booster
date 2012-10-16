@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
                 $("#sponsors").tablesorter({
-                    theme: 'blue',
+                    theme:'blue',
                     // use save sort widget
-                    widgets: ["saveSort"]
+                    widgets:["saveSort"]
 
                 });
             }
@@ -30,9 +30,9 @@
     <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email != '' ") %></td>
   </tr>
   <tr>
-      <td>Suggested (missing email):</td>
-      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email = ''") %></td>
-    </tr>
+    <td>Suggested (missing email):</td>
+    <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email = ''") %></td>
+  </tr>
   <tr>
     <td>Contacted:</td>
     <td><%= Sponsor.count(:conditions => "status = 'contacted'") %></td>
@@ -49,6 +49,20 @@
     <td>Both years:</td>
     <td><%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %></td>
   </tr>
+</table>
+
+<table>
+  <tr>
+    <th>Navn</th>
+    <th>Antall sponsorer</th>
+  </tr>
+
+  <% @number_of_sponsors_per_user.each { |row| %>
+      <tr>
+        <td><%= row[0] %></td>
+        <td> <%= row[1] %></td>
+      </tr>
+  <% } %>
 </table>
 <table id="sponsors" class="tablesorter">
   <thead>
