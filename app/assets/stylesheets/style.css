@@ -432,7 +432,6 @@ img.aligncenter {
    There was no definition, and I am uncertain as to whether it is necessary. If this works, the info in the image itself can be removed. That has not worked so far.*/
 
 .scale-down {
-    height: 120px;
 }
 table {
     width: 100%;
