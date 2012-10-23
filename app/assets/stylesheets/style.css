@@ -15,7 +15,7 @@ html {
 	clear: both;
 	height: 0;
 	line-height: 0;
-	font-size: 0px; /*for IE*/
+	font-size: 0; /*for IE*/
 }
 
 h1, h2, h3 {
@@ -50,7 +50,6 @@ p {
 #header ul, #header ol, #social_media ul, #social_media ol {
     margin: 0;
     padding: 0;
-
 }
 
 ul, ol {
@@ -94,7 +93,7 @@ img.alignright {
 }
 
 img.aligncenter {
-	margin: 0px auto;
+	margin: 0 auto;
 }
 
 #content, #page, #header, #social_media, #footer {
@@ -186,7 +185,7 @@ img.aligncenter {
 #menu {
 	float: left;
 	display: block;
-	margin: 0px 0 15px 30px;
+	margin: 0 0 15px 30px;
 	width: 140px;
 }
 
@@ -222,8 +221,8 @@ img.aligncenter {
 
 #header-right {
     position: absolute;
-    right: 0px;
-    top: 0px;
+    right: 0;
+    top: 0;
     width: 325px;
 }
 
@@ -262,7 +261,7 @@ img.aligncenter {
 
 #frontpageInfo1 .left {
 	float: left;
-	padding: 0px;
+	padding: 0;
 	width: 655px;
 	height: 200px;
     position: relative;
@@ -270,7 +269,7 @@ img.aligncenter {
 
 #frontpageInfo1 .right {
 	float: left;
-	padding: 0px;
+	padding: 0;
 	width: 320px;
 	height: 200px;
     overflow:  hidden;
@@ -334,7 +333,7 @@ img.aligncenter {
     top: 5px;
     width: 160px;
     height: 160px;
-    margin: 0px !important;
+    margin: 0 !important;
     border-radius: 10px;
 }
 
@@ -351,13 +350,14 @@ img.aligncenter {
     list-style:  none;
 }
 
+/* height was misspelled */
 .front-page-talks {
     margin-top: 15px;
-    padding-left: 0px;
+    padding-left: 0;
     position:relative;
     float: right;
     width: 325px;
-    heighth: 290px;
+    height: 290px;
 }
 .front-page-talks img {
     float:right;
@@ -423,8 +423,17 @@ img.aligncenter {
 	display: block;
 }
 
+/* person was used on committee members, but was not defined. Moved the details out here.*/
+.person {
+    float:left;
+    margin:10px;
+}
+/* scale-down was used as an id, but not defined. As an id must be unique, this should be changed to a class.
+   There was no definition, and I am uncertain as to whether it is necessary. If this works, the info in the image itself can be removed. That has not worked so far.*/
 
-
+.scale-down {
+    height: 120px;
+}
 table {
     width: 100%;
     margin-bottom: 15px;
@@ -459,8 +468,7 @@ table ul {
 /* Footer */
 #footer-wrapper, #header-wrapper {
     clear: both;
-    background-image: url(/images/gradient.png);
-    background-repeat: repeat-x;
+    background: url(/images/gradient.png) repeat-x;
     padding: 30px 0 0 0;
 }
 
@@ -478,7 +486,7 @@ table ul {
 	float: left;
 	margin-right: 22px;
 	height: 90px;
-    padding: 0px;
+    padding: 0;
 }
 
 div.field_with_errors input {
@@ -655,19 +663,19 @@ ul#roles_list {
 }
 
 table.videos {
-	border-width: 0px;
+	border-width: 0;
 	border-spacing: 2px;
 	border-collapse: collapse;
 	background-color: white;
 }
 table.videos th {
-	border-width: 0px;
+	border-width: 0;
 	padding: 1px;
 	background-color: white;
 	-moz-border-radius: 0;
 }
 table.videos td {
-	border-width: 0px;
+	border-width: 0;
 	padding: 1px;
 	background-color: white;
 	-moz-border-radius: 0;
@@ -687,7 +695,7 @@ div.row {
     float: left;
     width: 635px;
     height: 200px;
-    padding-right: 0px;
+    padding-right: 0;
     padding-bottom: 5px;
 }
 
@@ -705,10 +713,12 @@ div.rolebox {
 div.rolebox h4 {
     margin-top: 10px;
 }
+
+/* NB: margin lacked a unit. I added px. */
 div.rolebox img {
     width: 85px;
     height: 85px;
-    margin: 10;
+    margin: 10px;
 }
 
 .caption p {
