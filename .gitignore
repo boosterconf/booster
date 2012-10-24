@@ -15,5 +15,6 @@
 /tmp
 .env
 .idea
+*.pxm
 *~
 .DS_Store
