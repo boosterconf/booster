@@ -14,14 +14,14 @@ booster, roots conference, roots, it conference, software conference, methodolog
   <!--<link rel="icon" type="image/ico" href="favicon.ico" />   -->
 
   <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
-  <!--script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script-->
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
 
   <%= stylesheet_link_tag :application %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
   <%= tinymce_assets %>
-
 </head>
+
 <body id="hjem">
 <!--<link rel="shortcut icon" href="faviconicon.ico"/>      -->
 <div id="wrapper">
@@ -76,7 +76,7 @@ booster, roots conference, roots, it conference, software conference, methodolog
           <li><a href="/info/sponsors">Be a sponsor</a></li>
           <li><a href="/info/about">About Booster</a></li>
           <% if logged_in %>
-              <li><%= link_to 'My profile', current_user_url %></li>
+              <li><%= link_to 'My registration', current_user_url %></li>
           <% else %>
               <li><%= link_to 'Log in', login_url %></li>
           <% end %>
@@ -122,7 +122,7 @@ booster, roots conference, roots, it conference, software conference, methodolog
 
     <div id="footer">
       <h2>Sponsors</h2>
-      <ul class="ikoner" id="logoer">
+      <ul class="sponsorlogoer" id="logoer">
         <li>
           <a href="http://www.kantega.no/" title="Kantega" target="_blank"><img src="/images/logos/kantega.png" alt="Kantega"/></a>
         </li>
@@ -147,14 +147,17 @@ booster, roots conference, roots, it conference, software conference, methodolog
         <li>
           <a href="http://www.knowit.no/" title="Knowit" target="_blank"><img src="/images/logos/knowit.png" alt="KnowIt"/></a>
         </li>
+        <li>
+          <a href="http://www.delfidata.no/" title="Delfi Data" target="_blank"><img src="/images/logos/delfidata.png" alt="Delfi Data"/></a>
+        </li>
       </ul>
 
-      <div style="clear: both; text-align:center; margin:0 auto;">
+      <div style="clear: both; text-align:center; margin: 0 auto;">
         If you want to sponsor Booster 2013 and have your logo shown here,
         contact us at <a href="mailto:kontakt@boosterconf.no">kontakt@boosterconf.no</a>
       </div>
 
-      <div style="clear: both; text-align: center; margin:  0 auto;">
+      <div style="clear: both; text-align: center; margin: 0 auto;">
         <small>
           Booster is organized by a group of volunteers.
           <a href="/info/organizers">Meet the organizers</a>.
