@@ -1,15 +1,15 @@
 class Registration < ActiveRecord::Base
   # TODO: Should perhaps be in some i18n-file somewhere and not hard-coded
   TICKET_TEXTS = {
-      "early_bird"     => "EarlyBird-ticket for Roots 2012",
-      "full_price"     => "Ticket for Roots 2012",
-      "lightning"      => "Lightning Talk Ticket for Roots 2012",
-      "sponsor"        => "Sponsor ticket Roots 2012",
-      "volunteer"      => "Volunteer at Roots 2012",
-      "student"        => "Student for Roots 2012",
-      "mod251"         => "MOD251 Student for Roots 2012",
-      "organizer"      => "Organizer for Roots 2012",
-      "speaker"        => "Speaker at Roots 2012",
+      "early_bird"     => "EarlyBird-ticket for Booster 2013",
+      "full_price"     => "Ticket for Booster 2013",
+      "lightning"      => "Lightning Talk Ticket for Booster 2013",
+      "sponsor"        => "Sponsor ticket Booster 2013",
+      "volunteer"      => "Volunteer at Booster 2013",
+      "student"        => "Student for Booster 2013",
+      "mod251"         => "MOD251 Student for Booster 2013",
+      "organizer"      => "Organizer for Booster 2013",
+      "speaker"        => "Speaker at Booster 2013",
 			"new_speaker"        => "Speaker Without Abstracts"
   }
 
