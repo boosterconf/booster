@@ -428,11 +428,12 @@ img.aligncenter {
     float:left;
     margin:10px;
 }
-/* scale-down was used as an id, but not defined. As an id must be unique, this should be changed to a class.
-   There was no definition, and I am uncertain as to whether it is necessary. If this works, the info in the image itself can be removed. That has not worked so far.*/
 
-.scale-down {
+.scale-down img {
+    height: 180px;
+    max-width: 152px;
 }
+
 table {
     width: 100%;
     margin-bottom: 15px;
