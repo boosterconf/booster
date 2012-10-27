@@ -8,13 +8,13 @@ class BoosterMailer < ActionMailer::Base
   def registration_confirmation(user)
     @name = user.name
     @email = user.email
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
   end
 
   def manual_registration_confirmation(user)
     @name = user.name
     @email = user.email
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
   end
 
   def manual_registration_notification(user, user_url)
@@ -22,13 +22,13 @@ class BoosterMailer < ActionMailer::Base
     @email = user.email
     @description = user.registration.description
     @user_url = user_url
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered with manual payment method")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered with manual payment method")
   end
 
   def speaker_registration_confirmation(user)
     @name = user.name
     @email = user.email
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
   end
 
   def speaker_registration_notification(user, user_url)
@@ -39,17 +39,16 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def password_reset_instructions(user)
-    subject "#{SUBJECT_PREFIX} How to change your password"
-    recipients user.email
-    from FROM_EMAIL
-    body :edit_password_reset_url => edit_password_reset_url(user.perishable_token)
+    @edit_password_reset_url = edit_password_reset_url(user.perishable_token)
+    mail(:to => user.email, :from => FROM_EMAIL,
+         :subject => "#{SUBJECT_PREFIX} How to change your password")
 
   end
 
   def free_registration_confirmation(user)
     @name = user.name
     @email = user.email
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket request")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket request")
   end
 
   def free_registration_notification(user, user_url)
