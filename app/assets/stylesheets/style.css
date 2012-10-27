@@ -1,11 +1,39 @@
 body {
-	padding-top: 60px;
+	padding-top: 20px;
 	color: #666;
+    background-color: #fffffa;
 }
 
 html {
 	overflow: -moz-scrollbars-vertical;
 	overflow-y: scroll;
+}
+
+header {
+    background-image: url("bgnoise.png");
+}
+
+footer {
+    background-color: white;
+    border-top: 2px #505050 solid;
+    margin-top: 60px;
+    padding-top: 20px;
+}
+
+.masthead {
+    color: white;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.masthead h1 {
+    color: white;
+    font-size: 60px;
+}
+
+.masthead p {
+    font-size: 20px;
+    line-height: 40px;
 }
 
 .clearit {
@@ -17,7 +45,7 @@ html {
 
 h1, h2, h3 {
 	font-weight: bold;
-	color: #773060;
+	color: #0070df;
 }
 
 header {
@@ -42,12 +70,12 @@ ul.nobullets {
 
 a {
 	text-decoration: none;
-	color: #773060;
+	color: #0070df;
 }
 
 a:hover {
 	text-decoration: underline;
-	color: #773060;
+	color: #0070df;
 }
 
 p.small {
@@ -89,37 +117,6 @@ img.aligncenter {
     margin-left: 0.125em;
     padding-bottom: 0.5em;
     float: left;
-}
-
-#social_media .facebook {
-	background: url(../images/facebook.gif) no-repeat left center;
-	padding: 3px 0 3px 25px;
-	margin-right: 10px;
-}
-
-#social_media .twitter {
-	background: url(../images/twitter.gif) no-repeat left center;
-	padding: 3px 0 3px 25px;
-	margin-right: 10px;
-}
-
-#social_media .lanyrd {
-	background: url(../images/lanyrd-icon.png) no-repeat left center;
-	padding: 3px 0 3px 25px;
-	margin-right: 10px;
-}
-
-#social_media .linkedin {
-	background: url(../images/linkedin-icon.png) no-repeat left center;
-	padding: 3px 0 3px 25px;
-	margin-right: 10px;
-}
-
-
-#social_media .vimeo {
-	background: url(../images/vimeo-icon.png) no-repeat left center;
-	padding: 3px 0 3px 25px;
-	margin-right: 10px;
 }
 
 #header-wrapper {
