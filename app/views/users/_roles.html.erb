@@ -2,12 +2,16 @@
     to check whether user has selected role. Now we always display
     all of them unselected. %>
 
-<%= f.label :roles,  "Which role(s) do you have?" %>
-<ul id="roles_list" class="checkbox">
-  <% Roles.all.each do |role| %>
-      <li>
-        <%= check_box_tag "roles[]", role, false, :id => "roles_#{role}" %>
-        <%= label_tag "roles_#{role}", Roles.label[role]  %>
-      </li>
-  <% end %>
-</ul>
+<div class="control-group">
+
+  <%= f.label :roles, "What role(s) do you have?", :class => "control-label" %>
+  <div class="controls">
+
+    <% Roles.all.each do |role| %>
+        <label class="checkbox">
+          <%= check_box_tag "roles[]", role, false, :id => "roles_#{role}" %>
+          <%= label_tag "roles_#{role}", Roles.label[role] %>
+        </label>
+    <% end %>
+  </div>
+</div>

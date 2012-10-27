@@ -11,7 +11,7 @@
 </script>
 <h1>Sponsor list</h1>
 
-<table>
+<table class="table">
   <tr>
     <td>Accepted:</td>
     <td><%= Sponsor.count(:conditions => "status = 'accepted'") %></td>
@@ -51,7 +51,7 @@
   </tr>
 </table>
 
-<table>
+<table class="table">
   <tr>
     <th>Navn</th>
     <th>Antall sponsorer</th>

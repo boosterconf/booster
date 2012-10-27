@@ -1,12 +1,12 @@
 body {
-	padding-top: 20px;
-	color: #666;
+    padding-top: 20px;
+    color: #666;
     background-color: #fffffa;
 }
 
 html {
-	overflow: -moz-scrollbars-vertical;
-	overflow-y: scroll;
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
 }
 
 header {
@@ -36,16 +36,9 @@ footer {
     line-height: 40px;
 }
 
-.clearit {
-	clear: both;
-	height: 0;
-	line-height: 0;
-	font-size: 0; /*for IE*/
-}
-
 h1, h2, h3 {
-	font-weight: bold;
-	color: #0070df;
+    font-weight: bold;
+    color: #0070df;
 }
 
 header {
@@ -54,102 +47,12 @@ header {
     min-height: 70px;
 }
 
-
-#header ul, #header ol, #social_media ul, #social_media ol {
-    margin: 0;
-    padding: 0;
-}
-
-ul, ol {
-	line-height: 160%;
-}
-
-ul.nobullets {
-    list-style-type: none;
-}
-
 a {
-	text-decoration: none;
-	color: #0070df;
+    color: #0070df;
 }
 
 a:hover {
-	text-decoration: underline;
-	color: #0070df;
-}
-
-p.small {
-	line-height: 130%;
-	font-size: 85%;
-}
-
-img {
-	border: none;
-}
-
-img:hover {
-	text-decoration: none;
-}
-
-img.alignleft {
-	float: left;
-	margin-right: 25px;
-}
-
-img.alignright {
-	float: right;
-}
-
-img.aligncenter {
-	margin: 0 auto;
-}
-
-/* Header */
-
-#social_media {
-	height: 35px;
-	padding-top: 15px;
-}
-
-#social_media li {
-	display: inline;
-	margin-right: 0.5em;
-    margin-left: 0.125em;
-    padding-bottom: 0.5em;
-    float: left;
-}
-
-#header-wrapper {
-    padding-top: 20px;
-}
-
-#logo {
-	float: left;
-}
-
-#logo h1 {
-	display: block;
-	left: -1000em;
-	position: absolute;
-}
-
-#logo a {
-	text-decoration: none;
-	float: left;
-}
-
-#conference_info {
-	font-size: 119%;
-	clear: left;
-	text-transform: uppercase;
-    text-align: center;
-}
-
-#header-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 325px;
+    color: #0070df;
 }
 
 #submittalk a, #registration a {
@@ -157,7 +60,7 @@ img.aligncenter {
     color: #fff;
 }
 
-#submittalk , #registration  {
+#submittalk, #registration {
     background-color: #9fd07e;
     border-radius: 10px;
     width: 100%;
@@ -169,190 +72,13 @@ img.aligncenter {
 }
 
 #submittalk a:hover, #registration a:hover {
-	text-decoration: none;
-	background-color: #9fd07e;
+    text-decoration: none;
+    background-color: #9fd07e;
 }
 
-#practicalinfo {
-    width: 100%;
-    margin-top: 15px;
-}
-
-/* Frontpage info  */
-#frontpageInfo1 {
-	border-width: 0 0 1px;
-	height: 200px;
-    margin-top: 10px;
-}
-
-#frontpageInfo1 .left {
-	float: left;
-	padding: 0;
-	width: 655px;
-	height: 200px;
-    position: relative;
-}
-
-#frontpageInfo1 .right {
-	float: left;
-	padding: 0;
-	width: 320px;
-	height: 200px;
-    overflow:  hidden;
-    position: relative;
-}
-
-.front-page-speakers {
-    display: block;
-    float:left;
-    width: 635px;
-    height: 200px;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
-}
-
-.front-page-speaker {
-    display: none;
-}
-
-.front-page-speaker.selected {
-    display: block;
-    padding-top: 10px;
-}
-
-.front-page-speaker img {
-    float: left;
-    width: 160px;
-    height: 160px;
-    border-radius: 10px;
-}
-
-.front-page-speaker .content {
-    padding-left: 10px;
-    width: 400px;
-    float: left;
-}
-
-.front-page-main {
-
-}
-
-#announcements {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding:  10px;
-    border:  2px green solid;
-    border-radius: 10px;
-}
-
-.speaker {
-    position: relative;
-    margin-bottom:  10px;
-    padding: 5px;
-}
-
-.speaker img {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    width: 160px;
-    height: 160px;
-    margin: 0 !important;
-    border-radius: 10px;
-}
-
-.speaker .content {
-    margin-left: 180px;
-    background-color: #eeffee;
-    border-radius: 10px;
-    padding:  10px;
-}
-
-.front-page-talks li {
-    padding-left: 12px;
-    padding-bottom: 7px;
-    list-style:  none;
-}
-
-/* height was misspelled */
-.front-page-talks {
-    margin-top: 15px;
-    padding-left: 0;
-    position:relative;
-    float: right;
-    width: 325px;
-    height: 290px;
-}
-.front-page-talks img {
-    float:right;
-    width:16px;
-    height:16px;
-    padding-top:5px;
-}
-
-#frontpageInfo1 .right a span {
-	font-size: 140%;
-	text-transform: uppercase;
-	position: absolute;
-	top: 44px;
-	left: 10px;
-}
-
-#frontpageInfo2 {
-	float: left;
-	width: 100%;
-	border-width: 0 0 1px;
-}
-
-#frontpageInfo2 span.content {
-	min-height: 60px;
-	padding: 18px 10px 8px;
-	margin-left: 30px;
-	float: left;
-	border-left-width: 1px;
-}
-
-#frontpageInfo2 h2 {
-	float: left;
-	margin: 20px 20px 0 10px;
-}
-
-#frontpageInfo2 ul {
-	list-style: none;
-	float: left;
-}
-
-#frontpageInfo2 li {
-	float: left;
-	margin-right: 15px;
-	width: 100px;
-	overflow: hidden;
-	font-size: 90%;
-	text-align: center;
-}
-
-#frontpageInfo2 li img {
-	border: 3px solid #a1d172;
-	-webkit-border-radius:  3px;
-	-moz-border-radius: 	3px;
-	border-radius: 			3px;
-}
-
-#frontpageInfo2 li img:hover {
-	border-color: #8fc556;
-	text-decoration: none;
-}
-
-#frontpageInfo2 li .name {
-	display: block;
-}
-
-/* person was used on committee members, but was not defined. Moved the details out here.*/
 .person {
-    float:left;
-    margin:10px;
+    float: left;
+    margin: 10px;
 }
 
 .scale-down img {
@@ -360,322 +86,65 @@ img.aligncenter {
     max-width: 152px;
 }
 
-table {
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-table, th, td {
-    border: 1px solid #eeeeee;
-    border-collapse: collapse;
-    vertical-align: top;
-    text-align: left;
-    padding: 3px;
-}
-
-table ul {
-	margin-bottom: 0;
-}
-
-
-/* Sidebar */
-
-#sidebar {
-	float: right;
-	width: 250px;
-	padding: 15px 10px 15px 25px;
-}
-
-#sidebar ul {
-	margin-left: 20px;
-}
-
-
-/* Footer */
-#footer-wrapper, #header-wrapper {
-    clear: both;
-    background: url(/images/gradient.png) repeat-x;
-    padding: 30px 0 0 0;
-}
-
-#footer {
-	padding-bottom: 50px;
-}
-
-#content-wrapper {
-    padding-bottom: 30px;
-}
-
 ul.sponsorlogoer {
-	list-style: none;
+    list-style: none;
     margin: 30px 0 0 0;
     padding: 0;
 }
 
 ul.sponsorlogoer li {
-	float: left;
-	margin-right: 35px;
-	height: 90px;
+    float: left;
+    margin-right: 35px;
+    height: 90px;
     padding: 0;
 }
 
 div.field_with_errors input {
-	border: 1px solid red;
-	margin: 0;
+    border: 1px solid red;
+    margin: 0;
 }
 
-
 #railserrordisplaysux, #railserrordisplaysux * {
-	line-height: 2px;
-	font-size: 12px;
+    line-height: 2px;
+    font-size: 12px;
 }
 
 /* Error display */
 
-#railserrordisplaysux div.field_with_errors  {
-	border: 1px solid red;
-	padding: 0 1px;
-	margin: 0 2px 0 2px;
+#railserrordisplaysux div.field_with_errors {
+    border: 1px solid red;
+    padding: 0 1px;
+    margin: 0 2px 0 2px;
 }
 
-#railserrordisplaysux div.field_with_errors input  {
-	vertical-align: -2px;
-	border: 0;
- }
+#railserrordisplaysux div.field_with_errors input {
+    vertical-align: -2px;
+    border: 0;
+}
 
-#railserrordisplaysux div.field_with_errors:first-child  {
-	border: 0;
-	margin: 0;
-	padding: 0;
- }
+#railserrordisplaysux div.field_with_errors:first-child {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
 
 div.errorExplanation li {
     color: red;
 }
 
 div.field_with_errors, #railserrordisplaysux {
-	display: inline;
-	overflow: hidden;
+    display: inline;
+    overflow: hidden;
 }
 
 div.field_with_errors input {
-	border: 1px solid red;
-	margin: 0;
+    border: 1px solid red;
+    margin: 0;
 }
 
 div.language .field_with_errors {
     display: inline;
 }
-
-/* Login form */
-#loginform {
-	display: inline;
-	overflow: hidden;
-}
-
-#loginform .email span, #loginform .password span {
-	display: inline-block;
-	width: 5em;
-}
-
-#loginform .button, .forgot_password, .meld_deg_paa {
-	margin-left: 5em;
-}
-
-.announce {
-	font-size: 2em;
-	margin-bottom: 1em;
-}
-
-.highlight {
-	font-size: 1.3em;
-	font-weight: bold;
-}
-
-.forgot_password {
-	margin-top: .5em
-}
-
-.submitted_time .user {
-	display: inline;
-}
-
-.submitted_time {
-	font-size: .85em;
-}
-
-.passer_for {
-	text-transform: lowercase;
-}
-
-/* Form Formatting */
-
-fieldset {
-    border: 0;
-    margin: 0 0 1em 0;
-    padding: 0;
-}
-
-#talk_details {
-	padding-right: 7px;
-	text-align: left;
-}
-
-#talk_details input,
-#talk_details select {
-	display: block
-}
-
-#talk_details textarea,
-#talk_details .paastand input {
-	width: 100%;
-	margin: 0;
-}
-
-#personal_details div.field,
-#talk_details div.field,
-#loginform .field  {
-	padding: .25em 0;
-}
-
-#new_talk .format *, #new_talk .cc * {
-	display: inline
-}
-
-.radios{
-	margin-left: 10em;
-}
-
-#personal_details .radios label{
-	display: inline;
-}
-
-#personal_details .checkbox label {
-	display: inline-block;
-}
-
-#user_stats .geeky {
-    padding-top: 20px;
-    padding-bottom: 20px;
-	display: inline-block;
-    max-width: 600px;
-}
-
-#personal_details .privacy {
-	padding-bottom: 0;
-}
-
-#personal_details .optional {
-	padding-top: 0;
-}
-
-ul#roles_list {
-    list-style: none;
-}
-
-.confirmations {
-    padding: .75em 0
-}
-
-.tags {
-    font-size: 80%;
-}
-
-.room {
-    color: rgb(150, 150, 150);
-    font-size: 80%
-}
-
-table.videos {
-	border-width: 0;
-	border-spacing: 2px;
-	border-collapse: collapse;
-	background-color: white;
-}
-table.videos th {
-	border-width: 0;
-	padding: 1px;
-	background-color: white;
-	-moz-border-radius: 0;
-}
-table.videos td {
-	border-width: 0;
-	padding: 1px;
-	background-color: white;
-	-moz-border-radius: 0;
-}
-
-tr.spaceOver > td
-{
-  padding-top: 1em;
-}
-
-div.row {
-    display: table-row;
-    padding-right: 30px;
-}
-
-#roles {
-    float: left;
-    width: 635px;
-    height: 200px;
-    padding-right: 0;
-    padding-bottom: 5px;
-}
-
-div.rolebox {
-    width: 87px;
-    height: 87px;
-    margin: 5px;
-    float:left;
-    text-align: center;
-    font-size: 10px;
-    display: table-cell;
-    padding: 0 5px 0 3px;
-}
-
-div.rolebox h4 {
-    margin-top: 10px;
-}
-
-/* NB: margin lacked a unit. I added px. */
-div.rolebox img {
-    width: 85px;
-    height: 85px;
-    margin: 10px;
-}
-
-.caption p {
-    position:absolute;
-    color: white;
-    font-size: 12pt;
-    margin-top: -60px;
-    background-color: #000000;
-    opacity:0.7;
-    width: 170px;
-}
-
-.rolebox a {
-    text-decoration: none;
-}
-
-h1.sectionhead, h2.sectionhead, h3.sectionhead {
-    background-color: #9fd07e;
-    color: white;
-    padding-left: 5px;
-}
-#practicalinfo td {
-    font-size: 12pt;
-    font-weight: bold;
-    padding-left: 10px;
-}
-
-textarea.emails {
-    width: 100%;
-    height: 6em;
-    display: block;
-}
-
 
 .steps {
     padding-bottom: 10px;
@@ -683,7 +152,7 @@ textarea.emails {
 }
 
 .steps div {
-    display:inline;
+    display: inline;
     padding-right: 10px;
     color: #cccccc;
 }
@@ -692,15 +161,3 @@ textarea.emails {
     color: black;
 }
 
-.highlighted-form {
-    margin-top: 10px;
-    background: #eee;
-    padding: 60px;
-    border-radius: 6px;
-    width: 100%;
-}
-
-.framed {
-    border-radius: 6px;
-    border: 1px, solid, #eee;
-}
