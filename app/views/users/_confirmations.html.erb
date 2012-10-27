@@ -1,24 +1,22 @@
 <fieldset id="confirmations">
 
   <% unless @user.registration.discounted_ticket? %>
-    <div>
-        <%= reg.check_box :includes_dinner %>
-        <%= reg.label :includes_dinner,  "I want to attend the conference dinner", :style => "display:inline" %>
-    </div>
+      <div class="checkbox">
+        <%= reg.check_box :includes_dinner, :class => "checkbox" %>
+        <%= reg.label :includes_dinner, "I want to attend the conference dinner", :style => "display:inline", :class => "checkbox" %>
+      </div>
   <% end %>
 
-    <div>
-        <div id="railserrordisplaysux">
-            <%= f.check_box 'accepted_privacy_guidelines' %>
-        </div>
-        <%= f.label 'accepted_privacy_guidelines',
-          "I agree that the organizers will send me conference information on email.", :style => "display:inline"%>
-    </div>
+  <div class="checkbox">
+    <%= f.check_box 'accepted_privacy_guidelines', :class => "checkbox" %>
+    <%= f.label 'accepted_privacy_guidelines',
+                "I agree that the organizers will send me conference information on email.", :style => "display:inline", :class => "checkbox" %>
+  </div>
 
-    <div id="last">
-            <%= f.check_box 'accept_optional_email' %>
-        <%= f.label 'accept_optional_email',
-        "I would like to receive information about similar conferences.", :style => "display:inline" %>
-    </div>
+  <div class="checkbox">
+    <%= f.check_box 'accept_optional_email', :class => "checkbox" %>
+    <%= f.label 'accept_optional_email',
+                "I would like to receive information about similar conferences.", :style => "display:inline", :class => "checkbox" %>
+  </div>
 
 </fieldset>

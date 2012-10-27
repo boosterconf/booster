@@ -519,20 +519,17 @@ fieldset {
     padding: 0;
 }
 
-#talk_details, #registration_details  {
+#talk_details {
 	padding-right: 7px;
 	text-align: left;
 }
 
 #talk_details input,
-#talk_details select,
-#registration_details .kommentarer label,
-#registration_details .type label  {
+#talk_details select {
 	display: block
 }
 
 #talk_details textarea,
-#registration_details textarea,
 #talk_details .paastand input {
 	width: 100%;
 	margin: 0;
@@ -540,7 +537,7 @@ fieldset {
 
 #personal_details div.field,
 #talk_details div.field,
-#registration_details div.field, #loginform .field  {
+#loginform .field  {
 	padding: .25em 0;
 }
 
@@ -577,10 +574,9 @@ fieldset {
 
 ul#roles_list {
     list-style: none;
-    display: inline;
 }
 
-.confirmations, #registration_details {
+.confirmations {
     padding: .75em 0
 }
 
@@ -697,4 +693,17 @@ textarea.emails {
 
 .steps .active {
     color: black;
+}
+
+.highlighted-form {
+    margin-top: 10px;
+    background: #eee;
+    padding: 60px;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.framed {
+    border-radius: 6px;
+    border: 1px, solid, #eee;
 }

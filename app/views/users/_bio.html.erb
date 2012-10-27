@@ -36,7 +36,7 @@
                     <%= image_tag('placeholder.jpg') %>
                 <% end %>
               </div>
-              <div style="float:right;">
+              <div class="pull-right">
                 <%= bio.file_field :picture %>
               </div>
             </div>
@@ -44,7 +44,7 @@
         </div>
         <div style="float:left;width:100%;height:200px;">
           <%= bio.label :bio, "Bio" %>
-          <%= bio.text_area :bio, :rows => 13, :cols => 90 %>
+          <%= bio.text_area :bio, :rows => 13, :class => 'input-xxlarge' %>
         </div>
 
         <% if show_links %>

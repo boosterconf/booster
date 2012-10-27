@@ -1,7 +1,7 @@
 <div id="price_info">
   <% unless @user.registration.free_ticket %>
       <% if Time.now < AppConfig.early_bird_ends %>
-        <p>You're in time for an early bird special!</p>
+        <p class="lead">You're in time for an early bird special!</p>
         <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>,- (<strong>including VAT</strong>).</p>
       <% else %>
           <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %>,- (<strong>including VAT</strong>).</p>

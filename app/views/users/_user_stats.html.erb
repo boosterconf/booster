@@ -1,28 +1,29 @@
 <fieldset id="user_stats">
-<div class="geeky">
-  To better understand our audience and create a better conference, we hope you will indulge us and provide us with some additional information about yourself.
-</div>
+  <div class="geeky">
+    To better understand our audience, and create a better conference, we hope you will indulge us and provide us with
+    some additional information about yourself.
+  </div>
 
-<div class="field">
-  <fieldset>
-	<label class="radio">
-	    <%= f.radio_button :female, false %>
-	    Male
-	</label>
-	<label class="radio">
+  <div class="field">
+    <fieldset>
+      <label class="radio">
+        <%= f.radio_button :female, false %>
+        Male
+      </label>
+      <label class="radio">
         <%= f.radio_button :female, true %>
-		Female
-	</label>
-  </fieldset>
-</div>
+        Female
+      </label>
+    </fieldset>
+  </div>
 
-<div class="field">
-  <%= f.label :hometown, "City of residence" %>
-  <%= text_field(:user, :hometown, :placeholder => "Where do you live?", :size => 50) %>
-</div>
+  <div class="field">
+    <%= f.label :hometown, "City of residence" %>
+    <%= text_field(:user, :hometown, :placeholder => "Where do you live?", :class => 'input-xlarge') %>
+  </div>
 
-<div class="field">
-  <%= f.label :birthyear, "Birth year" %>
-  <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :size => 50) %>
-</div>
+  <div class="field">
+    <%= f.label :birthyear, "Birth year" %>
+    <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :class => 'input-xlarge') %>
+  </div>
 </fieldset>

@@ -1,7 +1,13 @@
-<%= f.label :roles,  "What role(s) do you have?" %>
-<ul id="roles_list">
+<%# TODO: When this partial is used to edit existing user, need
+    to check whether user has selected role. Now we always display
+    all of them unselected. %>
+
+<%= f.label :roles,  "Which role(s) do you have?" %>
+<ul id="roles_list" class="checkbox">
   <% Roles.all.each do |role| %>
-      <li><%= check_box_tag 'roles[]', role %>
-        <%= Roles.label[role] %></li>
+      <li>
+        <%= check_box_tag "roles[]", role, false, :id => "roles_#{role}" %>
+        <%= label_tag "roles_#{role}", Roles.label[role]  %>
+      </li>
   <% end %>
 </ul>

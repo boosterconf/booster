@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   end
 
   def roles_description
-    roles.split(",").map {|r| Roles.label[r] }
+    roles.split(",").map {|r| Roles.label[r.to_sym] }.join(", ")
   end
 
   def deliver_password_reset_instructions!

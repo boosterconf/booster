@@ -29,7 +29,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    p current_user.inspect
     if current_user && !current_user.is_admin
       redirect_to current_user_url
       return
@@ -42,7 +41,8 @@ class UsersController < ApplicationController
 
     @user = User.new
     @user.registration = Registration.new
-    @user.registration.manual_payment = params[:manual_payment]
+    #Default to manual payement. Paypal is expensive, and senderegning.no works fine.
+    @user.registration.manual_payment = true
     @user.registration.ticket_type_old = params[:free_ticket] || params[:ticket_type_old] || params[:ticket_type] || 'full_price'
     if @user.registration.ticket_type_old == 'full_price' && Time.now < AppConfig.early_bird_ends
       @user.registration.ticket_type_old = 'early_bird'
@@ -85,12 +85,12 @@ class UsersController < ApplicationController
         UserSession.create(:login => @user.email, :password => @user.password)
 
         if @user.registration.manual_payment
-          flash[:notice] = "We will contact you to confirm the details"
+          flash[:notice] = "We will contact you to confirm the details."
           BoosterMailer.manual_registration_confirmation(@user).deliver
           BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
           redirect_to @user
         elsif @user.registration.free_ticket
-          flash[:notice] = "We will contact you to confirm the details"
+          flash[:notice] = "We will contact you to confirm the details."
           BoosterMailer.free_registration_confirmation(@user).deliver
           BoosterMailer.free_registration_notification(@user, user_url(@user)).deliver
           redirect_to @user
