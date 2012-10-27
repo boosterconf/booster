@@ -55,7 +55,8 @@ class User < ActiveRecord::Base
   end
 
   def roles_description
-    roles.split(",").map {|r| Roles.label[r.to_sym] }.join(", ")
+    roles.split(",").map {|r| Roles.label[r.to_sym] }.join(", ") if roles
+    "" unless roles
   end
 
   def deliver_password_reset_instructions!
