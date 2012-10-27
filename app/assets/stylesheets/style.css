@@ -1,8 +1,5 @@
 body {
-	margin: 0;
-	padding: 0;
-	font-family: Lucida Sans Unicode, Lucida Grande, sans-serif;
-	font-size: 90%;
+	padding-top: 60px;
 	color: #666;
 }
 
@@ -19,33 +16,16 @@ html {
 }
 
 h1, h2, h3 {
-	margin: 0;
-	padding: 0;
-    font-family: Tahoma, Geneva, sans-serif;
 	font-weight: bold;
 	color: #773060;
-	line-height: 160%;
 }
 
-h1 {
-	font-size: 130%;
+header {
+    margin-top: 20px;
+    position: relative;
+    min-height: 70px;
 }
 
-h2 {
-	font-size: 130%;
-	margin-bottom: .3em;
-}
-
-h3 {
-	font-size: 110%;
-	font-weight: bold;
-	margin-bottom: .5em;
-}
-
-p {
-	margin-top: 0;
-	line-height: 160%;
-}
 
 #header ul, #header ol, #social_media ul, #social_media ol {
     margin: 0;
@@ -96,12 +76,6 @@ img.aligncenter {
 	margin: 0 auto;
 }
 
-#content, #page, #header, #social_media, #footer {
-	max-width: 980px;
-	margin: 0 auto;
-	padding: 0 1em;
-}
-
 /* Header */
 
 #social_media {
@@ -148,12 +122,6 @@ img.aligncenter {
 	margin-right: 10px;
 }
 
-#header {
-    margin-top: 20px;
-	position: relative;
-    min-height: 70px;
-}
-
 #header-wrapper {
     padding-top: 20px;
 }
@@ -178,45 +146,6 @@ img.aligncenter {
 	clear: left;
 	text-transform: uppercase;
     text-align: center;
-}
-
-/* Menu */
-
-#menu {
-	float: left;
-	display: block;
-	margin: 0 0 15px 30px;
-	width: 140px;
-}
-
-#menu ul {
-	list-style: none;
-	line-height: 130%;
-}
-
-#menu li {
-	padding-bottom: 8px;
-}
-
-#menu a {
-	font-size: 105%;
-	width: 130px;
-	overflow: hidden;
-	padding: 1px 6px;
-}
-
-#menu li a:hover,
-#menu li#current_page_item a {
-	text-decoration: none;
-	background-color: #773060;
-	color: #fff;
-	-webkit-border-radius:  3px;
-	-moz-border-radius: 	3px;
-	border-radius: 			3px;
-}
-
-#menu a:hover {
-	text-decoration: underline;
 }
 
 #header-right {
@@ -627,10 +556,6 @@ fieldset {
 	display: inline;
 }
 
-#personal_details .field label {
-	display: inline-block;
-}
-
 #personal_details .checkbox label {
 	display: inline-block;
 }
@@ -655,7 +580,9 @@ ul#roles_list {
     display: inline;
 }
 
-.confirmations, #registration_details {padding: .75em 0}
+.confirmations, #registration_details {
+    padding: .75em 0
+}
 
 .tags {
     font-size: 80%;

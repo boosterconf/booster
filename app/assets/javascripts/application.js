@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.widgets.min
 //= require tinymce-jquery

@@ -13,23 +13,18 @@
           <div style="float:left;width:40%; padding:10px;">
             <% if admin? %>
                 <%= f.check_box :featured_speaker %>
-                <%= f.label :featured_speaker, "Feature this user on speaker page" %>  <br/>
+                <%= f.label :featured_speaker, "Feature this user on speaker page" %>
                 <%= f.check_box :feature_as_organizer %>
                 <%= f.label :feature_as_organizer, "Feature this user on organizers page" %>
             <% end %>
-            <br/>
-            <br/>
             <%= bio.label :title, "Work title:" %>
             <%= bio.text_field :title, :size => 60 %>
-            <br/>
 
             <%= bio.label :twitter_handle, "Twitter handle:" %>
             <%= bio.text_field :twitter_handle, :size => 60 %>
-            <br/>
 
             <%= bio.label :blog, "Blog url" %>
             <%= bio.text_field :blog, :size => 60 %>
-            <br/>
 
           </div>
           <div style="float:left;width:50%;">
@@ -48,23 +43,23 @@
           </div>
         </div>
         <div style="float:left;width:100%;height:200px;">
-          <%= bio.label :bio, "Bio" %> <br/>
+          <%= bio.label :bio, "Bio" %>
           <%= bio.text_area :bio, :rows => 13, :cols => 90 %>
         </div>
 
         <% if show_links %>
             <% if admin? %>
                 <p>
-                  <%#= link_to('Publish abstract', {:controller => 'talks', :action => 'assign', :id => @user.id}) %>
+                  <%= link_to('Publish abstract', {:controller => 'talks', :action => 'assign', :id => @user.id}) %>
                 </p>
             <% end %>
             Accepted abstracts that will be displayed on speaker page:
             <ul style="list-style-type: none;">
-              <%# @user.talks.each do |talk| %>
-                  <%# if   talk.accepted? %>
-                      <li><%#= link_to h(talk.title), talk %></li>
-                  <%#end %>
-              <%# end %>
+              <% @user.talks.each do |talk| %>
+                  <% if   talk.accepted? %>
+                      <li><%= link_to h(talk.title), talk %></li>
+                  <%end %>
+              <% end %>
             </ul>
         <% end %>
       </div>

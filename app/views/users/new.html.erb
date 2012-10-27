@@ -35,13 +35,13 @@
           <%= reg.hidden_field :ticket_type_old %>
           <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
 
-          <label>
-            Please send me an invoice
-            <input type="radio" name="paymenttype" id="manual_payment" checked="true">
-          </label>
-          <label>
+          <label class="radio">
+            <input type="radio" name="paymenttype" id="paypal" class="radio">
             I want to pay with PayPal
-            <input type="radio" name="paymenttype" id="paypal">
+          </label>
+          <label class="radio">
+            <input type="radio" name="paymenttype" id="manual_payment" checked="true" class="radio">
+            Please send me an invoice
           </label>
 
           <div id="invoice_fields">
@@ -55,7 +55,7 @@
             </div>
           </div>
 
-          <div id="register_submit"><%= f.submit "Register" %></div>
+          <div id="register_submit"><%= f.submit "Register", :class => 'btn btn-primary' %></div>
       <% end %>
     </fieldset>
 <% end %>

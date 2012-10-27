@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="utf-8">
   <script type="text/javascript">var NREUMQ = NREUMQ || [];
   NREUMQ.push(["mark", "firstbyte", new Date().getTime()]);</script>
 
@@ -8,205 +9,89 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <meta name="description" content="The Booster conference is in Bergen, Norway March 13.-15. 2013. The
 conference is for all IT professionals seeking to learn from each other and from experts in their fields"/>
-  <meta name="keywords" content="booster conference, conference, software, agile, programming, bergen, norway,
-booster, roots conference, roots, it conference, software conference, methodology, testing, craftsmanship, software development, user experience, tools, project management"/>
+  <meta name="keywords" content="booster conference, conference, software, agile, programming, bergen, norway,booster, roots conference, roots, it conference, software conference, methodology, testing, craftsmanship, software development, user experience, tools, project management"/>
   <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
-  <!--<link rel="icon" type="image/ico" href="favicon.ico" />   -->
-
-  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
-  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
 
   <%= stylesheet_link_tag :application %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tag %>
   <%= tinymce_assets %>
+
 </head>
 
-<body id="hjem">
-<!--<link rel="shortcut icon" href="faviconicon.ico"/>      -->
-<div id="wrapper">
-  <div id="social_media">
-    <ul>
-      <li>
-        <a href="https://www.facebook.com/boosterconf" title="Facebook" class="facebook" target="_blank">
-          Like us on Facebook
-        </a>
-      </li>
-      <li>
-        <a href="http://twitter.com/boosterconf" title="Twitter" class="twitter" target="_blank">Follow us on
-          Twitter</a>
-      </li>
-      <li>
-        <a href="http://lanyrd.com/2013/boosterconf/" title="Lanyrd" class="lanyrd" target="_blank">Track us on
-          Lanyrd</a>
-      </li>
-      <li>
-        <a href="http://linkd.in/QjWslE" title="LinkedIn" class="linkedin">Join us on LinkedIn</a>
-      </li>
-      <!--<li>
-          <a href="http://vimeo.com/boosterconf/videos/" title="videos" class="vimeo">Videos</a>
-      </li>-->
-      <li style="float:right">
+<body>
 
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <div class="nav-collapse collapse">
+        <ul class="nav pull-right">
+          <li><a href="/">Home</a></li>
+          <li><a href="/info/about">About us</a></li>
+          <li><a href="/info/sponsors">For sponsors</a></li>
+          <li><a href="/login">Log in</a></li>
+        </ul>
+        </ul>
+      </div>
+      <!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="container">
+    <div style="width: 940px; height: 150px; border: solid 1px #a9a9a9;">
+                LOGO PLACEHOLDER
+      <p>
+        BOOSTER 2013
+      </p>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <%= yield %>
+</div>
+
+<footer>
+  <div id="sponsors" class="container">
+    <ul class="sponsorlogoer" id="logoer">
+      <li>
+        <a href="http://www.kantega.no/" title="Kantega" target="_blank"><img src="/images/logos/kantega.png" alt="Kantega"/></a>
+      </li>
+      <li>
+        <a href="http://www.miles.no/" title="Miles" target="_blank"><img src="/images/logos/miles.png" alt="Miles"/></a>
+      </li>
+      <li>
+        <a href="http://www.pswin.com/" title="PSWinCom AS" target="_blank"><img src="/images/logos/pswincom.jpg" alt="PSWinCom AS"/></a>
+      </li>
+      <li>
+        <a href="http://www.webstep.no/" title="Webstep AS" target="_blank"><img src="/images/logos/webstep.png" alt="Webstep AS"/></a>
+      </li>
+      <li>
+        <a href="http://www.rainfall.no/" title="Rainfall" target="_blank"><img src="/images/logos/rainfall.png" alt="Rainfall"/></a>
+      </li>
+      <li>
+        <a href="http://www.innovit.no/" title="Innovit" target="_blank"><img src="/images/logos/innovit.png" alt="Innovit"/></a>
+      </li>
+      <li>
+        <a href="http://www.experis.no/" title="Experis" target="_blank"><img src="/images/logos/experis.png" alt="Experis"/></a>
+      </li>
+      <li>
+        <a href="http://www.knowit.no/" title="Knowit" target="_blank"><img src="/images/logos/knowit.png" alt="KnowIt"/></a>
+      </li>
+      <li>
+        <a href="http://www.delfidata.no/" title="Delfi Data" target="_blank"><img src="/images/logos/delfidata.png" alt="Delfi Data"/></a>
       </li>
     </ul>
   </div>
-  <div id="header-wrapper">
+</footer>
 
-
-    <div id="header">
-      <div id="logo">
-        <!--<a href="/" title="Main page">
-       <h1>BOOSTER 2013</h1>-->
-        <!--<img src="/images/booster-logo.gif" alt="Booster logo"/>    -->
-        <!--</a>-->
-
-        <p id="conference_info"><a href="/">Booster Conference, March 13-15. 2013, Bergen</a></p>
-      </div>
-      <div id="menu">
-        <ul>
-
-          <li><a href="/">Main page</a></li>
-          <!--<li><a href="/users/new">Register</a></li>-->
-          <!--li><a href="/talks/new">Suggest a talk</a></li-->
-          <!--li><a href="/talks">Talk suggestions</a></li-->
-          <!--li><a href="/speakers">Speakers</a></li-->
-          <!--li><a href="/program">Program</a></li-->
-          <!--li><a href="/info/videos">Videos</a></li -->
-          <li><a href="/info/sponsors">Be a sponsor</a></li>
-          <li><a href="/info/about">About Booster</a></li>
-          <% if logged_in %>
-              <li><%= link_to 'My registration', current_user_url %></li>
-          <% else %>
-              <li><%= link_to 'Log in', login_url %></li>
-          <% end %>
-          <% if admin? %>
-              <li><%#= link_to 'Admin', :controller => 'admin', :action => 'index' %></li>
-          <% end %>
-        </ul>
-      </div>
-
-
-      <div id="header-right">
-        <!--<div id="submittalk">
-            <a href="/program">Program</a>
-        </div>-->
-
-
-        <!--
-        <div id="registration">
-        <a href="/users/new">Buy ticket</a>
-        </div>
-        -->
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="clearit"></div>
-  <div id="content-wrapper">
-
-    <div id="content">
-
-      <%= yield %>
-
-    </div>
-
-  </div>
-
-  <div class="clearit"></div>
-
-  <div id="footer-wrapper">
-
-    <div id="footer">
-      <h2>Sponsors</h2>
-      <ul class="sponsorlogoer" id="logoer">
-        <li>
-          <a href="http://www.kantega.no/" title="Kantega" target="_blank"><img src="/images/logos/kantega.png" alt="Kantega"/></a>
-        </li>
-        <li>
-          <a href="http://www.miles.no/" title="Miles" target="_blank"><img src="/images/logos/miles.png" alt="Miles"/></a>
-        </li>
-        <li>
-          <a href="http://www.pswin.com/" title="PSWinCom AS" target="_blank"><img src="/images/logos/pswincom.jpg" alt="PSWinCom AS"/></a>
-        </li>
-        <li>
-          <a href="http://www.webstep.no/" title="Webstep AS" target="_blank"><img src="/images/logos/webstep.png" alt="Webstep AS"/></a>
-        </li>
-        <li>
-          <a href="http://www.rainfall.no/" title="Rainfall" target="_blank"><img src="/images/logos/rainfall.png" alt="Rainfall"/></a>
-        </li>
-        <li>
-          <a href="http://www.innovit.no/" title="Innovit" target="_blank"><img src="/images/logos/innovit.png" alt="Innovit"/></a>
-        </li>
-        <li>
-          <a href="http://www.experis.no/" title="Experis" target="_blank"><img src="/images/logos/experis.png" alt="Experis"/></a>
-        </li>
-        <li>
-          <a href="http://www.knowit.no/" title="Knowit" target="_blank"><img src="/images/logos/knowit.png" alt="KnowIt"/></a>
-        </li>
-        <li>
-          <a href="http://www.delfidata.no/" title="Delfi Data" target="_blank"><img src="/images/logos/delfidata.png" alt="Delfi Data"/></a>
-        </li>
-      </ul>
-
-      <div style="clear: both; text-align:center; margin: 0 auto;">
-        If you want to sponsor Booster 2013 and have your logo shown here,
-        contact us at <a href="mailto:kontakt@boosterconf.no">kontakt@boosterconf.no</a>
-      </div>
-
-      <div style="clear: both; text-align: center; margin: 0 auto;">
-        <small>
-          Booster is organized by a group of volunteers.
-          <a href="/info/organizers">Meet the organizers</a>.
-        </small>
-      </div>
-
-    </div>
-  </div>
-  <!-- end #footer -->
-  <script type="text/javascript">
-      //logosShuffle();
-  </script>
-
-  <div class="clearit"></div>
-
-  <!-- START Disclaimer/Tracking Stuff -->
-  <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-19730740-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function () {
-          var ga = document.createElement('script');
-          ga.type = 'text/javascript';
-          ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(ga, s);
-      })();
-
-  </script>
-  <!-- END Disclaimer/Tracking Stuff -->
-
-</div>
-<script type="text/javascript">if (!NREUMQ.f) {
-    NREUMQ.f = function () {
-        NREUMQ.push(["load", new Date().getTime()]);
-        var e = document.createElement("script");
-        e.type = "text/javascript";
-        e.async = true;
-        e.src = "https://d1ros97qkrwjf5.cloudfront.net/42/eum/rum.js";
-        document.body.appendChild(e);
-        if (NREUMQ.a)NREUMQ.a();
-    };
-    NREUMQ.a = window.onload;
-    window.onload = NREUMQ.f;
-}
-;
-NREUMQ.push(["nrfj", "beacon-1.newrelic.com", "789462450d", 339576, "cAsIFkNcX1RTRRYPXVULSQtfV1ZA", 0.0, 84, new Date().getTime(), "", "", "", "", ""])</script>
 </body>
 </html>
