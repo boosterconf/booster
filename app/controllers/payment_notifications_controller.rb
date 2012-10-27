@@ -11,14 +11,14 @@ class PaymentNotificationsController < ApplicationController
     registration.save!
     
     PaymentNotification.create!(:params => params, :registration => registration, :status => params[:payment_status], :transaction_id => params[:txn_id], :paid_amount => params[:mc_gross], :currency => params[:mc_currency])
-    
-    BoosterMailer.deliver_payment_confirmation(registration)
+
+    BoosterMailer.payment_confirmation(registration).deliver
     
     render :nothing => true
   end
   
   def index
-    @payment_notifications = PaymentNotification.find(:all)
+    @payment_notifications = PaymentNotification.all()
 
     respond_to do |format|
       format.html # index.html.erb

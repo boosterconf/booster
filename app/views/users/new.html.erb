@@ -18,34 +18,44 @@
     <% elsif @user.registration.ticket_type_old == 'student' %>
         You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
     <% else %>
-        <%= render :partial => 'price_info', :locals => {:f => f } %>
+        <%= render :partial => 'price_info', :locals => {:f => f} %>
     <% end %>
 
-    <%= render :partial => 'personal_details', :locals => {:f => f}  %>
+    <%= render :partial => 'personal_details', :locals => {:f => f} %>
 
-    <%= render :partial => 'roles', :locals => {:f => f}  %>
+    <%= render :partial => 'roles', :locals => {:f => f} %>
 
-    <%= render :partial => 'passwords', :locals => {:f => f}  %>
+    <%= render :partial => 'passwords', :locals => {:f => f} %>
 
-    <%= render :partial => 'user_stats', :locals => {:f => f}  %>
+    <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
     <fieldset id="registration_details">
       <%= f.fields_for :registration do |reg| %>
+
           <%= reg.hidden_field :ticket_type_old %>
-          <% if @user.registration.manual_payment %>
-              <div class="field adresse">
-                <%= reg.label :invoice_address, "Payment address" %>
-                <%= reg.text_area :invoice_address, :rows => 4 %>
-              </div>
-              <div class="field kommentarer">
-                <%= reg.label :invoice_description, "Addional payment info" %>
-                <%= reg.text_area :invoice_description, :rows => 4 %>
-              </div>
-              <div class="field buttons"><%= f.submit "Register" %></div>
-          <% else %>
-              <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
-              <div><%= f.submit "Register and proceed to payment" %></div>
-          <% end %>
+          <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+
+          <label>
+            Please send me an invoice
+            <input type="radio" name="paymenttype" id="manual_payment" checked="true">
+          </label>
+          <label>
+            I want to pay with PayPal
+            <input type="radio" name="paymenttype" id="paypal">
+          </label>
+
+          <div id="invoice_fields">
+            <div class="field adresse">
+              <%= reg.label :invoice_address, "Payment address" %>
+              <%= reg.text_area :invoice_address, :rows => 4 %>
+            </div>
+            <div class="field kommentarer">
+              <%= reg.label :invoice_description, "Addional payment info" %>
+              <%= reg.text_area :invoice_description, :rows => 4 %>
+            </div>
+          </div>
+
+          <div id="register_submit"><%= f.submit "Register" %></div>
       <% end %>
     </fieldset>
 <% end %>

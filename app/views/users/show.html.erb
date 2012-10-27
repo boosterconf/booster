@@ -8,7 +8,7 @@ We have registered the following information about you:
 <ul>
   <li><strong>Name:</strong> <%=h @user.name %></li>
   <li><strong>Company:</strong> <%=h @user.company %></li>
-  <li><strong>Role: </strong> <%=h @user.role %></li>
+  <li><strong>Role: </strong> <%#=h @user.roles_description %></li>
   <li><strong>E-mail:</strong> <%=h @user.email %></li>
   <li><strong>Phone number:</strong> <%=h @user.phone_number %></li>
   <li><strong>Hometown:</strong> <%=h @user.hometown %></li>
@@ -25,11 +25,8 @@ We have registered the following information about you:
   <% end %>
 </ul>
 
-<%= link_to "Make changes to your registration", edit_user_path(@user) %>
-
 <% unless @user.talks.blank? %>
   <h3>Suggested talks</h3>
-
   <ul>
     <% for talk in @user.talks %>
       <li><%= link_to h(talk.title), talk %></li>
@@ -37,7 +34,8 @@ We have registered the following information about you:
   </ul>
 <% end %>
 
-
-<h3>Participant information</h3>
-
-<%= render :partial => @user.registration %>
+<% if @user.registration %>
+    <h3>Participant information</h3>
+    <%= render :partial => @user.registration %>
+    <%= link_to "Make changes to your registration", edit_user_path(@user) %>
+<% end %>
