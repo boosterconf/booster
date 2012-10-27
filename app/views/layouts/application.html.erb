@@ -65,7 +65,14 @@ conference is for all IT professionals seeking to learn from each other and from
           <li><a href="/">Home</a></li>
           <li><a href="/info/about">About us</a></li>
           <li><a href="/info/sponsors">For sponsors</a></li>
-          <li><a href="/login">Log in</a></li>
+          <% if logged_in %>
+              <li><%= link_to 'My profile', current_user_url %></li>
+          <% else %>
+              <li><%= link_to 'Log in', login_url %></li>
+          <% end %>
+          <% if admin? %>
+              <li><%#= link_to 'Admin', :controller => 'admin', :action => 'index' %></li>
+          <% end %>
         </ul>
         </ul>
       </div>
