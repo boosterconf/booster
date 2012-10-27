@@ -13,7 +13,7 @@ full_price:
 sponsor_price:
   id: 3
   name: Sponsor Booster 2013
-  description: Free ticket for sponsors onlly
+  description: Free ticket for sponsors only
   price: 0
 
 volunteer_price:
@@ -25,7 +25,7 @@ volunteer_price:
 student_price:
   id: 5
   name: Student ticket for Booster 2013
-  description: Student ticket for ROOTS 2011
+  description: Student ticket for Booster 2013
   price: 1000
 
 organizer_price:
@@ -39,10 +39,3 @@ speaker_price:
   name: Speaker at Booster 2013
   description: Free ticket for speakers only
   price: 0
-
-dnd_full_price:
-  id: 8
-  name: DnD ticket for Booster 2013
-  description: Rabated ticket for DnD members
-  price: 6000
-

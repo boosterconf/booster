@@ -91,10 +91,10 @@ module ApplicationHelper
   end
 
   def mailingliste_url
-    "http://groups.google.com/group/rootsconf"
+    "http://groups.google.com/group/boosterconf"
   end
   def twitter_url
-    "http://twitter.com/rootsconf"
+    "http://twitter.com/boosterconf"
   end
 
   def help_tooltip(&block)

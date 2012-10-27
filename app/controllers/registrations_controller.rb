@@ -50,9 +50,9 @@ class RegistrationsController < ApplicationController
         flash[:notice] = "Information updated and confirmation mail sent"
 
         if (@registration.free_ticket?)
-          RootsMailer.deliver_free_registration_completion(@registration.user)
+          BoosterMailer.deliver_free_registration_completion(@registration.user)
         else
-          RootsMailer.deliver_payment_confirmation(@registration)
+          BoosterMailer.deliver_payment_confirmation(@registration)
         end
       else
         flash[:notice] = "Information updated"

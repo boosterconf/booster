@@ -142,7 +142,7 @@ class TalksController < ApplicationController
 
       if @talk.save
         flash[:notice] = "Abstract published"
-        RootsMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
+        BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
         redirect_to(@talk)
       else
         render :action => "new"

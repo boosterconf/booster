@@ -66,7 +66,7 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.find(params[:id])
 
     if @sponsor.is_ready_for_email?
-      RootsMailer.initial_sponsor_mail(@sponsor).deliver
+      BoosterMailer.initial_sponsor_mail(@sponsor).deliver
       @sponsor.status = 'contacted'
       @sponsor.last_contacted_at = Time.now.to_datetime
       @sponsor.save
@@ -81,4 +81,3 @@ class SponsorsController < ApplicationController
     end
   end
 end
-

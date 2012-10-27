@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 
   def deliver_password_reset_instructions!
     reset_perishable_token!
-    RootsMailer.password_reset_instructions(self).deliver
+    BoosterMailer.password_reset_instructions(self).deliver
   end
 
   def confirmed_speaker?

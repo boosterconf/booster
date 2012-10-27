@@ -86,16 +86,16 @@ class UsersController < ApplicationController
 
         if @user.registration.manual_payment
           flash[:notice] = "We will contact you to confirm the details"
-          RootsMailer.manual_registration_confirmation(@user).deliver
-          RootsMailer.manual_registration_notification(@user, user_url(@user)).deliver
+          BoosterMailer.manual_registration_confirmation(@user).deliver
+          BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
           redirect_to @user
         elsif @user.registration.free_ticket
           flash[:notice] = "We will contact you to confirm the details"
-          RootsMailer.free_registration_confirmation(@user).deliver
-          RootsMailer.free_registration_notification(@user, user_url(@user)).deliver
+          BoosterMailer.free_registration_confirmation(@user).deliver
+          BoosterMailer.free_registration_notification(@user, user_url(@user)).deliver
           redirect_to @user
         else
-          RootsMailer.registration_confirmation(@user).deliver
+          BoosterMailer.registration_confirmation(@user).deliver
           redirect_to @user.registration.payment_url(payment_notifications_url, user_url(@user))
         end
       else
@@ -110,9 +110,9 @@ class UsersController < ApplicationController
   end
 
   def redirect_to_front_page
-    flash[:error] = "We have reached the limit on the number of participants for this conference. Please contact us at kontakt@rootsconf.no and we will see what we can do."
+    flash[:error] = "We have reached the limit on the number of participants for this conference. Please contact us at kontakt@boosterconf.no and we will see what we can do."
     logger.error("Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.")
-    RootsMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver
+    BoosterMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver
     redirect_to root_path
   end
 

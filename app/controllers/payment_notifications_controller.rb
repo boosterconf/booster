@@ -12,7 +12,7 @@ class PaymentNotificationsController < ApplicationController
     
     PaymentNotification.create!(:params => params, :registration => registration, :status => params[:payment_status], :transaction_id => params[:txn_id], :paid_amount => params[:mc_gross], :currency => params[:mc_currency])
     
-    RootsMailer.deliver_payment_confirmation(registration)
+    BoosterMailer.deliver_payment_confirmation(registration)
     
     render :nothing => true
   end

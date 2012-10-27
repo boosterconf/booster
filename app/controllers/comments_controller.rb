@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
 
     if @comment.save
       flash[:notice] = 'Comment created.'
-      RootsMailer.comment_notification(@comment, talk_url(@comment.talk, :anchor => dom_id(@comment))).deliver
+      BoosterMailer.comment_notification(@comment, talk_url(@comment.talk, :anchor => dom_id(@comment))).deliver
       redirect_to(:controller => 'talks', :action => 'show', :id => @talk, :anchor => dom_id(@comment))
     else
       render :template => "talks/show"

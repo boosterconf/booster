@@ -1,4 +1,4 @@
-class RootsMailer < ActionMailer::Base
+class BoosterMailer < ActionMailer::Base
 
   default_url_options[:host] = "boosterconf.no"
   FROM_EMAIL = 'Booster 2013 <kontakt@boosterconf.no>'
