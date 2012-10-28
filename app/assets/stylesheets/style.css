@@ -1,7 +1,7 @@
 body {
     padding-top: 20px;
     color: #666;
-    background-color: #fffffa;
+    background-color: #f2f0e6;
 }
 
 html {
@@ -10,7 +10,7 @@ html {
 }
 
 header {
-    background-image: url("bgnoise.png");
+    background-color: #1790a0;
 }
 
 footer {
@@ -38,7 +38,7 @@ footer {
 
 h1, h2, h3 {
     font-weight: bold;
-    color: #0070df;
+    color: #1790a0;
 }
 
 header {
@@ -48,11 +48,11 @@ header {
 }
 
 a {
-    color: #0070df;
+    color: #1790a0;
 }
 
 a:hover {
-    color: #0070df;
+    color: #1790a0;
 }
 
 #submittalk a, #registration a {
