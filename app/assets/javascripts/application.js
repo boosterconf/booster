@@ -16,4 +16,5 @@
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.widgets.min
 //= require tinymce-jquery
+//= require jquery.shuffle
 //= require_tree .

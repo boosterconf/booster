@@ -1,9 +1,3 @@
 // Place all the styles related to the Sponsors controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-table.tablesorter tbody tr.sponsor_last_year td {
-	background: lightgreen;
-}
-table.tablesorter tbody tr.odd td, table.tablesorter tbody tr:nth-child(even) td  {
-  background: lightgreen;
-}
