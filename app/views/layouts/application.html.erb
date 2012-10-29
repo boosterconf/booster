@@ -12,7 +12,7 @@
   <meta name="description" content="The Booster conference is in Bergen, Norway March 13.-15. 2013. The
 conference is for all IT professionals seeking to learn from each other and from experts in their fields"/>
   <meta name="keywords" content="booster conference, conference, software, agile, programming, bergen, norway,booster, roots conference, roots, it conference, software conference, methodology, testing, craftsmanship, software development, user experience, tools, project management"/>
-  <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= favicon_link_tag %>
 
   <%= stylesheet_link_tag :application %>
@@ -20,14 +20,6 @@ conference is for all IT professionals seeking to learn from each other and from
   <%= csrf_meta_tag %>
   <%= tinymce_assets %>
 
-  <style type="text/css">
-      b, h1, h2, h3, h4, h5 {
-          font-family:"Siri Core Bold", 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, Verdana, sans-serif; font-size-adjust:0.52; font-weight:bold; font-style:normal;
-      }
-      html, body {
-          font-family:"Siri Core Regular", 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, Verdana, sans-serif; font-size-adjust:0.51; font-weight:normal; font-style:normal;
-      }
-  </style>
 </head>
 
 <body>
@@ -40,37 +32,6 @@ conference is for all IT professionals seeking to learn from each other and from
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-
-      <div class="nav-collapse collapse">
-        <ul class="nav pull-left">
-          <li>
-            <a href="https://www.facebook.com/boosterconf" title="Facebook" class="facebook" target="_blank">
-              <%= image_tag "facebook-logo.png" %>
-            </a>
-          </li>
-
-          <li>
-            <a href="http://lanyrd.com/2013/boosterconf/" title="Lanyrd" class="lanyrd" target="_blank">
-              <%= image_tag "lanyrd-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="http://linkd.in/QjWslE" title="LinkedIn" class="linkedin" target="_blank">
-              <%= image_tag "linkedin-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="http://twitter.com/boosterconf" title="Twitter" class="twitter" target="_blank">
-              <%= image_tag "twitter-logo.png" %> @boosterconf
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/search?q=%23booster2013" target="_blank">
-              <%= image_tag "twitter-logo.png" %> #booster2013
-            </a>
-          </li>
-        </ul>
-      </div>
       <div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li><a href="/">Home</a></li>
@@ -96,6 +57,36 @@ conference is for all IT professionals seeking to learn from each other and from
   <div class="container masthead">
     <h1><%= image_tag "booster-logo-color-neg.png" %></h1>
     <p>International Software Conference. Join us on March 13. - 15., 2013, in beautiful Bergen!</p>
+  </div>
+  <div class="navbar pull-right">
+    <ul class="nav">
+      <li>
+        <a href="https://www.facebook.com/boosterconf" title="Facebook" class="facebook" target="_blank">
+          <%= image_tag "facebook-logo.png" %>
+        </a>
+      </li>
+
+      <li>
+        <a href="http://lanyrd.com/2013/boosterconf/" title="Lanyrd" class="lanyrd" target="_blank">
+          <%= image_tag "lanyrd-logo.png" %>
+        </a>
+      </li>
+      <li>
+        <a href="http://linkd.in/QjWslE" title="LinkedIn" class="linkedin" target="_blank">
+          <%= image_tag "linkedin-logo.png" %>
+        </a>
+      </li>
+      <li>
+        <a href="http://twitter.com/boosterconf" title="Twitter" class="twitter" target="_blank">
+          <%= image_tag "twitter-logo.png" %> @boosterconf
+        </a>
+      </li>
+      <li>
+        <a href="https://twitter.com/search?q=%23booster2013" target="_blank">
+          <%= image_tag "twitter-logo.png" %> #booster2013
+        </a>
+      </li>
+    </ul>
   </div>
 </header>
 
