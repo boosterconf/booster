@@ -72,7 +72,7 @@
   </table>
 </div>
 
-<a href="#" class="toggleevents">Show/hide latest 10 events</a><br/>
+<a href="#" class="toggleevents">Show/hide latest <%= @events.length %> events</a><br/>
 
 <div class="events" style="display: none;">
   <%= render @events %>
