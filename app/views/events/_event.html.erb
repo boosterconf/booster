@@ -1,7 +1,8 @@
 <div style="border-bottom: 1px solid #eeeeee">
   <p>
-    <strong>Date:</strong> <%= event.created_at %> <br/>
+    <strong>Date:</strong> <%= time_ago_in_words(event.created_at) %> ago (<%= event.created_at %>) <br/>
     <strong>Created by:</strong> <%= event.user ? event.user.name : 'System' %> <br/>
+    <strong>Sponsor:</strong> <%= event.sponsor.name %> <br/>
     <%= simple_format event.comment %>
   </p>
 </div>
