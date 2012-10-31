@@ -11,7 +11,7 @@
 </script>
 <h1>Sponsor list</h1>
 
-<a href="#" class="toggle">Show/hide statistics</a>
+<a href="#" class="toggle">Show/hide statistics</a><br />
 <div class="stats" style="display:none">
   <table class="table">
     <tr>
@@ -72,10 +72,20 @@
   </table>
 </div>
 
+<a href="#" class="toggleevents">Show/hide latest 10 events</a><br/>
+
+<div class="events" style="display: none;">
+  <%= render @events %>
+</div>
+
 <script>
 
 $(".toggle").click(function () {
-$(".stats").toggle();
+    $(".stats").toggle();
+});
+
+$(".toggleevents").click(function () {
+    $(".events").toggle();
 });
 </script>
 
