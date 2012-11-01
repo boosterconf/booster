@@ -96,6 +96,7 @@ class UsersController < ApplicationController
           redirect_to @user
         else
           BoosterMailer.registration_confirmation(@user).deliver
+          p "payment url: #{payment_notifications_url}"
           redirect_to @user.registration.payment_url(payment_notifications_url, user_url(@user))
         end
       else
