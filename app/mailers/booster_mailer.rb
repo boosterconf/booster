@@ -133,7 +133,7 @@ class BoosterMailer < ActionMailer::Base
 
   def error_mail(title, body)
     @body = body
-    mail(:to => "kontakt@boosterconf.no", :subject => title)
+    mail(:to => "kontakt@boosterconf.no", :subject => title, :from => FROM_EMAIL)
   end
 
   def feedback_email(talk, group)
