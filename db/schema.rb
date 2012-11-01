@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015180058) do
+ActiveRecord::Schema.define(:version => 20121101202843) do
 
   create_table "bios", :force => true do |t|
     t.integer   "user_id"
@@ -275,6 +275,8 @@ ActiveRecord::Schema.define(:version => 20121015180058) do
     t.boolean   "invited",                     :default => false
     t.string    "dietary_requirements"
     t.string    "roles"
+    t.string    "city"
+    t.string    "zip"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

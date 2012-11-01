@@ -37,18 +37,9 @@
   <%= form_for @registration do |reg| %>
     <p>
       <%= reg.check_box :manual_payment %>
-      <%= reg.label :manual_payment,  "I want to receive an invoice of NOK #{@registration.price}" %>
+      <%= reg.label :manual_payment,
+                    "I want to receive an invoice of NOK #{@registration.price}. The invoice will be sent by email." %>
     </p>
-    <div id="invoice_information">
-      <p>
-        <%= reg.label :invoice_address, "Invoice address" %><br/>
-        <%= reg.text_area :invoice_address, :rows => 4 %>
-      </p>
-      <p>
-        <%= reg.label :invoice_description, "Comments about invoicing" %><br/>
-        <%= reg.text_area :invoice_description, :rows => 4 %>
-      </p>
-    </div>
     <% if admin? %>
       <p class="admin">
       <%= reg.check_box :invoiced %>
@@ -66,7 +57,7 @@
   <h3>Admin: Register payment for <%= @registration.user.name %></h3>
 
   <p>
-       Før du gjør dette, vær vennlig og dobbeltsjekk epostadressen. Noen brukere
+    Før du gjør dette, vær vennlig og dobbeltsjekk epostadressen. Noen brukere
   	registrerer seg med flere epostadresser, og det er viktig at du oppdaterer
   	den riktige adressen
   </p>

@@ -127,7 +127,14 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    update_user
+    @user.roles_will_change!
+    @user.roles = params[:roles].join(",") unless params[:roles] == nil
+    if @user.update_attributes(params[:user])
+      flash[:notice] = "Updated profile."
+      redirect_to @user
+    else
+      render :action => 'edit'
+    end
   end
 
   def updated_dinner_attendance(dinner_status)
@@ -164,15 +171,6 @@ class UsersController < ApplicationController
   end
 
   protected
-
-  def update_user
-    if @user.update_attributes(params[:user])
-      flash[:notice] = "Updated profile."
-      redirect_to @user
-    else
-      render :action => 'edit'
-    end
-  end
 
   def total_by_date(users, date_range)
     users_by_date = users.group_by { |u| u.created_at.to_date }

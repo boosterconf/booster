@@ -44,24 +44,13 @@
               <fieldset>
                 <label class="radio" id="manual_payment">
                   <%= reg.radio_button :manual_payment, 'true'%>
-                  Please send me an invoice.
+                  Please send me an invoice by email.
                 </label>
                 <label class="radio" id="paypal">
                   <%= reg.radio_button :manual_payment, 'false'%>
                   I want to pay with PayPal.
                 </label>
               </fieldset>
-
-              <div id="invoice_fields">
-                <div class="field adresse">
-                  <%= reg.label :invoice_address, "Payment address" %>
-                  <%= reg.text_area :invoice_address, :rows => 4, :class => 'input-xlarge' %>
-                </div>
-                <div class="field kommentarer">
-                  <%= reg.label :invoice_description, "Addional payment info" %>
-                  <%= reg.text_area :invoice_description, :rows => 4, :class => 'input-xlarge' %>
-                </div>
-              </div>
 
               <div id="register_submit"><%= f.submit "Register", :class => 'btn btn-primary' %></div>
           <% end %>

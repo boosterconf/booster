@@ -19,18 +19,21 @@ development: &development
     <<: *prices
   paypal_email: paypal_1297107898_biz@rootsconf.no
   paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do"
 
 test:
   prices:
     <<: *prices
   paypal_email: paypal_1297107898_biz@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do"
 
 experimental:
   prices:
     <<: *prices
   paypal_email: paypal-test@rootsconf.no
   paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do"
 
 
 production: &production
@@ -38,6 +41,7 @@ production: &production
     <<: *prices
   paypal_email: paypal@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do"
 
 staging:
   prices:
@@ -50,3 +54,4 @@ staging:
     <<: *free_prices
   paypal_email: paypal@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do"
