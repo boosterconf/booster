@@ -22,6 +22,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
+    init_registration()
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -52,8 +53,21 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    puts @user.inspect
-    puts @user.bio.inspect
+    init_registration()
+  end
+
+  def init_registration
+    unless @user.registration
+      @user.registration = Registration.new
+      #Default to manual payement. Paypal is expensive, and senderegning.no works fine.
+      @user.registration.manual_payment = true
+      if Time.now < AppConfig.early_bird_ends
+        @user.registration.ticket_type_old = 'early_bird'
+      else
+        @user.registration.ticket_type_old = 'full_price'
+      end
+      @user.registration.save!
+    end
   end
 
   def create
@@ -88,9 +102,9 @@ class UsersController < ApplicationController
           flash[:notice] = "We will contact you to confirm the details."
           BoosterMailer.manual_registration_confirmation(@user).deliver
           BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
-          @user.registration.invoiced = SendRegning.new.send_invoice(
-              PAYMENT_CONFIG['send_regning_url'], @user.id, @user.name, @user.email, @user.zip, @user.city,
-              @user.registration.ticket_type_old, @user.registration.ticket_price)
+          #@user.registration.invoiced = SendRegning.new.send_invoice(
+          #    PAYMENT_CONFIG['send_regning_url'], @user.id, @user.name, @user.email, @user.zip, @user.city,
+          #    @user.registration.ticket_type_old, @user.registration.ticket_price)
 
           redirect_to @user
         elsif @user.registration.free_ticket

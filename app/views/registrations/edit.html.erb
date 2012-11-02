@@ -52,7 +52,7 @@
 
 <% if admin? %>
 
-<div class="admin">
+<div>
 
   <h3>Admin: Register payment for <%= @registration.user.name %></h3>
 
@@ -67,7 +67,7 @@
   <% unless @registration.registration_complete %>
     <h4>Update ticket information</h4>
 
-    <% form_for @registration do |f| %>
+    <%= form_for @registration do |f| %>
       <%= hidden_field_tag :ticket_change %>
       <p>
         <%= f.label :ticket_type_old, "Type of ticket" %><br>
@@ -99,7 +99,7 @@
 
   <h4>Update payment information</h4>
 
-  <% form_for @registration do |f| %>
+  <%= form_for @registration do |f| %>
   	<p>
   		<%= f.label :comments, "Comments" %><br/>
   		<%= f.text_area :comments, :rows => 5 %>
