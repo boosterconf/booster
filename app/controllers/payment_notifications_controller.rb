@@ -2,8 +2,6 @@ class PaymentNotificationsController < ApplicationController
   protect_from_forgery :except => [:create]
 
   def create
-    puts params.inspect
-
     registration = Registration.find_by_invoice(params[:invoice])
     registration.payment_notification_params = params
     registration.paid_amount = params[:mc_gross].to_i

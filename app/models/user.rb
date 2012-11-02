@@ -26,9 +26,9 @@ class User < ActiveRecord::Base
   #validates_length_of :phone_number, :in => 4..30
   #validates_length_of :hometown, :minimum => 2
   #validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
+
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
-  #validates_presence_of :role, :message => "You must specify role."
 
   validates_each :accepted_privacy_guidelines do |record, attr, value|
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
