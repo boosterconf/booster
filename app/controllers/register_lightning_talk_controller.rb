@@ -20,6 +20,7 @@ class RegisterLightningTalkController < ApplicationController
 
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
+      @user.registration.save!
       redirect_to "/register_lightning_talk/talk"
     else
       render :action => "start"
