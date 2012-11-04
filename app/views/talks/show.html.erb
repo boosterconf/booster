@@ -78,12 +78,12 @@
   <%= render :partial => @talk.comments %>
 </div>
 
-<% if logged_in %>
-    <h3 id="new_comment">Add new comment:</h3>
-    <%= render :partial => "comments/new" %>
-<% else %>
+<%# if logged_in %>
+    <!--h3 id="new_comment">Add new comment:</h3>
+    <%#= render :partial => "comments/new" %>
+<%# else %>
 
-    <h3><%= link_to "Log in to write a new comment", new_user_session_url(:save => true) %></h3>
-<% end %>
+    <h3><%#= link_to "Log in to write a new comment", new_user_session_url(:save => true) %></h3>
+<%# end %>
 
 
