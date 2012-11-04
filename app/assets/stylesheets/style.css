@@ -87,10 +87,9 @@ a:hover {
 }
 
 #sponsors {
-    border: 1px solid #F6AB6F;
+    border-top: 5px solid #D3D1CB;
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 6px;
 }
 
 ul.sponsorlogoer {
