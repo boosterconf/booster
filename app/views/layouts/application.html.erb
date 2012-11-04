@@ -14,7 +14,7 @@ conference is for all IT professionals seeking to learn from each other and from
   <meta name="keywords" content="booster conference, conference, software, agile, programming, bergen, norway,booster, roots conference, roots, it conference, software conference, methodology, testing, craftsmanship, software development, user experience, tools, project management"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="http://f.fontdeck.com/s/css/Uf28uh55+ApRRbdMqWM/5y2U+0o/boosterconf.no/25614.css" type="text/css" />
+  <link rel="stylesheet" href="http://f.fontdeck.com/s/css/Uf28uh55+ApRRbdMqWM/5y2U+0o/boosterconf.no/25614.css" type="text/css"/>
 
   <%= favicon_link_tag %>
 
@@ -39,6 +39,12 @@ conference is for all IT professionals seeking to learn from each other and from
       <div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li><a href="/">Home</a></li>
+          <% if !logged_in%>
+          <li><a href="/register_lightning_talk/start">Propose a talk</a></li>
+          <% end %>
+          <% if !logged_in%>
+              <li><a href="/users/new">Get a ticket</a></li>
+          <% end %>
           <li><a href="/info/about">About us</a></li>
           <li><a href="/info/sponsors">For sponsors</a></li>
           <% if logged_in %>
@@ -61,7 +67,7 @@ conference is for all IT professionals seeking to learn from each other and from
   <div class="container masthead">
     <h1><%= image_tag "booster-logo-color-neg.png" %></h1>
 
-    <p>International Software Conference. Join us on March 13. - 15., 2013, in beautiful Bergen!</p>
+    <p>International Software Conference. Join us on 13 - 15 March 2013, in beautiful Bergen, Norway!</p>
   </div>
 </header>
 
@@ -104,47 +110,47 @@ conference is for all IT professionals seeking to learn from each other and from
 </div>
 
 <footer>
-  <div id="sponsors" class="container">
-    <h4>Our dear sponsors</h4>
-    <ul class="sponsorlogoer" id="logoer">
-      <li>
-        <a href="http://www.kantega.no/" title="Kantega" target="_blank"><img src="/images/logos/kantega.png" alt="Kantega"/></a>
-      </li>
-      <li>
-        <a href="http://www.miles.no/" title="Miles" target="_blank"><img src="/images/logos/miles.png" alt="Miles"/></a>
-      </li>
-      <li>
-        <a href="http://www.pswin.com/" title="PSWinCom AS" target="_blank"><img src="/images/logos/pswincom.jpg" alt="PSWinCom AS"/></a>
-      </li>
-      <li>
-        <a href="http://www.webstep.no/" title="Webstep AS" target="_blank"><img src="/images/logos/webstep.png" alt="Webstep AS"/></a>
-      </li>
-      <li>
-        <a href="http://www.rainfall.no/" title="Rainfall" target="_blank"><img src="/images/logos/rainfall.png" alt="Rainfall"/></a>
-      </li>
-      <li>
-        <a href="http://www.innovit.no/" title="Innovit" target="_blank"><img src="/images/logos/innovit.png" alt="Innovit"/></a>
-      </li>
-      <li>
-        <a href="http://www.experis.no/" title="Experis" target="_blank"><img src="/images/logos/experis.png" alt="Experis"/></a>
-      </li>
-      <li>
-        <a href="http://www.knowit.no/" title="Knowit" target="_blank"><img src="/images/logos/knowit.png" alt="KnowIt"/></a>
-      </li>
-      <li>
-        <a href="http://www.delfidata.no/" title="Delfi Data" target="_blank"><img src="/images/logos/delfidata.png" alt="Delfi Data"/></a>
-      </li>
-      <li>
-        <a href="http://www.dataloy-systems.com/" title="Dataloy Systems" target="_blank"><img src="/images/logos/dataloy_logo.png" alt="Dataloy Systems"/></a>
-      </li>
-      <li>
-        <a href="http://www.umoeconsulting.no" title="Umoe Consulting" target="_blank"><img src="/images/logos/umoe.png" alt="Umoe Consulting"/></a>
-      </li>
-    </ul>
-  </div>
-  <div style="clear: both; text-align: center; margin: 0 auto;">
-    Booster is organized by a group of volunteers.
-    <a href="/info/organizers">Meet the organizers</a>.
+  <div id="sponsors">
+    <div class="row">
+      <div class="span12">
+        <h4>Our dear sponsors</h4>
+        <ul class="sponsorlogoer" id="logoer">
+          <li>
+            <a href="http://www.kantega.no/" title="Kantega" target="_blank"><img src="/images/logos/kantega.png" alt="Kantega"/></a>
+          </li>
+          <li>
+            <a href="http://www.miles.no/" title="Miles" target="_blank"><img src="/images/logos/miles.png" alt="Miles"/></a>
+          </li>
+          <li>
+            <a href="http://www.pswin.com/" title="PSWinCom AS" target="_blank"><img src="/images/logos/pswincom.jpg" alt="PSWinCom AS"/></a>
+          </li>
+          <li>
+            <a href="http://www.webstep.no/" title="Webstep AS" target="_blank"><img src="/images/logos/webstep.png" alt="Webstep AS"/></a>
+          </li>
+          <li>
+            <a href="http://www.rainfall.no/" title="Rainfall" target="_blank"><img src="/images/logos/rainfall.png" alt="Rainfall"/></a>
+          </li>
+          <li>
+            <a href="http://www.innovit.no/" title="Innovit" target="_blank"><img src="/images/logos/innovit.png" alt="Innovit"/></a>
+          </li>
+          <li>
+            <a href="http://www.experis.no/" title="Experis" target="_blank"><img src="/images/logos/experis.png" alt="Experis"/></a>
+          </li>
+          <li>
+            <a href="http://www.knowit.no/" title="Knowit" target="_blank"><img src="/images/logos/knowit.png" alt="KnowIt"/></a>
+          </li>
+          <li>
+            <a href="http://www.delfidata.no/" title="Delfi Data" target="_blank"><img src="/images/logos/delfidata.png" alt="Delfi Data"/></a>
+          </li>
+          <li>
+            <a href="http://www.dataloy-systems.com/" title="Dataloy Systems" target="_blank"><img src="/images/logos/dataloy_logo.png" alt="Dataloy Systems"/></a>
+          </li>
+          <li>
+            <a href="http://www.umoeconsulting.no" title="Umoe Consulting" target="_blank"><img src="/images/logos/umoe.png" alt="Umoe Consulting"/></a>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </footer>
 

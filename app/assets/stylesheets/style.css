@@ -23,10 +23,6 @@ header {
 }
 
 footer {
-    background-color: white;
-    border-top: 2px #505050 solid;
-    margin-top: 60px;
-    padding: 20px;
 }
 
 .masthead {
@@ -89,6 +85,13 @@ a:hover {
     max-width: 152px;
 }
 
+#sponsors {
+    border: 1px solid #F6AB6F;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+}
+
 ul.sponsorlogoer {
     list-style: none;
     margin: 30px 0 0 0;
@@ -102,12 +105,8 @@ ul.sponsorlogoer li {
     padding: 0;
 }
 
-div.field_with_errors input {
-    border: 1px solid red;
-}
-
-div.errorExplanation li {
-    color: red;
+div.error input {
+    border: 1px solid #F6AB6F;
 }
 
 .steps {
@@ -123,8 +122,5 @@ div.errorExplanation li {
 
 .steps .active {
     color: black;
-}
-
-.highlighted-form {
 }
 
