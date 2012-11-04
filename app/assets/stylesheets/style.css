@@ -20,10 +20,11 @@ body {
 
 header {
     background-color: #1790a0;
+    border-bottom: 3px solid #F6AB6F;
 }
 
-footer {
-    margin-top: 20px;
+.navbar-inner {
+    border: 1px solid #F6AB6F;
 }
 
 .masthead {
@@ -53,6 +54,13 @@ a {
 
 a:hover {
     color: #1790a0;
+}
+
+#content {
+    padding-left: 40px;
+    margin-left: 40px;
+    border-left: 3px solid #F6AB6F;
+    padding-bottom: 20px;
 }
 
 #submittalk a, #registration a {
@@ -87,7 +95,7 @@ a:hover {
 }
 
 #sponsors {
-    border-top: 5px solid #D3D1CB;
+    border-top: 3px solid #D3D1CB;
     background-color: #ffffff;
     padding: 20px;
 }
