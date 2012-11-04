@@ -9,6 +9,8 @@ class SponsorsController < ApplicationController
 
     @number_of_sponsors_per_user = @sponsors.group_by(&:user).map {|user, sponsors| [user != nil ? user.name : "(none)", sponsors.length]}.sort { |a, b| a[1] <=> b[1] }.reverse!
 
+    @events = Event.last(15).reverse
+
   end
 
   def show

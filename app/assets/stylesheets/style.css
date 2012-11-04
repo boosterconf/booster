@@ -1,44 +1,5 @@
-/* Webfonts:
-   Copyright © 2012 by Letters From Sweden. All rights reserved.
-   To obtain a license, please see: http://lettersfromsweden.se/webfonts */
-
-@font-face {
-    font-family: 'Siri Core';
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Regular.eot');
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Regular.eot?#iefix') format('embedded-opentype'), url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Siri Core';
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Bold.eot');
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Bold.eot?#iefix') format('embedded-opentype'), url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Bold.woff') format('woff');
-    font-weight: bold;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Siri Core';
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Italic.eot');
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Italic.eot?#iefix') format('embedded-opentype'), url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-Italic.woff') format('woff');
-    font-weight: normal;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: 'Siri Core';
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-BoldItalic.eot');
-    src: url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-BoldItalic.eot?#iefix') format('embedded-opentype'), url('http://prosjekt.sortenke.no/booster/profil/fonts/SiriCore-BoldItalic.woff') format('woff');
-    font-weight: bold;
-    font-style: italic;
-}
-
 body {
-    padding-top: 20px;
-    color: #777;;
-    background-color: #f2f0e6;
-    font-family: "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, Verdana, sans-serif;
+    font-family: "Siri Core Regular", 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, Verdana, sans-serif;
     font-size-adjust: 0.51;
     font-weight: normal;
     font-style: normal;
@@ -51,15 +12,17 @@ b, h1, h2, h3, h4, h5 {
     font-style: normal;
 }
 
+body {
+    padding-top: 20px;
+    color: #777;;
+    background-color: #f2f0e6;
+}
+
 header {
     background-color: #1790a0;
 }
 
 footer {
-    background-color: white;
-    border-top: 2px #505050 solid;
-    margin-top: 60px;
-    padding: 20px;
 }
 
 .masthead {
@@ -122,6 +85,13 @@ a:hover {
     max-width: 152px;
 }
 
+#sponsors {
+    border: 1px solid #F6AB6F;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+}
+
 ul.sponsorlogoer {
     list-style: none;
     margin: 30px 0 0 0;
@@ -135,51 +105,8 @@ ul.sponsorlogoer li {
     padding: 0;
 }
 
-div.field_with_errors input {
-    border: 1px solid red;
-    margin: 0;
-}
-
-#railserrordisplaysux, #railserrordisplaysux * {
-    line-height: 2px;
-    font-size: 12px;
-}
-
-/* Error display */
-
-#railserrordisplaysux div.field_with_errors {
-    border: 1px solid red;
-    padding: 0 1px;
-    margin: 0 2px 0 2px;
-}
-
-#railserrordisplaysux div.field_with_errors input {
-    vertical-align: -2px;
-    border: 0;
-}
-
-#railserrordisplaysux div.field_with_errors:first-child {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-div.errorExplanation li {
-    color: red;
-}
-
-div.field_with_errors, #railserrordisplaysux {
-    display: inline;
-    overflow: hidden;
-}
-
-div.field_with_errors input {
-    border: 1px solid red;
-    margin: 0;
-}
-
-div.language .field_with_errors {
-    display: inline;
+div.error input {
+    border: 1px solid #F6AB6F;
 }
 
 .steps {
@@ -195,8 +122,5 @@ div.language .field_with_errors {
 
 .steps .active {
     color: black;
-}
-
-.highlighted-form {
 }
 

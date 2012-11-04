@@ -1,20 +1,8 @@
 <div class="row">
-  <div class="span12 highlighted-form">
+  <div class="span12">
     <h1>Register for Booster 2013</h1>
 
     <%= form_for(@user) do |f| %>
-        <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
-
-              <ul>
-                <% @user.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
         <% if @user.registration.ticket_type_old == 'mod251' %>
             You're buying a MOD251 student ticket at
             kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
@@ -24,48 +12,47 @@
         <% else %>
             <%= render :partial => 'price_info', :locals => {:f => f} %>
         <% end %>
-
-        <%= render :partial => 'personal_details', :locals => {:f => f} %>
-
-        <%= render :partial => 'roles', :locals => {:f => f} %>
-
-        <%= render :partial => 'passwords', :locals => {:f => f} %>
-
-        <div class="framed">
-          <%= render :partial => 'user_stats', :locals => {:f => f} %>
         </div>
+        </div>
+        <div class="row">
+          <div class="span8">
 
-        <fieldset id="registration_details">
-          <%= f.fields_for :registration do |reg| %>
+            <%= render :partial => 'personal_details', :locals => {:f => f} %>
 
-              <%= reg.hidden_field :ticket_type_old %>
-              <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+            <%= render :partial => 'passwords', :locals => {:f => f} %>
 
-              <fieldset>
-                <label class="radio" id="manual_payment">
-                  <%= reg.radio_button :manual_payment, 'true'%>
-                  Please send me an invoice.
-                </label>
-                <label class="radio" id="paypal">
-                  <%= reg.radio_button :manual_payment, 'false'%>
-                  I want to pay with PayPal.
-                </label>
-              </fieldset>
+            <fieldset id="registration_details">
+              <%= f.fields_for :registration do |reg| %>
 
-              <div id="invoice_fields">
-                <div class="field adresse">
-                  <%= reg.label :invoice_address, "Payment address" %>
-                  <%= reg.text_area :invoice_address, :rows => 4, :class => 'input-xlarge' %>
-                </div>
-                <div class="field kommentarer">
-                  <%= reg.label :invoice_description, "Addional payment info" %>
-                  <%= reg.text_area :invoice_description, :rows => 4, :class => 'input-xlarge' %>
-                </div>
-              </div>
+                  <%= reg.hidden_field :ticket_type_old %>
+                  <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
 
-              <div id="register_submit"><%= f.submit "Register", :class => 'btn btn-primary' %></div>
-          <% end %>
-        </fieldset>
+                  <div class="clearfix">&nbsp;</div>
+
+                  <%= render :partial => 'roles', :locals => {:f => f} %>
+                  <%= render :partial => 'user_stats', :locals => {:f => f} %>
+
+                  <fieldset>
+                    <label class="radio" id="manual_payment">
+                      <%= reg.radio_button :manual_payment, 'true' %>
+                      Please send me an invoice by email.
+                    </label>
+                    <label class="radio" id="paypal">
+                      <%= reg.radio_button :manual_payment, 'false' %>
+                      I want to pay with PayPal.
+                    </label>
+                  </fieldset>
+
+
+                  <div id="register_submit"><%= f.submit "Register", :class => 'btn btn-primary' %></div>
+              <% end %>
+            </fieldset>
+          </div>
     <% end %>
-  </div>
-</div>
+    </div>
+    <div class="row">
+      <div class="clearfix">&nbsp;</div>
+      <div class="span7">
+        <div class="alert alert-block">By registering, you accept that we can send you email about the conference.</div>
+      </div>
+    </div>

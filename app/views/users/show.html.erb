@@ -10,8 +10,9 @@ We have registered the following information about you:
   <li><strong>Company:</strong> <%=h @user.company %></li>
   <li><strong>Role: </strong> <%=h @user.roles_description %></li>
   <li><strong>E-mail:</strong> <%=h @user.email %></li>
+  <li><strong>Zip:</strong> <%=h @user.zip%></li>
+  <li><strong>City:</strong> <%=h @user.city %></li>
   <li><strong>Phone number:</strong> <%=h @user.phone_number %></li>
-  <li><strong>Hometown:</strong> <%=h @user.hometown %></li>
   <li><strong>Sex:</strong> <%=h @user.female ? "Female" : "Male" %></li>
   <li><strong>Birthyear:</strong> <%=h @user.birthyear %></li>
 
@@ -20,7 +21,7 @@ We have registered the following information about you:
     <li><strong>Conference dinner:</strong> <%= @user.registration.includes_dinner ? "Yes" : "No" %></li>
     <li><strong>Price:</strong> <%= @user.registration.ticket_price %></li>
   <% end %>
-  <% if admin? %>
+  <% if admin? && @user.registration %>
     <li class="admin"><strong>Status:</strong> <%= @user.registration.status%></li>
   <% end %>
 </ul>
@@ -35,6 +36,10 @@ We have registered the following information about you:
 <% end %>
 
 <% if @user.registration %>
+    <h3>Participant information</h3>
+    <%= render :partial => @user.registration %>
+    <%= link_to "Make changes to your registration", edit_user_path(@user) %>
+<% else %>
     <h3>Participant information</h3>
     <%= render :partial => @user.registration %>
     <%= link_to "Make changes to your registration", edit_user_path(@user) %>

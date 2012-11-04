@@ -5,34 +5,39 @@
 <% end %>
 
 <h2 class="page_title">Change your registration</h2>
-<%= form_for(@user) do |f| %>
-    <% if @user.errors.any? %>
-        <div id="error_explanation">
-          <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
+<div class="row">
+  <div class="span12">
+    <%= form_for(@user) do |f| %>
+        <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
 
-          <ul>
-            <% @user.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
+              <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <% if @user.registration.ticket_type_old == 'mod251' %>
+            You're buying a MOD251 student ticket at
+            kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
+        <% elsif @user.registration.ticket_type_old == 'student' %>
+            You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %>
+            including VAT.
+        <% else %>
+            <%= render :partial => 'price_info', :locals => {:f => f} %>
+        <% end %>
+
+        <%= render :partial => 'personal_details', :locals => {:f => f} %>
+
+        <%= render :partial => 'user_stats', :locals => {:f => f} %>
+
+        <%= render :partial => 'bio', :locals => {:f => f, :show_links => true} %>
+
+        <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
+
     <% end %>
-
-    <% if @user.registration.ticket_type_old == 'mod251' %>
-        You're buying a MOD251 student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
-    <% elsif @user.registration.ticket_type_old == 'student' %>
-        You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
-    <% else %>
-        <%= render :partial => 'price_info', :locals => {:f => f } %>
-    <% end %>
-
-    <%= render :partial => 'personal_details', :locals => {:f => f}  %>
-
-    <%= render :partial => 'user_stats', :locals => {:f => f}  %>
-
-    <%= render :partial => 'bio', :locals => {:f => f, :show_links => true}  %>
-
-
-    <div><%= f.submit "Update", :class => "btn btn-primary"%></div>
-
-<% end  %>
+  </div>
+</div>

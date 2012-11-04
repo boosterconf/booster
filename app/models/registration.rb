@@ -1,16 +1,16 @@
 class Registration < ActiveRecord::Base
   # TODO: Should perhaps be in some i18n-file somewhere and not hard-coded
   TICKET_TEXTS = {
-      "early_bird"     => "Early bird ticket for Booster 2013",
-      "full_price"     => "Regular ticket for Booster 2013",
-      "lightning"      => "Lightning talk ticket for Booster 2013",
-      "sponsor"        => "Sponsor ticket Booster 2013",
-      "volunteer"      => "Volunteer at Booster 2013",
-      "student"        => "Student for Booster 2013",
-      "mod251"         => "MOD251 Student for Booster 2013",
-      "organizer"      => "Organizer for Booster 2013",
-      "speaker"        => "Speaker at Booster 2013",
-			"new_speaker"    => "Speaker without abstracts"
+      "early_bird" => "Early bird ticket for Booster 2013",
+      "full_price" => "Regular ticket for Booster 2013",
+      "lightning" => "Lightning talk ticket for Booster 2013",
+      "sponsor" => "Sponsor ticket Booster 2013",
+      "volunteer" => "Volunteer at Booster 2013",
+      "student" => "Student for Booster 2013",
+      "mod251" => "MOD251 Student for Booster 2013",
+      "organizer" => "Organizer for Booster 2013",
+      "speaker" => "Speaker at Booster 2013",
+      "new_speaker" => "Speaker without abstracts"
   }
 
   attr_accessible :comments, :includes_dinner, :description,
@@ -70,29 +70,32 @@ class Registration < ActiveRecord::Base
     self.completed_by = current_user.email
   end
 
-  def self.find_by_invoice(id)
-    Registration.find(id.to_i - self.invoice_prefix)
+  def self.find_by_invoice(invoice_id)
+    if invoice_id =~ /^2013t?-(\d+)$/
+      Registration.find($1.to_i)
+    else
+      raise "Invalid invoice_id #{invoice_id}"
+    end
   end
 
-  def self.invoice_prefix
-    invoice_start = Time.new.year if Rails.env == "production"
-    invoice_start ||= 0
-    invoice_start
+  def invoice_id
+    return "2013-#{id}" if Rails.env == "production"
+    "2013t-#{id}"
   end
 
   def payment_url(payment_notifications_url, return_url)
     values = {
-        :business      => PAYMENT_CONFIG[:paypal_email],
-        :cmd           => '_cart',
-        :upload        => '1',
+        :business => PAYMENT_CONFIG[:paypal_email],
+        :cmd => '_cart',
+        :upload => '1',
         :currency_code => 'NOK',
-        :notify_url    => payment_notifications_url,
-        :return        => return_url,
-        :invoice       => id + Registration.invoice_prefix,
-        :amount_1      => price,
-        :item_name_1   => description,
+        :notify_url => payment_notifications_url,
+        :return => return_url,
+        :invoice => invoice_id,
+        :amount_1 => price,
+        :item_name_1 => description,
         :item_number_1 => '1',
-        :quantity_1    => '1'
+        :quantity_1 => '1'
     }
 
     PAYMENT_CONFIG[:paypal_url] +"?"+values.map do
@@ -116,11 +119,11 @@ class Registration < ActiveRecord::Base
         when "skal_foelges_opp"
           return find(:all,
                       :conditions => {:free_ticket => false, :registration_complete => false, :manual_payment => false},
-                      :include    => :user)
+                      :include => :user)
         when "skal_faktureres"
           return find(:all,
                       :conditions => {:free_ticket => false, :registration_complete => false, :manual_payment => true, :invoiced => false},
-                      :include    => :user)
+                      :include => :user)
         when "dinner"
           return find(:all, :conditions => "includes_dinner = 1")
         else
@@ -141,7 +144,7 @@ class Registration < ActiveRecord::Base
   end
 
   def update_price
-    self.price       = ticket_price
+    self.price = ticket_price
     self.free_ticket = price == 0
   end
 end

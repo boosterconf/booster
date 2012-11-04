@@ -1,28 +1,23 @@
-<%= render :partial => 'steps', :locals => {:active_id => "start" } %>
+<%= render :partial => 'steps', :locals => {:active_id => "start"} %>
 
 <h2>Who are you?</h2>
 <p>
   Please start by telling us a little about yourself.
 
 </p>
-<%= form_for @user, :class=>"form-horizontal", :url => '/register_lightning_talk/create_user' do |f| %>
-    <%= render :partial => 'errors', :locals => {:item => @user } %>
+<%= form_for @user, :class => "form-horizontal", :url => '/register_lightning_talk/create_user' do |f| %>
+    <%= render :partial => 'errors', :locals => {:item => @user} %>
 
-    <div class="span4">
-        <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
-    </div>
-    <div class="span4">
-      <%= render :partial => 'users/roles', :locals => {:f => f} %>
+    <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
+    <%= render :partial => 'users/roles', :locals => {:f => f} %>
 <%#= render :partial => 'users/confirmations', :locals => {:f => f} %>
 
-      <%= render :partial => 'users/passwords', :locals => {:f => f} %>
+    <%= render :partial => 'users/passwords', :locals => {:f => f} %>
 
-    </div>
-
-    <br clear="all" />
+    <div class="clearfix"/>
 
     <div class="form-actions">
-        <%= f.submit "Next", :class => "btn btn-primary" %>
+      <%= f.submit "Next", :class => "btn btn-primary" %>
     </div>
 
 <% end %>

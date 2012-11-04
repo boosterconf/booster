@@ -1,0 +1,9 @@
+<table>
+  <% for notification in @payment_notifications %>
+      <tr>
+        <td><%= notification.id %></td>
+        <td><%= notification.transaction_id %>
+        </td>
+      </tr>
+  <% end %>
+</table>

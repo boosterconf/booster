@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121015180058) do
+ActiveRecord::Schema.define(:version => 20121101202843) do
 
   create_table "bios", :force => true do |t|
     t.integer   "user_id"
@@ -144,20 +144,20 @@ ActiveRecord::Schema.define(:version => 20121015180058) do
   end
 
   create_table "sponsors", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.date     "invoiced"
-    t.date     "paid"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "status"
-    t.string   "contact_person_phone_number"
-    t.string   "location"
-    t.boolean  "was_sponsor_last_year"
-    t.datetime "last_contacted_at"
-    t.string   "contact_person_first_name"
-    t.string   "contact_person_last_name"
+    t.string    "name"
+    t.string    "email"
+    t.date      "invoiced"
+    t.date      "paid"
+    t.integer   "user_id"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "status"
+    t.string    "contact_person_phone_number"
+    t.string    "location"
+    t.boolean   "was_sponsor_last_year"
+    t.timestamp "last_contacted_at"
+    t.string    "contact_person_first_name"
+    t.string    "contact_person_last_name"
   end
 
   create_table "tags", :force => true do |t|
@@ -194,36 +194,36 @@ ActiveRecord::Schema.define(:version => 20121015180058) do
   end
 
   create_table "talks", :force => true do |t|
-    t.integer  "topic_id"
-    t.string   "title"
-    t.text     "description"
-    t.boolean  "presenting_naked"
-    t.string   "video_url"
-    t.integer  "position"
-    t.boolean  "submitted"
-    t.string   "audience_level"
-    t.integer  "votes_count",              :default => 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "allow_commercial_use"
-    t.string   "allow_derivatives"
-    t.string   "slide_file_name"
-    t.string   "slide_content_type"
-    t.integer  "slide_file_size"
-    t.datetime "slide_updated_at"
-    t.integer  "period_id"
-    t.integer  "comments_count"
-    t.string   "acceptance_status",        :default => "pending"
-    t.boolean  "email_sent",               :default => false
-    t.integer  "sum_of_votes"
-    t.integer  "num_of_votes"
-    t.integer  "talk_type_id"
-    t.integer  "max_participants",         :default => 999
-    t.integer  "participants_count",       :default => 0
-    t.string   "language"
-    t.text     "participant_requirements"
-    t.text     "equipment"
-    t.string   "room_setup"
+    t.integer   "topic_id"
+    t.string    "title"
+    t.text      "description"
+    t.boolean   "presenting_naked"
+    t.string    "video_url"
+    t.integer   "position"
+    t.boolean   "submitted"
+    t.string    "audience_level"
+    t.integer   "votes_count",              :default => 0
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.boolean   "allow_commercial_use"
+    t.string    "allow_derivatives"
+    t.string    "slide_file_name"
+    t.string    "slide_content_type"
+    t.integer   "slide_file_size"
+    t.timestamp "slide_updated_at"
+    t.integer   "period_id"
+    t.integer   "comments_count"
+    t.string    "acceptance_status",        :default => "pending"
+    t.boolean   "email_sent",               :default => false
+    t.integer   "sum_of_votes"
+    t.integer   "num_of_votes"
+    t.integer   "talk_type_id"
+    t.integer   "max_participants",         :default => 999
+    t.integer   "participants_count",       :default => 0
+    t.string    "language"
+    t.text      "participant_requirements"
+    t.text      "equipment"
+    t.string    "room_setup"
   end
 
   create_table "ticket_types", :force => true do |t|
@@ -275,6 +275,8 @@ ActiveRecord::Schema.define(:version => 20121015180058) do
     t.boolean   "invited",                     :default => false
     t.string    "dietary_requirements"
     t.string    "roles"
+    t.string    "city"
+    t.string    "zip"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

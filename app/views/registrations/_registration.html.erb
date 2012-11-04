@@ -15,17 +15,8 @@ Payment is registered. See you at Booster!
 <% elsif registration.manual_payment %>
 
   <p>
-    We'll send an invoice to the following address. This page will be updated when payment is registered.
+    We'll send an invoice to your email. This page will be updated when payment is registered.
   </p>
-  
-  <h4>Invoice address</h4>
-  <%=simple_format h(registration.invoice_address) %>
-  
-  <h4>Description</h4>
-  <%=simple_format h(registration.invoice_description) %>
-
-  <%= link_to "Update invoice information", edit_registration_path(registration) %>
-
 <% else %>
 
   <p>
@@ -47,7 +38,7 @@ Payment is registered. See you at Booster!
   	    It might take a while before we have registered the payment
       </li>
     <% end %>
-    <li>Unable to use Paypal? We can send an invoice (although we'd rather not!)
+    <li>Unable to use Paypal? We can send an invoice instead.
       <%= link_to "Update invoice information", edit_registration_path(registration) %>
     </li>
 	  <% if registration.created_at < 3.hours.ago %>

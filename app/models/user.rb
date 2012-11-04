@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
-                  :current_login_at, :current_login_ip, :description, :dietary_requirements, :email, :password, :password_confirmation,
+                  :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
+                  :password, :password_confirmation, :city, :zip,
                   :failed_login_count, :feature_as_organizer, :featured_speaker, :female, :hometown,
                   :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name,
                   :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
@@ -25,9 +26,9 @@ class User < ActiveRecord::Base
   #validates_length_of :phone_number, :in => 4..30
   #validates_length_of :hometown, :minimum => 2
   #validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
+
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
-  #validates_presence_of :role, :message => "You must specify role."
 
   validates_each :accepted_privacy_guidelines do |record, attr, value|
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
@@ -55,8 +56,11 @@ class User < ActiveRecord::Base
   end
 
   def roles_description
-    roles.split(",").map {|r| Roles.label[r.to_sym] }.join(", ") if roles
-    "" unless roles
+    if roles
+      roles.split(",").map {|r| Roles.label[r.to_sym] }.join(", ")
+    else
+      ""
+    end
   end
 
   def deliver_password_reset_instructions!
@@ -171,9 +175,9 @@ class User < ActiveRecord::Base
 
   def accepted_talks
     all_talks =[]
-    #talks.each do |talk|
-    #  all_talks << talk if (talk) and (talk.accepted?)
-    #end
+    talks.each do |talk|
+      all_talks << talk if (talk) and (talk.accepted?)
+    end
     all_talks
   end
 
