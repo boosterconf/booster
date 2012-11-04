@@ -1,6 +1,6 @@
 <%= content_for :title, h(@talk.title) %>
-<div id="breadcrumbs"><%= link_to "Back to list of talks", talks_path %></div>
 <h2 class="page_title"><%= h @talk.title %></h2>
+<h4><%= render :partial => @talk.users %></h4>
 <p>In <%= @talk.language %></p>
 
 <% if @talk.accepted? %>
@@ -9,22 +9,23 @@
 
 <div class="tags">
   <b>Tags:</b>
-  <% @talk.tags.each do |tag| %>
-      <%= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
-  <% end %>
+  <span><%= @talk.tags.map { |t| t.title }.join(", ") %></span>
+  <%# @talk.tags.each do |tag| %>
+      <%#= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
+  <%# end %>
 </div>
-<h3><%= render :partial => @talk.users %></h3>
+
 
 <% if @talk.users.include?(current_user) || admin? %>
-    <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
+    <p><%#= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
-    <% unless @talk.slide_file_name.nil? %>
-        <h3>Presentation slides</h3>
-        <p><%= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
-    <% else %>
-        <h3>Upload presentation</h3>
-    <% end %>
-    <%= render :partial => "talks/upload_slide" %>
+    <%# unless @talk.slide_file_name.nil? %>
+        <%#h3>Presentation slides</h3%>
+        <p><%#= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
+    <%# else %>
+        <!--h3>Upload presentation</h3-->
+    <%# end %>
+    <%#= render :partial => "talks/upload_slide" %>
 
     <p>
       <strong>Extra equipment:</strong>

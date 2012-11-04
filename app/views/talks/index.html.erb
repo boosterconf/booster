@@ -1,6 +1,6 @@
 <% content_for :title, "Suggested topics" %>
 <h2 class="page_title">Do you have something to share?</h2>
-<% link_to 'Suggest a lightning talk topic!', new_talk_path %>
+<%= link_to 'Suggest a lightning talk topic!', register_lightning_talk_start_url %>
 
 <p>Every abstract is visible to everyone, in order to encourage discussion. Comments from both organizers and
   others are also visible.</p>
@@ -14,5 +14,5 @@
  </h2>
 
 <%= render :partial => @talks %>
-<br>
+
 <p>Missing anything? <%= link_to 'Suggest your own talk!', register_lightning_talk_start_url %></p>

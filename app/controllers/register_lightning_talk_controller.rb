@@ -2,8 +2,7 @@ class RegisterLightningTalkController < ApplicationController
 
   def start
     if current_user
-      flash[:notice] = "Register a new talk normally, do not use wizard."
-      redirect_to new_talk_url
+      redirect_to "/register_lightning_talk/talk"
     end
 	  @user = User.new
     @user.registration = Registration.new
@@ -32,7 +31,6 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_talk
-
     @talk = Talk.new(params[:talk])
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.users << current_user

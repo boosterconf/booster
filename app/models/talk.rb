@@ -153,7 +153,7 @@ class Talk < ActiveRecord::Base
 
   def self.all_pending_and_approved_tag(tag)
     talks_tmp = all(:order => 'acceptance_status, id desc', :include => {:users => :registration}).select {
-        |t| !t.users.first.nil? && t.users.first.registration.ticket_type_old == "speaker"
+        |t| !t.users.first.nil? && (t.users.first.registration.ticket_type_old == "speaker" || t.users.first.registration.ticket_type_old == "lightning")
     }
     talks = []
     talks_tmp.each do |talk|

@@ -1,13 +1,13 @@
-<%= render :partial => 'steps', :locals => {:active_id => "talk" } %>
+<%= render :partial => 'steps', :locals => {:active_id => "talk"} %>
 <h2>What's your passion?</h2>
 
 <ul>
-    <li>The format of a lightning talk is no more than 10 minutes.</li>
-    <li>You must provide the slides the day before the conference</li>
-    <li>Slides must be in PDF or a PowerPoint-compatible format. No other formats will be accepted.</li>
-    <li>We will provide a PC for running the presentation. As a general rule, we do not allow presenters to use their
-        own computer for the presentation. Please use the comment field if you have special requirements.
-    </li>
+  <li>The format of a lightning talk is no more than 10 minutes.</li>
+  <li>You must provide the slides the day before the conference</li>
+  <li>Slides must be in PDF or a PowerPoint-compatible format. No other formats will be accepted.</li>
+  <li>We will provide a PC for running the presentation. As a general rule, we do not allow presenters to use their
+    own computer for the presentation. Please use the comment field if you have special requirements.
+  </li>
 </ul>
 
 
@@ -17,39 +17,37 @@
 
     <legend>Language</legend>
     <p>In what language will you deliver your talk? Please select the language you are most comfortable with. </p>
-
-    <label class="radio" for="talk_language_english">
-        <input id="talk_language_english" name="talk[language]" type="radio" value="English" style="display:inline" <%= @talk.language == 'English' ? "checked" : "" %> />
-        English
+    <label class="radio">
+      <%= f.radio_button :language, 'English' %>
+      English
     </label>
-
-    <label class="radio" for="talk_language_english">
-        <input id="talk_language_norwegian" name="talk[language]" type="radio" value="Norwegian" style="display:inline" <%= @talk.language == 'Norwegian ' ? "checked" : "" %>/>
-        Norwegian
+    <label class="radio">
+      <%= f.radio_button :language, 'Norwegian' %>
+      Norwegian
     </label>
 
     <legend>Talk details</legend>
     <p>
-        The abstract will be published on the website as soon
-        as you submit it, and will be used by the committee during talk selection. It is therefore important that you
-        provide a detailed abstract. This will help us to select in the selection process and increase the chances
-        of your talk being selected.
+      The abstract will be published on the website as soon
+      as you submit it, and will be used by the committee during talk selection. It is therefore important that you
+      provide a detailed abstract. This will help us to select in the selection process and increase the chances
+      of your talk being selected.
     </p>
     <div class="field title">
-        <%= f.label :title, "Title" %>
+      <%= f.label :title, "Title" %>
 
-        <%= f.text_field :title, :size => "80", :class => "input-xxlarge" %>
+      <%= f.text_field :title, :size => "80", :class => "input-xxlarge" %>
     </div>
 
     <div class="field abstract">
-        <%= f.label :description, "Abstract" %>
+      <%= f.label :description, "Abstract" %>
 
-        <%= f.text_area :description, :class => "tinymce span10" %>
+      <%= f.text_area :description, :class => "tinymce span10" %>
     </div>
 
     <%= tinymce %>
 
     <div class="form-actions">
-        <%= f.submit "Next", :class => "btn btn-primary" %>
+      <%= f.submit "Next", :class => "btn btn-primary" %>
     </div>
 <% end %>
