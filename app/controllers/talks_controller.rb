@@ -26,9 +26,13 @@ class TalksController < ApplicationController
   end
 
 
-  def show                                                                                                       talks
+  def show
     @talk = Talk.find(params[:id], :include => [:users, :comments])
     @comment = Comment.new
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @talk }
+    end
   end
 
   def new
@@ -39,7 +43,7 @@ class TalksController < ApplicationController
       @types = TalkType.all
     else
       flash[:notice] = 'You have to register a user first!'
-      redirect_to new_user_path
+      redirect_to register_lightning_talk_start_url
     end
   end
 
@@ -64,7 +68,7 @@ class TalksController < ApplicationController
 
     @talk = Talk.new(extended_params)
     @user = User.find(params[:assigned_user_id])
-    @tags = Tag.find(:all)
+    @tags = Tag.find_all()
     @types = TalkType.all
 
     # Tag handling
@@ -118,35 +122,17 @@ class TalksController < ApplicationController
         end
       end
       @user.save
-    else
-      @user_session = UserSession.new(params[:user])
-      if @user_session.save
-        @user = current_user
-        flash[:warn] = 'Registration with this email already exists'
-        flash[:registration_already_exists] = true
-      else
-        @user = User.new(params[:user])
-        @user.create_registration(:ticket_type_old => "speaker",
-                                  :includes_dinner => params[:registration_includes_dinner])
-        if not @user.save and @user.registration.save
-          respond_to do |format|
-            format.html { render :action => "new" }
-            format.xml { render :xml => @talk.errors, :status => :unprocessable_entity }
-          end
-          return
-        end
-      end
     end
 
     @talk.users << @user
 
-      if @talk.save
-        flash[:notice] = "Abstract published"
-        BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
-        redirect_to(@talk)
-      else
-        render :action => "new"
-      end
+    if @talk.save
+      flash[:notice] = "Abstract published"
+      BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
+      redirect_to @talk
+    else
+      render :action => "new"
+    end
   end
 
   def update
@@ -182,7 +168,7 @@ class TalksController < ApplicationController
     @talk = current_user.is_admin ? Talk.find(params[:id]) : current_user.talks.find(params[:id])
     @talk.destroy
 
-      redirect_to(talks_url)
+    redirect_to(talks_url)
   end
 
   def cheat_sheet

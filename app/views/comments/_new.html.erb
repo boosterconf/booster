@@ -4,7 +4,7 @@
         <p><%= msg %></p>
     <% end %>
 
-    <p><%= f.label :title, "Title" %> <%= f.text_field :title %></p>
-    <p><%= f.text_area :description, :rows => 5 %></p>
-    <p><%= f.submit "Submit comment" %></p>
+    <p><%= f.label :title, "Title" %> <%= f.text_field :title, :class => 'input-xlarge' %></p>
+    <p><%= f.text_area :description, :rows => 5, :class => 'input-xlarge'  %></p>
+    <p><%= f.submit "Submit comment", :class => 'btn btn-primary' %></p>
 <% end %>

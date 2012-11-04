@@ -1,12 +1,21 @@
 class RegisterLightningTalkController < ApplicationController
 
   def start
+    if current_user
+      flash[:notice] = "Register a new talk normally, do not use wizard."
+      redirect_to new_talk_url
+    end
 	  @user = User.new
+    @user.registration = Registration.new
   end
 
   def create_user
     @user = User.new(params[:user])
-
+    @user.registration = Registration.new
+    @user.registration.ticket_type_old = "lightning"
+    @user.accepted_privacy_guidelines = true
+    @user.email.strip! if @user.email.present?
+    @user.registration_ip = request.remote_ip
     @user.roles = params[:roles].join(",") unless params[:roles] == nil
     p params.inspect
 

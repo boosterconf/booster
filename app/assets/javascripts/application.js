@@ -16,4 +16,7 @@
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.widgets.min
 //= require tinymce-jquery
+//= require jquery-ui-1.8.core-and-interactions.min
+//= require jquery-ui-1.8.autocomplete.min
+//= require tag.it
 //= require_tree .

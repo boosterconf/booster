@@ -1,9 +1,5 @@
-<% form_for(@talk, :html => {:multipart => true}) do |form| %>
+<%= form_for(@talk, :html => {:multipart => true}) do |form| %>
     <%= form.file_field :slide %>
-    <%= form.submit 'Upload' %>  <br/>
-    Only one presentation for each talk
-    <% help_tooltip() do %>
-        <p>Uploading a new slide deck will replace the old one</p>
-    <% end %>
-
+    <%= form.submit 'Upload', :class => 'btn btn-primary' %>
+    Only one presentation for each talk.
 <% end %>

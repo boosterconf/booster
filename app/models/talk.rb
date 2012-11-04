@@ -1,30 +1,30 @@
 class Talk < ActiveRecord::Base
   default_scope :order => 'talks.created_at desc'
 
+  attr_accessible :talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
+                  :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status
+
   has_many :speakers
   has_many :users, :through => :speakers
   has_many :comments, :order => "created_at", :include => :user
   has_and_belongs_to_many :tags
   belongs_to :talk_type
-  has_many :slots
-  has_many :periods, :through => :slots
-  has_many :participants, :include => :user, :dependent => :destroy
-  has_many :feedback_comments
+  #has_many :slots
+  #has_many :periods, :through => :slots
+  #has_many :participants, :include => :user, :dependent => :destroy
+  #has_many :feedback_comments
 
-  #has_attached_file :slide, PAPERCLIP_CONFIG
+  has_attached_file :slide, PAPERCLIP_CONFIG
 
-  #validates_attachment_content_type :slide, :content_type => ['application/pdf', 'application/vnd.ms-powerpoint', 'application/ms-powerpoint', %r{application/vnd.openxmlformats-officedocument}, %r{application/vnd.oasis.opendocument}, 'application/zip', 'application/x-7z-compressed', 'application/x-gtar']
+  validates_attachment_content_type :slide, :content_type => ['application/pdf', 'application/vnd.ms-powerpoint', 'application/ms-powerpoint', %r{application/vnd.openxmlformats-officedocument}, %r{application/vnd.oasis.opendocument}, 'application/zip', 'application/x-7z-compressed', 'application/x-gtar']
 
-  #validates_attachment_size :slide, :less_than => 50.megabytes
+  validates_attachment_size :slide, :less_than => 50.megabytes
 
   validates_acceptance_of :accepted_guidelines
   validates_acceptance_of :accepted_cc_license
   validates_presence_of :title
   validates_presence_of :description
   validates_presence_of :language
-
-  attr_accessible :talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
-                  :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status
 
   def after_initialize
     self.acceptance_status||= "pending"
@@ -212,7 +212,7 @@ class Talk < ActiveRecord::Base
   end
 
   def self.find_all_with_ids(id_array)
-    self.find(:all, :conditions => {:id => id_array})
+    self.find_all(:conditions => {:id => id_array})
   end
 
 end

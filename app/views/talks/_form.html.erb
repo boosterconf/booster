@@ -26,7 +26,7 @@
 
       <div class="field type">
         <%= f.label :talk_type, "Type of talk" %>
-        <%= f.collection_select :talk_type_id, TalkType.all, :id, :name_and_duration %>
+        <%= f.collection_select :talk_type_id, TalkType.all, :id, :name_and_duration, :class => 'input-xlarge' %>
       </div>
 
       <script type="text/javascript">
@@ -44,67 +44,61 @@
 
       </script>
 
-      <div class="field language">
-
-        Language
+      <div class="radios">
         Tutorials must be held in English. Lightning talks can be held in English or Norwegian.
-        <br>
-
-        <input id="talk_language_english" name="talk[language]" type="radio" value="English" style="display:inline" <%=@talk.language == 'English' ? "checked" : "" %> />
-        <label for="talk_language_english">English</label><br/>
-        <input id="talk_language_norwegian" name="talk[language]" type="radio" value="Norwegian" style="display:inline" <%=@talk.language == 'Norwegian ' ? "checked" : "" %>/>
-        <label for="talk_language_norwegian">Norwegian</label>
+        <fieldset>
+          <label class="radio" for="talk_language_english" >
+            <input id="talk_language_english" name="talk[language]" type="radio" value="English" <%=@talk.language == 'English' ? "checked" : "" %> />
+            English
+          </label>
+          <label class="radio" for="talk_language_norwegian" >
+            <input id="talk_language_norwegian" name="talk[language]" type="radio" value="Norwegian" <%=@talk.language == 'Norwegian ' ? "checked" : "" %>/>
+            Norwegian
+          </label>
+        </fieldset>
       </div>
 
       <div class="field title">
         <%= f.label :title, "Title" %>
 
-        <%= f.text_field :title %>
+        <%= f.text_field :title, :class => 'input-xxlarge'  %>
       </div>
 
       <div class="field abstract">
         <%= f.label :description, "Abstract" %>
 
-        <%= f.text_area :description, :class => "mceEditor" %>
+        <%= f.text_area :description, :class => "mceEditor", :class => 'input-xxlarge', :rows => 5  %>
       </div>
 
       <div class="field audience">
         <%= f.label :audience_level, "Target audience level: " %>
-        <%= f.select :audience_level, [['Any', 'any'], ['Novice', 'novice'], ['Intermediate', 'intermediate'], ['Expert', 'expert']] %>
+        <%= f.select :audience_level, [['Any', 'any'], ['Novice', 'novice'], ['Intermediate', 'intermediate'], ['Expert', 'expert']], :class => 'input-xxlarge'  %>
       </div>
 
 
       <div class="field max_participants">
         <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 24, please): " %>
-        <%= f.text_field :max_participants %>
+        <%= f.text_field :max_participants, :class => 'input-xxlarge'  %>
       </div>
 
       <div class="field participant_requirements">
         <%= f.label :participant_requirements, "What do the participants have to bring to the presentation?" %>
-        <%= f.text_area :participant_requirements %>
+        <%= f.text_area :participant_requirements, :class => 'input-xxlarge', :rows => 5    %>
       </div>
 
       <div class="field equipment">
         <%= f.label :equipment, "Do you need any extra equipment for your session? " %>
-        <%= f.text_area :equipment %>
+        <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5  %>
       </div>
 
       <div class="field room_setup">
         <%= f.label :room_setup, "Desired room setup" %>
-        <%= f.select :room_setup, [['Classroom', 'Classroom'], ['Horseshoe', 'Horseshoe'], ['Group tables', 'Group tables']] %>
+        <%= f.select :room_setup, [['Classroom', 'Classroom'], ['Horseshoe', 'Horseshoe'], ['Group tables', 'Group tables']], :class => 'input-xxlarge'  %>
       </div>
 
     </fieldset>
 
-    <fieldset class="confirmations">
-      <% if @talk.new_record? %>
-          <div class="field format">
-            <%= f.check_box :accepted_guidelines %>
-            <%= f.label :accepted_guidelines, "I accept the <b>Booster conference terms and conditions:</b>" %>
-          </div>
-      <% end %>
-    </fieldset>
-
+    <h4>Terms and Conditions</h4>
     <p>I agree to present this session at Booster 2013 in Bergen. If my presentation is accepted, and I cannot attend, I
       will notify the conference committee as soon as possible.</p>
 
@@ -120,6 +114,15 @@
       services that are relevant to the session topic.
     </p>
 
+    <fieldset class="confirmations">
+      <% if @talk.new_record? %>
+          <div class="checkbox">
+            <%= f.check_box :accepted_guidelines %>
+            <%= f.label :accepted_guidelines, "I accept the Booster conference terms and conditions" %>
+          </div>
+      <% end %>
+    </fieldset>
+
     <div class="tag">
       <h4>Tags</h4>
 
@@ -130,10 +133,8 @@
       </div>
     </div>
 
-    <br><br>
-
     <div class="field buttons">
-      <%= f.submit "Publish abstract" %>
+      <%= f.submit "Publish abstract", :class => 'btn btn-primary' %>
     </div>
 
 <% end %>

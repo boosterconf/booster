@@ -64,8 +64,6 @@ module ApplicationHelper
     %Q(<span class="feed" title="#{title}">
        #{feed_icon_tag(title, url)}
       </span>)
-
-
   end
 
   def feed_icon_tag(title, url)

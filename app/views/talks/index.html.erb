@@ -3,10 +3,16 @@
 <% link_to 'Suggest a lightning talk topic!', new_talk_path %>
 
 <p>Every abstract is visible to everyone, in order to encourage discussion. Comments from both organizers and
-others are also visible.</p>
+  others are also visible.</p>
 
-<h2>Suggested talks<%= feed_link "Watch new talks", talks_path(:format => :rss) %></h2>
+<h2>Suggested talks
+  <span class="feed" title="Watch new talks">
+    <%= link_to talks_path(:format => :rss) do %>
+    <%= image_tag('/images/icon_feed.png') %>
+    <% end %>
+  </span>
+ </h2>
 
 <%= render :partial => @talks %>
 <br>
-<p>Missing anything? <%= link_to 'Suggest your own talk!', new_talk_path %></p>
+<p>Missing anything? <%= link_to 'Suggest your own talk!', register_lightning_talk_start_url %></p>
