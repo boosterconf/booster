@@ -23,6 +23,8 @@ Booster2013::Application.routes.draw do
     end
   end
 
+  resources :registrations
+
   resources :nametags
 
   resources :payment_notifications

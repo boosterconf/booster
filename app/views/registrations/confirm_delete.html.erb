@@ -5,7 +5,7 @@
   the first three letters of the name in the text box below.
 </p>
 
-<% form_tag("/registrations/delete/#{@registration.id}", :method => :post) do -%> 
+<%= form_tag("/registrations/#{@registration.id}", :method => :delete) do -%>
   <%= hidden_field_tag 'name', @registration.user.name %>
   <%= text_field_tag "confirmation" %> 
   <%= submit_tag 'Slett bruker'%>

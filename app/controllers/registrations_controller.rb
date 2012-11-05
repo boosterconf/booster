@@ -65,7 +65,7 @@ class RegistrationsController < ApplicationController
     end
   end
 
-  def delete
+  def destroy
     @registration = Registration.find(params[:id])
 
     if params[:name][0..2].downcase == params[:confirmation][0..2].downcase
