@@ -1,3 +1,2 @@
 require 'active_record/fixtures'
-
-Fixtures.create_fixtures("#{Rails.root}/db/fixtures", ["talk_types", "ticket_types"])
+ActiveRecord::Fixtures.create_fixtures("#{Rails.root}/db/fixtures", %w(talk_types ticket_types))

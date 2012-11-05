@@ -25,6 +25,7 @@ class Talk < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :description
   validates_presence_of :language
+  validates :max_participants, :presence => true, :numericality => { :only_integer => true, :greater_than => 20 }
 
   def after_initialize
     self.acceptance_status||= "pending"

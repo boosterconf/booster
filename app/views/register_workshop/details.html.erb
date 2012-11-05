@@ -1,0 +1,13 @@
+<%= render :partial => 'steps', :locals => {:active_id => "details" } %>
+
+<h2>Could you help us understand more about who you are?</h2>
+
+<%= form_for @user, :url => '/register_lightning_talk/create_details' do |f| %>
+
+    <%= render :partial => 'errors', :locals => {:item => @user} %>
+    <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
+
+    <div class="form-actions">
+        <%= f.submit "Finish", :class => "btn btn-primary" %>
+    </div>
+<% end %>

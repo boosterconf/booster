@@ -5,4 +5,8 @@ class TalkType < ActiveRecord::Base
     "#{name} (#{duration})"
   end
 
+  def self.workshops
+    where(:is_workshop => true)
+  end
+
 end

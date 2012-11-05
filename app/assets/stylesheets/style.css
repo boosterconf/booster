@@ -114,7 +114,11 @@ ul.sponsorlogoer li {
 }
 
 div.error input {
-    border: 1px solid #F6AB6F;
+    border: 1px solid #b94a48;
+}
+
+div.error + table {
+    border: 1px solid #b94a48;
 }
 
 .steps {

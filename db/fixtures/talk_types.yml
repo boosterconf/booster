@@ -5,30 +5,34 @@ lightning_talk:
   duration: 10 min
   eligible_for_cfp: true
   eligible_for_free_ticket: false
+  is_workshop: false
 
 tutorial_short:
   id: 2
-  name: Short tutorial
+  name: Short workshop
   description: An interactive session.
   duration: 1.5 hours
   eligible_for_cfp: true
   eligible_for_free_ticket: true
+  is_workshop: true
 
 tutorial_normal:
   id: 3
-  name: Half-day tutorial
+  name: Half-day workshop
   description: An interactive session.
   duration: 3 hours
   eligible_for_cfp: true
   eligible_for_free_ticket: true
+  is_workshop: true
 
 tutorial_long:
   id: 4
-  name: Full-day tutorial
+  name: Full-day workshop
   description: An interactive session.
   duration: 4.5 hours
   eligible_for_cfp: true
   eligible_for_free_ticket: true
+  is_workshop: true
 
 keynote:
   id: 5
@@ -37,3 +41,4 @@ keynote:
   duration: 1 hour
   eligible_for_cfp: false
   eligible_for_free_ticket: true
+  is_workshop: false

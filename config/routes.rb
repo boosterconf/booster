@@ -38,6 +38,14 @@ Booster2013::Application.routes.draw do
   match '/register_lightning_talk/create_details' => 'register_lightning_talk#create_details'
   match '/register_lightning_talk/finish' => 'register_lightning_talk#finish'
 
+  match '/register_workshop/start'          => 'register_workshop#start'
+  match '/register_workshop/create_user'    => 'register_workshop#create_user'
+  match '/register_workshop/talk'           => 'register_workshop#talk'
+  match '/register_workshop/create_talk'    => 'register_workshop#create_talk'
+  match '/register_workshop/details'        => 'register_workshop#details'
+  match '/register_workshop/create_details' => 'register_workshop#create_details'
+  match '/register_workshop/finish'         => 'register_workshop#finish'
+
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'users/current' => 'users#current', :as => :current_user
