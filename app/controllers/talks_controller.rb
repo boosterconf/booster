@@ -5,7 +5,16 @@ class TalksController < ApplicationController
 
   def index
     @talks = Talk.all_pending_and_approved
+    @lightning_talks = []
+    @workshops = []
 
+    @talks.each do |talk|
+      if talk.is_lightning_talk?
+        @lightning_talks.append(talk)
+      else
+        @workshops.append(talk)
+      end
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml { render :xml => @talks }
