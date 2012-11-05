@@ -1,46 +1,82 @@
 <% content_for :title, @user.name %>
 
-<h2 class="page_title">User details</h2>
-You are logged in, <%=link_to_unless_current "Log out", logout_path %>.<br /><br />
+<h2 class="page_title">My profile</h2>
 
-We have registered the following information about you:
+<p>
+  <%= link_to "Edit", edit_user_path(@user), :class => "btn" %>
+</p>
 
-<ul>
-  <li><strong>Name:</strong> <%=h @user.name %></li>
-  <li><strong>Company:</strong> <%=h @user.company %></li>
-  <li><strong>Role: </strong> <%=h @user.roles_description %></li>
-  <li><strong>E-mail:</strong> <%=h @user.email %></li>
-  <li><strong>Zip:</strong> <%=h @user.zip%></li>
-  <li><strong>City:</strong> <%=h @user.city %></li>
-  <li><strong>Phone number:</strong> <%=h @user.phone_number %></li>
-  <li><strong>Sex:</strong> <%=h @user.female ? "Female" : "Male" %></li>
-  <li><strong>Birthyear:</strong> <%=h @user.birthyear %></li>
+<div class="row">
+  <table class="table span5">
+    <tr>
+      <th>Name:</th>
+      <td><%= h @user.name %></td>
+    </tr>
+    <tr>
+      <th>Company:</th>
+      <td><%= h @user.company %></td>
+    </tr>
+    <tr>
+      <th>Role:</th>
+      <td><%= h @user.roles_description %></td>
+    </tr>
+    <tr>
+      <th>E-mail:</th>
+      <td><%= h @user.email %></td>
+    </tr>
+    <tr>
+      <th>Zip:</th>
+      <td><%= h @user.zip %></td>
+    </tr>
+    <tr>
+      <th>City:</th>
+      <td><%= h @user.city %></td>
+    </tr>
+    <tr>
+      <th>Phone number:</th>
+      <td><%= h @user.phone_number %></td>
+    </tr>
+    <tr>
+      <th>Sex:</th>
+      <td><%= h @user.female ? "Female" : "Male" %></td>
+    </tr>
+    <tr>
+      <th>Birthyear:</th>
+      <td><%= h @user.birthyear %></td>
+    </tr>
 
-  <% if @user.registration %>
-    <li><strong>Ticket type:</strong> <%=h @user.registration.description %></li>
-    <li><strong>Conference dinner:</strong> <%= @user.registration.includes_dinner ? "Yes" : "No" %></li>
-    <li><strong>Price:</strong> <%= @user.registration.ticket_price %></li>
-  <% end %>
-  <% if admin? && @user.registration %>
-    <li class="admin"><strong>Status:</strong> <%= @user.registration.status%></li>
-  <% end %>
-</ul>
+    <% if @user.registration %>
+        <tr>
+          <th>Ticket type:</th>
+          <td><%= h @user.registration.description %></td>
+        </tr>
+        <tr>
+          <th>Conference dinner:</th>
+          <td><%= @user.registration.includes_dinner ? "Yes" : "No" %></td>
+        </tr>
+        <tr>
+          <th>Price:</th>
+          <td><%= @user.registration.ticket_price %></td>
+        </tr>
+    <% end %>
+    <% if admin? && @user.registration %>
+        <tr>
+          <th>Status:</th>
+          <td><%= @user.registration.status %></td>
+        </tr>
+    <% end %>
+  </table>
+</div>
 
 <% unless @user.talks.blank? %>
-  <h3>Suggested talks</h3>
-  <ul>
-    <% for talk in @user.talks %>
-      <li><%= link_to h(talk.title), talk %></li>
-    <% end %>
-  </ul>
+    <h3>Suggested talks</h3>
+    <ul>
+      <% for talk in @user.talks %>
+          <li><%= link_to h(talk.title), talk %></li>
+      <% end %>
+    </ul>
 <% end %>
 
-<% if @user.registration %>
-    <h3>Participant information</h3>
-    <%= render :partial => @user.registration %>
-    <%= link_to "Make changes to your registration", edit_user_path(@user) %>
-<% else %>
-    <h3>Participant information</h3>
-    <%= render :partial => @user.registration %>
-    <%= link_to "Make changes to your registration", edit_user_path(@user) %>
-<% end %>
+<h3>Participant information</h3>
+<%= render :partial => @user.registration %>
+<%= link_to "Make changes to your registration", edit_user_path(@user) %>
