@@ -5,26 +5,10 @@
     <th>Email</th>
     <th>Name</th>
     <th>Company</th>
-    <th>Phone number</th>
-    <th>Description</th>
-    <th>Login count</th>
-    <th>Failed login count</th>
-    <th>Last request at</th>
-    <th>Current login at</th>
-    <th>Last login at</th>
-    <th>Current login ip</th>
     <th>Is admin</th>
-    <th>Registration ip</th>
-    <th>Accepted privacy guidelines</th>
-    <th>Accept optional email</th>
-    <th>Hometown</th>
-    <th>Role</th>
-    <th>Female</th>
-    <th>Birthyear</th>
     <th>Featured speaker</th>
     <th>Feature as organizer</th>
     <th>Invited</th>
-    <th>Dietary requirements</th>
     <th></th>
     <th></th>
     <th></th>
@@ -35,26 +19,10 @@
     <td><%= user.email %></td>
     <td><%= user.name %></td>
     <td><%= user.company %></td>
-    <td><%= user.phone_number %></td>
-    <td><%= user.description %></td>
-    <td><%= user.login_count %></td>
-    <td><%= user.failed_login_count %></td>
-    <td><%= user.last_request_at %></td>
-    <td><%= user.current_login_at %></td>
-    <td><%= user.last_login_at %></td>
-    <td><%= user.current_login_ip %></td>
-    <td><%= user.is_admin %></td>
-    <td><%= user.registration_ip %></td>
-    <td><%= user.accepted_privacy_guidelines %></td>
-    <td><%= user.accept_optional_email %></td>
-    <td><%= user.hometown %></td>
-    <td><%= user.role %></td>
-    <td><%= user.female %></td>
-    <td><%= user.birthyear %></td>
-    <td><%= user.featured_speaker %></td>
-    <td><%= user.feature_as_organizer %></td>
-    <td><%= user.invited %></td>
-    <td><%= user.dietary_requirements %></td>
+    <td><%= user.is_admin ? "Yes" : "" %></td>
+    <td><%= user.featured_speaker ? "Yes" : "" %></td>
+    <td><%= user.feature_as_organizer ? "Yes" : "" %></td>
+    <td><%= user.invited ? "Yes" : "" %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
