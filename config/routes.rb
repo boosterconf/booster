@@ -48,6 +48,7 @@ Booster2013::Application.routes.draw do
   match 'info/sponsors' => 'info#sponsors'
   match 'info/about' => 'info#about'
 
+  match 'admin' => 'admin#index'
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
