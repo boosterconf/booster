@@ -147,14 +147,14 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_pending_and_approved
-    all(:order => 'acceptance_status, id desc', :include => {:users => :registration}).select {
-        |t| !t.refused? && !t.users.first.nil? && t.users.first.registration.ticket_type_old == "speaker"
+    all(:order => 'acceptance_status, id desc').select {
+        |t| !t.refused? && !t.users.first.nil?
     }
   end
 
   def self.all_pending_and_approved_tag(tag)
-    talks_tmp = all(:order => 'acceptance_status, id desc', :include => {:users => :registration}).select {
-        |t| !t.users.first.nil? && (t.users.first.registration.ticket_type_old == "speaker" || t.users.first.registration.ticket_type_old == "lightning")
+    talks_tmp = all(:order => 'acceptance_status, id desc').select {
+        |t| !t.users.first.nil? && !t.refused?
     }
     talks = []
     talks_tmp.each do |talk|
