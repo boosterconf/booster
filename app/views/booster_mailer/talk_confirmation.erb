@@ -1,14 +1,18 @@
-﻿Hi, <%= @speaker %>
+﻿<html>
+<body>
+<p>Hi, <%= @speaker %></p>
 
-This email confirms that you have been registered with
-user name <%= @email %> and that we have received your
-abstract: <%= @talk %>.
+<p>This email confirms that you have been registered with
+  user name <%= @email %> and that we have received your
+  abstract: <%= @talk %>.</p>
 
-Please note that your abstract is visible for everyone
-visiting the Booster web pages. You can see and edit your
-talk at  <%= @talk_url %>
+<p>Please note that your abstract is visible for everyone
+  visiting the Booster web pages. You can see and edit your
+  talk  <%= link_to 'here', @talk_url %></p>
 
-If you have any questions or comments, please do not
-hesitate to contact us by answering this email.
+<p>If you have any questions or comments, please do not
+  hesitate to contact us by answering this email.</p>
 
-- The Booster 2013 organizers
+<p>- The Booster 2013 organizers</p>
+</body>
+</html>

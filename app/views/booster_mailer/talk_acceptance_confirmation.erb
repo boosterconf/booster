@@ -1,58 +1,62 @@
-Hello, <%= @speaker.name %>
+<html>
+<body>
+<p>Hello, <%= @speaker.name %></p>
 
-We have the pleasure of informing you that your abstract
-     "<%= @talk.title %>"
-for Booster 2013 has been accepted!
+<p>We have the pleasure of informing you that your abstract
+  "<%= @talk.title %>"
+  for Booster 2013 has been accepted!</p>
 
-We would like you to confirm that you are still able to present at the
-conference. Please do so by replying to this email as soon as possible,
-and before April 4, so that we can publish the conference program.
+<p>We would like you to confirm that you are still able to present at the
+  conference. Please do so by replying to this email as soon as possible,
+  and before April 4, so that we can publish the conference program.</p>
+
 <% if @talk.is_tutorial? %>
-There are a few practical details we need you to attend to:
+    <p>There are a few practical details we need you to attend to:</p>
 
- - If there is a limit on the number of people who can attend your
-   session, please edit your talk by following the below link and
-   entering the maximum number of participants. Please do not set the
-   limit below 24.
+    <p>If there is a limit on the number of people who can attend your
+      session, please edit your talk by following the below link and
+      entering the maximum number of participants. Please do not set the
+      limit below 24.
 
-   Edit your talk: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
+      Edit your talk here: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
+    </p>
 
- - If you are unable to attend the conference one or more of the days,
-   you must inform us by email so that we can schedule your session
-   accordingly.
+    <p>If you are unable to attend the conference one or more of the days,
+      you must inform us by email so that we can schedule your session
+      accordingly.</p>
 
-You are entitled to free entrance to the conference and conference
-dinner.
+    <p>You are entitled to free entrance to the conference and conference
+      dinner.</p>
 <% end %>
 <% if @talk.is_lightning_talk? %>
-The lightning talks are scheduled for Wednesday April 25.
+    <p>The lightning talks are scheduled for Wednesday April 25.</p>
 <% end %>
-<% if not @speaker.has_accepted_tutorial? %>
-Because you have an accepted talk, you are entitled to a discounted
-ticket price, but you still need to buy a ticket. Please do so as soon
-as possible by going to <%= @current_user_url %> and go to payment from
-there. You have to log in first, using the email address and password
-you provided at registration time.
+<% unless @speaker.has_accepted_tutorial? %>
+    <p>Because you have an accepted talk, you are entitled to a discounted
+      ticket price, but you still need to buy a ticket. Please do so as soon
+      as possible by going to <%= @current_user_url %> and go to payment from
+      there. You have to log in first, using the email address and password
+      you provided at registration time.</p>
 
-If you have already paid for a normal ticket, the difference between the
-discounted ticket price and price you paid will be refunded.
+    <p>If you have already paid for a normal ticket, the difference between the
+      discounted ticket price and price you paid will be refunded.</p>
 <% end %>
-<% if not @speaker.invited? %>
-Please note that we will not cover travel and lodging.
-
-If you need a hotel room in Bergen, we recommend the conference hotel,
-Scandic Bergen City. Please contact them by telephone +47 55 30 90 80
-or by email at bergencity@scandichotels.com and give the booking code
-ROO250412.
+<% unless @speaker.invited? %>
+    <p>Please note that we will not cover travel and lodging. If you need a hotel room in Bergen, we recommend the
+      conference hotel,
+      Scandic Bergen City. Please contact them by telephone +47 55 30 90 80
+      or by email at bergencity@scandichotels.com and give the booking code
+      ROO250412.</p>
 <% end %>
-If you are not able to present at the conference after all, please let
-us know as soon as possible by replying to this email, so we can offer
-this time slot to someone else.
+<p>If you are not able to present at the conference after all, please let
+  us know as soon as possible by replying to this email, so we can offer
+  this time slot to someone else.</p>
 
-If you want to make any changes to the description of your talk, it is
-still possible to do so until the conference starts. However, please be
-aware that we will publish the program on our web pages in a few days.
+<p>If you want to make any changes to the description of your talk, it is
+  still possible to do so until the conference starts. However, please be
+  aware that we will publish the program on our web pages in a few days.</p>
 
--- 
-Best regards,
-The Booster 2013 organizers
+<p>Best regards,<br>
+  The Booster 2013 organizers</p>
+</body>
+</html>

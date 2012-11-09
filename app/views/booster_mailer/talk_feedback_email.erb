@@ -1,17 +1,26 @@
-Dear <%= @talk_feedback.talk.speaker_name %>!
+<html>
+<body>
+<p>Dear <%= @talk_feedback.talk.speaker_name %>!</p>
 
-Thank you again for helping us making this year's Booster conference the
-biggest and best ever!
+<p>Thank you again for helping us making this year's Booster conference the
+  biggest and best ever!</p>
 
-We have now finished summarizing the feedback we got on all the sessions,
-this is the result for <%= @talk_feedback.talk.title %>.
+<p>We have now finished summarizing the feedback we got on all the sessions,
+  this is the result for <%= @talk_feedback.talk.title %>.</p>
 
-Number of attendants : <%=h @talk_feedback.num_start %>
-Number of remaining attendants when finished: <%=h @talk_feedback.num_end %>
-Numer of green votes : <%=h @talk_feedback.num_green %>
-Number of yellow votes: <%=h @talk_feedback.num_yellow %>
-Number of read votes: <%=h @talk_feedback.num_red %>
 
-We really hope to see you again next year!
+<ul>
+  <li>Number of attendants : <%= h @talk_feedback.num_start %></li>
+  <li>Number of remaining attendants when finished: <%= h @talk_feedback.num_end %></li>
+  <li>Number of green votes : <%= h @talk_feedback.num_green %></li>
+  <li>Number of yellow votes: <%= h @talk_feedback.num_yellow %></li>
+  <li>Number of red votes: <%= h @talk_feedback.num_red %></li>
+</ul>
 
-- The Booster 2013 organizers
+<p>We really hope to see you again next year!
+</p>
+
+<p>- The Booster 2013 organizers
+</p>
+</body>
+</html>

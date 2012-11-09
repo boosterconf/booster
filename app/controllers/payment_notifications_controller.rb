@@ -18,7 +18,7 @@ class PaymentNotificationsController < ApplicationController
   end
   
   def index
-    @payment_notifications = PaymentNotification.all()
+    @payment_notifications = PaymentNotification.all
 
     respond_to do |format|
       format.html # index.html.erb

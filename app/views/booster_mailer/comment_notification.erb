@@ -1,10 +1,11 @@
-Hello, <%= @speaker %>
+<html><body>Hello, <%= @speaker %>
 
-This is a notice telling you that you have received a comment
-for your talk <%= @talk %>.
+<p>This is a notice telling you that you have received a comment
+for your talk <%= @talk %>.</p>
 
-You may read the comment on the conference website.
-<%= @comment_url %>.
+<p>You can read the comment <%= link_to 'here', @comment_url %>.
+</p>
 
-- The Booster 2013 Committee
+<p>The Booster 2013 organizers</p>
 
+</body></html>

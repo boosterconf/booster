@@ -1,68 +1,77 @@
-Hello <%= @user.name %>,
+<html>
+<body>
+<p>Hello <%= @user.name %>,
+</p>
 
-Booster 2013 starts in only a few days. Here is some important
-information you will need. Key points:
+<p>Booster 2013 starts in only a few days. Here is some important
+  information you will need. Key points:</p>
 
- - Bring your laptop to Booster
- - Some tutorials require some pre-installed software
- - Please update your dinner reservation
+<ul>
+  <li>Bring your laptop to Booster</li>
+  <li>Some tutorials require some pre-installed software
+  </li>
+  <li> Please update your dinner reservation
+  </li>
+</ul>
 
 
-LOCATION AND TRANSPORT
+<h3>LOCATION AND TRANSPORT</h3>
 
-As usual, Booster 2013 takes place at the Scandic Bergen City Hotel.
+<p>As usual, Booster 2013 takes place at the Scandic Bergen City Hotel.
 You can get there by airport bus, taxi, bus/light rail or car. The
 closest bus stop is at Olav Kyrres gate, and the closest light rail
 stop and airport bus is at Festplassen. The best place to park your
 car is the the parking house Klostergarasjen. We will encourage you to
 use public transportation, if possible. You can find a map with key
-locations here: http://bit.ly/booster2013-map
+locations <%= link_to 'here', 'http://bit.ly/booster2013-map' %>
+</p>
 
+<h3>LAPTOPS</h3>
 
-LAPTOPS
-
-Booster 2013 has a lot of hands-on tutorials, so we recommend everyone
+<p>Booster 2013 has a lot of hands-on tutorials, so we recommend everyone
 to bring a laptop if possible, in order to get the most out of the
 different tutorials. In order to minimize startup time, some tutorial
 speakers prefer that you have some piece of software installed before
 the tutorial starts. Please read the abstracts of the tutorials you
-plan to attend carefully.
+plan to attend carefully.</p>
 
-If you don't have a laptop, don't despair. We encourage pairing with
-others to maximize learning for both of you.
+<p>If you don't have a laptop, don't despair. We encourage pairing with
+others to maximize learning for both of you.</p>
 
 
-REGISTRATION
+<h3>REGISTRATION
+</h3>¨
 
-Registration opens at 08:00 Wednesday morning, and the conference itself
+<p>Registration opens at 08:00 Wednesday morning, and the conference itself
 starts at 09:00. To avoid standing in a queue when you could be
 talking to interesting people and drinking awesome coffee, come early.
 Please note that we will not send out any physical tickets in advance -
-you will recieve your name badge at the registration.
+you will receive your name badge at the registration.</p>
 
 
-CONFERENCE DINNER
-
-The conference dinner will be at Sardinen USF, Verftet (see the map:
-http://bit.ly/booster2013-map). It will feature a tapas buffet,
+<h3>CONFERENCE DINNER
+</h3>
+<p>The conference dinner will be at Sardinen USF, Verftet (see the <%=  link_to 'map', 'http://bit.ly/booster2013-map' %>). It will feature a tapas buffet,
 drinks and entertainment by the local band Pink Robots. We start with
 an apéritif Wednesday at 19:00, and the dinner is served at 19:30. We
-expect this to be the party of the year! The band will be on stage at 21:30.
+expect this to be the party of the year! The band will be on stage at 21:30.</p>
 
-Please log in at http://boosterconf.no/users/current and tell us if
+<p>Please <%=  link_to 'log in to your profile', 'http://boosterconf.no/users/current' %> and tell us if
 you're attending the dinner or not, so we know how many people to expect.
 The conference dinner is included in the ticket price, so there's no
-reason not to attend :)
+reason not to attend :)</p>
 
 
-TWITTER
-
-The official Twitter account for the Booster conference tweets at
-@boosterconf. Please use the hash tag #booster2012 when you tweet about
+<h3>TWITTER
+</h3>
+<p>The official Twitter account for the Booster conference tweets at
+@boosterconf. Please use the hash tag #booster2013 when you tweet about
 the conference, so that other people easily can find your tweets and
-follow the conference.
+follow the conference.</p>
 
-If you have any questions, please contact us at kontakt@boosterconf.no.
-We're looking forward to seeing you there!
+<p>If you have any questions, please contact us at kontakt@boosterconf.no.
+We're looking forward to seeing you there!</p>
 
-- The Booster 2013 organizers
+<p>- The Booster 2013 organizers</p>
+</body>
+</html>
