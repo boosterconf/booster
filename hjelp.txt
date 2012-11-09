@@ -1,3 +1,4 @@
+blapp
 * * * * fields_for viser ikke noenting!!!  * * * * *
 I rails 2 bruker man <% f.fields_for :some_object do |obj| %>
 I rails 3 må man legge til =, slik: <%= f.fields_for :some_object do |obj| %>
