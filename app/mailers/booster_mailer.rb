@@ -56,20 +56,20 @@ class BoosterMailer < ActionMailer::Base
     @email = user.email
     @description = user.registration.description
     @user_url = user_url
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered as #{user.registration.description}")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered as #{user.registration.description}")
   end
 
   def free_registration_completion(user)
     @name = user.name
     @email = user.email
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket confirmation")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket confirmation")
   end
 
   def payment_confirmation(registration)
     @name = registration.user.email
     @payment_text = registration.description
     @amount = registration.price
-    mail(:to => registration.user.email, :subject => "#{SUBJECT_PREFIX} Payment receipt for #{registration.user.email}")
+    mail(:to => registration.user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Payment receipt for #{registration.user.email}")
   end
 
   def talk_confirmation(talk, talk_url)
@@ -77,28 +77,28 @@ class BoosterMailer < ActionMailer::Base
     @email = talk.speaker_email
     @talk = talk.title
     @talk_url = talk_url
-    mail(:to => talk.users.map(&:email), :subject => "#{SUBJECT_PREFIX} Confirmation on submission #{talk.title}")
+    mail(:to => talk.users.map(&:email), :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Confirmation on submission #{talk.title}")
   end
 
   def comment_notification(comment, comment_url)
     @speaker = comment.talk.speaker_name
     @talk = comment.talk.title
     @comment_url = comment_url
-    mail(:to => comment.talk.users.map(&:email), :subject => "#{SUBJECT_PREFIX} Comment for #{comment.talk.title}")
+    mail(:to => comment.talk.users.map(&:email), :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Comment for #{comment.talk.title}")
   end
 
   def talk_acceptance_confirmation(talk, speaker, current_user_url)
     @talk = talk
     @speaker = speaker
     @current_user_url = current_user_url
-    mail(:to => speaker.email, :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has been accepted")
+    mail(:to => speaker.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has been accepted")
   end
 
   def talk_refusation_confirmation(talk, speaker, current_user_url)
     @talk = talk
     @speaker = speaker
     @current_user_url = current_user_url
-    mail(:to => speaker.email, :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has not been accepted")
+    mail(:to => speaker.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has not been accepted")
   end
 
   def upload_slides_notification(talk, edit_talk_url, new_password_reset_url)
@@ -108,8 +108,9 @@ class BoosterMailer < ActionMailer::Base
     @edit_talk_url = edit_talk_url
     @new_password_reset_url = new_password_reset_url
     mail(:to => talk.users.map(&:email),
-          :cc => FROM_EMAIL,
-          :subject => "You may now upload the slides for your lightning talk at the Booster conference website")
+         :from => FROM_EMAIL,
+         :cc => FROM_EMAIL,
+         :subject => "You may now upload the slides for your lightning talk at the Booster conference website")
   end
 
   def update_dinner_attendance_status(name, email, attending_dinner_url, not_attending_dinner_url, lost_password_url)
@@ -117,68 +118,68 @@ class BoosterMailer < ActionMailer::Base
     @attending_dinner_url = attending_dinner_url
     @not_attending_dinner_url = not_attending_dinner_url
     @lost_password_url = lost_password_url
-    mail(:to => email, :subject => "Please confirm your status regarding the conference dinner")
+    mail(:to => email, :from => FROM_EMAIL, :subject => "Please confirm your status regarding the conference dinner")
   end
 
   def welcome_email(user, tutorial_registration_url)
     @user = user
     @tutorial_registration_url = tutorial_registration_url
-    mail(:to => user.email, :subject => "Welcome to Booster 2013 at Scandic Hotel Bergen City, Wednesday March 13.")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster 2013 at Scandic Hotel Bergen City, Wednesday March 13.")
   end
 
   def promo_email(user)
     @user = user
-    mail(:to => user.email, :subject => "[Booster] Bergen Coding Dojo har startet opp!")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "[Booster] Bergen Coding Dojo har startet opp!")
   end
 
   def error_mail(title, body)
     @body = body
-    mail(:to => "kontakt@boosterconf.no", :subject => title, :from => FROM_EMAIL)
+    mail(:to => "kontakt@boosterconf.no", :from => FROM_EMAIL, :subject => title, :from => FROM_EMAIL)
   end
 
   def feedback_email(talk, group)
     @talk = talk
     @group = group
-    mail(:to => talk.users.map(&:email), :subject => "Feedback on your presentation at Booster 2013")
+    mail(:to => talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2013")
   end
 
   def talk_feedback_email(talk_feedback)
     @talk_feedback = talk_feedback
-    mail(:to => talk_feedback.talk.users.map(&:email), :subject => "Feedback on your presentation at Booster 2013")
+    mail(:to => talk_feedback.talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2013")
   end
 
   def hotel_program_email(user)
     @user = user
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} Hotel booking and program")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Hotel booking and program")
   end
 
   def tutorial_registration(user, lost_password_url)
     @user = user
     @lost_password_url = lost_password_url
-    mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} Tutorial registration opens Friday May 20 09:00 AM")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Tutorial registration opens Friday May 20 09:00 AM")
   end
 
   def speakers_dinner_email(user)
     @user = user
-    mail(:to => user.email, :cc => FROM_EMAIL,
+    mail(:to => user.email, :cc => FROM_EMAIL, :from => FROM_EMAIL,
          :subject => "#{SUBJECT_PREFIX} Information about the speaker's dinner")
-	end
+  end
 
-	def initial_sponsor_mail(sponsor)
+  def initial_sponsor_mail(sponsor)
     @sender = sponsor.user
     @sponsor = sponsor
     mail(:to => sponsor.email, :from => "#{sponsor.user.name} <#{sponsor.user.email}>",
-        :cc => FROM_EMAIL, :bcc => sponsor.user.email,
-        :subject => "Bli sponsor for Booster 2013")
+         :cc => FROM_EMAIL, :bcc => sponsor.user.email,
+         :subject => "Bli sponsor for Booster 2013")
   end
 
   def reminder_to_earlier_participants_email(user)
     @name = user.name
-    mail(:to => user.email, :subject => "Remember to sign up for Booster 2013 before the Early Bird deadline!")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Remember to sign up for Booster 2013 before the Early Bird deadline!")
   end
 
   def reminder_to_earlier_speakers_email(user)
-    @name  = user.name
-    mail(:to => user.email, :subject => "Share your knowledge at Booster 2013!")
+    @name = user.name
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Share your knowledge at Booster 2013!")
   end
 end
