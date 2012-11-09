@@ -7,7 +7,7 @@
 <div id="new_comment">
   <%= form_for [@sponsor, @event], :html => {:class => "form-inline"}, :remote => true do |f| %>
 
-      <%= f.text_field :comment, :class => "input-xxlarge" %>
+      <%= f.text_area :comment, :class => "input-xxlarge", :cols => 30, :rows => 8 %>
       <%= f.submit "Add comment", :class => "btn" %>
 
   <% end %>
