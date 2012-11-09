@@ -1,20 +1,22 @@
 class RegistrationsController < ApplicationController
   before_filter :require_user
   before_filter :require_admin_or_owner, :except => [:index]
-  before_filter :require_admin, :only => [:index, :delete, :confirm_delete, :phone_list]
+  before_filter :require_admin, :only => [:index, :destroy, :confirm_delete, :phone_list]
 
   def index
     @registrations = Registration.find_by_params(params)
 
     @ticket_type_olds = @registrations.collect { |r| r.ticket_type_old }.uniq
 
-    first_registration = @registrations.min { |x, y| x.created_at.to_date <=> y.created_at.to_date }
-    @date_range = (first_registration.created_at.to_date-1..Date.today).to_a
-    @all_per_date = total_by_date(@registrations, @date_range)
-    @registrations_per_ticket_type_old_per_date = per_ticket_type_old_by_date(@registrations, @date_range)
-    @paid_per_date = total_by_date(@registrations, @date_range)
+    if @registrations.length > 0
+      first_registration = @registrations.min { |x, y| x.created_at.to_date <=> y.created_at.to_date }
+      @date_range = (first_registration.created_at.to_date-1..Date.today).to_a
+      @all_per_date = total_by_date(@registrations, @date_range)
+      @registrations_per_ticket_type_old_per_date = per_ticket_type_old_by_date(@registrations, @date_range)
+      @paid_per_date = total_by_date(@registrations, @date_range)
 
-    @income_per_date = total_price_per_date(@registrations, @date_range)
+      @income_per_date = total_price_per_date(@registrations, @date_range)
+    end
   end
 
   def edit
