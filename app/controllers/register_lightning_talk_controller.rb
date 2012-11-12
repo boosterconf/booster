@@ -4,7 +4,7 @@ class RegisterLightningTalkController < ApplicationController
     if current_user
       redirect_to "/register_lightning_talk/talk"
     end
-	  @user = User.new
+    @user = User.new
     @user.registration = Registration.new
   end
 
@@ -36,7 +36,12 @@ class RegisterLightningTalkController < ApplicationController
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.users << current_user
     if @talk.save
-      redirect_to "/register_lightning_talk/details"
+      if current_user.has_all_statistics
+        puts "yes sir we have all statistics"
+        redirect_to "/register_lightning_talk/finish"
+      else
+        redirect_to "/register_lightning_talk/details"
+      end
     else
       render :action => "talk"
     end

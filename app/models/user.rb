@@ -173,6 +173,10 @@ class User < ActiveRecord::Base
     write_attribute(:featured_speaker, true)
   end
 
+  def has_all_statistics
+    self.female != nil && self.birthyear != nil
+  end
+
   def accepted_talks
     all_talks =[]
     talks.each do |talk|
@@ -246,4 +250,7 @@ class User < ActiveRecord::Base
     User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
   end
 
+
+
 end
+
