@@ -10,7 +10,6 @@
 
     </p>
     <%= form_for @user, :class => "form-horizontal", :url => '/register_lightning_talk/create_user' do |f| %>
-        <%= render :partial => 'errors', :locals => {:item => @user} %>
 
         <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
         <%= render :partial => 'users/roles', :locals => {:f => f} %>

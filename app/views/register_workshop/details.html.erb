@@ -2,9 +2,8 @@
 
 <h2>Could you help us understand more about who you are?</h2>
 
-<%= form_for @user, :url => '/register_lightning_talk/create_details' do |f| %>
+<%= form_for @user, :url => '/register_workshop/create_details' do |f| %>
 
-    <%= render :partial => 'errors', :locals => {:item => @user} %>
     <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
 
     <div class="form-actions">

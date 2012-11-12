@@ -9,8 +9,7 @@
       Please start by telling us a little about yourself.
 
     </p>
-    <%= form_for @user, :class => "form-horizontal", :url => '/register_lightning_talk/create_user' do |f| %>
-        <%= render :partial => 'errors', :locals => {:item => @user} %>
+    <%= form_for @user, :class => "form-horizontal", :url => '/register_workshop/create_user' do |f| %>
 
         <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
         <%= render :partial => 'users/roles', :locals => {:f => f} %>
