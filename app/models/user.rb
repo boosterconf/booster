@@ -23,9 +23,6 @@ class User < ActiveRecord::Base
 
   validates_format_of :phone_number, :with => /\A(\s*(\(\+\s*\d{2}\))?\s*(\d\s*){4,10})\Z/,
                       :message => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true
-  #validates_length_of :phone_number, :in => 4..30
-  #validates_length_of :hometown, :minimum => 2
-  #validates_numericality_of :birthyear, :greater_than => 1900, :less_than => 2000
 
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
@@ -57,7 +54,7 @@ class User < ActiveRecord::Base
 
   def roles_description
     if roles
-      roles.split(",").map {|r| Roles.label[r.to_sym] }.join(", ")
+      roles.split(",").map { |r| Roles.label[r.to_sym] }.join(", ")
     else
       ""
     end
@@ -98,39 +95,39 @@ class User < ActiveRecord::Base
   end
 
   def has_accepted_or_pending_tutorial?
-    #tutorials = self.talks.find_all { |talk| talk.is_tutorial? && (talk.accepted? || talk.pending?) }
-    #!tutorials.empty?
+    tutorials = self.talks.find_all { |talk| talk.is_tutorial? && (talk.accepted? || talk.pending?) }
+    !tutorials.empty?
     false
   end
 
   def has_accepted_lightning_talk?
-    #talks = self.talks.find_all { |talk| talk.is_lightning_talk? && talk.accepted? }
-    #!talks.empty?
+    talks = self.talks.find_all { |talk| talk.is_lightning_talk? && talk.accepted? }
+    !talks.empty?
     false
   end
 
   def has_accepted_tutorial?
-    #talks = self.talks.find_all { |talk| talk.is_tutorial? && talk.accepted? }
-    #!talks.empty?
+    talks = self.talks.find_all { |talk| talk.is_tutorial? && talk.accepted? }
+    !talks.empty?
     false
   end
 
   def has_all_talks_refused?
-    #refused_talks = self.talks.find_all { |talk| talk.refused? }
-    #self.talks.size == refused_talks.size
+    refused_talks = self.talks.find_all { |talk| talk.refused? }
+    self.talks.size == refused_talks.size
     false
   end
 
   def has_all_tutorials_refused?
-    #refused_tutorials = self.talks.find_all { |talk| talk.refused? && talk.is_tutorial? }
-    #all_tutorials     = self.talks.find_all { |talk| talk.is_tutorial? }
-    #all_tutorials.size == refused_tutorials.size
+    refused_tutorials = self.talks.find_all { |talk| talk.refused? && talk.is_tutorial? }
+    all_tutorials = self.talks.find_all { |talk| talk.is_tutorial? }
+    all_tutorials.size == refused_tutorials.size
     false
   end
 
   def has_pending_or_accepted_lightning_talk?
-    #talks = self.talks.find_all { |talk| talk.is_lightning_talk? && (talk.accepted? || talk.pending?) }
-    #!talks.empty?
+    talks = self.talks.find_all { |talk| talk.is_lightning_talk? && (talk.accepted? || talk.pending?) }
+    !talks.empty?
     false
   end
 
@@ -231,14 +228,14 @@ class User < ActiveRecord::Base
   end
 
   def self.featured_speakers
-    #potential_speakers = User.find(:all, :conditions => ['featured_speaker = ?', true], :include => [:bio, :talks],
-    #                               :order => 'created_at DESC')
+    potential_speakers = User.find_all(:conditions => ['featured_speaker = ?', true], :include => [:bio, :talks],
+                                   :order => 'created_at DESC')
     speakers = []
-    #potential_speakers.each do |sp|
-    #  if sp.is_featured?
-    #    speakers << sp
-    #  end
-    #end
+    potential_speakers.each do |sp|
+      if sp.is_featured?
+        speakers << sp
+      end
+    end
     speakers
   end
 
@@ -249,7 +246,6 @@ class User < ActiveRecord::Base
   def self.all_speakers
     User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
   end
-
 
 
 end

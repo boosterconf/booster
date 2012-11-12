@@ -25,7 +25,7 @@
         <%= reg.text_area :invoice_description, :rows => 4 %>
       </p>
     <% end %>
-    <p>
+    <p class="checkbox">
       <%= reg.check_box :includes_dinner %>
       <%= reg.label :includes_dinner,  "I want to participate in the dinner reception (it is included in the price)" %>
     </p>
@@ -35,13 +35,13 @@
 <% else %>
 
   <%= form_for @registration do |reg| %>
-    <p>
+    <p class="checkbox">
       <%= reg.check_box :manual_payment %>
       <%= reg.label :manual_payment,
                     "I want to receive an invoice of NOK #{@registration.price}. The invoice will be sent by email." %>
     </p>
     <% if admin? %>
-      <p class="admin">
+      <p class="admin checkbox">
       <%= reg.check_box :invoiced %>
       <%= reg.label :invoiced, "Has been invoiced "%>
       </p>
@@ -87,7 +87,7 @@
         <%= f.label :invoice_description, "Comments about the registration" %><br/>
         <%= f.text_area :invoice_description, :rows => 4 %>
       </p>
-      <p>
+      <p class="checkbox">
         <%= f.check_box :includes_dinner %>
         <%= f.label :includes_dinner,  "Participates at the dinner" %>
       </p>
@@ -112,7 +112,7 @@
   		<%= f.label :paid_amount, "Paid amount" %>
   		<%= f.text_field :paid_amount %>
   	</p>
-  	<p>
+  	<p class="checkbox">
   		<%= f.check_box :registration_complete %>
   		<%= f.label :registration_complete,
   		  case @registration.ticket_type_old

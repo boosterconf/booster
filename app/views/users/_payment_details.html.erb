@@ -1,0 +1,10 @@
+<fieldset id="payment_details">
+  <div class="field adresse">
+    <%= reg.label :invoice_address, "Payment address" %>
+    <%= reg.text_area :invoice_address, :rows => 4, :class => "input-xlarge" %>
+  </div>
+  <div class="field kommentarer">
+    <%= reg.label :invoice_description, "Addional payment info" %>
+    <%= reg.text_area :invoice_description, :rows => 4, :class => "input-xlarge" %>
+  </div>
+</fieldset>

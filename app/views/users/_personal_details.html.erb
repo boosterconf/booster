@@ -13,16 +13,6 @@
     <%= email_field(:user, :email, :placeholder => "Where can we email you?", :class => 'input-xlarge', :required => true) %>
   </div>
 
-  <div class="field">
-    <%= f.label :zip, "Postal code" %>
-    <%= text_field(:user, :zip, :placeholder => "For invoicing", :class => 'input-xlarge', :required => true) %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city %>
-    <%= text_field(:user, :city, :placeholder => "For invoicing", :class => 'input-xlarge', :required => true) %>
-  </div>
-
   <div class="field telefon">
     <%= f.label :phone_number, "Phone" %>
     <%= text_field(:user, :phone_number, :placeholder => "If we need to call you", :class => 'input-xlarge') %>

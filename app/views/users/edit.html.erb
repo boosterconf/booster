@@ -8,17 +8,6 @@
 <div class="row">
   <div class="span12">
     <%= form_for(@user) do |f| %>
-        <% if @user.errors.any? %>
-            <div id="error_explanation">
-              <p><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</p>
-
-              <ul>
-                <% @user.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
 
         <% if @user.registration.ticket_type_old == 'mod251' %>
             You're buying a MOD251 student ticket at

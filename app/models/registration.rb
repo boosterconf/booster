@@ -21,7 +21,7 @@ class Registration < ActiveRecord::Base
   belongs_to :user
   has_one :payment_notification
 
-  # validates_presence_of :invoice_address, :if => Proc.new { |reg| reg.manual_payment }
+  validates_presence_of :invoice_address, :if => Proc.new { |reg| reg.manual_payment }
 
   before_create :create_or_update_payment_info
 

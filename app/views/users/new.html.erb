@@ -43,6 +43,7 @@
                     </label>
                   </fieldset>
 
+                  <%= render :partial => 'payment_details', :locals => {:reg => reg, :f => f} %>
 
                   <div id="register_submit"><%= f.submit "Register", :class => 'btn btn-primary' %></div>
               <% end %>
