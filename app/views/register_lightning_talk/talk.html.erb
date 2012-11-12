@@ -45,6 +45,11 @@
 
     <%= tinymce %>
 
+    <div>
+      <%= f.label :equipment, "Leave comments for the organizers here." %>
+      <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5  %>
+    </div>
+
     <div class="form-actions">
       <%= f.submit "Next", :class => "btn btn-primary" %>
     </div>
