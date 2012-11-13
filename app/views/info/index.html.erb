@@ -1,4 +1,5 @@
-<article>
+<div id="front-page">
+
   <div id="notifications">
 <%# TODO: Dette ser jævlig ut. Fikse! %>
     <% if flash[:notice] %>
@@ -10,26 +11,78 @@
     <p style="color: red"><%= flash[:error] %></p>
   </div>
 
-  <h1 class="announce">Call for papers is open!</h1>
+  <article>
+    <h1 class="announce">Call for Papers</h1>
 
-  <p>
-    Do you have something you want to share? A controversial idea,
-    an interesting experience, or something you have learnt lately? Propose a topic for a lightning
-    talk, and get a chance to be part of a great team of speakers at Booster 2013. You'll get discounted tickets,
-    and free admission to the conference dinner and the speaker's dinner.
-  </p>
-  <p>
-    Call for papers for longer workshops and tutorials will open soon!
-    We already have some very exiting speakers confirmed that will be announced soon.
-    Follow us on <a href="http://twitter.com/boosterconf">Twitter</a> to keep updated on the
-    latest news from the conference.
-  </p>
-  <p>
-    Early bird tickets are also available. Get them <a href="/users/new">here</a>.
-  </p>
-  <div>
-    <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
-    <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
-  </div>
+    <p>
+      Do you have something you want to share? A controversial idea,
+      an interesting experience, or something you have learnt lately? Submit your abstract, and get a chance to be part
+      of a great team of speakers at Booster 2013. All speakers get free admission to the conference dinner and
+      the speaker's dinner.
+    </p>
 
-</article>
+    <ul class="thumbnails">
+      <li class="thumbnail thumbnail-with-button span5">
+        <div class="caption">
+          <h3>Lightning talk</h3>
+
+          <p>
+            A lightning talk is <b>10 minutes long</b>, and is a great way to convey an insight, suggest an idea or
+            share your enthusiasm about a particular tool or method.
+          </p>
+
+          <p>
+            Lightning talks are usually well-rehearsed and packed with useful information.
+          </p>
+
+          <p>
+            <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
+          </p>
+        </div>
+      </li>
+
+      <li class="thumbnail thumbnail-with-button span5">
+        <div class="caption">
+
+          <h3>Workshop</h3>
+
+          <p>
+            A workshop is <b>between 1.5 and 4.5 hours long</b>. You work with a small group of people who want to
+            learn a particular technology or method that you know well.
+          </p>
+
+          <p>
+            Workshops are interactive and hands-on, and focused on learning by doing.
+          </p>
+
+          <p>
+            <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
+          </p>
+        </div>
+      </li>
+
+    </ul>
+
+    <script type="text/javascript">
+        $(".thumbnails li").setEqualHeight();
+    </script>
+  </article>
+
+  <article>
+    <h1 class='announce'>Speakers</h1>
+
+    <p>
+      We already have some very exiting speakers confirmed that will be announced soon.
+      Follow us on <a href="http://twitter.com/boosterconf">Twitter</a> to keep updated on the
+      latest news from the conference.
+    </p>
+  </article>
+
+  <article>
+
+    <h1>Tickets</h1>
+
+    <p>
+      <%= link_to "Early Bird", new_user_path %> tickets are available now. <%=  link_to "Get them here!", new_user_path %></p>
+  </article>
+</div>

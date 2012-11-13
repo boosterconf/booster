@@ -139,3 +139,23 @@ div.error + table {
 .talk_list li a {
     font-size: larger;
 }
+
+.thumbnails  {
+}
+
+.thumbnails .thumbnail-with-button {
+    position: relative;
+    padding-bottom: 45px;
+}
+
+.thumbnails .thumbnail-with-button .btn {
+    position: absolute;
+    bottom: 13px;
+}
+
+#front-page {
+}
+
+#front-page article {
+    margin-bottom: 50px;
+}
