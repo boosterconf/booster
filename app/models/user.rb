@@ -52,6 +52,10 @@ class User < ActiveRecord::Base
     registration ? registration.description : "Ukjent"
   end
 
+  def has_role?(role)
+    roles && roles.include?(role)
+  end
+
   def roles_description
     if roles
       roles.split(",").map { |r| Roles.label[r.to_sym] }.join(", ")

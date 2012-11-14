@@ -9,7 +9,7 @@
 
     <% Roles.all.each do |role| %>
         <label class="checkbox">
-          <%= check_box_tag "roles[]", role, @user.roles.include?(role.to_s), :id => "roles_#{role}" %>
+          <%= check_box_tag "roles[]", role, @user.has_role?(role.to_s), :id => "roles_#{role}" %>
           <%= label_tag "roles_#{role}", Roles.label[role] %>
         </label>
     <% end %>
