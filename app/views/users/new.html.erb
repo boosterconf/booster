@@ -21,6 +21,8 @@
 
             <%= render :partial => 'passwords', :locals => {:f => f} %>
 
+            <%= f.hidden_field :invited %>
+
             <fieldset id="registration_details">
               <%= f.fields_for :registration do |reg| %>
 

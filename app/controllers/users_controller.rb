@@ -42,12 +42,19 @@ class UsersController < ApplicationController
 
     @user = User.new
     @user.registration = Registration.new
-    #Default to manual payement. Paypal is expensive, and senderegning.no works fine.
-    @user.registration.manual_payment = true
-    @user.registration.ticket_type_old = params[:free_ticket] || params[:ticket_type_old] || params[:ticket_type] || 'full_price'
-    if @user.registration.ticket_type_old == 'full_price' && Time.now < AppConfig.early_bird_ends
-      @user.registration.ticket_type_old = 'early_bird'
+    if (params[:invited])
+      @user.registration.ticket_type_old = "speaker"
+      @user.invited = true
+      @user.registration.manual_payment = false
+    else
+      #Default to manual payement. Paypal is expensive, and senderegning.no works fine.
+      @user.registration.manual_payment = true
+      @user.registration.ticket_type_old = params[:ticket_type_old] || 'full_price'
+      if @user.registration.ticket_type_old == 'full_price' && Time.now < AppConfig.early_bird_ends
+        @user.registration.ticket_type_old = 'early_bird'
+      end
     end
+
     @user.registration.includes_dinner = @user.registration.discounted_ticket?
   end
 
@@ -96,7 +103,9 @@ class UsersController < ApplicationController
           raise @user.registration.errors.inspect
         end
 
-        UserSession.create(:login => @user.email, :password => @user.password)
+        if (!current_user.is_admin)
+          UserSession.create(:login => @user.email, :password => @user.password)
+        end
 
         if @user.registration.manual_payment
           flash[:notice] = "We will contact you to confirm the details."
@@ -109,8 +118,8 @@ class UsersController < ApplicationController
           redirect_to @user
         elsif @user.registration.free_ticket
           flash[:notice] = "We will contact you to confirm the details."
-          BoosterMailer.free_registration_confirmation(@user).deliver
-          BoosterMailer.free_registration_notification(@user, user_url(@user)).deliver
+          #BoosterMailer.free_registration_confirmation(@user).deliver
+          BoosterMailer.free_registration_notification(current_user, @user, user_url(@user)).deliver
           redirect_to @user
         else
           BoosterMailer.registration_confirmation(@user).deliver

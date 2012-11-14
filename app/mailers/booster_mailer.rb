@@ -51,12 +51,12 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket request")
   end
 
-  def free_registration_notification(user, user_url)
+  def free_registration_notification(admin, user, user_url)
     @name = user.name
     @email = user.email
     @description = user.registration.description
     @user_url = user_url
-    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered as #{user.registration.description}")
+    mail(:to => admin.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} was registered as #{user.registration.description}")
   end
 
   def free_registration_completion(user)

@@ -5,10 +5,11 @@
   <li><%= link_to 'Users', :controller => 'users', :action => 'index' %></li>
   <li><%= link_to 'Talks', :controller => 'talks', :action => 'index' %></li>
   <li><%= link_to 'Sponsors', :controller => 'sponsors', :action => 'index' %></li>
-       <!--
+  <li><%= link_to 'Register an invited speaker', new_user_path(:invited => "true") %></li>
+
+  <!--
   <li><%#= #link_to 'Invitees', :controller => 'invitees', :action => 'index' %></li>
   <li><%#= #link_to 'Acceptances', :controller => 'acceptances', :action => 'index' %></li>
-
   <li><%#= #link_to 'Talk feedbacks', :controller => 'talk_feedbacks', :action => 'index' %></li>
   <li><%#= #link_to 'Periods', :controller => 'periods', :action => 'index' %></li>
   <li><%#= #link_to 'Slots', :controller => 'slots', :action => 'index' %></li>
@@ -19,8 +20,10 @@
 
 
 <h3>Statistics</h3>
+<!--
 <ul>
     <li><%#= link_to "Number of participants per company", :controller => "statistics/users_by_company" %></li>
     <li><%#= link_to "Number of submitted speakers per company", :controller => "statistics/users_by_company", :filter => 'speakers' %></li>
     <li><%#= link_to "Number of accepted speakers per company", :controller => "statistics/users_by_company", :filter => 'accepted'%></li>
 </ul>
+-->

@@ -21,14 +21,6 @@
       <td><%= h @user.email %></td>
     </tr>
     <tr>
-      <th>Zip:</th>
-      <td><%= h @user.zip %></td>
-    </tr>
-    <tr>
-      <th>City:</th>
-      <td><%= h @user.city %></td>
-    </tr>
-    <tr>
       <th>Phone number:</th>
       <td><%= h @user.phone_number %></td>
     </tr>
@@ -44,7 +36,7 @@
     <% if @user.registration %>
         <tr>
           <th>Ticket type:</th>
-          <td><%= h @user.registration.description %></td>
+          <td><%= h @user.registration.ticket_description %></td>
         </tr>
         <tr>
           <th>Conference dinner:</th>
@@ -54,6 +46,16 @@
           <th>Price:</th>
           <td><%= @user.registration.ticket_price %></td>
         </tr>
+        <% if @user.registration.manual_payment %>
+            <tr>
+              <th>Invoice adress:</th>
+              <td><%= @user.registration.invoice_address %></td>
+            </tr>
+            <tr>
+              <th>Invoice information:</th>
+              <td><%= @user.registration.invoice_description %></td>
+            </tr>
+        <% end %>
     <% end %>
     <% if admin? && @user.registration %>
         <tr>
