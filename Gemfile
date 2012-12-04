@@ -22,6 +22,8 @@ group :test do
   gem 'mocha', :require => false
   gem 'rspec-rails'
   gem 'test-unit'
+  gem "minitest"
+  gem "minitest-reporters", '>= 0.5.0'
 end
 
 
