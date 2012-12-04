@@ -4,14 +4,13 @@ gem 'rails', '3.2.8'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'paperclip', '~>3.0'
 
-gem "rest-client", "~> 1.6.7"
-
 gem 'tinymce-rails'
 gem 'aws-sdk', '~> 1.3.4'
 
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
+gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 
 group :production do
   gem 'pg'
@@ -21,6 +20,8 @@ group :development, :test do
 end
 group :test do
   gem 'mocha', :require => false
+  gem 'rspec-rails'
+  gem 'test-unit'
 end
 
 
