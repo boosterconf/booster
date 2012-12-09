@@ -10,4 +10,8 @@ class InfoController < ApplicationController
 #    response.headers['Cache-Control'] = 'public, max-age=3600'
 #  end
 
+  def speakers
+    @speakers = User.featured_speakers
+  end
+
 end

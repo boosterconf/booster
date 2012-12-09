@@ -1,0 +1,44 @@
+<article>
+  <h2>Our speakers</h2>
+
+  <% for speaker in @speakers.shuffle do %>
+      <div class="speaker">
+
+        <%= image_tag speaker.bio.picture.url, :width => '160' %>
+
+        <div class="content">
+
+          <b><%= speaker[:name] %></b> - <i><%= speaker.bio[:title] %></i>
+          <% if speaker.bio[:twitter_handle].length > 0 %>
+              <br/>
+              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                &#64;<%= speaker.bio[:twitter_handle] %>
+              </a>
+          <% end %>
+          <br/><br/>
+
+          <p>
+            <%= speaker.bio[:bio] %>
+          </p>
+
+          <% unless speaker.accepted_talks.empty? %>
+              <p>
+                <% if speaker.accepted_talks.size == 1 %>
+                    <b>Presentation:</b>
+                <% else %>
+                    <b>Presentations:</b>
+                <% end %>
+              </p>
+              <ul style="list-style-type: none;">
+                <% speaker.accepted_talks.each do |talk| %>
+                    <li><%= link_to h(talk.title), talk %></li>
+                <% end %>
+              </ul>
+
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+
+
+</article>

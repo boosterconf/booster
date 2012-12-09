@@ -159,3 +159,25 @@ div.error + table {
 #front-page article {
     margin-bottom: 50px;
 }
+
+.speaker {
+    position: relative;
+    margin-bottom:  10px;
+    padding: 5px;
+}
+
+.speaker img {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    height: 160px;
+    margin: 0px !important;
+    border-radius: 10px;
+}
+
+.speaker .content {
+    margin-left: 180px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding:  10px;
+}

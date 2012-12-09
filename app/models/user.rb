@@ -232,7 +232,7 @@ class User < ActiveRecord::Base
   end
 
   def self.featured_speakers
-    potential_speakers = User.find_all(:conditions => ['featured_speaker = ?', true], :include => [:bio, :talks],
+    potential_speakers = all(:conditions => ['featured_speaker = ?', true], :include => [:bio, :talks],
                                    :order => 'created_at DESC')
     speakers = []
     potential_speakers.each do |sp|

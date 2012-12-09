@@ -55,6 +55,7 @@ Booster2013::Application.routes.draw do
   match 'info/organizers' => 'info#organizers'
   match 'info/sponsors' => 'info#sponsors'
   match 'info/about' => 'info#about'
+  match 'info/speakers' => 'info#speakers'
 
   match 'admin' => 'admin#index'
 
