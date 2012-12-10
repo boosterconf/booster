@@ -69,13 +69,49 @@
   </article>
 
   <article>
-    <h1 class='announce'>Speakers</h1>
+    <div class="front-page-speakers">
+      <h2 class="sectionhead">Come to Roots and meet...</h2>
+      <% first = true %>
+      <% for speaker in @speakers.shuffle do %>
+          <div class="front-page-speaker <%= first ? "selected" : "" %>">
+            <% first = false %>
+            <%= image_tag speaker.bio.picture.url, :width => '160' %>
 
-    <p>
-      We already have some very exiting speakers confirmed that will be announced soon.
-      Follow us on <a href="http://twitter.com/boosterconf">Twitter</a> to keep updated on the
-      latest news from the conference.
-    </p>
+            <div class="content">
+              <span style="font-size: 30px"><%= speaker[:name] %></span>
+              <br/>
+              <% if speaker.bio[:twitter_handle].length > 0 %>
+                  <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                    &#64;<%= speaker.bio[:twitter_handle] %>
+                  </a>
+              <% end %>
+
+              <br/> <i><%= speaker.bio[:title] %></i>
+            </div>
+          </div>
+      <% end %>
+
+      <script type="text/javascript">
+          var refreshId = setInterval(next, 10000);
+          function next() {
+              var current_speaker = $(".selected");
+              var next_speaker = current_speaker.next(".front-page-speaker");
+              if (next_speaker.length == 0) {
+                  next_speaker = $(".front-page-speaker").first();
+              }
+              current_speaker.removeClass("selected");
+              next_speaker.addClass("selected");
+              clearInterval(refreshId);
+              refreshId = setInterval(next, 10000);
+          }
+
+      </script>
+
+      <a style="position:absolute; left: 300px; bottom: 10px;" href="javascript:next()">
+        next
+      </a>
+      <a style="position:absolute; left: 170px; bottom: 10px;" href="/info/speakers">Show all speakers</a>
+    </div>
   </article>
 
   <article>

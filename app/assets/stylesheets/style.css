@@ -179,3 +179,34 @@ div.error + table {
     background-color: #FFFFFF;
     padding:  10px;
 }
+
+.front-page-speakers {
+    display: block;
+    width: 635px;
+    height: 200px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.front-page-speaker {
+    display: none;
+}
+
+.front-page-speaker.selected {
+    display: block;
+    padding-top: 10px;
+}
+
+.front-page-speaker img {
+    float: left;
+    width: 140px;
+    height: 160px;
+}
+
+.front-page-speaker .content {
+    padding-left: 10px;
+    width: 400px;
+    float: left;
+}

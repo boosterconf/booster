@@ -18,16 +18,12 @@
           <br/><br/>
 
           <p>
-            <%= speaker.bio[:bio] %>
+            <%= simple_format speaker.bio[:bio] %>
           </p>
 
           <% unless speaker.accepted_talks.empty? %>
               <p>
-                <% if speaker.accepted_talks.size == 1 %>
-                    <b>Presentation:</b>
-                <% else %>
-                    <b>Presentations:</b>
-                <% end %>
+                <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
               </p>
               <ul style="list-style-type: none;">
                 <% speaker.accepted_talks.each do |talk| %>
