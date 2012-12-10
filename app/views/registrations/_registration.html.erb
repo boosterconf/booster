@@ -1,64 +1,69 @@
 <% if registration.free_ticket %>
-  
-  <% if not registration.registration_complete %>
-    <p>
-      You will be notified when your registration is approved, at least two weeks before the
-      conference starts. If you are not approved, you will get the opportunity to buy a ticket
-      at the price valid at registration time.
-    </p>
-  <% end %>
+
+    <% if not registration.registration_complete %>
+        <p>
+          You will be notified when your registration is approved, at least two weeks before the
+          conference starts. If you are not approved, you will get the opportunity to buy a ticket
+          at the price valid at registration time.
+        </p>
+    <% end %>
 
 <% elsif registration.registration_complete %>
 
-Payment is registered. See you at Booster!
+    Payment is registered. See you at Booster!
 
 <% elsif registration.manual_payment %>
 
-  <p>
-    We'll send an invoice to your email. This page will be updated when payment is registered.
-  </p>
+    <p>
+      We'll send an invoice to your email. This page will be updated when payment is registered.
+    </p>
 <% else %>
 
-  <p>
-    We have not yet registered your payment. This can be caused by a number of things:
-	</p>
-	
-	<ul>
-	  <li>
-	    You may not <%=link_to "have paid",
-	      registration.payment_url(payment_notifications_url, user_url(@user)) %>.
-	  </li>
-	  <li>
-	    Something might have gone wrong during the payment process
-	    <%=link_to "View payment status",
-	      registration.payment_url(payment_notifications_url, user_url(@user)) %>.
-	  </li>	    
-  	<% if registration.created_at > 15.minutes.ago %>
-  	  <li>
-  	    It might take a while before we have registered the payment
+    <p>
+      We have not yet registered your payment. This can be caused by a number of things:
+    </p>
+
+    <ul>
+      <li>
+        You may not <%= link_to "have paid",
+                                registration.payment_url(payment_notifications_url, user_url(@user)) %>.
       </li>
-    <% end %>
-    <li>Unable to use Paypal? We can send an invoice instead.
-      <%= link_to "Update invoice information", edit_registration_path(registration) %>
-    </li>
-	  <% if registration.created_at < 3.hours.ago %>
-  	  <li>
-  	    Still in trouble? No worries, you still get to go to the conference,
-  	    Send us <a href="mailto:kontakt@boosterconf.no">an email</a>, and we'll fix it.
-  	  </li>
-	  <% end %>
-	</ul>
+      <li>
+        Something might have gone wrong during the payment process
+        <%= link_to "View payment status",
+                    registration.payment_url(payment_notifications_url, user_url(@user)) %>.
+      </li>
+      <% if registration.created_at > 15.minutes.ago %>
+          <li>
+            It might take a while before we have registered the payment
+          </li>
+      <% end %>
+      <li>Unable to use Paypal? We can send an invoice instead.
+        <%= link_to "Update invoice information", edit_registration_path(registration) %>
+      </li>
+      <% if registration.created_at < 3.hours.ago %>
+          <li>
+            Still in trouble? No worries, you still get to go to the conference,
+            Send us <a href="mailto:kontakt@boosterconf.no">an email</a>, and we'll fix it.
+          </li>
+      <% end %>
+    </ul>
 
 <% end %>
 
-	
+
 <% if admin? %>
-  <h3 style="color:red">Admin: Register payment</h3>
-  
-  <p>
-  	<%= link_to "Update registration manually", edit_registration_path(@user.registration) %>
-  </p>
-  <p>
-  	<%= link_to "Print name tag", nametag_path(@user.registration, :format=> 'pdf') %>
-  </p>
+    <h3 style="color:red">Admin: Register payment</h3>
+
+    <p>
+      <%= link_to "Update registration manually", edit_registration_path(@user.registration) %>
+    </p>
+    <p>
+      <%= link_to "Print name tag", nametag_path(@user.registration, :format => 'pdf') %>
+    </p>
+    <p>
+      <% if @user.bio == nil && admin? %>
+          <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
+      <% end %>
+    </p>
 <% end %>
