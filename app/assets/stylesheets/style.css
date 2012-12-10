@@ -172,12 +172,10 @@ div.error + table {
     top: 5px;
     height: 160px;
     margin: 0px !important;
-    border-radius: 10px;
 }
 
 .speaker .content {
     margin-left: 180px;
     background-color: #FFFFFF;
-    border-radius: 10px;
     padding:  10px;
 }
