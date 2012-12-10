@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
                   :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
                   :password, :password_confirmation, :city, :zip,
-                  :failed_login_count, :feature_as_organizer, :featured_speaker, :female, :hometown,
+                  :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
                   :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name,
                   :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
                   :registration_attributes, :bio_attributes
@@ -174,7 +174,7 @@ class User < ActiveRecord::Base
   end
 
   def has_all_statistics
-    self.female != nil && self.birthyear != nil
+    self.gender != nil && self.birthyear != nil
   end
 
   def accepted_talks
