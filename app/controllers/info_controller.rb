@@ -14,4 +14,8 @@ class InfoController < ApplicationController
     @speakers = User.featured_speakers
   end
 
+  def index
+    @speakers = User.featured_speakers
+  end
+
 end
