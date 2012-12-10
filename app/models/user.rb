@@ -21,8 +21,7 @@ class User < ActiveRecord::Base
   end
 
 
-  validates_format_of :phone_number, :with => /\A(\s*(\(\+\s*\d{2}\))?\s*(\d\s*){4,10})\Z/,
-                      :message => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true
+  validates_presence_of :phone_number, :message => "You have to specify a phone number"
 
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
