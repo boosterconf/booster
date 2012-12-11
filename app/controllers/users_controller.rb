@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
     @user = User.new
     @user.registration = Registration.new
-    if (params[:invited])
+    if params[:invited]
       @user.registration.ticket_type_old = "speaker"
       @user.invited = true
       @user.registration.manual_payment = false
