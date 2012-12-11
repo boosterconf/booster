@@ -27,8 +27,8 @@
 
     <tr>
       <th>Gender:</th>
-      <% if @user.gender %>
-          <td><%= h @user.gender == 'F' ? "Female" : "Male" %></td>
+      <% if @user.female %>
+          <td><%= h @user.female == 'F' ? "Female" : "Male" %></td>
       <% else %>
           <td>-</td>
       <% end %>
