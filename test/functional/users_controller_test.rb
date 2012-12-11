@@ -12,7 +12,7 @@ class UsersControllerTest < ActionController::TestCase
   def create_speaker_params
     {"company"=>"DRW", "name"=>"Dan North", "bio_attributes"=>
         {"title"=>"Boss", "blog"=>"dannorth.net", "twitter_handle"=>"tastapod", "bio"=>"Testtest"},
-     "female"=>"false", "password_confirmation"=>"test", "role"=>"Developer", "featured_speaker"=>"0",
+     "gender"=>"M", "password_confirmation"=>"test", "role"=>"Developer", "featured_speaker"=>"0",
      "phone_number"=>"93400346", "hometown"=>"London", "registration_attributes"=>{"includes_dinner"=>"1"},
      "password"=>"test", "birthyear"=>"1976", "email"=>"dan@north.net"}
   end

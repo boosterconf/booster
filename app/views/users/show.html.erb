@@ -24,13 +24,23 @@
       <th>Phone number:</th>
       <td><%= h @user.phone_number %></td>
     </tr>
+
     <tr>
-      <th>Sex:</th>
-      <td><%= h @user.female ? "Female" : "Male" %></td>
+      <th>Gender:</th>
+      <% if @user.gender %>
+          <td><%= h @user.gender == 'F' ? "Female" : "Male" %></td>
+      <% else %>
+          <td>-</td>
+      <% end %>
     </tr>
+
     <tr>
       <th>Birthyear:</th>
-      <td><%= h @user.birthyear %></td>
+      <% if @user.birthyear %>
+          <td><%= h @user.birthyear %></td>
+      <% else %>
+          <td>-</td>
+      <% end %>
     </tr>
 
     <% if @user.registration %>

@@ -68,58 +68,39 @@
     </script>
   </article>
 
-  <article>
-    <div class="front-page-speakers">
-      <h2 class="sectionhead">Come to Roots and meet...</h2>
-      <% first = true %>
-      <% for speaker in @speakers.shuffle do %>
-          <div class="front-page-speaker <%= first ? "selected" : "" %>">
-            <% first = false %>
-            <%= image_tag speaker.bio.picture.url, :width => '160' %>
 
-            <div class="content">
-              <span style="font-size: 30px"><%= speaker[:name] %></span>
-              <br/>
-              <% if speaker.bio[:twitter_handle].length > 0 %>
-                  <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
-                    &#64;<%= speaker.bio[:twitter_handle] %>
-                  </a>
-              <% end %>
+  <div style="width: 50%; float: left;">
+    <article>
+        <h1 class='announce'>Speakers</h1>
 
-              <br/> <i><%= speaker.bio[:title] %></i>
-            </div>
-          </div>
-      <% end %>
+        <p>
+          We already have some very exiting speakers confirmed that will be announced soon.
+          Follow us on <a href="http://twitter.com/boosterconf">Twitter</a> to keep updated on the
+          latest news from the conference.
+        </p>
+      </article>
 
-      <script type="text/javascript">
-          var refreshId = setInterval(next, 10000);
-          function next() {
-              var current_speaker = $(".selected");
-              var next_speaker = current_speaker.next(".front-page-speaker");
-              if (next_speaker.length == 0) {
-                  next_speaker = $(".front-page-speaker").first();
-              }
-              current_speaker.removeClass("selected");
-              next_speaker.addClass("selected");
-              clearInterval(refreshId);
-              refreshId = setInterval(next, 10000);
-          }
+      <article>
 
-      </script>
+        <h1>Tickets</h1>
 
-      <a style="position:absolute; left: 300px; bottom: 10px;" href="javascript:next()">
-        next
-      </a>
-      <a style="position:absolute; left: 170px; bottom: 10px;" href="/info/speakers">Show all speakers</a>
+        <p>
+          <%= link_to "Early Bird", new_user_path %> tickets are available
+          now. <%= link_to "Get them here!", new_user_path %></p>
+      </article>
     </div>
-  </article>
 
-  <article>
+  <div style="width: 50%; float: right;">
+    <article>
+        <h1 class="announce">Tweets</h1>
+        <p>
+          <a class="twitter-timeline" href="https://twitter.com/boosterconf" data-widget-id="278214166739820544">Tweets by @boosterconf</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </p>
+      </article>
+  </div>
 
-    <h1>Tickets</h1>
 
-    <p>
-      <%= link_to "Early Bird", new_user_path %> tickets are available
-      now. <%= link_to "Get them here!", new_user_path %></p>
-  </article>
+
+
 </div>
