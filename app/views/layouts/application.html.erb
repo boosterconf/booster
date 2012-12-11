@@ -39,15 +39,16 @@ conference is for all IT professionals seeking to learn from each other and from
       <div class="nav-collapse collapse">
         <ul class="nav pull-right">
           <li><a href="/">Home</a></li>
-          <% if !logged_in %>
-              <li><a href="/register_lightning_talk/start">Propose a talk</a></li>
-          <% end %>
+          <li><a href="/register_lightning_talk/start">Propose a lightning talk</a></li>
+          <li><a href="/register_workshop/start">Propose a workshop</a></li>
           <% if !logged_in %>
               <li><a href="/users/new">Get a ticket</a></li>
           <% end %>
+          <!--<li><a href="/info/speakers">Speakers</a></li>-->
+          <li><a href="/talks">Suggested talks</a></li>
+
           <li><a href="/info/about">About us</a></li>
           <li><a href="/info/sponsors">For sponsors</a></li>
-          <!--<li><a href="/info/speakers">Speakers</a></li>-->
           <% if logged_in %>
               <li><%= link_to 'My profile', current_user_url %></li>
               <li><%= link_to_unless_current "Log out", logout_path %></li>
