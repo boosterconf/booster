@@ -1,17 +1,16 @@
-<div id="front-page">
-
-  <div id="notifications">
+<div id="notifications">
 <%# TODO: Dette ser jævlig ut. Fikse! %>
-    <% if flash[:notice] %>
-        <p class="flash-notice"><%= flash[:notice] %></p>
-    <% end %>
+  <% if flash[:notice] %>
+      <p class="flash-notice"><%= flash[:notice] %></p>
+  <% end %>
 
-    <p style="color: orange"><%= flash[:warn] %></p>
+  <p style="color: orange"><%= flash[:warn] %></p>
 
-    <p style="color: red"><%= flash[:error] %></p>
-  </div>
+  <p style="color: red"><%= flash[:error] %></p>
+</div>
 
-  <article>
+<div class="row">
+  <article class="span8">
     <h1 class="announce">Call for Papers</h1>
 
     <p>
@@ -22,39 +21,42 @@
     </p>
 
     <ul class="thumbnails">
-      <li class="thumbnail thumbnail-with-button span5">
+      <li class="thumbnail thumbnail-with-button span3">
         <div class="caption">
           <h3>Lightning talk</h3>
 
           <p>
-            A lightning talk is <b>10 minutes long</b> and is a great way to convey an insight, suggest an idea, or
+            A lightning talk is <em>10 minutes long</em> and is a great way to convey an insight, suggest an idea, or
             share your enthusiasm about a particular technology or method.
           </p>
-
           <p>
             Lightning talks are usually well-rehearsed and packed with useful information.
           </p>
-
+          <p>
+            CfP for lightning talks ends on 28 January 2013.
+          </p>
           <p>
             <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
           </p>
         </div>
       </li>
 
-      <li class="thumbnail thumbnail-with-button span5">
+      <li class="thumbnail thumbnail-with-button span4">
         <div class="caption">
 
           <h3>Workshop</h3>
 
           <p>
-            A workshop is <b>between 1.5 and 4.5 hours long</b>. You work with a small group of people who want to
+            A workshop can be <em>short</em> (1.5 hrs), <em>half-day</em> (3 hrs) or <em>full-day</em> (4.5 hrs).
+            You work with a small group of people who want to
             learn a particular technology or method that you know well.
           </p>
-
           <p>
             Workshops are interactive and hands-on, and focused on learning by doing.
           </p>
-
+          <p>
+            CfP for workshops ends on 21 January 2013.
+          </p>
           <p>
             <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
           </p>
@@ -67,40 +69,45 @@
         $(".thumbnails li").setEqualHeight();
     </script>
   </article>
+  <article class="span3 pull-right">
+    <p>
+      <a class="twitter-timeline" href="https://twitter.com/boosterconf" data-widget-id="278214166739820544">Tweets
+        by
+        @boosterconf</a>
+      <script>!function (d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (!d.getElementById(id)) {
+              js = d.createElement(s);
+              js.id = id;
+              js.src = "//platform.twitter.com/widgets.js";
+              fjs.parentNode.insertBefore(js, fjs);
+          }
+      }(document, "script", "twitter-wjs");</script>
+    </p>
+  </article>
 
 
-  <div style="width: 50%; float: left;">
+</div>
+
+<div class="row">
+  <div class="span6">
     <article>
-        <h1 class='announce'>Speakers</h1>
+      <h1 class='announce'>Speakers</h1>
 
-        <p>
-          We already have some very exiting speakers confirmed that will be announced soon.
-          Follow us on <a href="http://twitter.com/boosterconf">Twitter</a> to keep updated on the
-          latest news from the conference.
-        </p>
-      </article>
+      <p>
+        We already have some very exiting speakers confirmed that will be announced soon.
+        Follow us on <a href="http://twitter.com/boosterconf">Twitter</a> to keep updated on the
+        latest news from the conference.
+      </p>
+    </article>
 
-      <article>
-
-        <h1>Tickets</h1>
-
-        <p>
-          <%= link_to "Early Bird", new_user_path %> tickets are available
-          now. <%= link_to "Get them here!", new_user_path %></p>
-      </article>
-    </div>
-
-  <div style="width: 50%; float: right;">
     <article>
-        <h1 class="announce">Tweets</h1>
-        <p>
-          <a class="twitter-timeline" href="https://twitter.com/boosterconf" data-widget-id="278214166739820544">Tweets by @boosterconf</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        </p>
-      </article>
+
+      <h1>Tickets</h1>
+
+      <p>
+        <%= link_to "Early Bird", new_user_path %> tickets are available
+        now. <%= link_to "Get them here!", new_user_path %></p>
+    </article>
   </div>
-
-
-
-
 </div>
