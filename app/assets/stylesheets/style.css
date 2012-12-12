@@ -57,7 +57,8 @@ a:hover {
 }
 
 #content {
-    padding-left: 40px;
+    padding-left: 30px;
+    margin-left: -3px;
     border-left: 3px solid #F6AB6F;
     padding-bottom: 20px;
 }
@@ -139,17 +140,10 @@ div.error + table {
     font-size: larger;
 }
 
-.thumbnails  {
-}
-
-.thumbnails .thumbnail-with-button {
-    position: relative;
-    padding-bottom: 45px;
-}
-
-.thumbnails .thumbnail-with-button .btn {
-    position: absolute;
-    bottom: 13px;
+.thumbnail-with-button {
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 0;
 }
 
 #front-page {
