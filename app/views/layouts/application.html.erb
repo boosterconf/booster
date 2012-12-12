@@ -81,35 +81,9 @@ conference is for all IT professionals seeking to learn from each other and from
 <div class="container">
   <div id="content">
     <div class="row">
+      <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align pull-right"}) %>
       <div class="navbar pull-right">
-        <ul class="nav">
-          <li>
-            <a href="https://www.facebook.com/boosterconf" title="Facebook" class="facebook" target="_blank">
-              <%= image_tag "facebook-logo.png" %>
-            </a>
-          </li>
 
-          <li>
-            <a href="http://lanyrd.com/2013/boosterconf/" title="Lanyrd" class="lanyrd" target="_blank">
-              <%= image_tag "lanyrd-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="http://linkd.in/QjWslE" title="LinkedIn" class="linkedin" target="_blank">
-              <%= image_tag "linkedin-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="http://twitter.com/boosterconf" title="Twitter" class="twitter" target="_blank">
-              <%= image_tag "twitter-logo.png" %> @boosterconf
-            </a>
-          </li>
-          <li>
-            <a href="https://twitter.com/search?q=%23booster2013" target="_blank">
-              <%= image_tag "twitter-logo.png" %> #booster2013
-            </a>
-          </li>
-        </ul>
       </div>
     </div>
 
@@ -118,10 +92,12 @@ conference is for all IT professionals seeking to learn from each other and from
 </div>
 
 <footer>
-  <div id="sponsors" class="container">
+  <div class="container">
     <div class="row">
-      <div class="span12">
-        <h4>Our dear sponsors</h4>
+      <div class="span12" id="sponsors">
+        <h4>Our dear sponsors
+          <%= image_tag("maskott2.png", {:width => "100px", :class => ""}) %>
+        </h4>
         <ul class="sponsorlogoer" id="logoer">
           <li>
             <a href="http://www.kantega.no/" title="Kantega" target="_blank"><img src="/images/logos/kantega.png" alt="Kantega"/></a>
