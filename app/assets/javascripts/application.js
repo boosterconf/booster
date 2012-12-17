@@ -19,4 +19,5 @@
 //= require jquery-ui-1.8.core-and-interactions.min
 //= require jquery-ui-1.8.autocomplete.min
 //= require tag.it
+//= require lightbox
 //= require_tree .

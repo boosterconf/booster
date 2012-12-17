@@ -69,6 +69,26 @@
   </article>
 
   <article>
+    <h2 class="sectionhead">Some of our presenters</h2>
+    <% @speakers.shuffle[0..5].each do |speaker| %>
+        <div style="float:left; padding: 15px">
+          <a href="<%= speaker.bio.picture.url %>" rel="lightbox" title="<%= speaker.bio[:bio] %>">
+            <%= image_tag speaker.bio.picture.url, :width => '160' %>
+          </a>
+          <%= speaker.name %>
+          <br>
+          <% if speaker.bio[:twitter_handle].length > 0 %>
+              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                &#64;<%= speaker.bio[:twitter_handle] %>
+              </a>
+          <% end %>
+        </div>
+    <% end %>
+
+    <div class="clearfix"></div>
+    <a href="/info/speakers">Show all speakers</a>
+
+    <!--
     <div class="front-page-speakers">
       <h2 class="sectionhead">Come to Roots and meet...</h2>
       <% first = true %>
@@ -112,6 +132,7 @@
       </a>
       <a style="position:absolute; left: 170px; bottom: 10px;" href="/info/speakers">Show all speakers</a>
     </div>
+    -->
   </article>
 
   <article>
