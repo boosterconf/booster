@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   attr_accessible :accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
                   :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
                   :password, :password_confirmation, :city, :zip,
-                  :failed_login_count, :feature_as_organizer, :featured_speaker, :female, :hometown,
+                  :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
                   :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name,
                   :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
                   :registration_attributes, :bio_attributes
@@ -21,8 +21,7 @@ class User < ActiveRecord::Base
   end
 
 
-  validates_format_of :phone_number, :with => /\A(\s*(\(\+\s*\d{2}\))?\s*(\d\s*){4,10})\Z/,
-                      :message => "must be on the form 99999999 or (+99) 999999...", :allow_nil => true
+  validates_presence_of :phone_number, :message => "You have to specify a phone number"
 
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
@@ -175,7 +174,7 @@ class User < ActiveRecord::Base
   end
 
   def has_all_statistics
-    self.female != nil && self.birthyear != nil
+    self.gender != nil && self.birthyear != nil
   end
 
   def accepted_talks
@@ -184,6 +183,10 @@ class User < ActiveRecord::Base
       all_talks << talk if (talk) and (talk.accepted?)
     end
     all_talks
+  end
+
+  def atomic_reference
+    name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 
   def self.find_with_filter(filter)

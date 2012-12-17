@@ -11,7 +11,7 @@
   <b>Tags:</b>
   <span><%= @talk.tags.map { |t| t.title }.join(", ") %></span>
   <%# @talk.tags.each do |tag| %>
-      <%#= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
+  <%#= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
   <%# end %>
 </div>
 
@@ -20,27 +20,29 @@
     <p><%#= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
     <%# unless @talk.slide_file_name.nil? %>
-        <%#h3>Presentation slides</h3%>
-        <p><%#= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
+    <%#h3>Presentation slides</h3%>
+    <p><%#= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
     <%# else %>
-        <!--h3>Upload presentation</h3-->
+    <!--h3>Upload presentation</h3-->
     <%# end %>
     <%#= render :partial => "talks/upload_slide" %>
 
-    <p>
-      <strong>Extra equipment:</strong>
-      <%= h @talk.equipment %>
-    </p>
+    <% if @talk.is_tutorial? %>
+        <p>
+          <strong>Extra equipment:</strong>
+          <%= h @talk.equipment %>
+        </p>
 
-    <p>
-      <strong>Room setup:</strong>
-      <%= h @talk.room_setup %>
-    </p>
+        <p>
+          <strong>Room setup:</strong>
+          <%= h @talk.room_setup %>
+        </p>
 
-    <p>
-      <strong>Maximum number of participants:</strong>
-      <%= h @talk.max_participants %>
-    </p>
+        <p>
+          <strong>Maximum number of participants:</strong>
+          <%= h @talk.max_participants %>
+        </p>
+    <% end %>
 
 <% end %>
 
@@ -79,7 +81,7 @@
 </div>
 
 <%# if logged_in %>
-    <!--h3 id="new_comment">Add new comment:</h3>
+<!--h3 id="new_comment">Add new comment:</h3>
     <%#= render :partial => "comments/new" %>
 <%# else %>
 

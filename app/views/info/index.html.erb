@@ -11,130 +11,149 @@
     <p style="color: red"><%= flash[:error] %></p>
   </div>
 
-  <article>
-    <h1 class="announce">Call for Papers</h1>
+  <div class="row">
 
-    <p>
-      Do you have something you want to share? A controversial idea,
-      an interesting experience or something you have learnt lately? Submit your abstract and get a chance to be part
-      of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
-      the Speaker's Dinner.
-    </p>
+    <article class="span4 pull-right">
+      <h1 class="hidden-phone">&nbsp;</h1>
 
-    <ul class="thumbnails">
-      <li class="thumbnail thumbnail-with-button span5">
-        <div class="caption">
-          <h3>Lightning talk</h3>
+      <div class="navbar hidden-phone social-links">
+        <ul class="nav">
+          <li>
+            <a href="https://twitter.com/search?q=%23booster2013" target="_blank">
+              <%= image_tag "twitter-logo.png" %>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/boosterconf" title="Facebook" class="facebook" target="_blank">
+              <%= image_tag "facebook-logo.png" %>
+            </a>
+          </li>
+          <li>
+            <a href="http://lanyrd.com/2013/boosterconf/" title="Lanyrd" class="lanyrd" target="_blank">
+              <%= image_tag "lanyrd-logo.png" %>
+            </a>
+          </li>
+          <li>
+            <a href="http://linkd.in/QjWslE" title="LinkedIn" class="linkedin" target="_blank">
+              <%= image_tag "linkedin-logo.png" %>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <p>
+        <a class="twitter-timeline" href="https://twitter.com/boosterconf" data-widget-id="278214166739820544">Tweets
+          by
+          @boosterconf</a>
 
-          <p>
-            A lightning talk is <b>10 minutes long</b> and is a great way to convey an insight, suggest an idea, or
-            share your enthusiasm about a particular technology or method.
-          </p>
+        <script>!function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = "//platform.twitter.com/widgets.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, "script", "twitter-wjs");</script>
 
-          <p>
-            Lightning talks are usually well-rehearsed and packed with useful information.
-          </p>
+      </p>
 
-          <p>
-            <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
-          </p>
-        </div>
-      </li>
+    </article>
 
-      <li class="thumbnail thumbnail-with-button span5">
-        <div class="caption">
+    <article class="span7">
+      <h1 class="announce">Call for Papers</h1>
 
-          <h3>Workshop</h3>
+      <p>
+        Do you have something you want to share? A controversial idea,
+        an interesting experience or something you have learnt lately? Submit your abstract and get a chance to be part
+        of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
+        the Speaker's Dinner.
+      </p>
+    </article>
 
-          <p>
-            A workshop is <b>between 1.5 and 4.5 hours long</b>. You work with a small group of people who want to
-            learn a particular technology or method that you know well.
-          </p>
+    <div class="caption thumbnail thumbnail-with-button span7">
+      <h3>Lightning talk</h3>
 
-          <p>
-            Workshops are interactive and hands-on, and focused on learning by doing.
-          </p>
+      <p>
+        A lightning talk is <em>10 minutes long</em> and is a great way to convey an insight, suggest an idea, or
+        share your enthusiasm about a particular technology or method.
+        Lightning talks are usually well-rehearsed and packed with useful information.
+      </p>
 
-          <p>
-            <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
-          </p>
-        </div>
-      </li>
+      <p>
+        <em>CfP for lightning talks ends on 28 January 2013.</em>
+      </p>
 
-    </ul>
+      <p>
+        <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
+      </p>
+    </div>
 
-    <script type="text/javascript">
-        $(".thumbnails li").setEqualHeight();
-    </script>
-  </article>
+    <div class="caption thumbnail thumbnail-with-button span7">
+      <h3>Workshop</h3>
 
-  <article>
-    <h2 class="sectionhead">Some of our presenters</h2>
-    <% @speakers.shuffle[0..5].each do |speaker| %>
-        <div style="float:left; padding: 15px">
-          <a href="<%= speaker.bio.picture.url %>" rel="lightbox" title="<%= speaker.bio[:bio] %>">
-            <%= image_tag speaker.bio.picture.url, :width => '160' %>
-          </a>
-          <%= speaker.name %>
-          <br>
-          <% if speaker.bio[:twitter_handle].length > 0 %>
-              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
-                &#64;<%= speaker.bio[:twitter_handle] %>
+      <p>
+        A workshop can be <em>short</em> (1.5 hrs), <em>half-day</em> (3 hrs) or <em>full-day</em> (4.5 hrs).
+        You work with a small group of people who want to
+        learn a particular technology or method that you know well.
+        Workshops are interactive and hands-on, and focused on learning by doing.
+      </p>
+
+      <p>
+        <em>CfP for workshops ends on 21 January 2013.</em>
+      </p>
+
+      <p>
+        <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
+      </p>
+    </div>
+
+  </div>
+
+
+  <div class="row">
+    <div class="span9">
+      <article>
+        <h1 class='announce'>Speakers</h1>
+
+        <h2 class="sectionhead">Some of our presenters</h2>
+        <% @speakers.each do |speaker| %>
+            <div class="span2 speaker-box">
+              <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">
+                <%= image_tag speaker.bio.picture.url, :width => '160' %>
               </a>
-          <% end %>
-        </div>
-    <% end %>
-
-    <div class="clearfix"></div>
-    <a href="/info/speakers">Show all speakers</a>
-
-    <!--
-    <div class="front-page-speakers">
-      <h2 class="sectionhead">Come to Roots and meet...</h2>
-      <% first = true %>
-      <% for speaker in @speakers.shuffle do %>
-          <div class="front-page-speaker <%= first ? "selected" : "" %>">
-            <% first = false %>
-            <%= image_tag speaker.bio.picture.url, :width => '160' %>
-
-            <div class="content">
-              <span style="font-size: 30px"><%= speaker[:name] %></span>
-              <br/>
-              <% if speaker.bio[:twitter_handle].length > 0 %>
+              <%= speaker.name %>
+              <br>
+              <% if speaker.bio[:twitter_handle] %>
                   <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
                     &#64;<%= speaker.bio[:twitter_handle] %>
                   </a>
               <% end %>
-
-              <br/> <i><%= speaker.bio[:title] %></i>
             </div>
-          </div>
-      <% end %>
+        <% end %>
 
-      <script type="text/javascript">
-          var refreshId = setInterval(next, 10000);
-          function next() {
-              var current_speaker = $(".selected");
-              var next_speaker = current_speaker.next(".front-page-speaker");
-              if (next_speaker.length == 0) {
-                  next_speaker = $(".front-page-speaker").first();
-              }
-              current_speaker.removeClass("selected");
-              next_speaker.addClass("selected");
-              clearInterval(refreshId);
-              refreshId = setInterval(next, 10000);
-          }
+        <% @speakers.each do |speaker| %>
+            <div id="<%= speaker.atomic_reference %>" style=" display:none;" class="speaker-full">
+              <%= image_tag speaker.bio.picture.url %>
+              <h3><%= speaker.name %></h3>
+              <p><i><%= speaker.bio.title %></i></p>
+              <% if speaker.bio[:twitter_handle] %>
+                  <p>
+                  <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                    &#64;<%= speaker.bio[:twitter_handle] %>
+                  </a>
+                  </p>
+              <% end %>
+              <p>
+                <%= speaker.bio[:bio] %>
+              </p>
+            </div>
+        <% end %>
 
-      </script>
-
-      <a style="position:absolute; left: 300px; bottom: 10px;" href="javascript:next()">
-        next
-      </a>
-      <a style="position:absolute; left: 170px; bottom: 10px;" href="/info/speakers">Show all speakers</a>
+        <div class="clearfix"></div>
+        <%= link_to 'Show all', info_speakers_path %>
+      </article>
     </div>
-    -->
-  </article>
-
+  </div>
   <article>
 
     <h1>Tickets</h1>
@@ -144,3 +163,15 @@
       now. <%= link_to "Get them here!", new_user_path %></p>
   </article>
 </div>
+
+<% content_for :javascript do %>
+    <script type="text/javascript">
+        $('.defaultDOMWindow').openDOMWindow({
+            eventType:'click',
+            loader:1,
+            loaderImagePath:'animationProcessing.gif',
+            loaderHeight:16,
+            loaderWidth:17
+        });
+    </script>
+<% end %>

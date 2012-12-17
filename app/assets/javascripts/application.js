@@ -20,4 +20,5 @@
 //= require jquery-ui-1.8.autocomplete.min
 //= require tag.it
 //= require lightbox
+//= require jquery.DOMWindow
 //= require_tree .

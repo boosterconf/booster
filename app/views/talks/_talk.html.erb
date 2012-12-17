@@ -6,11 +6,17 @@
     <p class="muted">
       Suggested by <%= talk.users.map { |u| u.name }.join(", ") %>,
       <%= time_ago_in_words(talk.created_at) %> ago.
-      <%= "Max number of participants: " + h(talk.max_participants) if admin? %>
+      <% if talk.is_tutorial? %>
+          <%= "Max number of participants: " + h(talk.max_participants) if admin? %>
+      <% end %>
     </p>
 
     <p>
-      <%= strip_tags talk.description %>
+      <% if contains_html talk.description %>
+          <%= sanitize talk.description %>
+      <% else %>
+          <%= simple_format h(talk.description) %>
+      <% end %>
       <br/>
       <%= link_to "Read more...", talk %>
     </p>
@@ -19,7 +25,7 @@
     <%= image_tag("approved_talk.png") if talk.accepted? %>
     <%= image_tag("icon_slides.gif") if admin? && talk.slide.file? %>
 
-    <%# link_to "#{talk.comments_count or 0} comment(s).", talk_path(talk, :anchor => "comments") %> 
+    <%# link_to "#{talk.comments_count or 0} comment(s).", talk_path(talk, :anchor => "comments") %>
 
     <% unless talk.tags.size == 0 %>
         <div class="tags">
