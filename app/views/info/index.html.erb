@@ -118,7 +118,9 @@
             <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">
               <%= image_tag speaker.bio.picture.url %>
             </a>
-            <%= speaker.name %>
+            <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">
+              <%= speaker.name %>
+            </a>
             <br>
             <% if speaker.bio[:twitter_handle] %>
                 <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
