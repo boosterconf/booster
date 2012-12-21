@@ -1,18 +1,20 @@
 <%= content_for :title, h(@talk.title) %>
 <h2 class="page_title"><%= h @talk.title %></h2>
 <h4><%= render :partial => @talk.users %></h4>
-<p>In <%= @talk.language %></p>
+<p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language %></p>
 
 <% if @talk.accepted? %>
     <p><%= image_tag("approved_talk.png") %> approved</p>
 <% end %>
 
 <div class="tags">
-  <b>Tags:</b>
-  <span><%= @talk.tags.map { |t| t.title }.join(", ") %></span>
-  <%# @talk.tags.each do |tag| %>
-  <%#= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
-  <%# end %>
+  <% unless @talk.tags.empty? %>
+      <b>Tags:</b>
+      <span><%= @talk.tags.map { |t| t.title }.join(", ") %></span>
+      <%# @talk.tags.each do |tag| %>
+      <%#= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
+      <%# end %>
+  <% end %>
 </div>
 
 
@@ -47,22 +49,23 @@
 <% end %>
 
 <div class="description">
-  <h4>Description</h4>
   <% if contains_html @talk.description %>
       <%= sanitize @talk.description %>
   <% else %>
       <%= simple_format h(@talk.description) %>
   <% end %>
 </div>
+<% if @talk.is_tutorial? %>
+    <p>
+      <strong>Participant requirements:</strong>
+      <%= h @talk.participant_requirements %>
+    </p>
+<% end %>
 
-<p>
-  <strong>Participant requirements:</strong>
-  <%= h @talk.participant_requirements %>
-</p>
 
 <p>
   <strong>Target audience:</strong>
-  <%= h @talk.describe_audience_level %>
+  <%= (@talk.describe_audience_level.blank?) ? "Everyone" : h(@talk.describe_audience_level) %>
 </p>
 
 
