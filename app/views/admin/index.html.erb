@@ -2,9 +2,9 @@
 
 <ul>
 
-  <li><%= link_to 'Users', :controller => 'users', :action => 'index' %></li>
-  <li><%= link_to 'Talks', :controller => 'talks', :action => 'index' %></li>
-  <li><%= link_to 'Sponsors', :controller => 'sponsors', :action => 'index' %></li>
+  <li><%= link_to 'Users', registrations_path %></li>
+  <li><%= link_to 'Talks', talks_path %></li>
+  <li><%= link_to 'Sponsors', sponsors_path %></li>
   <li><%= link_to 'Register an invited speaker', new_user_path(:invited => "true") %></li>
 
   <!--
