@@ -3,6 +3,7 @@ require 'pp'
 
 class AcceptancesControllerTest < ActionController::TestCase
 
+=begin
   def setup
     login_as(:god)
     @talk = talks(:three)
@@ -81,4 +82,5 @@ class AcceptancesControllerTest < ActionController::TestCase
     get :await, :id => @talk.id
     assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end
+=end
 end

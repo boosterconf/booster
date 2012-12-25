@@ -6,6 +6,7 @@ class ParticipantsControllerTest < ActionController::TestCase
     login_as :god
   end
 
+=begin
   should "get index" do
     get :index
     assert_response :success
@@ -32,4 +33,5 @@ class ParticipantsControllerTest < ActionController::TestCase
 
     assert_redirected_to participants_path
   end
+=end
 end

@@ -48,13 +48,13 @@ class RegistrationsController < ApplicationController
     end
 
     if @registration.update_attributes(params[:registration])
-      if (admin? && @registration.registration_complete?)
+      if admin? && @registration.registration_complete?
         flash[:notice] = "Information updated and confirmation mail sent"
 
-        if (@registration.free_ticket?)
+        if @registration.free_ticket?
           BoosterMailer.free_registration_completion(@registration.user).deliver
         else
-          BoosterMailer.deliver_payment_confirmation(@registration)
+          BoosterMailer.payment_confirmation(@registration).deliver
         end
       else
         flash[:notice] = "Information updated"

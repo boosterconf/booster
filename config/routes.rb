@@ -3,6 +3,10 @@ Booster2013::Application.routes.draw do
   resources :users
 
   resources :user_sessions
+
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
+
   resources :registrations do
     member do
       get :confirm_delete
@@ -22,8 +26,6 @@ Booster2013::Application.routes.draw do
       get :article_tags
     end
   end
-
-  resources :registrations
 
   resources :nametags
 
@@ -46,8 +48,8 @@ Booster2013::Application.routes.draw do
   match '/register_workshop/create_details' => 'register_workshop#create_details'
   match '/register_workshop/finish'         => 'register_workshop#finish'
 
-  match 'login' => 'user_sessions#new', :as => :login
-  match 'logout' => 'user_sessions#destroy', :as => :logout
+  #match 'login' => 'user_sessions#new', :as => :login
+  #match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'users/current' => 'users#current', :as => :current_user
   match 'users/:id/create_bio' => 'users#create_bio'
   match 'users/:id/delete_bio' => 'users#delete_bio'

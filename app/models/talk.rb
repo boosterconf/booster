@@ -25,7 +25,7 @@ class Talk < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :description
   validates_presence_of :language
-  validates :max_participants, :presence => true, :if => :is_tutorial?, :numericality => { :only_integer => true, :greater_than => 20 }
+  validates :max_participants, :presence => true, :if => :is_tutorial?, :numericality => { :only_integer => true, :greater_than_or_equal => 20 }
 
   def after_initialize
     self.acceptance_status||= "pending"
@@ -110,9 +110,11 @@ class Talk < ActiveRecord::Base
     !is_lightning_talk?
   end
 
+=begin
   def is_full?
     participants.size >= max_participants
   end
+=end
 
   def update_speakers(current_user)
     for speaker in self.users

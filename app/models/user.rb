@@ -100,38 +100,32 @@ class User < ActiveRecord::Base
   def has_accepted_or_pending_tutorial?
     tutorials = self.talks.find_all { |talk| talk.is_tutorial? && (talk.accepted? || talk.pending?) }
     !tutorials.empty?
-    false
   end
 
   def has_accepted_lightning_talk?
     talks = self.talks.find_all { |talk| talk.is_lightning_talk? && talk.accepted? }
     !talks.empty?
-    false
   end
 
   def has_accepted_tutorial?
     talks = self.talks.find_all { |talk| talk.is_tutorial? && talk.accepted? }
     !talks.empty?
-    false
   end
 
   def has_all_talks_refused?
     refused_talks = self.talks.find_all { |talk| talk.refused? }
     self.talks.size == refused_talks.size
-    false
   end
 
   def has_all_tutorials_refused?
     refused_tutorials = self.talks.find_all { |talk| talk.refused? && talk.is_tutorial? }
     all_tutorials = self.talks.find_all { |talk| talk.is_tutorial? }
     all_tutorials.size == refused_tutorials.size
-    false
   end
 
   def has_pending_or_accepted_lightning_talk?
     talks = self.talks.find_all { |talk| talk.is_lightning_talk? && (talk.accepted? || talk.pending?) }
     !talks.empty?
-    false
   end
 
   def update_to_lightning_talk_speaker
@@ -154,19 +148,11 @@ class User < ActiveRecord::Base
   end
 
   def is_featured?
-    if read_attribute(:featured_speaker) && bio != nil
-      true
-    else
-      false
-    end
+    read_attribute(:featured_speaker) && bio != nil
   end
 
   def is_organizer_with_bio?
-    if read_attribute(:feature_as_organizer) && bio != nil
-      true
-    else
-      false
-    end
+    read_attribute(:feature_as_organizer) && bio != nil
   end
 
   def feature_as_speaker

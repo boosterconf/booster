@@ -5,17 +5,9 @@ class TalkTest < ActiveSupport::TestCase
     should "increment comments count when adding a comment" do
       talk = talks(:one)
       comments_count = talk.comments_count
-      talk.comments << Comment.new(:title =>"en tittel", :description => "en beskrivelse", :user => User.last)
+      talk.comments << Comment.new(:title => "en tittel", :description => "en beskrivelse", :user => User.last)
       talk = Talk.find(talk.id)
       assert_equal comments_count + 1, talk.comments_count
-    end
-
-    should "increment participants count when adding a participant" do
-      talk = Talk.first
-      participant_count = talk.participants_count
-      talk.participants << Participant.new(:user => User.last)
-      talk = Talk.find(talk.id)
-      assert_equal participant_count + 1, talk.participants_count
     end
 
     should "be pending by default" do
@@ -55,6 +47,16 @@ class TalkTest < ActiveSupport::TestCase
       assert not_refused.size > 0
     end
 
+=begin
+      should "increment participants count when adding a participant" do
+      talk = Talk.first
+      participant_count = talk.participants_count
+      talk.participants << Participant.new(:user => User.last)
+      talk = Talk.find(talk.id)
+      assert_equal participant_count + 1, talk.participants_count
+    end
+
+
     should "not be full if current number of participants are less than maximum number of participants" do
       talk = talks(:not_full_tutorial)
       assert !talk.is_full?
@@ -87,7 +89,6 @@ class TalkTest < ActiveSupport::TestCase
       talk = talks(:spans_several_slots)
       assert_equal periods(:one).start_time, talk.start_time
     end
-
+=end
   end
-
 end

@@ -4,6 +4,8 @@ class Tag < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title, :case_sensitive => false
 
+  attr_accessible :title
+
   def self.create_and_return_tags(tagnames)
     tags = []
 
@@ -12,7 +14,7 @@ class Tag < ActiveRecord::Base
     tagnames.each { |title|
       tag = all_tags[title.downcase]
 
-      if (tag == nil)
+      if tag == nil
         tag = Tag.new({:title => title})
         tag.save!
       end

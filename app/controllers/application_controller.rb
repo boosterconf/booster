@@ -33,8 +33,8 @@ class ApplicationController < ActionController::Base
   def require_admin_or_self
     if params[:id]  =~ /^[-+]?[1-9]([0-9]*)?$/
       user = User.find(params[:id])
-      unless (current_user.is_admin? || user == current_user)
-        flash[:error] = "You are not allowed to look at other users' information"
+      unless current_user.is_admin? || user == current_user
+        flash[:error] = "You are not allowed to look at or edit other users' information"
         access_denied
       end
     end
@@ -43,8 +43,8 @@ class ApplicationController < ActionController::Base
   def require_admin_or_speaker
     unless params[:id] == 'favicon'
       user = User.find(params[:id])
-      unless (current_user.is_admin? || user.registration.ticket_type_old == 'speaker')
-        flash[:error] = "You are not allowed to look at other users' information"
+      unless current_user.is_admin? || user.registration.ticket_type_old == 'speaker'
+        flash[:error] = "Speakers only!"
         access_denied
       end
     end

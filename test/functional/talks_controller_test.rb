@@ -46,48 +46,12 @@ class TalksControllerTest < ActionController::TestCase
     assert_redirected_to talk_path(assigns(:talk))
   end
 
-  def test_only_admin_can_access_assign_page
-    login_as :quentin
-    get :assign, :id => 1
-    assert_response 302
-  end
-
-  def test_only_admin_can_assign_talks
-    login_as :quentin
-    post :create_assigned
-    assert_response 302
-  end
-
   context "An admin" do
 
     setup do
       login_as :god
     end
 
-    should "be able to assign talks" do
-      get :assign, :id => users(:quentin).id
-      assert_response 200
-    end
-
-    should "not be the speaker of an assigned talk" do
-      post :create_assigned, :talk => create_valid_talk_params, :assigned_user_id => users(:quentin).id
-
-      talk = Talk.find_by_title("Assigned")
-      assert users(:quentin).id == talk.speakers[0].user.id
-    end
-
-    should "should create auto-accepted assigned talks" do
-      post :create_assigned, :talk => create_valid_talk_params, :assigned_user_id => users(:quentin).id
-
-      talk = Talk.find_by_title("Assigned")
-      assert talk.accepted?
-    end
-
-    should "be returned to form again when invalid talk assignment is made" do
-      post :create_assigned, :talk => create_invalid_talk_params, :assigned_user_id => users(:quentin).id
-
-      assert_template :assign
-    end
   end
 
   private

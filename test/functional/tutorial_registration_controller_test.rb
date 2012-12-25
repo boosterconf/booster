@@ -2,6 +2,7 @@ require 'test_helper'
 
 class TutorialRegistrationControllerTest < ActionController::TestCase
 
+=begin
   context "An unauthenticated user" do
     should "not be able to view index" do
       get :index
@@ -130,6 +131,7 @@ class TutorialRegistrationControllerTest < ActionController::TestCase
 
     end
   end
+=end
 
   private
   def create_tutorial_params(talk = talks(:ten), period = periods(:one))

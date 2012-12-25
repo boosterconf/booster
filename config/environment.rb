@@ -23,5 +23,3 @@ ActionView::Base.field_error_proc = proc do |html, instance|
     html
   end
 end
-
-ActionMailer::Base.delivery_method = :smtp

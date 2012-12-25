@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   before_filter :require_user, :except => [:new, :create]
-  before_filter :require_admin, :only => [:index, :delete_bio, :speaker, :create_speaker, :phone_list, :dietary_requirements]
+  before_filter :require_admin, :only => [:index, :delete_bio, :phone_list, :dietary_requirements]
   before_filter :require_admin_or_self, :only => [:show, :edit, :update]
-  
+  before_filter :require_admin_or_speaker, :only => [:create_bio]
+
   # GET /users
   # GET /users.json
   def index
@@ -96,15 +97,17 @@ class UsersController < ApplicationController
 
       if @user.valid?
         unless @user.registration.free_ticket || @user.registration.discounted_ticket?
-          Time.now < AppConfig.early_bird_ends ? @user.registration.ticket_type_old = 'early_bird' : @user.registration.ticket_type_old = 'full_price'
+          early_bird_is_active? ? @user.registration.ticket_type_old = 'early_bird' : @user.registration.ticket_type_old = 'full_price'
         end
+
         @user.save
-        if !@user.registration.save
+
+        unless @user.registration.save
           raise @user.registration.errors.inspect
         end
 
-        if (!current_user.is_admin)
-          UserSession.create(:login => @user.email, :password => @user.password)
+        unless current_user
+          login @user
         end
 
         if @user.registration.manual_payment
@@ -123,7 +126,6 @@ class UsersController < ApplicationController
           redirect_to @user
         else
           BoosterMailer.registration_confirmation(@user).deliver
-          p "payment url: #{payment_notifications_url}"
           redirect_to @user.registration.payment_url(payment_notifications_url, user_url(@user))
         end
       else
@@ -131,6 +133,14 @@ class UsersController < ApplicationController
         render :action => 'new'
       end
     end
+  end
+
+  def login(user)
+    UserSession.create(:login => user.email, :password => user.password)
+  end
+
+  def early_bird_is_active?
+    Time.now < AppConfig.early_bird_ends
   end
 
   def no_more_registrations_allowed

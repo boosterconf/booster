@@ -1,49 +1,53 @@
 require 'test_helper'
 
 class SponsorsControllerTest < ActionController::TestCase
-  def setup
-    login_as :god
-  end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:sponsors)
-  end
+  context "An admin" do
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create sponsor" do
-    assert_difference('Sponsor.count') do
-      post :create, :sponsor => { }
+    setup do
+      login_as :god
     end
 
-    assert_redirected_to sponsors_path
-  end
-
-  test "should show sponsor" do
-    get :show, :id => sponsors(:one).to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => sponsors(:one).to_param
-    assert_response :success
-  end
-
-  test "should update sponsor" do
-    put :update, :id => sponsors(:one).to_param, :sponsor => { }
-    assert_redirected_to sponsors_path
-  end
-
-  test "should destroy sponsor" do
-    assert_difference('Sponsor.count', -1) do
-      delete :destroy, :id => sponsors(:one).to_param
+    should "be able to view index" do
+      get :index
+      assert_response :success
+      assert_not_nil assigns(:sponsors)
     end
 
-    assert_redirected_to sponsors_path
+    should "be able to show new form" do
+      get :new
+      assert_response :success
+    end
+
+    should "be able to create new sponsor" do
+      assert_difference('Sponsor.count', +1) do
+        post :create, :sponsor => {}
+      end
+
+      assert_redirected_to sponsors_path
+    end
+
+    should "be able to show a sponsor" do
+      get :show, :id => sponsors(:one).to_param
+      assert_response :success
+    end
+
+    should "be ble to show edit form" do
+      get :edit, :id => sponsors(:one).to_param
+      assert_response :success
+    end
+
+    should "be able to update sponsor" do
+      put :update, :id => sponsors(:one).to_param, :sponsor => {}
+      assert_redirected_to sponsors_path
+    end
+
+    should "be able to delete a sponsor" do
+      assert_difference('Sponsor.count', -1) do
+        delete :destroy, :id => sponsors(:one).to_param
+      end
+
+      assert_redirected_to sponsors_path
+    end
   end
 end

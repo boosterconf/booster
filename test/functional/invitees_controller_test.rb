@@ -6,6 +6,7 @@ class InviteesControllerTest < ActionController::TestCase
     login_as :god
   end
 
+=begin
   test "should get index" do
     get :index
     assert_response :success
@@ -47,4 +48,5 @@ class InviteesControllerTest < ActionController::TestCase
 
     assert_redirected_to invitees_path
   end
+=end
 end

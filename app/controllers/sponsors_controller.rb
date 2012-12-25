@@ -34,7 +34,7 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.new(params[:sponsor])
 
     if @sponsor.save
-      redirect_to @sponsor, notice: 'Sponsor was successfully created.'
+      redirect_to sponsors_path, notice: 'Sponsor was successfully created.'
     else
       render action: "new"
     end
@@ -51,7 +51,7 @@ class SponsorsController < ApplicationController
     end
 
     if @sponsor.save
-      redirect_to @sponsor, notice: 'Sponsor was successfully updated.'
+      redirect_to sponsors_path, notice: 'Sponsor was successfully updated.'
     else
       render action: "edit"
     end

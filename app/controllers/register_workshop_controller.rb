@@ -1,3 +1,5 @@
+require "securerandom"
+
 class RegisterWorkshopController < ApplicationController
 
   def start
@@ -10,13 +12,12 @@ class RegisterWorkshopController < ApplicationController
 
   def create_user
     @user = User.new(params[:user])
-    @user.registration = Registration.new
+    @user.create_registration
     @user.registration.ticket_type_old = "speaker"
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
     @user.roles = params[:roles].join(",") unless params[:roles] == nil
-    p params.inspect
 
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
@@ -35,7 +36,22 @@ class RegisterWorkshopController < ApplicationController
     @talk = Talk.new(params[:talk])
     @talk.language = "english"
     @talk.users << current_user
+
     if @talk.save
+      if params[:talk][:additional_speaker_email].present?
+        additional_speaker = User.new
+        additional_speaker.create_registration
+        additional_speaker.email = params[:talk][:additional_speaker_email]
+        additional_speaker.password = "'tisASecret!" # må sette passord, av grunner bare authlogic forstår
+        additional_speaker.registration.ticket_type_old = "speaker"
+        additional_speaker.registration.unfinished = true
+        additional_speaker.registration.unique_reference = SecureRandom.urlsafe_base64
+
+        additional_speaker.save(:validate => false)
+        @talk.users << additional_speaker
+        @talk.save!
+      end
+
       redirect_to register_workshop_details_url
     else
       render :action => "talk"
