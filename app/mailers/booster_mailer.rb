@@ -173,6 +173,17 @@ class BoosterMailer < ActionMailer::Base
          :subject => "Bli sponsor for Booster 2013")
   end
 
+  def additional_speaker(primary_speaker, additional_speaker, talk)
+    @primary_speaker = primary_speaker
+    @talk = talk
+    @create_user_url = user_from_reference_url additional_speaker.registration.unique_reference
+
+    mail(:to => additional_speaker.email,
+         :from => FROM_EMAIL,
+         :cc => FROM_EMAIL,
+         :subject => "#{SUBJECT_PREFIX} You have been added as a speaker to a workshop")
+  end
+
   def reminder_to_earlier_participants_email(user)
     @name = user.name
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Remember to sign up for Booster 2013 before the Early Bird deadline!")

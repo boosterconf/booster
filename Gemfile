@@ -17,6 +17,7 @@ group :production do
 end
 group :development, :test do
   gem 'sqlite3'
+  gem 'quiet_assets'
 end
 group :test do
   gem 'mocha', :require => false

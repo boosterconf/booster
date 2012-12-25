@@ -9,9 +9,14 @@ class ActionController::TestCase
 
   def login_as(u)    
     UserSession.create(users(u))
-  end  
+  end
+
   def logout
     UserSession.find.destroy if UserSession.find
+  end
+
+  def last_email_sent
+    ActionMailer::Base.deliveries.last
   end
 end
 

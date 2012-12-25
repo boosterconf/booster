@@ -2,6 +2,8 @@ Booster2013::Application.routes.draw do
 
   resources :users
 
+  get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
+
   resources :user_sessions
 
   match 'login' => 'user_sessions#new', :as => :login

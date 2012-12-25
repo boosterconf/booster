@@ -38,10 +38,10 @@ class RegisterWorkshopController < ApplicationController
     @talk.users << current_user
 
     if @talk.save
-      if params[:talk][:additional_speaker_email].present?
+      if params[:user].present? && params[:user][:additional_speaker_email].present?
         additional_speaker = User.new
         additional_speaker.create_registration
-        additional_speaker.email = params[:talk][:additional_speaker_email]
+        additional_speaker.email = params[:user][:additional_speaker_email]
         additional_speaker.password = "'tisASecret!" # må sette passord, av grunner bare authlogic forstår
         additional_speaker.registration.ticket_type_old = "speaker"
         additional_speaker.registration.unfinished = true
@@ -50,6 +50,8 @@ class RegisterWorkshopController < ApplicationController
         additional_speaker.save(:validate => false)
         @talk.users << additional_speaker
         @talk.save!
+
+        BoosterMailer.additional_speaker(current_user, additional_speaker, @talk).deliver
       end
 
       redirect_to register_workshop_details_url

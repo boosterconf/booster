@@ -105,8 +105,4 @@ class RegistrationsControllerTest < ActionController::TestCase
      "free_ticket" => false}
   end
 
-  def last_email_sent
-    ActionMailer::Base.deliveries.last
-  end
-
 end
