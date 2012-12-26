@@ -33,6 +33,8 @@ Booster2013::Application.routes.draw do
 
   resources :payment_notifications
 
+  resources :password_resets
+
 
   match '/register_lightning_talk/start' => 'register_lightning_talk#start'
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user'

@@ -1,0 +1,23 @@
+<% content_for :title, "Change password" %>
+<h2 class="page_title">Change your password</h2>
+
+<p>
+  Hi, <%= @user.name %>. Please type your new password
+</p>
+
+<%= form_for @user, :url => password_reset_path, :method => :put do |f| %>
+    <p>
+      <%= f.label :password, "New password:" %>
+      <br/>
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation, "Confirm new password:" %>
+      <br/>
+      <%= f.password_field :password_confirmation %>
+    </p>
+    <p>
+      <%= f.submit "Change password" %>
+    </p>
+<% end %>
+
