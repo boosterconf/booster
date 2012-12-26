@@ -75,7 +75,9 @@
           <% end %>
           <tr>
             <td>
-
+              <% if registration.unfinished %>
+                <span style="color: red; font-weight: bold">[U]</span>
+              <% end %>
               <%= link_to h(registration.user.name), registration.user %>
               (<%= h registration.user.company %>)
             </td>

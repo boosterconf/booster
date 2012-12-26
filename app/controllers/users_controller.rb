@@ -136,8 +136,7 @@ class UsersController < ApplicationController
   end
 
   def login(user)
-    p UserSession.create(user)
-
+    UserSession.create(user)
   end
 
   def early_bird_is_active?
@@ -164,10 +163,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(params[:id], :include => :registration)
     @user.roles_will_change!
     @user.roles = params[:roles].join(",") unless params[:roles] == nil
-    if @user.update_attributes(params[:user])
+    @user.assign_attributes(params[:user])
+    if @user.valid?
+      @user.registration.unfinished = false
+      @user.save
       flash[:notice] = "Updated profile."
       redirect_to @user
     else

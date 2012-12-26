@@ -2,6 +2,8 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
+  SOME_EMAIL = "a@b.no"
+
   context 'An unauthenticated user' do
 
     should 'be able to create a new user' do
@@ -24,7 +26,7 @@ class UsersControllerTest < ActionController::TestCase
     context 'following a valid user creation link' do
       setup do
 
-        @u = User.create_unfinished("b@b.no", "speaker")
+        @u = User.create_unfinished(SOME_EMAIL, "speaker")
         @u.save(:validate => false)
 
         kill_all_sessions # TODO: not sure why we have to do this, but we do.
@@ -58,6 +60,20 @@ class UsersControllerTest < ActionController::TestCase
         get :new
         assert flash[:error]
       end
+    end
+  end
+
+  context 'An unfinished user updating his profile info' do
+    setup do
+      @u = User.create_unfinished(SOME_EMAIL, "speaker")
+      @u.save(:validate => false)
+
+      post :update, :id => @u.id, :user => update_user_params
+    end
+
+    should 'no longer be unfinished' do
+      registration = User.find_by_email(SOME_EMAIL).registration
+      assert !registration.unfinished
     end
   end
 
@@ -124,10 +140,14 @@ class UsersControllerTest < ActionController::TestCase
 
   private
   def create_user_params
+    update_user_params.merge!({"email" => "test@mail.com"})
+  end
+
+  def update_user_params
     {"accepted_privacy_guidelines" => "1", "company" => "Test", "name" => "Test", "accept_optional_email" => "1",
      "password" => "fjasepass", "password_confirmation" => "fjasepass", "phone_number" => "92043382", "role" => "Developer", "birthyear" => 1984, "hometown" => "Bergen",
-     "registration_attributes" => {"ticket_type_old" => "full_price", "manual_payment" => "", "free_ticket" => "false", "includes_dinner" => "1"},
-     "email" => "test@mail.com"}
+     "registration_attributes" => {"ticket_type_old" => "full_price", "manual_payment" => "", "free_ticket" => "false", "includes_dinner" => "1"}
+     }
   end
 
   def create_speaker_params
@@ -148,4 +168,5 @@ class UsersControllerTest < ActionController::TestCase
     session = UserSession.find
     session.destroy if session.present?
   end
+
 end
