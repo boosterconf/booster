@@ -7,7 +7,7 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
 
   context "An authenticated user" do
     setup do
-      login_quentin
+      login_as :quentin
     end
 
     context "creating a talk" do
@@ -26,6 +26,20 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
             post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => EMAIL}
           end
         end
+      end
+
+      should 'when a user with given email already exists should not create a new user' do
+        assert_no_difference('User.count') do
+          assert_no_difference('Registration.count') do
+            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => users(:quentin).email}
+          end
+        end
+      end
+
+      should 'when a user with given email already exists should send an email to us' do
+          assert_difference('ActionMailer::Base.deliveries.size', +1) do
+            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => users(:quentin).email}
+          end
       end
 
       context "create a new user" do
@@ -68,12 +82,6 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         "participant_requirements" => "Nothing",
         "equipment" => "Stables and hay"
     }
-  end
-
-  def login_quentin
-    q = users(:quentin)
-    UserSession.create(q)
-    q
   end
 
 end

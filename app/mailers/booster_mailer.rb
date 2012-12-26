@@ -184,6 +184,14 @@ class BoosterMailer < ActionMailer::Base
          :subject => "#{SUBJECT_PREFIX} You have been added as a speaker to a workshop")
   end
 
+  def organizer_notification(text)
+    @text = text
+
+    mail(:to => FROM_EMAIL,
+         :from => FROM_EMAIL,
+         :subject => "ROOTS APP organizer notification - take action!")
+  end
+
   def reminder_to_earlier_participants_email(user)
     @name = user.name
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Remember to sign up for Booster 2013 before the Early Bird deadline!")

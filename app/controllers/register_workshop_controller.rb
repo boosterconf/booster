@@ -38,13 +38,21 @@ class RegisterWorkshopController < ApplicationController
     @talk.users << current_user
 
     if @talk.save
-      if params[:user].present? && params[:user][:additional_speaker_email].present?
-        additional_speaker = User.create_unfinished(params[:user][:additional_speaker_email], "speaker")
-        additional_speaker.save(:validate => false)
-        @talk.users << additional_speaker
-        @talk.save!
 
-        BoosterMailer.additional_speaker(current_user, additional_speaker, @talk).deliver
+      if params[:user].present? && params[:user][:additional_speaker_email].present?
+
+      additional_speaker_email = params[:user][:additional_speaker_email]
+
+        if User.find_by_email(additional_speaker_email)
+          BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@talk.title}. Go fix!").deliver
+        else
+          additional_speaker = User.create_unfinished(additional_speaker_email, "speaker")
+          additional_speaker.save(:validate => false)
+          @talk.users << additional_speaker
+          @talk.save!
+
+          BoosterMailer.additional_speaker(current_user, additional_speaker, @talk).deliver
+        end
       end
 
       redirect_to register_workshop_details_url
