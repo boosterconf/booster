@@ -18,6 +18,10 @@ class ActionController::TestCase
   def last_email_sent
     ActionMailer::Base.deliveries.last
   end
+
+  def logged_in_user
+    UserSession.find.record
+  end
 end
 
 class ActiveSupport::TestCase  

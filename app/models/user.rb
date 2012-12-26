@@ -240,6 +240,16 @@ class User < ActiveRecord::Base
     User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
   end
 
+  def self.create_unfinished(email, ticket_type)
+    user = User.new
+    user.create_registration
+    user.email = email
+    user.password = "'tisASecret!" # må sette passord, av grunner bare authlogic forstår
+    user.registration.ticket_type_old = ticket_type
+    user.registration.unfinished = true
+    user.registration.unique_reference = SecureRandom.urlsafe_base64
+    user
+  end
 
 end
 

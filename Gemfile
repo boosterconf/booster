@@ -21,11 +21,11 @@ group :development, :test do
 end
 group :test do
   gem 'mocha', :require => false
-  gem 'shoulda'
   gem 'rspec-rails'
   gem 'test-unit'
   gem "minitest"
   gem "minitest-reporters", '>= 0.5.0'
+  gem 'shoulda'
 end
 
 

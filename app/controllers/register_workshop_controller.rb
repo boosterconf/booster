@@ -39,14 +39,7 @@ class RegisterWorkshopController < ApplicationController
 
     if @talk.save
       if params[:user].present? && params[:user][:additional_speaker_email].present?
-        additional_speaker = User.new
-        additional_speaker.create_registration
-        additional_speaker.email = params[:user][:additional_speaker_email]
-        additional_speaker.password = "'tisASecret!" # må sette passord, av grunner bare authlogic forstår
-        additional_speaker.registration.ticket_type_old = "speaker"
-        additional_speaker.registration.unfinished = true
-        additional_speaker.registration.unique_reference = SecureRandom.urlsafe_base64
-
+        additional_speaker = User.create_unfinished(params[:user][:additional_speaker_email], "speaker")
         additional_speaker.save(:validate => false)
         @talk.users << additional_speaker
         @talk.save!

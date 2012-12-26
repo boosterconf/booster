@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_user, :except => [:new, :create]
+  before_filter :require_user, :except => [:new, :create, :from_reference]
   before_filter :require_admin, :only => [:index, :delete_bio, :phone_list, :dietary_requirements]
   before_filter :require_admin_or_self, :only => [:show, :edit, :update]
   before_filter :require_admin_or_speaker, :only => [:create_bio]
@@ -136,7 +136,8 @@ class UsersController < ApplicationController
   end
 
   def login(user)
-    UserSession.create(:login => user.email, :password => user.password)
+    p UserSession.create(user)
+
   end
 
   def early_bird_is_active?
@@ -207,8 +208,26 @@ class UsersController < ApplicationController
     @users = User.all(:order => "registrations.ticket_type_old, name", :include => :registration, :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
   end
 
-  protected
+  def from_reference
 
+    if current_user
+      redirect_to current_user_url
+      return
+    end
+
+    registration = Registration.find_by_unique_reference(params[:reference], :include => [:user])
+
+    unless registration.present?
+      flash[:error] = "This link does no longer work"
+      return
+    end
+
+    login registration.user
+
+    redirect_to edit_user_path registration.user
+  end
+
+  protected
   def total_by_date(users, date_range)
     users_by_date = users.group_by { |u| u.created_at.to_date }
     per_date = []

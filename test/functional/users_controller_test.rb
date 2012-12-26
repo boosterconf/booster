@@ -3,6 +3,7 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
 
   context 'An unauthenticated user' do
+
     should 'be able to create a new user' do
       post :create, :user => create_user_params
       assert_not_nil assigns :user
@@ -10,14 +11,46 @@ class UsersControllerTest < ActionController::TestCase
       assert_nil flash[:error]
     end
 
-    context "with limit for number of user reached" do
+    context 'following an invalid user creation reference link' do
+      setup do
+        get :from_reference, :reference => "bogus"
+      end
+
+      should 'get an error message' do
+        assert flash[:error] != nil
+      end
+    end
+
+    context 'following a valid user creation link' do
+      setup do
+
+        @u = User.create_unfinished("b@b.no", "speaker")
+        @u.save(:validate => false)
+
+        kill_all_sessions # TODO: not sure why we have to do this, but we do.
+
+        get :from_reference, :reference => @u.registration.unique_reference
+      end
+
+      should 'be redirected to user edit page' do
+        assert_redirected_to edit_user_path @u
+      end
+
+      should 'be logged in as that user' do
+        assert logged_in_user.email == @u.email
+      end
+
+
+    end
+
+    context "trying to create a new user with limit for number of users reached" do
       setup do
         User.stubs(:count).returns(500)
         AppConfig.stubs(:max_users_limit).returns(500)
       end
 
       should "give an error message when create is called" do
-        post :create, :user => create_user_params()
+        post :create, :user => create_user_params
         assert flash[:error]
       end
 
@@ -31,6 +64,18 @@ class UsersControllerTest < ActionController::TestCase
   context 'A normal user' do
     setup do
       @q = login_quentin
+    end
+
+    context 'that follows a valid user creation link' do
+      setup do
+        @u = User.create_unfinished("a@b.no", "speaker")
+        @u.save(:validate => false)
+        get :from_reference, :reference => @u.registration.unique_reference
+      end
+
+      should 'be redirected to profile page' do
+        assert_redirected_to current_user_url
+      end
     end
 
     should "not be able to create a bio" do
@@ -99,4 +144,8 @@ class UsersControllerTest < ActionController::TestCase
     q
   end
 
+  def kill_all_sessions
+    session = UserSession.find
+    session.destroy if session.present?
+  end
 end
