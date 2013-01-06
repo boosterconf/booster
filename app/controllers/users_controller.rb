@@ -16,14 +16,14 @@ class UsersController < ApplicationController
   end
 
   def show
-    logger.debug("Looking for " + params[:id])
     if params[:id] == 'current'
       @user = current_user
     else
       @user = User.find(params[:id])
     end
 
-    init_registration()
+    init_registration
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -48,10 +48,10 @@ class UsersController < ApplicationController
       @user.invited = true
       @user.registration.manual_payment = false
     else
-      #Default to manual payement. Paypal is expensive, and senderegning.no works fine.
+      # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
       @user.registration.ticket_type_old = params[:ticket_type_old] || 'full_price'
-      if @user.registration.ticket_type_old == 'full_price' && Time.now < AppConfig.early_bird_ends
+      if @user.registration.ticket_type_old == 'full_price' && early_bird_is_active?
         @user.registration.ticket_type_old = 'early_bird'
       end
     end
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    init_registration()
+    init_registration
   end
 
   def init_registration
@@ -69,17 +69,13 @@ class UsersController < ApplicationController
       @user.registration = Registration.new
       # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
-      if early_bird_is_still_active
+      if early_bird_is_active?
         @user.registration.ticket_type_old = 'early_bird'
       else
         @user.registration.ticket_type_old = 'full_price'
       end
       @user.registration.save!
     end
-  end
-
-  def early_bird_is_still_active
-    Time.now < AppConfig.early_bird_ends
   end
 
   def create
