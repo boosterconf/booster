@@ -6,6 +6,34 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'An unauthenticated user' do
 
+    context 'creating a new user when early bird is still on' do
+
+      setup do
+        AppConfig.stubs(:early_bird_ends).returns(Time.now + 1.days)
+        post :create, :user => create_user_params
+        @registration = Registration.unscoped.order("id asc").last
+      end
+
+      should 'get an early bird ticket' do
+        @registration.ticket_type_old = 'early_bird'
+      end
+
+    end
+
+    context 'creating a new user after early bird is over' do
+
+      setup do
+        AppConfig.stubs(:early_bird_ends).returns(Time.now - 1.days)
+        post :create, :user => create_user_params
+        @registration = Registration.unscoped.order("id asc").last
+      end
+
+      should 'get a full price ticket' do
+        @registration.ticket_type_old = 'full_price'
+      end
+
+    end
+
     should 'be able to create a new user' do
       post :create, :user => create_user_params
       assert_not_nil assigns :user
@@ -26,20 +54,20 @@ class UsersControllerTest < ActionController::TestCase
     context 'following a valid user creation link' do
       setup do
 
-        @u = User.create_unfinished(SOME_EMAIL, "speaker")
-        @u.save(:validate => false)
+        @user = User.create_unfinished(SOME_EMAIL, "speaker")
+        @user.save(:validate => false)
 
         kill_all_sessions # TODO: not sure why we have to do this, but we do.
 
-        get :from_reference, :reference => @u.registration.unique_reference
+        get :from_reference, :reference => @user.registration.unique_reference
       end
 
       should 'be redirected to user edit page' do
-        assert_redirected_to edit_user_path @u
+        assert_redirected_to edit_user_path @user
       end
 
       should 'be logged in as that user' do
-        assert logged_in_user.email == @u.email
+        assert logged_in_user.email == @user.email
       end
 
 
@@ -65,10 +93,10 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'An unfinished user updating his profile info' do
     setup do
-      @u = User.create_unfinished(SOME_EMAIL, "speaker")
-      @u.save(:validate => false)
+      @user = User.create_unfinished(SOME_EMAIL, "speaker")
+      @user.save(:validate => false)
 
-      post :update, :id => @u.id, :user => update_user_params
+      post :update, :id => @user.id, :user => update_user_params
     end
 
     should 'no longer be unfinished' do
@@ -79,14 +107,14 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'A normal user' do
     setup do
-      @q = login_quentin
+      @normal_user = login_quentin
     end
 
     context 'that follows a valid user creation link' do
       setup do
-        @u = User.create_unfinished("a@b.no", "speaker")
-        @u.save(:validate => false)
-        get :from_reference, :reference => @u.registration.unique_reference
+        @user = User.create_unfinished("a@b.no", "speaker")
+        @user.save(:validate => false)
+        get :from_reference, :reference => @user.registration.unique_reference
       end
 
       should 'be redirected to profile page' do
@@ -96,11 +124,11 @@ class UsersControllerTest < ActionController::TestCase
 
     should "not be able to create a bio" do
 
-      @q.registration = Registration.new
-      @q.registration.ticket_type_old = 'early_bird'
-      @q.registration.save
-      assert @q.id && @q.registration.id
-      post :create_bio, :id => @q.id
+      @normal_user.registration = Registration.new
+      @normal_user.registration.ticket_type_old = 'early_bird'
+      @normal_user.registration.save
+      assert @normal_user.id && @normal_user.registration.id
+      post :create_bio, :id => @normal_user.id
       assert_response 302
     end
   end

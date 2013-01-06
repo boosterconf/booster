@@ -67,15 +67,19 @@ class UsersController < ApplicationController
   def init_registration
     unless @user.registration
       @user.registration = Registration.new
-      #Default to manual payment. Paypal is expensive, and sendregning.no works fine.
+      # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
-      if Time.now < AppConfig.early_bird_ends
+      if early_bird_is_still_active
         @user.registration.ticket_type_old = 'early_bird'
       else
         @user.registration.ticket_type_old = 'full_price'
       end
       @user.registration.save!
     end
+  end
+
+  def early_bird_is_still_active
+    Time.now < AppConfig.early_bird_ends
   end
 
   def create
