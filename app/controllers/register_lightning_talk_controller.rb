@@ -16,7 +16,6 @@ class RegisterLightningTalkController < ApplicationController
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
     @user.roles = params[:roles].join(",") unless params[:roles] == nil
-    p params.inspect
 
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
@@ -36,6 +35,7 @@ class RegisterLightningTalkController < ApplicationController
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.users << current_user
     if @talk.save
+      BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
       if current_user.has_all_statistics
         redirect_to "/register_lightning_talk/finish"
       else

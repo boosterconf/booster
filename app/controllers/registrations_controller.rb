@@ -21,7 +21,6 @@ class RegistrationsController < ApplicationController
 
   def edit
     @registration = Registration.find(params[:id])
-    p @registration.inspect
     @registration.payment_notification ||= @registration.build_payment_notification
   end
 

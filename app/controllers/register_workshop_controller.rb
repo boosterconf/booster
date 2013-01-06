@@ -49,6 +49,8 @@ class RegisterWorkshopController < ApplicationController
         end
       end
 
+      BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
+
       if current_user.has_all_statistics
         redirect_to register_lightning_talk_finish_url
       else

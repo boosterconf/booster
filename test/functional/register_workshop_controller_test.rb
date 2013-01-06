@@ -2,15 +2,21 @@ require 'test_helper'
 
 class RegisterWorkshopControllerTest < ActionController::TestCase
 
-  EMAIL = "a@b.no"
-  TITLE = "hest"
+  EMAIL = 'a@b.no'
+  TITLE = 'hest'
 
-  context "An authenticated user" do
+  context 'An authenticated user' do
     setup do
       login_as :quentin
     end
 
-    context "creating a talk" do
+    context 'creating a talk' do
+
+      should 'get an email confirming that the talk has been submitted' do
+        assert_difference('ActionMailer::Base.deliveries.size', +1) do
+          post :create_talk, :talk => create_talk_params
+        end
+      end
 
       should "not create a new user when no additional speaker is given" do
         assert_no_difference('User.count') do
@@ -28,18 +34,24 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         end
       end
 
-      should 'when a user with given email already exists should not create a new user' do
-        assert_no_difference('User.count') do
-          assert_no_difference('Registration.count') do
-            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => users(:quentin).email}
+      context 'when a user with given email already exists' do
+        setup do
+          @existing_email = users(:quentin).email
+        end
+
+        should 'not create a new user' do
+          assert_no_difference('User.count') do
+            assert_no_difference('Registration.count') do
+              post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => @existing_email}
+            end
           end
         end
-      end
 
-      should 'when a user with given email already exists should send an email to us' do
-          assert_difference('ActionMailer::Base.deliveries.size', +1) do
-            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => users(:quentin).email}
+        should 'send an email to us' do
+          assert_difference('ActionMailer::Base.deliveries.size', +2) do
+            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => @existing_email}
           end
+        end
       end
 
       context "create a new user" do
@@ -49,15 +61,15 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
           @user = User.unscoped.order("id asc").last
         end
 
-        should "with a random unique reference" do
+        should "have a random unique reference" do
           assert_not_nil @registration.unique_reference
         end
 
-        should "that gets an email" do
+        should "get an email" do
           assert last_email_sent[:to] = EMAIL
         end
 
-        should "marked as unfinished" do
+        should "be marked as unfinished" do
           assert_true @registration.unfinished
         end
 
