@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 
 
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
-
   validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :company, :message => "You have to specify a company."
 
@@ -35,7 +34,7 @@ class User < ActiveRecord::Base
   end
 
   def attend_dinner(have_dinner)
-    self.registration.includes_dinner=have_dinner if self.registration
+    self.registration.includes_dinner = have_dinner if self.registration
     save!
   end
 
@@ -48,7 +47,7 @@ class User < ActiveRecord::Base
   end
 
   def user_status
-    registration ? registration.description : "Ukjent"
+    registration ? registration.description : "Unknown"
   end
 
   def has_role?(role)
@@ -222,7 +221,7 @@ class User < ActiveRecord::Base
 
   def self.featured_speakers
     potential_speakers = all(:conditions => ['featured_speaker = ?', true], :include => [:bio, :talks],
-                                   :order => 'created_at DESC')
+                             :order => 'created_at DESC')
     speakers = []
     potential_speakers.each do |sp|
       if sp.is_featured?
