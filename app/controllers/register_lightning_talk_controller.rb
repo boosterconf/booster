@@ -37,7 +37,6 @@ class RegisterLightningTalkController < ApplicationController
     @talk.users << current_user
     if @talk.save
       if current_user.has_all_statistics
-        puts "yes sir we have all statistics"
         redirect_to "/register_lightning_talk/finish"
       else
         redirect_to "/register_lightning_talk/details"

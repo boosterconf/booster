@@ -39,26 +39,45 @@ class RegisterWorkshopController < ApplicationController
 
     if @talk.save
 
-      if params[:user].present? && params[:user][:additional_speaker_email].present?
+      if has_entered_additional_speaker_email
+        additional_speaker_email = params[:user][:additional_speaker_email]
 
-      additional_speaker_email = params[:user][:additional_speaker_email]
-
-        if User.find_by_email(additional_speaker_email)
-          BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@talk.title}. Go fix!").deliver
+        if additional_speaker_already_has_registered_user(additional_speaker_email)
+          send_email_to_organizers_to_go_fix_it(additional_speaker_email)
         else
-          additional_speaker = User.create_unfinished(additional_speaker_email, "speaker")
-          additional_speaker.save(:validate => false)
-          @talk.users << additional_speaker
-          @talk.save!
-
-          BoosterMailer.additional_speaker(current_user, additional_speaker, @talk).deliver
+          create_user_for_additional_speaker(additional_speaker_email, @talk)
         end
       end
 
-      redirect_to register_workshop_details_url
+      if current_user.has_all_statistics
+        redirect_to register_lightning_talk_finish_url
+      else
+        redirect_to register_lightning_talk_details_url
+      end
     else
       render :action => "talk"
     end
+  end
+
+  def send_email_to_organizers_to_go_fix_it(additional_speaker_email)
+    BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@talk.title}. Go fix!").deliver
+  end
+
+  def create_user_for_additional_speaker(additional_speaker_email, talk)
+    additional_speaker = User.create_unfinished(additional_speaker_email, "speaker")
+    additional_speaker.save(:validate => false)
+    talk.users << additional_speaker
+    talk.save!
+
+    BoosterMailer.additional_speaker(current_user, additional_speaker, @talk).deliver
+  end
+
+  def additional_speaker_already_has_registered_user(additional_speaker_email)
+    User.find_by_email(additional_speaker_email)
+  end
+
+  def has_entered_additional_speaker_email
+    params[:user].present? && params[:user][:additional_speaker_email].present?
   end
 
   def details
