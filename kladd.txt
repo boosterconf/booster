@@ -1,0 +1,63 @@
+"[#<Talk id: 374648174
+topic_id: nil
+title: \"Seven\"
+description: \"MyText\"
+presenting_naked: false
+video_url: \"MyString\"
+position: 1
+submitted: false
+audience_level: \"MyString\"
+votes_count: 0
+created_at: \"2013-01-07 19:22:36\"
+updated_at: \"2013-01-07 19:22:36\"
+allow_commercial_use: nil
+allow_derivatives: nil
+slide_file_name: nil
+slide_content_type: nil
+slide_file_size: nil
+slide_updated_at: nil
+period_id: nil
+comments_count: 1
+acceptance_status: \"pending\"
+email_sent: false
+sum_of_votes: nil
+num_of_votes: nil
+talk_type_id: 651483948
+max_participants: nil
+participants_count: 0
+language: \"English\"
+participant_requirements: nil
+equipment: nil
+room_setup: nil>
+
+#<Talk id: 638205575
+topic_id: nil
+title: \"Eight\"
+description: \"MyText\"
+presenting_naked: false
+video_url: \"MyString\"
+position: 1
+submitted: false
+audience_level: \"MyString\"
+votes_count: 0
+created_at: \"2013-01-07 19:22:36\"
+updated_at: \"2013-01-07 19:22:36\"
+allow_commercial_use: nil
+allow_derivatives: nil
+slide_file_name: nil
+slide_content_type: nil
+slide_file_size: nil
+slide_updated_at: nil
+period_id: nil
+comments_count: 1
+acceptance_status: \"pending\"
+email_sent: false
+sum_of_votes: nil
+num_of_votes: nil
+talk_type_id: 107741164
+max_participants: nil
+participants_count: 0
+language: \"English\"
+participant_requirements: nil
+equipment: nil
+room_setup: nil>]"

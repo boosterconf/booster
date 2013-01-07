@@ -1,6 +1,14 @@
 Booster2013::Application.routes.draw do
 
   resources :users
+  resources :acceptances do
+    member do
+      get :accept
+      get :refuse
+      get :await
+      get :send_mail
+    end
+  end
 
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
 

@@ -12,6 +12,9 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 
+gem "factory_girl_rails", "~> 3.0"
+
+
 group :production do
   gem 'pg'
 end
