@@ -12,6 +12,7 @@ one:
   acceptance_status: refused
   talk_type: lightning_talk
   language: English
+  max_participants: 100
 
 two:
   title: Two
@@ -25,6 +26,7 @@ two:
   acceptance_status: accepted
   talk_type: lightning_talk
   language: English
+  max_participants: 100
 
 three:
   title: Three
@@ -38,6 +40,7 @@ three:
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
+  max_participants: 100
 
 four:
   title: Four
@@ -51,6 +54,7 @@ four:
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
+  max_participants: 100
 
 five:
   title: Five
@@ -64,6 +68,7 @@ five:
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
+  max_participants: 100
 
 six:
   title: Six
@@ -77,6 +82,7 @@ six:
   acceptance_status: pending
   talk_type: tutorial
   language: English
+  max_participants: 100
 
 seven:
   title: Seven
@@ -90,6 +96,7 @@ seven:
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
+  max_participants: 100
 
 eight:
   title: Eight
@@ -103,6 +110,7 @@ eight:
   acceptance_status: pending
   talk_type: tutorial
   language: English
+  max_participants: 100
 
 nine:
   title: Nine
@@ -116,6 +124,7 @@ nine:
   acceptance_status: refused
   talk_type: tutorial
   language: English
+  max_participants: 100
 
 ten:
   title: Ten
@@ -129,6 +138,7 @@ ten:
   acceptance_status: accepted
   talk_type: tutorial
   language: English
+  max_participants: 100
 
 full_tutorial:
   title: Full tutorial
