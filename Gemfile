@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'paperclip', '~>3.0'
 
