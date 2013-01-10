@@ -21,6 +21,7 @@ end
 group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'taps'
 end
 group :test do
   gem 'mocha', :require => false
