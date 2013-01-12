@@ -8,7 +8,7 @@ prices: &prices
   mod251: 600
   early_bird: 6250
   early_bird_dnd: 6250
-  full_price: 7500
+  full_price: 8000
   lightning: 5625
   student: 1600
   dinner: 0
