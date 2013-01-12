@@ -14,7 +14,23 @@
   <div class="row">
 
     <article class="span4 pull-right">
-      <h1 class="hidden-phone">&nbsp;</h1>
+      <!--h1 class="hidden-phone">&nbsp;</h1-->
+
+      <div class="thumbnail-with-button">
+        <h2>Tickets</h2>
+
+        <p>
+          All tickets includes the full 3 day conference and the conference dinner.
+        </p>
+
+        <p>
+            <em>Early-bird ends on <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>.</em>
+        </p>
+
+        <p>
+            <a href="/users/new" class="btn btn-primary btn-large">Buy a ticket!</a>
+        </p>
+      </div>
 
       <div class="navbar hidden-phone social-links">
         <ul class="nav">
@@ -154,14 +170,6 @@
       <%= link_to 'Show all', info_speakers_path %>
     </article>
   </div>
-  <article>
-
-    <h1>Tickets</h1>
-
-    <p>
-      <%= link_to "Early Bird", new_user_path %> tickets are available
-      now. <%= link_to "Get them here!", new_user_path %></p>
-  </article>
 </div>
 
 <% content_for :javascript do %>
