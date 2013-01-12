@@ -1,0 +1,27 @@
+<article>
+  <h2>Tickets for Booster 2013</h2>
+
+  <p>
+    Discounted early-bird tickets are for sale until <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>.
+    All tickets includes the conference dinner.
+  </p>
+  <ul>
+    <li>Early bird-ticket: NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>
+       (ends <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>)
+    </li>
+    <li>Full price ticket: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %></li>
+    <!-- li>Students: NOK <%= PAYMENT_CONFIG[:prices]['student'].to_i %></li -->
+    <li>Lightning talk speakers: NOK <%= PAYMENT_CONFIG[:prices]['lightning'].to_i %></li>
+    <li>Tutorial speakers: Free of charge</li>
+   </ul>
+   <p>
+     All prices are <strong>including</strong> VAT.
+   </p>
+
+  <p>
+    <a href="/users/new" class="btn btn-primary btn-large">Buy a ticket!</a>
+    <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
+    <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
+  </p>
+
+</article>
