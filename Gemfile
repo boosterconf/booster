@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.8'
+gem 'rails', '3.2.11'
 gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
 gem 'paperclip', '~>3.0'
 
@@ -12,12 +12,16 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 
+gem "factory_girl_rails", "~> 3.0"
+
+
 group :production do
   gem 'pg'
 end
 group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
+  gem 'taps'
 end
 group :test do
   gem 'mocha', :require => false

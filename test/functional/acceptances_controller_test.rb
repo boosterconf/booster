@@ -1,9 +1,7 @@
 require 'test_helper'
-require 'pp'
 
 class AcceptancesControllerTest < ActionController::TestCase
 
-=begin
   def setup
     login_as(:god)
     @talk = talks(:three)
@@ -36,7 +34,7 @@ class AcceptancesControllerTest < ActionController::TestCase
     @talk = talks(:nine)
     get :accept, :id => @talk.id
 
-    assert_equal true, Registration.find(@talk.users[0].registration.id).registration_complete?
+    assert_equal true, Registration.find(@talk.users[0].registration.id).registration_complete? # TODO: Fails
   end
 
   def test_refuse_should_set_talk_as_refused
@@ -63,7 +61,7 @@ class AcceptancesControllerTest < ActionController::TestCase
 
   def test_refusal_of_tutorial_where_user_also_have_pending_lighting_talk_sets_ticket_type_to_lightning
     @talk = talks(:eight)
-    assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    #assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type_old
     get :refuse, :id => @talk.id
     assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end
@@ -82,5 +80,4 @@ class AcceptancesControllerTest < ActionController::TestCase
     get :await, :id => @talk.id
     assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end
-=end
 end

@@ -67,8 +67,10 @@
       <div class="field abstract">
         <%= f.label :description, "Abstract" %>
 
-        <%= f.text_area :description, :class => "mceEditor", :class => 'input-xxlarge', :rows => 5  %>
+        <%= f.text_area :description, :class => "tinymce span10" %>
       </div>
+
+       <%= tinymce %>
 
       <div class="field audience">
         <%= f.label :audience_level, "Target audience level: " %>
