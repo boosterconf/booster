@@ -103,7 +103,7 @@ module ApplicationHelper
   end
 
   def self.early_bird_end_date
-    to_date "2012-02-22 23:59:59"
+    to_date "2013-01-28 23:59:59"
   end
 
   def self.to_date(a_string)
