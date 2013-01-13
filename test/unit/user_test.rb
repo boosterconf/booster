@@ -15,7 +15,6 @@ class UserTest < ActiveSupport::TestCase
 
   def test_user_with_one_pending_talk_does_not_have_all_talks_refused
     god = users(:god)
-    p god.talks.map { |t| t.acceptance_status}
     assert !god.has_all_talks_refused?
   end
 
@@ -37,4 +36,15 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "full_price", god.registration.ticket_type_old
   end
 
+  def test_updating_ticket_type_for_user_with_pending_workshop_sets_speaker_ticket_type
+    speaker = users(:multispeaker)
+    speaker.update_ticket_type!('bogus')
+    assert_equal 'speaker', speaker.registration.ticket_type_old
+  end
+
+  def test_updating_ticket_type_for_user_with_pending_lightning_talk_sets_lightning_talk_ticket_type
+    speaker = users(:test)
+    speaker.update_ticket_type!('bogus')
+    assert_equal 'lightning', speaker.registration.ticket_type_old
+  end
 end

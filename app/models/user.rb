@@ -71,7 +71,7 @@ class User < ActiveRecord::Base
     self.has_accepted_lightning_talk? || self.has_accepted_tutorial?
   end
 
-  def update_ticket_type(current_user)
+  def update_ticket_type!(current_user='Unknown')
     unless self.registration.special_ticket?
       if self.has_accepted_or_pending_tutorial?
         self.registration.ticket_type_old = 'speaker'

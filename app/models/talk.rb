@@ -118,7 +118,7 @@ class Talk < ActiveRecord::Base
 
   def update_speakers(current_user)
     for speaker in self.users
-      speaker.update_ticket_type(current_user)
+      speaker.update_ticket_type!(current_user)
     end
   end
 
