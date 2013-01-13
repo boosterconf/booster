@@ -41,13 +41,11 @@ conference is for all IT professionals seeking to learn from each other and from
           <li><a href="/">Home</a></li>
           <li><a href="/register_lightning_talk/start">Propose a lightning talk</a></li>
           <li><a href="/register_workshop/start">Propose a workshop</a></li>
-          <% if !logged_in %>
-              <!--li><a href="/users/new">Get a ticket</a></li-->
+          <% unless logged_in %>
               <li><a href="/info/tickets">Tickets</a></li>
           <% end %>
-          <!--<li><a href="/info/speakers">Speakers</a></li>-->
+          <li><a href="/info/speakers">Speakers</a></li>
           <li><a href="/talks">Suggested talks</a></li>
-
           <li><a href="/info/about">About us</a></li>
           <li><a href="/info/sponsors">For sponsors</a></li>
           <% if logged_in %>
@@ -59,7 +57,6 @@ conference is for all IT professionals seeking to learn from each other and from
           <% if admin? %>
               <li><%= link_to 'Admin', :controller => 'admin', :action => 'index' %></li>
           <% end %>
-        </ul>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -75,7 +72,7 @@ conference is for all IT professionals seeking to learn from each other and from
       </a>
     </h1>
 
-    <p>International Software Conference. Join us on 13 - 15 March 2013, in beautiful Bergen, Norway!</p>
+    <p>A software conference for the whole team - 13 - 15 March 2013, in Bergen, Norway</p>
   </div>
 </header>
 
