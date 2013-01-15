@@ -1,7 +1,7 @@
 <div class="row talk" id="<%= dom_id(talk) %>">
 
   <div class="span8">
-    <h4><%= talk.title %></h4>
+    <h4><%= link_to talk.title, talk %></h4>
 
     <p class="muted">
       <%=  talk.talk_type.name %> - Suggested by <%= talk.users.map { |u| u.name }.join(", ") %>,

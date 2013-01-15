@@ -19,7 +19,7 @@
 
 
 <% if @talk.users.include?(current_user) || admin? %>
-    <p><%#= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
+    <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
     <%# unless @talk.slide_file_name.nil? %>
     <%#h3>Presentation slides</h3%>
