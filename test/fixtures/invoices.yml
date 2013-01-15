@@ -1,0 +1,15 @@
+one:
+  our_reference: MyString
+  your_reference: MyString
+  recipient_name: MyString
+  adress: MyString
+  zip: MyString
+  city: MyString
+
+two:
+  our_reference: MyString
+  your_reference: MyString
+  recipient_name: MyString
+  adress: MyString
+  zip: MyString
+  city: MyString
