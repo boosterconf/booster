@@ -243,7 +243,7 @@ class User < ActiveRecord::Base
     user = User.new
     user.create_registration
     user.email = email
-    user.password = "'tisASecret!" # må sette passord, av grunner bare authlogic forstår
+    user.password = SecureRandom.urlsafe_base64  # må sette passord, av grunner bare authlogic forstår
     user.registration.ticket_type_old = ticket_type
     user.registration.unfinished = true
     user.registration.unique_reference = SecureRandom.urlsafe_base64
