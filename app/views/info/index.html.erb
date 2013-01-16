@@ -24,11 +24,11 @@
         </p>
 
         <p>
-            <em>Early-bird ends on <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>.</em>
+          <em>Early-bird ends on <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>.</em>
         </p>
 
         <p>
-            <%= link_to 'Tickets and prices', info_tickets_url, :class => "btn btn-primary btn-large" %>
+          <%= link_to 'Tickets and prices', info_tickets_url, :class => "btn btn-primary btn-large" %>
         </p>
       </div>
 
@@ -60,13 +60,14 @@
     </article>
 
     <article class="span7">
-      <h2 class="announce">Welcome to Booster 2013!</h2>
+      <h2 class="announce">Welcome to Booster 2013</h2>
 
       <p>
-        Early bird tickets are available until January 28th.
+        It's time to make plans for attending Booster. Early bird tickets are available until January 28th.
       </p>
+
       <p>
-          <%= link_to "Get them while they're still available!", info_tickets_url, :class => "btn btn-primary btn-large" %>
+        <%= link_to "Get them while they're still available!", info_tickets_url, :class => "btn btn-primary btn-large" %>
       </p>
     </article>
 
@@ -74,15 +75,14 @@
       <h3>Propose a session</h3>
 
       <p>
-        The CFP is open for workshops and lightning talks. Submit your abstract and get a chance to be part
-                of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
-                the Speaker's Dinner.
+        The CFP is now open for workshops and lightning talks. Submit your abstract and get a chance to be part
+        of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
+        the Speaker's Dinner.
       </p>
 
       <p>
-        CFP ends January 21st for workshops, January 28th for lightning talks.
+        CFP ends January 21st for workshops and January 28th for lightning talks.
       </p>
-
 
 
       <p>
@@ -95,7 +95,7 @@
 
   <div class="row">
     <article class="span12">
-      <h2 class="sectionhead">Some of our presenters</h2>
+      <h2 class="sectionhead">Some of our speakers</h2>
       <% @speakers.each do |speaker| %>
           <div class="span2 speaker-box">
             <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">
