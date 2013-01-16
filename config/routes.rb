@@ -1,6 +1,11 @@
 Booster2013::Application.routes.draw do
 
+  get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
+  get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
+  post 'users/create_skeleton' => 'users#create_skeleton', :as => :create_skeleton_user
+
   resources :users
+
   resources :acceptances do
     member do
       get :accept
@@ -9,8 +14,6 @@ Booster2013::Application.routes.draw do
       get :send_mail
     end
   end
-
-  get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
 
   resources :user_sessions
 

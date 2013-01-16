@@ -210,6 +210,34 @@ class UsersController < ApplicationController
     @users = User.all(:order => "registrations.ticket_type_old, name", :include => :registration, :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
   end
 
+  def new_skeleton
+    @user = User.new
+    @user.registration = Registration.new
+  end
+
+  def create_skeleton
+
+    p params
+    email = params[:user][:email]
+
+    if user_already_exists(email)
+      flash[:error] = "This email already has a user"
+      render :action => 'new_skeleton'
+    else
+      @user = User.create_unfinished(email, params[:user][:registration_attributes][:ticket_type_old])
+      @user.company = params[:user][:company]
+      @user.save!(:validate => false)
+
+      flash[:notice] = "Skeleton user created - creation link is #{user_from_reference_url(@user.registration.unique_reference)}"
+      redirect_to new_skeleton_user_path
+
+    end
+  end
+
+  def user_already_exists(email)
+    User.find_by_email(email)
+  end
+
   def from_reference
 
     if current_user

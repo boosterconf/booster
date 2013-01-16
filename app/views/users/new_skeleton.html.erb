@@ -1,0 +1,23 @@
+<h2>Register a skeleton user</h2>
+
+<p style="color:green"><%= flash[:notice] %> </p>
+
+<%= form_for @user, :url => create_skeleton_user_path do |f| %>
+
+    <%= f.label :email %>
+    <%= email_field(:user, :email, :class => 'input-xlarge', :required => true) %>
+
+    <%= f.fields_for :registration do |reg| %>
+        <%= reg.label :ticket_type_old, "Ticket type" %><br>
+        <%= reg.select :ticket_type_old, [
+                ['Sponsor ticket', 'sponsor'],
+                ['Volunteer', 'volunteer'],
+                ['Organizer', 'organizer']
+        ] %>
+    <% end %>
+
+    <%= f.label :company %>
+    <%= text_field(:user, :company, :class => 'input-xlarge', :required => true) %>
+    <br/>
+    <%= f.submit "Create!", :class => "btn btn-primary" %>
+<% end %>
