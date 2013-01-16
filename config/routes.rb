@@ -67,7 +67,8 @@ Booster2013::Application.routes.draw do
   match 'users/:id/delete_bio' => 'users#delete_bio'
 
   match 'info/organizers' => 'info#organizers'
-  match 'info/speaker_reimbursement' => 'info#speaker_reimbursement'
+  match 'info/monetary_policy' => 'info#monetary_policy'
+  match 'info/cfp' => 'info#cfp'
   match 'info/sponsors' => 'info#sponsors'
   match 'info/about' => 'info#about'
 	match 'info/tickets' => 'info#tickets'

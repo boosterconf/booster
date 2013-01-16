@@ -35,7 +35,7 @@
       <div class="navbar hidden-phone social-links">
         <ul class="nav">
           <li>
-            <a href="https://twitter.com/search?q=%23booster2013" target="_blank">
+            <a href="https://twitter.com/boosterconf" target="_blank">
               <%= image_tag "twitter-logo.png" %>
             </a>
           </li>
@@ -56,70 +56,37 @@
           </li>
         </ul>
       </div>
-      <p class="hidden-phone">
-        <a class="twitter-timeline" href="https://twitter.com/boosterconf" data-widget-id="278214166739820544">Tweets
-          by
-          @boosterconf</a>
-
-        <script>!function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = "//platform.twitter.com/widgets.js";
-                fjs.parentNode.insertBefore(js, fjs);
-            }
-        }(document, "script", "twitter-wjs");</script>
-
-      </p>
 
     </article>
 
     <article class="span7">
-      <h2 class="announce">Call for Papers</h2>
+      <h2 class="announce">Welcome to Booster 2013!</h2>
 
       <p>
-        Do you have something you want to share? A controversial idea,
-        an interesting experience or something you have learnt lately? Submit your abstract and get a chance to be part
-        of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
-        the Speaker's Dinner.
+        Early bird tickets are available until January 28th.
+      </p>
+      <p>
+          <%= link_to "Get them while they're still available!", info_tickets_url, :class => "btn btn-primary btn-large" %>
       </p>
     </article>
 
     <div class="caption thumbnail thumbnail-with-button span7">
-      <h3>Lightning talk</h3>
+      <h3>Propose a session</h3>
 
       <p>
-        A lightning talk is <em>10 minutes long</em> and is a great way to convey an insight, suggest an idea, or
-        share your enthusiasm about a particular technology or method.
-        Lightning talks are usually well-rehearsed and packed with useful information.
+        The CFP is open for workshops and lightning talks. Submit your abstract and get a chance to be part
+                of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
+                the Speaker's Dinner.
       </p>
 
       <p>
-        <em>CfP for lightning talks ends on 28 January 2013.</em>
+        CFP ends January 21st for workshops, January 28th for lightning talks.
       </p>
 
-      <p>
-        <a href="/register_lightning_talk/start" class="btn btn-primary btn-large">Propose a lightning talk</a>
-      </p>
-    </div>
 
-    <div class="caption thumbnail thumbnail-with-button span7">
-      <h3>Workshop</h3>
 
       <p>
-        A workshop can be <em>short</em> (1.5 hrs), <em>half-day</em> (3 hrs) or <em>full-day</em> (4.5 hrs).
-        You work with a small group of people who want to
-        learn a particular technology or method that you know well.
-        Workshops are interactive and hands-on, and focused on learning by doing.
-      </p>
-
-      <p>
-        <em>CfP for workshops ends on 21 January 2013.</em>
-      </p>
-
-      <p>
-        <a href="/register_workshop/start" class="btn btn-primary btn-large">Propose a workshop</a>
+        <%= link_to "Read more and propose a session", info_cfp_url, :class => "btn btn-primary btn-large" %>
       </p>
     </div>
 
