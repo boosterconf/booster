@@ -85,6 +85,12 @@ Booster2013::Application.routes.draw do
 
   root :to => 'info#index' #'/' resolves to info/index.html
 
+  #
+  # This redirect fixes a typo in one of the tweets that we published around jan. 2013
+  # Can be removd after the 2013 conference
+  #
+  match "/usres/new", :to => redirect("/users/new")
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

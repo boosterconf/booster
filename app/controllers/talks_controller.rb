@@ -61,6 +61,16 @@ class TalksController < ApplicationController
     @tags = Tag.all
     @user = User.new
     @types = TalkType.all
+
+    action = "edit_lightning_talk"
+    if @talk.is_tutorial?
+      action = "edit_tutorial"
+    end
+
+    respond_to do |format|
+      format.html { render :action => action }
+    end
+
   end
 
   def assign
