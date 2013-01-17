@@ -1,0 +1,100 @@
+<h2 class="page_title">Edit your tutorial</h2>
+
+<script>
+    $(document).ready(function() {
+        var availableTags = [];
+        var selectedTags = [];
+        <% @tags.each do |tag| %>
+        availableTags.push("<%=h tag.title %>");
+        <% if @talk.tags.include? tag%>
+        selectedTags.push("<%=h tag.title %>");
+        <%end%>
+        <% end %>
+        $("#mytags").tagit({availableTags: availableTags, selectedTags: selectedTags});
+
+        // Remove all non-workshop options from the select
+        var elSel = document.getElementById('talk_talk_type_id');
+        var i;
+        for (i = elSel.length - 1; i >= 0; i--)
+        {
+            if (elSel.options[i].text.indexOf("workshop") == -1)
+            {
+                elSel.remove(i);
+            }
+        }
+    });
+</script>
+
+<%= form_for @talk do |f| %>
+
+    <fieldset id="talk_details">
+
+      <% @talk.errors.full_messages.each do |msg| %>
+          <p><%= msg %></p>
+      <% end %>
+
+      <div class="field type">
+        <%= f.label :talk_type, "Type of talk" %>
+        <%= f.collection_select :talk_type_id, TalkType.all, :id, :name_and_duration, :class => 'input-xlarge' %>
+      </div>
+
+      <div class="field title">
+        <%= f.label :title, "Title" %>
+
+        <%= f.text_field :title, :class => 'input-xxlarge'  %>
+      </div>
+
+      <div class="field abstract">
+        <%= f.label :description, "Abstract" %>
+
+        <%= f.text_area :description, :class => "tinymce span10" %>
+      </div>
+
+       <%= tinymce %>
+
+      <div class="field audience">
+        <%= f.label :audience_level, "Target audience level: " %>
+        <%= f.select :audience_level, [['Any', 'any'], ['Novice', 'novice'], ['Intermediate', 'intermediate'], ['Expert', 'expert']], :class => 'input-xxlarge'  %>
+      </div>
+
+      <div class="field max_participants">
+        <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 24, please): " %>
+        <%= f.text_field :max_participants, :class => 'input-xxlarge'  %>
+      </div>
+
+      <div class="field participant_requirements">
+        <%= f.label :participant_requirements, "What do the participants have to bring to the presentation?" %>
+        <%= f.text_area :participant_requirements, :class => 'input-xxlarge', :rows => 5    %>
+      </div>
+
+      <div class="field equipment">
+        <%= f.label :equipment, "Do you need any extra equipment for your session? " %>
+        <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5  %>
+      </div>
+
+      <div class="field room_setup">
+        <%= f.label :room_setup, "Desired room setup" %>
+        <%= f.select :room_setup, [['Classroom', 'Classroom'], ['Horseshoe', 'Horseshoe'], ['Group tables', 'Group tables']], :class => 'input-xxlarge'  %>
+      </div>
+
+    </fieldset>
+
+    <br/>
+
+    <div class="field buttons">
+      <%= f.submit "Save changes", :class => 'btn btn-primary' %>
+    </div>
+
+    <br/>
+
+    <div class="field buttons">
+        <%= link_to 'Back to talk', talk_path(@talk) %>
+    </div>
+
+<% end %>
+
+<br/>
+
+<h3>Upload tutorial slides</h3>
+
+<%= render :partial => 'upload_slide' %>

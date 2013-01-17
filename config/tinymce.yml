@@ -32,3 +32,4 @@ paste_strip_class_attributes: all
 paste_retain_style_properties: none
 paste_text_sticky: true
 paste_text_sticky_default: true
+content_css: "/tinymce-custom-content.css"

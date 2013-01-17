@@ -70,7 +70,8 @@ Booster2013::Application.routes.draw do
   match 'users/:id/delete_bio' => 'users#delete_bio'
 
   match 'info/organizers' => 'info#organizers'
-  match 'info/speaker_reimbursement' => 'info#speaker_reimbursement'
+  match 'info/monetary_policy' => 'info#monetary_policy'
+  match 'info/cfp' => 'info#cfp'
   match 'info/sponsors' => 'info#sponsors'
   match 'info/about' => 'info#about'
 	match 'info/tickets' => 'info#tickets'
@@ -83,6 +84,12 @@ Booster2013::Application.routes.draw do
   # root :to => 'welcome#index'
 
   root :to => 'info#index' #'/' resolves to info/index.html
+
+  #
+  # This redirect fixes a typo in one of the tweets that we published around jan. 2013
+  # Can be removd after the 2013 conference
+  #
+  match "/usres/new", :to => redirect("/users/new")
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
