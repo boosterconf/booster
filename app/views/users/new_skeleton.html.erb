@@ -5,7 +5,7 @@
 <%= form_for @user, :url => create_skeleton_user_path do |f| %>
 
     <%= f.label :email %>
-    <%= email_field(:user, :email, :class => 'input-xlarge', :required => true) %>
+    <%= email_field(:user, :email, :class => 'input-xlarge') %>
 
     <%= f.fields_for :registration do |reg| %>
         <%= reg.label :ticket_type_old, "Ticket type" %><br>
@@ -17,7 +17,7 @@
     <% end %>
 
     <%= f.label :company %>
-    <%= text_field(:user, :company, :class => 'input-xlarge', :required => true) %>
+    <%= text_field(:user, :company, :class => 'input-xlarge') %>
     <br/>
     <%= f.submit "Create!", :class => "btn btn-primary" %>
 <% end %>
