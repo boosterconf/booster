@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       end
     end
 
-    @user.registration.includes_dinner = @user.registration.discounted_ticket?
+    @user.registration.includes_dinner = !@user.registration.discounted_ticket?
   end
 
   def edit
