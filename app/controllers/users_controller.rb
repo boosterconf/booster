@@ -56,7 +56,7 @@ class UsersController < ApplicationController
       end
     end
 
-    @user.registration.includes_dinner = @user.registration.discounted_ticket?
+    @user.registration.includes_dinner = !@user.registration.discounted_ticket?
   end
 
   def edit
@@ -218,7 +218,7 @@ class UsersController < ApplicationController
   def create_skeleton
     email = params[:user][:email]
 
-    if user_already_exists(email)
+    if !email.empty? && user_already_exists(email)
       flash[:error] = "This email already has a user"
       render :action => 'new_skeleton'
     else
