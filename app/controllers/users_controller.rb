@@ -220,7 +220,7 @@ class UsersController < ApplicationController
     p params
     email = params[:user][:email]
 
-    if user_already_exists(email)
+    if !email.empty? && user_already_exists(email)
       flash[:error] = "This email already has a user"
       render :action => 'new_skeleton'
     else
