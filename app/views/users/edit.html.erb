@@ -27,6 +27,15 @@
 
         <%= render :partial => 'roles', :locals => {:f => f} %>
 
+        <%= f.fields_for :registration do |reg| %>
+            <fieldset id="registration_details">
+                <%= reg.hidden_field :ticket_type_old %>
+                <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+            </fieldset>
+
+            <br>
+        <% end %>
+
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
         <%= render :partial => 'bio', :locals => {:f => f, :show_links => true} %>
