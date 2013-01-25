@@ -1,0 +1,16 @@
+<h2>Group registration</h2>
+
+<p>
+  So, you have a whole bunch of people that you want to register for Booster? That's great! We can register several
+  in one go and send you a collective invoice.
+
+  <%= form_for @invoice do |f| %>
+      <%= f.label :email %>
+      <%= email_field(:invoice, :email, :class => 'input-xlarge') %>
+
+      <%= f.label :your_reference %>
+      <%= text_field(:invoice, :your_reference, :class => 'input-xlarge') %>
+
+
+  <% end %>
+</p>

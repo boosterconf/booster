@@ -216,8 +216,6 @@ class UsersController < ApplicationController
   end
 
   def create_skeleton
-
-    p params
     email = params[:user][:email]
 
     if user_already_exists(email)
@@ -232,6 +230,10 @@ class UsersController < ApplicationController
       redirect_to new_skeleton_user_path
 
     end
+  end
+
+  def group_registration
+    @invoice = Invoice.new
   end
 
   def user_already_exists(email)
