@@ -50,13 +50,14 @@ class UsersController < ApplicationController
     else
       # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
-      @user.registration.ticket_type_old = params[:ticket_type_old] || 'full_price'
-      if @user.registration.ticket_type_old == 'full_price' && early_bird_is_active?
-        @user.registration.ticket_type_old = 'early_bird'
-      end
+      @user.registration.ticket_type_old = params[:ticket_type_old] || current_normal_ticket_type
     end
 
     @user.registration.includes_dinner = !@user.registration.discounted_ticket?
+  end
+
+  def current_normal_ticket_type
+    early_bird_is_active? ? "early_bird" : "full_price"
   end
 
   def edit
@@ -69,11 +70,7 @@ class UsersController < ApplicationController
       @user.registration = Registration.new
       # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
-      if early_bird_is_active?
-        @user.registration.ticket_type_old = 'early_bird'
-      else
-        @user.registration.ticket_type_old = 'full_price'
-      end
+      @user.registration.ticket_type_old = current_normal_ticket_type
       @user.registration.save!
     end
   end
@@ -97,7 +94,7 @@ class UsersController < ApplicationController
 
       if @user.valid?
         unless @user.registration.free_ticket || @user.registration.discounted_ticket?
-          early_bird_is_active? ? @user.registration.ticket_type_old = 'early_bird' : @user.registration.ticket_type_old = 'full_price'
+          @user.registration.ticket_type_old = current_normal_ticket_type
         end
 
         @user.save
@@ -242,7 +239,7 @@ class UsersController < ApplicationController
     emails = params[:emails]
 
     users = emails.gsub(/[,;:]/, " ").split.map do |email|
-      user = User.create_unfinished(email, "early_bird")
+      user = User.create_unfinished(email, current_normal_ticket_type)
       user.company = params[:company]
       user.registration.invoice = @invoice
       user
@@ -256,7 +253,7 @@ class UsersController < ApplicationController
         BoosterMailer.ticket_assignment(user).deliver
       end
 
-      redirect_to "/"
+      render :action => 'group_registration_confirmation'
     else
       flash[:error] = "Not valid emails: #{emails}"
       render :action => 'group_registration'

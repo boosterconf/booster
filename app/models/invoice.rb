@@ -5,4 +5,7 @@ class Invoice < ActiveRecord::Base
 
   has_many :registrations
 
+  def total
+    registrations.map(&:price).inject(0) { |sum, price| sum + price }
+  end
 end
