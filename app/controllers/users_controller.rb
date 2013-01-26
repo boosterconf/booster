@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :require_user, :except => [:new, :create, :from_reference]
+  before_filter :require_user, :except => [:new, :create, :from_reference, :group_registration, :create_group_registration]
   before_filter :require_admin, :only => [:index, :delete_bio, :phone_list, :dietary_requirements]
   before_filter :require_admin_or_self, :only => [:show, :edit, :update]
   before_filter :require_admin_or_speaker, :only => [:create_bio]
@@ -234,6 +234,40 @@ class UsersController < ApplicationController
 
   def group_registration
     @invoice = Invoice.new
+  end
+
+  def create_group_registration
+    @invoice = Invoice.new(params[:invoice])
+
+    emails = params[:emails]
+
+    users = emails.gsub(/[,;:]/, " ").split.map do |email|
+      user = User.create_unfinished(email, "early_bird")
+      user.company = params[:company]
+      user.registration.invoice = @invoice
+      user
+    end
+
+    if all_emails_are_valid(users)
+      @invoice.save
+
+      users.each do |user|
+        user.save!(:validate => false)
+        BoosterMailer.ticket_assignment(user).deliver
+      end
+
+      redirect_to "/"
+    else
+      flash[:error] = "Not valid emails: #{emails}"
+      render :action => 'group_registration'
+    end
+  end
+
+  def all_emails_are_valid(users)
+    users.each do |user|
+      return false unless user.has_valid_email?
+    end
+    true
   end
 
   def user_already_exists(email)
