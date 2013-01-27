@@ -15,4 +15,8 @@ class Invoice < ActiveRecord::Base
     self.email.present? ? "email" : "snail mail"
   end
 
+  def is_possible_to_change?
+    status == "not_invoiced"
+  end
+
 end

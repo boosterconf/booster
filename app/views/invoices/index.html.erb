@@ -2,26 +2,32 @@
 
 <table>
   <tr>
-    <th>Delivery method</th>
+    <th>Delivery</th>
     <th>Address</th>
     <th>Total</th>
+    <th>Created</th>
     <th>Status</th>
     <th></th>
     <th></th>
   </tr>
 
-<% @invoices.each do |invoice| %>
-  <tr>
-    <td><%= invoice.delivery_method %></td>
-    <td><%= invoice.delivery_method == 'email' ? invoice.email : invoice.adress %></td>
-    <td><%= invoice.total %></td>
-    <td><%= invoice.status %></td>
-    <td><%= link_to 'Show', invoice %></td>
-    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-  </tr>
-<% end %>
+  <% @invoices.each do |invoice| %>
+      <tr>
+        <td><%= invoice.delivery_method %></td>
+        <td><%= invoice.delivery_method == 'email' ? invoice.email : invoice.adress %></td>
+        <td><%= invoice.total %></td>
+        <td><%= time_ago_in_words(invoice.created_at) %> ago</td>
+        <td><%= invoice.status %></td>
+        <td><%= link_to 'Show', invoice %></td>
+        <td>
+          <% if invoice.is_possible_to_change? %>
+              <%= link_to 'Edit', edit_invoice_path(invoice) %>
+          <% end %>
+        </td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Invoice', new_invoice_path %>
