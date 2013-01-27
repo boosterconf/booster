@@ -238,24 +238,33 @@ class UsersController < ApplicationController
 
     emails = params[:emails]
 
-    users = emails.gsub(/[,;:]/, " ").split.map do |email|
+    users = emails.gsub(/[,;:\n]/, " ").split.map do |email|
       user = User.create_unfinished(email, current_normal_ticket_type)
       user.company = params[:company]
       user.registration.invoice = @invoice
       user
     end
 
-    if all_emails_are_valid(users)
+    existing_users = users.select {|u| user_already_exists(u.email)}
+    new_users = users.select {|u| !user_already_exists(u.email)}
+
+    if all_emails_are_valid(new_users)
       @invoice.save
 
-      users.each do |user|
+      new_users.each do |user|
         user.save!(:validate => false)
         BoosterMailer.ticket_assignment(user).deliver
       end
 
+      existing_users.each do |u|
+        user = User.find_by_email(u.email)
+        user.company = params[:company]
+        user.registration.invoice = @invoice
+        user.save!(:validate => false)
+      end
       render :action => 'group_registration_confirmation'
     else
-      flash[:error] = "Not valid emails: #{emails}"
+      flash[:error] = "Contains one or more invalid email address: #{emails}"
       render :action => 'group_registration'
     end
   end

@@ -11,11 +11,14 @@
   <% end %>
 </ul>
 
-<p>They have each received an email with instructions for completing the registrations.</p>
+<p>If not already registered, they will each have received an email with instructions for completing the registrations.</p>
 
 <p>We have also prepared an invoice that will be sent soon by <%= @invoice.email.present? ? "email" : "snail mail" %>
   to the address <%= @invoice.email.present? ? @invoice.email : @invoice.adress %>. This invoice has a total of
   NOK <%= @invoice.total %>.
-  <% if @invoice.your_reference.present? %>The invoice is marked <%= @invoice.your_reference %>.
-  <% end %>
 </p>
+<% if @invoice.your_reference.present? %>
+<p>
+  The invoice is marked <%= @invoice.your_reference %>.
+</p>
+<% end %>
