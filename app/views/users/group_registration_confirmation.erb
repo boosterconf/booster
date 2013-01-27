@@ -2,8 +2,7 @@
 
 <p>
   We've now registered <%= @invoice.registrations.count %> tickets for you. They have been assigned to the following
-  email
-  addresses:
+  email addresses:
 </p>
 
 <ul>
@@ -17,4 +16,6 @@
 <p>We have also prepared an invoice that will be sent soon by <%= @invoice.email.present? ? "email" : "snail mail" %>
   to the address <%= @invoice.email.present? ? @invoice.email : @invoice.adress %>. This invoice has a total of
   NOK <%= @invoice.total %>.
+  <% if @invoice.your_reference.present? %>The invoice is marked <%= @invoice.your_reference %>.
+  <% end %>
 </p>

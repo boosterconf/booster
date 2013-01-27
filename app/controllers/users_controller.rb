@@ -262,7 +262,7 @@ class UsersController < ApplicationController
 
   def all_emails_are_valid(users)
     users.each do |user|
-      return false unless user.has_valid_email?
+      return false unless user.has_valid_email? && !user_already_exists(user.email)
     end
     true
   end
