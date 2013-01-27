@@ -176,12 +176,22 @@ class BoosterMailer < ActionMailer::Base
   def additional_speaker(primary_speaker, additional_speaker, talk)
     @primary_speaker = primary_speaker
     @talk = talk
-    @create_user_url = user_from_reference_url additional_speaker.registration.unique_reference
+    @create_user_url = user_from_reference_url(additional_speaker.registration.unique_reference)
 
     mail(:to => additional_speaker.email,
          :from => FROM_EMAIL,
          :cc => FROM_EMAIL,
          :subject => "#{SUBJECT_PREFIX} You have been added as a speaker to a workshop")
+  end
+
+  def ticket_assignment(user)
+    @user = user
+    @create_user_url = user_from_reference_url(user.registration.unique_reference)
+
+    mail(:to => user.email,
+         :from => FROM_EMAIL,
+         :cc => FROM_EMAIL,
+         :subject => "#{SUBJECT_PREFIX} You have been assigned a ticket to Booster 2013")
   end
 
   def organizer_notification(text)

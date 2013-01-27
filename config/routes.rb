@@ -4,6 +4,9 @@ Booster2013::Application.routes.draw do
   get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
   post 'users/create_skeleton' => 'users#create_skeleton', :as => :create_skeleton_user
 
+  get 'users/group_registration' => 'users#group_registration', :as => :new_group_registration
+  post 'users/create_group_registration' => 'users#create_group_registration', :as => :create_group_registration
+
   resources :users
 
   resources :acceptances do
@@ -46,6 +49,7 @@ Booster2013::Application.routes.draw do
 
   resources :password_resets
 
+  resources :invoices
 
   match '/register_lightning_talk/start' => 'register_lightning_talk#start'
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user'

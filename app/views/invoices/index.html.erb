@@ -1,0 +1,27 @@
+<h2>Invoices</h2>
+
+<table>
+  <tr>
+    <th>Delivery method</th>
+    <th>Address</th>
+    <th>Total</th>
+    <th>Status</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @invoices.each do |invoice| %>
+  <tr>
+    <td><%= invoice.delivery_method %></td>
+    <td><%= invoice.delivery_method == 'email' ? invoice.email : invoice.adress %></td>
+    <td><%= invoice.total %></td>
+    <td><%= invoice.status %></td>
+    <td><%= link_to 'Show', invoice %></td>
+    <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Invoice', new_invoice_path %>

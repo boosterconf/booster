@@ -47,4 +47,14 @@ class UserTest < ActiveSupport::TestCase
     speaker.update_ticket_type!('bogus')
     assert_equal 'lightning', speaker.registration.ticket_type_old
   end
+
+  def test_invalid_email_is_not_accepted
+    user = users(:quentin)
+    assert user.has_valid_email?
+    assert user.valid?
+
+    user.email = "not a valid email"
+    assert !user.has_valid_email?
+    assert !user.valid?
+  end
 end

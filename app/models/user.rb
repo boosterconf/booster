@@ -174,6 +174,10 @@ class User < ActiveRecord::Base
     name.downcase.strip.gsub(' ', '-').gsub(/[^\w-]/, '')
   end
 
+  def has_valid_email?
+    email.match(Authlogic::Regex.email)
+  end
+
   def self.find_with_filter(filter)
     case filter
       when "all", "", nil
@@ -241,7 +245,7 @@ class User < ActiveRecord::Base
 
   def self.create_unfinished(email, ticket_type)
     user = User.new
-    user.create_registration
+    user.build_registration
     user.email = email
     user.password = SecureRandom.urlsafe_base64  # må sette passord, av grunner bare authlogic forstår
     user.registration.ticket_type_old = ticket_type

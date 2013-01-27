@@ -20,6 +20,7 @@ class Registration < ActiveRecord::Base
   default_scope :order => 'registrations.created_at desc'
   belongs_to :user
   has_one :payment_notification
+  belongs_to :invoice
 
   validates_presence_of :invoice_address, :if => Proc.new { |reg| reg.manual_payment }
 
