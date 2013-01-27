@@ -1,17 +1,18 @@
 <div id="front-page">
 
-  <div id="notifications">
-<%# TODO: Dette ser jævlig ut. Fikse! %>
-    <% if flash[:notice] %>
-        <p class="flash-notice"><%= flash[:notice] %></p>
-    <% end %>
-
-    <p style="color: orange"><%= flash[:warn] %></p>
-
-    <p style="color: red"><%= flash[:error] %></p>
-  </div>
-
   <div class="row">
+
+    <div id="notifications">
+<%# TODO: Dette ser jævlig ut. Fikse! %>
+      <% if flash[:notice] %>
+          <p class="flash-notice"><%= flash[:notice] %></p>
+      <% end %>
+
+      <p style="color: orange"><%= flash[:warn] %></p>
+
+      <p style="color: red"><%= flash[:error] %></p>
+    </div>
+
 
     <article class="span4 pull-right">
       <!--h1 class="hidden-phone">&nbsp;</h1-->
@@ -95,7 +96,9 @@
 
   <div class="row">
     <article class="span12">
-      <h2 class="sectionhead">Some of our speakers</h2>
+      <h2 class="sectionhead">Some of our speakers
+        <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align"}) %>
+      </h2>
       <% @speakers.each do |speaker| %>
           <div class="span2 speaker-box">
             <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">

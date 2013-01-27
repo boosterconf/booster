@@ -1,5 +1,8 @@
 <article>
-  <h2>Our speakers</h2>
+  <h2>
+    Our speakers
+    <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align"}) %>
+  </h2>
 
   <% for speaker in @speakers.shuffle do %>
       <div class="speaker">

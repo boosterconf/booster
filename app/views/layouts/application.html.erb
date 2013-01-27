@@ -76,13 +76,12 @@ conference is for all IT professionals seeking to learn from each other and from
 
 <div class="container">
   <div id="content">
-    <div class="row">
-      <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align pull-right"}) %>
-      <div class="navbar pull-right">
 
+    <div class="row">
+      <div class="span12">
+        <%= yield %>
       </div>
     </div>
-    <%= yield %>
   </div>
 </div>
 
