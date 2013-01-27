@@ -4,22 +4,62 @@
 <p>
   So, you have a whole bunch of people that you want to register for Booster? That's great! We can register several
   in one go and send you a collective invoice.
-
-  <%= form_for @invoice, :url => create_group_registration_path do |f| %>
-      <%= f.label :email %>
-      <%= email_field(:invoice, :email, :class => 'input-xlarge') %>
-
-      <%= f.label :your_reference %>
-      <%= text_field(:invoice, :your_reference, :class => 'input-xlarge') %>
-
-      <%= f.label :company %>
-      <%= text_field_tag :company, nil, :class => 'input-xlarge' %>
-
-      <%= f.label :emails %>
-      <%= text_area_tag :emails, nil, :cols => 20, :rows => 5 %>
-
-      <br/>
-      <%= f.submit "Send me an invoice", :class => "btn btn-primary" %>
-
-  <% end %>
 </p>
+
+<%= form_for @invoice, :url => create_group_registration_path do |f| %>
+
+    <%= f.label :delivery_method, 'How do you want to receive the invoice?' %>
+    <fieldset>
+      <label class="radio">
+        <%= f.radio_button :delivery_method, 'email' %>
+        By email
+      </label>
+      <label class="radio">
+        <%= f.radio_button :delivery_method, 'snail_mail' %>
+        By snail mail
+      </label>
+    </fieldset>
+
+    <div id="email">
+      <%= f.label :email, 'Invoice email' %>
+      <%= email_field(:invoice, :email, :class => 'input-xlarge') %>
+    </div>
+
+    <div id="snail_mail">
+      <%= f.label :adress, 'Invoice snail mail address' %>
+      <%= text_area(:invoice, :adress, :cols => 20, :rows => 5) %>
+    </div>
+
+    <%= f.label :your_reference %>
+    <%= text_field(:invoice, :your_reference, :class => 'input-xlarge') %>
+
+    <%= f.label :company %>
+    <%= text_field_tag :company, nil, :class => 'input-xlarge' %>
+
+    <%= f.label :emails %>
+    <%= text_area_tag :emails, nil, :cols => 20, :rows => 5 %>
+
+    <br/>
+    <%= f.submit "Send me an invoice", :class => "btn btn-primary" %>
+
+<% end %>
+
+<% content_for :javascript do %>
+    <script type="text/javascript">
+        $("#email").hide();
+        $("#snail_mail").hide();
+
+        $("#invoice_delivery_method_email").click(function () {
+            $("#email").show();
+            $("#snail_mail").hide();
+            $("#snail_mail textarea").val("");
+        });
+
+        $("#invoice_delivery_method_snail_mail").click(function () {
+            $("#email").hide();
+            $("#email input").val("");
+            $("#snail_mail").show();
+        });
+
+    </script>
+<% end %>

@@ -3,7 +3,7 @@
     <%= f.label :name, "Name" %>
     <%= text_field(:user, :name, :placeholder => "Please tell us your name", :class => 'input-xlarge', :required => true) %>
   </div>
-  <div class="field firma">
+  <div class="field company">
     <%= f.label :company, "Company" %>
     <%= text_field(:user, :company, :placeholder => "and where you work", :class => 'input-xlarge', :required => true) %>
   </div>
@@ -13,7 +13,7 @@
     <%= email_field(:user, :email, :placeholder => "Where can we email you?", :class => 'input-xlarge', :required => true) %>
   </div>
 
-  <div class="field telefon">
+  <div class="field phone_number">
     <%= f.label :phone_number, "Phone" %>
     <%= text_field(:user, :phone_number, :placeholder => "If we need to call you", :class => 'input-xlarge') %>
   </div>

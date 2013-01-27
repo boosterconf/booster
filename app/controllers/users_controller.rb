@@ -248,8 +248,8 @@ class UsersController < ApplicationController
     existing_users = users.select {|u| user_already_exists(u.email)}
     new_users = users.select {|u| !user_already_exists(u.email)}
 
-    if all_emails_are_valid(new_users)
-      @invoice.save
+    if all_emails_are_valid(new_users) && @invoice.valid?
+      @invoice.save!
 
       new_users.each do |user|
         user.save!(:validate => false)
