@@ -7,6 +7,8 @@ class Invoice < ActiveRecord::Base
 
   validates :email, :format => { :with => Authlogic::Regex.email }, :allow_blank => true
 
+  validate :delivery_method_present?
+
   def total
     registrations.map(&:price).inject(0) { |sum, price| sum + price }
   end
@@ -23,4 +25,11 @@ class Invoice < ActiveRecord::Base
     status == "not_invoiced"
   end
 
+  private
+
+  def delivery_method_present?
+    if !(email.blank? ^ adress.blank?)
+      errors.add(:delivery_method, "Delivery method for invoice must be present")
+    end
+  end
 end
