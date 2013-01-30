@@ -71,12 +71,13 @@
       <% for registration in @registrations %>
           <% if registration.user.nil? %>
               BAD DATA for this registration with id <%= registration.id %> at <%= registration.updated_at %>
+              <br/>
               <% next %>
           <% end %>
           <tr>
             <td>
               <% if registration.unfinished %>
-                <span style="color: red; font-weight: bold">[U]</span>
+                  <span style="color: red; font-weight: bold">[U]</span>
               <% end %>
               <%= link_to h(registration.user.name), registration.user %>
               (<%= h registration.user.company %>)
@@ -87,6 +88,9 @@
             <td><%= time_ago_in_words(registration.created_at) %> ago</td>
             <td>
               <%= h registration.ticket_type_old %>
+              <% if %w(lightning speaker).include?(registration.ticket_type_old) %>
+                  (<%= registration.user.talks.size %> abstracts)
+              <% end %>
             </td>
             <td>
               <%= h registration.status %>

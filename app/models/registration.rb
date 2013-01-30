@@ -120,18 +120,18 @@ class Registration < ActiveRecord::Base
         when "skal_foelges_opp"
           return find(:all,
                       :conditions => {:free_ticket => false, :registration_complete => false, :manual_payment => false},
-                      :include => :user)
+                      :include => [:user, {:user => :talks}])
         when "skal_faktureres"
           return find(:all,
                       :conditions => {:free_ticket => false, :registration_complete => false, :manual_payment => true, :invoiced => false},
-                      :include => :user)
+                      :include => [:user, {:user => :talks}])
         when "dinner"
-          return find(:all, :conditions => "includes_dinner = 1")
+          return find(:all, :conditions => "includes_dinner = 1", :include => [:user, {:user => :talks}])
         else
           return []
       end
     else
-      find(:all, :include => :user)
+      find(:all, :include => [:user, {:user => :talks}])
     end
   end
 
