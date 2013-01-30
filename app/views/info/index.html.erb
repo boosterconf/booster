@@ -25,10 +25,6 @@
         </p>
 
         <p>
-          <em>Early-bird ends on <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>.</em>
-        </p>
-
-        <p>
           <%= link_to 'Tickets and prices', info_tickets_url, :class => "btn btn-primary btn-large" %>
         </p>
       </div>
@@ -62,32 +58,19 @@
 
     <article class="span7">
       <h2 class="announce">Welcome to Booster 2013</h2>
-
-      <p>
-        It's time to make plans for attending Booster. Early bird tickets are available until January 28th.
-      </p>
-
-      <p>
-        <%= link_to "Get them while they're still available!", info_tickets_url, :class => "btn btn-primary btn-large" %>
-      </p>
     </article>
 
     <div class="caption thumbnail thumbnail-with-button span7">
-      <h3>Propose a session</h3>
 
       <p>
-        The CFP is now open for workshops and lightning talks. Submit your abstract and get a chance to be part
-        of a great team of speakers at Booster 2013. All speakers get free admission to the Conference Dinner and
-        the Speaker's Dinner.
+        The Booster 2013 program is on the way!
+      </p>
+      <p>
+        The CFP has ended, and the committee is hard at work selecting sessions from all the <%= link_to "fantastic proposals.", talks_path %>
       </p>
 
       <p>
-        CFP ends January 21st for workshops and January 28th for lightning talks.
-      </p>
-
-
-      <p>
-        <%= link_to "Read more and propose a session", info_cfp_url, :class => "btn btn-primary btn-large" %>
+        <%= link_to "Buy a ticket!", info_tickets_url, :class => "btn btn-primary btn-large" %>
       </p>
     </div>
 
