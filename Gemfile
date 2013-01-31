@@ -12,8 +12,8 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 
-gem "factory_girl_rails", "~> 3.0"
-
+gem 'prawn', '= 0.6.3'
+gem 'prawnto'
 
 group :production do
   gem 'pg'
@@ -30,13 +30,10 @@ group :test do
   gem "minitest"
   gem "minitest-reporters", '>= 0.5.0'
   gem 'shoulda'
+  gem "factory_girl_rails", "~> 3.0"
 end
 
 
-group :plugins do
-  gem 'prawn', '= 0.6.3'
-  gem 'prawnto'
-end
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 

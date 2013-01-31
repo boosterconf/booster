@@ -91,7 +91,11 @@ class BoosterMailer < ActionMailer::Base
     @talk = talk
     @speaker = speaker
     @current_user_url = current_user_url
-    mail(:to => speaker.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has been accepted")
+    mail(:to => speaker.email,
+         :cc => FROM_EMAIL,
+         :from => FROM_EMAIL,
+         :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has been accepted"
+    )
   end
 
   def talk_refusation_confirmation(talk, speaker, current_user_url)
