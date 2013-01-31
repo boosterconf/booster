@@ -8,17 +8,13 @@
 
 <p>We would like you to confirm that you are still able to present at the
   conference. Please do so by replying to this email as soon as possible,
-  and before April 4, so that we can publish the conference program.</p>
+  and before February 7., so that we can publish the conference program.</p>
 
 <% if @talk.is_tutorial? %>
     <p>There are a few practical details we need you to attend to:</p>
 
-    <p>If there is a limit on the number of people who can attend your
-      session, please edit your talk by following the below link and
-      entering the maximum number of participants. Please do not set the
-      limit below 24.
-
-      Edit your talk here: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
+    <p>
+      It is still possible to edit your talk by using this url: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
     </p>
 
     <p>If you are unable to attend the conference one or more of the days,
@@ -29,7 +25,7 @@
       dinner.</p>
 <% end %>
 <% if @talk.is_lightning_talk? %>
-    <p>The lightning talks are scheduled for Wednesday April 25.</p>
+    <p>The lightning talks are scheduled for Wednesday March 13.</p>
 <% end %>
 <% unless @speaker.has_accepted_tutorial? %>
     <p>Because you have an accepted talk, you are entitled to a discounted
@@ -45,8 +41,7 @@
     <p>Please note that we will not cover travel and lodging. If you need a hotel room in Bergen, we recommend the
       conference hotel,
       Scandic Bergen City. Please contact them by telephone +47 55 30 90 80
-      or by email at bergencity@scandichotels.com and give the booking code
-      ROO250412.</p>
+      or by email at bergencity@scandichotels.com.</p>
 <% end %>
 <p>If you are not able to present at the conference after all, please let
   us know as soon as possible by replying to this email, so we can offer
