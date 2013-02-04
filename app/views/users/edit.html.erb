@@ -4,6 +4,12 @@
     <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
 <% end %>
 
+
+<% @user.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+
+
 <h2 class="page_title">Change your registration</h2>
 <div class="row">
   <div class="span12">
