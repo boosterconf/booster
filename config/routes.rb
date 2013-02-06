@@ -7,7 +7,11 @@ Booster2013::Application.routes.draw do
   get 'users/group_registration' => 'users#group_registration', :as => :new_group_registration
   post 'users/create_group_registration' => 'users#create_group_registration', :as => :create_group_registration
 
-  resources :users
+  resources :users do
+    collection do
+      get :dietary_requirements
+    end
+  end
 
   resources :acceptances do
     member do
