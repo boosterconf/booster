@@ -117,19 +117,6 @@ GEM
     powerbar (1.0.11)
       ansi (~> 1.4.0)
       hashie (>= 1.1.0)
-    prawn (0.6.3)
-      prawn-core (>= 0.6.3, < 0.7)
-      prawn-format (>= 0.2.3, < 0.3)
-      prawn-layout (>= 0.3.2, < 0.4)
-      prawn-security (>= 0.1.1, < 0.2)
-    prawn-core (0.6.3)
-    prawn-format (0.2.3)
-      prawn-core
-    prawn-layout (0.3.2)
-    prawn-security (0.1.1)
-    prawnto (0.1.1)
-      prawn
-      rails (>= 2.1)
     quiet_assets (1.0.1)
       railties (~> 3.1)
     rack (1.4.3)
@@ -230,8 +217,6 @@ DEPENDENCIES
   mocha
   paperclip (~> 3.0)
   pg
-  prawn (= 0.6.3)
-  prawnto
   quiet_assets
   rails (= 3.2.11)
   rspec-rails

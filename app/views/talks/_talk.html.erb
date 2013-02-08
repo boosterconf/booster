@@ -1,7 +1,11 @@
 <div class="row talk" id="<%= dom_id(talk) %>">
 
   <div class="span8">
-    <h4><%= link_to talk.title, talk %></h4>
+    <h4>
+      <%= link_to talk.title, talk %>
+      <%= image_tag("approved_talk.png") if talk.accepted? %>
+      <%= image_tag("icon_slides.gif") if admin? && talk.slide.file? %>
+    </h4>
 
     <p class="muted">
       <%=  talk.talk_type.name %> - Suggested by <%= talk.users.map { |u| u.name }.join(", ") %>,
@@ -20,10 +24,6 @@
       <br/>
       <%= link_to "Read more...", talk %>
     </p>
-
-    <%= "(#{num_of_votes(talk.votes_count)})" if talk.votes_count > 0 %>
-    <%= image_tag("approved_talk.png") if talk.accepted? %>
-    <%= image_tag("icon_slides.gif") if admin? && talk.slide.file? %>
 
     <%# link_to "#{talk.comments_count or 0} comment(s).", talk_path(talk, :anchor => "comments") %>
 
