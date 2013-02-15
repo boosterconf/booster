@@ -1,3 +1,246 @@
-// Place all the styles related to the Program controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* START PROGRAM */
+
+.program {
+  margin-top: 10px;
+}
+
+.program .program-row {
+  margin-bottom: 10px;
+}
+
+.program .period {
+  background-color: #d3d1cb;
+}
+
+.program h3.time {
+  display: none;
+}
+
+.program .period header {
+  background-color: #1790a0;
+  color: #fff;
+  padding: 3px 5px;
+}
+
+.program .period header .location, .location span {
+  text-align: right;
+  background-color: #1790a0;
+  color: #fff;
+  display: inline-block;
+}
+header time {
+  float: right;
+}
+
+.program .period .slot {
+  line-height: 1.2em;
+}
+
+.program .period .pause {
+  padding: 10px;
+}
+
+.program .period.sal_0 .slot {
+  border-color: #F90;
+}
+
+.program .period.sal_1 .slot {
+  border-color: #C00;
+}
+
+.program .period.sal_2 .slot {
+  border-color: #090;
+}
+
+.program .period .slot .talk {
+  font-size: 14px;
+  padding: 10px;
+  min-height: 60px;
+}
+
+.program .period.one .slot .talk {
+  min-height: 0;
+}
+
+.program .period .slot .talk:hover {
+  cursor: pointer;
+  background-color: #DDD;
+}
+
+.program .period .slot .talk h3 {
+  font-weight: bold;
+}
+
+.program .period .slot .talk .author {
+  font-weight: normal;
+  display: block;
+}
+
+/*.program .period.one .slot .talk .author {
+	display: none;
+}*/
+
+.program .period .slot .talk .description {
+  display: none;
+  padding: 5px 0px;
+  color: black;
+}
+
+.program .period .slot .talk .description p {
+  margin-bottom: 10px;
+}
+
+header.program .menu {
+  font-size: 1.2em;
+  font-weight: bold;
+  display: block;
+  list-style: none;
+}
+header.program .menu a {
+  text-decoration: none;
+}
+
+header.program .menu li {
+  list-style: none;
+  float: left;
+  padding: 3px;
+  margin: 2px;
+  background-color: #DDD;
+  border-bottom: 1px solid #999;
+}
+
+@media (min-width: 1200px) {
+  .program-column {
+    width: 158px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-row h3 {
+    font-size: 1em;
+    line-height: 1;
+    color: black;
+  }
+
+  section.program-column header {
+    display: block;
+  }
+}
+
+@media (min-width: 979px) and (max-width: 1199px) {
+  .program-column {
+    width: 108px;
+    float: left;
+    margin-left: 25px;
+  }
+
+  .program-column:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-row h3 {
+    font-size: 0.8em;
+    line-height: 1;
+    color: red;
+  }
+
+  section.program-column header {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 978px) {
+
+  .program-column:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-row h3 {
+    font-size: 0.8em;
+    line-height: 1;
+    color: blue;
+  }
+
+  section.program-column header {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .program-column:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-row h3 {
+    font-size: 0.8em;
+    line-height: 1;
+    color: green;
+  }
+
+  section.program-column header {
+    display: none;
+  }
+}
+/*
+@media handheld, only screen and (max-width: 767px) {
+  .admin {
+    display: none;
+  }
+
+  .content-wrapper {
+    margin-top: 60px !important; /* Yes, way to lazy..
+  }
+
+  .location-explanation {
+    display: block;
+    position: fixed;
+    width: 100%;
+    background: #ccc;
+    top: 0;
+    left: 0;
+    border-bottom: 1px solid #999;
+  }
+
+  .location-explanation .time {
+    padding-bottom: 5px;
+  }
+
+  .location-explanation .location {
+    padding: 5px 0 0px;
+  }
+
+  .program .program-row,
+  .program .fourcol {
+    padding: 0;
+  }
+
+  .program .period header {
+    display: none;
+  }
+
+  .program h3.time {
+    display: block;
+    padding: 0px 5px;
+    background: white;
+    margin: 0;
+  }
+
+  .program .period.one .slot .talk .author {
+    display: inline-block;
+    padding: 3px 0px;
+  }
+
+  .program .period.one .slot {
+    display: block;
+  }
+
+  .program .period .slot .talk {
+    min-height: 0;
+  }
+} */
+
+/* END PROGRAM */
