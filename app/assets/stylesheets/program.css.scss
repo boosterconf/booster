@@ -40,18 +40,6 @@ header time {
   padding: 10px;
 }
 
-.program .period.sal_0 .slot {
-  border-color: #F90;
-}
-
-.program .period.sal_1 .slot {
-  border-color: #C00;
-}
-
-.program .period.sal_2 .slot {
-  border-color: #090;
-}
-
 .program .period .slot .talk {
   font-size: 14px;
   padding: 10px;
@@ -64,11 +52,12 @@ header time {
 
 .program .period .slot .talk:hover {
   cursor: pointer;
-  background-color: #DDD;
+  background-color: #e2e0d9;
 }
 
 .program .period .slot .talk h3 {
   font-weight: bold;
+  color: #6D6C69;
 }
 
 .program .period .slot .talk .author {
@@ -88,25 +77,6 @@ header time {
 
 .program .period .slot .talk .description p {
   margin-bottom: 10px;
-}
-
-header.program .menu {
-  font-size: 1.2em;
-  font-weight: bold;
-  display: block;
-  list-style: none;
-}
-header.program .menu a {
-  text-decoration: none;
-}
-
-header.program .menu li {
-  list-style: none;
-  float: left;
-  padding: 3px;
-  margin: 2px;
-  background-color: #DDD;
-  border-bottom: 1px solid #999;
 }
 
 @media (min-width: 1200px) {
@@ -145,7 +115,6 @@ header.program .menu li {
   .program-row h3 {
     font-size: 0.8em;
     line-height: 1;
-    color: red;
   }
 
   section.program-column header {
