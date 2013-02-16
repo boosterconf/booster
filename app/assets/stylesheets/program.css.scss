@@ -66,10 +66,6 @@ header time {
   display: block;
 }
 
-/*.program .period.one .slot .talk .author {
-	display: none;
-}*/
-
 .program .period .slot .talk .description {
   display: none;
   padding: 5px 0px;
@@ -96,24 +92,25 @@ header time {
     margin-left: 0;
   }
 
-  section.program-column header {
+  .program-column header {
     display: block;
   }
 }
 
 @media (min-width: 979px) and (max-width: 1199px) {
   .program-column {
-    width: 108px;
+    width: 125px;
     float: left;
-    margin-left: 25px;
+    margin-left: 10px;
   }
 
   .program-column:first-of-type {
     margin-left: 0;
   }
 
-  section.program-column header {
+  .program-column header {
     display: block;
+    font-size: 0.8em;
   }
 }
 
@@ -126,6 +123,15 @@ header time {
   section.program-column header {
     display: none;
   }
+
+  .program header.time {
+    display: block;
+    text-align: right;
+    padding: 0px 5px;
+    background-color: #1790a0;
+    color: #fff;
+    margin: 0;
+  }
 }
 
 @media (max-width: 767px) {
@@ -133,8 +139,17 @@ header time {
     margin-left: 0;
   }
 
-  section.program-column header {
+  .program-column header {
     display: none;
+  }
+
+  .program header.time {
+    display: block;
+    text-align: right;
+    padding: 0px 5px;
+    background-color: #1790a0;
+    color: #fff;
+    margin: 0;
   }
 }
 /*
