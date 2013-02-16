@@ -12,7 +12,7 @@
   background-color: #d3d1cb;
 }
 
-.program h3.time {
+.program header.time {
   display: none;
 }
 
@@ -44,11 +44,6 @@ header time {
 .program .period .slot .talk {
   font-size: 14px;
   padding: 10px;
-  min-height: 60px;
-}
-
-.program .period.one .slot .talk {
-  min-height: 0;
 }
 
 .program .period .slot .talk:hover {
@@ -81,6 +76,11 @@ header time {
   line-height: 1;
 }
 
+.lightning-talk h3 {
+  font-size: 1em;
+  line-height: 1;
+}
+
 @media (min-width: 1200px) {
   .program-column {
     width: 158px;
@@ -94,6 +94,16 @@ header time {
 
   .program-column header {
     display: block;
+  }
+
+  .lightning-talk {
+    width: 370px;
+    float: left;
+    margin-left: 30px;
+  }
+
+  .lightning-talk:first-of-type {
+    margin-left: 0;
   }
 }
 
