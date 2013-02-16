@@ -29,9 +29,11 @@
   display: inline-block;
 }
 
+/*
 header time {
   float: right;
 }
+  */
 
 .program .period .slot {
   line-height: 1.2em;
@@ -96,6 +98,10 @@ header time {
     display: block;
   }
 
+  .program-column .talk {
+    min-height: 150px;
+  }
+
   .lightning-talk {
     width: 370px;
     float: left;
@@ -120,7 +126,16 @@ header time {
 
   .program-column header {
     display: block;
-    font-size: 0.8em;
+  }
+
+  .lightning-talk {
+    width: 293px;
+    float: left;
+    margin-left: 30px;
+  }
+
+  .lightning-talk:first-of-type {
+    margin-left: 0;
   }
 }
 
