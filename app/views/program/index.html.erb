@@ -2,39 +2,10 @@
 
   <h2>Wednesday March 13</h2>
 
-  <div class="program-row row">
-    <div class="span12">
-      <div>09:00-09:15</div>
-      <section class="period">
-        <header>
-          <span class="location">Dragefjellet</span>
-          <time class="time">09:00 - 09:15</time>
-        </header>
-        <div class="slot">
-          <div class="pause">
-            <h3>Welcome!</h3>
-            <span class="author">The organizers</span>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-  <div class="program-row row">
-    <div class="span12">
-      <section class="period">
-        <header>
-          <span class="location">Dragefjellet</span>
-          <time class="time">09:15-10:15</time>
-        </header>
-        <div class="slot">
-          <div class="talk">
-            <h3>Opening keynote: UX stuff</h3>
-            <span class="author">Jonas Söderström</span>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+  <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
+  <%= render 'break_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
+  <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[176] %>
+
   <div class='program-row row'>
     <div class="span12 ">
       <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
@@ -46,21 +17,7 @@
     </div>
   </div>
 
-  <div class="program-row row">
-    <div class="span12">
-      <section class="period">
-        <header>
-          <span class="location">Downstairs</span>
-          <time class="time">11:15 - 11:30</time>
-        </header>
-        <div class="slot">
-          <div class="pause">
-            <h3>Coffee break</h3>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+  <%= render 'break_section', location: 'Downstairs', time: '11:15-11:30', title: 'Coffee break' %>
 
   <div class='program-row row'>
     <div class="span12">
@@ -73,21 +30,7 @@
     </div>
   </div>
 
-  <div class="program-row row">
-    <div class="span12">
-      <section class="period">
-        <header>
-          <span class="location">Restaurant</span>
-          <time class="time">12:15 - 13:30</time>
-        </header>
-        <div class="slot">
-          <div class="pause">
-            <h3>Lunch</h3>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+  <%= render 'break_section', location: 'Restaurant', time: '12:15-13:30', title: 'Lunch' %>
 
   <div class='program-row row'>
     <div class="workshop-slot span12">
@@ -102,22 +45,7 @@
     </div>
   </div>
 
-
-  <div class="program-row row">
-    <div class="span12">
-      <section class="period">
-        <header>
-          <span class="location">Downstairs</span>
-          <time class="time">15:00-15:30</time>
-        </header>
-        <div class="slot">
-          <div class="pause">
-            <h3>Coffee break</h3>
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
+  <%= render 'break_section', location: 'Downstairs', time: '15:00-15:30', title: 'Coffee break' %>
 
   <div class='program-row row'>
     <div class="workshop-slot span12">
