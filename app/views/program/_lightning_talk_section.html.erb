@@ -1,0 +1,15 @@
+<section class='period lightning-talk'>
+  <header>
+    <span class='location'><%= location %></span>
+    <time class='time'><%= time %></time>
+  </header>
+  <div class='slot'>
+    <% talks.each do |talk| %>
+        <div class='talk' data-talkid='<%= talk.id %>'>
+          <h3><%= talk.title %></h3>
+          <span class='author'><%= talk.speaker_name %></span>
+          <div class='description'><%= talk.description %></div>
+        </div>
+    <% end %>
+  </div>
+</section>

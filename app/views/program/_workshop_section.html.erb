@@ -1,0 +1,14 @@
+<section class='period program-column'>
+  <header>
+    <span class='location'> <%=  location %></span>
+    <br>
+    <time class='time'><%= time %></time>
+  </header>
+  <div class='slot'>
+    <div class='talk' data-talkid='<%= talk.id %>'>
+      <h3><%=  talk.title %></h3>
+      <span class='author'><%= talk.speaker_name %></span>
+      <div class='description'><%= talk.description %></div>
+    </div>
+  </div>
+</section>

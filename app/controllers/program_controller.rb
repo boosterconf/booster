@@ -1,9 +1,12 @@
 class ProgramController < ApplicationController
   before_filter :require_admin #, :except => [:index]
 
-  # GET /users
-  # GET /users.json
   def index
+
+    unless AppConfig.program_released
+      redirect_to root_path
+      return
+    end
 
     all_talks = Talk.all
     @talks = {}
@@ -11,7 +14,6 @@ class ProgramController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      #format.json { render json: @users }
     end
   end
 end

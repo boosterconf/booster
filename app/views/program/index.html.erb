@@ -1,495 +1,102 @@
-<%= content_for :title, "Smidig 2012 - Program" %>
 <div class="program">
-<div class="program-row row">
-  <div class="span12">
-    <h2>Wednesday March 13</h2>
-    <section class="period">
-      <header>
-        <span class="location">Dragefjellet</span>
-        <time class="time">09:00 - 09:15</time>
-      </header>
-      <div class="slot">
-        <div class="pause">
-          <h3>Welcome!</h3>
+
+  <div class="program-row row">
+    <div class="span12">
+      <h2>Wednesday March 13</h2>
+      <section class="period">
+        <header>
+          <span class="location">Dragefjellet</span>
+          <time class="time">09:00 - 09:15</time>
+        </header>
+        <div class="slot">
+          <div class="pause">
+            <h3>Welcome!</h3>
+            <span class="author">From the organizers</span>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
+  </div>
+  <div class="program-row row">
+    <div class="span12">
+      <section class="period">
+        <header>
+          <span class="location">Dragefjellet</span>
+          <time class="time">09:15-10:15</time>
+        </header>
+        <div class="slot">
+          <div class="talk">
+            <h3>Opening keynote: UX stuff</h3>
+            <span class="author">Jonas Söderström</span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <div class='program-row row'>
+    <div class="span12">
+      <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
+                 talks: [@talks[1], @talks[2], @talks[3], @talks[4]] %>
+      <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '10:30 - 11:15',
+                 talks: [@talks[1], @talks[2], @talks[3], @talks[4]] %>
+      <%= render 'lightning_talk_section', location: 'Muséplass', time: '10:30 - 11:15',
+                 talks: [@talks[1], @talks[2], @talks[3], @talks[4]] %>
+    </div>
+  </div>
+
+  <div class="program-row row">
+    <div class="span12">
+      <section class="period">
+        <header>
+          <span class="location">Downstairs</span>
+          <time class="time">11:15 - 11:30</time>
+        </header>
+        <div class="slot">
+          <div class="pause">
+            <h3>Coffee break</h3>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class='program-row row'>
+    <div class="span12">
+      <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 121:15',
+                 talks: [@talks[1], @talks[2], @talks[3], @talks[4]] %>
+      <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '11:30 - 12:15',
+                 talks: [@talks[1], @talks[2], @talks[3], @talks[4]] %>
+      <%= render 'lightning_talk_section', location: 'Muséplass', time: '11:30 - 12:15',
+                 talks: [@talks[1], @talks[2], @talks[3], @talks[4]] %>
+    </div>
+  </div>
+
+  <div class="program-row row">
+    <div class="span12">
+      <section class="period">
+        <header>
+          <span class="location">Restaurant</span>
+          <time class="time">12:00 - 13:00</time>
+        </header>
+        <div class="slot">
+          <div class="pause">
+            <h3>Lunch</h3>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class='program-row row'>
+    <div class="span12">
+      <header class='time'>13:00 - 14:30</header>
+      <%=  render 'workshop_section', location: 'Dragefjellet', time: '13:00 - 14:30', talk: @talks[1] %>
+      <%=  render 'workshop_section', location: 'Sydneshaugen', time: '13:00 - 14:30', talk: @talks[2] %>
+      <%=  render 'workshop_section', location: 'Muséplass', time: '13:00 - 14:30', talk: @talks[3] %>
+      <%=  render 'workshop_section', location: 'Hødden', time: '13:00 - 14:30', talk: @talks[4] %>
+      <%=  render 'workshop_section', location: 'Trangesmauget', time: '13:00 - 14:30', talk: @talks[1] %>
+      <%=  render 'workshop_section', location: 'Teatergaten', time: '13:00 - 14:30', talk: @talks[2] %>
+      <%=  render 'workshop_section', location: 'Tårnplass', time: '13:00 - 14:30', talk: @talks[3] %>
+    </div>
   </div>
 </div>
-<div class="program-row row">
-  <div class="span12">
-    <section class="period">
-      <header>
-        <span class="location">Dragefjellet</span>
-        <time class="time">09:15-10:15</time>
-      </header>
-      <div class="slot">
-        <div class="talk">
-          <h3>Opening keynote: UX stuff</h3>
-          <span class="author">Jonas Söderström</span>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-<div class='program-row row'>
-  <div class="span12">
-    <section class='period lightning-talk'>
-      <header>
-        <span class='location'>Dragefjellet</span>
-        <time class='time'>10:30</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Slik unngår du at din app blir en sikkerhetstrussel </h3>
-          <span class='author'>Anders Skar</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>All you need to know about TypeScript (in 10 minutes)</h3>
-          <span class='author'>Torstein Nicolaysen</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>RubyMotion - Developer happiness for iOS </h3>
-          <span class='author'>Bjørn Arild Mæland</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>HTML5 Pixel Magic</h3>
-          <span class='author'>Eirik Bjørsnøs</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period lightning-talk'>
-      <header>
-        <span class='location'>Sydneshaugen</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='103'>
-          <h3>App-server euthanasia; Dropwizard</h3>
-          <span class='author'>Olve Hansen</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-        <div class='talk' data-talkid='103'>
-          <h3>Storm: Real time processing of Big Data</h3>
-          <span class='author'>Jon Espen Ingvaldsen</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-        <div class='talk' data-talkid='103'>
-          <h3>Apache Kafka - distributed publish-subscribe messaging system</h3>
-          <span class='author'>Morten Kjetland</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-        <div class='talk' data-talkid='103'>
-          <h3>Deploying Java web applications with zero downtime</h3>
-          <span class='author'>Stein Inge Morisbak</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-      </div>
-    </section>
-    <section class='period lightning-talk'>
-      <header>
-        <span class='location'>Dragefjellet</span>
-        <time class='time'>10:30</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Slik unngår du at din app blir en sikkerhetstrussel </h3>
-          <span class='author'>Anders Skar</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>All you need to know about TypeScript (in 10 minutes)</h3>
-          <span class='author'>Torstein Nicolaysen</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>RubyMotion - Developer happiness for iOS </h3>
-          <span class='author'>Bjørn Arild Mæland</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>HTML5 Pixel Magic</h3>
-          <span class='author'>Eirik Bjørsnøs</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<div class="program-row row">
-  <div class="span12">
-    <section class="period">
-      <header>
-        <span class="location">Downstairs</span>
-        <time class="time">11:15 - 11:30</time>
-      </header>
-      <div class="slot">
-        <div class="pause">
-          <h5>Coffee break</h5>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-
-<div class='program-row row'>
-  <div class="span12">
-    <section class='period lightning-talk'>
-      <header>
-        <span class='location'>Dragefjellet</span>
-        <time class='time'>10:30</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Slik unngår du at din app blir en sikkerhetstrussel </h3>
-          <span class='author'>Anders Skar</span>
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>All you need to know about TypeScript (in 10 minutes)</h3>
-          <span class='author'>Torstein Nicolaysen</span>
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>RubyMotion - Developer happiness for iOS </h3>
-          <span class='author'>Bjørn Arild Mæland</span>
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>HTML5 Pixel Magic</h3>
-          <span class='author'>Eirik Bjørsnøs</span>
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period lightning-talk'>
-      <header>
-        <span class='location'>Sydneshaugen</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='103'>
-          <h3>App-server euthanasia; Dropwizard</h3>
-          <span class='author'>Olve Hansen</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-        <div class='talk' data-talkid='103'>
-          <h3>Storm: Real time processing of Big Data</h3>
-          <span class='author'>Jon Espen Ingvaldsen</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-        <div class='talk' data-talkid='103'>
-          <h3>Apache Kafka - distributed publish-subscribe messaging system</h3>
-          <span class='author'>Morten Kjetland</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-        <div class='talk' data-talkid='103'>
-          <h3>Deploying Java web applications with zero downtime</h3>
-          <span class='author'>Stein Inge Morisbak</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-      </div>
-    </section>
-    <section class='period lightning-talk'>
-      <header>
-        <span class='location'>Dragefjellet</span>
-        <time class='time'>10:30</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Slik unngår du at din app blir en sikkerhetstrussel </h3>
-          <span class='author'>Anders Skar</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>All you need to know about TypeScript (in 10 minutes)</h3>
-          <span class='author'>Torstein Nicolaysen</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>RubyMotion - Developer happiness for iOS </h3>
-          <span class='author'>Bjørn Arild Mæland</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-        <div class='talk' data-talkid='100'>
-          <h3>HTML5 Pixel Magic</h3>
-          <span class='author'>Eirik Bjørsnøs</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-<div class="program-row row">
-  <div class="span12">
-    <section class="period">
-      <header>
-        <span class="location">Restaurant</span>
-        <time class="time">12:00 - 13:00</time>
-      </header>
-      <div class="slot">
-        <div class="pause">
-          <h5>Lunch</h5>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-<div class='program-row row'>
-  <div class="span12">
-    <header class='time'>10:30 - 11:15</header>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Dragefjellet</span>
-        <time class='time'>10:30</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Quality beyond the story limits - evolving exploratory testing on an agile team</h3>
-          <span class='author'>Matt Barcomb, Lanette Creamer</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Sydneshaugen</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='103'>
-          <h3>Coding dojo with stuff</h3>
-          <span class='author'>Emily Bache</span>
-
-          <div class='description'>Dette er hele abstractet mitt</div>
-        </div>
-      </div>
-    </section>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Museplass</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Test driven architecture instead of gut feeling driven architecture</h3>
-          <span class='author'>Jason hdsag og han andre</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Hødden</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Building secure software, the good the bad and the ugly</h3>
-          <span class='author'>Han derre fjompen</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Trangesmauet</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>The node js scalability myth</h3>
-          <span class='author'>Felix Geisendorfer</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Teatergaten</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='100'>
-          <h3>Functional programming.... in Java?</h3>
-          <span class='author'>Fredrik Vraalsen</span>
-
-          <div class='description'>woohoo</div>
-        </div>
-      </div>
-    </section>
-    <section class='period program-column'>
-      <header>
-        <span class='location'>Strangehagen</span>
-        <time class='time'>10:00</time>
-      </header>
-      <div class='slot'>
-        <div class='talk' data-talkid='101'>
-          <h3>Spec by example</h3>
-          <span class='author'>David Evans</span>
-
-          <div class='description'>blablabla</div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
-</div>
-
-<!--
-
-<h2>2013 Program</h2>
-
-<h4>Wednesday March 13</h4>
-
-<table class="table tablesorter" colspan="0" cellspacing="0">
-<thead>
-  <th class="time">Time</th>
-  <th>Dev (1)</th>
-  <th>Methods</th>
-  <th>User interfaces</th>
-  <th>Architecture</th>
-  <th>Test</th>
-  <th>Dev (2)</th>
-  <th>Security</th>
-  <th>Lean Startup</th>
-  </thead>
-  <tbody>
-  <%= raw plenary("08:00", "Registration", 8, "Reception area") %>
-<%= raw plenary("09:00", "Welcome to the conference") %>
-<%= raw plenary("09:15", "Opening Keynote: #{link_to title_for(@talks[37]), @talks[37]} (#{speaker_name_for(@talks[37])})") %>
-<%= raw pause("10:15") %>
-
-<%= raw plenary("10:30", "Lightning talks", 8, "") %>
-
-  <tr>
-      <td>10:30</td>
-      <td colspan="8">
-          <table class="lightning">
-              <tr>
-                  <%= raw lightning_talk_slot([@talks[86], @talks[95], @talks[29], @talks[39]], "Dragefjellet") %>
-<%= raw lightning_talk_slot([@talks[65], @talks[73], @talks[74], @talks[89]], "Teatergaten") %>
-<%= raw lightning_talk_slot([@talks[83], @talks[4], @talks[34], @talks[30]], "Sydneshaugen") %>
-              </tr>
-          </table>
-
-      </td>
-  </tr>
-  <%= raw pause("11:15") %>
-  <tr>
-      <td>11:30</td>
-      <td colspan="8">
-          <table class="lightning">
-              <tr>
-                  <%= raw lightning_talk_slot([@talks[80], @talks[68], @talks[76], @talks[67]], "Dragefjellet") %>
-<%= raw lightning_talk_slot([@talks[66], @talks[72], @talks[12], @talks[55]], "Teatergaten") %>
-<%= raw lightning_talk_slot([@talks[60], @talks[69], @talks[71], @talks[88]], "Sydneshaugen") %>
-              </tr>
-          </table>
-      </td>
-  </tr>
-
-  <%= raw pause("12:15", "Lunch break") %>
-<%= raw track("13:30", [@talks[70], @talks[19], @talks[25], @talks[93], @talks[45], @talks[11], @talks[13], @talks[5]]) %>
-
-<%= raw pause("15:00") %>
-
-<%= raw track("15:15", [@talks[70], @talks[19], @talks[22], @talks[93], @talks[45], @talks[11], @talks[13], @talks[5]]) %>
-
-<%= raw pause("16:45") %>
-
-<%= raw plenary("19:00", "Conference dinner", 8, "USF Verftet - Sardinen") %>
-</tbody>
-</table>
-
-<h4>Thursday March 14</h4>
-
-<table class="table tablesorter" colspan="0" cellspacing="0">
-  <thead>
-  <th class="time">Time</th>
-  <th>Dev (1)</th>
-  <th>Methods</th>
-  <th>User interfaces</th>
-  <th>Architecture</th>
-  <th>Test</th>
-  <th>Dev (2)</th>
-  <th>Security</th>
-  <th>Lean Startup</th>
-  </thead>
-  <tbody>
-  <%= raw track("09:00", [@talks[42], @talks[44], @talks[32], @talks[49], @talks[46], @talks[16], @talks[26], @talks[94]]) %>
-<%= raw pause("10:30", "Break") %>
-
-<%= raw track("10:45", [@talks[42], @talks[44], @talks[32], @talks[49], @talks[46], @talks[16], @talks[26], @talks[94]]) %>
-<%= raw pause("12:15", "Lunch break") %>
-<%= raw track("13:30", [@talks[35], @talks[43], @talks[32], @talks[51], @talks[7], @talks[6], @talks[26], @talks[38]]) %>
-
-<%= raw pause("15:00", "Break") %>
-
-<%= raw track("15:15", ["Open Spaces", "Open Spaces", "Open Spaces", "Open Spaces", "Open Spaces", "Open Spaces", "Open Spaces", @talks[38]]) %>
-
-<%= raw pause("17:15", "Break") %>
-
-<%= raw plenary("19:00", "<a href='http://bergen.nnug.no/events/60805942/?eventId=60805942&action=detail'>Fishbowl discussion - NNUG</a>", 8, "Teatergaten") %>
-
-  </tbody>
-</table>
-
-<h4>Friday March 15</h4>
-
-<table class="table tablesorter" colspan="0" cellspacing="0">
-  <thead>
-  <th class="time">Time</th>
-  <th>Dev (1)</th>
-    <th>Methods</th>
-    <th>User interfaces</th>
-    <th>Architecture</th>
-    <th>Test</th>
-    <th>Dev (2)</th>
-    <th>Security</th>
-    <th>Lean Startup</th>
-    </thead>
-  <tbody>
-  <%= raw track("09:00", [@talks[31], @talks[47], @talks[54], @talks[52], @talks[28], @talks[33], @talks[57], @talks[64]]) %>
-<%= raw pause("10:30") %>
-
-<%= raw track("10:45", [@talks[31], @talks[47], @talks[54], @talks[52], @talks[28], @talks[33], @talks[18], @talks[59]]) %>
-<%= raw pause("12:15", "Lunch break") %>
-<%= raw track("13:30", [@talks[3], @talks[9], @talks[63], @talks[24], @talks[28], @talks[33], @talks[27], @talks[59]]) %>
-
-<%= raw pause("15:00") %>
-<%= raw plenary("15:15", "Closing Keynote: #{link_to title_for(@talks[41]), @talks[41]} (#{speaker_name_for(@talks[41])})") %>
-<%= raw plenary("16:15", "Goodbye") %>
-  </tbody>
-</table>
-
--->
