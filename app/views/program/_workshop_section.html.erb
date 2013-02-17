@@ -5,11 +5,11 @@
     <time class='time'><%= time %></time>
   </header>
   <div class='slot'>
-    <span class='location-small'> <%=  location %></span>
     <div class='talk' data-talkid='<%= talk.id %>'>
-      <h3><%=  talk.title %></h3>
+      <h5><%= talk.title %></h5>
       <span class='author'><%= talk.speaker_name %></span>
       <div class='description'><%= talk.description %></div>
+      <span class='location-small'> Room: <%= location %></span>
     </div>
   </div>
 </section>

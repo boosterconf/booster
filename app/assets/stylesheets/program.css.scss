@@ -56,9 +56,13 @@ header .location {
   color: #6D6C69;
 }
 
-.program .period .slot .talk .author {
+.program .period .slot .talk {
   font-weight: normal;
   display: block;
+}
+
+.author {
+  font-style: italic;
 }
 
 .program .period .slot .talk .description {
@@ -77,6 +81,14 @@ header .location {
 
 .lightning-talk h3 {
   line-height: 1;
+}
+
+.lightning-talk-slot .talk {
+  border-bottom: 2px dotted #6D6C69;;
+}
+
+.lightning-talk-slot .talk:last-child {
+  border-bottom: none;
 }
 
 @media (min-width: 1200px) {
@@ -107,6 +119,10 @@ header .location {
   .lightning-talk:first-of-type {
     margin-left: 0;
   }
+
+  .location-small {
+    display:none;
+  }
 }
 
 @media (min-width: 979px) and (max-width: 1199px) {
@@ -133,9 +149,25 @@ header .location {
   .lightning-talk:first-of-type {
     margin-left: 0;
   }
+
+  .location-small {
+    display:none;
+  }
+
+  .lightning-talk-slot .talk {
+    border-bottom: 2px dotted #6D6C69;;
+  }
+
+  .lightning-talk-slot .talk:last-child {
+    border-bottom: none;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 978px) {
+
+  .location-small {
+    display:block;
+  }
 
   .program-column:first-of-type {
     margin-left: 0;
@@ -153,9 +185,21 @@ header .location {
     color: #fff;
     margin: 0;
   }
+
+  .workshop-slot section {
+    border-bottom: 2px dotted #6D6C69;;
+  }
+
+  .workshop-slot section:last-child {
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 767px) {
+  .location-small {
+    display:block;
+  }
+
   .program-column:first-of-type {
     margin-left: 0;
   }
@@ -172,5 +216,14 @@ header .location {
     color: #fff;
     margin: 0;
   }
+
+  .workshop-slot section {
+    border-bottom: 2px dotted #6D6C69;;
+  }
+
+  .workshop-slot section:last-child {
+    border-bottom: none;
+  }
+
 }
 /* END PROGRAM */
