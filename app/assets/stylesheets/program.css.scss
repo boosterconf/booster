@@ -29,11 +29,9 @@
   display: inline-block;
 }
 
-/*
-header time {
+header .location {
   float: right;
 }
-  */
 
 .program .period .slot {
   line-height: 1.2em;
@@ -149,7 +147,7 @@ header time {
 
   .program header.time {
     display: block;
-    text-align: right;
+    text-align: left;
     padding: 0px 5px;
     background-color: #1790a0;
     color: #fff;
@@ -175,62 +173,4 @@ header time {
     margin: 0;
   }
 }
-/*
-@media handheld, only screen and (max-width: 767px) {
-  .admin {
-    display: none;
-  }
-
-  .content-wrapper {
-    margin-top: 60px !important; /* Yes, way to lazy..
-  }
-
-  .location-explanation {
-    display: block;
-    position: fixed;
-    width: 100%;
-    background: #ccc;
-    top: 0;
-    left: 0;
-    border-bottom: 1px solid #999;
-  }
-
-  .location-explanation .time {
-    padding-bottom: 5px;
-  }
-
-  .location-explanation .location {
-    padding: 5px 0 0px;
-  }
-
-  .program .program-row,
-  .program .fourcol {
-    padding: 0;
-  }
-
-  .program .period header {
-    display: none;
-  }
-
-  .program h3.time {
-    display: block;
-    padding: 0px 5px;
-    background: white;
-    margin: 0;
-  }
-
-  .program .period.one .slot .talk .author {
-    display: inline-block;
-    padding: 3px 0px;
-  }
-
-  .program .period.one .slot {
-    display: block;
-  }
-
-  .program .period .slot .talk {
-    min-height: 0;
-  }
-} */
-
 /* END PROGRAM */
