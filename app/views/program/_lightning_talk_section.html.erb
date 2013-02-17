@@ -6,7 +6,7 @@
   <div class='slot'>
     <% talks.each do |talk| %>
         <div class='talk' data-talkid='<%= talk.id %>'>
-          <h3><%= talk.title %></h3>
+          <h4><%= talk.title %></h4>
           <span class='author'><%= talk.speaker_name %></span>
           <div class='description'><%= talk.description %></div>
         </div>
