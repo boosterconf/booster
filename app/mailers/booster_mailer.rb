@@ -102,7 +102,10 @@ class BoosterMailer < ActionMailer::Base
     @talk = talk
     @speaker = speaker
     @current_user_url = current_user_url
-    mail(:to => speaker.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has not been accepted")
+    mail(:to => speaker.email,
+         :cc => FROM_EMAIL,
+         :from => FROM_EMAIL,
+         :subject => "#{SUBJECT_PREFIX} Your submission \"#{talk.title}\" has not been accepted")
   end
 
   def upload_slides_notification(talk, edit_talk_url, new_password_reset_url)
