@@ -13,7 +13,12 @@
 }
 
 .program header.time {
-  display: none;
+  border-bottom: none;
+  color: #6D6C69;
+  background-color: #f2f0e6;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px;
 }
 
 .program .period header {
@@ -29,8 +34,7 @@
   display: inline-block;
 }
 
-header .location {
-  float: right;
+.program header.break {
 }
 
 .program .period .slot {
@@ -38,12 +42,16 @@ header .location {
 }
 
 .program .period .plenary-type {
-  padding: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 5px;
 }
 
 .program .period .slot .talk {
   font-size: 14px;
-  padding: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 5px;
 }
 
 .program .period .slot .talk:hover {
@@ -179,8 +187,7 @@ header .location {
 
   .program header.time {
     display: block;
-    text-align: left;
-    padding: 0px 5px;
+    padding: 5px;
     background-color: #1790a0;
     color: #fff;
     margin: 0;
@@ -204,14 +211,17 @@ header .location {
     margin-left: 0;
   }
 
+  .program header.time {
+    border-bottom: 5px solid #F6AB6F;
+  }
+
   .program-column header {
     display: none;
   }
 
   .program header.time {
     display: block;
-    text-align: right;
-    padding: 0px 5px;
+    padding: 5px;
     background-color: #1790a0;
     color: #fff;
     margin: 0;

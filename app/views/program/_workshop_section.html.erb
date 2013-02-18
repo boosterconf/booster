@@ -1,12 +1,10 @@
 <section class='period program-column'>
   <header>
     <span class='location'> <%=  location %></span>
-    <br>
-    <time class='time'><%= time %></time>
   </header>
   <div class='slot'>
     <div class='talk' data-talkid='<%= talk.id %>'>
-      <h5><%= talk.title %></h5>
+      <h5><%= link_to talk.title, talk_path(talk.id) %></h5>
       <span class='author'><%= talk.speaker_name %></span>
       <div class='description'><%= talk.description %></div>
       <span class='location-small'> Room: <%= location %></span>
