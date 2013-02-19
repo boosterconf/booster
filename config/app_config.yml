@@ -19,6 +19,6 @@ staging:
 production:
   max_users_limit: 200
   tutorial_registration_open: false
-  program_released: false
+  program_released: true
   early_bird_ends: 2013-01-28 23:59:59
 
