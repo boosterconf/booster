@@ -1,5 +1,4 @@
 class ProgramController < ApplicationController
-  before_filter :require_admin #, :except => [:index]
 
   def index
 

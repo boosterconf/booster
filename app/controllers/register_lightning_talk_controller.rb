@@ -1,5 +1,7 @@
 class RegisterLightningTalkController < ApplicationController
 
+  before_filter :require_admin
+
   def start
     if current_user
       redirect_to "/register_lightning_talk/talk"
