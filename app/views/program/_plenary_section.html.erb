@@ -5,11 +5,14 @@
         <time class="time"><%= time %></time>
         <span class="location"><%= location %></span>
       </header>
-      <div class="slot">
-        <div class="plenary-type">
-          <h4>Keynote: <%= talk.title %></h4>
+      <a href="<%= talk_path(talk.id) %>">
+        <div class="slot">
+          <div class="plenary-type">
+            <h4>Keynote: <%= talk.title %></h4>
+            <span class='author'><%= talk.speaker_name %></span>
+          </div>
         </div>
-      </div>
+      </a>
     </section>
   </div>
 </div>

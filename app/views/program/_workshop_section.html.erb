@@ -1,13 +1,16 @@
 <section class='period program-column'>
   <header>
-    <span class='location'> <%=  location %></span>
+    <span class='location'> <%= location %></span>
   </header>
   <div class='slot'>
-    <div class='talk' data-talkid='<%= talk.id %>'>
-      <h5><%= link_to talk.title, talk_path(talk.id) %></h5>
-      <span class='author'><%= talk.speaker_name %></span>
-      <div class='description'><%= talk.description %></div>
-      <span class='location-small'> Room: <%= location %></span>
-    </div>
+    <a href="<%= talk_path(talk.id) %>">
+      <div class='talk' data-talkid='<%= talk.id %>'>
+        <h5><%= talk.title %></h5>
+        <span class='author'><%= talk.speaker_name %></span>
+
+        <div class='description'><%= talk.description %></div>
+        <span class='location-small'> Room: <%= location %></span>
+      </div>
+    </a>
   </div>
 </section>
