@@ -12,7 +12,7 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 
-#gem 'prawn', '= 0.6.3'
+gem 'prawn'
 #gem 'prawnto'
 
 group :production do
