@@ -74,7 +74,7 @@
          <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[187] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[101] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[105] %>
-         <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[163] %>
+         <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[169] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[189] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[133] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[149] %>
@@ -89,7 +89,7 @@
            <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[187] %>
            <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[101] %>
            <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[105] %>
-           <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[163] %>
+           <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[169] %>
            <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[189] %>
            <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[133] %>
            <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[155] %>
@@ -98,9 +98,17 @@
 
   <%= render 'break_section', location: 'Restaurant', time: '12:15-13:30', title: 'Lunch' %>
 
-  <%= render 'break_section', location: 'Room: TBA', time: '13:30-14:00', title: 'Introduction to open spaces' %>
+  <div class='program-row row'>
+    <div class="workshop-slot span12">
+      <header class='time'>13:30 - 15:00</header>
+
+      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00', talk: @talks[159] %>
+      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00', talk: @talks[169] %>
+    </div>
+  </div>
+
   <%= render 'break_section', location: 'Room: TBA', time: '14:00-14:45', title: 'Open spaces 1' %>
-  <%= render 'break_section', location: 'Room: TBA', time: '15:45-15:30', title: 'Open spaces 2' %>
+  <%= render 'break_section', location: 'Room: TBA', time: '15:45-16:30', title: 'Open spaces 2' %>
   <%= render 'break_section', location: 'Room: TBA', time: '21:00-01:00', title: 'Community night' %>
 
   <h2>Friday March 15</h2>
@@ -115,7 +123,7 @@
        <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[117] %>
        <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[151] %>
        <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[146] %>
-       <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[169] %>
+       <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[163] %>
        <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[130] %>
        <%= render 'workshop_section', location: 'Room: TBA', time: '09:00-10:30', talk: @talks[197] %>
      </div>
@@ -130,7 +138,7 @@
          <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[106] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[152] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[146] %>
-         <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[169] %>
+         <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[163] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[130] %>
          <%= render 'workshop_section', location: 'Room: TBA', time: '10:45-12:15', talk: @talks[197] %>
        </div>
@@ -144,8 +152,8 @@
       <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[190] %>
       <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[145] %>
       <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[157] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[159] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[169] %>
+      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[1] %>
+      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[1] %>
       <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[130] %>
       <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-15:00', talk: @talks[197] %>
     </div>

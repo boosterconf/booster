@@ -3,6 +3,10 @@
     <span class='location'> <%= location %></span>
   </header>
   <div class='slot'>
+    <%
+       talk = Talk.new unless talk
+       talk.users << User.new
+    %>
     <a href="<%= talk_path(talk.id) %>">
       <div class='talk' data-talkid='<%= talk.id %>'>
         <h5><%= talk.title %></h5>
