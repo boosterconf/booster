@@ -27,14 +27,16 @@
   padding: 3px 5px;
 }
 
-.program .period header .location, .location span {
+.program .period header .location {
   text-align: right;
   background-color: #1790a0;
   color: #fff;
   display: inline-block;
 }
 
-.program header.break {
+.program header.break, .program header.break .location {
+  background-color: #d3d1cb;
+  color: #777;
 }
 
 .program .period .slot {
