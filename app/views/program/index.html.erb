@@ -98,19 +98,20 @@
 
   <%= render 'break_section', location: 'Restaurant', time: '12:15-13:30', title: 'Lunch' %>
 
-  <div class='program-row row'>
+  <%#div class='program-row row'>
     <div class="workshop-slot span12">
       <header class='time'>13:30 - 15:00</header>
       <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00'  %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00', talk: @talks[169] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00', talk: @talks[159] %>
-    </div>
-  </div>
+      <%#= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
+      <%#= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
+      <%#= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00', talk: @talks[169] %>
+      <%#= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
+      <%#= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00' %>
+      <%#= render 'workshop_section', location: 'Room: TBA', time: '13:30-14:00', talk: @talks[159] %>
+    <%#/div>
+  </div>%>
 
+  <%= render 'break_section', location: 'Room: TBA', time: '13:30-14:00', title: 'Introduction to open spaces' %>
   <%= render 'break_section', location: 'Room: TBA', time: '14:00-14:45', title: 'Open spaces 1' %>
   <%= render 'break_section', location: 'Room: TBA', time: '15:45-16:30', title: 'Open spaces 2' %>
   <%= render 'break_section', location: 'Room: TBA', time: '21:00-01:00', title: 'Community night' %>
