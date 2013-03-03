@@ -58,29 +58,31 @@ class NametagPdf < Prawn::Document
 
       fill_color "1790A0"
       font_size 26
-      text user.name, :align => :center, :style => :bold
+      text user.name||'', :align => :center, :style => :bold
 
       move_down 10
       font_size 15
       fill_color "6D6C69"
-      text user.company, :align => :center, :style => :normal
+      text user.company||'', :align => :center, :style => :normal
 
       move_down 150
 
       fill_color "F6AB6F"
       registration = user.registration
+      ticket_type_text = ''
       if registration == NIL
-        text ''
+        ticket_type_text = ''
       elsif registration.ticket_type_old == 'organizer'
-        text 'Organizer', :align => :center
+        ticket_type_text = 'Organizer'
       elsif registration.speaker?
-        text 'Speaker'
+        ticket_type_text = 'Speaker'
       elsif registration.ticket_type_old == 'volunteer'
-        text 'Volunteer'
+        ticket_type_text = 'Volunteer'
       elsif registration.ticket_type_old == 'student'
-        text 'Student'
+        ticket_type_text ='Student'
       end
 
+      text_box ticket_type_text, :at => [0, 80], :align => :center
 
       image "#{Rails.root}/app/assets/images/nametag-bottom.png", :width => 290, :at => [-25,60]
 
