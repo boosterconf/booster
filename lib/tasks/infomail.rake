@@ -149,7 +149,7 @@ desc "Send out information to previous speaker about early bird"
     sponsors = Sponsor.all_accepted
 
     for sponsor in sponsors
-      next unless sponsor.email.start_with? 'karianne.berg'
+      #next unless sponsor.email.start_with? 'karianne.berg'
       print "Mailing: #{sponsor.email}...\n"
       BoosterMailer.reminder_to_sponsor(sponsor).deliver
     end

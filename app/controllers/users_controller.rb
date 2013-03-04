@@ -176,7 +176,7 @@ class UsersController < ApplicationController
 
   def updated_dinner_attendance(dinner_status)
     flash[:notice] = "Thank you for updating your dinner attendance. #{dinner_status}"
-    redirect_to current_users_path
+    redirect_to current_user_path
   end
 
   def attending_dinner
