@@ -85,7 +85,7 @@
   margin-bottom: 10px;
 }
 
-.program-column h3 {
+.program-column h3, .program-column-8 h3 {
   line-height: 1;
 }
 
@@ -106,21 +106,28 @@
 }
 
 @media (min-width: 1200px) {
+
   .program-column {
     width: 158px;
     float: left;
     margin-left: 10px;
   }
 
-  .program-column:first-of-type {
+  .program-column-8 {
+    width: 123px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type {
     margin-left: 0;
   }
 
-  .program-column header {
+  .program-column header, .program-column-8 header {
     display: block;
   }
 
-  .program-column .talk {
+  .program-column .talk, .program-column-8 .talk {
     min-height: 150px;
   }
 
@@ -146,11 +153,17 @@
     margin-left: 10px;
   }
 
-  .program-column:first-of-type {
+  .program-column-8 {
+    width: 96px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type {
     margin-left: 0;
   }
 
-  .program-column header {
+  .program-column header, .program-column-8 header {
     display: block;
   }
 
@@ -183,11 +196,11 @@
     display:block;
   }
 
-  .program-column:first-of-type {
+  .program-column:first-of-type, .program-column-8:first-of-type {
     margin-left: 0;
   }
 
-  .program-column header {
+  .program-column header, .program-column-8 header {
     display: none;
   }
 
@@ -213,7 +226,7 @@
     display:block;
   }
 
-  .program-column:first-of-type {
+  .program-column:first-of-type, .program-column-8:first-of-type{
     margin-left: 0;
   }
 
@@ -221,7 +234,7 @@
     border-bottom: 5px solid #F6AB6F;
   }
 
-  .program-column header {
+  .program-column header, .program-column-8 header {
     display: none;
   }
 
