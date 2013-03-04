@@ -41,7 +41,7 @@ namespace :infomail do
   end
 
   desc "Send out request for dinner attendance update"
-  task :update_dinner_attendance => :mail_settings do
+  task :update_dinner_attendance => :sent_email do
     users = User.all_but_invited_speakers
     puts "Sending #{users.size} mails requesting to update dinner attendance"
     users.each do |user|
@@ -57,7 +57,7 @@ namespace :infomail do
   end
 
   desc "Send out information about tutorial registration"
-  task :tutorial_registration => :mail_settings do
+  task :tutorial_registration => :sent_email do
     users = User.all_but_invited_speakers
     puts "Sending #{users.size} mails requesting to register for tutorials"
     users.each do |user|
@@ -106,7 +106,7 @@ namespace :infomail do
   end
 
   desc "Send out information to tutorial speakers about the speaker's dinner"
-  task :speakers_dinner => :mail_settings do
+  task :speakers_dinner => :sent_email do
     users = User.all_accepted_speakers
 
     for user in users
@@ -119,7 +119,7 @@ namespace :infomail do
   end
 
   desc "Send out information to previous participants about early bird"
-  task :previous_participants => :mail_settings do
+  task :previous_participants => :sent_email do
     users = User.all_normal_participants
 
     for user in users
@@ -145,7 +145,7 @@ desc "Send out information to previous speaker about early bird"
   end
 
   desc "Send out information to sponsors before the conference"
-  task :sponsor_reminder => :mail_settings do
+  task :sponsor_reminder => :sent_email do
     sponsors = Sponsor.all_accepted
 
     for sponsor in sponsors
