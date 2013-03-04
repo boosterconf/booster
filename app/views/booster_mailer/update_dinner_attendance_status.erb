@@ -1,0 +1,30 @@
+<html>
+<body>
+Hi <%= @name %>,
+
+<p>The official conference dinner will be held at Bølgen og Moi, Wednesday March 13. The address is Vågsallmenningen 16.
+You can either meet us there, or walk together with us from the hotel reception at 18:40. If the weather is horrible,
+we'll provide alternative transportation. There will be entertainment sometime during the evening, and the dress code
+is non-existent.</p>
+
+<p>The dinner is free for everyone at the conference, and we would like all of you to attend. However, we understand that
+some people won't be able to make it for different reasons. Because this constitutes a significant expense, we would
+very much appreciate it if you update your registration for the dinner.</p>
+
+<p>
+<%= link_to 'Click here for NO, unfortunately I am unable to attend the dinner', @not_attending_dinner_url %><br/>
+<%= link_to "Click here for YES, I'd love to attend the dinner", @attending_dinner_url %>
+</p>
+
+<p>
+You will have to log in to do this. If you've forgotten your password, you can reset it <%= link_to 'here', @lost_password_url %>
+</p>
+
+<p>
+If you have any special dietary needs for lunch or dinner (allergies, vegetarian etc), please let us
+know at kontakt@rootsconf.no as soon as possible, so we can inform the restaurant and conference center.
+</p>
+<br/>
+The Roots 2012 committee
+</body>
+</html>

@@ -2,15 +2,41 @@
 <body>
 
 <p>Dear <%= @user %>,</p>
+<p>
+The conference is soon approaching, and we are looking forward to seeing you all in Bergen. Here is some practical information that you might need.
+</p>
 
-<p>The Booster 2013 Speaker's Dinner will be held at Restaurant Beyeren (Rosenkrantz gate 8) on Tuesday May 24th. The
-  dinner will start at 17.30. We will meet at the conference hotel reception right after the last tutorial (ends 17:00),
-  from where we will either walk or provide taxis, depending on the weather.</p>
+<p>
+First off; the social events. We encourage you to participate if you have the possibility. On the wednesday there
+will be a conference dinner at the restaurant Bølgen & Moi, http://www.bolgenogmoi.no/Restaurant/Bergen. After dinner
+there will be a live performance by the local band, Ocean of Lotion, http://www.oceanoflotion.com/. On thursday evening
+there will be a Speaker's Dinner, at the newly opened Litteraturhuset, http://www.litthusbergen.no/servering/. After
+the Speaker's Dinner we hope you would like to join the local .Net User Group's fishbowl event, one floor up from the
+dinner.
+<% if @user.has_accepted_tutorial? %>
+After the conference is over, on Friday evening, we will throw an after party at one of the organizers. This is a good
+  opportunity to unwind and  hang out with the other speakers and the committee.
+      <% end %>
+</p>
 
-<p>We hope as many as possible will attend.</p>
+<p>
+We need to know which of these events you would like to attend, so please reply to this email and let us know. Also,
+  if you have any food allergies or other special needs foodwise, please let us know about that, too.
+  <p>
 
-<p>We need to know if you will NOT attend this dinner – please reply to this email if this is the case.</p>
+    <p>
+Secondly; locations: <br/>
+All events are located in the centre of Bergen, within walking distance of the hotel. <%=  link_to 'Here is a map',
+ 'http://bit.ly/booster-2013-map' %> where all the important locations are marked. </p>
 
-<p>- The Booster 2013 organizers</p>
+<p>
+If you have any other questions, or if there is anything you need to tell us, please let us know, and we will get
+back to you as soon as we can.
+</p>
+
+<p>
+Regards, <br/>
+The Booster 2013 organizing committee
+</p>
 </body>
 </html>

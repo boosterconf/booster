@@ -201,6 +201,15 @@ class BoosterMailer < ActionMailer::Base
          :subject => "#{SUBJECT_PREFIX} You have been assigned a ticket to Booster 2013")
   end
 
+  def reminder_to_sponsor(sponsor)
+    @sponsor = sponsor
+
+    mail(:to => sponsor.email,
+         :from => FROM_EMAIL,
+         :cc => FROM_EMAIL,
+         :subject => "Booster 2013 - viktig informasjon til sponsorer!")
+  end
+
   def organizer_notification(text)
     @text = text
 
