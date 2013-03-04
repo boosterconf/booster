@@ -3,17 +3,18 @@
   <h2>Wednesday March 13</h2>
 
   <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
-  <%= render 'break_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
+
+  <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
   <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[194] %>
 
   <div class='program-row row'>
     <div class="span12 ">
       <header class='time'>10:30 - 11:15</header>
-      <%= render 'lightning_talk_section', location: 'Room: Dragefjellet', time: '10:30 - 11:15',
+      <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
                  talks: [@talks[125], @talks[161], @talks[183], @talks[176]] %>
-      <%= render 'lightning_talk_section', location: 'Room: Teatergaten', time: '10:30 - 11:15',
+      <%= render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
                  talks: [@talks[184], @talks[170], @talks[177], @talks[126]] %>
-      <%= render 'lightning_talk_section', location: 'Room: Muséplass', time: '10:30 - 11:15',
+      <%= render 'lightning_talk_section', location: 'Muséplass', time: '10:30 - 11:15',
                  talks: [@talks[148], @talks[124], @talks[166], @talks[129]] %>
     </div>
   </div>
@@ -23,11 +24,11 @@
   <div class='program-row row'>
     <div class="span12">
       <header class='time'>11:30 - 12:15</header>
-      <%= render 'lightning_talk_section', location: 'Room: Dragefjellet', time: '11:30 - 12:15',
+      <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
                  talks: [@talks[171], @talks[162], @talks[144], @talks[179]] %>
-      <%= render 'lightning_talk_section', location: 'Room: Teatergaten', time: '11:30 - 12:15',
+      <%= render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
                  talks: [@talks[104], @talks[123], @talks[168], @talks[186]] %>
-      <%= render 'lightning_talk_section', location: 'Room: Muséplass', time: '11:30 - 12:15',
+      <%= render 'lightning_talk_section', location: 'Muséplass', time: '11:30 - 12:15',
                  talks: [@talks[160], @talks[141], @talks[174], @talks[114]] %>
     </div>
   </div>
@@ -37,13 +38,13 @@
   <div class='program-row row'>
     <div class="workshop-slot span12">
       <header class='time'>13:30 - 15:00</header>
-      <%= render 'workshop_section', location: 'Room: Galgebakken', time: '13:30-15:00', talk: @talks[138] %>
-      <%= render 'workshop_section', location: 'Room: Tårnplass', time: '13:30-15:00', talk: @talks[156] %>
-      <%= render 'workshop_section', location: 'Room: Hødden', time: '13:30-15:00', talk: @talks[193] %>
-      <%= render 'workshop_section', location: 'Room: Teatergaten', time: '13:30-15:00', talk: @talks[188] %>
-      <%= render 'workshop_section', location: 'Room: Muséplass', time: '13:30-15:00', talk: @talks[169] %>
-      <%= render 'workshop_section', location: 'Room: Strangehagen', time: '13:30-15:00', talk: @talks[111] %>
-      <%= render 'workshop_section', location: 'Room: Dragefjellet', time: '13:30-15:00', talk: @talks[192] %>
+      <%= render 'workshop_section', location: 'Galgebakken', time: '13:30-15:00', talk: @talks[138] %>
+      <%= render 'workshop_section', location: 'Tårnplass', time: '13:30-15:00', talk: @talks[156] %>
+      <%= render 'workshop_section', location: 'Hødden', time: '13:30-15:00', talk: @talks[193] %>
+      <%= render 'workshop_section', location: 'Teatergaten', time: '13:30-15:00', talk: @talks[188] %>
+      <%= render 'workshop_section', location: 'Muséplass', time: '13:30-15:00', talk: @talks[169] %>
+      <%= render 'workshop_section', location: 'Strangehagen', time: '13:30-15:00', talk: @talks[111] %>
+      <%= render 'workshop_section', location: 'Dragefjellet', time: '13:30-15:00', talk: @talks[192] %>
     </div>
   </div>
 
@@ -52,13 +53,13 @@
   <div class='program-row row'>
     <div class="workshop-slot span12">
       <header class='time'>15:30-17:00</header>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[138] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[156] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[193] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[188] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[169] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[111] %>
-      <%= render 'workshop_section', location: 'Room: TBA', time: '15:30-17:00', talk: @talks[192] %>
+      <%= render 'workshop_section', location: 'Galgebakken', time: '15:30-17:00', talk: @talks[138] %>
+      <%= render 'workshop_section', location: 'Tårnplass', time: '15:30-17:00', talk: @talks[156] %>
+      <%= render 'workshop_section', location: 'Hødden', time: '15:30-17:00', talk: @talks[193] %>
+      <%= render 'workshop_section', location: 'Teatergaten', time: '15:30-17:00', talk: @talks[188] %>
+      <%= render 'workshop_section', location: 'Muséplass', time: '15:30-17:00', talk: @talks[169] %>
+      <%= render 'workshop_section', location: 'Strangehagen', time: '15:30-17:00', talk: @talks[111] %>
+      <%= render 'workshop_section', location: 'Dragefjellet', time: '15:30-17:00', talk: @talks[192] %>
     </div>
   </div>
 
@@ -153,6 +154,7 @@
   </div>
 
   <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
+
   <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[196] %>
-  <%= render 'break_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
+  <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
 </div>
