@@ -39,6 +39,10 @@
   color: #777;
 }
 
+.program header.break, .program header.openspace  {
+  padding: 6px 5px;
+}
+
 .program .period .slot {
   line-height: 1.2em;
 }
