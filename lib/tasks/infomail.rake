@@ -45,7 +45,7 @@ namespace :infomail do
     users = User.all_but_invited_speakers
     puts "Sending #{users.size} mails requesting to update dinner attendance"
     users.each do |user|
-      next unless user.email == 'karianne.berg@gmail.com'
+      #next unless user.email == 'karianne.berg@gmail.com'
 
       puts "Mailing to #{user.email}"
       BoosterMailer.update_dinner_attendance_status(user.name, user.email,
@@ -107,10 +107,11 @@ namespace :infomail do
 
   desc "Send out information to tutorial speakers about the speaker's dinner"
   task :speakers_dinner => :mail_settings do
-    users = User.all_speakers
+    users = User.all_accepted_speakers
 
     for user in users
       print "Mailing: #{user.email}...\n"
+      next unless user.email.start_with? 'karianne.berg'
       BoosterMailer.speakers_dinner_email(user).deliver
     end
 
@@ -148,8 +149,8 @@ desc "Send out information to previous speaker about early bird"
     sponsors = Sponsor.all_accepted
 
     for sponsor in sponsors
-      print "Mailing: #{sponsor.email}...\n"
       next unless sponsor.email.start_with? 'karianne.berg'
+      print "Mailing: #{sponsor.email}...\n"
       BoosterMailer.reminder_to_sponsor(sponsor).deliver
     end
 
