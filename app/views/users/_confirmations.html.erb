@@ -1,6 +1,6 @@
 <fieldset id="confirmations">
 
-  <% unless @user.registration.discounted_ticket? %>
+  <% unless @user.registration.student? %>
       <div class="checkbox">
         <%= reg.check_box :includes_dinner, :class => "checkbox" %>
         <%= reg.label :includes_dinner, "I want to attend the conference dinner", :style => "display:inline", :class => "checkbox" %>
