@@ -59,7 +59,7 @@
       <%= link_to "Update registration manually", edit_registration_path(@user.registration) %>
     </p>
     <p>
-      <%= link_to "Print name tag", nametag_path(@user.registration, :format => 'pdf') %>
+      <%= link_to "Print name tag", nametag_path(@user, :format => 'pdf') %>
     </p>
     <p>
       <% if @user.bio == nil && admin? %>
