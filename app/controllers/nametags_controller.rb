@@ -80,8 +80,10 @@ class NametagPdf < Prawn::Document
         ticket_type_text = 'Volunteer'
       elsif registration.ticket_type_old == 'student'
         ticket_type_text ='Student'
+      elsif registration.ticket_type_old == 'Academic'
+        ticket_type_text ='Academic'
       elsif registration.ticket_type_old == 'guest'
-        ticket_type_text ='Gjest - begrenset adgang'
+        ticket_type_text ='Guest - limited access'
       end
 
       text_box ticket_type_text, :at => [0, 80], :align => :center

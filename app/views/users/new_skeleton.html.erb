@@ -2,7 +2,14 @@
 
 <p style="color:green"><%= flash[:notice] %> </p>
 
+<p>
+  No fields except ticket type are mandatory. The rest will be registered when the user click the link.
+</p>
+
 <%= form_for @user, :url => create_skeleton_user_path do |f| %>
+
+    <%= f.label :name %>
+    <%= text_field(:user, :name, :class => 'input-xlarge') %>
 
     <%= f.label :email %>
     <%= email_field(:user, :email, :class => 'input-xlarge') %>
@@ -14,7 +21,7 @@
                 ['Volunteer', 'volunteer'],
                 ['Organizer', 'organizer'],
                 ['Student', 'student'],
-                ['Volunteer', 'volunteer']
+                ['Academic', 'academic']
         ] %>
     <% end %>
 

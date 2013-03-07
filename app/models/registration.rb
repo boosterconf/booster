@@ -10,6 +10,7 @@ class Registration < ActiveRecord::Base
       "mod251" => "MOD251 Student for Booster 2013",
       "organizer" => "Organizer for Booster 2013",
       "speaker" => "Speaker at Booster 2013",
+      "academic" => "Academic ticket Booster 2013",
       "new_speaker" => "Speaker without abstracts"
   }
 
