@@ -55,15 +55,20 @@ class NametagPdf < Prawn::Document
 
 
       font 'siri'
-
       fill_color "1790A0"
-      font_size 26
-      text user.name||'', :align => :center, :style => :bold
+
+      if user.name
+        font_size 26
+        text user.name, :align => :center, :style => :bold
+      else
+        font_size 15
+        text user.email || '', :align => :center, :style => :bold
+      end
 
       move_down 10
       font_size 15
       fill_color "6D6C69"
-      text user.company||'', :align => :center, :style => :normal
+      text user.company || '', :align => :center, :style => :normal
 
       move_down 150
 
@@ -80,7 +85,7 @@ class NametagPdf < Prawn::Document
         ticket_type_text = 'Volunteer'
       elsif registration.ticket_type_old == 'student'
         ticket_type_text ='Student'
-      elsif registration.ticket_type_old == 'Academic'
+      elsif registration.ticket_type_old == 'academic'
         ticket_type_text ='Academic'
       elsif registration.ticket_type_old == 'guest'
         ticket_type_text ='Guest - limited access'
