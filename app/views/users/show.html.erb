@@ -52,7 +52,7 @@
           <th>Conference dinner:</th>
           <td><%= @user.registration.includes_dinner ? "Yes" : "No" %></td>
         </tr>
-        <% unless @user.ticket_type_old == 'student' %>
+        <% unless @user.registration.ticket_type_old == 'student' %>
             <tr>
               <th>Price:</th>
               <td><%= @user.registration.ticket_price %></td>
