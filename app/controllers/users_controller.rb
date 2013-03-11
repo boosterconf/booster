@@ -212,6 +212,7 @@ class UsersController < ApplicationController
     @user.registration = Registration.new
   end
 
+  # TODO: Lag egen type for skeleton users
   def create_skeleton
     email = params[:user][:email]
 
