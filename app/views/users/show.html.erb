@@ -52,10 +52,12 @@
           <th>Conference dinner:</th>
           <td><%= @user.registration.includes_dinner ? "Yes" : "No" %></td>
         </tr>
-        <tr>
-          <th>Price:</th>
-          <td><%= @user.registration.ticket_price %></td>
-        </tr>
+        <% unless @user.ticket_type_old == 'student' %>
+            <tr>
+              <th>Price:</th>
+              <td><%= @user.registration.ticket_price %></td>
+            </tr>
+        <% end %>
         <% if @user.registration.manual_payment %>
             <tr>
               <th>Invoice adress:</th>
