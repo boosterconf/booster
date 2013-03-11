@@ -156,6 +156,7 @@ class TalksController < ApplicationController
 
   def update
     @talk = current_user.is_admin ? Talk.find(params[:id]) : current_user.talks.find(params[:id])
+    @talk.assign_attributes(params[:talk])
     @tags = Tag.all
     @types = TalkType.all
 

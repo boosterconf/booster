@@ -21,13 +21,13 @@
 <% if @talk.users.include?(current_user) || admin? %>
     <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
-    <%# unless @talk.slide_file_name.nil? %>
-    <%#h3>Presentation slides</h3%>
-    <p><%#= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
-    <%# else %>
-    <!--h3>Upload presentation</h3-->
-    <%# end %>
-    <%#= render :partial => "talks/upload_slide" %>
+    <% unless @talk.slide_file_name.nil? %>
+    <h3>Presentation slides</h3>
+    <p><%= link_to "#{image_tag("icon_slides.gif")} Download", @talk.slide.url %></p>
+    <% else %>
+    <h3>Upload presentation</h3>
+    <% end %>
+    <%= render :partial => "talks/upload_slide" %>
 
     <% if @talk.is_tutorial? %>
         <p>
