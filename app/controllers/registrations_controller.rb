@@ -26,6 +26,14 @@ class RegistrationsController < ApplicationController
     redirect_to registrations_url
   end
 
+  def send_test_welcome_email()
+    User.find_all_by_email("kjersti.berg@gmail.com").each do | a_user |
+      puts a_user
+      BoosterMailer.welcome_email(a_user).deliver
+    end
+    redirect_to registrations_url
+  end
+
   def edit
     @registration = Registration.find(params[:id])
     @registration.payment_notification ||= @registration.build_payment_notification
