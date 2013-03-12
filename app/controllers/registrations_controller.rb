@@ -21,7 +21,7 @@ class RegistrationsController < ApplicationController
 
   def send_welcome_email()
     User.all.each do | a_user |
-      BoosterMailer.welcome_email(a_user).deliver
+      BoosterMailer.welcome_email(a_user).deliver if a_user.email && a_user.name
     end
     redirect_to registrations_url
   end
