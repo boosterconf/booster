@@ -36,6 +36,8 @@ Booster2013::Application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
+  match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url
+
   resources :registrations do
     member do
       get :confirm_delete

@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
   before_filter :require_user
   before_filter :require_admin_or_owner, :except => [:index]
-  before_filter :require_admin, :only => [:index, :destroy, :confirm_delete, :phone_list]
+  before_filter :require_admin, :only => [:index, :destroy, :confirm_delete, :phone_list, :send_welcome_email]
 
   def index
     @registrations = Registration.find_by_params(params)
@@ -17,6 +17,13 @@ class RegistrationsController < ApplicationController
 
       @income_per_date = total_price_per_date(@registrations, @date_range)
     end
+  end
+
+  def send_welcome_email()
+    User.all.each do | a_user |
+      BoosterMailer.welcome_email(a_user).deliver
+    end
+    redirect_to registrations_url
   end
 
   def edit

@@ -54,6 +54,8 @@
   <li><%= link_to "Dinner registrations", :conditions => {:includes_dinner => 1} %></li>
 </ul>
 
+<%=  link_to "Send welcome email", :send_welcome_email_url %>
+
 <% unless @registrations.length == 0 %>
 
     <h3><%= @registrations.length %> brukere:</h3>

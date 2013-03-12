@@ -128,9 +128,8 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => email, :from => FROM_EMAIL, :subject => "Please confirm your status regarding the conference dinner")
   end
 
-  def welcome_email(user, tutorial_registration_url)
+  def welcome_email(user)
     @user = user
-    @tutorial_registration_url = tutorial_registration_url
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster 2013 at Scandic Hotel Bergen City, Wednesday March 13.")
   end
 
