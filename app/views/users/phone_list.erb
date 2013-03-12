@@ -1,0 +1,16 @@
+<h2 class="page_title">Phone list for Roots 2012</h2>
+
+<table border="1" cellspacing="0">
+  <tr>
+    <th>Name</th>
+    <th>Role</th>
+    <th>Phone number</th>
+  </tr>
+  <% for user in @users %>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.registration.ticket_type_old %></td>
+        <td><%= user.phone_number %></td>
+      </tr>
+  <% end %>
+</table>

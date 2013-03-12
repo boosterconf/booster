@@ -15,6 +15,7 @@ Booster2013::Application.routes.draw do
   resources :users do
     collection do
       get :dietary_requirements
+      get :phone_list
     end
   end
 
