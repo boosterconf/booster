@@ -174,7 +174,7 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_accepted_tutorials
-    all(:include => [:talk_type, :slots, :periods], :conditions => ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title ")
+    unscoped.all(:include => [:talk_type], :conditions => ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title")
   end
 
   def self.all_accepted_lightning_talks

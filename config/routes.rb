@@ -53,6 +53,7 @@ Booster2013::Application.routes.draw do
     end
   end
 
+  match '/talks/cheat_sheet' => 'talks#cheat_sheet'
   resources :talks do
     resources :comments
     member do

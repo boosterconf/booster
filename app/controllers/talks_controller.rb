@@ -192,7 +192,7 @@ class TalksController < ApplicationController
   end
 
   def cheat_sheet
-    @days = Talk.all_accepted_tutorials.find_all { |talk| talk.is_scheduled? }.group_by { |talk| talk.periods[0].day }
+    @talks = Talk.all_accepted_tutorials
   end
 
   protected
