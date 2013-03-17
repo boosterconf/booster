@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def talks_this_year
+    talks.select { |talk| talk.year == AppConfig.year }
+  end
+
   def deliver_password_reset_instructions!
     reset_perishable_token!
     BoosterMailer.password_reset_instructions(self).deliver

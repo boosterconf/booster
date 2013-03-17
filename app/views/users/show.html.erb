@@ -78,10 +78,10 @@
   </table>
 </div>
 
-<% unless @user.talks.blank? %>
+<% unless @user.talks_this_year.blank? %>
     <h3>Suggested talks</h3>
     <ul class="talk_list">
-      <% for talk in @user.talks %>
+      <% for talk in @user.talks_this_year %>
           <li><%= link_to h(talk.title), talk %></li>
       <% end %>
     </ul>
