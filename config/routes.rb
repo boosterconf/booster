@@ -63,6 +63,8 @@ Booster2013::Application.routes.draw do
 
   resources :nametags
 
+  resources :receipts
+
   resources :payment_notifications
 
   resources :password_resets
