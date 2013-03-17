@@ -152,7 +152,7 @@ class Talk < ActiveRecord::Base
 
   def self.all_pending_and_approved
     all(:order => 'acceptance_status, id desc').select {
-        |t| !t.refused? && !t.users.first.nil?
+        |t| !t.refused? && !t.users.first.nil? && t.year == AppConfig.year
     }
   end
 

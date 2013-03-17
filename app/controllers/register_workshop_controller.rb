@@ -36,6 +36,7 @@ class RegisterWorkshopController < ApplicationController
   def create_talk
     @talk = Talk.new(params[:talk])
     @talk.language = "english"
+    @talk.year = AppConfig.year
     @talk.users << current_user
 
     if @talk.save

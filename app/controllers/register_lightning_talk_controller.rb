@@ -35,6 +35,7 @@ class RegisterLightningTalkController < ApplicationController
   def create_talk
     @talk = Talk.new(params[:talk])
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
+    @talk.year = AppConfig.year
     @talk.users << current_user
     if @talk.save
       current_user.update_ticket_type!

@@ -1,23 +1,27 @@
 development:
+  year: 2014
   max_users_limit: 2000
   tutorial_registration_open: true
   program_released: true
-  early_bird_ends: 2013-01-28 23:59:59
+  early_bird_ends: 2014-01-28 23:59:59
 
 test:
+  year: 2014
   max_users_limit: 2000
   tutorial_registration_open: true
   program_released: true
-  early_bird_ends: 2013-01-28 23:59:59
+  early_bird_ends: 2014-01-28 23:59:59
 
 staging:
+  year: 2014
   max_users_limit: 2000
   tutorial_registration_open: true
   program_released: true
-  early_bird_ends: 2013-01-28 23:59:59
+  early_bird_ends: 2014-01-28 23:59:59
 
 production:
+  year: 2014
   max_users_limit: 250
   tutorial_registration_open: false
-  program_released: true
-  early_bird_ends: 2013-01-28 23:59:59
+  program_released: false
+  early_bird_ends: 2014-01-28 23:59:59
