@@ -65,6 +65,8 @@ Booster2013::Application.routes.draw do
 
   resources :receipts
 
+  resources :feedbacks
+
   resources :payment_notifications
 
   resources :password_resets
@@ -102,6 +104,7 @@ Booster2013::Application.routes.draw do
   match 'info/speakers' => 'info#speakers'
 
   match 'admin' => 'admin#index'
+
 
 # You can have the root of your site routed with "root"
 # just remember to delete public/index.html.

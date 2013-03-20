@@ -2,31 +2,11 @@
 
   <div class="row">
 
-    <div id="notifications">
-<%# TODO: Dette ser jævlig ut. Fikse! %>
-      <% if flash[:notice] %>
-          <p class="flash-notice"><%= flash[:notice] %></p>
-      <% end %>
-
-      <p style="color: orange"><%= flash[:warn] %></p>
-
-      <p style="color: red"><%= flash[:error] %></p>
-    </div>
-
-
     <article class="span4 pull-right">
       <!--h1 class="hidden-phone">&nbsp;</h1-->
 
       <div class="thumbnail-with-button">
-        <h2>Tickets</h2>
-
-        <p>
-          All tickets includes the full 3 day conference and the conference dinner.
-        </p>
-
-        <p>
-          <%= link_to 'Tickets and prices', info_tickets_url, :class => "btn btn-primary btn-large" %>
-        </p>
+        <%= image_tag("roots-011.jpg", {:width => "400px", :class => 'hidden-phone'}) %>
       </div>
 
       <div class="navbar hidden-phone social-links">
@@ -57,68 +37,40 @@
     </article>
 
     <article class="span7">
-      <h2 class="announce">The Program is out!</h2>
-    </article>
-
-    <article class="span7">
-
+      <h2 class="announce">So long and thanks for all the fish!</h2>
       <p>
-        The <%=  link_to "Booster 2013 program" %> is now launched, and we're very excited about it!
+        Booster 2013 is over, and we hope you have enjoyed it as much as we have. Videos of keynotes and
+        lightning talks will be made available on <a href="http://vimeo.com/boosterconf">Vimeo</a> over the
+        next weeks.
       </p>
       <p>
-        <%= link_to "Read the program", program_url, :class => "btn btn-primary btn-large" %>
-        <%= link_to "Buy a ticket", new_user_url, :class => "btn btn-primary btn-large" %>
+        The dates are already set for next year, so be sure to mark your calendars for <strong>March 12.-14. 2014</strong>.
       </p>
-    </article>
-  </div>
 
+      <h2>Feedback?</h2>
+      <div id="notifications">
+        <%# TODO: Dette ser jævlig ut. Fikse! %>
+        <% if flash[:notice] %>
+            <p class="flash-notice"><%= flash[:notice] %></p>
+        <% end %>
 
-  <div class="row">
-    <article class="span12">
-      <h2 class="sectionhead">Some of our speakers
-        <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align"}) %>
-      </h2>
-      <% @speakers.each do |speaker| %>
-          <div class="span2 speaker-box">
-            <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">
-              <%= image_tag speaker.bio.picture.url %>
-            </a>
-            <br/>
-            <a class="defaultDOMWindow" href="#<%= speaker.atomic_reference %>" title="<%= speaker.bio[:name] %>">
-              <%= speaker.name %>
-            </a>
-            <br/>
-            <% if speaker.bio[:twitter_handle] %>
-                <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
-                  &#64;<%= speaker.bio[:twitter_handle] %>
-                </a>
-            <% end %>
-          </div>
+        <p style="color: orange"><%= flash[:warn] %></p>
+
+        <p style="color: red"><%= flash[:error] %></p>
+      </div>
+      <p>
+        Did you attend the conference, as a participant or as a speaker, and would like to give us some
+        feedback? Please fill out this form. We appreciate it!
+      </p>
+      <%= form_for(@feedback) do |f| %>
+          <%= f.text_area :comment, :rows => 5, :class => 'span7'  %>
+          <%= f.submit 'Send', :class => 'btn btn-primary' %>
       <% end %>
 
-      <% @speakers.each do |speaker| %>
-          <div id="<%= speaker.atomic_reference %>" style=" display:none;" class="speaker-full">
-            <%= image_tag speaker.bio.picture.url %>
-            <h3><%= speaker.name %></h3>
-
-            <p><i><%= speaker.bio.title %></i></p>
-            <% if speaker.bio[:twitter_handle] %>
-                <p>
-                  <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
-                    &#64;<%= speaker.bio[:twitter_handle] %>
-                  </a>
-                </p>
-            <% end %>
-            <p>
-              <%= simple_format speaker.bio[:bio] %>
-            </p>
-          </div>
-      <% end %>
-
-      <div class="clearfix"></div>
-      <%= link_to 'Show all', info_speakers_path %>
     </article>
+
   </div>
+
 </div>
 
 <% content_for :javascript do %>

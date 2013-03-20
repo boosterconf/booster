@@ -133,6 +133,11 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster 2013 at Scandic Hotel Bergen City, Wednesday March 13.")
   end
 
+  def open_feedback_email(feedback)
+    @feedback = feedback
+    mail(:to => FROM_EMAIL, :from => FROM_EMAIL, :subject => "Anonymous feedback from website")
+  end
+
   def promo_email(user)
     @user = user
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "[Booster] Bergen Coding Dojo har startet opp!")
