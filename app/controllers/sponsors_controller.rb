@@ -1,6 +1,7 @@
 class SponsorsController < ApplicationController
 
   before_filter :require_admin
+  before_filter :find_sponsor, only: [:show, :update, :destroy, :email]
 
   respond_to :html, :js
 
@@ -14,8 +15,6 @@ class SponsorsController < ApplicationController
   end
 
   def show
-    @sponsor = Sponsor.find(params[:id])
-
   end
 
   def new
@@ -36,37 +35,45 @@ class SponsorsController < ApplicationController
     if @sponsor.save
       redirect_to sponsors_path, notice: 'Sponsor was successfully created.'
     else
-      render action: "new"
+      render action: :new
     end
   end
 
   def update
-    @sponsor = Sponsor.find(params[:id])
-
     @sponsor.assign_attributes(params[:sponsor])
+
+    # TODO: Do all this in transaction
 
     if @sponsor.status_changed?
       event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Sponsor status changed to #{@sponsor.status_text}")
       event.save
+
+      if @sponsor.status == 'accepted'
+        first_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
+        second_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
+
+        first_sponsor_ticket.company = @sponsor.name
+        second_sponsor_ticket.company = @sponsor.name
+
+        first_sponsor_ticket.save!(:validate => false)
+        second_sponsor_ticket.save!(:validate => false)
+      end
     end
 
     if @sponsor.save
-      redirect_to sponsors_path, notice: 'Sponsor was successfully updated.'
+      redirect_to sponsors_path, notice: "Sponsor #{@sponsor.name} was successfully updated."
     else
-      render action: "edit"
+      render action: :edit
     end
   end
 
   def destroy
-    @sponsor = Sponsor.find(params[:id])
     @sponsor.destroy
 
-    redirect_to sponsors_url
+    redirect_to sponsors_url, notice: "Sponsor #{@sponsor.name} was successfully updated."
   end
 
   def email
-    @sponsor = Sponsor.find(params[:id])
-
     if @sponsor.is_ready_for_email?
       BoosterMailer.initial_sponsor_mail(@sponsor).deliver
       @sponsor.status = 'contacted'
@@ -82,4 +89,10 @@ class SponsorsController < ApplicationController
       redirect_to sponsors_path
     end
   end
+
+  private
+  def find_sponsor
+    @sponsor = Sponsor.find(params[:id])
+  end
+
 end

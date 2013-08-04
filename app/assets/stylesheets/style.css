@@ -212,3 +212,8 @@ div.error + table {
 .social-links .nav > li > a {
     padding-top: 0;
 }
+
+.flash-notice {
+    color: dodgerblue;
+    font-weight: bold;
+}
