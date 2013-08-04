@@ -60,6 +60,12 @@
   <%= render @sponsor.events %>
 </p>
 
+<% if @sponsor.accepted? %>
+    <p>
+      <b>Sponsor tickets:</b>
+      <%= "WE HAZ DAT!"  %>
+    </p>
+<% end %>
 
 <%= link_to 'Edit', edit_sponsor_path(@sponsor) %> |
 <%= link_to 'Back', sponsors_path %>

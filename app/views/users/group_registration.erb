@@ -3,7 +3,8 @@
 <p class="alert-error"><%= flash[:error] %> </p>
 <p>
   So, you have a whole bunch of people that you want to register for Booster? That's great! We can register several
-  in one go and send you a collective invoice.
+  in one go and send you a collective invoice. The people you register will get separate emails with information
+  about how to provide us with the rest of the information we need.
 </p>
 
 <%= form_for @invoice, :url => create_group_registration_path do |f| %>
@@ -34,10 +35,10 @@
     <%= text_field(:invoice, :your_reference, :class => 'input-xlarge') %>
 
     <%= f.label :company %>
-    <%= text_field_tag :company, nil, :class => 'input-xlarge' %>
+    <%= text_field_tag :company, nil, :class => 'input-xlarge', :placeholder => "Your company's name" %>
 
     <%= f.label :emails %>
-    <%= text_area_tag :emails, nil, :cols => 20, :rows => 5 %>
+    <%= text_area_tag :emails, nil, :cols => 20, :rows => 5, :placeholder => 'me@company.com, you@company.com...' %>
 
     <br/>
     <%= f.submit "Send me an invoice", :class => "btn btn-primary" %>
