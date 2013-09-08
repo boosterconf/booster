@@ -1,87 +1,177 @@
-<div id="front-page">
-
-  <div class="row">
-
-    <article class="span4 pull-right">
-      <!--h1 class="hidden-phone">&nbsp;</h1-->
-
-      <div class="thumbnail-with-button">
-        <%= image_tag("fishbowl.jpg", {:width => "400px", :class => 'hidden-phone'}) %>
-      </div>
-
-      <div class="navbar hidden-phone social-links">
-        <ul class="nav">
-          <li>
-            <a href="https://twitter.com/boosterconf" target="_blank">
-              <%= image_tag "twitter-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="https://www.facebook.com/boosterconf" title="Facebook" class="facebook" target="_blank">
-              <%= image_tag "facebook-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="http://lanyrd.com/2013/boosterconf/" title="Lanyrd" class="lanyrd" target="_blank">
-              <%= image_tag "lanyrd-logo.png" %>
-            </a>
-          </li>
-          <li>
-            <a href="http://linkd.in/QjWslE" title="LinkedIn" class="linkedin" target="_blank">
-              <%= image_tag "linkedin-logo.png" %>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-    </article>
-
-    <article class="span7">
-      <h2 class="announce">So long and thanks for all the fish!</h2>
-      <p>
-        Booster 2013 is over, and we hope you have enjoyed it as much as we have. Videos of keynotes and
-        lightning talks will be made available on <a href="http://vimeo.com/boosterconf">Vimeo</a> over the
-        next weeks.
-      </p>
-      <p>
-        The dates are already set for next year, so be sure to mark your calendars for <strong>March 12.-14. 2014</strong>.
-      </p>
-
-      <h2>Feedback?</h2>
-      <div id="notifications">
-        <%# TODO: Dette ser jævlig ut. Fikse! %>
-        <% if flash[:notice] %>
-            <p class="flash-notice"><%= flash[:notice] %></p>
-        <% end %>
-
-        <p style="color: orange"><%= flash[:warn] %></p>
-
-        <p style="color: red"><%= flash[:error] %></p>
-      </div>
-      <p>
-        Did you attend the conference, as a participant or as a speaker, and would like to give us some
-        feedback? Or do you have any ideas for us for next year's conference?
-        Please fill out this form. We appreciate it!
-      </p>
-      <%= form_for(@feedback) do |f| %>
-          <%= f.text_area :comment, :rows => 5, :class => 'span7'  %>
-          <%= f.submit 'Send', :class => 'btn btn-primary' %>
-      <% end %>
-
-    </article>
-
-  </div>
-
+<div class="hello">
+   <p>So long and thanks for all the fish! Booster 2013 is over, and we hope you enjoyed it as much as we did. Join us <strong>next year</strong> on…</p>
+   <h1>12–14 March 2014</h1>
 </div>
 
-<% content_for :javascript do %>
-    <script type="text/javascript">
-        $('.defaultDOMWindow').openDOMWindow({
-            eventType:'click',
-            loader:1,
-            loaderImagePath:'animationProcessing.gif',
-            loaderHeight:16,
-            loaderWidth:17
-        });
-    </script>
-<% end %>
+<div class="videosarea group">
+   <div class="videosintro">
+      <p>But while you count the days, we think you should watch</p>
+      <h1>videos from talks at Booster&nbsp;2013</h1>
+   </div>
+   <ul class="videosthatarelong group">
+      <li class="keynotefirst">
+         <a class="keynotelink" href="http://vimeo.com/62378403" title="Self-Organize or Die: Why self-organizing teams are the key to thriving in a fast changing world - Esther Derby on Vimeo">
+            <p class="keynotespeaker"><span>Keynote:</span> Esther Derby</p>
+            <h2 class="keynotetitle">Self-Organize or&nbsp;Die:</h2>
+            <h3 class="keynotetitle">Why self-organizing teams are the key to&nbsp;thriving in a fast changing world</h3>
+            <p class="keynoteintro">“Self-organizing team” may be the most over-used, mis-understood, vague, and mis-leading phrase of the decade. What is a self-organizing team? How are self-organizing teams different from other teams? What makes self-organizing teams the key to unlocking creativity and agility?
+            </p>
+         </a>
+      </li>
+      <li class="keynotesecond">
+         <a class="keynotelink" href="http://vimeo.com/62821779" title="Get up from your chair, get digital! - Jonas Söderström on Vimeo">
+            <p class="keynotespeaker"><span>Keynote:</span> Jonas Söderström</p>
+            <h2 class="keynotetitle">Get up from your chair, get&nbsp;digital!</h2> 
+            <p class="keynoteintro">Too much software today just sucks. Too many digital products leave us frustrated and disappointed. (…) There’s a huge global market for digital products that take on this challenge — and it’s not just about appearance. It’s about the best democratic ideals and traditions, about empowerment and independence. And it's waiting for you to claim it.
+            </p>
+         </a>
+      </li>
+   </ul>
+   <h2 class="tenminutestitle">Got 10 minutes? We also have short videos for you to enjoy.</h2>
+   <ul class="videosthatareshort group">
+      <li>
+         <a href="http://vimeo.com/62378401" title="Tips for bedre logger - Anders Båtstrand on Vimeo">
+            <p class="speaker">Anders Båtstrand</p>
+            <h3 class="talk">Tips for bedre logger</h3>
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62274255" title="Slik unngår du at din app blir en sikkerhetstrussel - Anders Skar on Vimeo">
+            <p class="speaker">Anders Skar</p>
+            <h3 class="talk">Slik unngår du at din app blir en sikkerhetstrussel</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62305786" title="Hvor smidig er utviklingen hvis vi følger en smidig metode? - Atle Geitung on Vimeo">
+            <p class="speaker">Atle Geitung</p>
+            <h3 class="talk">Hvor smidig er utviklingen hvis vi følger en&nbsp;smidig metode?</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62274257" title="RubyMotion - Developer happiness for iOS - Bjørn Arild Mæland on Vimeo">
+            <p class="speaker">Bjørn Arild Mæland</p>
+            <h3 class="talk">RubyMotion—Developer happiness for&nbsp;iOS</h3>
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/61896812" title="Programming by hyperbole - Einar W. Høst on Vimeo">
+            <p class="speaker">Einar W. Høst</p>
+            <h3 class="talk">Programming by hyperbole</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62274260" title="HTML5 Pixel Magic - Eirik Bjørsnøs on Vimeo">
+            <p class="speaker">Eirik Bjørsnøs</p>
+            <h3 class="talk">HTML5 Pixel Magic</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62295467" title="How we transformed a deadful legacy codebase using only a Strap-on - Espen Dalløkken on Vimeo">
+            <p class="speaker">Espen Dalløkken</p>
+            <h3 class="talk">How we transformed a deadful legacy codebase using only a&nbsp;Strap-on</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62295464" title="UX Low hanging fruit - Fredrik Johnsson on Vimeo">
+            <p class="speaker">Fredrik Johnsson</p>
+            <h3 class="talk">UX Low hanging fruit</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62305787" title="Feil - Gaute Småland on Vimeo">
+            <p class="speaker">Gaute Småland</p>
+            <h3 class="talk">Feil</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62298874" title="Manage risk and expectations in Agile - Harald Hovdevik on Vimeo">
+            <p class="speaker">Harald Hovdevik</p>
+            <h3 class="talk">Manage risk and expectations in Agile</h3> 
+         </a>
+      </li>      
+      <li>
+         <a href="http://vimeo.com/62305789" title="EffectMapping: Hvis forretningsverdi er viktigst - Håvard Sjøvoll on Vimeo">
+            <p class="speaker">Håvard Sjøvoll</p>
+            <h3 class="talk">EffectMapping: Hvis forretningsverdi er viktigst</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62295471" title="Storm: Real time processing of Big Data - Jon Espen Ingvaldsen on Vimeo">
+            <p class="speaker">Jon Espen Ingvaldsen</p>
+            <h3 class="talk">Storm: Real time processing of Big Data</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62378404" title="Embrace the superteam - Kjartan Storli, Rick Sickenger on Vimeo">
+            <p class="speaker">Kjartan Storli &amp;&nbsp;Rick&nbsp;Sickenger</p>
+            <h3 class="talk">Embrace the superteam</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62298873" title="Distribuert databasesynkronisering i skyen(e) - Knut Tveitane on Vimeo">
+            <p class="speaker">Knut Tveitane</p>
+            <h3 class="talk">Distribuert databasesynkronisering i&nbsp;skyen(e)</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62274261" title="Automated CSS Testing - Kristofer Walters on Vimeo">
+            <p class="speaker">Kristofer Walters</p>
+            <h3 class="talk">Automated CSS Testing</h3> 
+         </a>
+      </li> 
+      <li>
+         <a href="http://vimeo.com/62298870" title="Type Driven Development - Maciek Próchniak on Vimeo">
+            <p class="speaker">Maciek Próchniak</p>
+            <h3 class="talk">Type Driven Development</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62305788" title="Emphasizing customer value of software quality using quality requirements - Mario Ek Aparicio on Vimeo">
+            <p class="speaker">Mario Ek Aparicio</p>
+            <h3 class="talk">Emphasizing customer value of software quality using quality requirements</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62298867" title="Apache Kafka - distributed publish-subscribe messaging system - Morten Kjetland on Vimeo">
+            <p class="speaker">Morten Kjetland</p>
+            <h3 class="talk">Apache Kafka – distributed publish-subscribe messaging system</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62295468" title="App-server euthanasia; Dropwizard - Olve Hansen on Vimeo">
+            <p class="speaker">Olve Hansen</p>
+            <h3 class="talk">App-server euthanasia; Dropwizard</h3> 
+         </a>
+      </li> 
+      <li>
+         <a href="http://vimeo.com/61889110" title="Alle prosjekter bør gjennomføre brukertesting! - Ram Yoga on Vimeo">
+            <p class="speaker">Ram Yoga</p>
+            <h3 class="talk">Alle prosjekter bør gjennomføre brukertesting!</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62295466" title="Are you cross-browser compatible - Safurudin Mahic on Vimeo">
+            <p class="speaker">Safurudin Mahic</p>
+            <h3 class="talk">Are you cross-browser compatible</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62298868" title="Deploying Java web applications with zero downtime - Stein Inge Morisbak on Vimeo">
+            <p class="speaker">Stein Inge Morisbak</p>
+            <h3 class="talk">Deploying Java web applications with zero downtime</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62378405" title="K I S S - Keep it simple stupid - Thommy Bommen on Vimeo">
+            <p class="speaker">Thommy Bommen</p>
+            <h3 class="talk">KISS — <br>Keep it simple stupid</h3> 
+         </a>
+      </li>
+      <li>
+         <a href="http://vimeo.com/62274256" title="All you need to know about TypeScript (in 10 minutes) - Torstein Nicolaysen on Vimeo">
+            <p class="speaker">Torstein Nicolaysen</p>
+            <h3 class="talk">All you need to know about TypeScript (in 10 minutes)</h3> 
+         </a>
+      </li>
+   </ul>
+</div> <!-- end videosarea -->
