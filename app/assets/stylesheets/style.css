@@ -13,8 +13,7 @@ b, h1, h2, h3, h4, h5 {
 }
 
 body {
-    padding-top: 20px;
-    color: #777;;
+    color: #777;
     background-color: #f2f0e6;
 }
 
@@ -97,12 +96,6 @@ a:hover {
 .scale-down img {
     height: 180px;
     max-width: 152px;
-}
-
-footer {
-    border-top: 3px solid #D3D1CB;
-    background-color: #ffffff;
-    padding: 20px;
 }
 
 #sponsors {
