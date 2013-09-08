@@ -363,6 +363,8 @@ a.btn {
 .mainnav a:hover {
    border-bottom: 2px solid #F2F0E6;
    padding-bottom: 2px;
+   color: #fff;
+   text-decoration: none;
 }
 
 
