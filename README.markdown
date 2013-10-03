@@ -2,6 +2,7 @@
 
 ## Setting up your environment
 
+
 ### OSX / Linux
 
 * Ruby 1.9.2
