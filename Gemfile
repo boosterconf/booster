@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
-gem "authlogic", :git => "git://github.com/binarylogic/authlogic.git"
+gem 'rails', '3.2.14'
+gem "authlogic", '~> 3.3.0'
 gem 'paperclip', '~>3.0'
 
 gem 'tinymce-rails'
