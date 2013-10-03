@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20130320200627) do
   end
 
   create_table "feedbacks", :force => true do |t|
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string    "comment"
+    t.timestamp "created_at", :null => false
+    t.timestamp "updated_at", :null => false
   end
 
   create_table "invitees", :force => true do |t|
