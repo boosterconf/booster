@@ -181,7 +181,7 @@ class BoosterMailer < ActionMailer::Base
     @sponsor = sponsor
     mail(:to => sponsor.email, :from => "#{sponsor.user.name} <#{sponsor.user.email}>",
          :cc => FROM_EMAIL, :bcc => sponsor.user.email,
-         :subject => "Bli sponsor for Booster 2013")
+         :subject => "Bli sponsor for Booster 2014")
   end
 
   def additional_speaker(primary_speaker, additional_speaker, talk)
