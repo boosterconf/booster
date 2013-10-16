@@ -200,6 +200,15 @@ a:focus {
    text-align: center;
 }
 
+.hello h2 {
+   text-align: center;
+}
+
+.hello div {
+   text-align: center;
+   margin-bottom: 20px;
+}
+
 .videosintro p {
    line-height: 1.2;
    margin-bottom: 0.5em;
