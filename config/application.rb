@@ -10,10 +10,10 @@ if defined?(Bundler)
 end
 
 module Dates
-	CFP_LIGHTNING_BEGINS = Date.parse("2012-10-30")
-	CFP_LIGHTNING_ENDS = Date.parse("2013-01-28")
-	CFP_TUTORIALS_BEGINS = Date.parse("2012-10-30")
-	CFP_TUTORIAL_ENDS = Date.parse("2013-01-21")
+	CFP_LIGHTNING_BEGINS = Date.parse("2013-10-16")
+	CFP_LIGHTNING_ENDS = Date.parse("2014-02-02")
+	CFP_TUTORIALS_BEGINS = Date.parse("2013-10-16")
+	CFP_TUTORIAL_ENDS = Date.parse("2014-01-13")
 end
 
 module Booster2013

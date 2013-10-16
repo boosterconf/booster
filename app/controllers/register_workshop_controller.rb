@@ -1,7 +1,6 @@
 require "securerandom"
 
 class RegisterWorkshopController < ApplicationController
-  before_filter :require_admin
 
   def start
     if current_user
