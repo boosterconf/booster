@@ -4,7 +4,7 @@ class RegisterWorkshopController < ApplicationController
 
   def start
     if current_user
-      redirect_to register_workshop_talk_url
+      redirect_to register_workshop_url
     end
     @user = User.new
     @user.registration = Registration.new
@@ -13,18 +13,18 @@ class RegisterWorkshopController < ApplicationController
   def create_user
     @user = User.new(params[:user])
     @user.create_registration
-    @user.registration.ticket_type_old = "speaker"
+    @user.registration.ticket_type_old = 'speaker'
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
-    @user.roles = params[:roles].join(",") unless params[:roles] == nil
+    @user.roles = params[:roles].join(',') unless params[:roles] == nil
 
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
       @user.registration.save!
-      redirect_to register_workshop_talk_url
+      redirect_to register_workshop_url
     else
-      render :action => "start"
+      render :action => 'start'
     end
   end
 
@@ -34,7 +34,7 @@ class RegisterWorkshopController < ApplicationController
 
   def create_talk
     @talk = Talk.new(params[:talk])
-    @talk.language = "english"
+    @talk.language = 'english'
     @talk.year = AppConfig.year
     @talk.users << current_user
 
@@ -55,12 +55,12 @@ class RegisterWorkshopController < ApplicationController
       BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
 
       if current_user.has_all_statistics
-        redirect_to register_lightning_talk_finish_url
+        redirect_to register_workshop_finish_url
       else
-        redirect_to register_lightning_talk_details_url
+        redirect_to register_workshop_details_url
       end
     else
-      render :action => "talk"
+      render :action => 'talk'
     end
   end
 
@@ -69,7 +69,7 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def create_user_for_additional_speaker(additional_speaker_email, talk)
-    additional_speaker = User.create_unfinished(additional_speaker_email, "speaker")
+    additional_speaker = User.create_unfinished(additional_speaker_email, 'speaker')
     additional_speaker.save(:validate => false)
     talk.users << additional_speaker
     talk.save!
@@ -87,16 +87,18 @@ class RegisterWorkshopController < ApplicationController
 
   def details
     @user = current_user
+    @user.create_bio
   end
 
   def create_details
+
     @user = current_user
     @user.update_attributes(params[:user])
 
     if @user.save
       redirect_to register_workshop_finish_url
     else
-      render :action => "details"
+      render :action => 'details'
     end
   end
 

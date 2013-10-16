@@ -30,7 +30,7 @@
           <div>
             <div style="float:right">
               <div style="margin: 5px;">
-                <% if !@user.bio.picture_file_name.nil? %>
+                <% if @user.bio.picture_file_name.present? %>
                     <%= image_tag @user.bio.picture.url %>
                 <% else %>
                     <%= image_tag('placeholder.jpg') %>
