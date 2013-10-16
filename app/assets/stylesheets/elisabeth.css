@@ -598,11 +598,11 @@ li.keynotesecond {
 @media screen and (min-width: 800px) {
 
 .hello {
-   background: url(/assets/bg-hello.png) no-repeat right top;
+   background: url(/assets/bg-videosarea.png) no-repeat right top;
 }
 
 .videosarea {
-   background: url(/assets/bg-videosarea.png) no-repeat 1em 1em;
+   background: url(/assets/bg-hello.png) no-repeat 1em 1em;
 }
 
 
