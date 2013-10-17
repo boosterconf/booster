@@ -1,8 +1,8 @@
 class BoosterMailer < ActionMailer::Base
 
   default_url_options[:host] = "boosterconf.no"
-  FROM_EMAIL = 'Booster 2013 <kontakt@boosterconf.no>'
-  SUBJECT_PREFIX = "[Booster 2013]"
+  FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
+  SUBJECT_PREFIX = "[boosterconf]"
 
 
   def registration_confirmation(user)
@@ -130,7 +130,7 @@ class BoosterMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster 2013 at Scandic Hotel Bergen City, Wednesday March 13.")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster 2014 at Scandic Hotel Bergen City, Wednesday March 12.")
   end
 
   def open_feedback_email(feedback)
@@ -151,12 +151,12 @@ class BoosterMailer < ActionMailer::Base
   def feedback_email(talk, group)
     @talk = talk
     @group = group
-    mail(:to => talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2013")
+    mail(:to => talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2014")
   end
 
   def talk_feedback_email(talk_feedback)
     @talk_feedback = talk_feedback
-    mail(:to => talk_feedback.talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2013")
+    mail(:to => talk_feedback.talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2014")
   end
 
   def hotel_program_email(user)
@@ -202,7 +202,7 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => user.email,
          :from => FROM_EMAIL,
          :cc => FROM_EMAIL,
-         :subject => "#{SUBJECT_PREFIX} You have been assigned a ticket to Booster 2013")
+         :subject => "#{SUBJECT_PREFIX} You have been assigned a ticket to Booster 2014")
   end
 
   def reminder_to_sponsor(sponsor)
@@ -211,7 +211,7 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => sponsor.email,
          :from => FROM_EMAIL,
          :cc => FROM_EMAIL,
-         :subject => "Booster 2013 - viktig informasjon til sponsorer!")
+         :subject => "Booster 2014 - viktig informasjon til sponsorer!")
   end
 
   def organizer_notification(text)
@@ -224,11 +224,11 @@ class BoosterMailer < ActionMailer::Base
 
   def reminder_to_earlier_participants_email(user)
     @name = user.name
-    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Remember to sign up for Booster 2013 before the Early Bird deadline!")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Remember to sign up for Booster 2014 before the Early Bird deadline!")
   end
 
   def reminder_to_earlier_speakers_email(user)
     @name = user.name
-    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Share your knowledge at Booster 2013!")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Share your knowledge at Booster 2014!")
   end
 end

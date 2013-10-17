@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title("Booster 2013 talks")
+  feed.title("Booster 2014 talks")
   unless @talks.empty?
     feed.updated(@talks.first.created_at)
 

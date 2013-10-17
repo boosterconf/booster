@@ -4,6 +4,6 @@ class App < ActiveRecord::Base
   end
 
   def self.speakers_close_date
-    Time.zone.parse("2013-01-28 23:59:59")
+    Time.zone.parse("2014-01-28 23:59:59")
   end
 end
