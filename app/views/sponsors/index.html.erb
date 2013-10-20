@@ -1,19 +1,39 @@
 <script type="text/javascript">
     $(document).ready(function () {
+
+                $(".email").bind("ajax:success",
+                        function() {
+                            showNotification({
+                                message: "Email sent",
+                                autoClose: true,
+                                duration: 2
+                            });
+                        }).bind("ajax:error", function (evt, data, status, xhr) {
+                            showNotification({
+                                message: "Oops! an error occurred.",
+                                type: "error",
+                                autoClose: true,
+                                duration: 2
+                            });
+                        });
+
                 $("#sponsors").tablesorter({
-                    theme:'blue',
+                    theme: 'blue',
                     // use save sort widget
-                    widgets:["saveSort"]
+                    widgets: ["saveSort"]
 
                 });
+
             }
-    );
+
+    )
+    ;
 </script>
 <h1>Sponsor list</h1>
 
 <%= render "shared/notice" %>
 
-<a href="#" class="toggle">Show/hide statistics</a><br />
+<a href="#" class="toggle">Show/hide statistics</a><br/>
 <div class="stats" style="display:none">
   <table class="table">
     <tr>
@@ -82,13 +102,13 @@
 
 <script>
 
-$(".toggle").click(function () {
-    $(".stats").toggle();
-});
+    $(".toggle").click(function () {
+        $(".stats").toggle();
+    });
 
-$(".toggleevents").click(function () {
-    $(".events").toggle();
-});
+    $(".toggleevents").click(function () {
+        $(".events").toggle();
+    });
 </script>
 
 <table id="sponsors" class="tablesorter">
@@ -113,7 +133,8 @@ $(".toggleevents").click(function () {
         <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
         <td>
           <% if sponsor.is_ready_for_email? %>
-              <%= link_to image_tag('mimiglyphs/57.png'), email_sponsor_path(sponsor), :confirm => 'Are you sure?', :disabled => sponsor.status != 'suggested', :method => :post %>
+              <%= link_to image_tag('mimiglyphs/57.png'), api_sponsor_email_path(sponsor), method: :post,
+                          remote: true, class: 'email' %>
           <% end %>
         </td>
       </tr>

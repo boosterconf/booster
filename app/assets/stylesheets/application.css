@@ -13,6 +13,7 @@
 = require bootstrap
 = require bootstrap-responsive
 = require jquery-ui-themeroller
+= require jquery_notification
 = require style
 = require program
 = require_tree .

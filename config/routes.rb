@@ -61,6 +61,12 @@ Booster2013::Application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :sponsors do
+      post :email
+    end
+  end
+
   resources :nametags
 
   resources :receipts

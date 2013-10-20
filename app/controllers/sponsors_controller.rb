@@ -49,14 +49,7 @@ class SponsorsController < ApplicationController
       event.save
 
       if @sponsor.status == 'accepted'
-        first_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
-        second_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
-
-        first_sponsor_ticket.company = @sponsor.name
-        second_sponsor_ticket.company = @sponsor.name
-
-        first_sponsor_ticket.save!(:validate => false)
-        second_sponsor_ticket.save!(:validate => false)
+        create_sponsor_tickets
       end
     end
 
@@ -65,6 +58,17 @@ class SponsorsController < ApplicationController
     else
       render action: :edit
     end
+  end
+
+  def create_sponsor_tickets
+    first_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
+    second_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
+
+    first_sponsor_ticket.company = @sponsor.name
+    second_sponsor_ticket.company = @sponsor.name
+
+    first_sponsor_ticket.save!(:validate => false)
+    second_sponsor_ticket.save!(:validate => false)
   end
 
   def destroy
@@ -84,6 +88,26 @@ class SponsorsController < ApplicationController
       event.save
 
       redirect_to(sponsors_path, :notice => 'Email was sent and sponsor status set to \'Contacted\'.')
+    else
+      flash[:error] = 'No email sent: must have status suggested and responsible set'
+      redirect_to sponsors_path
+    end
+  end
+
+  def ajax_email
+    if @sponsor.is_ready_for_email?
+      BoosterMailer.initial_sponsor_mail(@sponsor).deliver
+      @sponsor.status = 'contacted'
+      @sponsor.last_contacted_at = Time.now.to_datetime
+      if @sponsor.save
+        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+        event.save
+
+        redirect_to(sponsors_path, :notice => "Email was sent to #{@sponsor.name} and sponsor status set to \'Contacted\'.")
+      else
+
+        redirect_to sponsors_path
+      end
     else
       flash[:error] = 'No email sent: must have status suggested and responsible set'
       redirect_to sponsors_path
