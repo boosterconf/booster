@@ -4,7 +4,7 @@ class RegisterWorkshopController < ApplicationController
 
   def start
     if current_user
-      redirect_to register_workshop_url
+      redirect_to register_workshop_talk_url
     end
     @user = User.new
     @user.registration = Registration.new
@@ -22,7 +22,7 @@ class RegisterWorkshopController < ApplicationController
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
       @user.registration.save!
-      redirect_to register_workshop_url
+      redirect_to register_workshop_talk_url
     else
       render :action => 'start'
     end
