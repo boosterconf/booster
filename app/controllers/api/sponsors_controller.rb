@@ -8,7 +8,7 @@ module Api
     def email
       if @sponsor.is_ready_for_email?
         BoosterMailer.initial_sponsor_mail(@sponsor).deliver
-        #@sponsor.status = 'contacted'
+        @sponsor.status = 'contacted'
         @sponsor.last_contacted_at = Time.now.to_datetime
         if @sponsor.save
           event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
