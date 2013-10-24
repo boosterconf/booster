@@ -1,6 +1,7 @@
 <div class="form-horizontal">
 
-  <%= form_for(@sponsor) do |f| %>
+  <%= form_for @sponsor, html: { multipart: true } do |f| %>
+
       <% if @sponsor.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@sponsor.errors.count, "error") %> prohibited this sponsor from being saved:</h2>
@@ -84,13 +85,34 @@
       </div>
 
       <div class="control-group">
-
         <%= f.label :location, :class => "control-label" %>
         <div class="controls">
 
           <%= f.text_field :location %>
         </div>
+      </div>
 
+      <div class="control-group">
+        <%= f.label :website, :class => "control-label" %>
+        <div class="controls">
+
+          <%= f.text_field :website %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= image_tag @sponsor.logo if @sponsor.logo.present? %>
+        <%= f.label :logo, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.file_field :logo %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :publish_logo, :class => 'control-label' %>
+        <div class="controls">
+          <%= f.check_box :publish_logo %>
+        </div>
       </div>
 
       <div class="form-actions">

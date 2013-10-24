@@ -3,10 +3,16 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user_session, :current_user, :logged_in?, :admin?
 
+  before_filter :load_sponsors
+
   private
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
+  end
+
+  def load_sponsors
+    @our_sponsors = Sponsor.all_accepted.select { |sponsor| sponsor.should_show_logo? }
   end
 
   def current_user

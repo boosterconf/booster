@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<%= image_tag @sponsor.logo.url if @sponsor.logo.exists? %>
+
 <p>
   <b>Name:</b>
   <%=h @sponsor.name %>
