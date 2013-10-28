@@ -14,7 +14,7 @@ module Api
           event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
           event.save
 
-          head :ok
+          respond_with @sponsor
         else
 
           head :internal_server_error

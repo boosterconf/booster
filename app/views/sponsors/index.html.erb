@@ -2,12 +2,15 @@
     $(document).ready(function () {
 
                 $(".email").bind("ajax:success",
-                        function() {
+                        function(evt, sponsor, status, xhr) {
                             showNotification({
                                 message: "Email sent",
                                 autoClose: true,
                                 duration: 2
                             });
+
+                            $('#sponsor_email_' + sponsor.id).hide();
+
                         }).bind("ajax:error", function (evt, data, status, xhr) {
                             showNotification({
                                 message: "Oops! an error occurred.",
@@ -134,7 +137,7 @@
         <td>
           <% if sponsor.is_ready_for_email? %>
               <%= link_to image_tag('mimiglyphs/57.png'), api_sponsor_email_path(sponsor), method: :post,
-                          remote: true, class: 'email' %>
+                          remote: true, class: 'email', id: "sponsor_email_#{sponsor.id}" %>
           <% end %>
         </td>
       </tr>
