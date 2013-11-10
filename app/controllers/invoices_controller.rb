@@ -3,6 +3,7 @@ class InvoicesController < ApplicationController
   respond_to :html
 
   before_filter :require_admin
+  before_filter :find_invoice, only: [:update, :edit, :show]
 
   def index
     @invoices = Invoice.all
@@ -11,8 +12,6 @@ class InvoicesController < ApplicationController
   end
 
   def show
-    @invoice = Invoice.find(params[:id])
-
     respond_with @invoice
   end
 
@@ -23,7 +22,6 @@ class InvoicesController < ApplicationController
   end
 
   def edit
-    @invoice = Invoice.find(params[:id])
   end
 
   def create
@@ -37,8 +35,6 @@ class InvoicesController < ApplicationController
   end
 
   def update
-    @invoice = Invoice.find(params[:id])
-
     if @invoice.save
       redirect_to @invoice, notice: 'Invoice was successfully updated.'
     else
@@ -46,4 +42,8 @@ class InvoicesController < ApplicationController
     end
   end
 
+  private
+  def find_invoice
+    @invoice = Invoice.find(params[:id])
+  end
 end
