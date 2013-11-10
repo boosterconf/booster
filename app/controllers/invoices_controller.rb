@@ -1,32 +1,25 @@
 class InvoicesController < ApplicationController
 
+  respond_to :html
+
   before_filter :require_admin
 
   def index
     @invoices = Invoice.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @invoices }
-    end
+    respond_with @invoices
   end
 
   def show
     @invoice = Invoice.find(params[:id])
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @invoice }
-    end
+    respond_with @invoice
   end
 
   def new
     @invoice = Invoice.new
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @invoice }
-    end
+    respond_with @invoice
   end
 
   def edit
@@ -36,28 +29,21 @@ class InvoicesController < ApplicationController
   def create
     @invoice = Invoice.new(params[:invoice])
 
-    respond_to do |format|
-      if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
-        format.json { render json: @invoice, status: :created, location: @invoice }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
+    if @invoice.save
+      redirect_to @invoice, notice: 'Invoice was successfully created.'
+    else
+      render action: :new
     end
   end
 
   def update
     @invoice = Invoice.find(params[:id])
 
-    respond_to do |format|
-      if @invoice.update_attributes(params[:invoice])
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @invoice.errors, status: :unprocessable_entity }
-      end
+    if @invoice.save
+      redirect_to @invoice, notice: 'Invoice was successfully updated.'
+    else
+      render action: :new
     end
   end
+
 end
