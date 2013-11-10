@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/rootsconf/booster2014.png)](https://travis-ci.org/rootsconf/booster2014)
+
 # Booster Conference site
 
 ## Setting up your environment
