@@ -9,6 +9,10 @@ class Invoice < ActiveRecord::Base
 
   validate :delivery_method_present?
 
+  after_initialize do |invoice|
+    invoice.status = 'Registered'
+  end
+
   def total
     registrations.map(&:price).inject(0) { |sum, price| sum + price }
   end

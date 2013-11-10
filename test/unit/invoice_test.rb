@@ -9,7 +9,7 @@ class InvoiceTest < ActiveSupport::TestCase
 
   def test_new_invoice
     invoice = Invoice.new
-    assert invoice.status == "Registered"
+    assert invoice.status == 'Registered'
   end
 
 end
