@@ -3,7 +3,7 @@ class Talk < ActiveRecord::Base
 
   attr_accessible :talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
                   :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status,
-                  :slide, :outline
+                  :slide, :outline, :appropriate_for_roles
 
   has_many :speakers
   has_many :users, :through => :speakers
@@ -27,10 +27,11 @@ class Talk < ActiveRecord::Base
   validates_presence_of :title
   validates_presence_of :description
   validates_presence_of :language
-  validates :max_participants, :presence => true, :if => :is_tutorial?, :numericality => { :only_integer => true, :greater_than_or_equal => 20 }
+  validates :talk_type_id, presence: true
 
-  def after_initialize
-    self.acceptance_status||= "pending"
+  after_initialize do |talk|
+    talk.acceptance_status ||= 'pending'
+    talk.year = AppConfig.year
   end
 
   def speaker_name
@@ -105,6 +106,7 @@ class Talk < ActiveRecord::Base
 
   def is_lightning_talk?
     # TODO: Megahack!
+    return false unless talk_type
     talk_type.name == 'Lightning talk'
   end
 
@@ -148,6 +150,10 @@ class Talk < ActiveRecord::Base
 
   def is_scheduled?
     periods.present? && periods.length > 0
+  end
+
+  def appropriate_for_role?(role)
+    self.appropriate_for_roles && self.appropriate_for_roles.include?(role)
   end
 
   def self.all_pending_and_approved

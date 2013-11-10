@@ -17,39 +17,30 @@ class RegisterWorkshopController < ApplicationController
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
-    @user.roles = params[:roles].join(',') unless params[:roles] == nil
+    @user.roles = params[:roles].join(',') if params[:roles]
 
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
       @user.registration.save!
       redirect_to register_workshop_talk_url
     else
-      render :action => 'start'
+      render :action => :start
     end
   end
 
   def talk
-    @talk = Talk.new
+    @talk = Workshop.new
   end
 
   def create_talk
-    @talk = Talk.new(params[:talk])
-    @talk.language = 'english'
-    @talk.year = AppConfig.year
+    @talk = Workshop.new(params[:talk])
     @talk.users << current_user
 
     if @talk.save
       current_user.update_ticket_type!
 
       if has_entered_additional_speaker_email
-        additional_speaker_email = params[:user][:additional_speaker_email]
-
-
-        if additional_speaker_already_has_registered_user(additional_speaker_email)
-          send_email_to_organizers_to_go_fix_it(additional_speaker_email)
-        else
-          create_user_for_additional_speaker(additional_speaker_email, @talk)
-        end
+        add_additional_speaker
       end
 
       BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
@@ -60,7 +51,17 @@ class RegisterWorkshopController < ApplicationController
         redirect_to register_workshop_details_url
       end
     else
-      render :action => 'talk'
+      render action: :talk
+    end
+  end
+
+  def add_additional_speaker
+    additional_speaker_email = params[:user][:additional_speaker_email]
+
+    if additional_speaker_already_has_registered_user(additional_speaker_email)
+      send_email_to_organizers_to_go_fix_it(additional_speaker_email)
+    else
+      create_user_for_additional_speaker(additional_speaker_email, @talk)
     end
   end
 
@@ -98,7 +99,7 @@ class RegisterWorkshopController < ApplicationController
     if @user.save
       redirect_to register_workshop_finish_url
     else
-      render :action => 'details'
+      render :action => :details
     end
   end
 
