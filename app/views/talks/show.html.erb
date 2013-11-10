@@ -22,10 +22,10 @@
     <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
     <% unless @talk.slide_file_name.nil? %>
-    <h3>Presentation slides</h3>
-    <p><%= link_to image_tag("icon_slides.gif"), @talk.slide.url %><%= link_to "Download", @talk.slide.url %></p>
+        <h3>Presentation slides</h3>
+        <p><%= link_to image_tag("icon_slides.gif"), @talk.slide.url %><%= link_to "Download", @talk.slide.url %></p>
     <% else %>
-    <h3>Upload presentation</h3>
+        <h3>Upload presentation</h3>
     <% end %>
     <%= render :partial => "talks/upload_slide" %>
 
@@ -56,21 +56,27 @@
   <% end %>
 </div>
 <% if @talk.is_tutorial? %>
-    <p>
-      <strong>Participant requirements:</strong>
-      <%= h @talk.participant_requirements %>
-    </p>
-<% end %>
 
-
+    <div class="outline">
+    <% if @talk.users.include?(current_user) || admin? %>
+        <strong>Outline</strong>
+        <% if contains_html(@talk.outline) %>
+            <%= sanitize @talk.outline %>
+        <% else %>
+            <%= simple_format h(@talk.outline) %>
+        <% end %>
+    <% end %>
+      </div>
 <p>
-  <strong>Target audience:</strong>
-  <%= (@talk.describe_audience_level.blank?) ? "Everyone" : h(@talk.describe_audience_level) %>
+  <strong>Participant requirements:</strong>
+  <%= h @talk.participant_requirements %>
 </p>
+
+<% end %>   
 
 <p>
   Do you want to hear this talk? Vote <%= link_to "here", :controller => "talks", :action => "vote", :id => @talk.id %>.
-  This talk has received <%=  @talk.votes_count %> votes.
+  This talk has received <%= @talk.votes_count %> votes.
 </p>
 
 
