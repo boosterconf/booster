@@ -40,6 +40,20 @@
 
     <%= tinymce %>
 
+    <div class="control-group">
+
+      <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?', :class => 'control-label' %>
+      <div class="controls">
+
+        <% Roles.all.each do |role| %>
+            <label class="checkbox">
+              <%= check_box_tag "roles[]", role, @talk.appropriate_for_role?(role.to_s), :id => "roles_#{role}" %>
+              <%= label_tag "roles_#{role}", Roles.label[role] %>
+            </label>
+        <% end %>
+      </div>
+    </div>
+
     <div class="field max_participants">
       <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 20, please): " %>
       <%= f.text_field :max_participants, :class => 'input-small'%>
