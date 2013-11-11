@@ -14,14 +14,14 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
 
       should 'get an email confirming that the talk has been submitted' do
         assert_difference('ActionMailer::Base.deliveries.size', +1) do
-          post :create_talk, :talk => create_talk_params
+          post :create_talk, :workshop => create_talk_params
         end
       end
 
       should "not create a new user when no additional speaker is given" do
         assert_no_difference('User.count') do
           assert_no_difference('Registration.count') do
-            post :create_talk, :talk => create_talk_params
+            post :create_talk, :workshop => create_talk_params
           end
         end
       end
@@ -29,7 +29,7 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
       should "create a new user when additional speaker is given" do
         assert_difference('User.count' "+1") do
           assert_difference('Registration.count' "+1") do
-            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => EMAIL}
+            post :create_talk, :workshop => create_talk_params, :user => {:additional_speaker_email => EMAIL}
           end
         end
       end
@@ -42,21 +42,21 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         should 'not create a new user' do
           assert_no_difference('User.count') do
             assert_no_difference('Registration.count') do
-              post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => @existing_email}
+              post :create_talk, :workshop => create_talk_params, :user => {:additional_speaker_email => @existing_email}
             end
           end
         end
 
         should 'send an email to us' do
           assert_difference('ActionMailer::Base.deliveries.size', +2) do
-            post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => @existing_email}
+            post :create_talk, :workshop => create_talk_params, :user => {:additional_speaker_email => @existing_email}
           end
         end
       end
 
       context "create a new user" do
         setup do
-          post :create_talk, :talk => create_talk_params, :user => {:additional_speaker_email => EMAIL}
+          post :create_talk, :workshop => create_talk_params, :user => {:additional_speaker_email => EMAIL}
           @registration = Registration.unscoped.order("id asc").last
           @user = User.unscoped.order("id asc").last
         end

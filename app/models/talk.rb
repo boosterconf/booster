@@ -14,7 +14,6 @@ class Talk < ActiveRecord::Base
   #has_many :periods, :through => :slots
   #has_many :participants, :include => :user, :dependent => :destroy
   #has_many :feedback_comments
-
   has_attached_file :slide, PAPERCLIP_CONFIG
 
   validates_attachment_content_type :slide,
@@ -24,9 +23,9 @@ class Talk < ActiveRecord::Base
 
   validates_acceptance_of :accepted_guidelines
   validates_acceptance_of :accepted_cc_license
-  validates_presence_of :title
-  validates_presence_of :description
-  validates_presence_of :language
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :language, presence: true
   validates :talk_type_id, presence: true
 
   after_initialize do |talk|

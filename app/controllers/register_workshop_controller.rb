@@ -29,21 +29,22 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def talk
-    @talk = Workshop.new
+    @workshop = Workshop.new
   end
 
   def create_talk
-    @talk = Workshop.new(params[:talk])
-    @talk.users << current_user
+    @workshop = Workshop.new(params[:workshop])
+    @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
+    @workshop.users << current_user
 
-    if @talk.save
+    if @workshop.save
       current_user.update_ticket_type!
 
       if has_entered_additional_speaker_email
         add_additional_speaker
       end
 
-      BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
+      BoosterMailer.talk_confirmation(@workshop, talk_url(@workshop)).deliver
 
       if current_user.has_all_statistics
         redirect_to register_workshop_finish_url
@@ -61,12 +62,12 @@ class RegisterWorkshopController < ApplicationController
     if additional_speaker_already_has_registered_user(additional_speaker_email)
       send_email_to_organizers_to_go_fix_it(additional_speaker_email)
     else
-      create_user_for_additional_speaker(additional_speaker_email, @talk)
+      create_user_for_additional_speaker(additional_speaker_email, @workshop)
     end
   end
 
   def send_email_to_organizers_to_go_fix_it(additional_speaker_email)
-    BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@talk.title}. Go fix!").deliver
+    BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@workshop.title}. Go fix!").deliver
   end
 
   def create_user_for_additional_speaker(additional_speaker_email, talk)
@@ -75,7 +76,7 @@ class RegisterWorkshopController < ApplicationController
     talk.users << additional_speaker
     talk.save!
 
-    BoosterMailer.additional_speaker(current_user, additional_speaker, @talk).deliver
+    BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver
   end
 
   def additional_speaker_already_has_registered_user(additional_speaker_email)
