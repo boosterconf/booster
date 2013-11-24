@@ -1,7 +1,7 @@
 <%= content_for :title, h(@talk.title) %>
 <h2 class="page_title"><%= h @talk.title %></h2>
 <h4><%= render :partial => @talk.users %></h4>
-<p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language %></p>
+<p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
 <% if @talk.accepted? %>
     <p><%= image_tag("approved_talk.png") %> approved</p>
@@ -21,7 +21,7 @@
 <% if @talk.users.include?(current_user) || admin? %>
     <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
-    <% unless @talk.slide_file_name.nil? %>
+    <% if @talk.slide_file_name.present? %>
         <h3>Presentation slides</h3>
         <p><%= link_to image_tag("icon_slides.gif"), @talk.slide.url %><%= link_to "Download", @talk.slide.url %></p>
     <% else %>
@@ -67,6 +67,15 @@
         <% end %>
     <% end %>
       </div>
+
+    <div class="appropriate_for_roles">
+          <strong>Primarily for:</strong>
+                <%
+                    roles = @talk.appropriate_for_roles.split(',')
+                    role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
+                %>
+              <%= role_names.join(', ') %>
+    </div>
 <p>
   <strong>Participant requirements:</strong>
   <%= h @talk.participant_requirements %>

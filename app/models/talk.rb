@@ -27,6 +27,7 @@ class Talk < ActiveRecord::Base
   validates :description, presence: true
   validates :language, presence: true
   validates :talk_type_id, presence: true
+  validates :appropriate_for_roles, presence: true
 
   after_initialize do |talk|
     talk.acceptance_status ||= 'pending'

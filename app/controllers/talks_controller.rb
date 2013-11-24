@@ -3,44 +3,22 @@ class TalksController < ApplicationController
   before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
   before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
+  respond_to :html
+
   def index
     @talks = Talk.all_pending_and_approved
-    @lightning_talks = []
-    @workshops = []
-
-    @talks.each do |talk|
-      if talk.is_lightning_talk?
-        @lightning_talks.append(talk)
-      else
-        @workshops.append(talk)
-      end
-    end
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml { render :xml => @talks }
-      format.rss
-    end
+    @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
   end
 
   def article_tags
     @tags = Tag.all(:order => :title)
     @tag = Tag.find(params[:id])
     @talks = @tag.talks
-
-    respond_to do |format|
-      format.html #article_tags
-      format.xml { render :xml => @talks }
-      format.rss
-    end
   end
 
   def show
     @talk = Talk.find(params[:id], :include => [:users, :comments])
     @comment = Comment.new
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @talk }
-    end
   end
 
   def new
@@ -61,15 +39,7 @@ class TalksController < ApplicationController
     @user = User.new
     @types = TalkType.all
 
-    action = "edit_lightning_talk"
-    if @talk.is_tutorial?
-      action = "edit_tutorial"
-    end
-
-    respond_to do |format|
-      format.html { render :action => action }
-    end
-
+    render action: @talk.is_tutorial? ? 'edit_tutorial' : 'edit_lightning_talk'
   end
 
   def assign
@@ -81,8 +51,6 @@ class TalksController < ApplicationController
 
   def create_assigned
     extended_params = params[:talk].merge!({:acceptance_status => "accepted"})
-
-    puts params
 
     @talk = Talk.new(extended_params)
     @user = User.find(params[:assigned_user_id])
@@ -105,10 +73,10 @@ class TalksController < ApplicationController
     @talk.users << @user
 
     if @talk.save
-      flash[:notice] = "Abstract assigned"
+      flash[:notice] = 'Abstract assigned'
       redirect_to(@talk)
     else
-      render :action => "assign"
+      render :action => 'assign'
     end
 
   end
@@ -145,17 +113,18 @@ class TalksController < ApplicationController
     @talk.users << @user
 
     if @talk.save
-      flash[:notice] = "Abstract published"
+      flash[:notice] = 'Abstract published'
       BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
       redirect_to @talk
     else
-      render :action => "new"
+      render action: 'new'
     end
   end
 
   def update
     @talk = current_user.is_admin ? Talk.find(params[:id]) : current_user.talks.find(params[:id])
     @talk.assign_attributes(params[:talk])
+    @talk.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @tags = Tag.all
     @types = TalkType.all
 
@@ -171,15 +140,11 @@ class TalksController < ApplicationController
     end
     @talk.tags = Tag.create_and_return_tags(tag_names)
 
-    respond_to do |format|
-      if @talk.update_attributes(params[:talk])
-        flash[:notice] = 'Abstract updated.'
-        format.html { redirect_to(@talk) }
-        format.xml { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml { render :xml => @talk.errors, :status => :unprocessable_entity }
-      end
+    if @talk.update_attributes(params[:talk])
+      flash[:notice] = 'Abstract updated.'
+      redirect_to(@talk)
+    else
+      render action: @talk.is_tutorial? ? 'edit_tutorial' : 'edit_lightning_talk'
     end
   end
 
@@ -209,17 +174,15 @@ class TalksController < ApplicationController
   protected
   def login_required
     return unless current_user
-    flash[:error] = "Please log in first."
+    flash[:error] = 'Please log in first.'
     access_denied
   end
 
   def is_admin_or_owner
     talk = Talk.find(params[:id])
     unless current_user.is_admin? || talk.users.include?(current_user)
-      flash[:error] = "You are required to be the owner of this talk or an administrator to view this page."
+      flash[:error] = 'You are required to be the owner of this talk or an administrator to view this page.'
       access_denied
     end
   end
-
-
 end

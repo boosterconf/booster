@@ -33,7 +33,8 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def create_talk
-    @workshop = Workshop.new(params[:workshop])
+
+    @workshop = Workshop.new(params[:talk])
     @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @workshop.users << current_user
 
@@ -57,7 +58,7 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def add_additional_speaker
-    additional_speaker_email = params[:user][:additional_speaker_email]
+    additional_speaker_email = params[:additional_speaker_email]
 
     if additional_speaker_already_has_registered_user(additional_speaker_email)
       send_email_to_organizers_to_go_fix_it(additional_speaker_email)
@@ -84,7 +85,7 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def has_entered_additional_speaker_email
-    params[:user].present? && params[:user][:additional_speaker_email].present?
+    params[:additional_speaker_email].present?
   end
 
   def details

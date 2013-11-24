@@ -1,0 +1,71 @@
+<%= form_for @workshop, url: post_to do |f| %>
+
+    <div class="field type">
+      <%= f.collection_select :talk_type_id, TalkType.workshops, :id, :name_and_duration, :class => 'input-xlarge' %>
+    </div>
+
+    <legend>Talk details</legend>
+    <p>
+      The abstract will be published on the website as soon
+      as you submit it, and will be used by the committee during talk selection. It is therefore important that you
+      provide a detailed abstract. This will help us to select in the selection process and increase the chances
+      of your talk being selected.
+    </p>
+    <div class="field title">
+      <%= f.label :title, "Title" %>
+
+      <%= f.text_field :title, :size => "80", :class => "input-xxlarge" %>
+    </div>
+
+    <div class="field abstract">
+      <%= f.label :description, "Abstract" %>
+
+      <%= f.text_area :description, :class => "tinymce span10" %>
+    </div>
+
+    <%= tinymce %>
+
+    <div class="field outline">
+      <%= f.label :outline, "Outline" %>
+
+      <%= f.text_area :outline, :class => "tinymce span10" %>
+    </div>
+
+    <%= tinymce %>
+
+    <div class="control-group">
+
+      <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?', :class => 'control-label' %>
+      <div class="controls">
+
+        <% Roles.all.each do |role| %>
+            <label class="checkbox">
+              <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
+              <%= label_tag "appropriate_for_roles_#{role}", Roles.label[role] %>
+            </label>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="field max_participants">
+      <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 20, please): " %>
+      <%= f.text_field :max_participants, :class => 'input-small' %>
+    </div>
+
+    <div class="field participant_requirements">
+      <%= f.label :participant_requirements, 'What do the participants have to bring to the presentation?' %>
+      <%= f.text_area :participant_requirements, :class => 'input-xxlarge', :rows => 5 %>
+    </div>
+
+    <div class="field equipment">
+      <%= f.label :equipment, 'Do you need any extra equipment for your session? Any specific room setup?
+      Leave comments for the organizers here.' %>
+      <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5 %>
+    </div>
+
+    <%= render :partial => 'talks/additional', :locals => {:f => f} %>
+
+    <div class="form-actions">
+      <%= f.submit @workshop.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary' %>
+    </div>
+<% end %>

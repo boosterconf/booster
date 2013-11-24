@@ -13,6 +13,7 @@ one:
   talk_type: lightning_talk
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 two:
   title: Two
@@ -27,6 +28,7 @@ two:
   talk_type: lightning_talk
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 three:
   title: Three
@@ -41,6 +43,7 @@ three:
   talk_type: lightning_talk
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 four:
   title: Four
@@ -55,6 +58,7 @@ four:
   talk_type: lightning_talk
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 five:
   title: Five
@@ -69,6 +73,7 @@ five:
   talk_type: lightning_talk
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 six:
   title: Six
@@ -83,6 +88,7 @@ six:
   talk_type: tutorial
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 seven:
   title: Seven
@@ -97,6 +103,7 @@ seven:
   talk_type: lightning_talk
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 eight:
   title: Eight
@@ -111,6 +118,7 @@ eight:
   talk_type: tutorial
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 nine:
   title: Nine
@@ -125,6 +133,7 @@ nine:
   talk_type: tutorial
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 ten:
   title: Ten
@@ -139,6 +148,7 @@ ten:
   talk_type: tutorial
   language: English
   max_participants: 100
+  appropriate_for_roles: project_manager
 
 full_tutorial:
   title: Full tutorial
@@ -147,6 +157,7 @@ full_tutorial:
   talk_type: tutorial
   participants_count: 1
   language: English
+  appropriate_for_roles: project_manager
 
 not_full_tutorial:
   title: Not full tutorial
@@ -155,6 +166,7 @@ not_full_tutorial:
   talk_type: tutorial
   participants_count: 1
   language: English
+  appropriate_for_roles: project_manager
 
 spans_several_slots:
   title: Spans several slots
@@ -163,3 +175,4 @@ spans_several_slots:
   talk_type: tutorial
   participants_count: 1
   language: English
+  appropriate_for_roles: project_manager

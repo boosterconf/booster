@@ -18,4 +18,10 @@ class Keynote < Talk
                  order: 'title')
   end
 
+  # This is a hack to get path helpers working. See
+  # http://stackoverflow.com/questions/4507149/best-practices-to-handle-routes-for-sti-subclasses-in-rails
+  def self.model_name
+    Talk.model_name
+  end
+
 end
