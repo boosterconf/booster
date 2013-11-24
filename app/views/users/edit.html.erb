@@ -15,15 +15,8 @@
   <div class="span12">
     <%= form_for(@user) do |f| %>
 
-        <% if @user.registration.ticket_type_old == 'mod251' %>
-            You're buying a MOD251 student ticket at
-            kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
-        <% elsif @user.registration.ticket_type_old == 'student' %>
-            You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %>
-            including VAT.
-        <% else %>
-            <%= render :partial => 'price_info', :locals => {:f => f} %>
-        <% end %>
+
+        <%= render :partial => 'price_info', :locals => {:f => f} %>
 
         <%= render :partial => 'personal_details', :locals => {:f => f} %>
 

@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :require_user, :except => [:new, :create, :from_reference, :group_registration, :create_group_registration]
-  before_filter :require_admin, :only => [:index, :delete_bio, :phone_list, :dietary_requirements]
-  before_filter :require_admin_or_self, :only => [:show, :edit, :update]
-  before_filter :require_admin_or_speaker, :only => [:create_bio]
+  before_filter :require_user, except: [:new, :create, :from_reference, :group_registration, :create_group_registration]
+  before_filter :require_admin, only: [:index, :delete_bio, :phone_list, :dietary_requirements]
+  before_filter :require_admin_or_self, only: [:show, :edit, :update]
+  before_filter :require_admin_or_speaker, only: [:create_bio]
 
   # GET /users
   # GET /users.json
@@ -247,6 +247,7 @@ class UsersController < ApplicationController
       user
     end
 
+
     existing_users = users.select {|u| user_already_exists(u.email)}
     new_users = users.select {|u| !user_already_exists(u.email)}
 
@@ -254,7 +255,7 @@ class UsersController < ApplicationController
       @invoice.save!
 
       new_users.each do |user|
-        user.save!(:validate => false)
+        user.save!(validate: false)
         BoosterMailer.ticket_assignment(user).deliver
       end
 

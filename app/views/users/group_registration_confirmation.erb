@@ -14,8 +14,8 @@
 <p>If not already registered, they will each have received an email with instructions for completing the registrations.</p>
 
 <p>We have also prepared an invoice that will be sent soon by <%= @invoice.email.present? ? "email" : "snail mail" %>
-  to the address <%= @invoice.email.present? ? @invoice.email : @invoice.adress %>. This invoice has a total of
-  NOK <%= @invoice.total %>.
+  to the address <b><%= @invoice.email.present? ? @invoice.email : @invoice.adress %></b>. This invoice has a total of
+  NOK <%= @invoice.total %> (excluding VAT).
 </p>
 <% if @invoice.your_reference.present? %>
 <p>

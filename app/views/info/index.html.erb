@@ -1,11 +1,21 @@
 <div class="hello">
    <h2>Booster 2014, 12-14 March</h2>
-   <h1>Call for papers</h1><h1>is now open!</h1>
+   <h1>Registration is <br>now open!</h1>
    <div>
-      <%= link_to "Submit a workshop", register_workshop_start_url, :class => "btn btn-primary btn-large" %>
-      <%= link_to "Submit a lightning talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>
+      <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
+      <%= link_to 'Register multiple tickets', new_group_registration_url, :class => "btn btn-primary btn-large" %>
    </div>
-   <p>Want to know more about what we are looking for in a proposal? Read <%= link_to 'more', info_cfp_url %>.</p>
+</div>
+
+<hr />
+
+<div class="hello">
+  <h1>Call for papers</h1><h1>is also open!</h1>
+  <div>
+    <%= link_to "Submit a workshop", register_workshop_start_url, :class => "btn btn-primary btn-large" %>
+    <%= link_to "Submit a lightning talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>
+  </div>
+  <p>Want to know more about what we are looking for in a proposal? Read <%= link_to 'more', info_cfp_url %>.</p>
 </div>
 
 <div class="videosarea group">

@@ -2,18 +2,14 @@
   <div class="span12">
     <h1>Register for Booster 2014</h1>
 
+    <p>
+      Registering several people and want a common invoice? Use our
+      <%= link_to 'group registration', new_group_registration_url %>!
+    </p>
+
     <%= form_for(@user) do |f| %>
-        <% if @user.registration.ticket_type_old == 'mod251' %>
-            You're buying a MOD251 student ticket at
-            kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %> including VAT.
-        <% elsif @user.registration.ticket_type_old == 'student' %>
-            You're buying a student ticket at kr <%= PAYMENT_CONFIG[:prices][@user.registration.ticket_type_old].to_i %>
-            including VAT.
-        <% else %>
-            <%= render :partial => 'price_info', :locals => {:f => f} %>
-        <% end %>
-        </div>
-        </div>
+        <%= render :partial => 'price_info', :locals => {:f => f} %>
+
         <div class="row">
           <div class="span8">
 
@@ -60,3 +56,5 @@
         <div class="alert alert-block">By registering, you accept that we can send you email about the conference.</div>
       </div>
     </div>
+  </div>
+</div>

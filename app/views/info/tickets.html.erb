@@ -9,12 +9,11 @@
        (ends <%= ApplicationHelper.early_bird_end_date.strftime('%b %d %Y') %>)
     </li>
     <li>Full price ticket: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %></li>
-    <!-- li>Students: NOK <%= PAYMENT_CONFIG[:prices]['student'].to_i %></li -->
     <li>Lightning talk speakers: NOK <%= PAYMENT_CONFIG[:prices]['lightning'].to_i %></li>
     <li>Tutorial speakers: Free of charge</li>
    </ul>
    <p>
-     All prices are <strong>including</strong> VAT.
+     All prices are excluding VAT.
    </p>
 
   <p>

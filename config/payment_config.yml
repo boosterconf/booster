@@ -5,12 +5,10 @@ free_prices: &free_prices
   sponsor: 0
 
 prices: &prices
-  mod251: 600
-  early_bird: 6250
-  early_bird_dnd: 6250
-  full_price: 8000
-  lightning: 5625
-  student: 1600
+  early_bird: 5500
+  full_price: 7000
+  lightning: 4400
+  reviewer: 4400
   dinner: 0
   <<: *free_prices
 
@@ -46,11 +44,9 @@ production: &production
 staging:
   prices:
     early_bird: 10
-    early_bird_dnd: 10
     full_price: 12
     lightning: 5
-    student: 1
-    mod251: 2
+    reviewer: 5
     <<: *free_prices
   paypal_email: paypal@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
