@@ -7,15 +7,15 @@
 
 <ul>
   <% @invoice.registrations.each do |registration| %>
-      <li><%= registration.user.email %></li>
+      <li><%= registration.user.email %> (<%= registration.ticket_description %> - NOK <%= registration.ticket_price %>)</li>
   <% end %>
 </ul>
+<p><strong>This invoice has a total of NOK <%= @invoice.total %> (excluding VAT).</strong></p>
 
 <p>If not already registered, they will each have received an email with instructions for completing the registrations.</p>
 
 <p>We have also prepared an invoice that will be sent soon by <%= @invoice.email.present? ? "email" : "snail mail" %>
-  to the address <b><%= @invoice.email.present? ? @invoice.email : @invoice.adress %></b>. This invoice has a total of
-  NOK <%= @invoice.total %> (excluding VAT).
+  to the address <b><%= @invoice.email.present? ? @invoice.email : @invoice.adress %></b>.
 </p>
 <% if @invoice.your_reference.present? %>
 <p>
