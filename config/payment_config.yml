@@ -14,32 +14,14 @@ prices: &prices
 
 development: &development
   prices:
-    <<: *prices
+    early_bird: 10
+    full_price: 12
+    lightning: 5
+    reviewer: 5
+    <<: *free_prices
   paypal_email: paypal_1297107898_biz@rootsconf.no
   paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
   send_regning_url: "https://kontakt%40rootsconf.no:jySGOHz7@www.sendregning.no/ws/butler.do?action=send&type=invoice&test=true"
-
-test:
-  prices:
-    <<: *prices
-  paypal_email: paypal_1297107898_biz@rootsconf.no
-  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
-  send_regning_url: "https://www.sendregning.no/ws/butler.do?action=send&type=invoice&test=true"
-
-experimental:
-  prices:
-    <<: *prices
-  paypal_email: paypal-test@rootsconf.no
-  paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
-  send_regning_url: "https://kontakt%40rootsconf.no:jySGOHz7@www.sendregning.no/ws/butler.do?action=send&type=invoice&test=true"
-
-
-production: &production
-  prices:
-    <<: *prices
-  paypal_email: paypal@rootsconf.no
-  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
-  send_regning_url: "https://kontakt%40rootsconf.no:jySGOHz7@www.sendregning.no/ws/butler.do?action=send&type=invoice"
 
 staging:
   prices:
@@ -48,6 +30,24 @@ staging:
     lightning: 5
     reviewer: 5
     <<: *free_prices
+  paypal_email: paypal_1297107898_biz@rootsconf.no
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do?action=send&type=invoice&test=true"
+
+test:
+  prices:
+    early_bird: 10
+    full_price: 12
+    lightning: 5
+    reviewer: 5
+    <<: *free_prices
+  paypal_email: paypal_1297107898_biz@rootsconf.no
+  paypal_url: "https://www.paypal.com/cgi-bin/webscr"
+  send_regning_url: "https://www.sendregning.no/ws/butler.do?action=send&type=invoice&test=true"
+
+production: &production
+  prices:
+    <<: *prices
   paypal_email: paypal@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
-  send_regning_url: "https://kontakt%40rootsconf.no:jySGOHz7@www.sendregning.no/ws/butler.do?action=send&type=invoice&test=true"
+  send_regning_url: "https://kontakt%40rootsconf.no:jySGOHz7@www.sendregning.no/ws/butler.do?action=send&type=invoice"

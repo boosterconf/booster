@@ -94,7 +94,7 @@ class Registration < ActiveRecord::Base
         :notify_url => payment_notifications_url,
         :return => return_url,
         :invoice => invoice_id,
-        :amount_1 => price,
+        :amount_1 => price_including_vat,
         :item_name_1 => description,
         :item_number_1 => '1',
         :quantity_1 => '1'
@@ -104,6 +104,10 @@ class Registration < ActiveRecord::Base
     |k, v|
       "#{k}=#{CGI::escape(v.to_s)}"
     end.join("&")
+  end
+
+  def price_including_vat
+    price * 1.25
   end
 
   def status
