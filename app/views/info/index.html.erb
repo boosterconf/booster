@@ -32,7 +32,7 @@
     <% for speaker in @speakers.shuffle.take(4) do %>
         <div class="frontpage-speaker">
           <span>
-            <%= image_tag 'placeholder.jpg' %>
+            <%= image_tag speaker.bio.picture.url %>
           </span>
           <span>
             <b><%= speaker[:name] %></b> - <i><%= speaker.bio[:title] %></i>
