@@ -556,10 +556,6 @@ footer .inner {
    line-height: 1.1;
 }
 
-.videosintro {
-   width: 60%;
-}
-
 .keynotelink {
    min-height: 230px;  /* to make the two boxes exactly equal when they are almost equal */
    padding: 1em 1.25em 0.5em 1.5em; /* gief moar space at this width */

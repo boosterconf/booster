@@ -1,26 +1,51 @@
-<div class="hello">
-   <h2>Booster 2014, 12-14 March</h2>
-   <h1>Registration is <br>now open!</h1>
-   <div>
-      <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
-      <%= link_to 'Register multiple tickets', new_group_registration_url, :class => "btn btn-primary btn-large" %>
-   </div>
-</div>
+<div class="row">
+  <div class="span7">
+    <div class="hello">
+      <h2>Booster 2014, 12-14 March</h2>
 
-<hr />
+      <h1>Registration is <br>now open!</h1>
 
-<div class="hello">
-  <h1>Call for papers</h1><h1>is also open!</h1>
-  <div>
-    <%= link_to "Submit a workshop", register_workshop_start_url, :class => "btn btn-primary btn-large" %>
-    <%= link_to "Submit a lightning talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>
+      <div>
+        <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
+        <%= link_to 'Register multiple tickets', new_group_registration_url, :class => "btn btn-primary btn-large" %>
+      </div>
+    </div>
   </div>
-  <p>Want to know more about what we are looking for in a proposal? Read <%= link_to 'more', info_cfp_url %>.</p>
+  <div class="span3 right-column pull-right">
+
+    <h2>Call for papers</h2>
+
+    <h2>is also open!</h2>
+
+    <div>
+      <%= link_to "Submit workshop", register_workshop_start_url, :class => "btn btn-primary btn-large" %>
+      <%= link_to "Submit lightning talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>
+    </div>
+    <p>Want to know more about what we are looking for in a proposal? Read <%= link_to 'more', info_cfp_url %>.</p>
+  </div>
 </div>
+
 
 <div class="videosarea group">
-   <div class="videosintro">
-      <p>While you count the days to Booster 2014, we think you should watch</p>
-      <h3>videos from talks at Booster&nbsp;2013 on <a href="https://vimeo.com/boosterconf">Vimeo</a></h3>
-   </div>
+  <div class="videosintro" style="min-height: 200px;">
+    <% for speaker in @speakers.shuffle do %>
+        <div class="speaker">
+
+          <%= image_tag 'placeholder.jpg' %>
+
+          <b><%= speaker[:name] %></b> - <i><%= speaker.bio[:title] %></i>
+          <% if speaker.bio[:twitter_handle].length > 0 %>
+              <br/>
+              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                &#64;<%= speaker.bio[:twitter_handle] %>
+              </a>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+  <div class="videosintro">
+    <p>While you count the days to Booster 2014, we think you should watch</p>
+
+    <h3>videos from talks at Booster&nbsp;2013 on <a href="https://vimeo.com/boosterconf">Vimeo</a></h3>
+  </div>
 </div> 

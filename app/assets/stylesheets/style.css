@@ -217,3 +217,12 @@ div.error + table {
     color: dodgerblue;
     font-weight: bold;
 }
+
+.right-column div {
+     text-align: center;
+}
+
+.right-column h2{
+    color: #6D6C69;
+    text-align: center;
+}
