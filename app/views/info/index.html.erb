@@ -26,26 +26,24 @@
 </div>
 
 
-<div class="videosarea group">
-  <div class="videosintro" style="min-height: 200px;">
-    <% for speaker in @speakers.shuffle do %>
-        <div class="speaker">
-
-          <%= image_tag 'placeholder.jpg' %>
-
-          <b><%= speaker[:name] %></b> - <i><%= speaker.bio[:title] %></i>
-          <% if speaker.bio[:twitter_handle].length > 0 %>
-              <br/>
-              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
-                &#64;<%= speaker.bio[:twitter_handle] %>
-              </a>
-          <% end %>
+<div class="row speakers-box">
+  <div class="speakers">
+    <h3>Speaking at Booster 2014</h3>
+    <% for speaker in @speakers.shuffle.take(4) do %>
+        <div class="frontpage-speaker">
+          <span>
+            <%= image_tag 'placeholder.jpg' %>
+          </span>
+          <span>
+            <b><%= speaker[:name] %></b> - <i><%= speaker.bio[:title] %></i>
+            <% if speaker.bio[:twitter_handle].length > 0 %>
+                <br />
+                <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                  &#64;<%= speaker.bio[:twitter_handle] %>
+                </a>
+            <% end %>
+          </span>
         </div>
     <% end %>
-  </div>
-  <div class="videosintro">
-    <p>While you count the days to Booster 2014, we think you should watch</p>
-
-    <h3>videos from talks at Booster&nbsp;2013 on <a href="https://vimeo.com/boosterconf">Vimeo</a></h3>
   </div>
 </div> 

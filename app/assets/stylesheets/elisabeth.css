@@ -385,10 +385,6 @@ a.btn {
    margin-bottom: 0;
 }
 
-.videosarea {
-
-}
-
 .videosintro {
    border-top: 8px solid #F6AB6F;
    margin: 0 auto 2em auto;
@@ -521,7 +517,7 @@ h3 {
 @media screen and (min-width: 500px) {
 
 .videosintro {
-   width: 80%;
+   width: 75%;
 }
 
 .videosthatareshort li {

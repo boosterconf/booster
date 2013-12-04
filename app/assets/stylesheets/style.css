@@ -168,34 +168,25 @@ div.error + table {
     padding: 10px;
 }
 
-.front-page-speakers {
-    display: block;
-    width: 635px;
-    height: 200px;
-    margin-top: 15px;
-    margin-bottom: 20px;
-    position: relative;
-    overflow: hidden;
+/* Front page speakers section. */ 
+.speakers-box {
+    /*margin-right: auto;*/
+    border-top: 8px solid #F6AB6F;
+    background: url(/assets/bg-hello.png) no-repeat 1em 1em;
 }
 
-.front-page-speaker {
-    display: none;
-}
-
-.front-page-speaker.selected {
-    display: block;
+.speakers {
+    margin-left: auto;
+    
+    width: 80%;
     padding-top: 10px;
 }
 
-.front-page-speaker img {
-    float: left;
-    width: 140px;
-    height: 160px;
-}
-
-.front-page-speaker .content {
-    padding-left: 10px;
-    width: 400px;
+.frontpage-speaker {
+    position: relative;
+    padding-right: 1em;
+    max-width: 140px;
+    min-height: 140px;
     float: left;
 }
 
