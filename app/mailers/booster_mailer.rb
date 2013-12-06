@@ -22,7 +22,7 @@ class BoosterMailer < ActionMailer::Base
     @email = user.email
     @description = user.registration.description
     @user_url = user_url
-    mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered with manual payment method")
+    mail(:to => FROM_EMAIL, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered with manual payment method")
   end
 
   def speaker_registration_confirmation(user)
