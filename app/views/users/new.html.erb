@@ -31,7 +31,7 @@
                   <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
                   <% unless @user.invited %>
-                    <%= reg.hidden_field :manual_payment, 'true' %>
+                    <%= reg.hidden_field :manual_payment, :value => 'true' %>
                       <!--fieldset>
                         <label class="radio" id="manual_payment">
                           <%= reg.radio_button :manual_payment, 'true' %>
