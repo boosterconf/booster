@@ -36,10 +36,10 @@
                           <%= reg.radio_button :manual_payment, 'true' %>
                           Please send me an invoice.
                         </label>
-                        <label class="radio" id="paypal">
+                        <!--label class="radio" id="paypal">
                           <%= reg.radio_button :manual_payment, 'false' %>
                           I want to pay with PayPal.
-                        </label>
+                        </label-->
                       </fieldset>
                       <%= render :partial => 'payment_details', :locals => {:reg => reg, :f => f} %>
                   <% end %>
