@@ -13,6 +13,10 @@
 
 <%= form_for @talk, :url => '/register_lightning_talk/create_talk' do |f| %>
 
+    <% if flash[:error] %>
+        <p class="flash-error"><%= flash[:error] %></p>
+    <% end %>
+
     <legend>Language</legend>
     <p>In what language will you deliver your talk? Please select the language you are most comfortable with. </p>
     <label class="radio">

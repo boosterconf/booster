@@ -27,11 +27,11 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def talk
-    @talk = Talk.new
+    @talk = LightningTalk.new
   end
 
   def create_talk
-    @talk = Talk.new(params[:talk])
+    @talk = LightningTalk.new(params[:talk])
     @talk.talk_type = TalkType.find_by_name('Lightning talk')
     @talk.year = AppConfig.year
     @talk.users << current_user

@@ -21,14 +21,13 @@ class Talk < ActiveRecord::Base
 
   validates_attachment_size :slide, :less_than => 50.megabytes
 
-  validates_acceptance_of :accepted_guidelines
-  validates_acceptance_of :accepted_cc_license
+  #validates_acceptance_of :accepted_guidelines
+  #validates_acceptance_of :accepted_cc_license
   validates :title, presence: true
   validates :description, presence: true
   validates :language, presence: true
   validates :talk_type_id, presence: true
-  validates :appropriate_for_roles, presence: true
-
+  
   after_initialize do |talk|
     talk.acceptance_status ||= 'pending'
     talk.year = AppConfig.year
