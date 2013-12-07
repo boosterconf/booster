@@ -3,6 +3,8 @@ class Workshop < Talk
   validates :max_participants, presence: true,
             numericality: {only_integer: true, greater_than_or_equal: 20}
 
+  validates :appropriate_for_roles, presence: true
+
   after_initialize do |workshop|
     workshop.acceptance_status ||= 'pending'
     workshop.language = 'english' # all workshops are english
