@@ -6,7 +6,6 @@ class Registration < ActiveRecord::Base
       "lightning" => 'Lightning talk ticket for Booster 2014',
       "sponsor" => 'Sponsor ticket Booster 2014',
       "volunteer" => 'Volunteer at Booster 2014',
-      "reviewer" => 'Reviewer for Booster 2014',
       "student" => 'Student for Booster 2014',
       "mod251" => 'MOD251 Student for Booster 2014',
       "organizer" => 'Organizer for Booster 2014',
@@ -57,7 +56,7 @@ class Registration < ActiveRecord::Base
   end
 
   def special_ticket?
-    %w(sponsor volunteer organizer reviewer).include? ticket_type_old
+    %w(sponsor volunteer organizer).include? ticket_type_old
   end
 
   def normal_ticket?
