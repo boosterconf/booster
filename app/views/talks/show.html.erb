@@ -71,7 +71,7 @@
     <div class="appropriate_for_roles">
           <strong>Primarily for:</strong>
                 <%
-                    roles = @talk.appropriate_for_roles.split(',')
+                    roles = @talk.appropriate_for_roles ? @talk.appropriate_for_roles.split(',') : []
                     role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
                 %>
               <%= role_names.join(', ') %>
