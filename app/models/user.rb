@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def reviewer?
+    registration ? registration.ticket_type_old == 'reviewer' : false
+  end
+
   def talks_this_year
     talks.select { |talk| talk.year == AppConfig.year }
   end

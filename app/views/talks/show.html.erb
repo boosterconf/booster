@@ -3,6 +3,14 @@
 <h4><%= render :partial => @talk.users %></h4>
 <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
+<% if current_user.reviewer? %>
+  <p>
+    <h4>Send review feedback to </h4>
+    <a href="mailto:<%= @talk.users.collect{|u| u.email }.join(',') %>">
+      <%= @talk.users.collect{|u| u.email }.join(',') %></a>
+  </p>
+<% end %>
+
 <% if @talk.accepted? %>
     <p><%= image_tag("approved_talk.png") %> approved</p>
 <% end %>
