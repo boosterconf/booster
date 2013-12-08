@@ -240,7 +240,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_normal_participants
-    User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(early_bird full_price sponsor organizer)], :include => [:registration])
+    User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(early_bird full_price sponsor organizer reviewer)], :include => [:registration])
   end
 
   def self.all_speakers
@@ -254,6 +254,7 @@ class User < ActiveRecord::Base
     user.name = name if name.present?
     user.password = SecureRandom.urlsafe_base64  # må sette passord, av grunner bare authlogic forstår
     user.registration.ticket_type_old = ticket_type
+    user.registration.manual_payment = true
     user.registration.includes_dinner = true
     user.registration.unfinished = true
     user.registration.unique_reference = SecureRandom.urlsafe_base64

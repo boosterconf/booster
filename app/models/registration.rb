@@ -53,7 +53,7 @@ class Registration < ActiveRecord::Base
   end
 
   def discounted_ticket?
-    %w(student lightning mod251).include? ticket_type_old
+    %w(student lightning mod251 reviewer).include? ticket_type_old
   end
 
   def special_ticket?
