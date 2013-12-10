@@ -28,6 +28,10 @@ class ApplicationController < ActionController::Base
     current_user and current_user.is_admin
   end
 
+  def reviewer?
+    current_user and current_user.reviewer?
+  end
+
   def require_admin
     unless admin?
       store_location
