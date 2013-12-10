@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  helper_method :current_user_session, :current_user, :logged_in?, :admin?
+  helper_method :current_user_session, :current_user, :logged_in?, :admin?, :reviewer?
 
   before_filter :load_sponsors
 
