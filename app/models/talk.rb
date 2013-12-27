@@ -7,9 +7,10 @@ class Talk < ActiveRecord::Base
 
   has_many :speakers
   has_many :users, :through => :speakers
-  has_many :comments, :order => "created_at", :include => :user
+  has_many :comments, :order => 'created_at', :include => :user
   has_and_belongs_to_many :tags
   belongs_to :talk_type
+  has_many :reviews, order: 'created_at desc', include: :reviewer
   #has_many :slots
   #has_many :periods, :through => :slots
   #has_many :participants, :include => :user, :dependent => :destroy
@@ -41,6 +42,9 @@ class Talk < ActiveRecord::Base
     users.any?(&:invited)
   end
 
+def is_presented_by?(speaker)
+  users.include?(speaker)
+end
 
   def speaker_email
     users.map(&:email).join(", ")

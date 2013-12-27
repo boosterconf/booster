@@ -17,8 +17,8 @@ class TalksController < ApplicationController
   end
 
   def show
-    @talk = Talk.find(params[:id], :include => [:users, :comments])
-    @comment = Comment.new
+    @talk = Talk.find(params[:id], :include => [:users, :comments, :reviews])
+    @review = Review.new
   end
 
   def new
@@ -38,6 +38,7 @@ class TalksController < ApplicationController
     @tags = Tag.all
     @user = User.new
     @types = TalkType.all
+
 
     render action: @talk.is_tutorial? ? 'edit_tutorial' : 'edit_lightning_talk'
   end

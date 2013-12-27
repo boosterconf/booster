@@ -1,5 +1,8 @@
 Booster2013::Application.routes.draw do
 
+  resources :reviews
+
+
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
   get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
   post 'users/create_skeleton' => 'users#create_skeleton', :as => :create_skeleton_user
@@ -56,6 +59,7 @@ Booster2013::Application.routes.draw do
   match '/talks/vote' => 'talks#vote'
   resources :talks do
     resources :comments
+    resources :reviews
     member do
       get :article_tags
     end
