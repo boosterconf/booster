@@ -148,6 +148,12 @@ div.error + table {
     padding-right: 0;
 }
 
+/* Aligns image on top of speakers page. */
+.frontpage-img-align {
+    margin-top: -40px;
+    margin-left: 0;
+}
+
 .speaker {
     position: relative;
     margin-bottom: 10px;
@@ -177,27 +183,15 @@ div.error + table {
 
 .speakers {
     margin-left: auto;
-    
     width: 80%;
     padding-top: 10px;
 }
 
 .frontpage-speaker {
     position: relative;
-    padding-right: 1em;
+    padding-right: 3em;
     max-width: 140px;
-    min-height: 140px;
     float: left;
-}
-
-#DOMWindow img {
-    padding: 10px;
-    float: left;
-}
-
-.frontpage-img-align {
-    margin-top: -40px;
-    margin-left: 0px;
 }
 
 .social-links .nav > li > a {
