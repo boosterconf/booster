@@ -31,8 +31,8 @@ Booster2013::Application.routes.draw do
     end
   end
 
-  resources :statistics, :only => [:index] do
-    get :users_by_company, :on => :collection
+  resources :statistics, only: [:index] do
+    get :users_by_company, on: :collection
   end
 
   resources :user_sessions
