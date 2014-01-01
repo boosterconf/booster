@@ -67,10 +67,6 @@ class ReviewNotifierTest < ActiveSupport::TestCase
       end
 
     end
-
-
-    # TODO What about several speakers on one talk? Will they want to get a notification?
-
   end
 
 end
