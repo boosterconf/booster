@@ -6,7 +6,7 @@ class ReviewNotifierTest < ActiveSupport::TestCase
     @notifier = ReviewNotifier.new
   end
 
-  context 'Notifying create' do
+  context 'Notifying on create' do
 
     setup do
       @talk = talks(:three)
@@ -34,6 +34,38 @@ class ReviewNotifierTest < ActiveSupport::TestCase
           @notifier.notify_create(@review)
         end
       end
+    end
+
+    context 'on talk with previous reviews' do
+
+      setup do
+        new_review = Review.new(talk: @talk)
+        new_review.reviewer = users(:reviewer)
+        @talk.reviews << new_review
+
+      end
+
+      should 'send email to previous reviewers also' do
+        @review.reviewer = users(:god)
+
+        assert_difference('ActionMailer::Base.deliveries.size', +2) do
+          @notifier.notify_create(@review)
+        end
+      end
+
+      should 'not send multiple emails to previous reviewers' do
+
+        another_review = Review.new(talk: @talk)
+        another_review.reviewer = users(:reviewer)
+        @talk.reviews << another_review
+
+        @review.reviewer = users(:god)
+
+        assert_difference('ActionMailer::Base.deliveries.size', +2) do
+          @notifier.notify_create(@review)
+        end
+      end
+
     end
 
 

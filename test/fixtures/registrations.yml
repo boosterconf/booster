@@ -45,3 +45,10 @@ six:
   price: 19.99
   ticket_type_old: early_bird
   created_at: 2010-10-10
+
+reviewer:
+  user: reviewer
+  comments: MyText
+  price: 19.99
+  ticket_type_old: reviewer
+  created_at: 2010-10-10
