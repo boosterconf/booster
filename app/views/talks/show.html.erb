@@ -91,12 +91,6 @@
 
 <% end %>
 
-<p>
-  Do you want to hear this talk? Vote <%= link_to "here", :controller => "talks", :action => "vote", :id => @talk.id %>.
-  This talk has received <%= @talk.votes_count %> votes.
-</p>
-
-
 <%= link_to image_tag("#{@talk.license}.png", :title => 'Presentation is shared under a Creative Commons license.'),
             "http://creativecommons.org/licenses/#{@talk.license}/3.0/no/", :rel => 'license' %>
 

@@ -1,5 +1,5 @@
 class TalksController < ApplicationController
-  before_filter :require_user, :except => [:index, :show, :new, :article_tags, :vote]
+  before_filter :require_user, :except => [:index, :show, :new, :article_tags]
   before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
   before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
@@ -158,18 +158,6 @@ class TalksController < ApplicationController
 
   def cheat_sheet
     @talks = Talk.all_accepted_tutorials
-  end
-
-  def vote
-    @talk = Talk.find(params[:id])
-    @talk.votes_count += 1
-
-    if @talk.save
-      flash[:notice] = 'Vote registered'
-    else
-      flash[:error] = 'Vote could not be registered'
-    end
-    redirect_to @talk
   end
 
   protected
