@@ -35,7 +35,7 @@ class ReviewsControllerTest < ActionController::TestCase
 
     should 'be able to create a review' do
       assert_difference('Review.count') do
-        post :create, review: {}, talk_id: talks(:one), format: :js
+        post :create, valid_review_params
       end
 
       assert_response :success
@@ -55,4 +55,21 @@ class ReviewsControllerTest < ActionController::TestCase
     end
   end
 
+  context '#create' do
+
+    setup do
+      login_as(:god)
+    end
+
+    should 'send notification' do
+      ReviewNotifier.any_instance.expects(:notify_create)
+
+      post :create, valid_review_params
+    end
+
+  end
+
+  def valid_review_params
+    {review: {}, talk_id: talks(:one), format: :js}
+  end
 end

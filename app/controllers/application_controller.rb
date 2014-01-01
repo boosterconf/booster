@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   before_filter :load_sponsors
 
   private
+  LOOKS_NUMBER_LIKE = /^[-+]?[1-9]([0-9]*)?$/
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -46,12 +48,13 @@ class ApplicationController < ActionController::Base
     unless admin?
       store_location
       redirect_to new_user_session_url, :notice => "You must be a magician to access this page."
-    return false
+      return false
     end
   end
 
+
   def require_admin_or_self
-    if params[:id]  =~ /^[-+]?[1-9]([0-9]*)?$/
+    if params[:id]  =~ LOOKS_NUMBER_LIKE
       user = User.find(params[:id])
       unless current_user.is_admin? || user == current_user
         flash[:error] = "You are not allowed to look at or edit other users' information"
@@ -64,17 +67,16 @@ class ApplicationController < ActionController::Base
 
     return access_denied unless current_user
 
-
-    if params[:talk_id]  =~ /^[-+]?[1-9]([0-9]*)?$/
+    if params[:talk_id]  =~ LOOKS_NUMBER_LIKE
       talk = Talk.find(params[:talk_id], include: :users)
       unless admin_or_reviewer? || talk.is_presented_by?(current_user)
         flash[:error] = 'Shame on you!'
-        access_denied
+        return access_denied
       end
-    elsif
+    else
       unless admin_or_reviewer?
         flash[:error] = 'Shame on you!'
-        access_denied
+        return access_denied
       end
     end
   end
@@ -93,7 +95,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       redirect_to new_user_session_url, :notice => "You must be logged in to access this page."
-    return false
+      return false
     end
   end
 
@@ -114,14 +116,16 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html do
         if current_user
-          redirect_to root_path
+          return redirect_to root_path
         else
-          redirect_to new_user_session_path
+          return redirect_to new_user_session_path
         end
       end
-      format.any(:json, :xml) do
-        request_http_basic_authentication 'Web Password'
+      format.any(:json, :xml, :js) do
+        return request_http_basic_authentication 'Web Password'
       end
     end
   end
 end
+
+

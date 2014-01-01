@@ -13,13 +13,18 @@ class ReviewsController < ApplicationController
   end
 
   def create
+
     @review = Review.new(params[:review])
     @review.reviewer = current_user
     @review.talk_id = params[:talk_id]
 
-    @review.save
-
-    respond_with @review, location: talk_url(@review.talk_id)
+    if @review.save
+      @review = Review.find(@review.id, include: [:reviewer, :talk])
+      ReviewNotifier.new.notify_create(@review)
+      respond_with @review, location: talk_url(@review.talk_id)
+    else
+      puts 'Oh noes something terrible happened.'
+    end
   end
 
   def update
@@ -48,4 +53,5 @@ class ReviewsController < ApplicationController
   def find_review
     @review = Review.find(params[:id])
   end
+
 end

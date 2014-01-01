@@ -170,6 +170,13 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Tutorial registration opens Friday May 20 09:00 AM")
   end
 
+  def review_created(review)
+    @reviewer = review.reviewer
+    @talk = review.talk
+    @talk_url = talk_url(@talk, anchor: 'all-reviews')
+    mail(:to => @talk.speaker_email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} New review on your talk '#{@talk.title}")
+  end
+
   def speakers_dinner_email(user)
     @user = user
     mail(:to => user.email, :cc => FROM_EMAIL, :from => FROM_EMAIL,
