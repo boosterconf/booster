@@ -1,6 +1,5 @@
 class BoosterMailer < ActionMailer::Base
 
-  default_url_options[:host] = "boosterconf.no"
   FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
   SUBJECT_PREFIX = "[boosterconf]"
 
