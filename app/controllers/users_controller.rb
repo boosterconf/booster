@@ -239,7 +239,7 @@ class UsersController < ApplicationController
 
     emails = params[:emails]
 
-    users = emails.gsub(/[,;:\n]/, " ").split.map do |email|
+    users = tokenize(emails).map do |email|
       user = User.create_unfinished(email, current_normal_ticket_type)
       user.company = params[:company]
       user.registration.invoice = @invoice
@@ -247,22 +247,24 @@ class UsersController < ApplicationController
     end
 
 
-    existing_users = users.select {|u| user_already_exists(u.email)}
-    new_users = users.select {|u| !user_already_exists(u.email)}
+    existing_users = users.select { |u| user_already_exists(u.email) }
+    new_users = users.select { |u| !user_already_exists(u.email) }
 
     if all_emails_are_valid(new_users) && @invoice.valid?
       @invoice.save!
 
-      new_users.each do |user|
-        user.save!(validate: false)
-        BoosterMailer.ticket_assignment(user).deliver
-      end
+      User.transaction do
+        new_users.each do |user|
+          user.save!(validate: false)
+          BoosterMailer.ticket_assignment(user).deliver
+        end
 
-      existing_users.each do |u|
-        user = User.find_by_email(u.email)
-        user.company = params[:company]
-        user.registration.invoice = @invoice
-        user.save!(:validate => false)
+        existing_users.each do |u|
+          user = User.find_by_email(u.email)
+          user.company = params[:company]
+          user.registration.invoice = @invoice
+          user.save!(:validate => false)
+        end
       end
       render :action => 'group_registration_confirmation'
     else
@@ -326,4 +328,7 @@ class UsersController < ApplicationController
     per_date
   end
 
+  def tokenize(string)
+    string.gsub(/[,;:\n]/, " ").split
+  end
 end
