@@ -216,11 +216,10 @@ class UsersController < ApplicationController
   def create_skeleton
     email = params[:user][:email]
 
-    if !email.empty? && user_already_exists(email)
+    if email.present? && user_already_exists(email)
       flash[:error] = "This email already has a user"
-      render :action => 'new_skeleton'
+      render action: 'new_skeleton'
     else
-      puts @user
       @user = User.create_unfinished(email, params[:user][:registration_attributes][:ticket_type_old], params[:user][:name])
       @user.company = params[:user][:company]
       @user.save!(:validate => false)
