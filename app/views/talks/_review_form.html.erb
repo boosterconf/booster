@@ -1,11 +1,11 @@
 <legend>Reviews</legend>
 
 <div id="new-review">
-  <%= form_for [@talk, @review], html: {class: 'form-inline'}, remote: true do |f| %>
+  <%= form_for [@talk, @review], html: {class: 'form-inline', id: 'review-form'}, remote: true do |f| %>
 
       <%= f.text_field :subject, class: 'input-xxlarge', required: true %>
       <%= f.text_area :text, class: 'input-xxlarge', cols: 30, rows: 8, required: true %>
-      <%= f.submit 'Add review', class: 'btn' %>
+      <%= f.submit 'Add review', class: 'btn btn-primary', id: 'submit-review' %>
 
   <% end %>
 </div>
@@ -13,3 +13,22 @@
 <div id="all-reviews">
   <%= render @talk.reviews %>
 </div>
+
+<% content_for :javascript do %>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#review-form")
+                    .bind('ajax:before', function() {
+                        $('#submit-review').prop("disabled", true);
+                        $('#submit-review').val("Adding...");
+
+                    })
+                    .bind('ajax:complete', function(data, status, xhr) {
+                        $('#submit-review').prop("disabled", false);
+                        $('#submit-review').val("Add review");
+                    }
+            )
+        });
+    </script>
+<% end %>
