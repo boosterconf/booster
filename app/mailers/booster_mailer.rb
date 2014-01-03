@@ -172,6 +172,7 @@ class BoosterMailer < ActionMailer::Base
   def review_created(review, recipient)
     @reviewer = review.reviewer
     @talk = review.talk
+    @review = review
     @talk_url = talk_url(@talk, anchor: 'all-reviews')
     mail(:to => recipient, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} New review on talk '#{@talk.title}'")
   end

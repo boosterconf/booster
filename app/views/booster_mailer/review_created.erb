@@ -2,8 +2,22 @@
 <body><p>Hi,</p>
 
 <p>
-  You have received a new review on your submission '<%= @talk.title %>'. Please go to <%= @talk_url %> to read
-  it and find out what it has to say!
+  <%= @review.reviewer.name %> has added a new review on the submission '<%= @talk.title %>'.
+  This is what it says:
+</p>
+
+<h3><%= @review.subject %></h3>
+
+
+<p>
+  <pre>
+  <%= @review.text %>
+  </pre>
+</p>
+
+
+<p>
+  For full history and to reply to the review, <a href="<%= @talk_url %>">Go here</a>.
 </p>
 
 <p>- The Booster conference organizers</p>
