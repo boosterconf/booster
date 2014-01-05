@@ -4,11 +4,19 @@
 <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
 <% if reviewer? %>
+<<<<<<< HEAD
   <p>
     <h4>Send review feedback to </h4>
     <a href="mailto:<%= @talk.users.collect{|u| u.email }.join(',') %>">
       <%= @talk.users.collect{|u| u.email }.join(',') %></a>
   </p>
+=======
+    <p>
+    <h4>Send review feedback to </h4>
+    <a href="mailto:<%= @talk.users.collect { |u| u.email }.join(',') %>">
+      <%= @talk.users.collect { |u| u.email }.join(',') %></a>
+    </p>
+>>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
 <% end %>
 
 <% if @talk.accepted? %>
@@ -66,36 +74,39 @@
 <% if @talk.is_tutorial? %>
 
     <div class="outline">
-    <% if @talk.users.include?(current_user) || admin? %>
-        <strong>Outline</strong>
-        <% if contains_html(@talk.outline) %>
-            <%= sanitize @talk.outline %>
-        <% else %>
-            <%= simple_format h(@talk.outline) %>
-        <% end %>
-    <% end %>
-      </div>
+      <% if admin_reviewer_or_talk_owner?(@talk) %>
+          <strong>Outline</strong>
+          <% if contains_html(@talk.outline) %>
+              <%= sanitize @talk.outline %>
+          <% else %>
+              <%= simple_format h(@talk.outline) %>
+          <% end %>
+      <% end %>
+    </div>
 
     <div class="appropriate_for_roles">
+<<<<<<< HEAD
           <strong>Primarily for:</strong>
                 <%
                     roles = @talk.appropriate_for_roles ? @talk.appropriate_for_roles.split(',') : []
                     role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
                 %>
               <%= role_names.join(', ') %>
+=======
+      <strong>Primarily for:</strong>
+      <%
+         roles = @talk.appropriate_for_roles ? @talk.appropriate_for_roles.split(',') : []
+         role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
+      %>
+      <%= role_names.join(', ') %>
+>>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
     </div>
-<p>
-  <strong>Participant requirements:</strong>
-  <%= h @talk.participant_requirements %>
-</p>
+    <p>
+      <strong>Participant requirements:</strong>
+      <%= h @talk.participant_requirements %>
+    </p>
 
 <% end %>
-
-<p>
-  Do you want to hear this talk? Vote <%= link_to "here", :controller => "talks", :action => "vote", :id => @talk.id %>.
-  This talk has received <%= @talk.votes_count %> votes.
-</p>
-
 
 <%= link_to image_tag("#{@talk.license}.png", :title => 'Presentation is shared under a Creative Commons license.'),
             "http://creativecommons.org/licenses/#{@talk.license}/3.0/no/", :rel => 'license' %>
@@ -108,6 +119,13 @@
 <div id="comments">
   <%= render :partial => @talk.comments %>
 </div>
+
+<% if admin_reviewer_or_talk_owner?(@talk) %>
+    <div id="reviews">
+      <%= render partial: 'review_form' %>
+    </div>
+<% end %>
+
 
 <%# if logged_in %>
 <!--h3 id="new_comment">Add new comment:</h3>

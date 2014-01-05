@@ -8,7 +8,7 @@ class SponsorsController < ApplicationController
   def index
     @sponsors = Sponsor.all(:include => :user).sort
 
-    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map {|user, sponsors| [user != nil ? user.name : "(none)", sponsors.length]}.sort { |a, b| a[1] <=> b[1] }.reverse!
+    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
 
     @events = Event.last(15).reverse
 
@@ -42,21 +42,23 @@ class SponsorsController < ApplicationController
   def update
     @sponsor.assign_attributes(params[:sponsor])
 
-    # TODO: Do all this in transaction
+    User.transaction do
+      Sponsor.transaction do
+        if @sponsor.status_changed?
+          event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Sponsor status changed to #{@sponsor.status_text}")
+          event.save
 
-    if @sponsor.status_changed?
-      event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Sponsor status changed to #{@sponsor.status_text}")
-      event.save
+          if @sponsor.status == 'accepted'
+            create_sponsor_tickets
+          end
+        end
 
-      if @sponsor.status == 'accepted'
-        create_sponsor_tickets
+        if @sponsor.save
+          redirect_to sponsors_path, notice: "Sponsor #{@sponsor.name} was successfully updated."
+        else
+          render action: :edit
+        end
       end
-    end
-
-    if @sponsor.save
-      redirect_to sponsors_path, notice: "Sponsor #{@sponsor.name} was successfully updated."
-    else
-      render action: :edit
     end
   end
 

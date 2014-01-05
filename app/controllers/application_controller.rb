@@ -1,11 +1,18 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+<<<<<<< HEAD
   
   helper_method :current_user_session, :current_user, :logged_in?, :admin?, :reviewer?
+=======
+
+  helper_method :current_user_session, :current_user, :logged_in?, :admin?, :reviewer?, :admin_reviewer_or_talk_owner?
+>>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
 
   before_filter :load_sponsors
 
   private
+  LOOKS_NUMBER_LIKE = /^[-+]?[1-9]([0-9]*)?$/
+
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
@@ -32,20 +39,52 @@ class ApplicationController < ActionController::Base
     current_user and current_user.reviewer?
   end
 
+<<<<<<< HEAD
+=======
+  def admin_reviewer_or_talk_owner?(talk)
+    admin_or_reviewer? || talk.is_presented_by?(current_user)
+  end
+
+  def admin_or_reviewer?
+    return false unless current_user
+
+    current_user.is_admin || current_user.reviewer?
+  end
+
+>>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
   def require_admin
     unless admin?
       store_location
       redirect_to new_user_session_url, :notice => "You must be a magician to access this page."
-    return false
+      return false
     end
   end
 
+
   def require_admin_or_self
-    if params[:id]  =~ /^[-+]?[1-9]([0-9]*)?$/
+    if params[:id]  =~ LOOKS_NUMBER_LIKE
       user = User.find(params[:id])
       unless current_user.is_admin? || user == current_user
         flash[:error] = "You are not allowed to look at or edit other users' information"
         access_denied
+      end
+    end
+  end
+
+  def require_reviewer_admin_or_self
+
+    return access_denied unless current_user
+
+    if params[:talk_id]  =~ LOOKS_NUMBER_LIKE
+      talk = Talk.find(params[:talk_id], include: :users)
+      unless admin_or_reviewer? || talk.is_presented_by?(current_user)
+        flash[:error] = 'Shame on you!'
+        return access_denied
+      end
+    else
+      unless admin_or_reviewer?
+        flash[:error] = 'Shame on you!'
+        return access_denied
       end
     end
   end
@@ -64,20 +103,20 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       redirect_to new_user_session_url, :notice => "You must be logged in to access this page."
-    return false
+      return false
     end
   end
 
   def store_location
     session[:return_to] = request.url
   end
- 
+
   def redirect_back_or_default(default)
     redirect_to(session[:return_to] || default)
     session[:return_to] = nil
   end
 
-  def return_to 
+  def return_to
     session[:return_to]
   end
 
@@ -85,14 +124,16 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.html do
         if current_user
-          redirect_to root_path
+          return redirect_to root_path
         else
-          redirect_to new_user_session_path
+          return redirect_to new_user_session_path
         end
       end
-      format.any(:json, :xml) do
-        request_http_basic_authentication 'Web Password'
+      format.any(:json, :xml, :js) do
+        return request_http_basic_authentication 'Web Password'
       end
     end
   end
 end
+
+

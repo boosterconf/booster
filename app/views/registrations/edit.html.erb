@@ -12,13 +12,7 @@
     <% if @registration.user.talks.empty? %>
       <p>
       <%= reg.label :ticket_type_old, "Type billett" %><br>
-      <%= reg.select :ticket_type_old, [
-          ['I want to use a free sponsor ticket (name the company)', 'sponsor'],
-          ['I will make a presentation together with somebody else (name the presenter)', 'speaker'],
-          ['I want to contribute as a volunteer during the conference', 'volunteer'],
-          ['I am a student', 'student'],
-          ['I am a MOD251 student', 'mod251'],
-          ['I am a member of the organizing committee of the conference', 'organizer']], :include_blank => true %>
+      <%= reg.select :ticket_type_old, Registration::TICKET_TEXTS.invert.to_a, :include_blank => true %>
       </p>
       <p>
         <%= reg.label :invoice_description, "Comments about the registration" %><br/>
@@ -71,17 +65,7 @@
       <%= hidden_field_tag :ticket_change %>
       <p>
         <%= f.label :ticket_type_old, "Type of ticket" %><br>
-        <%= f.select :ticket_type_old, [
-            ['Early bird', 'early_bird'],
-            ['Full price', 'full_price'],
-            ["Take advantage of a sponsor's free ticket - free (name the company)", 'sponsor'],
-            ['Will talk - free', 'speaker'],
-            ['Speaker Without Abstract', 'new_speaker'],
-            ['Contributes as a volunteer at the conference - free', 'volunteer'],
-            ['Am a student', 'student'],
-            ['Am a MOD251 student', 'mod251'],
-            ['Am a guest at the conference', 'guest'],
-            ['Am a member of the organizing committee - free', 'organizer']] %>
+        <%= f.select :ticket_type_old, Registration::TICKET_TEXTS.invert.to_a %>
       </p>
       <p>
         <%= f.label :invoice_description, "Comments about the registration" %><br/>

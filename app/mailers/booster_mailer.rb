@@ -1,6 +1,5 @@
 class BoosterMailer < ActionMailer::Base
 
-  default_url_options[:host] = "boosterconf.no"
   FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
   SUBJECT_PREFIX = "[boosterconf]"
 
@@ -168,6 +167,14 @@ class BoosterMailer < ActionMailer::Base
     @user = user
     @lost_password_url = lost_password_url
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Tutorial registration opens Friday May 20 09:00 AM")
+  end
+
+  def review_created(review, recipient)
+    @reviewer = review.reviewer
+    @talk = review.talk
+    @review = review
+    @talk_url = talk_url(@talk, anchor: 'all-reviews')
+    mail(:to => recipient, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} New review on talk '#{@talk.title}'")
   end
 
   def speakers_dinner_email(user)

@@ -17,7 +17,14 @@ god:
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("god" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
   is_admin: true
-    
+
+reviewer:
+  email: reviewer@example.com
+  name: Ms Nitty Pickersen
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("reviewer" + salt) %>
+  persistence_token: <%= Authlogic::Random.hex_token %>
+
 test:
   email: test@whatever.com
   name: Test

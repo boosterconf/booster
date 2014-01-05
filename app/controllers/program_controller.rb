@@ -3,8 +3,7 @@ class ProgramController < ApplicationController
   def index
 
     unless AppConfig.program_released
-      redirect_to root_path
-      return
+      return redirect_to root_path
     end
 
     all_talks = Talk.all
