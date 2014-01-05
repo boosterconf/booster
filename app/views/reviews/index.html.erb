@@ -1,28 +1,28 @@
 <h1>Listing reviews</h1>
 
-<table>
+<table class="table table-striped">
+  <thead>
   <tr>
     <th>Talk</th>
     <th>Type</th>
     <th>Reviews</th>
     <th>&nbsp;</th>
   </tr>
-
+</thead>
+<tbody>
 <% @talks_with_reviews.each do |talk, reviews| %>
   <tr>
     <td><%= talk.title %></td>
     <td><%= talk.type %></td>
     <td>
-      <ul>
       <% reviews.each do |review| %>
-        <li>
-            <%= review.subject %> by <%= review.reviewer.name %>
-        </li>
+        <div>
+            &quot;<%= truncate(review.text, :length => 50) %>&quot; by <em><%= review.reviewer.name %></em>
+        </div>
       <% end %>
-      </ul>
-      <strong>A total of <%= reviews.length %> reviews</strong>
     </td>
     <td><%= link_to 'Show', talk %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
