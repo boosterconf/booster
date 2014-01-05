@@ -1,8 +1,5 @@
-<div style="border-bottom: 1px solid #eeeeee">
-  <h5><%= review.subject %></h5>
-  <p>
-    <strong>Date:</strong> <%= time_ago_in_words(review.created_at) %> ago (<%= review.created_at %>) <br/>
-    <strong>By:</strong> <%= review.reviewer.name %> <br/>
-    <%= simple_format review.text %>
-  </p>
-</div>
+<h4><%= time_ago_in_words(review.created_at) %> ago <%= review.reviewer.name %> said:</h4>
+<p>
+<%= simple_format review.text %>
+</p>
+<hr>

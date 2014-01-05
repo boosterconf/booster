@@ -21,6 +21,11 @@ header {
     background-color: #1790a0;
 }
 
+hr {
+    border-top: 1px solid #DBD9D2;
+    border-bottom: 1px solid #DBD9D2;
+}
+
 .navbar-inner {
     border: 1px solid #F6AB6F;
 }
