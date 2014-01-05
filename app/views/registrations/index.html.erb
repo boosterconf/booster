@@ -78,9 +78,12 @@
           <tr>
             <td>
               <% if registration.unfinished %>
-                  <span style="color: red; font-weight: bold">[U]</span>
+                  <span style="color: red; font-weight: bold">
+                    <%= link_to h('[U]'), registration.user %>
+                  </span>
+              <% else %>
+                <%= link_to h(registration.user.name), registration.user %>
               <% end %>
-              <%= link_to h(registration.user.name), registration.user %>
               (<%= h registration.user.company %>)
             </td>
             <td>
