@@ -119,7 +119,7 @@ class Registration < ActiveRecord::Base
 
   def self.find_by_params(params)
     if params[:conditions]
-      find(:all, :conditions => params[:conditions], :include => :user)
+      where(params[:conditions])
     elsif params[:filter]
       case params[:filter]
         when "skal_foelges_opp"

@@ -14,6 +14,7 @@ class RegisterWorkshopController < ApplicationController
     @user = User.new(params[:user])
     @user.create_registration
     @user.registration.ticket_type_old = 'speaker'
+    @user.registration.manual_payment = true
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
