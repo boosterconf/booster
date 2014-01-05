@@ -1,20 +1,44 @@
-body {
-    font-family: "Siri Core Regular", 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, Verdana, sans-serif;
-    font-size-adjust: 0.51;
-    font-weight: normal;
-    font-style: normal;
-}
-
-b, h1, h2, h3, h4, h5 {
-    font-family: "Siri Core Bold", 'Lucida Sans Unicode', 'Lucida Sans', Tahoma, Verdana, sans-serif;
-    font-size-adjust: 0.52;
-    font-weight: bold;
-    font-style: normal;
-}
+/* Siri is written twice in font-family because
+   boosterconf.no gets Siri from fontdeck = "Siri Core Regular" or "Siri Core Bold"*/
 
 body {
-    color: #777;
-    background-color: #f2f0e6;
+   color: #51504E;          /* contrast ratio 7.1 = AAA for large text */
+   font-family: "Siri Core Regular", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
+   font-size: 100%;
+   font-style: normal;
+   line-height: 1.6;
+   background-color: #f2f0e6;
+}
+
+h1, h2, h3, h4, h5 {
+   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
+   font-weight: bold; 
+   line-height: 1.1;
+   text-rendering: optimizeLegibility;
+}
+
+/* To select the proper type face, all tags that uses font-weight bold must be listed in this selector list. */
+strong, th {
+   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
+   font-weight: bold; 
+}
+
+h1 {
+   color: #1790A0;
+   font-size: 2.5em;
+   margin-bottom: 0.38em;
+}
+
+h2 {
+   color: #6D6C69;            /* contrast ratio 4.6 = AAA for large text */
+   font-size: 2em;
+   margin-bottom: 0.38em;
+}
+
+h3 {
+   color: #6D6C69;            /* contrast ratio 4.6 = AAA for large text */
+   font-size: 1.5em;
+   margin-bottom: 0.236em;
 }
 
 header {
@@ -44,11 +68,6 @@ hr {
 .masthead p {
     font-size: 20px;
     line-height: 40px;
-}
-
-h1, h2, h3 {
-    font-weight: bold;
-    color: #1790a0;
 }
 
 a {
