@@ -8,7 +8,7 @@
   <%= form_for [@talk, @review], html: { id: 'review-form'}, remote: true do |f| %>
 
       <%#= f.text_field :subject, class: 'input-xxlarge', required: true %>
-      <legend for="text">Add your review</label>
+      <legend for="text">Add your review</legend>
       <%= f.text_area :text, class: 'input-block-level', rows: 8, required: true %>
       <%#= f.submit 'Add review', class: 'btn btn-primary', id: 'submit-review' %>
       <button id="submit-review" type="submit" class="btn btn-primary">Add review</button>
