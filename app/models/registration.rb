@@ -16,7 +16,7 @@ class Registration < ActiveRecord::Base
 
   attr_accessible :comments, :includes_dinner, :description,
                   :ticket_type_old, :free_ticket, :user_id,
-                  :manual_payment, :invoice_address, :invoice_description
+                  :manual_payment, :invoice_address, :invoice_description, :invoiced
 
   default_scope :order => 'registrations.created_at desc'
   belongs_to :user
@@ -118,25 +118,39 @@ class Registration < ActiveRecord::Base
   end
 
   def self.find_by_params(params)
-    if params[:conditions]
-      where(params[:conditions])
-    elsif params[:filter]
+    puts params
+    if params[:filter]
       case params[:filter]
+        when "er_fakturert"
+          return where(
+            {
+              :free_ticket => false, 
+              :registration_complete => false, 
+              :manual_payment => true, 
+              :invoiced => true
+            })
         when "skal_foelges_opp"
-          return find(:all,
-                      :conditions => {:free_ticket => false, :registration_complete => false, :manual_payment => false},
-                      :include => [:user, {:user => :talks}])
+          return where(
+            {
+              :free_ticket => false, 
+              :registration_complete => false, 
+              :manual_payment => false
+            })
         when "skal_faktureres"
-          return find(:all,
-                      :conditions => {:free_ticket => false, :registration_complete => false, :manual_payment => true, :invoiced => false},
-                      :include => [:user, {:user => :talks}])
+          return where(
+            {
+              :free_ticket => false, 
+              :registration_complete => false, 
+              :manual_payment => true, 
+              :invoiced => false
+            })
         when "dinner"
-          return find(:all, :conditions => "includes_dinner = 1", :include => [:user, {:user => :talks}])
+          return where(:includes_dinner => true)
         else
           return []
       end
     else
-      find(:all, :include => [:user, {:user => :talks}])
+      all
     end
   end
 

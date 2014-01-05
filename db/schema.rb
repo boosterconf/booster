@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140103235513) do
+ActiveRecord::Schema.define(:version => 20140105181731) do
 
   create_table "bios", :force => true do |t|
     t.integer   "user_id"
@@ -122,31 +122,31 @@ ActiveRecord::Schema.define(:version => 20140103235513) do
   end
 
   create_table "registrations", :force => true do |t|
-    t.integer   "user_id"
-    t.text      "comments"
-    t.decimal   "price"
-    t.date      "invoiced_at"
-    t.date      "paid_at"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.boolean   "is_earlybird"
-    t.boolean   "includes_dinner"
-    t.string    "description"
-    t.text      "ticket_type_old"
-    t.text      "payment_notification_params"
-    t.timestamp "payment_complete_at"
-    t.decimal   "paid_amount"
-    t.text      "payment_reference"
-    t.boolean   "registration_complete"
-    t.boolean   "manual_payment"
-    t.text      "invoice_address"
-    t.text      "invoice_description"
-    t.boolean   "free_ticket"
-    t.string    "completed_by"
-    t.boolean   "invoiced"
-    t.boolean   "unfinished"
-    t.string    "unique_reference"
-    t.integer   "invoice_id"
+    t.integer  "user_id"
+    t.text     "comments"
+    t.decimal  "price"
+    t.date     "invoiced_at"
+    t.date     "paid_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "is_earlybird"
+    t.boolean  "includes_dinner"
+    t.string   "description"
+    t.text     "ticket_type_old"
+    t.text     "payment_notification_params"
+    t.datetime "payment_complete_at"
+    t.decimal  "paid_amount"
+    t.text     "payment_reference"
+    t.boolean  "registration_complete",       :default => false
+    t.boolean  "manual_payment"
+    t.text     "invoice_address"
+    t.text     "invoice_description"
+    t.boolean  "free_ticket",                 :default => false
+    t.string   "completed_by"
+    t.boolean  "invoiced",                    :default => false
+    t.boolean  "unfinished"
+    t.string   "unique_reference"
+    t.integer  "invoice_id"
   end
 
   create_table "reviews", :force => true do |t|

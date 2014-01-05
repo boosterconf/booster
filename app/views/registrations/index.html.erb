@@ -31,13 +31,12 @@
 <h3>Requires follow-up</h3>
 
 <ul>
-  <li><%= link_to "Paying users that haven't paid yet", :filter => 'skal_foelges_opp' %>. These must be contacted to
-    hear if they will try to pay again, receive an invoice, or not participate at all.
+  <li><%= link_to "Paypal users that haven't paid yet", :filter => 'skal_foelges_opp' %>. These must be contacted to
+    hear if they will try to pay again, receive an invoice, or not participate at all. Note: Paypal is no longer a payment option. 
   </li>
   <li><%= link_to "To be invoiced", :filter => 'skal_faktureres' %>. Send to André to invoice (for now).
   </li>
-  <li><%= link_to "Has been invoiced", :conditions => {:manual_payment => 1, :invoiced => 1} %>. When we receive a
-    payment, we need to update these users.
+  <li><%= link_to "Has been invoiced", :filter => 'er_fakturert' %>. When we receive a payment, we need to update these users.
   </li>
 </ul>
 
