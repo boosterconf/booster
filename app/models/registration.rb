@@ -36,11 +36,11 @@ class Registration < ActiveRecord::Base
   end
 
   def description
-    ticket_description + " " + (registration_complete ? " (Paid)" : "")
+    ticket_description + ' ' + (registration_complete ? ' (Paid)' : '')
   end
 
   def speaker?
-    ticket_type_old == "speaker" || ticket_type_old == "lightning"
+    ticket_type_old == 'speaker' || ticket_type_old == 'lightning'
   end
 
   def free_ticket
@@ -76,13 +76,13 @@ class Registration < ActiveRecord::Base
     if invoice_id =~ /^2014t?-(\d+)$/
       Registration.find($1.to_i)
     else
-      raise "Invalid invoice_id #{invoice_id}"
+      raise 'Invalid invoice_id #{invoice_id}'
     end
   end
 
   def invoice_id
-    return "2014-#{id}" if Rails.env == "production"
-    "2014t-#{id}"
+    return '2014-#{id}' if Rails.env == 'production'
+    '2014t-#{id}'
   end
 
   def payment_url(payment_notifications_url, return_url)
@@ -100,10 +100,10 @@ class Registration < ActiveRecord::Base
         :quantity_1 => '1'
     }
 
-    PAYMENT_CONFIG[:paypal_url] +"?"+values.map do
+    PAYMENT_CONFIG[:paypal_url] +'?'+values.map do
     |k, v|
-      "#{k}=#{CGI::escape(v.to_s)}"
-    end.join("&")
+      '#{k}=#{CGI::escape(v.to_s)}'
+    end.join('&')
   end
 
   def price_including_vat
@@ -111,17 +111,23 @@ class Registration < ActiveRecord::Base
   end
 
   def status
-    paid? ? "Paid" : (
-    registration_complete? ? "Approved" : (
-    manual_payment? && !invoiced ? "To be invoiced" : (
-    manual_payment? ? "Already invoiced" : "Must follow up")))
+    paid? ? 'Paid' : (
+    registration_complete? ? 'Approved' : (
+    manual_payment? && !invoiced ? 'To be invoiced' : (
+    manual_payment? ? 'Already invoiced' : 'Must follow up')))
   end
 
   def self.find_by_params(params)
     puts params
-    if params[:filter]
+    if params[:conditions]
+      return where(params[:conditions])
+    elsif params[:filter]
       case params[:filter]
-        when "er_fakturert"
+        when 'completed'
+          return where( { :registration_complete => true })
+        when 'not_completed'
+          return where( { :registration_complete => false })
+        when 'er_fakturert'
           return where(
             {
               :free_ticket => false, 
@@ -129,14 +135,14 @@ class Registration < ActiveRecord::Base
               :manual_payment => true, 
               :invoiced => true
             })
-        when "skal_foelges_opp"
+        when 'skal_foelges_opp'
           return where(
             {
               :free_ticket => false, 
               :registration_complete => false, 
               :manual_payment => false
             })
-        when "skal_faktureres"
+        when 'skal_faktureres'
           return where(
             {
               :free_ticket => false, 
@@ -144,7 +150,7 @@ class Registration < ActiveRecord::Base
               :manual_payment => true, 
               :invoiced => false
             })
-        when "dinner"
+        when 'dinner'
           return where(:includes_dinner => true)
         else
           return []
@@ -156,7 +162,7 @@ class Registration < ActiveRecord::Base
 
   def create_or_update_payment_info
     if paid?
-      raise "Cannot change a completed payment!"
+      raise 'Cannot change a completed payment!'
     end
     self.registration_complete = false
     update_price

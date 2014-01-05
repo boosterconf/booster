@@ -44,13 +44,13 @@
 <h3>Other searches</h3>
 
 <ul>
-  <li><%= link_to "All", :conditions => '' %></li>
+  <li><%= link_to "All" %></li>
   <% for ticket_type_old in @ticket_type_olds %>
       <li><%= link_to ticket_type_old, :conditions => {:ticket_type_old => ticket_type_old} %></li>
   <% end %>
-  <li><%= link_to "Completed", :conditions => {:registration_complete => 1} %></li>
-  <li><%= link_to "Not completed", :conditions => {:registration_complete => 0} %></li>
-  <li><%= link_to "Dinner registrations", :conditions => {:includes_dinner => 1} %></li>
+  <li><%= link_to "Completed", :filters => 'completed' %></li>
+  <li><%= link_to "Not completed", :filters => 'not_completed' %></li>
+  <li><%= link_to "Dinner registrations", :filters => 'dinner' %></li>
 </ul>
 
 <%=  link_to "Send welcome email", :send_welcome_email_url %>
