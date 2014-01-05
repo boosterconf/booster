@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_sponsors
-    @our_sponsors = Sponsor.all_accepted.select { |sponsor| sponsor.should_show_logo? }
+    @our_sponsors = cached_sponsors
   end
 
   def current_user
@@ -52,9 +52,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
   def require_admin_or_self
-    if params[:id]  =~ LOOKS_NUMBER_LIKE
+    if params[:id] =~ LOOKS_NUMBER_LIKE
       user = User.find(params[:id])
       unless current_user.is_admin? || user == current_user
         flash[:error] = "You are not allowed to look at or edit other users' information"
@@ -67,7 +66,7 @@ class ApplicationController < ActionController::Base
 
     return access_denied unless current_user
 
-    if params[:talk_id]  =~ LOOKS_NUMBER_LIKE
+    if params[:talk_id] =~ LOOKS_NUMBER_LIKE
       talk = Talk.find(params[:talk_id], include: :users)
       unless admin_or_reviewer? || talk.is_presented_by?(current_user)
         flash[:error] = 'Shame on you!'
@@ -124,6 +123,13 @@ class ApplicationController < ActionController::Base
       format.any(:json, :xml, :js) do
         return request_http_basic_authentication 'Web Password'
       end
+    end
+  end
+
+  private
+  def cached_sponsors
+    Rails.cache.fetch('all_accepted_sponsors', expires_in: 4.hours) do
+      Sponsor.all_accepted.select { |sponsor| sponsor.should_show_logo? }
     end
   end
 end

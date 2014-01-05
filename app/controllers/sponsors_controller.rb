@@ -44,6 +44,9 @@ class SponsorsController < ApplicationController
 
     User.transaction do
       Sponsor.transaction do
+
+        Rails.cache.delete('all_accepted_sponsors')
+
         if @sponsor.status_changed?
           event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Sponsor status changed to #{@sponsor.status_text}")
           event.save

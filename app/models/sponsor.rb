@@ -48,9 +48,7 @@ class Sponsor < ActiveRecord::Base
   end
 
   def self.all_accepted
-    Rails.cache.fetch('all_accepted_sponsors') do
       self.find_all_by_status('accepted')
-    end
   end
 
   def is_ready_for_email?
