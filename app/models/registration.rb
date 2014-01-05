@@ -15,8 +15,8 @@ class Registration < ActiveRecord::Base
   }
 
   attr_accessible :comments, :includes_dinner, :description,
-                  :ticket_type_old, :free_ticket, :user_id,
-                  :manual_payment, :invoice_address, :invoice_description, :invoiced
+                  :ticket_type_old, :free_ticket, :user_id, :paid_amount, :payment_reference,
+                  :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete
 
   default_scope :order => 'registrations.created_at desc'
   belongs_to :user

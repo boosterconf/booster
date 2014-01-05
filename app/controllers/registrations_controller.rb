@@ -44,6 +44,7 @@ class RegistrationsController < ApplicationController
   def update
 
     @registration = Registration.find(params[:id])
+    puts params[:registration]
     if admin?
       if params[:ticket_change]
         @registration.ticket_type_old = params[:registration][:ticket_type_old]
