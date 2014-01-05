@@ -1,33 +1,17 @@
 class Registration < ActiveRecord::Base
   # TODO: Should perhaps be in some i18n-file somewhere and not hard-coded
   TICKET_TEXTS = {
-<<<<<<< HEAD
-      "early_bird" => 'Early bird ticket for Booster 2014',
-      "full_price" => 'Regular ticket for Booster 2014',
-      "lightning" => 'Lightning talk ticket for Booster 2014',
-      "sponsor" => 'Sponsor ticket Booster 2014',
-      "volunteer" => 'Volunteer at Booster 2014',
-      "reviewer" => 'Reviewer for Booster 2014',
-      "student" => 'Student for Booster 2014',
-      "mod251" => 'MOD251 Student for Booster 2014',
-      "organizer" => 'Organizer for Booster 2014',
-      "speaker" => 'Speaker at Booster 2014',
-      "academic" => 'Academic ticket Booster 2014',
-      "new_speaker" => 'Speaker without abstracts'
-=======
       'early_bird' => 'Early bird ticket for Booster 2014',
       'full_price' => 'Regular ticket for Booster 2014',
       'lightning' => 'Lightning talk ticket for Booster 2014',
       'sponsor' => 'Sponsor ticket Booster 2014',
       'volunteer' => 'Volunteer at Booster 2014',
-      'reviewer' => 'Reviewer for Booster 2014',
       'student' => 'Student for Booster 2014',
       'organizer' => 'Organizer for Booster 2014',
       'speaker' => 'Speaker at Booster 2014',
       'academic' => 'Academic ticket Booster 2014',
       'new_speaker' => 'Speaker without abstracts',
       'reviewer' => 'Reviewer ticket for Booster 2014'
->>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
   }
 
   attr_accessible :comments, :includes_dinner, :description,

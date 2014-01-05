@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(:version => 20140103235513) do
     t.string    "logo_file_name"
     t.string    "logo_content_type"
     t.integer   "logo_file_size"
-    t.timestamp "logo_updated_at"
+    t.datetime  "logo_updated_at"
     t.boolean   "publish_logo",                :default => false
     t.string    "website"
   end

@@ -1,12 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-<<<<<<< HEAD
-  
-  helper_method :current_user_session, :current_user, :logged_in?, :admin?, :reviewer?
-=======
 
   helper_method :current_user_session, :current_user, :logged_in?, :admin?, :reviewer?, :admin_reviewer_or_talk_owner?
->>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
 
   before_filter :load_sponsors
 
@@ -39,8 +34,6 @@ class ApplicationController < ActionController::Base
     current_user and current_user.reviewer?
   end
 
-<<<<<<< HEAD
-=======
   def admin_reviewer_or_talk_owner?(talk)
     admin_or_reviewer? || talk.is_presented_by?(current_user)
   end
@@ -51,7 +44,6 @@ class ApplicationController < ActionController::Base
     current_user.is_admin || current_user.reviewer?
   end
 
->>>>>>> 3de48988feeb915ed5db8cd2ce36bad98cec8c3d
   def require_admin
     unless admin?
       store_location
