@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def load_sponsors
-    @our_sponsors = cached_sponsors
+    @our_sponsors = Sponsor.all_accepted.select { |sponsor| sponsor.should_show_logo? }
   end
 
   def current_user
