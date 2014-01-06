@@ -24,7 +24,7 @@ class Registration < ActiveRecord::Base
   belongs_to :invoice
 
   #validates_presence_of :invoice_address, :if => Proc.new { |reg| reg.manual_payment }
-  validates_presence_of :user 
+  #validates_presence_of :user 
 
   before_create :create_or_update_payment_info
 
