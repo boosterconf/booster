@@ -21,4 +21,9 @@
 //= require jquery_notification_v.1
 //= require tag.it
 //= require jquery.DOMWindow
+//= require underscore
+//= require backbone
+//= require backbone_rails_sync
+//= require backbone_datalink
+//= require backbone/booster2013
 //= require_tree .

@@ -63,6 +63,7 @@ GEM
     coffee-script-source (1.6.3)
     daemons (1.1.9)
     diff-lcs (1.2.5)
+    ejs (1.0.0)
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.0.2)
@@ -139,6 +140,10 @@ GEM
       activesupport (= 3.2.14)
       bundler (~> 1.0)
       railties (= 3.2.14)
+    rails-backbone (0.7.2)
+      coffee-script (~> 2.2.0)
+      ejs (~> 1.0.0)
+      railties (>= 3.1.0)
     rails_12factor (0.0.2)
       rails_serve_static_assets
       rails_stdout_logging
@@ -230,6 +235,7 @@ DEPENDENCIES
   prawn
   quiet_assets
   rails (= 3.2.14)
+  rails-backbone
   rails_12factor
   rspec-rails
   sass-rails (~> 3.2.3)

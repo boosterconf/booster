@@ -1,0 +1,25 @@
+<h1> Program planner </h1>
+
+<div id="planner_window">
+
+  <div id="speaks_listing"></div>
+
+  <div id="program_listing"></div>
+
+</div>
+
+<script>
+    var speakCollection = new SpeakCollection
+    ([
+        {speaker: 'Ole Brumm', title: 'What I want for Christmas', description: 'Wooden Toy House'},
+        {speaker: 'Hans Brumundsen', title: 'Et tilbakeblikk', description: 'Foredrag om alt som har skjedd de siste 20 år'},
+        {speaker: 'Kaptein Sabeltann', title: 'Min vei mot makten', description: 'Biografisk.'}
+    ]);
+
+    var speakItemListView = new SpeakItemListView({
+
+        // Pass model as a parameter to a view.
+        collection: speakCollection
+    });
+    speakItemListView.render()
+</script>

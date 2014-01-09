@@ -98,6 +98,7 @@ Booster2013::Application.routes.draw do
   match '/register_workshop/details' => 'register_workshop#details'
   match '/register_workshop/create_details' => 'register_workshop#create_details'
   match '/register_workshop/finish' => 'register_workshop#finish'
+  match '/planner' => 'planner#index'
 
 #match 'login' => 'user_sessions#new', :as => :login
 #match 'logout' => 'user_sessions#destroy', :as => :logout

@@ -235,3 +235,36 @@ div.error + table {
     color: #6D6C69;
     text-align: center;
 }
+
+#planner_window {
+    background: #FFFAF0;
+    height: 500px;
+    width: 90%;
+}
+
+#planner_window ul {
+    list-style-type: none;
+    margin: 5px;
+}
+
+#speak_box {
+    background-color: #FFFAF0;
+    padding: 5px;
+    margin: 3px;
+    border: 1px solid black;
+}
+
+#speaks_listing {
+    background: pink;
+    height: 500px;
+    width: 30%;
+    float: left;
+    padding: 15px;
+}
+
+#program_listing {
+    background: #FFFAF0;
+    height: 500px;
+    width: 60%;
+    float: right;
+}
