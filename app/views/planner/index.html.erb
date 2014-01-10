@@ -4,7 +4,27 @@
 
   <div id="speaks_listing"></div>
 
-  <div id="program_listing"></div>
+  <div id="program_listing">
+
+    <% @days.each do |day| %>
+
+        <table>
+          <tr><th id="day_headline" colspan=7><h3><%= day %></h3></th></tr>
+          <tr>
+            <% (1..@num_tracks).each do |number| %>
+                <th><h5>Track <%= number %> </h5></th>
+            <% end %>
+          </tr>
+          <tr>
+            <% (1..@num_tracks).each do |number| %>
+                <td></td>
+            <% end %>
+          </tr>
+        </table>
+
+     <% end %>
+
+  </div>
 
 </div>
 
@@ -22,4 +42,13 @@
         collection: speakCollection
     });
     speakItemListView.render()
+
+    window.onload = function() {
+        var dragged = document.getElementById("drag1");
+        var drophere = document.getElementById("drop1");
+        dragged.ondragstart = drag;
+        drophere.ondragover = allowDrop;
+        drophere.ondrop = drop;
+    }
+
 </script>
