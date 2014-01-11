@@ -32,7 +32,7 @@ Booster2013::Application.routes.draw do
   end
 
   resources :statistics, only: [:index] do
-    get :users_by_company, on: :collections
+    get :users_by_company, on: :collection
   end
 
   resources :user_sessions
@@ -144,7 +144,7 @@ Booster2013::Application.routes.draw do
 #       post 'toggle'
 #     end
 #
-#     collections do
+#     collection do
 #       get 'sold'
 #     end
 #   end
@@ -159,7 +159,7 @@ Booster2013::Application.routes.draw do
 #   resources :products do
 #     resources :comments
 #     resources :sales do
-#       get 'recent', :on => :collections
+#       get 'recent', :on => :collection
 #     end
 #   end
 

@@ -16,8 +16,6 @@
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.widgets.min
 //= require tinymce-jquery
-//= require jquery-ui-1.8.core-and-interactions.min
-//= require jquery-ui-1.8.autocomplete.min
 //= require jquery_notification_v.1
 //= require tag.it
 //= require jquery.DOMWindow

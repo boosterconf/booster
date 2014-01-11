@@ -3,11 +3,12 @@ class TalksController < ApplicationController
   before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
   before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
-  respond_to :html
+  respond_to :html, :json
 
   def index
     @talks = Talk.all_pending_and_approved
     @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
+    respond_with(@lightning_talks, @workshops)
   end
 
   def article_tags

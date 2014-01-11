@@ -1,4 +1,5 @@
 var SpeakCollection = Backbone.Collection.extend
 ({
-    model: SpeakModel
+    model: SpeakModel,
+    url: '/talks'
 });

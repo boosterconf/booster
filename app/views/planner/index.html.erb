@@ -2,53 +2,56 @@
 
 <div id="planner_window">
 
-  <div id="speaks_listing"></div>
+  <div id="speaks_listing" class="droppable"></div>
 
   <div id="program_listing">
 
-    <% @days.each do |day| %>
-
         <table>
-          <tr><th id="day_headline" colspan=7><h3><%= day %></h3></th></tr>
           <tr>
             <% (1..@num_tracks).each do |number| %>
                 <th><h5>Track <%= number %> </h5></th>
             <% end %>
           </tr>
-          <tr>
-            <% (1..@num_tracks).each do |number| %>
-                <td></td>
-            <% end %>
-          </tr>
+          <% (1..@talks_per_track).each do |talks| %>
+              <tr>
+                <% (1..@num_tracks).each do |number| %>
+                    <td><div class="droppable slot"> <p>  </p></div></td>
+                <% end %>
+              </tr>
+          <% end %>
         </table>
-
-     <% end %>
 
   </div>
 
 </div>
 
 <script>
-    var speakCollection = new SpeakCollection
-    ([
-        {speaker: 'Ole Brumm', title: 'What I want for Christmas', description: 'Wooden Toy House'},
-        {speaker: 'Hans Brumundsen', title: 'Et tilbakeblikk', description: 'Foredrag om alt som har skjedd de siste 20 år'},
-        {speaker: 'Kaptein Sabeltann', title: 'Min vei mot makten', description: 'Biografisk.'}
-    ]);
 
-    var speakItemListView = new SpeakItemListView({
+    var collection = new SpeakCollection();
 
-        // Pass model as a parameter to a view.
-        collection: speakCollection
+    collection.fetch({
+        success: function(collection, response, options) {
+            speakItemListView = new SpeakItemListView({ collection: collection});
+            console.log(speakItemListView);
+            $('#speaks_listing').html(
+                    speakItemListView.el
+            );
+
+        },
+        error: function(collection, response, options) {
+            alert('error!');
+        }
     });
-    speakItemListView.render()
 
-    window.onload = function() {
-        var dragged = document.getElementById("drag1");
-        var drophere = document.getElementById("drop1");
-        dragged.ondragstart = drag;
-        drophere.ondragover = allowDrop;
-        drophere.ondrop = drop;
-    }
+    $(function() {
+        $( ".draggable" ).draggable({revert: "invalid"});
+        $( ".droppable" ).droppable({
+            drop: function( event, ui ) {
+                $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
+                $(ui.draggable).css("border", "none");
+            },
+            hoverClass: "hover_over"
+        });
+    });
 
 </script>

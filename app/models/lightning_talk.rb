@@ -20,4 +20,8 @@ class LightningTalk < Talk
                  order: 'title')
   end
 
+  def self.all_with_speaker
+    unscoped.all(include: [:users])
+  end
+
 end
