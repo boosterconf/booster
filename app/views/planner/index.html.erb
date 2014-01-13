@@ -32,9 +32,9 @@
     collection.fetch({
         success: function(collection, response, options) {
             speakItemListView = new SpeakItemListView({ collection: collection});
-            console.log(speakItemListView);
+
             $('#speaks_listing').html(
-                    speakItemListView.el
+                    speakItemListView.render().el
             );
 
         },
@@ -44,7 +44,7 @@
     });
 
     $(function() {
-        $( ".draggable" ).draggable({revert: "invalid"});
+        $( ".draggable" ).draggable( {revert: "invalid"} );
         $( ".droppable" ).droppable({
             drop: function( event, ui ) {
                 $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
