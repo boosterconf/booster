@@ -37,21 +37,21 @@
                     speakItemListView.render().el
             );
 
+            $(function() {
+                $( ".draggable" ).draggable( {revert: "invalid"} );
+                $( ".droppable" ).droppable({
+                    drop: function( event, ui ) {
+                        $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
+                        $(ui.draggable).css("border", "none");
+                    },
+                    hoverClass: "hover_over"
+                });
+            });
+
         },
         error: function(collection, response, options) {
             alert('error!');
         }
-    });
-
-    $(function() {
-        $( ".draggable" ).draggable( {revert: "invalid"} );
-        $( ".droppable" ).droppable({
-            drop: function( event, ui ) {
-                $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
-                $(ui.draggable).css("border", "none");
-            },
-            hoverClass: "hover_over"
-        });
     });
 
 </script>
