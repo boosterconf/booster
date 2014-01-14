@@ -504,17 +504,7 @@ li.keynotesecond {
 } /* end this media query */
 
 
-
 @media screen and (min-width: 800px) {
-
-.hello {
-   background: url(/assets/bg-videosarea.png) no-repeat right bottom;
-}
-
-.videosarea {
-   background: url(/assets/bg-hello.png) no-repeat 1em 1em;
-}
-
 
 footer .inner {
    background: url(/assets/bg-footer-5people.png) no-repeat 18em bottom;
@@ -538,8 +528,12 @@ footer .inner {
 } /* end this media query */
 
 
-
 @media screen and (min-width: 1120px) {
+
+   
+.hello {
+   background: url(/assets/bg-videosarea.png) no-repeat right bottom;
+}
 
 .inner {
    width: 70em;                /* 1120px */

@@ -198,6 +198,11 @@ div.error + table {
     padding: 10px;
 }
 
+.speakers-box {
+      /*margin-right: auto;*/
+      border-top: 8px solid #F6AB6F;
+  }
+
 .speakers {
     margin-left: auto;
     margin-right: auto;
@@ -208,8 +213,9 @@ div.error + table {
 
 .frontpage-speaker {
     position: relative;
-    padding-right: 4em;
-    max-width: 160px;
+    margin-left: 2em;
+    width: 20%;
+    min-width: 160px;
     float: left;
 }
 
@@ -231,11 +237,11 @@ div.error + table {
     text-align: center;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 1000px) {
 
   .speakers-box {
       /*margin-right: auto;*/
-      border-top: 8px solid #F6AB6F;
+      /*border-top: 8px solid #F6AB6F;*/
       background: url(/assets/bg-hello.png) no-repeat 1em 1em;
   }
 }
