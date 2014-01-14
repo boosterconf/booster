@@ -36,7 +36,7 @@ body {
 
 .inner {
    margin: 0 auto;
-   width: 90%;
+   width: 95%;
 }
 
 nav {
@@ -413,39 +413,7 @@ li.keynotesecond {
 
 /* ==================== media queries ==================== */
 
-@media screen and (max-width: 700px) {
-
-h1 {
-
-}
-
-h2 {
-
-}
-
-h3 {
-
-}
-
-} /* end this media query */
-
-
-
-
 @media screen and (min-width: 500px) {
-
-.videosintro {
-   width: 75%;
-}
-
-.videosthatareshort li {
-   width: 50%;
-   float: left;
-}
-
-.videosthatareshort li a {
-   height: 85px;  
-}
 
 footer .inner {
    background: url(/assets/bg-footer-2people.png) no-repeat 18em bottom;
