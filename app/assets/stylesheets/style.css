@@ -198,23 +198,18 @@ div.error + table {
     padding: 10px;
 }
 
-/* Front page speakers section. */ 
-.speakers-box {
-    /*margin-right: auto;*/
-    border-top: 8px solid #F6AB6F;
-    background: url(/assets/bg-hello.png) no-repeat 1em 1em;
-}
-
 .speakers {
     margin-left: auto;
+    margin-right: auto;
     width: 80%;
     padding-top: 10px;
+    padding-left: 50px;
 }
 
 .frontpage-speaker {
     position: relative;
-    padding-right: 3em;
-    max-width: 140px;
+    padding-right: 4em;
+    max-width: 160px;
     float: left;
 }
 
@@ -234,4 +229,13 @@ div.error + table {
 .right-column h2{
     color: #6D6C69;
     text-align: center;
+}
+
+@media screen and (min-width: 800px) {
+
+  .speakers-box {
+      /*margin-right: auto;*/
+      border-top: 8px solid #F6AB6F;
+      background: url(/assets/bg-hello.png) no-repeat 1em 1em;
+  }
 }
