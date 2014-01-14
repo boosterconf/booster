@@ -219,6 +219,13 @@ div.error + table {
     float: left;
 }
 
+.frontpage-speaker img {
+  border: 3px solid #d3d1cb;
+  border-radius: 5px;
+  min-width: 160px;
+  min-height: 160px;
+}
+
 .social-links .nav > li > a {
     padding-top: 0;
 }

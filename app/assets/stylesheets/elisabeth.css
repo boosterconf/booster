@@ -504,7 +504,7 @@ li.keynotesecond {
 } /* end this media query */
 
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
 
 footer .inner {
    background: url(/assets/bg-footer-5people.png) no-repeat 18em bottom;
@@ -514,7 +514,7 @@ footer .inner {
 
 
 
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 980px) {
 
 .hello h1 {
    font-size: 4.25em;
@@ -528,9 +528,9 @@ footer .inner {
 } /* end this media query */
 
 
-@media screen and (min-width: 1120px) {
+@media screen and (min-width: 1200px) {
 
-   
+
 .hello {
    background: url(/assets/bg-videosarea.png) no-repeat right bottom;
 }
