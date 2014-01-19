@@ -17,9 +17,8 @@ gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 gem 'prawn'
 gem 'rails_12factor'
 
-gem 'heroku-deflater'
-
 group :production do
+  gem 'heroku-deflater'
   gem 'pg'
   gem 'thin'
 end
