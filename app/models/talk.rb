@@ -160,7 +160,7 @@ end
   end
 
   def self.all_pending_and_approved
-    all(:order => 'acceptance_status, id desc').select {
+    all(order: 'acceptance_status, id desc', include: [:speakers, :users, :talk_type]).select {
         |t| !t.refused? && !t.users.first.nil? && t.year == AppConfig.year
     }
   end

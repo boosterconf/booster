@@ -8,7 +8,8 @@ class TalksController < ApplicationController
   def index
     @talks = Talk.all_pending_and_approved
     @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
-    respond_with(@lightning_talks, @workshops)
+    @response = {lightning_talks: @lightning_talks, workshops: @workshops}
+    respond_with(@lightning_talks, include: :users)
   end
 
   def article_tags
