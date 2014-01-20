@@ -15,7 +15,7 @@
           <% (1..@talks_per_track).each do |talks| %>
               <tr>
                 <% (1..@num_tracks).each do |number| %>
-                    <td><div class="droppable slot"> <p>  </p></div></td>
+                    <td><div class="droppable slot"></div></td>
                 <% end %>
               </tr>
           <% end %>
@@ -43,6 +43,7 @@
                     drop: function( event, ui ) {
                         $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
                         $(ui.draggable).css("border", "none");
+                        $(ui.draggable).css("float", "left");
                     },
                     hoverClass: "hover_over"
                 });
