@@ -238,8 +238,8 @@ div.error + table {
 
 #planner_window {
     background: #FFFAF0;
-    height: 500px;
     width: 99%;
+    height: 1000px;
 }
 
 #planner_window ul {
@@ -247,7 +247,7 @@ div.error + table {
     margin: 5px;
 }
 
-#speak_box {
+.draggable {
     background-color: #FFFAF0;
     padding: 5px;
     margin: 3px;
@@ -261,7 +261,6 @@ div.error + table {
 
 #speaks_listing {
     background: pink;
-    height: 500px;
     width: 30%;
     float: left;
     padding: 15px;
@@ -282,7 +281,7 @@ div.error + table {
 }
 
 #program_listing td {
-    padding: 2px;
+    padding: 0px;
 }
 
 #program_listing th, td {
@@ -303,9 +302,14 @@ div.error + table {
 }
 
 .slot {
-    height: 50px;
+    height: 100px;
+    width: 240px;
 }
 
 .hover_over {
-    background: #d3d3d3;
+    background: #DCDCDC;
+}
+
+.dropped{
+    width: 200px;
 }

@@ -8,7 +8,7 @@ var SpeakItemListView = Backbone.View.extend({
             var speaker = model.get('users').first()
             // TODO: Create model view
             var item_html =
-                '<div id="speak_box" draggable="true" class="draggable">' +
+                '<div draggable="true" class="draggable">' +
                 '<h5>' + model.get('title') + '</h5>' +
                     '<h6>' + speaker.get('name') + ' (' + speaker.get('company') + ')' + '</h6>' +
                     '</div>';

@@ -44,6 +44,7 @@
                         $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
                         $(ui.draggable).css("border", "none");
                         $(ui.draggable).css("float", "left");
+                        $(ui.draggable).toggleClass(' dropped');
                     },
                     hoverClass: "hover_over"
                 });
