@@ -1,28 +1,41 @@
 <h1>Listing reviews</h1>
 
+<h2>Workshops</h2>
 <table class="table table-striped">
   <thead>
   <tr>
     <th>Talk</th>
-    <th>Type</th>
     <th>Reviews</th>
-    <th>&nbsp;</th>
+    <th>Reviewed by me?</th>
   </tr>
 </thead>
 <tbody>
-<% @talks_with_reviews.each do |talk, reviews| %>
+<% @workshops.each do |talk| %>
   <tr>
-    <td><%= talk.title %></td>
-    <td><%= talk.type %></td>
-    <td>
-      <% reviews.each do |review| %>
-        <div>
-            &quot;<%= truncate(review.text, :length => 50) %>&quot; by <em><%= review.reviewer.name %></em>
-        </div>
-      <% end %>
-    </td>
-    <td><%= link_to 'Show', talk %></td>
+    <td><%= link_to "\"#{truncate(talk.title, length: 60)}\" by #{talk.speaker_name}", talk %></td>
+    <td> <%= pluralize(talk.reviews.size, 'review') %></td>
+    <td> <%= talk.has_been_reviewed_by(current_user) ? 'Yes' : 'No' %></td>
   </tr>
 <% end %>
 </tbody>
+</table>
+
+<h2>Lightning talks</h2>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Talk</th>
+    <th>Reviews</th>
+    <th>Reviewed by me?</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @lightning_talks.each do |talk| %>
+      <tr>
+        <td><%= link_to "\"#{truncate(talk.title, length: 60)}\" by #{talk.speaker_name}", talk %></td>
+        <td> <%= pluralize(talk.reviews.size, 'review') %></td>
+        <td> <%= talk.has_been_reviewed_by(current_user) ? 'Yes' : 'No' %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>

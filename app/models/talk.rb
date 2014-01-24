@@ -159,8 +159,12 @@ end
     self.appropriate_for_roles && self.appropriate_for_roles.include?(role)
   end
 
+  def has_been_reviewed_by(user)
+    reviews.map { |r| r.reviewer }.include?(user)
+  end
+
   def self.all_pending_and_approved
-    all(:order => 'acceptance_status, id desc').select {
+    all(order: 'acceptance_status, id desc', include: :reviews).select {
         |t| !t.refused? && !t.users.first.nil? && t.year == AppConfig.year
     }
   end

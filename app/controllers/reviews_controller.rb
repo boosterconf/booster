@@ -6,10 +6,11 @@ class ReviewsController < ApplicationController
   before_filter :find_review, only: [:update, :destroy]
 
   def index
-    reviews = Review.all(include: [:reviewer, :talk])
-    @talks_with_reviews = reviews.group_by(&:talk)
+    talks = Talk.all_pending_and_approved
 
-    respond_with @talks_with_reviews
+    @workshops, @lightning_talks = talks.partition {|t| t.is_tutorial? }
+
+    respond_with @workshops
   end
 
   def create
