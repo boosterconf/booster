@@ -23,6 +23,10 @@
 
   </div>
 
+  <div class="warnings">
+    <h3>Warnings</h3>
+  </div>
+
 </div>
 
 <script>
@@ -38,7 +42,10 @@
             );
 
             $(function() {
-                $( ".draggable" ).draggable( {revert: "invalid"} );
+                $( ".draggable" ).draggable( {
+                    revert: "invalid",
+                    cursor: "move"
+                } );
                 $( ".droppable" ).droppable({
                     drop: function( event, ui ) {
                         $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
@@ -47,9 +54,8 @@
                         $(ui.draggable).toggleClass(' dropped');
                     },
                     hoverClass: "hover_over"
-                });
+                })
             });
-
         },
         error: function(collection, response, options) {
             alert('error!');

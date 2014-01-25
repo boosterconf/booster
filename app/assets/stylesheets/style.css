@@ -261,8 +261,9 @@ div.error + table {
 
 #speaks_listing {
     background: pink;
-    width: 30%;
+    width: 20%;
     float: left;
+    min-width:250px;
     padding: 15px;
 }
 
@@ -270,8 +271,11 @@ div.error + table {
     background: #FFFAF0;
     height: 500px;
     width: 65%;
-    float: right;
-    margin-top: 20px;
+    min-width:700px;
+    float: left;
+    margin-top: 10px;
+    padding: 10px;
+    padding-left: 30px;
 }
 
 #program_listing table {
@@ -287,7 +291,10 @@ div.error + table {
 #program_listing th, td {
     padding: 5px;
     width: 73.5px;
-    border: 1px solid black;
+}
+
+#program_listing th{
+    background-color: pink;
 }
 
 #day_headline {
@@ -312,4 +319,8 @@ div.error + table {
 
 .dropped{
     width: 200px;
+}
+
+.warnings{
+    margin-left: 15px;
 }
