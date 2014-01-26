@@ -286,6 +286,7 @@ div.error + table {
 
 #program_listing td {
     padding: 0px;
+    border: 1px solid black;
 }
 
 #program_listing th, td {
@@ -323,4 +324,10 @@ div.error + table {
 
 .warnings{
     margin-left: 15px;
+}
+
+td.break {
+    font-size: 16pt;
+    text-align: center;
+    background-color: pink;
 }

@@ -6,20 +6,27 @@
 
   <div id="program_listing">
 
-        <table>
-          <tr>
-            <% (1..@num_tracks).each do |number| %>
-                <th><h5>Track <%= number %> </h5></th>
-            <% end %>
-          </tr>
-          <% (1..@talks_per_track).each do |talks| %>
+    <table>
+      <tr>
+        <% (1..@num_tracks).each do |number| %>
+            <th><h5>Track <%= number %> </h5></th>
+        <% end %>
+      </tr>
+      <% (1..@num_slots).each do |slot_num| %>
+          <% (1..@talks_per_slot).each do |talks| %>
               <tr>
                 <% (1..@num_tracks).each do |number| %>
-                    <td><div class="droppable slot"></div></td>
+                    <td>
+                      <div class="droppable slot"></div>
+                    </td>
                 <% end %>
               </tr>
           <% end %>
-        </table>
+          <tr>
+            <td colspan="<%= @num_tracks %>" class="break">Break</td>
+          </tr>
+      <% end %>
+    </table>
 
   </div>
 
@@ -34,21 +41,21 @@
     var collection = new SpeakCollection();
 
     collection.fetch({
-        success: function(collection, response, options) {
+        success: function (collection, response, options) {
             speakItemListView = new SpeakItemListView({ collection: collection});
 
             $('#speaks_listing').html(
                     speakItemListView.render().el
             );
 
-            $(function() {
-                $( ".draggable" ).draggable( {
+            $(function () {
+                $(".draggable").draggable({
                     revert: "invalid",
                     cursor: "move"
-                } );
-                $( ".droppable" ).droppable({
-                    drop: function( event, ui ) {
-                        $(ui.draggable).detach().css({top: 0,left: 0}).appendTo(this);
+                });
+                $(".droppable").droppable({
+                    drop: function (event, ui) {
+                        $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
                         $(ui.draggable).css("border", "none");
                         $(ui.draggable).css("float", "left");
                         $(ui.draggable).toggleClass(' dropped');
@@ -57,7 +64,7 @@
                 })
             });
         },
-        error: function(collection, response, options) {
+        error: function (collection, response, options) {
             alert('error!');
         }
     });
