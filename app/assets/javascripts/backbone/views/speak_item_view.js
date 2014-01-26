@@ -1,19 +1,24 @@
 var SpeakItemView = Backbone.View.extend({
 
-    tagName: 'li',
+
+    initialize: function() {
+        this.$el.attr('draggable', true);
+        this.$el.addClass('draggable');
+
+        this.$el.draggable({
+            revert: "invalid",
+            cursor: "move"
+        });
+
+    },
 
     // Renders view
     render: function () {
-        console.log("In view");
         var speaker = this.model.get('users').first();
 
-        console.log("this.$el in itemview: " + this.$el);
-
         var html =
-            '<div draggable="true" class="draggable">' +
                 '<h5>' + this.model.get('title') + '</h5>' +
-                '<h6>' + speaker.get('name') + ' (' + speaker.get('company') + ')' + '</h6>' +
-                '</div>';
+                '<h6>' + speaker.get('name') + ' (' + speaker.get('company') + ')' + '</h6>';
 
         this.$el.append(html);
 

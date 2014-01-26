@@ -49,10 +49,7 @@
             );
 
             $(function () {
-                $(".draggable").draggable({
-                    revert: "invalid",
-                    cursor: "move"
-                });
+
                 $(".droppable").droppable({
                     drop: function (event, ui) {
                         $(ui.draggable).detach().css({top: 0, left: 0}).appendTo(this);
