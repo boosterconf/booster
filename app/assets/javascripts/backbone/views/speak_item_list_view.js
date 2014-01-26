@@ -1,23 +1,16 @@
 var SpeakItemListView = Backbone.View.extend({
 
+    tagName: 'ul',
+
     // Renders view
     render: function() {
-        var html = '';
+
+        var element =  this.$el; // Must be defined outside loop - or else Bad Things Happens (tm)
+
         _.each(this.collection.models, function(model, index, list) {
-
-            var speaker = model.get('users').first()
-            // TODO: Create model view
-            var item_html =
-                '<div draggable="true" class="draggable">' +
-                '<h5>' + model.get('title') + '</h5>' +
-                    '<h6>' + speaker.get('name') + ' (' + speaker.get('company') + ')' + '</h6>' +
-                    '</div>';
-            html = html + '<li>' + item_html + '</li>';
+            var view = new SpeakItemView({model: model});
+            element.append(view.render().el)
         });
-
-        html = '<ul>' + html + '</ul>';
-
-        this.$el.html(html);
         return this;
     }
 });
