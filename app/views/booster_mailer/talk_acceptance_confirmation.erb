@@ -6,9 +6,13 @@
   "<%= @talk.title %>"
   for Booster 2014 has been accepted!</p>
 
-<p>We would like you to confirm that you are still able to present at the
-  conference. Please do so by replying to this email as soon as possible,
-  and before February 7., so that we can publish the conference program.</p>
+<p>You have been assigned a date and time for your workshop, which you can find in 
+  <a href="https://docs.google.com/spreadsheet/ccc?key=0AsSmC89I-7PrdDNJRVpOMC1sTmEzSE5HUWhDM3FDdlE&usp=sharing">
+    this google spreadsheet.
+  </a> We would like you to confirm that you are still able to present at the
+  conference, and that your assigned slot works with your schedule. 
+  Please do so by replying to this email as soon as possible,
+  and before February 7th, so that we can publish the conference program. </p>
 
 <% if @talk.is_tutorial? %>
     <p>There are a few practical details we need you to attend to:</p>
@@ -16,10 +20,6 @@
     <p>
       It is still possible to edit your talk by using this url: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
     </p>
-
-    <p>If you are unable to attend the conference one or more of the days,
-      you must inform us by email so that we can schedule your session
-      accordingly.</p>
 
     <p>You are entitled to free entrance to the conference and conference
       dinner.</p>
@@ -38,7 +38,7 @@
       discounted ticket price and price you paid will be refunded.</p>
 <% end %>
 <% unless @speaker.invited? %>
-    <p>Please note that we will not cover travel and lodging. If you need a hotel room in Bergen, we recommend the
+    <p>Please note that we will not normally cover travel and lodging. However, we will consider sponsoring travel and lodging. Confer with our <a href="http://www.boosterconf.no/info/monetary_policy">monetary policy</a> for the details. If you need a hotel room in Bergen, we recommend the
       conference hotel,
       Scandic Bergen City. Please contact them by telephone +47 55 30 90 80
       or by email at bergencity@scandichotels.com.</p>
@@ -49,7 +49,7 @@
 
 <p>If you want to make any changes to the description of your talk, it is
   still possible to do so until the conference starts. However, please be
-  aware that we will publish the program on our web pages in a few days.</p>
+  aware that we will begin publishing information about the program in a few days.</p>
 
 <p>Best regards,<br>
 The Booster conference organizers</p>
