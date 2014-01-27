@@ -6,17 +6,18 @@
   "<%= @talk.title %>"
   for Booster 2014 has been accepted!</p>
 
-<p>You have been assigned a date and time for your workshop, which you can find in 
-  <a href="https://docs.google.com/spreadsheet/ccc?key=0AsSmC89I-7PrdDNJRVpOMC1sTmEzSE5HUWhDM3FDdlE&usp=sharing">
-    this google spreadsheet.
-  </a> We would like you to confirm that you are still able to present at the
+<p>We would like you to confirm that you are still able to present at the
   conference, and that your assigned slot works with your schedule. 
   Please do so by replying to this email as soon as possible,
   and before February 7th, so that we can publish the conference program. </p>
 
 <% if @talk.is_tutorial? %>
     <p>There are a few practical details we need you to attend to:</p>
-
+ <p>
+        You have been assigned a date and time for your workshop, which you can find in 
+  <a href="https://docs.google.com/spreadsheet/ccc?key=0AsSmC89I-7PrdDNJRVpOMC1sTmEzSE5HUWhDM3FDdlE&usp=sharing">
+    this google spreadsheet.
+  </a> </p>
     <p>
       It is still possible to edit your talk by using this url: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
     </p>
