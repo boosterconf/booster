@@ -1,6 +1,9 @@
 class RegisterLightningTalkController < ApplicationController
 
   def start
+    unless AppConfig.lightning_registration_open
+      redirect_to '/'
+    end
     if current_user
       redirect_to '/register_lightning_talk/talk'
     end

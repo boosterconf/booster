@@ -3,6 +3,9 @@ require "securerandom"
 class RegisterWorkshopController < ApplicationController
 
   def start
+    unless AppConfig.tutorial_registration_open
+      redirect_to '/'
+    end
     if current_user
       redirect_to register_workshop_talk_url
     end

@@ -2,6 +2,7 @@ development:
   year: 2014
   max_users_limit: 2000
   tutorial_registration_open: true
+  lightning_registration_open: true
   program_released: false
   early_bird_ends: 2014-01-24 23:59:59
 
@@ -9,13 +10,15 @@ test:
   year: 2014
   max_users_limit: 2000
   tutorial_registration_open: true
+  lightning_registration_open: false
   program_released: false
   early_bird_ends: 2014-01-24 23:59:59
 
 staging:
   year: 2014
   max_users_limit: 2000
-  tutorial_registration_open: true
+  tutorial_registration_open: false
+  lightning_registration_open: true
   program_released: false
   early_bird_ends: 2014-01-24 23:59:59
 
@@ -23,5 +26,6 @@ production:
   year: 2014
   max_users_limit: 250
   tutorial_registration_open: false
+  lightning_registration_open: false
   program_released: false
   early_bird_ends: 2014-01-24 23:59:59
