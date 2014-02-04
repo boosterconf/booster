@@ -8,6 +8,7 @@ body {
    font-style: normal;
    line-height: 1.6;
    background-color: #f2f0e6;
+   padding: 0;
 }
 
 h1, h2, h3, h4, h5 {
@@ -42,7 +43,7 @@ h3 {
 }
 
 header {
-    background-color: #1790a0;
+   background-color: #1790A0;
 }
 
 hr {
@@ -50,8 +51,79 @@ hr {
     border-bottom: 1px solid #DBD9D2;
 }
 
-.navbar-inner {
-    border: 1px solid #F6AB6F;
+.navbar {
+  background-color: transparent;
+}
+
+.navbar .navbar-inner {
+  border: none;
+  color: #ffffff;
+  text-shadow: none;
+  background-color: transparent;
+  background-image: none;
+}
+
+.navbar .btn-navbar:hover,
+.navbar .btn-navbar:active,
+.navbar .btn-navbar.active,
+.navbar .btn-navbar.disabled,
+.navbar .btn-navbar[disabled] {
+  color: #1790A0;
+  /*background-color: #ffffff;*/
+}
+
+.navbar .btn-navbar .icon-bar {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background-color: #1790A0;
+}
+
+nav {
+   background-color: rgba(0,0,0,0.09);
+}
+
+.nav a {
+   color: #fff;
+   border-bottom: 2px solid transparent;
+}
+
+.navbar .nav > li > a {
+  text-shadow: none;
+  color: #fff;
+}
+
+.navbar .nav > li > a:hover {
+   border-bottom: 2px solid #F2F0E6;
+   color: #fff;
+   text-decoration: none;
+}
+
+/* ==================== header#top ==================== */
+
+.logo {
+   float: left;
+   margin-bottom: 0;
+   margin-left: -5px;
+   max-width: 300px; 
+}
+
+.whenandwhere {
+   margin-bottom: 0.1em;
+}
+
+.tagline {
+   margin-bottom: 0;
+}
+
+.whenandwhere, 
+.tagline {
+   color: #fff;
+   font-family: "Siri Core Regular", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
+   font-size: 1em;
+   font-weight: normal;
+   line-height: 1.2;
+   text-transform: uppercase;  
 }
 
 .masthead {
@@ -245,6 +317,15 @@ div.error + table {
     text-align: center;
 }
 
+/* ==================== media queries ==================== */
+
+@media screen and (min-width: 500px) {
+
+footer .inner {
+   background: url(/assets/bg-footer-2people.png) no-repeat 18em bottom;
+}
+
+} /* end this media query */
 @media screen and (min-width: 1200px) {
   .speakers-box {
       background: url(/assets/bg-hello.png) no-repeat 1em 1em;
@@ -254,3 +335,75 @@ div.error + table {
     width: 80%
   }
 }
+
+@media screen and (min-width: 700px) {
+
+#meta {
+   float: left;
+   padding-top: 3em;
+   padding-left: 1em;
+   padding-bottom: 1em;
+}
+
+.hello h1 {
+   font-size: 3.5em;
+   line-height: 1.1;
+}
+
+.sponsorlogos li {
+   width:20%;
+   float: left;
+   height: 80px;
+}
+
+} /* end this media query */
+
+
+@media screen and (min-width: 768px) {
+
+footer .inner {
+   background: url(/assets/bg-footer-5people.png) no-repeat 18em bottom;
+}
+
+} /* end this media query */
+
+
+@media screen and (min-width: 980px) {
+
+.hello h1 {
+   font-size: 4.25em;
+   line-height: 1.1;
+}
+
+footer .inner {
+   background: url(/assets/bg-footer-8people.png) no-repeat 18em bottom;
+}
+
+} /* end this media query */
+
+
+@media screen and (min-width: 1200px) {
+
+.hello {
+   background: url(/assets/bg-videosarea.png) no-repeat right bottom;
+}
+
+.inner {
+   width: 70em;                /* 1120px */
+}
+
+#meta {
+   float: right;
+   text-align: right;
+}
+
+
+.sponsorarea {
+   background: #fff url(/assets/bg-sponsorarea.png) no-repeat top center;
+}
+
+.sponsorarea .inner {
+   background-color: #fff;
+}
+
+} /* end this media query */

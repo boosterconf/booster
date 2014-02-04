@@ -13,7 +13,7 @@ Booster2013::Application.routes.draw do
   get 'users/current/attending_dinner' => 'users#attending_dinner', :as => :attending_dinner_url
   get 'users/current/not_attending_dinner' => 'users#not_attending_dinner', :as => :not_attending_dinner_url
 
-  get 'program/' => 'program#index'
+  get 'program/' => 'program#index2'
 
   resources :users do
     collection do
