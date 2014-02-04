@@ -3,9 +3,6 @@ require "securerandom"
 class RegisterWorkshopController < ApplicationController
 
   def start
-    unless AppConfig.lightning_registration_open
-      return redirect_to root_path
-    end
     if current_user
       redirect_to register_workshop_talk_url
     end
