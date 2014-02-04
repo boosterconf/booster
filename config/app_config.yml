@@ -3,7 +3,7 @@ development:
   max_users_limit: 2000
   tutorial_registration_open: true
   lightning_registration_open: true
-  program_released: false
+  program_released: true
   early_bird_ends: 2014-01-24 23:59:59
 
 test:
