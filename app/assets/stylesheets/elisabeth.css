@@ -67,11 +67,6 @@ ul {
    list-style-position: inside;
 }
 
-strong {
-   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
-   font-weight: bold; 
-}
-
 a:link, 
 a:visited {
 	text-decoration: none;
@@ -147,23 +142,6 @@ a.btn {
     white-space: nowrap;
 }
 
-/* ==================== header#top ==================== */
-
-.logo {
-   float: left;
-   margin-bottom: 0;
-   margin-left: -5px;
-   max-width: 300px; 
-}
-
-.whenandwhere {
-   margin-bottom: 0.1em;
-}
-
-.tagline {
-   margin-bottom: 0;
-}
-
 /* ==================== div#content ==================== */
 
 .hello {
@@ -192,10 +170,6 @@ a.btn {
 .contactbuttons {
    list-style-type: none;
    margin: 0  0 2em 0;
-}
-
-#btntwitter {
-   
 }
 
 #btntwitter:hover {

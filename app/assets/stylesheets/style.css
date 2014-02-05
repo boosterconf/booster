@@ -11,6 +11,11 @@ body {
    padding: 0;
 }
 
+input, button, select, textarea {
+  font-family: "Siri Core Regular", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
+  font-style: normal; 
+}
+
 h1, h2, h3, h4, h5 {
    font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
    font-weight: bold; 
@@ -57,26 +62,28 @@ hr {
 
 .navbar .navbar-inner {
   border: none;
-  color: #ffffff;
+  color: #fff;
   text-shadow: none;
   background-color: transparent;
   background-image: none;
 }
 
+.navbar .btn-navbar,
 .navbar .btn-navbar:hover,
 .navbar .btn-navbar:active,
 .navbar .btn-navbar.active,
 .navbar .btn-navbar.disabled,
 .navbar .btn-navbar[disabled] {
-  color: #1790A0;
-  /*background-color: #ffffff;*/
+  background-color: #1790A0;
+  background-image: none; 
 }
 
 .navbar .btn-navbar .icon-bar {
   display: block;
   width: 18px;
   height: 2px;
-  background-color: #1790A0;
+  color: #1790A0;
+  background-color: #fff;
 }
 
 nav {
@@ -94,8 +101,8 @@ nav {
 }
 
 .navbar .nav > li > a:hover {
-   border-bottom: 2px solid #F2F0E6;
    color: #fff;
+   background-color: #1790A0;
    text-decoration: none;
 }
 
@@ -106,6 +113,14 @@ nav {
    margin-bottom: 0;
    margin-left: -5px;
    max-width: 300px; 
+}
+
+#meta {
+   float: right;
+   text-align: right;
+   padding-top: 3em;
+   padding-left: 1em;
+   padding-bottom: 1em;
 }
 
 .whenandwhere {
@@ -319,6 +334,15 @@ div.error + table {
 
 /* ==================== media queries ==================== */
 
+@media screen and (max-width: 693px) {
+  #meta {
+    float: left;
+    text-align: left;
+    padding-left: 1em;
+    padding-top: 1em;
+  }
+}
+
 @media screen and (min-width: 500px) {
 
 footer .inner {
@@ -337,13 +361,6 @@ footer .inner {
 }
 
 @media screen and (min-width: 700px) {
-
-#meta {
-   float: left;
-   padding-top: 3em;
-   padding-left: 1em;
-   padding-bottom: 1em;
-}
 
 .hello h1 {
    font-size: 3.5em;
@@ -391,12 +408,6 @@ footer .inner {
 .inner {
    width: 70em;                /* 1120px */
 }
-
-#meta {
-   float: right;
-   text-align: right;
-}
-
 
 .sponsorarea {
    background: #fff url(/assets/bg-sponsorarea.png) no-repeat top center;
