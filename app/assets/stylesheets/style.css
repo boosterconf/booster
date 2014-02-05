@@ -77,6 +77,9 @@ hr {
   background-color: #1790A0;
   background-image: none; 
 }
+.navbar .btn-navbar:focus {
+  outline: none;
+}
 
 .navbar .btn-navbar .icon-bar {
   display: block;
