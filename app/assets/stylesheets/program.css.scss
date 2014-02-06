@@ -9,6 +9,18 @@ table.program {
   width: 7em;
 }
 
+.program .lightning-talk-slot {
+  width: 15em;
+}
+
+.program .workshop-slot {
+  width: 30%
+}
+
+.program .open-spaces {
+  width: 40%;
+}
+
 .program td, .program th {
   border-left: 1px solid #ddd;
 } 
@@ -28,14 +40,10 @@ table.program {
   bottom: 0.5em;
   right: 1em;
   font-style: italic;
-  font-size: 0.9em;
+  font-size: 0.8em;
 }
 
-.program .period {
-  background-color: #d3d1cb;
-}
-
-.program header.time {
+.program .time {
   border-bottom: none;
   color: #6D6C69;
   background-color: #f2f0e6;
@@ -44,88 +52,24 @@ table.program {
   padding: 5px;
 }
 
-.program header {
-  background-color: #1790a0;
-  color: #fff;
-  padding: 3px 5px;
-}
-
-header .location {
-  text-align: right;
-  background-color: #1790a0;
-  color: #fff;
-  display: inline-block;
-}
-
-.program header.break, .program header.break .location {
-  background-color: #d3d1cb;
-  color: #777;
-}
-
-.program header.break, .program header.openspace  {
-  padding: 6px 5px;
-}
-
-.program .period .slot {
-  line-height: 1.2em;
-}
-
-.program .period .plenary-type {
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-top: 5px;
-}
-
-.program .period .slot .talk {
-  font-size: 14px;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-top: 5px;
-}
-
-.program .period .slot .talk:hover {
+.program .talk:hover {
   cursor: pointer;
   background-color: #e2e0d9;
 }
 
-.program h3 {
-  font-weight: bold;
-  color: #6D6C69;
-}
-
-.program .period .slot .talk {
-  font-weight: normal;
-  display: block;
+.title {
+  font-size: 1.2em;
+  line-height: 1.1em;
 }
 
 .author {
   font-style: italic;
+  font-size: 80%;
+  line-height: 0.8em;
 }
 
-.program .period .slot .talk .description {
-  display: none;
-  padding: 5px 0px;
-  color: black;
-}
-
-.program .period .slot .talk .description p {
-  margin-bottom: 10px;
-}
-
-.program-column h3, .program-column-8 h3 {
-  line-height: 1;
-}
-
-.lightning-talk h3 {
-  line-height: 1;
-}
-
-.lightning-talk-slot .talk {
-  border-bottom: 2px dotted #6D6C69;;
-}
-
-.lightning-talk-slot .talk:last-child {
-  border-bottom: none;
+.program .slot {
+  margin-bottom: 20px;
 }
 
 .slot a, section.period a {
