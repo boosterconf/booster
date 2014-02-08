@@ -13,7 +13,10 @@ Booster2013::Application.routes.draw do
   get 'users/current/attending_dinner' => 'users#attending_dinner', :as => :attending_dinner_url
   get 'users/current/not_attending_dinner' => 'users#not_attending_dinner', :as => :not_attending_dinner_url
 
-  get 'program/' => 'program#index2'
+  #get 'program/' => 'program#index2'
+  get 'program/' => 'program#index3'
+  get 'program/lightningtalks' => 'program#lightningtalks'
+  get 'program/workshops' => 'program#workshops'
 
   resources :users do
     collection do
@@ -112,6 +115,9 @@ Booster2013::Application.routes.draw do
   match 'info/about' => 'info#about'
   match 'info/tickets' => 'info#tickets'
   match 'info/speakers' => 'info#speakers'
+  match 'info/openspaces' => 'info#openspaces'
+  match 'info/fishbowl' => 'info#fishbowl'
+  match 'info/conference_dinner' => 'info#conference_dinner'
 
   match 'admin' => 'admin#index'
 

@@ -11,7 +11,7 @@ body {
    padding: 0;
 }
 
-input, button, select, textarea, .ui-widget {
+input, button, select, textarea, .ui-widget, div {
   font-family: "Siri Core Regular", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
   font-style: normal; 
 }
@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* To select the proper type face, all tags that uses font-weight bold must be listed in this selector list. */
-strong, th, b {
+strong, th, b, .program .title {
    font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
    font-weight: bold; 
 }
@@ -168,10 +168,6 @@ a:hover {
     color: #1790a0;
 }
 
-#content {
-    padding-bottom: 20px;
-}
-
 /* jquery-ui overrides */
 .ui-widget-content {
   background: #f2f0e6;
@@ -233,14 +229,6 @@ a:hover {
 .ui-state-active a:visited {
   color: #51504E;
   text-decoration: none;
-}
-
-@media (min-width: 980px) {
-    #content {
-        padding-left: 30px;
-        border-left: 5px solid #F6AB6F;
-        margin-left: -5px;
-    }
 }
 
 #submittalk a, #registration a {
