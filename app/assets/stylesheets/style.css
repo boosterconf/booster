@@ -56,6 +56,10 @@ hr {
     border-bottom: 1px solid #DBD9D2;
 }
 
+article {
+  max-width: 55em;
+}
+
 .navbar {
   background-color: transparent;
 }
