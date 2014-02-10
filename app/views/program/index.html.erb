@@ -1,160 +1,179 @@
 <div class="program">
 
-  <h2>Wednesday March 13</h2>
+  <h2>Schedule</h2>
 
-  <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
+  <table>
+    <tr>
+      <th colspan="3">
+        Wednesday March 12th
+      </thd>
+    </tr>
+    <tr class="odd">
+      <td class="time">08:00</td>
+      <td class="what">Registration</td>
+      <td class="location">Reception </td>
+    </tr>
+    <tr class="even">
+      <td class="time">09:00</td>
+      <td class="what">Welcome from the organizers</td>
+      <td class="location">Dragefjellet</td>
+    </tr>
+    <tr class="odd">
+      <td class="time">09:15</td>
+      <td class="what">
+        <span class="meta">Opening keynote</span>
+        <a href="/talks/312"><%= @talks[312].speaker_name %>: <%= @talks[312].title %></a>
+      </td>
+      <td class="location">Dragefjellet</td>
+    </tr>
+    <tr class="even">
+      <td class="time">10:15</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr>
+    <tr class="odd">
+      <td class="time">10:30</td>
+      <td class="what"><a href="/program/lightningtalks1">Lightning talks I</a></td>
+      <td class="location"></td>
+    </tr>
+    <tr class="even">
+      <td class="time">11:15</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">11:30</td>
+      <td class="what"><a href="/program/lightningtalks2">Lightning talks II</a></td>
+      <td class="location"></td>
+    </tr>
+    <tr class="even">
+      <td class="time">12:15</td>
+      <td class="what">Lunch</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">13:30</td>
+      <td class="what"><a href="/program/workshops">Workshops</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="even">
+      <td class="time">15:10</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">15:30</td>
+      <td class="what"><a href="/talks/?filter=workshopswednesdaypart2">Workshops continues</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="even">
+      <td class="time">19:00</td>
+      <td class="what"><a href="/info/conference_dinner">Conference dinner</a></td>
+      <td class="location"></td>
+    </tr>
+    <tr>
+      <th colspan="3">
+        Thursday March 13th
+      </th>
+    </tr>
+    <tr class="odd">
+      <td class="time">08:00</td>
+      <td class="what">Registration</td>
+      <td class="location">Reception </td>
+    </tr>
+    <tr class="even">
+      <td class="time">09:00</td>
+      <td class="what"><a href="/talks/?filter=workshopsthursday">Workshops</td>
+      <td class="location"></td>
+    </tr>
+    <tr class="odd">
+      <td class="time">10:30</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr>
+    <tr class="even">
+      <td class="time">10:45</td>
+      <td class="what"><a href="/talks/?filter=workshopsthursday2">Workshops continues</a></td>
+      <td class="location"></td>
+    </tr>
+    <tr class="odd">
+      <td class="time">12:15</td>
+      <td class="what">Lunch</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="even">
+      <td class="time">13:30</td>
+      <td><a href="/info/openspaces">Open spaces I</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">15:10</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="even">
+      <td class="time">15:30</td>
+      <td class="what"><a href="/info/openspaces">Open spaces II</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">18:00</td>
+      <td class="what"><a href="/info/fishbowl">NNUG Fishbowl event</a></td>
+      <td class="location"></td>
+    </tr>
+    <tr>
+      <th colspan="3">
+        Friday March 14th
+      </th>
+    </tr>
+    <tr class="odd">
+      <td class="time">08:00</td>
+      <td class="what">Registration</td>
+      <td class="location">Reception </td>
+    </tr>
+    <tr class="even">
+      <td class="time">09:00</td>
+      <td class="what"><a href="/talks/?filter=workshopsfriday">Workshops</td>
+      <td class="location"></td>
+    </tr>
+    <tr class="odd">
+      <td class="time">10:30</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr>
+    <tr class="even">
+      <td class="time">10:45</td>
+      <td class="what"><a href="/talks/?filter=workshopsfriday2">Workshops continues</a></td>
+      <td class="location"></td>
+    </tr>
+    <tr class="odd">
+      <td class="time">12:15</td>
+      <td class="what">Lunch</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="even">
+      <td class="time">13:30</td>
+      <td class="what"><a href="/talks/?filter=workshopsfriday3">Workshops continues</a></td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">15:00</td>
+      <td class="what">Coffee break</td>
+      <td class="location"></td>
+    </tr> 
+    <tr class="even">
+      <td class="time">15:15</td>
+      <td class="what">
+        <span class="meta">Closing keynote</span>
+        <a href="/talks/314"><%= @talks[314].speaker_name %>: <%= @talks[314].title %></a>
+      </td>
+      <td class="location">Dragefjellet</td>
+    </tr> 
+    <tr class="odd">
+      <td class="time">16:15</td>
+      <td class="what">Thank you for coming, see you next year!</td>
+      <td class="location">Dragefjellet</td>
+    </tr>
+  </table>
 
-  <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-  <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[194] %>
-
-  <div class='program-row row'>
-    <div class="span12 ">
-      <header class='time'>10:30 - 11:15</header>
-      <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
-                 talks: [@talks[125], @talks[161], @talks[183], @talks[176]] %>
-      <%= render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
-                 talks: [@talks[184], @talks[170], @talks[177], @talks[126]] %>
-      <%= render 'lightning_talk_section', location: 'Muséplass', time: '10:30 - 11:15',
-                 talks: [@talks[148], @talks[124], @talks[166], @talks[129]] %>
-    </div>
-  </div>
-
-  <%= render 'break_section', location: 'Downstairs', time: '11:15-11:30', title: 'Coffee break' %>
-
-  <div class='program-row row'>
-    <div class="span12">
-      <header class='time'>11:30 - 12:15</header>
-      <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
-                 talks: [@talks[171], @talks[162], @talks[144], @talks[179]] %>
-      <%= render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
-                 talks: [@talks[104], @talks[123], @talks[168], @talks[186]] %>
-      <%= render 'lightning_talk_section', location: 'Muséplass', time: '11:30 - 12:15',
-                 talks: [@talks[160], @talks[141], @talks[174], @talks[114]] %>
-    </div>
-  </div>
-
-  <%= render 'break_section', location: 'Restaurant', time: '12:15-13:30', title: 'Lunch' %>
-
-  <div class='program-row row'>
-    <div class="workshop-slot span12">
-      <header class='time'>13:30 - 15:00</header>
-      <%= render 'workshop_section', location: 'Galgebakken', time: '13:30-15:00', talk: @talks[138] %>
-      <%= render 'workshop_section', location: 'Tårnplass', time: '13:30-15:00', talk: @talks[156] %>
-      <%= render 'workshop_section', location: 'Hødden', time: '13:30-15:00', talk: @talks[163] %>
-      <%= render 'workshop_section', location: 'Teatergaten', time: '13:30-15:00', talk: @talks[128] %>
-      <%= render 'workshop_section', location: 'Muséplass', time: '13:30-15:00', talk: @talks[169] %>
-      <%= render 'workshop_section', location: 'Strangehagen', time: '13:30-15:00', talk: @talks[111] %>
-      <%= render 'workshop_section', location: 'Dragefjellet', time: '13:30-15:00', talk: @talks[192] %>
-    </div>
-  </div>
-
-  <%= render 'break_section', location: 'Downstairs', time: '15:00-15:30', title: 'Coffee break' %>
-
-  <div class='program-row row'>
-    <div class="workshop-slot span12">
-      <header class='time'>15:30-17:00</header>
-      <%= render 'workshop_section', location: 'Galgebakken', time: '15:30-17:00', talk: @talks[138] %>
-      <%= render 'workshop_section', location: 'Tårnplass', time: '15:30-17:00', talk: @talks[156] %>
-      <%= render 'workshop_section', location: 'Hødden', time: '15:30-17:00', talk: @talks[163] %>
-      <%= render 'workshop_section', location: 'Teatergaten', time: '15:30-17:00', talk: @talks[128] %>
-      <%= render 'workshop_section', location: 'Muséplass', time: '15:30-17:00', talk: @talks[169] %>
-      <%= render 'workshop_section', location: 'Strangehagen', time: '15:30-17:00', talk: @talks[111] %>
-      <%= render 'workshop_section', location: 'Dragefjellet', time: '15:30-17:00', talk: @talks[192] %>
-    </div>
-  </div>
-
-  <%= render 'break_section', location: 'Bølgen & Moi', time: '19:00-00:00', title: 'Conference dinner' %>
-
-  <h2>Thursday March 14</h2>
-
-    <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
-
-  <div class='program-row row'>
-       <div class="workshop-slot span12">
-         <header class='time'>09:00 - 10:30</header>
-         <%= render 'workshop_section_8', location: 'Tårnplass', time: '09:00-10:30', talk: @talks[187] %>
-         <%= render 'workshop_section_8', location: 'Muséplass', time: '09:00-10:30', talk: @talks[101] %>
-         <%= render 'workshop_section_8', location: 'Galgebakken', time: '09:00-10:30', talk: @talks[105] %>
-         <%= render 'workshop_section_8', location: 'Teatergaten', time: '09:00-10:30', talk: @talks[193] %>
-         <%= render 'workshop_section_8', location: 'Dragefjellet', time: '09:00-10:30', talk: @talks[189] %>
-         <%= render 'workshop_section_8', location: 'Strangehagen', time: '09:00-10:30', talk: @talks[133] %>
-         <%= render 'workshop_section_8', location: 'Hødden', time: '09:00-10:30', talk: @talks[159] %>
-       </div>
-     </div>
-
-  <%= render 'break_section', location: 'Downstairs', time: '10:30-10:45', title: 'Coffee break' %>
-
-  <div class='program-row row'>
-         <div class="workshop-slot span12">
-           <header class='time'>10:45 - 12:15</header>
-           <%= render 'workshop_section_8', location: 'Tårnplass', time: '10:45-12:15', talk: @talks[187] %>
-           <%= render 'workshop_section_8', location: 'Muséplass', time: '10:45-12:15', talk: @talks[101] %>
-           <%= render 'workshop_section_8', location: 'Galgebakken', time: '10:45-12:15', talk: @talks[105] %>
-           <%= render 'workshop_section_8', location: 'Teatergaten', time: '10:45-12:15', talk: @talks[193] %>
-           <%= render 'workshop_section_8', location: 'Dragefjellet', time: '10:45-12:15', talk: @talks[189] %>
-           <%= render 'workshop_section_8', location: 'Strangehagen', time: '10:45-12:15', talk: @talks[133] %>
-           <%= render 'workshop_section_8', location: 'Hødden', time: '10:45-12:15', talk: @talks[155] %>
-           <%= render 'workshop_section_8', location: 'Dokken', time: '09:00-10:30', talk: @talks[149] %>
-         </div>
-       </div>
-
-  <%= render 'break_section', location: 'Restaurant', time: '12:15-13:30', title: 'Lunch' %>
-
-  <%= render 'open_space_section', location: 'Dragefjellet', time: '13:30-14:00', title: 'Introduction to open spaces' %>
-  <%= render 'open_space_section', location: 'Dragefjellet and more', time: '14:00-14:45', title: 'Open spaces 1' %>
-  <%= render 'open_space_section', location: 'Dragefjellet and more', time: '14:45-15:30', title: 'Open spaces 2' %>
-
-  <%= render 'open_space_section', location: 'Litteraturhuset - Alver', time: '18:00-01:00', title: 'Geek beer/Community night' %>
-
-  <h2>Friday March 15</h2>
-
-  <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
-
-<div class='program-row row'>
-     <div class="workshop-slot span12">
-       <header class='time'>09:00 - 10:30</header>
-       <%= render 'workshop_section', location: 'Teatergaten', time: '09:00-10:30', talk: @talks[190] %>
-       <%= render 'workshop_section', location: 'Dragefjellet', time: '09:00-10:30', talk: @talks[117] %>
-       <%= render 'workshop_section', location: 'Hødden', time: '09:00-10:30', talk: @talks[151] %>
-       <%= render 'workshop_section', location: 'Galgebakken', time: '09:00-10:30', talk: @talks[146] %>
-       <%= render 'workshop_section', location: 'Muséplass', time: '09:00-10:30', talk: @talks[191] %>
-       <%= render 'workshop_section', location: 'Strangehagen', time: '09:00-10:30', talk: @talks[130] %>
-       <%= render 'workshop_section', location: 'Sydneshaugen', time: '09:00-10:30', talk: @talks[197] %>
-     </div>
-   </div>
-
-  <%= render 'break_section', location: 'Downstairs', time: '10:30-10:45', title: 'Coffee break' %>
-
-<div class='program-row row'>
-       <div class="workshop-slot span12">
-         <header class='time'>10:45 - 12:15</header>
-         <%= render 'workshop_section', location: 'Teatergaten', time: '10:45-12:15', talk: @talks[190] %>
-         <%= render 'workshop_section', location: 'Dragefjellet', time: '10:45-12:15', talk: @talks[106] %>
-         <%= render 'workshop_section', location: 'Hødden', time: '10:45-12:15', talk: @talks[152] %>
-         <%= render 'workshop_section', location: 'Galgebakken', time: '10:45-12:15', talk: @talks[146] %>
-         <%= render 'workshop_section', location: 'Muséplass', time: '10:45-12:15', talk: @talks[191] %>
-         <%= render 'workshop_section', location: 'Strangehagen', time: '10:45-12:15', talk: @talks[130] %>
-         <%= render 'workshop_section', location: 'Sydneshaugen', time: '10:45-12:15', talk: @talks[197] %>
-       </div>
-     </div>
-
-<%= render 'break_section', location: 'Restaurant', time: '12:15-13:30', title: 'Lunch' %>
-
-<div class='program-row row'>
-    <div class="workshop-slot span12">
-      <header class='time'>13:30 - 15:00</header>
-      <%= render 'workshop_section', location: 'Teatergaten', time: '13:30-15:00', talk: @talks[190] %>
-      <%= render 'workshop_section', location: 'Dragefjellet', time: '13:30-15:00', talk: @talks[145] %>
-      <%= render 'workshop_section', location: 'Hødden', time: '13:30-15:00', talk: @talks[157] %>
-      <%= render 'workshop_section', location: 'Galgebakken', time: '13:30-15:00', talk: nil %>
-      <%= render 'workshop_section', location: 'Muséplass', time: '13:30-15:00', talk: nil %>
-      <%= render 'workshop_section', location: 'Strangehagen', time: '13:30-15:00', talk: @talks[130] %>
-      <%= render 'workshop_section', location: 'Sydneshaugen', time: '13:30-15:00', talk: @talks[197] %>
-    </div>
-  </div>
-
-  <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
-
-  <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[196] %>
-  <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
 </div>
