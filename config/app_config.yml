@@ -49,8 +49,8 @@ production:
   opening_keynote: 312
   closing_keynote: 314
   wednesday_ws: '256,222,270,269,203,315,316,317'
-  thursday_ws1: '1,2,3,5'
-  thursday_ws2: '1,2,3,5'
-  friday_ws1: '1,2,3,5'
-  friday_ws2: '1,2,3,5'
-  friday_ws3: '1,2,3,5'
+  thursday_ws1: '318,319,321,261,220,249,200,322'
+  thursday_ws2: '320'
+  friday_ws1: '323,324,233,279,224,207'
+  friday_ws2: ''
+  friday_ws3: '251,274,246,219'
