@@ -6,7 +6,7 @@ development:
   program_released: true
   early_bird_ends: 2014-01-24 23:59:59
   opening_keynote: 7
-  closing_keynote: 7
+  closing_keynote: 2
   wednesday_ws: '1,2,3,5'
   thursday_ws1: '1,2,3,5'
   thursday_ws2: '1,2,3,5'
@@ -28,11 +28,11 @@ staging:
   max_users_limit: 2000
   tutorial_registration_open: false
   lightning_registration_open: true
-  program_released: false
+  program_released: true
   early_bird_ends: 2014-01-24 23:59:59
-  opening_keynote: 7
-  closing_keynote: 7
-  wednesday_ws: '1,2,3,5'
+  opening_keynote: 194
+  closing_keynote: 196
+  wednesday_ws: '193,192,191,190'
   thursday_ws1: '1,2,3,5'
   thursday_ws2: '1,2,3,5'
   friday_ws1: '1,2,3,5'

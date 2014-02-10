@@ -22,7 +22,8 @@
       <td class="time">09:15</td>
       <td class="what">
         <span class="meta">Opening keynote</span>
-        <a href="/talks/312"><%= @talks[AppConfig.opening_keynote].speaker_name %>: <%= @talks[AppConfig.opening_keynote].title %></a>
+        <% talk = @talks[AppConfig.opening_keynote] %>
+        <a href="<%= talk_path(talk.id) %>"><%= talk.speaker_name %>: <%= talk.title %></a>
       </td>
       <td class="location">Dragefjellet</td>
     </tr>
@@ -54,7 +55,7 @@
     <tr class="odd">
       <td class="time">13:30</td>
       <td class="what">
-        <a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops</a>
+        <a href="/program/workshops?filter=<%=AppConfig.wednesday_ws %>">Workshops</a>
       </td>
       <td class="location"></td>
     </tr> 
@@ -65,7 +66,9 @@
     </tr> 
     <tr class="odd">
       <td class="time">15:30</td>
-      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
+      <td class="what">
+        <a href="/program/workshops?filter=<%=AppConfig.wednesday_ws %>">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr> 
     <tr class="even">
@@ -85,7 +88,9 @@
     </tr>
     <tr class="even">
       <td class="time">09:00</td>
-      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops</a></td>
+      <td class="what">
+        <a href="/program/workshops?filter=<%=AppConfig.thursday1_ws %>">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -95,7 +100,9 @@
     </tr>
     <tr class="even">
       <td class="time">10:45</td>
-      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
+      <td class="what">
+        <a href="/program/workshops?filter=<%=AppConfig.thursday2_ws %>">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -135,7 +142,9 @@
     </tr>
     <tr class="even">
       <td class="time">09:00</td>
-      <td><a href="/program/workshops?filter=<%=AppConfig.wednesday_ws %>">Workshops</a></td>
+      <td class="what">
+        <a href="/program/workshops?filter=<%=AppConfig.friday1_ws %>">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -145,7 +154,9 @@
     </tr>
     <tr class="even">
       <td class="time">10:45</td>
-      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
+      <td class="what">
+        <a href="/program/workshops?filter=<%=AppConfig.friday2_ws %>">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -155,7 +166,9 @@
     </tr> 
     <tr class="even">
       <td class="time">13:30</td>
-      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
+      <td class="what">
+        <a href="/program/workshops?filter=<%=AppConfig.friday3_ws %>">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr> 
     <tr class="odd">
@@ -167,7 +180,8 @@
       <td class="time">15:15</td>
       <td class="what">
         <span class="meta">Closing keynote</span>
-        <a href="/talks/314"><%= @talks[AppConfig.closing_keynote].speaker_name %>: <%= @talks[AppConfig.closing_keynote].title %></a>
+        <% talk = @talks[AppConfig.closing_keynote] %>
+        <a href="<%= talk_path(talk.id) %>"><%= talk.speaker_name %>: <%= talk.title %></a>
       </td>
       <td class="location">Dragefjellet</td>
     </tr> 
