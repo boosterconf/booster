@@ -16,6 +16,7 @@ class ProgramController < ApplicationController
   end
 
   def workshops
+    @day = params[:day]
     ids = params[:filter].split(',').map(&:to_i)
     @talks = Talk.find(ids)
   end
