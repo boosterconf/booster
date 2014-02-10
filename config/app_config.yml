@@ -33,11 +33,11 @@ staging:
   opening_keynote: 194
   closing_keynote: 196
   wednesday_ws: '193,192,191,190'
-  thursday_ws1: '1,2,3,5'
-  thursday_ws2: '1,2,3,5'
-  friday_ws1: '1,2,3,5'
-  friday_ws2: '1,2,3,5'
-  friday_ws3: '1,2,3,5'
+  thursday_ws1: '193,192,191,190'
+  thursday_ws2: '193,192,191,190'
+  friday_ws1: '193,192,191,190'
+  friday_ws2: '193,192,191,190'
+  friday_ws3: '193,192,191,190'
 
 production:
   year: 2014
