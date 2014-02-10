@@ -14,4 +14,9 @@ class ProgramController < ApplicationController
       format.html # index.html.erb
     end
   end
+
+  def workshops
+    ids = params[:filter].split(',').map(&:to_i)
+    @talks = Talk.find(ids)
+  end
 end

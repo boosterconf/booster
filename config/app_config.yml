@@ -5,6 +5,15 @@ development:
   lightning_registration_open: true
   program_released: true
   early_bird_ends: 2014-01-24 23:59:59
+  opening_keynote: 7
+  closing_keynote: 7
+  wednesday_ws: '1,2,3,5'
+  thursday_ws1: '1,2,3,5'
+  thursday_ws2: '1,2,3,5'
+  friday_ws1: '1,2,3,5'
+  friday_ws2: '1,2,3,5'
+  friday_ws3: '1,2,3,5'
+
 
 test:
   year: 2014
@@ -21,6 +30,14 @@ staging:
   lightning_registration_open: true
   program_released: false
   early_bird_ends: 2014-01-24 23:59:59
+  opening_keynote: 7
+  closing_keynote: 7
+  wednesday_ws: '1,2,3,5'
+  thursday_ws1: '1,2,3,5'
+  thursday_ws2: '1,2,3,5'
+  friday_ws1: '1,2,3,5'
+  friday_ws2: '1,2,3,5'
+  friday_ws3: '1,2,3,5'
 
 production:
   year: 2014
@@ -29,3 +46,11 @@ production:
   lightning_registration_open: false
   program_released: false
   early_bird_ends: 2014-01-24 23:59:59
+  opening_keynote: 312
+  closing_keynote: 314
+  wednesday_ws: '256,222,270,269,203,315,316,317'
+  thursday_ws1: '1,2,3,5'
+  thursday_ws2: '1,2,3,5'
+  friday_ws1: '1,2,3,5'
+  friday_ws2: '1,2,3,5'
+  friday_ws3: '1,2,3,5'

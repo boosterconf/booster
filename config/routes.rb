@@ -14,7 +14,8 @@ Booster2013::Application.routes.draw do
   get 'users/current/not_attending_dinner' => 'users#not_attending_dinner', :as => :not_attending_dinner_url
 
   get 'program/' => 'program#index'
-  get 'program/lightningtalks' => 'program#lightningtalks'
+  get 'program/lightningtalks1' => 'program#lightningtalks1'
+  get 'program/lightningtalks2' => 'program#lightningtalks2'
   get 'program/workshops' => 'program#workshops'
 
   resources :users do

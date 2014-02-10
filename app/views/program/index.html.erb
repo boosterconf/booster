@@ -22,7 +22,7 @@
       <td class="time">09:15</td>
       <td class="what">
         <span class="meta">Opening keynote</span>
-        <a href="/talks/312"><%= @talks[312].speaker_name %>: <%= @talks[312].title %></a>
+        <a href="/talks/312"><%= @talks[AppConfig.opening_keynote].speaker_name %>: <%= @talks[AppConfig.opening_keynote].title %></a>
       </td>
       <td class="location">Dragefjellet</td>
     </tr>
@@ -53,7 +53,9 @@
     </tr> 
     <tr class="odd">
       <td class="time">13:30</td>
-      <td class="what"><a href="/program/workshops">Workshops</td>
+      <td class="what">
+        <a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops</a>
+      </td>
       <td class="location"></td>
     </tr> 
     <tr class="even">
@@ -63,7 +65,7 @@
     </tr> 
     <tr class="odd">
       <td class="time">15:30</td>
-      <td class="what"><a href="/talks/?filter=workshopswednesdaypart2">Workshops continues</td>
+      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
       <td class="location"></td>
     </tr> 
     <tr class="even">
@@ -83,7 +85,7 @@
     </tr>
     <tr class="even">
       <td class="time">09:00</td>
-      <td class="what"><a href="/talks/?filter=workshopsthursday">Workshops</td>
+      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops</a></td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -93,7 +95,7 @@
     </tr>
     <tr class="even">
       <td class="time">10:45</td>
-      <td class="what"><a href="/talks/?filter=workshopsthursday2">Workshops continues</a></td>
+      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -133,7 +135,7 @@
     </tr>
     <tr class="even">
       <td class="time">09:00</td>
-      <td class="what"><a href="/talks/?filter=workshopsfriday">Workshops</td>
+      <td><a href="/program/workshops?filter=<%=AppConfig.wednesday_ws %>">Workshops</a></td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -143,7 +145,7 @@
     </tr>
     <tr class="even">
       <td class="time">10:45</td>
-      <td class="what"><a href="/talks/?filter=workshopsfriday2">Workshops continues</a></td>
+      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
       <td class="location"></td>
     </tr>
     <tr class="odd">
@@ -153,7 +155,7 @@
     </tr> 
     <tr class="even">
       <td class="time">13:30</td>
-      <td class="what"><a href="/talks/?filter=workshopsfriday3">Workshops continues</a></td>
+      <td><a href="/program/workshops?filter=256,222,270,269,203,315,316,317">Workshops continues</a></td>
       <td class="location"></td>
     </tr> 
     <tr class="odd">
@@ -165,7 +167,7 @@
       <td class="time">15:15</td>
       <td class="what">
         <span class="meta">Closing keynote</span>
-        <a href="/talks/314"><%= @talks[314].speaker_name %>: <%= @talks[314].title %></a>
+        <a href="/talks/314"><%= @talks[AppConfig.closing_keynote].speaker_name %>: <%= @talks[AppConfig.closing_keynote].title %></a>
       </td>
       <td class="location">Dragefjellet</td>
     </tr> 
