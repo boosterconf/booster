@@ -4,7 +4,7 @@
         <p class="lead">You're in time for an early bird special!</p>
         <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>,- (excluding VAT).</p>
       <% else %>
-          <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %>,- (including VAT).</p>
+          <p>Price: NOK <%= PAYMENT_CONFIG[:prices]['full_price'].to_i %>,- (excluding VAT).</p>
       <% end %>
   <% end %>
 </div>
