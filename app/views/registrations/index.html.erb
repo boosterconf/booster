@@ -67,6 +67,7 @@
         <th>Ticket</th>
         <th>Status</th>
         <th>Paid</th>
+        <th>Invoice</th>
         <th>&nbsp;</th>
       </tr>
       <% for registration in @registrations %>
@@ -101,6 +102,11 @@
             </td>
             <td>
               <%= registration.paid_amount %>
+            </td>
+            <td>
+              <% if registration.invoice.present? %>
+                <%= link_to('Invoice', registration.invoice) %>
+              <% end %>
             </td>
             <td>
               <%= link_to_unless(registration.paid?, 'Slett bruker', :action => 'confirm_delete', :id => registration.id) %>
