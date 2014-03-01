@@ -19,6 +19,7 @@ Booster2013::Application.routes.draw do
   get 'program/lightningtalks1' => 'program#lightningtalks1'
   get 'program/lightningtalks2' => 'program#lightningtalks2'
   get 'program/workshops' => 'program#workshops'
+  get 'program/lightning' => 'program#lightning'
 
   resources :users do
     collection do

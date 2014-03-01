@@ -9,7 +9,8 @@ class ProgramController < ApplicationController
     all_talks = Talk.all
     @talks = {}
     all_talks.each { |talk| @talks[talk.id] = talk }
-
+    puts "abc"
+    puts @talks
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -19,5 +20,15 @@ class ProgramController < ApplicationController
     @day = params[:day]
     ids = params[:filter].split(',').map(&:to_i)
     @talks = Talk.find(ids)
+  end
+
+  def lightning
+    all_talks = Talk.all
+    @talks = {}
+    all_talks.each { |talk| @talks[talk.id] = talk }
+    puts @talks
+    respond_to do |format|
+      format.html 
+    end
   end
 end
