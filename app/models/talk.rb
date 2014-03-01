@@ -11,19 +11,14 @@ class Talk < ActiveRecord::Base
   has_and_belongs_to_many :tags
   belongs_to :talk_type
   has_many :reviews, order: 'created_at desc', include: :reviewer
-  #has_many :slots
-  #has_many :periods, :through => :slots
-  #has_many :participants, :include => :user, :dependent => :destroy
-  #has_many :feedback_comments
   has_attached_file :slide, PAPERCLIP_CONFIG
+  has_one :timeslot
 
   validates_attachment_content_type :slide,
                                     :content_type => ['application/pdf', 'application/vnd.ms-powerpoint', 'application/ms-powerpoint', %r{application/vnd.openxmlformats-officedocument}, %r{application/vnd.oasis.opendocument}, 'application/zip', 'application/x-7z-compressed', 'application/x-gtar']
 
   validates_attachment_size :slide, :less_than => 50.megabytes
 
-  #validates_acceptance_of :accepted_guidelines
-  #validates_acceptance_of :accepted_cc_license
   validates :title, presence: true
   validates :description, presence: true
   validates :language, presence: true
