@@ -2,11 +2,22 @@
 
 <h2>Invoice</h2>
 
-<legend>Id:</legend><p><%= @invoice.id %></p>
+<legend>Recipient:</legend><p><%= @invoice.delivery_method == 'email' ? @invoice.email : @invoice.adress %></p>
+<legend>Total (ex. MVA)</legend><p><%= @invoice.total %></p>
 
-<h3>Tickets in invoice (<%= @invoice.registrations.size %>)</h3>
+<legend>Tickets in invoice (<%= @invoice.registrations.size %>)</legend>
 
+<table class="table table-striped">
+  <tr>
+  	<th>Name</th>
+  	<th>Email</th>
+  	<th>Price</th>
+  </tr>
   <% @invoice.registrations.each do |registration| %>
-  	<br/><%= registration.user.name %> (<%= registration.user.email %>)
+  	<tr>
+  		<td><%= registration.user.name %></td>
+  		<td><%= registration.user.email %></td>
+  		<td><%= registration.price %></td>
+  	</tr>
   <% end %>
-
+</table>
