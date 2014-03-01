@@ -3,7 +3,7 @@
 # Prerequisites:
 #
 # - Postgres installed and in path (OS X: use Postgres.app, add /Applications/Postgres.app/Contents/Versions/9.3/bin/ to path)
-# - Database created (initdb dbname)
+# - Database created (createdb dbname)
 #
 # Usage:
 # dbpull.sh appname [dbname]
