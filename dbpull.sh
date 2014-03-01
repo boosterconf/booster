@@ -19,6 +19,6 @@ fi
 
 db=${2-$1}
 
-heroku pgbackups:capture -a $1
+heroku pgbackups:capture -a $1 --expire
 curl -o latest.dump `heroku pgbackups:url -a $1`
 pg_restore --verbose --clean --no-acl --no-owner -h localhost -U `whoami` -d $db latest.dump

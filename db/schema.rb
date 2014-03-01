@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140105181731) do
+ActiveRecord::Schema.define(:version => 20140301205235) do
 
   create_table "bios", :force => true do |t|
     t.integer   "user_id"
@@ -189,7 +189,7 @@ ActiveRecord::Schema.define(:version => 20140105181731) do
     t.string    "logo_file_name"
     t.string    "logo_content_type"
     t.integer   "logo_file_size"
-    t.timestamp "logo_updated_at"
+    t.datetime  "logo_updated_at"
     t.boolean   "publish_logo",                :default => false
     t.string    "website"
   end
@@ -272,6 +272,14 @@ ActiveRecord::Schema.define(:version => 20140105181731) do
     t.decimal   "price"
     t.timestamp "created_at"
     t.timestamp "updated_at"
+  end
+
+  create_table "timeslots", :force => true do |t|
+    t.string   "location"
+    t.string   "day"
+    t.string   "time"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "topics", :force => true do |t|
