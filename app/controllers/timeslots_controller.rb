@@ -44,7 +44,7 @@ class TimeslotsController < ApplicationController
 
     respond_to do |format|
       if @timeslot.save
-        format.html { redirect_to @timeslot, notice: 'Timeslot was successfully created.' }
+        format.html { redirect_to action: 'index', notice: 'Timeslot was successfully created.' }
         format.json { render json: @timeslot, status: :created, location: @timeslot }
       else
         format.html { render action: "new" }

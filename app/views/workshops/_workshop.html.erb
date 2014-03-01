@@ -7,6 +7,11 @@
       <%= image_tag("icon_slides.gif") if admin? && workshop.slide.file? %>
     </h4>
 
+    <% if workshop.timeslot %>
+      <strong>Location</strong>
+      <span><%= workshop.timeslot.location %> </span>
+    <% end %>
+
     <p class="muted">
       Workshop - Suggested by <%= workshop.users.map { |u| u.name }.join(", ") %>,
       <%= time_ago_in_words(workshop.created_at) %> ago.
@@ -22,8 +27,6 @@
       <br/>
       <%= link_to "Read more...", workshop %>
     </p>
-
-    <%# link_to "#{talk.comments_count or 0} comment(s).", talk_path(talk, :anchor => "comments") %>
 
     <% unless workshop.tags.size == 0 %>
         <div class="tags">
