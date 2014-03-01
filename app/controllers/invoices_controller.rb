@@ -12,6 +12,8 @@ class InvoicesController < ApplicationController
   end
 
   def show
+    @invoice.registrations = Registration.where(invoice_id: params[:id])
+
     respond_with @invoice
   end
 

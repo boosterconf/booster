@@ -2,4 +2,11 @@
 
 <h2>Invoice</h2>
 
-<legend>Number:</legend><p><%= @invoice.id %></p>
+<legend>Id:</legend><p><%= @invoice.id %></p>
+
+<h3>Tickets in invoice (<%= @invoice.registrations.size %>)</h3>
+
+  <% @invoice.registrations.each do |registration| %>
+  	<br/><%= registration.user.name %> (<%= registration.user.email %>)
+  <% end %>
+
