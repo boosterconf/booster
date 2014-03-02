@@ -2,7 +2,7 @@ class TimeslotsController < ApplicationController
   # GET /timeslots
   # GET /timeslots.json
   def index
-    @timeslots = Timeslot.all
+    @timeslots = Timeslot.order('day desc', 'time asc').all
 
     respond_to do |format|
       format.html # index.html.erb
