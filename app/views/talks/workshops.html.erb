@@ -1,10 +1,10 @@
-<h1>Workshops</h1>
+<h2>Workshops</h2>
 
 <% @talks.each do |talk| %>
-    <h2>
+    <h3>
       <%= link_to talk.title, talk %>
       <%= image_tag("icon_slides.gif") if admin? && talk.slide.file? %>
-    </h2>
+    </h3>
 
     <p class="muted">
       <%=  talk.talk_type.name %> - Hosted by <%= talk.users.map { |u| u.name }.join(", ") %>.

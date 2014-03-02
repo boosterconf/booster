@@ -1,18 +1,17 @@
 <div class="program">
-	<h2>Workshops</h2>
-	<h3><%= @day %></h3>
+	<h1>Workshops</h1>
+	<h2><%= @day %></h2>
 	<table >
-		<!--tr>
-			<th>Dragefjellet</th>
-		</tr-->
 		<% odd = true %>
 		<% @talks.each do |talk| %>
 			<tr class="<%= odd ? 'odd' : 'even' %>">
 				<td>
 					<a href="<%= talk_path(talk.id) %>">
-						<div class="location"><%#= talk.location %></div>
             			<div class="title"><%= talk.title %></div>
             			<span class='author'><%= talk.speaker_name %></span>
+            			<div class="location">
+            				Location: <%= talk.timeslot ? talk.timeslot.location : 'TBA' %>
+            			</div>
             			<div class="type"><%= talk.talk_type.name %> - <%= talk.talk_type.duration %></div>
         			</a>
 				</td>            

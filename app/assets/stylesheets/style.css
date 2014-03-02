@@ -360,6 +360,11 @@ div.error + table {
   margin-bottom: 1.5em;
 }
 
+.program h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.38em;
+}
+
 .frontpage-speaker {
     margin-left: 34px;
     width: 20%;
