@@ -1,5 +1,7 @@
 <h1>Timeslots</h1>
-
+<% if flash[:notice] %>
+  <div class="alert alert-info"><%= flash[:notice] %></div>
+<% end %>
 <table class="table table-striped">
   <tr>
     <th>Location</th>

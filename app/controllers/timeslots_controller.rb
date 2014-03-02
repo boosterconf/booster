@@ -2,7 +2,7 @@ class TimeslotsController < ApplicationController
   # GET /timeslots
   # GET /timeslots.json
   def index
-    @timeslots = Timeslot.order('day desc', 'time asc').all
+    @timeslots = Timeslot.order('day desc', 'time asc', 'location asc').all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -60,7 +60,7 @@ class TimeslotsController < ApplicationController
 
     respond_to do |format|
       if @timeslot.update_attributes(params[:timeslot])
-        format.html { redirect_to @timeslot, notice: 'Timeslot was successfully updated.' }
+        format.html { redirect_to action: 'index', notice: 'Timeslot was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
