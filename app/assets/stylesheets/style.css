@@ -360,7 +360,7 @@ div.error + table {
   margin-bottom: 1.5em;
 }
 
-.program h3 {
+.program h2, .talks h3 {
   margin-top: 1.5em;
   margin-bottom: 0.38em;
 }
@@ -395,6 +395,13 @@ div.error + table {
 .right-column h2{
     color: #6D6C69;
     text-align: center;
+}
+
+.talks {
+  margin: auto;
+  width: 95%;
+  max-width: 680px;
+  padding-bottom: 2em;
 }
 
 /* ==================== media queries ==================== */
