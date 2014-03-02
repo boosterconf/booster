@@ -1,0 +1,41 @@
+<h1>Workshops</h1>
+
+<% @talks.each do |talk| %>
+    <h2>
+      <%= link_to talk.title, talk %>
+      <%= image_tag("icon_slides.gif") if admin? && talk.slide.file? %>
+    </h2>
+
+    <p class="muted">
+      <%=  talk.talk_type.name %> - Hosted by <%= talk.users.map { |u| u.name }.join(", ") %>.
+    </p>
+    <% if talk.timeslot %>
+	    <p>
+	    	<strong>Location:</strong> <%= talk.timeslot.location %>
+	    	<br /> 
+	    	<strong>Starts at:</strong> <%= talk.timeslot.day %> <%= talk.timeslot.time %> 
+	    </p>
+    <% end %> 
+
+    <p>
+      <% if contains_html talk.description %>
+          <%= sanitize talk.description.strip %>
+      <% else %>
+          <%= simple_format h(talk.description.strip) %>
+      <% end %>
+    </p>
+
+    <div>
+      <strong>Primarily for:</strong>
+      <%
+         roles = talk.appropriate_for_roles ? talk.appropriate_for_roles.split(',') : []
+         role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
+      %>
+      <%= role_names.join(', ') %>
+    </div>
+    <div>
+      <strong>Participant requirements:</strong>
+      <%= h talk.participant_requirements %>
+    </div>
+
+<% end %>

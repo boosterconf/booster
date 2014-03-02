@@ -61,6 +61,7 @@ Booster2013::Application.routes.draw do
     end
   end
 
+  match '/workshops' => 'talks#workshops'
   match '/talks/cheat_sheet' => 'talks#cheat_sheet'
   match '/talks/vote' => 'talks#vote'
   resources :talks do

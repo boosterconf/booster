@@ -160,6 +160,10 @@ class TalksController < ApplicationController
     @talks = Talk.all_accepted_tutorials
   end
 
+  def workshops
+    @talks = Talk.all_accepted_tutorials
+  end
+
   protected
   def login_required
     return unless current_user
