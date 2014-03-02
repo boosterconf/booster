@@ -29,8 +29,8 @@ staging:
   lightning_registration_open: true
   program_released: true
   early_bird_ends: 2014-01-24 23:59:59
-  opening_keynote: 312
-  closing_keynote: 314
+  opening_keynote: 194
+  closing_keynote: 196
   wednesday_ws: '256,222,270,220,203,315,316,317'
   thursday_ws1: '318,249,319,321,261,269,200,322'
   thursday_ws2: '320'
