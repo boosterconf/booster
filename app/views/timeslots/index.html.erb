@@ -5,6 +5,7 @@
     <th>Location</th>
     <th>Day</th>
     <th>Time</th>
+    <th>Talk</th>
     <th></th>
     <th></th>
   </tr>
@@ -14,6 +15,7 @@
     <td><%= timeslot.location %></td>
     <td><%= timeslot.day %></td>
     <td><%= timeslot.time %></td>
+    <td><%= timeslot.talk ? (timeslot.talk.title + ' (' + timeslot.talk.speaker_name + ')') : '' %></td>
     <td><%= link_to 'Edit', edit_timeslot_path(timeslot) %></td>
     <td><%= link_to 'Destroy', timeslot, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
