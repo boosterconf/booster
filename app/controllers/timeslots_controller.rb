@@ -1,4 +1,7 @@
 class TimeslotsController < ApplicationController
+
+  before_filter :require_admin
+  
   # GET /timeslots
   # GET /timeslots.json
   def index

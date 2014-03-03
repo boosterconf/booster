@@ -37,9 +37,17 @@ class Talk < ActiveRecord::Base
     users.any?(&:invited)
   end
 
-def is_presented_by?(speaker)
-  users.include?(speaker)
-end
+  def is_presented_by?(speaker)
+    users.include?(speaker)
+  end
+
+  def starts_now?(day_time)
+    if timeslot
+      day_time.start_with?(timeslot.day) && day_time.end_with?(timeslot.time)
+    else
+      true
+    end
+  end
 
   def speaker_email
     users.map(&:email).join(", ")
@@ -73,7 +81,6 @@ end
   def email_is_sent?
     email_sent
   end
-
 
   def accept!
     self.acceptance_status = "accepted"
