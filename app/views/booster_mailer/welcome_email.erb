@@ -54,10 +54,12 @@ drinks and entertainment by the local theatre group Bergen Impro Laug. We start 
 an ap&eacute;ritif Wednesday at 19:00, and the dinner is served at 20:00. We
 expect this to be the party of the year! The theatre group will come on stage after dinner.</p>
 
-<p>Please <%=  link_to 'log in to your profile', 'http://boosterconf.no/users/current' %> and tell us if
-you're attending the dinner or not, so we know how many people to expect.
-The conference dinner is included in the ticket price, so there's no
-reason not to attend :)</p>
+<p>
+<%= link_to "Click here for YES, I'd love to attend the dinner", @attending_dinner_url %>
+<%= link_to 'Click here for NO, unfortunately I am unable to attend the dinner', @not_attending_dinner_url %><br/>
+</p>
+
+<p>The conference dinner is included in the ticket price, so there's no reason not to attend :)</p>
 
 
 <h3>TWITTER</h3>
