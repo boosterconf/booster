@@ -12,7 +12,7 @@ class Talk < ActiveRecord::Base
   belongs_to :talk_type
   has_many :reviews, order: 'created_at desc', include: :reviewer
   has_attached_file :slide, PAPERCLIP_CONFIG
-  has_one :timeslot
+  has_many :timeslots
 
   validates_attachment_content_type :slide,
                                     :content_type => ['application/pdf', 'application/vnd.ms-powerpoint', 'application/ms-powerpoint', %r{application/vnd.openxmlformats-officedocument}, %r{application/vnd.oasis.opendocument}, 'application/zip', 'application/x-7z-compressed', 'application/x-gtar']
@@ -42,11 +42,16 @@ class Talk < ActiveRecord::Base
   end
 
   def starts_now?(day_time)
-    if timeslot
+    if timeslots.length > 0
       day_time.start_with?(timeslot.day) && day_time.end_with?(timeslot.time)
     else
       true
     end
+  end
+
+  def timeslot 
+    timeslots.sort! {|a,b| a.time <=> b.time} 
+    timeslots[0]
   end
 
   def speaker_email
