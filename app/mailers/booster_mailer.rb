@@ -129,8 +129,6 @@ class BoosterMailer < ActionMailer::Base
 
   def welcome_email(user)
     @user = user
-    @attending_dinner_url = :attending_dinner_url
-    @not_attending_dinner_url = :not_attending_dinner_url
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster 2014 at Scandic Hotel Bergen City, Wednesday March 12.")
   end
 
