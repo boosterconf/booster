@@ -6,6 +6,7 @@
     <th>Address</th>
     <th>Total</th>
     <th>Created</th>
+    <th>Invoiced</th>
     <th>Status</th>
     <th></th>
     <th></th>
@@ -17,6 +18,7 @@
         <td><%= invoice.delivery_method == 'email' ? invoice.email : invoice.adress %></td>
         <td><%= invoice.total %></td>
         <td><%= time_ago_in_words(invoice.created_at) %> ago</td>
+        <td><%= time_ago_in_words(invoice.invoiced_at) + ' ago' if invoice.invoiced_at.present? %></td>
         <td><%= invoice.status %></td>
         <td><%= link_to 'Show', invoice %></td>
         <td>
