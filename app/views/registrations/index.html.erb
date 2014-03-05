@@ -50,7 +50,7 @@
   <% end %>
   <li><%= link_to "Completed", :filters => 'completed' %></li>
   <li><%= link_to "Not completed", :filters => 'not_completed' %></li>
-  <li><%= link_to "Dinner registrations", :filters => 'dinner' %></li>
+  <li><%= link_to "Dinner registrations", :conditions => {:includes_dinner => true} %></li>
 </ul>
 
 <%=  link_to "Send welcome email", :send_welcome_email_url %>
