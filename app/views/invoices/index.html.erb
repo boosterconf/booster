@@ -2,6 +2,7 @@
 
 <table class="table table-striped">
   <tr>
+    <th>Recipient</th>
     <th>Delivery</th>
     <th>Address</th>
     <th>Total</th>
@@ -14,6 +15,7 @@
 
   <% @invoices.each do |invoice| %>
       <tr>
+        <td><%= invoice.recipient_name %></td>
         <td><%= invoice.delivery_method %></td>
         <td><%= invoice.delivery_method == 'email' ? invoice.email : invoice.adress %></td>
         <td><%= invoice.total %></td>
