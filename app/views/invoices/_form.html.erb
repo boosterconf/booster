@@ -1,3 +1,36 @@
+<script>
+  function remove_user(id) {
+      $.post(
+              "<%= invoice_path(@invoice) + "/remove_user" %>",
+              {user_id: id},
+              function(data) {
+                  var tr = $("tr[data-user-id="+data.id+"]");
+                  tr.hide(500, function() {tr.remove()});
+              }
+      );
+  }
+
+  function add_user() {
+      var id = $("#add_user_id").val();
+      $.post(
+              "<%= invoice_path(@invoice) + "/add_user" %>",
+              {user_id: id},
+              function(data) {
+                  $("#users tr:first").after(
+                          '<tr data-user-id="' + data.id + '">' +
+                                  '<td>' + data.name + '</td>' +
+                                  '<td>' + data.email + '</td>' +
+                                  '<td>' + data.ticket_type_old + '</td>' +
+                                  '<td>' + data.price + '</td>' +
+                                  '<td><a href="javascript:remove_user(' + data.id + ')">remove</a></td>' +
+                          '</tr>');
+                  $("#add_user_id").val("");
+              }
+      );
+
+      return false;
+  }
+</script>
 <%= form_for(@invoice) do |f| %>
   <% if @invoice.errors.any? %>
     <div id="error_explanation">
@@ -11,6 +44,35 @@
     </div>
   <% end %>
 
+    <label for="recipient_name">Recipient</label>
+    <%= f.text_field :recipient_name %>
+
+    <label for="address">Snail mail address</label>
+    <%= f.text_area :adress, :rows => 5 %>
+
+
+    <label for="email">Email address</label>
+    <%= f.text_field :email %>
+
+    <legend>Registrations:</legend>
+    <input type="text" id="add_user_id"><button onclick='return add_user()'>Add user by id</button>
+    <table class="table table-striped" id="users">
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Ticket type</th>
+        <th>Price</th>
+      </tr>
+      <% @invoice.registrations.each do |registration| %>
+          <tr data-user-id="<%= registration.user.id %>">
+            <td><%= registration.user.name %></td>
+            <td><%= registration.user.email %></td>
+            <td><%= registration.ticket_type_old %></td>
+            <td><%= registration.price %></td>
+            <td><a href="javascript:remove_user(<%= registration.user.id %>)">remove</a></td>
+          </tr>
+      <% end %>
+    </table>
   <div class="actions">
     <%= f.submit %>
   </div>

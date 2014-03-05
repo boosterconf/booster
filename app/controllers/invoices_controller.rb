@@ -3,7 +3,7 @@ class InvoicesController < ApplicationController
   respond_to :html
 
   before_filter :require_admin
-  before_filter :find_invoice, only: [:update, :edit, :show]
+  before_filter :find_invoice, only: [:update, :edit, :show, :add_user, :remove_user]
 
   def index
     @invoices = Invoice.all
@@ -19,11 +19,13 @@ class InvoicesController < ApplicationController
 
   def new
     @invoice = Invoice.new
-
-    respond_with @invoice
+    if @invoice.save
+      redirect_to edit_invoice_url(@invoice), notice: 'Invoice was successfully created.'
+    end
   end
 
   def edit
+
   end
 
   def create
@@ -37,11 +39,36 @@ class InvoicesController < ApplicationController
   end
 
   def update
-    if @invoice.save
+    if @invoice.update_attributes(params[:invoice])
       redirect_to @invoice, notice: 'Invoice was successfully updated.'
     else
-      render action: :new
+      flash.now[:error] = 'Unable to update invoice'
+      render :action => "edit"
     end
+  end
+
+  def add_user
+    registration = User.find(params[:user_id]).registration
+    registration.invoice_id = @invoice.id
+    registration.save
+
+    render :json => {
+        :id => registration.user.id,
+        :name => registration.user.name,
+        :email => registration.user.email,
+        :ticket_type_old => registration.ticket_type_old,
+        :price => registration.price
+    }
+  end
+
+  def remove_user
+    registration = User.find(params[:user_id]).registration
+    registration.invoice_id = nil
+    registration.save
+
+    render :json => {
+        :id => registration.user.id
+    }
   end
 
   private

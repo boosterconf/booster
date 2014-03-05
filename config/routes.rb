@@ -91,7 +91,12 @@ Booster2013::Application.routes.draw do
 
   resources :password_resets
 
-  resources :invoices
+  resources :invoices do
+    member do
+      post :add_user
+      post :remove_user
+    end
+  end
 
   match '/register_lightning_talk/start' => 'register_lightning_talk#start'
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user'

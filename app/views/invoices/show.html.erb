@@ -2,7 +2,9 @@
 
 <h2>Invoice</h2>
 
-<legend>Recipient:</legend><p><%= @invoice.delivery_method == 'email' ? @invoice.email : @invoice.adress %></p>
+<legend>Recipient:</legend>
+<p><%= @invoice.recipient_name %></p>
+<p><%= @invoice.delivery_method == 'email' ? @invoice.email : @invoice.adress %></p>
 <legend>Total (ex. MVA):</legend><p><%= @invoice.total %></p>
 
 <legend>Registrations (<%= @invoice.registrations.size %>):</legend>
