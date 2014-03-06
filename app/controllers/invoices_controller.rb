@@ -6,7 +6,7 @@ class InvoicesController < ApplicationController
   before_filter :find_invoice, only: [:update, :edit, :show, :add_user, :remove_user]
 
   def index
-    @invoices = Invoice.all
+    @invoices = Invoice.order(:created_at).all()
 
     respond_with @invoices
   end
