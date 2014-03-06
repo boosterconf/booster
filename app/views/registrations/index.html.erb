@@ -63,6 +63,7 @@
 
     <table class="table table-striped">
       <tr>
+        <th>UserID</th>
         <th>User</th>
         <th>Email</th>
         <th>Registered</th>
@@ -79,6 +80,9 @@
               <% next %>
           <% end %>
           <tr>
+            <td>
+              <%= registration.user.id %>
+            </td>
             <td>
               <% if registration.unfinished %>
                   <span style="color: red; font-weight: bold">
