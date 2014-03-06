@@ -3,7 +3,14 @@
   <% unless @user.registration.student? %>
       <div class="checkbox">
         <%= reg.check_box :includes_dinner, :class => "checkbox" %>
-        <%= reg.label :includes_dinner, "I want to attend the conference dinner", :style => "display:inline", :class => "checkbox" %>
+        <%= reg.label :includes_dinner, "I want to attend the conference dinner on day one", :style => "display:inline", :class => "checkbox" %>
+      </div>
+  <% end %>
+
+  <% if @user.registration.may_attend_speakers_dinner? %>
+      <div class="checkbox">
+        <%= reg.check_box :speakers_dinner, :class => "checkbox" %>
+        <%= reg.label :speakers_dinner, "I want to attend the speaker's dinner on day two", :style => "display:inline", :class => "checkbox" %>
       </div>
   <% end %>
 

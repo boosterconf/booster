@@ -52,6 +52,12 @@
           <th>Conference dinner:</th>
           <td><%= @user.registration.includes_dinner ? "Yes" : "No" %></td>
         </tr>
+        <% if @user.registration.may_attend_speakers_dinner? %>
+            <tr>
+              <th>Speaker's dinner:</th>
+              <td><%= @user.registration.speakers_dinner ? "Yes" : "No" %></td>
+            </tr>
+        <% end %>
         <% unless @user.registration.ticket_type_old == 'student' %>
             <tr>
               <th>Price:</th>

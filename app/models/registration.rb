@@ -16,7 +16,8 @@ class Registration < ActiveRecord::Base
 
   attr_accessible :comments, :includes_dinner, :description,
                   :ticket_type_old, :free_ticket, :user_id, :paid_amount, :payment_reference,
-                  :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete
+                  :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete,
+                  :speakers_dinner
 
   default_scope :order => 'registrations.created_at desc'
   belongs_to :user
@@ -44,6 +45,10 @@ class Registration < ActiveRecord::Base
     ticket_type_old == 'speaker' || ticket_type_old == 'lightning'
   end
 
+  def may_attend_speakers_dinner?
+    speaker? || reviewer? || organizer?
+  end
+
   def free_ticket
     ticket_price == 0
   end
@@ -58,6 +63,14 @@ class Registration < ActiveRecord::Base
 
   def special_ticket?
     %w(sponsor volunteer organizer reviewer).include? ticket_type_old
+  end
+
+  def reviewer?
+      ticket_type_old == 'reviewer'
+  end
+
+  def organizer?
+    ticket_type_old == 'organizer'
   end
 
   def normal_ticket?
