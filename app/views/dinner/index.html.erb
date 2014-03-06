@@ -5,8 +5,8 @@
   <tr>
     <th>User</th>
     <th>Ticket type</th>
-    <th>Conference dinner</th>
-    <th>Speaker's dinner</th>
+    <th>Conference dinner (<span id="conference_dinner_sum"></span>)</th>
+    <th>Speaker's dinner (<span id="speakers_dinner_sum"></span>)</th>
   </tr>
 
   <% @registrations.each do |registration| %>
@@ -33,6 +33,26 @@
 </table>
 
 <script>
+    function update_sums() {
+        var speakers_dinner = 0;
+        $(".speakers_dinner").each(function() {
+            if($(this).is(":checked")) {
+                speakers_dinner++;
+            }
+        });
+        $("#speakers_dinner_sum").html(speakers_dinner);
+
+        var conference_dinner = 0;
+        $(".conference_dinner").each(function() {
+            if($(this).is(":checked")) {
+                conference_dinner++;
+            }
+        });
+        $("#conference_dinner_sum").html(conference_dinner);
+    }
+
+    update_sums();
+
     $(".speakers_dinner").change(function() {
         var checkbox = $(this);
         var value = checkbox.is(":checked");
@@ -44,7 +64,7 @@
                 user_id: user_id,
                 attend: value
             },
-            success: function() { },
+            success: function() { update_sums() },
             error: function() {
                 checkbox.attr(":checked", !value);
             }
@@ -62,11 +82,10 @@
                 user_id: user_id,
                 attend: value
             },
-            success: function() { },
+            success: function() { update_sums() },
             error: function() {
                 checkbox.attr(":checked", !value);
             }
         });
     });
-
 </script>
