@@ -1,0 +1,72 @@
+
+<h2>Dinner reservations</h2>
+
+<table class="table table-striped">
+  <tr>
+    <th>User</th>
+    <th>Ticket type</th>
+    <th>Conference dinner</th>
+    <th>Speaker's dinner</th>
+  </tr>
+
+  <% @registrations.each do |registration| %>
+      <%= form_for(registration) do |f| %>
+
+          <tr>
+            <td><%= link_to registration.user.name, user_path(registration.user) %></td>
+            <td><%= registration.ticket_type_old %></td>
+            <td>
+              <div class="checkbox">
+                <%= f.check_box :includes_dinner, data: { "user-id" => registration.user.id }, :class => "conference_dinner checkbox" %>
+              </div>
+
+            <td>
+              <% if registration.may_attend_speakers_dinner? %>
+                  <div class="checkbox">
+                    <%= f.check_box :speakers_dinner, data: { "user-id" => registration.user.id }, :class => "speakers_dinner checkbox" %>
+                  </div>
+              <% end %>
+            </td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>
+
+<script>
+    $(".speakers_dinner").change(function() {
+        var checkbox = $(this);
+        var value = checkbox.is(":checked");
+        var user_id = checkbox.attr("data-user-id");
+
+        $.ajax("/dinner/attend_speakers_dinner", {
+            type: "POST",
+            data: {
+                user_id: user_id,
+                attend: value
+            },
+            success: function() { },
+            error: function() {
+                checkbox.attr(":checked", !value);
+            }
+        });
+    });
+
+    $(".conference_dinner").change(function() {
+        var checkbox = $(this);
+        var value = checkbox.is(":checked");
+        var user_id = checkbox.attr("data-user-id");
+
+        $.ajax("/dinner/attend_conference_dinner", {
+            type: "POST",
+            data: {
+                user_id: user_id,
+                attend: value
+            },
+            success: function() { },
+            error: function() {
+                checkbox.attr(":checked", !value);
+            }
+        });
+    });
+
+</script>

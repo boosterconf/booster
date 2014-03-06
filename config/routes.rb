@@ -98,6 +98,13 @@ Booster2013::Application.routes.draw do
     end
   end
 
+  resources :dinner do
+    collection do
+      post :attend_speakers_dinner
+      post :attend_conference_dinner
+    end
+  end
+
   match '/register_lightning_talk/start' => 'register_lightning_talk#start'
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user'
   match '/register_lightning_talk/talk' => 'register_lightning_talk#talk'
