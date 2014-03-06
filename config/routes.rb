@@ -95,6 +95,8 @@ Booster2013::Application.routes.draw do
     member do
       post :add_user
       post :remove_user
+      post :invoiced
+      post :paid
     end
   end
 

@@ -11,6 +11,7 @@
     <th>Status</th>
     <th></th>
     <th></th>
+    <th></th>
   </tr>
 
   <% @invoices.each do |invoice| %>
@@ -24,8 +25,16 @@
         <td><%= invoice.status %></td>
         <td><%= link_to 'Show', invoice %></td>
         <td>
-          <% if invoice.is_possible_to_change? %>
+          <% if invoice.possible_to_change? %>
               <%= link_to 'Edit', edit_invoice_path(invoice) %>
+          <% end %>
+        </td>
+        <td>
+          <% if invoice.possible_to_change? %>
+              <%= link_to 'Mark as invoiced', invoiced_invoice_path(invoice), confirm: 'Mark as invoiced?', method: :post %>
+          <% end %>
+          <% if invoice.unpaid? %>
+              <%= link_to 'Mark as paid', paid_invoice_path(invoice), confirm: 'Mark as paid?', method: :post %>
           <% end %>
         </td>
       </tr>

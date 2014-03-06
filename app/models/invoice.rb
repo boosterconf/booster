@@ -17,15 +17,23 @@ class Invoice < ActiveRecord::Base
   end
 
   def delivery_method
-    self.email.present? ? "email" : "snail_mail"
+    self.email.present? ? 'email' : 'snail_mail'
   end
 
   def delivery_method=(method)
     # Hack
   end
 
-  def is_possible_to_change?
-    status == "not_invoiced"
+  def possible_to_change?
+    status == 'not_invoiced'
+  end
+
+  def unpaid?
+    status == 'invoiced'
+  end
+
+  def registrations
+    Registration.where(invoice_id: id)
   end
 
 end
