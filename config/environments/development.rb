@@ -17,6 +17,8 @@ Booster2013::Application.configure do
       :host => '127.0.0.1',
       :port => 3000
   }
+  
+  config.action_mailer.delivery_method = :file
 
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false

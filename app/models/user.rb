@@ -29,6 +29,11 @@ class User < ActiveRecord::Base
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
   end
 
+  def attending_speakers_dinner(will_attend)
+    self.registration.speakers_dinner = will_attend
+    save!
+  end
+
   def attending_dinner?
     self.registration ? self.registration.includes_dinner? : false
   end
@@ -218,6 +223,9 @@ class User < ActiveRecord::Base
     self.find_all_by_invited(true)
   end
 
+  def self.all_accepted_speakers 
+    self.all.select { |u| u.has_accepted_tutorial? || u.has_accepted_lightning_talk? }
+  end
 
   def self.all_tutorial_speakers
     self.all.select { |u| u.has_accepted_tutorial? }

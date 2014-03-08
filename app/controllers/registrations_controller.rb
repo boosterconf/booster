@@ -34,6 +34,14 @@ class RegistrationsController < ApplicationController
     redirect_to registrations_url
   end
 
+  def send_speakers_dinner_email 
+    User.all_accepted_speakers.each do |user|
+      print "Mailing: #{user.email}...\n"
+      BoosterMailer.speakers_dinner_email(user).deliver
+    end
+    redirect_to registrations_url
+  end
+
   def edit
     @registration = Registration.find(params[:id])
     @registration.payment_notification ||= @registration.build_payment_notification

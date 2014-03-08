@@ -3,31 +3,37 @@
 
 <p>Dear <%= @user.name %>,</p>
 <p>
-The conference is soon approaching, and we are looking forward to seeing you all in Bergen. Here is some practical information that you might need.
-</p>
-
-<p>
-First off; the social events. We encourage you to participate if you have the possibility. On the wednesday there
-will be a conference dinner at the restaurant Bølgen & Moi, http://www.bolgenogmoi.no/Restaurant/Bergen. After dinner
-there will be a live performance by the local band, Ocean of Lotion, http://www.oceanoflotion.com/. On thursday evening
-there will be a Speaker's Dinner, at the newly opened Litteraturhuset, http://www.litthusbergen.no/servering/. After
-the Speaker's Dinner we hope you would like to join the local .Net User Group's fishbowl event, one floor up from the
-dinner.
+The conference is soon approaching, and we are looking forward to seeing you all in Bergen. You should already have received information about the conference dinner on the Wednesday. There will be food and drinks and some impro theater. We hope you will take part. In addition to that, on thursday evening there will be a Speaker's Dinner at Nøsteboden, http://www.nosteboden.no/. We hope to have a community fishbowl session in the pub here after dinner. 
 <% if @user.has_accepted_tutorial? %>
-After the conference is over, on Friday evening, we will throw an after party at one of the organizers. This is a good
-  opportunity to unwind and  hang out with the other speakers and the committee.
-      <% end %>
+Lastly, after the conference is over, on Friday evening, we will throw an after party at one of the organizers. This is a good
+  opportunity to unwind and hang out with the other speakers and the committee.
+<% end %>
 </p>
 
 <p>
-We need to know which of these events you would like to attend, so please reply to this email and let us know. Also,
-  if you have any food allergies or other special needs foodwise, please let us know about that, too.
-  <p>
+We need to know which of these events you would like to attend, and if you have any allergies or special needs foodwise. You can use the links below, or log into boosterconf.no to update your information. You can also reply to this email with your information, and we will take care of it. 
+<p>
 
-    <p>
-Secondly; locations: <br/>
+<p>
+	<a href="http://boosterconf.no/users/current/attending_dinner">
+		Click here for YES, I'd love to attend the conference dinner on the Wednesday</a>
+</p>
+<p>
+	<a href="http://boosterconf.no/users/current/not_attending_dinner">
+		Click here for NO, unfortunately I am unable to attend the conference dinner on the Wednesday</a>
+</p>
+<p>
+	<a href="http://boosterconf.no/users/current/attending_speakers_dinner">
+		Click here if you are coming to speakers dinner on the Thursday</a>
+</p>
+<p>
+	<a href="http://boosterconf.no/users/current/not_attending_speakers_dinner">
+		Click here if you are NOT coming to speakers dinner on the Thursday</a>
+</p>
+
+<p>
 All events are located in the centre of Bergen, within walking distance of the hotel. <%=  link_to 'Here is a map',
- 'http://bit.ly/booster-2013-map' %> where all the important locations are marked. </p>
+ 'http://bit.ly/booster-2014-map' %> where all the important locations are marked. </p>
 
 <p>
 If you have any other questions, or if there is anything you need to tell us, please let us know, and we will get

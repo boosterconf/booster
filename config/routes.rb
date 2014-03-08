@@ -15,6 +15,10 @@ Booster2013::Application.routes.draw do
   get 'users/current/attending_dinner' => 'users#attending_dinner', :as => :attending_dinner_url
   get 'users/current/not_attending_dinner' => 'users#not_attending_dinner', :as => :not_attending_dinner_url
 
+  get 'users/current/attending_speakers_dinner' => 'users#attending_speakers_dinner', :as => :attending_speakers_dinner_url
+  get 'users/current/not_attending_speakers_dinner' => 'users#not_attending_speakers_dinner', :as => :not_attending_speakers_dinner_url
+
+
   get 'program/' => 'program#index'
   get 'program/lightningtalks1' => 'program#lightningtalks1'
   get 'program/lightningtalks2' => 'program#lightningtalks2'
@@ -47,8 +51,7 @@ Booster2013::Application.routes.draw do
   match 'logout' => 'user_sessions#destroy', :as => :logout
 
   match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url
-    match 'registrations/send_test_welcome_email' => 'registrations#send_test_welcome_email', :as => :send_test_welcome_email_url
-
+  match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url
 
   resources :registrations do
     member do

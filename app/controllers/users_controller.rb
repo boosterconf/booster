@@ -189,6 +189,16 @@ class UsersController < ApplicationController
     updated_dinner_attendance("You are registered as not attending the dinner")
   end
 
+  def attending_speakers_dinner
+    current_user.attending_speakers_dinner(true)
+    updated_dinner_attendance("You are registered as attending the dinner.")
+  end
+
+  def not_attending_speakers_dinner
+    current_user.attending_speakers_dinner(false)
+    updated_dinner_attendance("You are registered as not attending the dinner")
+  end
+
   def delete_bio
     @user = User.find(params[:id])
     if @user.bio.delete
