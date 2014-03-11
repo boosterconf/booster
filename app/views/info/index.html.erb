@@ -1,11 +1,14 @@
 <div class="row">
   <div class="span11">
     <div class="hello">
-      <h2>Booster 2014, 12-14 March</h2>
-      <h1>Get your tickets now!</h1>
+      <h1 class="high">Welcome to Booster 2014!</h1>
       <div>
-        <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
-        <%= link_to 'Register group ticket', new_group_registration_url, :class => "btn btn-primary btn-large" %>
+        <a href="https://s3-eu-west-1.amazonaws.com/booster2013-production/program03-skjerm.pdf" 
+            class="btn btn-primary btn-large wide">
+          Download program
+        </a>
+        <%= link_to 'Schedule', program_url, :class => "btn btn-primary btn-large wide" %>
+        <%= link_to 'Speakers', info_speakers_url, :class => "btn btn-primary btn-large wide" %>
       </div>
     </div>
   </div>

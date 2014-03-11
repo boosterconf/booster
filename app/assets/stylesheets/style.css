@@ -35,6 +35,15 @@ h1 {
    margin-bottom: 0.38em;
 }
 
+.high {
+  padding-top: 30px; 
+}
+
+.wide{
+  margin: 0 20px 20px 20px;
+  padding: 0 40px;
+}
+
 h2 {
    color: #6D6C69;            /* contrast ratio 4.6 = AAA for large text */
    font-size: 2em;
