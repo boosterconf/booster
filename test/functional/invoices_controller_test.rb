@@ -15,7 +15,7 @@ class InvoicesControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_response :success
+		assert_redirected_to edit_invoice_path(assigns(:invoice))
   end
 
   test "should create invoice" do
