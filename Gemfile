@@ -38,6 +38,7 @@ group :test do
   gem "minitest-reporters", '>= 0.5.0'
   gem 'shoulda'
   gem "factory_girl_rails", "~> 3.0"
+	gem 'ruby-prof'
 end
 
 # Gems used only for assets and not required
