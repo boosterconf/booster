@@ -1,37 +1,37 @@
 development:
-  year: 2014
+  year: 2015
   max_users_limit: 2000
   tutorial_registration_open: true
   lightning_registration_open: true
   program_released: true
-  early_bird_ends: 2014-01-24 23:59:59
+  early_bird_ends: 2015-01-24 23:59:59
   opening_keynote: 312
   closing_keynote: 314
 
 test:
-  year: 2014
+  year: 2015
   max_users_limit: 2000
   tutorial_registration_open: true
   lightning_registration_open: false
   program_released: false
-  early_bird_ends: 2014-01-24 23:59:59
+  early_bird_ends: 2015-01-24 23:59:59
 
 staging:
-  year: 2014
+  year: 2015
   max_users_limit: 2000
   tutorial_registration_open: false
   lightning_registration_open: true
   program_released: true
-  early_bird_ends: 2014-01-24 23:59:59
+  early_bird_ends: 2015-01-24 23:59:59
   opening_keynote: 194
   closing_keynote: 196
 
 production:
-  year: 2014
+  year: 2015
   max_users_limit: 224
   tutorial_registration_open: false
   lightning_registration_open: false
   program_released: true
-  early_bird_ends: 2014-01-24 23:59:59
+  early_bird_ends: 2015-01-24 23:59:59
   opening_keynote: 312
   closing_keynote: 314

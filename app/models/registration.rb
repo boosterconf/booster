@@ -1,17 +1,17 @@
 class Registration < ActiveRecord::Base
   # TODO: Should perhaps be in some i18n-file somewhere and not hard-coded
   TICKET_TEXTS = {
-      'early_bird' => 'Early bird ticket for Booster 2014',
-      'full_price' => 'Regular ticket for Booster 2014',
-      'lightning' => 'Lightning talk ticket for Booster 2014',
-      'sponsor' => 'Sponsor ticket Booster 2014',
-      'volunteer' => 'Volunteer at Booster 2014',
-      'student' => 'Student for Booster 2014',
-      'organizer' => 'Organizer for Booster 2014',
-      'speaker' => 'Speaker at Booster 2014',
-      'academic' => 'Academic ticket Booster 2014',
+      'early_bird' => 'Early bird ticket for Booster',
+      'full_price' => 'Regular ticket for Booster',
+      'lightning' => 'Lightning talk ticket for Booster',
+      'sponsor' => 'Sponsor ticket Booster',
+      'volunteer' => 'Volunteer at Booster',
+      'student' => 'Student for Booster',
+      'organizer' => 'Organizer for Booster',
+      'speaker' => 'Speaker at Booster',
+      'academic' => 'Academic ticket Booster',
       'new_speaker' => 'Speaker without abstracts',
-      'reviewer' => 'Reviewer ticket for Booster 2014'
+      'reviewer' => 'Reviewer ticket for Booster'
   }
 
   attr_accessible :comments, :includes_dinner, :description,
@@ -87,7 +87,7 @@ class Registration < ActiveRecord::Base
   end
 
   def self.find_by_invoice(invoice_id)
-    if invoice_id =~ /^2014t?-(\d+)$/
+    if invoice_id =~ /^2015t?-(\d+)$/
       Registration.find($1.to_i)
     else
       raise 'Invalid invoice_id #{invoice_id}'
@@ -95,8 +95,8 @@ class Registration < ActiveRecord::Base
   end
 
   def invoice_id
-    return '2014-#{id}' if Rails.env == 'production'
-    '2014t-#{id}'
+    return '2015-#{id}' if Rails.env == 'production'
+    '2015t-#{id}'
   end
 
   def payment_url(payment_notifications_url, return_url)
