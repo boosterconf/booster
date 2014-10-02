@@ -3,6 +3,7 @@ require 'test_helper'
 class TimeslotsControllerTest < ActionController::TestCase
   setup do
     @timeslot = timeslots(:one)
+		login_as :god
   end
 
   test "should get index" do
@@ -21,7 +22,7 @@ class TimeslotsControllerTest < ActionController::TestCase
       post :create, timeslot: { day: @timeslot.day, location: @timeslot.location, time: @timeslot.time }
     end
 
-    assert_redirected_to timeslot_path(assigns(:timeslot))
+    assert_redirected_to timeslots_path
   end
 
   test "should show timeslot" do
@@ -36,7 +37,7 @@ class TimeslotsControllerTest < ActionController::TestCase
 
   test "should update timeslot" do
     put :update, id: @timeslot, timeslot: { day: @timeslot.day, location: @timeslot.location, time: @timeslot.time }
-    assert_redirected_to timeslot_path(assigns(:timeslot))
+    assert_redirected_to timeslots_path
   end
 
   test "should destroy timeslot" do
