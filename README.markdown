@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/rootsconf/booster2014.png)](https://travis-ci.org/rootsconf/booster2014)
+[![Build Status](https://travis-ci.org/boosterconf/booster.png)](https://travis-ci.org/boosterconf/booster)
 
 # Booster Conference site
 
