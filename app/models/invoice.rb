@@ -8,10 +8,6 @@ class Invoice < ActiveRecord::Base
   validates :email, :format => { :with => Authlogic::Regex.email }, :allow_blank => true
 
 
-  after_initialize do |invoice|
-    invoice.status ||= 'Registered'
-  end
-
   def total
     registrations.map(&:price).inject(0) { |sum, price| sum + price }
   end
