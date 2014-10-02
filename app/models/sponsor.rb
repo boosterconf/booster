@@ -1,7 +1,7 @@
 class Sponsor < ActiveRecord::Base
 
   belongs_to :user
-  has_many :events
+  has_many :events, :dependent => :destroy
 
   attr_accessible :comment, :contact_person_first_name, :contact_person_last_name, :contact_person_phone_number,
                   :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id,
