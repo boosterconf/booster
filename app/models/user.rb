@@ -251,6 +251,10 @@ class User < ActiveRecord::Base
     speakers
   end
 
+  def self.featured_organizers
+    User.where(:feature_as_organizer => true).joins(:bio).includes(:bio)
+  end
+
   def self.all_normal_participants
     User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(early_bird full_price sponsor organizer reviewer)], :include => [:registration])
   end

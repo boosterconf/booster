@@ -20,7 +20,7 @@ class InfoController < ApplicationController
   end
 
   def organizers
-    @organizers = User.find_all_by_feature_as_organizer(true)
+    @organizers = User.featured_organizers.shuffle
   end
 
 end
