@@ -21,9 +21,14 @@
         <div class="info">
           <div class="name"><%= organizer.name %></div>
           <div class="twitter_handle">
-            <a href="http://twitter.com/<%= organizer.bio.twitter_handle %>" title="Twitter" target="_blank">
-              &#64;<%= organizer.bio.twitter_handle %>
-            </a></div>
+            <% if not organizer.bio.twitter_handle.blank? %>
+                <a href="http://twitter.com/<%= organizer.bio.twitter_handle %>" title="Twitter" target="_blank">
+                  &#64;<%= organizer.bio.twitter_handle %>
+                </a>
+            <% else %>
+                <br/>
+            <% end %>
+          </div>
           <div class="company"><%= organizer.company %></div>
         </div>
       </div>
