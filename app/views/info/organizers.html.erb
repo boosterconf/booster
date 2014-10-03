@@ -11,172 +11,24 @@
     <a href="http://rootsconf.no">Roots Conference</a>, some of us since it started, back in 2000.
   </p>
 
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Nina Kaurel" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/26/nina_normal.jpg?1335818248"/>
-    </div>
-    <div class="info">
-      <div class="name">Nina Kaurel</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/nkaurel" title="Twitter" target="_blank">
-          &#64;nkaurel
-        </a></div>
-      <div class="company">Nikau AS</div>
-    </div>
-  </div>
 
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Livar Bergheim" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/9/8_normal.jpg?1328385404"/>
-    </div>
-    <div class=" info">
-      <div class="name">Livar Bergheim</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/livarb" title="Twitter" target="_blank">
-          &#64;livarb
-        </a></div>
-      <div class="company">University of Bergen</div>
-    </div>
-  </div>
+  <% for organizer in @organizers do %>
 
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Bjørn Christian Sebak" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/5/meg_normal.jpeg?1324202160"/>
-    </div>
-    <div class="info">
-      <div class="name">Bjørn Christian Sebak</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/brsseb" title="Twitter" target="_blank">
-          &#64;brsseb
-        </a></div>
-      <div class="company">DNB</div>
-    </div>
-  </div>
+      <div class="person">
+        <div class="scale-down">
+          <%= image_tag organizer.bio.picture.url, alt: organizer.name, class: 'img-polaroid' %>
+        </div>
+        <div class="info">
+          <div class="name"><%= organizer.name %></div>
+          <div class="twitter_handle">
+            <a href="http://twitter.com/<%= organizer.bio.twitter_handle %>" title="Twitter" target="_blank">
+              &#64;<%= organizer.bio.twitter_handle %>
+            </a></div>
+          <div class="company"><%= organizer.company %></div>
+        </div>
+      </div>
 
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Kjersti Bjørnestad Berg" src="http://booster2013-production.s3.amazonaws.com/pictures/27/DSC_0014_normal.JPG?1350150874"/>
-    </div>
-    <div class="info">
-      <div class="name">Kjersti Bjørnestad Berg</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/kjerstibb" title="Twitter" target="_blank">
-          &#64;kjerstibb
-        </a></div>
-      <div class="company">PSWinCom AS</div>
-    </div>
-  </div>
+  <% end %>
 
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Øyvind Moland Fanebust" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/18/meg_normal.JPG?1329403874"/>
-    </div>
-    <div class="info">
-      <div class="name">Øyvind Moland Fanebust</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/oyvindfanebust" title="Twitter" target="_blank">
-          &#64;oyvindfanebust
-        </a></div>
-      <div class="company">Frende Forsikring</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="André Heie Vik" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/2/photo_normal.jpeg?1324028013"/>
-    </div>
-    <div class="info">
-      <div class="name">André Heie Vik</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/andrev" title="Twitter" target="_blank">
-          &#64;andrev
-        </a></div>
-      <div class="company">Miles</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Ove Gram Nipen" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/4/ove_normal.jpg?1324023258"/>
-    </div>
-    <div class="info">
-      <div class="name">Ove Gram Nipen</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/ovegram" title="Twitter" target="_blank">
-          &#64;ovegram
-        </a></div>
-      <div class="company">Delfi Data</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Erle Krøger" src="images/placeholder.jpg"/>
-    </div>
-    <div class="info">
-      <div class="name">Erle Krøger</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/erlekroger" title="Twitter" target="_blank">
-          &#64;erlekroger
-        </a></div>
-      <div class="company">University of Bergen</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Erlend Birkenes" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/8/new_profile_color_normal.jpg?1327657639"/>
-    </div>
-    <div class="info">
-      <div class="name">Erlend Birkenes</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/ebirkenes" title="Twitter" target="_blank">
-          &#64;ebirkenes
-        </a></div>
-      <div class="company">Dataloy Systems</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div id="scale-down">
-      <img class="img-polaroid" alt="Karianne Berg" src="http://s3.amazonaws.com/rootsconf2011-files-production/pictures/1/Milestegning_normal.JPG?1323960927"/>
-    </div>
-    <div class="info">
-      <div class="name">Karianne Berg</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/karianneberg" title="Twitter" target="_blank">
-          &#64;karianneberg
-        </a></div>
-      <div class="company">Vimond</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Kristian A. Kastet" src="http://booster2013-production.s3.amazonaws.com/pictures/7/kristian_normal.png?1351190217"/>
-    </div>
-    <div class="info">
-      <div class="name">Kristian A. Kastet</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/" title="Twitter" target="_blank">
-          &#64;kakastet
-        </a></div>
-      <div class="company">Frende Forsikring</div>
-    </div>
-  </div>
-
-  <div class="person">
-    <div class="scale-down">
-      <img class="img-polaroid" alt="Nina Andersen" src="http://booster2013-production.s3.amazonaws.com/pictures/38/profile_2_normal.png?1359491557"/>
-    </div>
-    <div class="info">
-      <div class="name">Nina Andersen</div>
-      <div class="twitter_handle">
-        <a href="http://twitter.com/venuOo" title="Twitter" target="_blank">
-          &#64;venuOo
-        </a></div>
-      <div class="company">Vimond</div>
-    </div>
-  </div>
 
 </article>

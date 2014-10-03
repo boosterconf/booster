@@ -19,4 +19,8 @@ class InfoController < ApplicationController
     @feedback = Feedback.new
   end
 
+  def organizers
+    @organizers = User.find_all_by_feature_as_organizer(true)
+  end
+
 end
