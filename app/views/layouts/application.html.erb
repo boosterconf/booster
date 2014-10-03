@@ -42,7 +42,9 @@ conference is for all IT professionals seeking to learn from each other and from
                   <li><%= link_to 'Workshops', '/workshops' %></li>
                   <li><%= link_to 'Lightning talks', '/lightning_talks' %></li>
                 <% end %>
-                <li><%= link_to 'Speakers', info_speakers_url %></li>
+                <% if AppConfig.speakers_released %>
+                  <li><%= link_to 'Speakers', info_speakers_url %></li>
+                <% end %>
                 <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
                   <li><%= link_to 'Call for papers', info_cfp_url %></li>
                   <li><%= link_to 'Proposals', talks_url %></li>
