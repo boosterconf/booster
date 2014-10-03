@@ -88,7 +88,7 @@ conference is for all IT professionals seeking to learn from each other and from
 
 <div class="sponsorarea">
   <section class="inner group">
-    <h4 class="sponsortitle">Our sponsors. <%= link_to 'How to become a sponsor', info_sponsors_url %></h4>
+    <h4 class="sponsortitle"> <% if not @our_sponsors.empty?  %> Our sponsors. <% end %> <%= link_to 'How to become a sponsor', info_sponsors_url %></h4>
     <ul class="sponsorlogos">
       <% @our_sponsors.each do |sponsor| %>
           <li>
