@@ -16,6 +16,7 @@
 //= require bootstrap
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.widgets.min
+//= require dataTables/jquery.dataTables
 //= require tinymce-jquery
 //= require jquery_notification_v.1
 //= require tag.it

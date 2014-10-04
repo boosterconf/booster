@@ -1,4 +1,10 @@
 <script type="text/javascript">
+    /* Create an array with the values of all the select options in a column */
+    $.fn.dataTable.ext.order['dom-select'] = function  ( settings, col ){
+        return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
+            return $('select', td).val();
+        } );
+    };
     $(document).ready(function () {
 
                 $(".email").bind("ajax:success",
@@ -20,21 +26,36 @@
                             });
                         });
 
-                $("#sponsors").tablesorter({
-                    theme: 'blue',
-                    // use save sort widget
-                    widgets: ["saveSort"]
-
-                });
-
-            }
-
-    )
-    ;
+        $('#sponsors').dataTable({
+            "ordering": true,
+            "paging": false,
+            "stateSave": true,
+            "columnDefs": [ {
+                  "targets": 'empty-header',
+                  "searchable": false,
+                  "sortable": false
+                },
+                {
+                  "targets": 2,
+                   "orderDataType": "dom-select",
+                   "searchable": false
+                },
+                {
+                  "targets": 3,
+                   "visible": false,
+                   "searchable": true
+                }]
+        });
+    });
+//    function updateStatus(id, status) {
+//                    alert('Updated ' + id + ' to ' + status);
+//                }
 </script>
 <h1>Sponsor list</h1>
 
-<%= render "shared/notice" %>
+<div id="notice">
+    <%= render "shared/notice" %>
+</div>
 
 <a href="#" class="toggle">Show/hide statistics</a><br/>
 <div class="stats" style="display:none">
@@ -119,9 +140,16 @@
   <tr>
     <th>Name</th>
     <th>Responsible committee member</th>
-    <th>Status</th>
+    <th class='extractor-select'>Status</th>
+    <th>Status text</th>
+    <th>Has Email?</th>
+    <th>Invoice?</th>
     <th>Sponsor last year</th>
-    <th colspan="4"></th>
+    <th class="empty-header"></th>
+    <th class="empty-header"></th>
+    <th class="empty-header"></th>
+    <th class="empty-header"></th>
+    </tr>
   </tr>
   </thead>
   <tbody>
@@ -129,7 +157,18 @@
       <tr>
         <td><%= h sponsor.name[0..25] %></td>
         <td><%= h sponsor.user ? sponsor.user.name : "" %></td>
+
+        <td>
+          <%= form_for(sponsor, :html => { :style => 'margin: 0;' }, :remote => true, :method => :put) do |f| %>
+            <%= f.select(:status,
+                         options_from_collection_for_select(Sponsor::STATES, :first, :last, sponsor.status), {},
+                         {:style => "margin-bottom: 0; width: 130px;", :onchange => "$(this).parent('form').submit();"} ) %>
+          <% end %>
+        </td>
+
         <td><%= h sponsor.status_text %></td>
+        <td><%= h sponsor.has_email? ? "Yes" : "No" %></td>
+        <td><%= h sponsor.invoice_status %></td>
         <td><%= h sponsor.was_sponsor_last_year? ? "Yes" : "No" %></td>
         <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
         <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>

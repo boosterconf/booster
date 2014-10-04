@@ -56,10 +56,17 @@ class SponsorsController < ApplicationController
           end
         end
 
-        if @sponsor.save
-          redirect_to sponsors_path, notice: "Sponsor #{@sponsor.name} was successfully updated."
-        else
-          render action: :edit
+        respond_to do |format|
+          format.html {
+            if @sponsor.save
+              redirect_to sponsors_path, notice: "Sponsor #{@sponsor.name} was successfully updated."
+            else
+              render action: :edit
+            end
+          }
+          format.js {
+            flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
+          }
         end
       end
     end

@@ -51,6 +51,10 @@ class Sponsor < ActiveRecord::Base
       self.find_all_by_status('accepted')
   end
 
+  def has_email?
+    self.email.present?
+  end
+
   def is_ready_for_email?
     status == 'suggested' && email.present?
   end
@@ -61,6 +65,20 @@ class Sponsor < ActiveRecord::Base
 
   def accepted?
     self.status == 'accepted'
+  end
+
+  def invoice_status
+    if self.accepted?
+        if paid != nil
+          'Paid'
+        elsif invoiced != nil
+          'Invoiced'
+        else
+          'Not invoiced'
+        end
+    else
+      '-'
+    end
   end
 
   def should_show_logo?

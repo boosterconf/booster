@@ -1,0 +1,6 @@
+$("#notice").html("<%= escape_javascript(render :partial => 'shared/notice' , :locals => { :flash => flash }).html_safe %>");
+
+<%
+#Avoid flash notice from ajax calls showing up on the next request
+flash[:notice] = nil
+%>
