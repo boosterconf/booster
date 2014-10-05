@@ -66,6 +66,7 @@ class SponsorsController < ApplicationController
           }
           format.js {
             flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
+            render
           }
         end
       end

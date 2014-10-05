@@ -19,7 +19,6 @@
                                 duration: 2
                             });
                         });
-
         $("#sponsors").tablesorter({
             theme: 'blue',
             // use save sort widget
@@ -123,9 +122,8 @@
   <thead>
   <tr>
     <th>Name</th>
-    <th>Responsible committee member</th>
-    <th class='extractor-select'>Status</th>
-    <th>Status text</th>
+    <th>Responsible</th>
+    <th class="extractor-select">Status</th>
     <th>Has Email?</th>
     <th>Invoice?</th>
     <th>Sponsor last year</th>
@@ -135,32 +133,10 @@
   </thead>
   <tbody>
   <% @sponsors.each do |sponsor| %>
-      <tr>
-        <td><%= h sponsor.name[0..25] %></td>
-        <td><%= h sponsor.user ? sponsor.user.name : "" %></td>
-
-        <td>
-          <%= form_for(sponsor, :html => { :style => 'margin: 0;' }, :remote => true, :method => :put) do |f| %>
-            <%= f.select(:status,
-                         options_from_collection_for_select(Sponsor::STATES, :first, :last, sponsor.status), {},
-                         {:style => "margin-bottom: 0; width: 130px;", :onchange => "$(this).parent('form').submit();"} ) %>
-          <% end %>
-        </td>
-
-        <td><%= h sponsor.status_text %></td>
-        <td><%= h sponsor.has_email? ? "Yes" : "No" %></td>
-        <td><%= h sponsor.invoice_status %></td>
-        <td><%= h sponsor.was_sponsor_last_year? ? "Yes" : "No" %></td>
-        <td><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
-        <td><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
-        <td><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
-        <td>
-          <% if sponsor.is_ready_for_email? %>
-              <%= link_to image_tag('mimiglyphs/57.png'), api_sponsor_email_path(sponsor), method: :post,
-                          remote: true, class: 'email', id: "sponsor_email_#{sponsor.id}" %>
-          <% end %>
-        </td>
+      <tr id='row-id-<%=sponsor.id %>'>
+        <%= render partial: 'tablerow', locals: {sponsor: sponsor} %>
       </tr>
+
   <% end %>
 
   </tbody>

@@ -1,0 +1,25 @@
+
+    <td><%= h sponsor.name[0..25] %></td>
+    <td><%= h sponsor.user ? sponsor.user.name : '' %></td>
+
+    <td class='no-filter' data-sort='<%= sponsor.status %>' data-filter='<%= sponsor.status %>'>
+      <%= form_for(sponsor, :html => { :style => 'margin: 0;', :dataType => :js }, :remote => true, :method => :put) do |f| %>
+        <%= f.select(:status,
+                     options_from_collection_for_select(Sponsor::STATES, :first, :last, sponsor.status), {},
+                     {:style => 'margin-bottom: 0; width: 130px;', :onchange => "$(this).parent('form').submit();"} ) %>
+      <% end %>
+    </td>
+
+    <td class='sp-email'><%= h sponsor.has_email? ? 'Yes' : 'No' %></td>
+    <td class='sp-invoice'><%= h sponsor.invoice_status %></td>
+    <td><%= h sponsor.was_sponsor_last_year? ? 'Yes' : 'No' %></td>
+    <td class='no-filter'><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
+    <td class='no-filter'><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
+    <td class='no-filter'><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td class='no-filter'>
+      <% if sponsor.is_ready_for_email? %>
+          <%= link_to image_tag('mimiglyphs/57.png'), api_sponsor_email_path(sponsor), method: :post,
+                      remote: true, class: 'email', id: 'sponsor_email_#{sponsor.id}' %>
+      <% end %>
+    </td>
+
