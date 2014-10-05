@@ -1,10 +1,4 @@
 <script type="text/javascript">
-    /* Create an array with the values of all the select options in a column */
-    $.fn.dataTable.ext.order['dom-select'] = function  ( settings, col ){
-        return this.api().column( col, {order:'index'} ).nodes().map( function ( td, i ) {
-            return $('select', td).val();
-        } );
-    };
     $(document).ready(function () {
 
                 $(".email").bind("ajax:success",
@@ -26,25 +20,15 @@
                             });
                         });
 
-        $('#sponsors').dataTable({
-            "ordering": true,
-            "paging": false,
-            "stateSave": true,
-            "columnDefs": [ {
-                  "targets": 'empty-header',
-                  "searchable": false,
-                  "sortable": false
-                },
-                {
-                  "targets": 2,
-                   "orderDataType": "dom-select",
-                   "searchable": false
-                },
-                {
-                  "targets": 3,
-                   "visible": false,
-                   "searchable": true
-                }]
+        $("#sponsors").tablesorter({
+            theme: 'blue',
+            // use save sort widget
+            widgets: ["saveSort"]
+        });
+        $("#sponsors").sieve({
+            itemSelector: 'tbody tr',
+            textSelector: 'td:not(.no-filter), td select option[selected]',
+            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
         });
     });
 //    function updateStatus(id, status) {
@@ -145,10 +129,7 @@
     <th>Has Email?</th>
     <th>Invoice?</th>
     <th>Sponsor last year</th>
-    <th class="empty-header"></th>
-    <th class="empty-header"></th>
-    <th class="empty-header"></th>
-    <th class="empty-header"></th>
+    <th colspan="4"></th>
     </tr>
   </tr>
   </thead>
