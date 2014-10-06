@@ -62,7 +62,7 @@ Booster2013::Application.configure do
   config.active_support.deprecation = :notify
 
   config.action_mailer.default_url_options = {
-      :host => 'staging2014.herokuapp.com',
+      :host => 'staging-boosterconf.herokuapp.com',
   }
 
   # Log the query plan for queries taking more than this (works
