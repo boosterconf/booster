@@ -1,8 +1,8 @@
 development:
   year: 2015
   max_users_limit: 2000
-  tutorial_registration_open: false
-  lightning_registration_open: false
+  tutorial_registration_open: true
+  lightning_registration_open: true
   program_released: false
   speakers_released: false
   early_bird_ends: 2015-01-24 23:59:59
