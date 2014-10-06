@@ -16,6 +16,8 @@
 //= require bootstrap
 //= require jquery.tablesorter.min
 //= require jquery.tablesorter.widgets.min
+//= require parser-input-select
+//= require jquery.sieve
 //= require tinymce-jquery
 //= require jquery_notification_v.1
 //= require tag.it
