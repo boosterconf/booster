@@ -4,22 +4,20 @@
   Hei <%= @sponsor.contact_person_first_name %>!
 </p>
 
-<p>
-  Jeg er en av arrangørene av Boosterkonferansen som arrangeres neste gang <strong>12.-14. mars 2015</strong> i Scandic
-  Bergen City konferansesenter.
-</p>
-
 <% if @sponsor.was_sponsor_last_year %>
 <p>
-  Det viktigste først: Tusen takk for at <%= @sponsor.name %> sponset Booster 2014!
+  Tusen takk for at <%= @sponsor.name %> sponset Booster 2014!
 </p>
 <% end %>
 
 <p>
-  Booster 2014 var en stor suksess, det er derfor med stor glede vi nå har startet forberedelsene til neste års
-  konferanse! En viktig del av forberedelsene er å sikre en god finansiering, og vi vil svært gjerne ha med oss
-  <%= @sponsor.name %> som sponsor for Booster 2015. Sponsorene er veldig viktige for oss, det er dere som gjør at
-  vi kan holde et høyt faglig nivå på konferansen samtidig som vi kan holde deltagerprisene lave!
+  Jeg er en av deltagerne i komiteen som nå er godt i gang med arbeidet med neste års Boosterkonferanse som avholdes 
+  <strong>11.-13. mars 2015</strong> i Scandic Bergen City konferansesenter. Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse
+</p>
+
+<p>
+  Booster 2014 var helt utsolgt, og som vanlig fikk vi svært høy grad av positive tilbakemeldinger fra deltagerne! Noe av det som gjør at folk er veldig fornøyd er at vi har en unik kombinasjon av gode og annerkjente speakere, en intim atmosfære og overkommelige priser. Dette hadde vi ikke fått til uten sponsorene våre, derfor er vi nå tidlig ute for å høre om
+  <%= @sponsor.name %> ønsker å være med som sponsor av Booster 2015.
 </p>
 
 <p>
@@ -40,24 +38,10 @@
 </p>
 
 <p>
-  I fjor hadde konferansen over 200 deltagere, og de fikk fikk med seg internasjonale navn som; Jonas Søderstrøm,
-  Esther Derby, Matt Barcomb og Fred George - i tillegg til en rekke lokale foredragsholdere. Tilbakemeldingene på
-  konferansen var overveldende positive, av de som ga oss tilbakemelding sa over 90% at de vil anbefale konferansen
-  til andre.
+  I fjor hadde konferansen over 230 deltagere, det er all time high for oss! Keynotes fra Gary McGraw og Gojko Adzic, workshops ved blant annet Liz Keogh, Johannes Brodwall, Jim "Cope" Coplien, Lisa Crispin, Pawel Brodzinski, Rob Ashton, Christian Johansen – og 24 lyntaler fra fjernt og nært. Når vi tenker oss om er det ikke rart det ble utsolgt, og dette vil vi klare igjen!
 </p>
 
-<p>
-  Vi er godt i gang med programmet for neste års konferanse.
-</p>
 
-<p>
-  Booster skiller seg ut fra mange andre konferanser ved at vi er en konferanse som passer for alle som jobber i et
-  utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber
-  med brukeropplevelse. Vi legger også vekt på praktisk læring, ved at deltakerne på konferansen faktisk får forsøke
-  seg på å jobbe med teknologier og problemstillinger i mindre grupper. Vårt mål er at deltakerne skal vende tilbake
-  til arbeidsplassen sin etter konferansen med ny inspirasjon, lærdom og nye bekjentskaper.
-
-  <p>
   <% if @sponsor.is_in_bergen? %>
       Et sponsorat av Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
       ansatte. Vi har et vidt spekter av deltakere, alt fra studenter til folk med flere tiårs erfaring.
