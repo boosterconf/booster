@@ -8,15 +8,19 @@
 <p>
   Tusen takk for at <%= @sponsor.name %> sponset Booster 2014!
 </p>
+<% else %>
+<p>
+  Jeg vil gjerne invitere <%= @sponsor.name %> til å sponse Boosterkonferansen 2015!
+</p>
 <% end %>
 
 <p>
-  Jeg er en av deltagerne i komiteen som nå er godt i gang med arbeidet med neste års Boosterkonferanse som avholdes 
+  Jeg er en av deltagerne i komiteen som nå er godt i gang med arbeidet med neste års konferanse som avholdes 
   <strong>11.-13. mars 2015</strong> i Scandic Bergen City konferansesenter. Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse
 </p>
 
 <p>
-  Booster 2014 var helt utsolgt, og som vanlig fikk vi svært høy grad av positive tilbakemeldinger fra deltagerne! Noe av det som gjør at folk er veldig fornøyd er at vi har en unik kombinasjon av gode og annerkjente speakere, en intim atmosfære og overkommelige priser. Dette hadde vi ikke fått til uten sponsorene våre, derfor er vi nå tidlig ute for å høre om
+  Booster 2014 var helt utsolgt, og som vanlig fikk vi svært høy grad av positive tilbakemeldinger fra deltagerne! Noe av det som gjør at folk er veldig fornøyde er at vi har en unik kombinasjon av gode og anerkjente speakere, en intim atmosfære og overkommelige priser. Dette hadde vi ikke fått til uten sponsorene våre, derfor er vi nå tidlig ute for å høre om
   <%= @sponsor.name %> ønsker å være med som sponsor av Booster 2015.
 </p>
 
@@ -44,7 +48,7 @@
 
   <% if @sponsor.is_in_bergen? %>
       Et sponsorat av Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
-      ansatte. Vi har et vidt spekter av deltakere, alt fra studenter til folk med flere tiårs erfaring.
+      ansatte. Vi har et vidt spekter av deltakere, alt fra studenter som jobber som frivillige til folk med flere tiårs erfaring.
   <% end %>
   For mer informasjon om oss, besøk våre nettsider på <a href="http://www.boosterconf.no">boosterconf.no</a>.
   </p>
