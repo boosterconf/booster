@@ -1,17 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-                $(".email").bind("ajax:success",
-                        function(evt, sponsor, status, xhr) {
-                            showNotification({
-                                message: "Email sent",
-                                autoClose: true,
-                                duration: 2
-                            });
-
-                            $('#sponsor_email_' + sponsor.id).hide();
-
-                        }).bind("ajax:error", function (evt, data, status, xhr) {
+                $(".email").bind("ajax:error", function (evt, data, status, xhr) {
                             showNotification({
                                 message: "Oops! an error occurred.",
                                 type: "error",
@@ -134,7 +124,7 @@
   <tbody>
   <% @sponsors.each do |sponsor| %>
       <tr id='row-id-<%=sponsor.id %>'>
-        <%= render partial: 'tablerow', locals: {sponsor: sponsor} %>
+        <%= render partial: 'sponsors/tablerow', locals: {sponsor: sponsor} %>
       </tr>
 
   <% end %>

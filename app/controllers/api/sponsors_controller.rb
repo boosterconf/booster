@@ -14,7 +14,14 @@ module Api
           event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
           event.save
 
-          respond_with @sponsor
+          respond_to do |format|
+            format.json { respond_with @sponsor }
+            format.js {
+              flash[:notice] = "Email sent and status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
+              render 'sponsors/update'
+            }
+          end
+
         else
 
           head :internal_server_error
