@@ -1,29 +1,32 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-                $(".email").bind("ajax:error", function (evt, data, status, xhr) {
-                            showNotification({
-                                message: "Oops! an error occurred.",
-                                type: "error",
-                                autoClose: true,
-                                duration: 2
-                            });
-                        });
+        $(".email").bind("ajax:error", function (evt, data, status, xhr) {
+            $.notify("Oops! an error occurred.", "error");
+        });
+
         $("#sponsors").tablesorter({
             theme: 'blue',
             // use save sort widget
             widgets: ["saveSort"]
         });
+
         $("#sponsors").sieve({
             itemSelector: 'tbody tr',
             textSelector: 'td:not(.no-filter), td select option[selected]',
             searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
         });
+
+        $(".toggle").click(function () {
+            $(".stats").toggle();
+        });
+
+        $(".toggleevents").click(function () {
+            $(".events").toggle();
+        });
     });
-//    function updateStatus(id, status) {
-//                    alert('Updated ' + id + ' to ' + status);
-//                }
 </script>
+
 <h1>Sponsor list</h1>
 
 <div id="notice">
@@ -96,17 +99,6 @@
 <div class="events" style="display: none;">
   <%= render @events %>
 </div>
-
-<script>
-
-    $(".toggle").click(function () {
-        $(".stats").toggle();
-    });
-
-    $(".toggleevents").click(function () {
-        $(".events").toggle();
-    });
-</script>
 
 <table id="sponsors" class="table table-striped">
   <thead>
