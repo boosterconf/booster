@@ -17,7 +17,7 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.email %></td>
-    <td><%= user.name %></td>
+    <td><%= user.full_name %></td>
     <td><%= user.company %></td>
     <td><%= user.is_admin ? "Yes" : "" %></td>
     <td><%= user.featured_speaker ? "Yes" : "" %></td>

@@ -57,9 +57,9 @@ class NametagPdf < Prawn::Document
       font 'siri'
       fill_color "1790A0"
 
-      if user.name
+      if user.full_name
         font_size 26
-        text user.name, :align => :center, :style => :bold
+        text user.full_name, :align => :center, :style => :bold
       else
         font_size 15
         text user.email || '', :align => :center, :style => :bold

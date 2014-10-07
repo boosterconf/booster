@@ -91,7 +91,7 @@
                     <%= link_to h('[U]'), registration.user %>
                   </span>
               <% else %>
-                <%= link_to h(registration.user.name), registration.user %>
+                <%= link_to h(registration.user.full_name), registration.user %>
               <% end %>
               (<%= h registration.user.company %>)
             </td>

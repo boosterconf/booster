@@ -51,7 +51,7 @@ class ReceiptPdf < Prawn::Document
     move_down 20
 
     text registration.user.company
-    text registration.user.name
+    text registration.user.full_name
     text registration.user.email
 
     move_down 50

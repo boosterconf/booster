@@ -1,5 +1,5 @@
 <% if admin? %>
-<h2>Admin: Payment information for <%=h @registration.user.name %></h2>
+<h2>Admin: Payment information for <%=h @registration.user.full_name %></h2>
   <p>
     User registered on: <%= @registration.created_at.to_date %>.
   </p>

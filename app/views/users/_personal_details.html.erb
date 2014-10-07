@@ -1,7 +1,11 @@
 <fieldset id="personal_details">
-  <div class="field name">
-    <%= f.label :name, "Name" %>
-    <%= text_field(:user, :name, :placeholder => "Please tell us your name", :class => 'input-xlarge', :required => true) %>
+  <div class="field first_name">
+    <%= f.label :first_name, "First name" %>
+    <%= text_field(:user, :first_name, :placeholder => "Please tell us your first name", :class => 'input-xlarge', :required => true) %>
+  </div>
+  <div class="field last_name">
+    <%= f.label :last_name, "Last name" %>
+    <%= text_field(:user, :last_name, :placeholder => "Please tell us your last name", :class => 'input-xlarge', :required => true) %>
   </div>
   <div class="field company">
     <%= f.label :company, "Company" %>

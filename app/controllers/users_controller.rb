@@ -112,7 +112,7 @@ class UsersController < ApplicationController
           BoosterMailer.manual_registration_confirmation(@user).deliver
           BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
           #@user.registration.invoiced = SendRegning.new.send_invoice(
-          #    PAYMENT_CONFIG['send_regning_url'], @user.id, @user.name, @user.email, @user.zip, @user.city,
+          #    PAYMENT_CONFIG['send_regning_url'], @user.id, @user.full_name, @user.email, @user.zip, @user.city,
           #    @user.registration.ticket_type_old, @user.registration.ticket_price)
 
           redirect_to @user

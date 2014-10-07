@@ -3,7 +3,7 @@
     <p>This workshop is presented by: </p>
     <ul>
       <% @workshop.speakers.each do |speaker| %>
-        <li><%= speaker.user.name %></li>
+        <li><%= speaker.user.full_name %></li>
       <% end %>
     </ul>
 <% else %>

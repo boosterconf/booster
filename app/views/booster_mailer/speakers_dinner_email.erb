@@ -1,7 +1,7 @@
 <html>
 <body>
 
-<p>Dear <%= @user.name %>,</p>
+<p>Dear <%= @user.first_name %>,</p>
 <p>
 The conference is soon approaching, and we are looking forward to seeing you all in Bergen. You should already have received information about the conference dinner on the Wednesday. There will be food and drinks and some impro theater. We hope you will take part. In addition to that, on thursday evening there will be a Speaker's Dinner at Nøsteboden, http://www.nosteboden.no/. We hope to have a community fishbowl session in the pub here after dinner. 
 <% if @user.has_accepted_tutorial? %>

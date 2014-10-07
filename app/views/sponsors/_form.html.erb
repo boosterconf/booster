@@ -64,7 +64,7 @@
         <label class="control-label">Our contact</label>
 
         <div class="controls">
-          <%= f.collection_select :user_id, @users, :id, :name, :include_blank => true %>
+          <%= f.collection_select :user_id, @users, :id, :full_name, :include_blank => true %>
         </div>
       </div>
 

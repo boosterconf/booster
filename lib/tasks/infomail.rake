@@ -48,7 +48,7 @@ namespace :infomail do
       #next unless user.email == 'karianne.berg@gmail.com'
 
       puts "Mailing to #{user.email}"
-      BoosterMailer.update_dinner_attendance_status(user.name, user.email,
+      BoosterMailer.update_dinner_attendance_status(user.first_name, user.email,
                                                             "http://www.boosterconf.no/users/current/attending_dinner",
                                                             "http://www.boosterconf.no/users/current/not_attending_dinner",
                                                             Rails.application.routes.url_helpers.new_password_reset_url).deliver

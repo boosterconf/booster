@@ -13,7 +13,7 @@
       <%= form_for(registration) do |f| %>
 
           <tr>
-            <td><%= link_to registration.user.name, user_path(registration.user) %></td>
+            <td><%= link_to registration.user.full_name, user_path(registration.user) %></td>
             <td><%= registration.ticket_type_old %></td>
             <td>
               <div class="checkbox">

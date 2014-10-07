@@ -2,7 +2,7 @@
 <h2 class="page_title">Change your password</h2>
 
 <p>
-  Hi, <%= @user.name %>. Please type your new password
+  Hi, <%= @user.first_name %>. Please type your new password
 </p>
 
 <%= form_for @user, :url => password_reset_path, :method => :put do |f| %>

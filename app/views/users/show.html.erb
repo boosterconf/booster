@@ -1,4 +1,4 @@
-<% content_for :title, @user.name %>
+<% content_for :title, @user.full_name %>
 
 <h2 class="page_title">My profile</h2>
 
@@ -6,7 +6,7 @@
   <table class="table span5">
     <tr>
       <th>Name:</th>
-      <td><%= h @user.name %></td>
+      <td><%= h @user.full_name %></td>
     </tr>
     <tr>
       <th>Company:</th>

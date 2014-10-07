@@ -21,7 +21,7 @@ class RegistrationsController < ApplicationController
 
   def send_welcome_email()
     User.all.each do | a_user |
-      BoosterMailer.welcome_email(a_user).deliver if a_user.email && a_user.name
+      BoosterMailer.welcome_email(a_user).deliver if a_user.email && a_user.first_name
     end
     redirect_to registrations_url
   end
@@ -103,7 +103,7 @@ class RegistrationsController < ApplicationController
       @registration.user.delete
       @registration.delete
 
-      flash[:notice] = "Deleted user #{@registration.user.name}"
+      flash[:notice] = "Deleted user #{@registration.user.full_name}"
       redirect_to :action => 'index'
     else
       flash[:error] = "Wrong letters - try again"

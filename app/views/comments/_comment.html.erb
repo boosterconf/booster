@@ -6,7 +6,7 @@
 
   <div><%= simple_format h(comment.description) %></div>
 
-  <div class="detail">Written by <%= link_to_if admin?, h(comment.user.name),
+  <div class="detail">Written by <%= link_to_if admin?, h(comment.user.full_name),
                                                 h(comment.user) %>,
     <%= time_ago_in_words comment.created_at %> ago
   </div>

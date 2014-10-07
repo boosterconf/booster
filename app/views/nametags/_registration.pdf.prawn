@@ -17,7 +17,7 @@ p_pdf.text 'Roots 2012',
 p_pdf.font 'League Gothic'
 p_pdf.fill_color '5bbc6d'
 
-name = registration.user.name
+name = registration.user.full_name
 company = registration.user.company
 
 

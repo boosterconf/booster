@@ -52,7 +52,7 @@ class InvoicesController < ApplicationController
 
     render :json => {
         :id => registration.user.id,
-        :name => registration.user.name,
+        :name => registration.user.full_name,
         :email => registration.user.email,
         :ticket_type_old => registration.ticket_type_old,
         :price => registration.price

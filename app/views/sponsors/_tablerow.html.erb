@@ -1,6 +1,6 @@
 
     <td><%= h sponsor.name[0..25] %></td>
-    <td><%= h sponsor.user ? sponsor.user.name : '' %></td>
+    <td><%= h sponsor.user ? sponsor.user.full_name : '' %></td>
 
     <td class='no-filter' data-sort='<%= sponsor.status %>' data-filter='<%= sponsor.status %>'>
       <%= form_for(sponsor, :html => { :style => 'margin: 0;', :dataType => :js }, :remote => true, :method => :put) do |f| %>

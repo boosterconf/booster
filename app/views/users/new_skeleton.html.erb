@@ -8,8 +8,11 @@
 
 <%= form_for @user, :url => create_skeleton_user_path do |f| %>
 
-    <%= f.label :name %>
-    <%= text_field(:user, :name, :class => 'input-xlarge') %>
+    <%= f.label :first_name %>
+    <%= text_field(:user, :first_name, :class => 'input-xlarge') %>
+
+    <%= f.label :last_name %>
+    <%= text_field(:user, :last_name, :class => 'input-xlarge') %>
 
     <%= f.label :email %>
     <%= email_field(:user, :email, :class => 'input-xlarge') %>

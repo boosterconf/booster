@@ -65,7 +65,7 @@
       </tr>
       <% @invoice.registrations.each do |registration| %>
           <tr data-user-id="<%= registration.user.id %>">
-            <td><%= registration.user.name %></td>
+            <td><%= registration.user.full_name %></td>
             <td><%= registration.user.email %></td>
             <td><%= registration.ticket_type_old %></td>
             <td><%= registration.price %></td>

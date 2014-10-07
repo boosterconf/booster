@@ -5,19 +5,19 @@ class BoosterMailer < ActionMailer::Base
 
 
   def registration_confirmation(user)
-    @name = user.name
+    @name = user.first_name
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
   end
 
   def manual_registration_confirmation(user)
-    @name = user.name
+    @name = user.first_name
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
   end
 
   def manual_registration_notification(user, user_url)
-    @name = user.name
+    @name = user.full_name
     @email = user.email
     @description = user.registration.description
     @user_url = user_url
@@ -25,13 +25,13 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def speaker_registration_confirmation(user)
-    @name = user.name
+    @name = user.first_name
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered")
   end
 
   def speaker_registration_notification(user, user_url)
-    @name = user.name
+    @name = user.full_name
     @email = user.email
     @user_url = user_url
     mail(:to => user.email, :subject => "#{SUBJECT_PREFIX} User #{user.email} registered as speaker")
@@ -45,13 +45,13 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def free_registration_confirmation(user)
-    @name = user.name
+    @name = user.first_name
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket request")
   end
 
   def free_registration_notification(admin, user, user_url)
-    @name = user.name
+    @name = user.full_name
     @email = user.email
     @description = user.registration.description
     @user_url = user_url
@@ -59,7 +59,7 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def free_registration_completion(user)
-    @name = user.name
+    @name = user.first_name
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket confirmation")
   end
@@ -186,7 +186,7 @@ class BoosterMailer < ActionMailer::Base
   def initial_sponsor_mail(sponsor)
     @sender = sponsor.user
     @sponsor = sponsor
-    mail(:to => sponsor.email, :from => "#{sponsor.user.name} <#{sponsor.user.email}>",
+    mail(:to => sponsor.email, :from => "#{sponsor.user.full_name} <#{sponsor.user.email}>",
          :cc => FROM_EMAIL, :bcc => sponsor.user.email,
          :subject => "Bli sponsor for Booster 2015")
   end
@@ -230,12 +230,12 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def reminder_to_earlier_participants_email(user)
-    @name = user.name
+    @name = user.full_name
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Remember to sign up for Booster 2015 before the Early Bird deadline!")
   end
 
   def reminder_to_earlier_speakers_email(user)
-    @name = user.name
+    @name = user.full_name
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Share your knowledge at Booster 2015!")
   end
 end

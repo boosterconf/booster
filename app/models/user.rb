@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
                   :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
                   :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name,
                   :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
-                  :registration_attributes, :bio_attributes
+                  :registration_attributes, :bio_attributes, :first_name, :last_name
 
   has_one :registration
   has_one :bio
@@ -22,11 +22,32 @@ class User < ActiveRecord::Base
 
 
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
-  validates_presence_of :name, :message => "You have to specify a name."
+  #validates_presence_of :name, :message => "You have to specify a name."
+  validates_presence_of :first_name,:last_name, :message => "You have to specify both names."
   validates_presence_of :company, :message => "You have to specify a company."
 
   validates_each :accepted_privacy_guidelines do |record, attr, value|
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
+  end
+
+  def name
+    if read_attribute(:first_name)
+      read_attribute(:first_name) + read_attribute(:last_name)
+    else
+      read_attribute(:name)
+    end
+  end
+
+  def full_name
+      if read_attribute(:first_name)
+        read_attribute(:first_name) + " " + read_attribute(:last_name)
+      else
+        read_attribute(:name)
+      end
+    end
+
+  def name=(name)
+    raise 'Do not set name! Use first_name and last_name!'
   end
 
   def attending_speakers_dinner(will_attend)
@@ -267,6 +288,7 @@ class User < ActiveRecord::Base
     user = User.new
     user.build_registration
     user.email = email.present? ? email : ""
+    # FIXME First name/last name?
     user.name = name if name.present?
     user.password = SecureRandom.urlsafe_base64  # må sette passord, av grunner bare authlogic forstår
     user.registration.ticket_type_old = ticket_type
