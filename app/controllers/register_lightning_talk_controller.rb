@@ -38,7 +38,7 @@ class RegisterLightningTalkController < ApplicationController
     @talk.users << current_user
     if @talk.save
       current_user.update_ticket_type!
-      BoosterMailer.talk_confirmation(@talk, talk_url(@talk)).deliver
+      BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver
       if current_user.has_all_statistics
         redirect_to '/register_lightning_talk/finish'
       else

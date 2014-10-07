@@ -46,7 +46,7 @@ class RegisterWorkshopController < ApplicationController
         add_additional_speaker
       end
 
-      BoosterMailer.talk_confirmation(@workshop, talk_url(@workshop)).deliver
+      BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver
 
       if current_user.has_all_statistics
         redirect_to register_workshop_finish_url

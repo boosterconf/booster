@@ -34,6 +34,12 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         end
       end
 
+      should 'send only one email to each user when additional speaker is given' do
+        assert_difference('ActionMailer::Base.deliveries.size', +2) do
+          post :create_talk, :talk => create_talk_params, :additional_speaker_email => EMAIL
+        end
+      end
+
       context 'when a user with given email already exists' do
         setup do
           @existing_email = users(:quentin).email

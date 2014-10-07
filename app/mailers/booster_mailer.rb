@@ -71,12 +71,12 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => registration.user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Payment receipt for #{registration.user.email}")
   end
 
-  def talk_confirmation(talk, talk_url)
-    @speaker = talk.speaker_name
-    @email = talk.speaker_email
+  def talk_confirmation(speaker, talk, talk_url)
+    @speaker = speaker.name
+    @email = speaker.email
     @talk = talk.title
     @talk_url = talk_url
-    mail(:to => talk.users.map(&:email), :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Confirmation on submission #{talk.title}")
+    mail(:to => @email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Confirmation on submission #{talk.title}")
   end
 
   def comment_notification(comment, comment_url)
@@ -109,7 +109,7 @@ class BoosterMailer < ActionMailer::Base
 
   def upload_slides_notification(talk, edit_talk_url, new_password_reset_url)
     @talk = talk.title
-    @speaker_email = talk.speaker_email
+    @speaker_email = talk.speaker_emails
     @speaker = talk.speaker_name
     @edit_talk_url = edit_talk_url
     @new_password_reset_url = new_password_reset_url

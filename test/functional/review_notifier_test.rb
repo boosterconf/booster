@@ -23,7 +23,7 @@ class ReviewNotifierTest < ActiveSupport::TestCase
       end
 
       last_email = ActionMailer::Base.deliveries.last
-      assert_equal last_email['to'].to_s, @talk.speaker_email
+      assert_equal last_email['to'].to_s, @talk.speaker_emails
     end
 
     context 'when reviewer is abstract owner herself' do

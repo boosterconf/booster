@@ -33,7 +33,7 @@ namespace :infomail do
     talks = Talk.all_accepted_lightning_talks
     talks.each do |talk|
       #next unless talk.speaker_email == 'karianne.berg@gmail.com'
-      print "Mailing: #{talk.speaker_email} #{talk.title}....."
+      print "Mailing: #{talk.speaker_emails} #{talk.title}....."
       BoosterMailer.deliver_upload_slides_notification(talk, edit_talk_url(talk), new_password_reset_url)
       puts " done"
     end

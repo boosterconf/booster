@@ -54,7 +54,7 @@ class Talk < ActiveRecord::Base
     timeslots[0]
   end
 
-  def speaker_email
+  def speaker_emails
     users.map(&:email).join(", ")
   end
 
