@@ -18,6 +18,5 @@
 //= require jquery-tablesorter/parsers/parser-input-select
 //= require jquery.sieve
 //= require tinymce-jquery
-//= require jquery_notification_v.1
 //= require tag.it
 //= require_tree .
