@@ -11,3 +11,6 @@ script:
   - RAILS_ENV=test bundle exec rake test
 before_script:
   - psql -c 'create database myapp_test' -U postgres
+notifications:
+  slack:
+    secure: DE7RFYp6wElEvl1MtxhtmLJlgvMhLQeRnIuLOn+BGli6xtzqO8wGO5N3gkq/CrLQTN0wKUJbuZwtxX3m30248sromR3A2R0KeJ5KkoDqTCubmkPT0aEsz6HlCkQPdnOe5bBvGXsHFKvEuPCXc+FRQugDMPk+AGRcACoS9faCmsE=
