@@ -30,7 +30,7 @@ class Talk < ActiveRecord::Base
   end
 
   def speaker_name
-    users.map(&:name).join(", ")
+    users.map(&:full_name).join(", ")
   end
 
   def speaker_invited

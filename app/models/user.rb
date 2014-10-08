@@ -31,14 +31,6 @@ class User < ActiveRecord::Base
     record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
   end
 
-  def name
-    if read_attribute(:first_name)
-      read_attribute(:first_name) + ' ' + read_attribute(:last_name)
-    else
-      read_attribute(:name)
-    end
-  end
-
   def full_name
       if read_attribute(:first_name)
         read_attribute(:first_name) + ' ' + read_attribute(:last_name)
@@ -46,10 +38,6 @@ class User < ActiveRecord::Base
         read_attribute(:name)
       end
     end
-
-  def name=(name)
-    raise 'Do not set name! Use first_name and last_name!'
-  end
 
   def attending_speakers_dinner(will_attend)
     self.registration.speakers_dinner = will_attend

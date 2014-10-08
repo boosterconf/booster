@@ -11,7 +11,7 @@
 
         <div class="content">
 
-          <b><%= speaker[:full_name] %></b> - <i><%= speaker.bio[:title] %></i>
+          <b><%= speaker.full_name %></b> - <i><%= speaker.bio[:title] %></i>
           <% if speaker.bio[:twitter_handle].length > 0 %>
               <br/>
               <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
