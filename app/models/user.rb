@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 
 
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
-  #validates_presence_of :name, :message => "You have to specify a name."
   validates_presence_of :first_name,:last_name, :message => "You have to specify a first name."
   validates_presence_of :first_name, :message => "You have to specify a last name."
   validates_presence_of :company, :message => "You have to specify a company."
@@ -273,12 +272,12 @@ class User < ActiveRecord::Base
     User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
   end
 
-  def self.create_unfinished(email, ticket_type, name=nil)
+  def self.create_unfinished(email, ticket_type, first_name=nil, last_name=nil)
     user = User.new
     user.build_registration
     user.email = email.present? ? email : ""
-    # FIXME First name/last name?
-    user.name = name if name.present?
+    user.first_name = first_name if first_name.present?
+    user.last_name = last_name if last_name.present?
     user.password = SecureRandom.urlsafe_base64  # må sette passord, av grunner bare authlogic forstår
     user.registration.ticket_type_old = ticket_type
     user.registration.manual_payment = true
