@@ -23,7 +23,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
   #validates_presence_of :name, :message => "You have to specify a name."
-  validates_presence_of :first_name,:last_name, :message => "You have to specify both names."
+  validates_presence_of :first_name,:last_name, :message => "You have to specify a first name."
+  validates_presence_of :first_name, :message => "You have to specify a last name."
   validates_presence_of :company, :message => "You have to specify a company."
 
   validates_each :accepted_privacy_guidelines do |record, attr, value|
@@ -32,7 +33,7 @@ class User < ActiveRecord::Base
 
   def name
     if read_attribute(:first_name)
-      read_attribute(:first_name) + read_attribute(:last_name)
+      read_attribute(:first_name) + ' ' + read_attribute(:last_name)
     else
       read_attribute(:name)
     end
@@ -40,7 +41,7 @@ class User < ActiveRecord::Base
 
   def full_name
       if read_attribute(:first_name)
-        read_attribute(:first_name) + " " + read_attribute(:last_name)
+        read_attribute(:first_name) + ' ' + read_attribute(:last_name)
       else
         read_attribute(:name)
       end

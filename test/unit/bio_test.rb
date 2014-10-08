@@ -11,7 +11,8 @@ class BioTest < ActiveSupport::TestCase
   end
 
   def test_bio_belongs_to_user
-    assert_equal "Quentin", @bio.user.name
+    assert_equal "Quentin", @bio.user.first_name
+    assert_equal "Quintinus", @bio.user.last_name
   end
 
   def test_user_not_featured

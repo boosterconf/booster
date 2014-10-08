@@ -1,6 +1,8 @@
 quentin:
   email: whatever@whatever.com
   name: Quentin
+  first_name: Quentin
+  last_name: Quintinus
   company: MyCo
   phone_number: 99887766
   role: Developer
@@ -13,6 +15,8 @@ quentin:
 god:
   email: god@paradise.net
   name: Jahve
+  first_name: Jahve
+  last_name: the LORD
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("god" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -21,6 +25,8 @@ god:
 reviewer:
   email: reviewer@example.com
   name: Ms Nitty Pickersen
+  first_name: Nitty
+  last_name: Pickersen
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("reviewer" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -28,6 +34,8 @@ reviewer:
 test:
   email: test@whatever.com
   name: Test
+  first_name: Test
+  last_name: Whatever
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -35,6 +43,8 @@ test:
 other:
   email: other@whatever.com
   name: Other Guy
+  first_name: Other
+  last_name: Guy
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -42,6 +52,8 @@ other:
 sponsor:
   email: sponsor@whatever.com
   name: Sponsor Dude
+  first_name: Sponsor
+  last_name: Dude
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -49,6 +61,8 @@ sponsor:
 multispeaker:
   email: very@expressive.com
   name: Mr Talk Talkative
+  first_name: Talk
+  last_name: Talkative, Esq.
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -56,6 +70,8 @@ multispeaker:
 singlespeaker:
   email: not@much.com
   name: C. Oncise
+  first_name: C.
+  last_name: Oncise
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
