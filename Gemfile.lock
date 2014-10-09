@@ -241,6 +241,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 3.2.14)
   rails_12factor
+  rest-client
   rspec-rails
   ruby-prof
   sass-rails (~> 3.2.3)

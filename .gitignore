@@ -10,6 +10,9 @@
 # Ignore the default SQLite database.
 /db/*.sqlite3
 
+# Ignore local environment variables
+local_env.yml
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp

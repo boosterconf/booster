@@ -1,0 +1,7 @@
+# Copy to local_env.yml and set these to test Boosterbot in dev. Setting SLACK_URL will enable Boosterbot.
+
+# URL for Slack incoming webhook used by Boosterbot. Go find it in Slack
+#SLACK_URL:
+
+# Use another channel or a username to test Boosterbot
+#SLACK_TEST_CHANNEL: '@erlend'
