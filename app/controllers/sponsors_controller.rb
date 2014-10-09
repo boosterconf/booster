@@ -65,6 +65,9 @@ class SponsorsController < ApplicationController
             end
           }
           format.js {
+            @sponsors = Sponsor.all(:include => :user).sort
+            @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
+            @events = Event.last(15).reverse
             flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
             render
           }

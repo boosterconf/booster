@@ -34,69 +34,13 @@
 </div>
 
 <a href="#" class="toggle">Show/hide statistics</a><br/>
-<div class="stats" style="display:none">
-  <table class="table table-striped">
-    <tr>
-      <td>Accepted:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'accepted'") %></td>
-    </tr>
-
-    <tr>
-      <td>Declined:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'declined'") %></td>
-    </tr>
-    <tr>
-      <td>In Dialogue:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'dialogue'") %></td>
-    </tr>
-    <tr>
-      <td>Suggested (with email):</td>
-      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email != '' ") %></td>
-    </tr>
-    <tr>
-      <td>Suggested (missing email):</td>
-      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email = ''") %></td>
-    </tr>
-    <tr>
-      <td>Contacted:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'contacted'") %></td>
-    </tr>
-    <tr>
-      <td>Reminded:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'reminded'") %></td>
-    </tr>
-    <tr>
-      <td>Don't ask</td>
-      <td><%= Sponsor.count(:conditions => "status = 'never'") %></td>
-    </tr>
-    <tr>
-      <td>Last year:</td>
-      <td><%= Sponsor.count(:conditions => "was_sponsor_last_year = 't'") %></td>
-    </tr>
-    <tr>
-      <td>Both years:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %></td>
-    </tr>
-  </table>
-
-  <table class="table table-striped">
-    <tr>
-      <th>Navn</th>
-      <th>Antall sponsorer</th>
-    </tr>
-
-    <% @number_of_sponsors_per_user.each { |row| %>
-        <tr>
-          <td><%= row[0] %></td>
-          <td> <%= row[1] %></td>
-        </tr>
-    <% } %>
-  </table>
+<div id="stats" class="stats" style="display:none">
+  <%= render partial: 'sponsors/stats' %>
 </div>
 
 <a href="#" class="toggleevents">Show/hide latest <%= @events.length %> events</a><br/>
 
-<div class="events" style="display: none;">
+<div id="events" class="events" style="display: none;">
   <%= render @events %>
 </div>
 
