@@ -43,4 +43,15 @@ Booster2013::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+
+  config.after_initialize do
+      Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+  end
+
+  config.before_configuration do
+    env_file = File.join(Rails.root, 'local_env.yml')
+    YAML.load(File.open(env_file)).each do |key, value|
+      ENV[key.to_s] = value
+    end if File.exists?(env_file)
+  end
 end
