@@ -2,7 +2,7 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :sponsor
 
-  attr_accessible :comment, :sponsor
+  attr_accessible :user, :comment, :sponsor
 
   accepts_nested_attributes_for :sponsor
 
