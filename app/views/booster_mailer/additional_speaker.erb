@@ -2,14 +2,14 @@
 <body><p>Hi,</p>
 
 <p>
-  <%= @primary_speaker.name %> (<%= @primary_speaker.email %>) just let us know that you'll be presenting
+  <%= @primary_speaker.full_name %> (<%= @primary_speaker.email %>) just let us know that you'll be presenting
   "<%= @talk.title %>" together at the Booster
   conference. However, we need to know a little bit more about you. Please go to <%= link_to 'here', @create_user_url %>
   and provide us with the information we need.
 </p>
 
 <p>
-  If you think <%= @primary_speaker.name %> made a mistake when s/he added you to the workshop, we would really
+  If you think <%= @primary_speaker.full_name %> made a mistake when s/he added you to the workshop, we would really
   appreciate it if you <%= link_to 'let us know', "mailto:kontakt@boosterconf.no" %>.
 </p>
 

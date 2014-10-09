@@ -13,7 +13,7 @@
     <% end %>
 
     <p class="muted">
-      Workshop - Suggested by <%= workshop.users.map { |u| u.name }.join(", ") %>,
+      Workshop - Suggested by <%= workshop.speaker_name %>,
       <%= time_ago_in_words(workshop.created_at) %> ago.
       <%= "Max number of participants: " + h(workshop.max_participants) if admin? %>
     </p>

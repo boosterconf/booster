@@ -208,7 +208,7 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_with_speakers
-    with_exclusive_scope { find(:all, :include => :users, :order => "users.name ") }
+    with_exclusive_scope { find(:all, :include => :users, :order => "users.last_name ") }
   end
 
   def self.add_feedback(talk_id, sum, num)

@@ -72,7 +72,7 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def talk_confirmation(speaker, talk, talk_url)
-    @speaker = speaker.name
+    @speaker = speaker.first_name
     @email = speaker.email
     @talk = talk.title
     @talk_url = talk_url

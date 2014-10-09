@@ -1,4 +1,4 @@
-<h4><%= time_ago_in_words(review.created_at) %> ago <%= review.reviewer.name %> said:</h4>
+<h4><%= time_ago_in_words(review.created_at) %> ago <%= review.reviewer.full_name %> said:</h4>
 <p>
 <%= simple_format review.text %>
 </p>
