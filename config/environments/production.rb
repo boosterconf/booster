@@ -69,4 +69,8 @@ Booster2013::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
   ActionMailer::Base.delivery_method = :smtp
+
+  config.after_initialize do
+        Rails.application.routes.default_url_options[:host] = 'www.boosterconf.no'
+    end
 end
