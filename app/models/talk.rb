@@ -30,7 +30,13 @@ class Talk < ActiveRecord::Base
   end
 
   def speaker_name
-    users.map(&:name).join(", ")
+    users.sort{|x,y| x.name && y.name ? x.name <=> y.name : x.name ? -1 : 1}
+          .map{|u| u.name? ? u.name : 'another speaker'}.join(" and ")
+  end
+
+  def speaker_name_or_email
+    users.sort{|x,y| x.name && y.name ? x.name <=> y.name : x.name ? -1 : 1}
+        .map{|u| u.name? ? u.name : u.email ? "(#{u.email})" : 'another speaker'}.join(" and ")
   end
 
   def speaker_invited
