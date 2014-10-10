@@ -15,14 +15,15 @@
 <p>Every abstract is visible to everyone, in order to encourage discussion. Comments from both organizers and
   others are also visible.</p>
 
+  <br/>
 
 <% if !@lightning_talks.empty? %>
-    <h4 id="lightning">Lightning talks</h4>
+    <h3 id="lightning">Lightning talks</h3>
     <%= render :partial => @lightning_talks %>
 <% end %>
 
 <% if !@workshops.empty? %>
-    <h4 id="workshops">Workshops</h4>
+    <h3 id="workshops">Workshops</h3>
     <%= render :partial => @workshops %>
 <% end %>
 

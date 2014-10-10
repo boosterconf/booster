@@ -413,6 +413,10 @@ div.error + table {
   padding-bottom: 2em;
 }
 
+.row.talk {
+    padding-bottom: 30px;
+}
+
 /* ==================== media queries ==================== */
 
 @media screen and (max-width: 693px) {
