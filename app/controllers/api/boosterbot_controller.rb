@@ -66,8 +66,8 @@ module Api
 
     def answer(message)
       SlackNotifier.postReply(params, message)
-      render :plain, :text => message, :status => 200
-      # render :nothing => true, :status => 200
+      # render :plain, :text => message, :status => 200
+      render :nothing => true, :status => 200
       return
     end
 
