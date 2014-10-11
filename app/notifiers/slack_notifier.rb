@@ -70,6 +70,8 @@ class SlackNotifier
   end
 
   def self.postReply(params, message)
+    channel = params[:channel]
+    channel = channel == 'directmessage' ? '@' + params[user_name] : channel
     body = {
         :username => @@BOT_NAME,
         :channel => params[:channel_name],
