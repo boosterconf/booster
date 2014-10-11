@@ -82,6 +82,7 @@ Booster2013::Application.routes.draw do
     resources :sponsors do
       post :email
     end
+    match 'boosterbot/slash_bot' => 'boosterbot#slash_bot', :via => :post, :as => :slash_bot
   end
 
   resources :nametags

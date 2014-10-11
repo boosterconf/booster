@@ -68,4 +68,13 @@ class SlackNotifier
       puts "Warning: Environment variable SLACK_URL is not set in #{Rails.env}. Skipping Slack notification."
     end
   end
+
+  def self.postReply(params, message)
+    body = {
+        :username => @@BOT_NAME,
+        :channel => params[:channel_name],
+        :text => message
+    }
+    puts body
+  end
 end
