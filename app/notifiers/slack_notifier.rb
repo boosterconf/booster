@@ -71,12 +71,13 @@ class SlackNotifier
 
   def self.postReply(params, message)
     channel = params[:channel_name]
-    channel = channel == 'directmessage' ? '@' + params[:user_name] : channel
+    channel = channel == 'directmessage' ? '@' + params[:user_name] : '#' + channel
     body = {
         :username => @@BOT_NAME,
         :channel => channel,
         :text => message
     }
     puts body
+    RestClient.post @@API_URL, body.to_json, :content_type => :json, :accept => :json
   end
 end
