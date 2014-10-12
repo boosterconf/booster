@@ -13,29 +13,37 @@ module Api
         text = params[:text]
         puts 'Full text: ' + text
 
-        command = text.include?(' ') ? text.split(' ')[0].to_s : text
+        command = first(text)
+        text = strip_first(text)
+
+        puts 'Initial command: ' + command
+
+        #Handle 'all' as the second command and strip it off
+        if (command == 'all')
+          params[:reply_all] = true
+          command = first(text)
+          text = strip_first(text)
+        end
+
         puts 'Parsed command: ' + command
 
         case command
           when 'help' then
-            answer("Commands: help hello stats sponsors")
+            answer("Commands for /bot: help hello stats sponsors")
 
           when 'hello' then
             command_hello
 
           when 'stats' then
-            command_stats(strip_first(text))
+            command_stats(text)
 
           when 'sponsors' then
-            command_sponsors(strip_first(text))
+            command_sponsors(text)
 
 
           else
             answer("I'm sorry. I don't understand what you mean.")
           end
-
-
-        # render :nothing => true, :status => 200
 
       else
         head :bad_request
@@ -73,6 +81,14 @@ module Api
 
     def strip_first(text)
       text.split(' ').drop(1).join(' ')
+    end
+
+    def first(text)
+      if not text
+        nil
+      else
+        text.include?(' ') ? text.split(' ')[0].to_s : text
+      end
     end
 
 
