@@ -31,6 +31,8 @@ module Api
           when 'sponsors' then
             command_sponsors(text)
 
+          when 'say' then
+            answer(text.empty? ? 'Say what?' : text)
 
           else
             answer("I'm sorry. I don't understand what you mean.")
