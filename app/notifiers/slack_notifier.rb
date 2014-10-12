@@ -1,5 +1,6 @@
 class SlackNotifier
   require 'rest_client'
+  require 'nokogiri'
 
   @@API_URL = ENV['SLACK_URL']
   @@SLACK_TEST_CHANNEL = ENV['SLACK_TEST_CHANNEL']
@@ -13,7 +14,7 @@ class SlackNotifier
     talk_type = talk.talk_type.name.downcase
     title = talk.title
     talk_url = Rails.application.routes.url_helpers.talk_url(talk)
-    abstract = ActionView::Base.full_sanitizer.sanitize(talk.description[0..500])
+    abstract = Nokogiri::HTML.fragment(ActionView::Base.full_sanitizer.sanitize(talk.description)[0..500]).to_s
     if (talk.description.length > 500)
       abstract = abstract + "... <#{talk_url}|read more>"
     end
