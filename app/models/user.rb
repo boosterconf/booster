@@ -18,12 +18,13 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
     c.login_field = :email
+    c.validate_email_field = false #Avoid double validation error message
   end
 
 
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
-  validates_presence_of :first_name,:last_name, :message => "You have to specify a first name."
-  validates_presence_of :first_name, :message => "You have to specify a last name."
+  validates_presence_of :first_name, :message => "You have to specify a first name."
+  validates_presence_of :last_name, :message => "You have to specify a last name."
   validates_presence_of :company, :message => "You have to specify a company."
 
   validates_each :accepted_privacy_guidelines do |record, attr, value|
