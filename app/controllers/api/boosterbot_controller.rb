@@ -16,15 +16,6 @@ module Api
         command = first(text)
         text = strip_first(text)
 
-        puts 'Initial command: ' + command
-
-        #Handle 'all' as the second command and strip it off
-        if (command == 'all')
-          params[:reply_all] = true
-          command = first(text)
-          text = strip_first(text)
-        end
-
         puts 'Parsed command: ' + command
 
         case command
