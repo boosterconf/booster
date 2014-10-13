@@ -28,6 +28,7 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
+    <th>&nbsp;</th>
   </tr>
 <% for talk in @talks %>
 <tr>
@@ -53,7 +54,11 @@
       <td>&nbsp;</td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
+      <td>
+        <%= link_to_if talk.accepted? && !talk.speakers_confirmed, 'Confirm', :action => 'confirm', :id => talk.id %>
+      </td>
       <td>&nbsp;</td>
+
     <% else %>
       <td>
         <%= link_to_unless talk.accepted? ||talk.speakers_confirmed , 'Accept', :action => 'accept', :id => talk.id %>
