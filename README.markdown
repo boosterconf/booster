@@ -55,9 +55,12 @@ checkout (both will save to repo with LF-endings).
     $ gem install rails --version 3.2.8
     # In application directory
     $ bundle install
-    ON WINDOWS: Also grab sqlite DLL from http://www.sqlite.org/download.html and stuff it in your path
-    ON UBUNTU: sudo aptitude install libsqlite3-dev
-    $ rake db:migrate
+
+    You need to install Postgres on you machine. Follow this guide
+    https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
+    It works sometimes.
+
+    $ heroku pg:pull jade booster2014 --app booster2015
     $ rake test
     # Start the server
     $ rails s
@@ -77,7 +80,7 @@ Setup:
     $ gem install heroku
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
-    $ cd booster2013
+    $ cd booster
     $ git remote add production git@heroku.com:booster2015.git
     $ git remote add staging git@heroku.com:staging-boosterconf.git
 
