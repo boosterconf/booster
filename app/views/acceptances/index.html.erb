@@ -23,6 +23,7 @@
     <th>Title</th>
     <th>Status</th>
     <th>Email sent</th>
+    <th>Confirmed</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
@@ -45,6 +46,9 @@
     <td>
       <%=talk.email_sent ? "Yes" : "No"%>
     </td>
+    <td>
+        <%=talk.speakers_confirmed ? "Yes" : "No"%>
+    </td>
     <% if talk.email_sent%>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
@@ -52,16 +56,19 @@
       <td>&nbsp;</td>
     <% else %>
       <td>
-        <%= link_to_unless talk.accepted?, 'Accept', :action => 'accept', :id => talk.id %>
+        <%= link_to_unless talk.accepted? ||talk.speakers_confirmed , 'Accept', :action => 'accept', :id => talk.id %>
       </td>
       <td>
-        <%= link_to_unless talk.refused?, 'Reject', :action => 'refuse', :id => talk.id %>
+        <%= link_to_unless talk.refused? || talk.speakers_confirmed, 'Reject', :action => 'refuse', :id => talk.id %>
       </td>
       <td>
-        <%= link_to_unless talk.pending?, 'Await', :action => 'await', :id => talk.id %>
+        <%= link_to_unless talk.pending? || talk.speakers_confirmed, 'Await', :action => 'await', :id => talk.id %>
       </td>
       <td>
-        <%= link_to_unless talk.email_sent, 'Send mail', :action => 'send_mail', :id => talk.id %>
+        <%= link_to_if talk.accepted? && !talk.speakers_confirmed, 'Confirm', :action => 'confirm', :id => talk.id %>
+      </td>
+      <td>
+        <%= link_to_unless talk.email_sent ||talk.speakers_confirmed , 'Send mail', :action => 'send_mail', :id => talk.id %>
       </td>
     <% end%>
   </tr>
