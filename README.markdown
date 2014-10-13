@@ -49,7 +49,7 @@ checkout (both will save to repo with LF-endings).
 ## Getting started
 
     You need to be added as a collaborator on the project. Talk to brsseb
-    Check out the code: git clone git@github.com:rootsconf/booster2013.git
+    Check out the code: git clone git@github.com:boosterconf/booster.git
     $ gem update --system
     $ gem install bundler
     $ gem install rails --version 3.2.8
@@ -78,23 +78,23 @@ Setup:
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
     $ cd booster2013
-    $ git remote add production git@heroku.com:booster2013.git
-    $ git remote add staging git@heroku.com:staging-boosterconference.git
+    $ git remote add production git@heroku.com:booster2015.git
+    $ git remote add staging git@heroku.com:staging-boosterconf.git
 
 Fool around:
 
     $ gem install taps
     # remote console
-    $ heroku console --app stagingroots
-    $ heroku console --app rootsconf
+    $ heroku console --app staging-boosterconf
+    $ heroku console --app booster2015
     # Pull data from the heroku app to your local db
-    $ heroku db:pull --app [staging-boosterconf|booster2013]
+    $ heroku pg:pull jade booster2014 --app booster2015
 
 Update (push):
 
     $ git push [production|staging|master]
     #DB changes? remember to migrate the server
-    $ heroku rake db:migrate --app [staging-boosterconf|booster2013]
+    $ heroku rake db:migrate --app [staging-boosterconf|booster2015]
 
 Heroku app-owner privileges:
 
@@ -105,7 +105,7 @@ Heroku app-owner privileges:
 
 Heroku SendGrid:
     # For å sjekke user/pass:
-    $ heroku config --long --app booster2013
+    $ heroku config --long --app booster2015
 
 
 ## GIT (github)
@@ -114,18 +114,18 @@ Create a github user and add your public SSH-key (usually ~/.ssh/id_rsa.pub) to 
 
 To commit directly to the repository, ask at dev@rootsconf.no for collaborator status.
 
-Otherwise; fork the project (http://github.com:rootsconf/booster2013 - click the "fork project" button).
+Otherwise; fork the project (https://github.com/boosterconf/booster - click the "fork project" button).
 
-For working on your fork (replace <username> with 'rootsconf' if you are allowed to work on the main project).
+For working on your fork (replace <username> with 'boosterconf' if you are allowed to work on the main project).
 
-    $ git clone git@github.com:<username>/booster2013.git
-    $ cd rootsconf
+    $ git clone git@github.com:<username>/booster.git
+    $ cd booster
     $ mate README (or another editor, make a change)
     $ git status (shows what is changed, i.e. README should now be marked red (if you have colors))
     $ git add README (adds README file which should be changed now)
     git status (Will now show README as green - meaning it will be committed)
     git commit -am "My first commit, added some text to README" (Commit to your local repository)
-    git push (Push local changes to the central (origin) repository to github.com/<username>/booster2013)
+    git push (Push local changes to the central (origin) repository to github.com/<username>/booster)
 
 
 (To verify the format for this file, use http://attacklab.net/showdown/)
