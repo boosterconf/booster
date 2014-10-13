@@ -65,6 +65,23 @@ class AcceptancesController < ApplicationController
     redirect_to :controller => :acceptances
   end
 
+  def confirm
+      @talk = Talk.find(params[:id])
+
+      if not @talk.accepted?
+        flash[:error] = "Cannot confirm speaker on talk that is not accepted"
+        redirect_to :controller => :acceptances
+        return
+      end
+
+      @talk.speakers_confirmed = true
+      @talk.save
+      @talk.update_speakers(current_user)
+
+      flash[:notice] = "#{@talk.speaker_name} confirmed for talk '#{@talk.title}'"
+      redirect_to :controller => :acceptances
+    end
+
   def send_mail
     @talk = Talk.find(params[:id])
 

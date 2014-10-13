@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141007201817) do
+ActiveRecord::Schema.define(:version => 20141013181327) do
 
   create_table "bios", :force => true do |t|
     t.integer  "user_id"
@@ -264,6 +264,7 @@ ActiveRecord::Schema.define(:version => 20141007201817) do
     t.text     "outline"
     t.string   "appropriate_for_roles"
     t.string   "type"
+    t.boolean  "speakers_confirmed"
   end
 
   create_table "ticket_types", :force => true do |t|
@@ -329,6 +330,7 @@ ActiveRecord::Schema.define(:version => 20141007201817) do
     t.string   "gender"
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "confirmed_speaker"
   end
 
   create_table "votes", :force => true do |t|

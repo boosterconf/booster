@@ -3,7 +3,7 @@ class Talk < ActiveRecord::Base
 
   attr_accessible :talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
                   :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status,
-                  :slide, :outline, :appropriate_for_roles
+                  :slide, :outline, :appropriate_for_roles, :speakers_confirmed
 
   has_many :speakers
   has_many :users, :through => :speakers
