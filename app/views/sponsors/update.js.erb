@@ -4,7 +4,7 @@ $('#row-id-<%=@sponsor.id%>').html("<%= escape_javascript(render :partial => 'sp
 
 $('#stats').html("<%= escape_javascript(render :partial => 'sponsors/stats' ) %>");
 
-$('#events').html("<%= escape_javascript(render @events ) %>");
+//$('#events').html("<#%= escape_javascript(render @events ) %>");
 
 $.notify("<%= flash[:notice] %>", "success");
 
