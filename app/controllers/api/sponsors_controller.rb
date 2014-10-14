@@ -6,6 +6,9 @@ module Api
     before_filter :find_sponsor, only: [:email]
 
     def email
+      @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
+      @events = Event.last(15).reverse
+
       if @sponsor.is_ready_for_email?
         BoosterMailer.initial_sponsor_mail(@sponsor).deliver
         @sponsor.status = 'contacted'
