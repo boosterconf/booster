@@ -52,6 +52,11 @@
       <%= f.text_field :max_participants, :class => 'input-small' %>
     </div>
 
+    <div class="field speaking_history">
+      <%= f.label :speaking_history, 'Have you held this presentation before? If so; where?' %>
+      <%= f.text_area :speaking_history, :class => 'input-xxlarge', :rows => 5 %>
+    </div>
+
     <div class="field participant_requirements">
       <%= f.label :participant_requirements, 'What do the participants have to bring to the presentation?' %>
       <%= f.text_area :participant_requirements, :class => 'input-xxlarge', :rows => 5 %>
