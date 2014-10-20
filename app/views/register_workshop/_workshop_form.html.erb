@@ -4,7 +4,7 @@
       <%= f.collection_select :talk_type_id, TalkType.workshops, :id, :name_and_duration, :class => 'input-xlarge' %>
     </div>
 
-    <legend>Talk details</legend>
+    <legend>Information visible for everyone</legend>
     <p>
       The abstract will be published on the website as soon
       as you submit it, and will be used by the committee during talk selection. It is therefore important that you
@@ -25,6 +25,23 @@
 
     <%= tinymce %>
 
+    <div class="control-group">
+
+      <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?', :class => 'control-label' %>
+      <div class="controls">
+        <fieldset>
+          <% Roles.all.each do |role| %>
+              <label class="checkbox">
+                <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
+                <%= label_tag "appropriate_for_roles_#{role}", Roles.label[role] %>
+              </label>
+          <% end %>
+        </fieldset>
+      </div>
+    </div>
+
+    <legend>information visible only for the organizing committee and yourself</legend>
+
     <div class="field outline">
       <%= f.label :outline, "Outline" %>
 
@@ -32,20 +49,6 @@
     </div>
 
     <%= tinymce %>
-
-    <div class="control-group">
-
-      <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?', :class => 'control-label' %>
-      <div class="controls">
-
-        <% Roles.all.each do |role| %>
-            <label class="checkbox">
-              <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
-              <%= label_tag "appropriate_for_roles_#{role}", Roles.label[role] %>
-            </label>
-        <% end %>
-      </div>
-    </div>
 
     <div class="field max_participants">
       <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 20, please): " %>
