@@ -80,7 +80,24 @@ class AcceptancesController < ApplicationController
 
       flash[:notice] = "#{@talk.speaker_name} confirmed for talk '#{@talk.title}'"
       redirect_to :controller => :acceptances
-    end
+  end
+
+  def unconfirm
+        @talk = Talk.find(params[:id])
+
+        if not @talk.speakers_confirmed?
+          flash[:error] = "Cannot cancel speaker that is not confirmed"
+          redirect_to :controller => :acceptances
+          return
+        end
+
+        @talk.speakers_confirmed = false
+        @talk.save
+        @talk.update_speakers(current_user)
+
+        flash[:notice] = "#{@talk.speaker_name} cancelled for talk '#{@talk.title}'"
+        redirect_to :controller => :acceptances
+      end
 
   def send_mail
     @talk = Talk.find(params[:id])

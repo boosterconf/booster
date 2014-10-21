@@ -38,6 +38,7 @@ Booster2013::Application.routes.draw do
       get :refuse
       get :await
       get :confirm
+      get :unconfirm
       get :send_mail
     end
   end
