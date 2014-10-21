@@ -1,22 +1,18 @@
 <div class="row">
   <div class="span11">
     <div class="hello">
-      <h1 style='padding-top: 50px'>Booster 2015 will be March 11-13</h1>
-      <h2 style='padding-top:50px; padding-bottom: 100px;' class="high">Speakers and CfP coming soon</h2>
-      <div>
-        <a href="https://vimeo.com/boosterconf/albums" class="btn btn-primary btn-large wide">See this year's talks on Vimeo</a>
+      <h1 style='padding-top: 50px'>Call for Papers is open</h1>
+      <div class="cfp">
+        <h2><%= link_to 'Submit your idea!', info_cfp_url, :class => 'btn btn-primary btn-large wide cfp-button'%></h2>
+        <p><h3>We're accepting ideas for lightning talks and workshops.</h3></p>
+        <p><h3>Want to be a part of Booster 2015? Submit your proposal now!</h3></p>
       </div>
     </div>
   </div>
-  <!--<div class="span3 right-column pull-right">-->
-
-    <!--<h2>Send in your proposals</h2>-->
-    <!--<div>-->
-      <!--<%#= link_to "Submit workshop", register_workshop_start_url, :class => "btn btn-primary btn-large" %>-->
-      <!--<%= link_to "Submit lightning talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>-->
-    <!--</div>-->
-    <!--<p>Want to know more about what we are looking for in a proposal? Read <%= link_to 'more', info_cfp_url %>.</p>-->
-  <!--</div>-->
+  <div class="span11" style="text-align: center; padding-top: 40px;">
+      <p>Got questions? We're available on <%= mail_to 'kontakt@boosterconf.no' %> and
+        <a href="http://twitter.com/boosterconf">@boosterconf</a>.</p>
+  </div>
 </div>
 
 <!--

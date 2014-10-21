@@ -467,6 +467,16 @@ footer .inner {
    background: url(/assets/bg-footer-5people.png) no-repeat 18em bottom;
 }
 
+.hello .cfp h2 .cfp-button {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-top:30px;
+    margin-bottom:30px;
+    padding-left: 100px;
+    padding-right: 100px;
+    font-size: 32px
+}
+
 } /* end this media query */
 
 
@@ -481,13 +491,23 @@ footer .inner {
    background: url(/assets/bg-footer-8people.png) no-repeat 18em bottom;
 }
 
+
+
 } /* end this media query */
 
 
 @media screen and (min-width: 1200px) {
 
 .hello {
-   background: url(/assets/bg-videosarea.png) no-repeat right bottom;
+   background: url(/assets/folk06.png) no-repeat;
+    background-position: 90% 170px;
+    background-size: 10%;
+}
+
+.hello .cfp {
+   background: url(/assets/bg-footer-2people.png) no-repeat;
+   background-position: 60px 0px;
+   background-size: 15%;
 }
 
 .inner {
