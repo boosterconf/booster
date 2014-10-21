@@ -70,6 +70,47 @@ class SlackNotifier
     end
   end
 
+  def self.notifySponsor(sponsor)
+    name = sponsor.name
+    count = Sponsor.count(:conditions => "status = 'accepted'")
+    body = {
+            :username => @@BOT_NAME,
+            :channel => '#sponsors',
+            :text => "*Good news everyone!* #{name} has agreed to be a sponsor! We now have #{count} sponsors."
+        }
+    self.postToSlack(body)
+  end
+
+  def self.postToSlack(body)
+    url = @@API_URL
+    if url
+
+      if @@SLACK_TEST_CHANNEL && !body[:channel]
+        body = body.merge({:channel => "#{@@SLACK_TEST_CHANNEL}"})
+      end
+
+      t = Thread.new do
+        begin
+          puts 'Posting to Slack: ' + url +  '=>'  + body.to_json
+
+          RestClient.post url, body.to_json, :content_type => :json, :accept => :json
+
+        rescue => e
+          message = 'Posting to Slack failed!' +
+          '\n\nException: ' + e.to_s +
+          '\n\nURL: ' + url +
+          '\n\nPayload: ' + body.to_json
+
+          puts message
+          BoosterMailer.deliver_error_mail('Failed to post a message to Slack', message)
+        end
+      end
+    else
+      puts "Warning: Environment variable SLACK_URL is not set in #{Rails.env}. Skipping Slack notification."
+    end
+  end
+
+
   def self.postReply(params, message)
     channel = params[:channel_name]
     channel = channel == 'directmessage' ? '@' + params[:user_name] : '#' + channel

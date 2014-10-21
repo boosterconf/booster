@@ -53,6 +53,7 @@ class SponsorsController < ApplicationController
 
           if @sponsor.status == 'accepted'
             create_sponsor_tickets
+            SlackNotifier.notifySponsor(@sponsor)
           end
         end
 
