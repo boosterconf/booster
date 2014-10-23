@@ -1,9 +1,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
                 $("#acceptances").tablesorter({
-                    theme:'blue',
+                    theme: 'blue',
                     // use save sort widget
-                    widgets:["saveSort"]
+                    widgets: ["saveSort"]
 
                 });
             }
@@ -12,10 +12,10 @@
 <h1>Approval of talk</h1>
 
 <p>
-    Total number of submitted talks: <%= @talks.size %><br><br>
-    <% @types.each_pair{ |key, value| %>
-        <img src="images/<%= key %>.gif" alt="<%=key %>" /> : <%= value  %> <br />
-    <% } %>
+  Total number of submitted talks: <%= @talks.size %><br><br>
+  <% @types.each_pair { |key, value| %>
+      <img src="images/<%= key %>.gif" alt="<%= key %>"/> : <%= value %> <br/>
+  <% } %>
 </p>
 <table id="acceptances" class="table table-striped table-condensed" colspan="0" cellspacing="0">
   <tr>
@@ -30,61 +30,61 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
   </tr>
-<% for talk in @talks %>
-<tr>
-    <td>
-      <%= h(talk.speaker_name) %>
-      <%= talk.speaker_invited ? "(invited)" : "" %>
+  <% for talk in @talks %>
+      <tr>
+        <td>
+          <%= h(talk.speaker_name) %>
+          <%= talk.speaker_invited ? "(invited)" : "" %>
 
-    </td>
-    <td>
-      <%= link_to h(talk.title), talk %>
-      (<%= talk.talk_type.name %>)
-    </td>
-    <td>
-      <img src="images/<%= talk.acceptance_status %>.gif" alt="<%= talk.acceptance_status %>" />
-    </td>
-    <td>
-      <%=talk.email_sent ? "Yes" : "No"%>
-    </td>
-    <td>
-        <%=talk.speakers_confirmed ? "Yes" : "No"%>
-    </td>
+        </td>
+        <td>
+          <%= link_to h(talk.title), talk %>
+          (<%= talk.talk_type.name %>)
+        </td>
+        <td>
+          <img src="images/<%= talk.acceptance_status %>.gif" alt="<%= talk.acceptance_status %>"/>
+        </td>
+        <td>
+          <%= talk.email_sent ? "Yes" : "No" %>
+        </td>
+        <td>
+          <%= talk.speakers_confirmed ? "Yes" : "No" %>
+        </td>
 
-    <% if talk.email_sent? || talk.speakers_confirmed? %>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-      <td>
-        <% if !talk.speakers_confirmed? %>
-        <%= link_to_if talk.accepted?, 'Confirm', :action => 'confirm', :id => talk.id %>
+        <% if talk.email_sent? || talk.speakers_confirmed? %>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>
+              <% if talk.speakers_confirmed? %>
+                  <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
+              <% else %>
+                  <%= link_to_if talk.accepted?, 'Confirm', :action => 'confirm', :id => talk.id %>
+              <% end %>
+            </td>
+            <td>&nbsp;</td>
+
         <% else %>
-          <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
+            <td>
+              <%= link_to_unless talk.accepted?, 'Accept', :action => 'accept', :id => talk.id %>
+            </td>
+            <td>
+              <%= link_to_unless talk.refused?, 'Reject', :action => 'refuse', :id => talk.id %>
+            </td>
+            <td>
+              <%= link_to_unless talk.pending?, 'Await', :action => 'await', :id => talk.id %>
+            </td>
+            <td>
+              <% if talk.speakers_confirmed? %>
+                  <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
+              <% else %>
+                  <%= link_to_if talk.accepted?, 'Confirm', :action => 'confirm', :id => talk.id %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to_unless talk.email_sent?, 'Send mail', :action => 'send_mail', :id => talk.id %>
+            </td>
         <% end %>
-      </td>
-      <td>&nbsp;</td>
-
-    <% else %>
-      <td>
-        <%= link_to_unless talk.accepted?, 'Accept', :action => 'accept', :id => talk.id %>
-      </td>
-      <td>
-        <%= link_to_unless talk.refused?, 'Reject', :action => 'refuse', :id => talk.id %>
-      </td>
-      <td>
-        <%= link_to_unless talk.pending?, 'Await', :action => 'await', :id => talk.id %>
-      </td>
-      <td>
-        <% if !talk.speakers_confirmed? %>
-          <%= link_to_if talk.accepted?, 'Confirm', :action => 'confirm', :id => talk.id %>
-        <% else %>
-          <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
-        <% end %>
-      </td>
-      <td>
-        <%= link_to_unless talk.email_sent?, 'Send mail', :action => 'send_mail', :id => talk.id %>
-      </td>
-    <% end%>
-  </tr>
-<% end %>
+      </tr>
+  <% end %>
 </table>

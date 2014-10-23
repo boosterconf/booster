@@ -117,7 +117,7 @@ class RegistrationsController < ApplicationController
 
   protected
   def require_admin_or_owner
-    if !current_user
+    unless current_user
       store_location
       flash[:notice] = "You must be logged in to see this page"
       redirect_to new_user_session_url

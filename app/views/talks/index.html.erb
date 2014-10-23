@@ -16,12 +16,12 @@
 
   <br/>
 
-<% if !@lightning_talks.empty? %>
+<% unless @lightning_talks.empty? %>
     <h3 id="lightning">Lightning talks</h3>
     <%= render :partial => @lightning_talks %>
 <% end %>
 
-<% if !@workshops.empty? %>
+<% unless @workshops.empty? %>
     <h3 id="workshops">Workshops</h3>
     <%= render :partial => @workshops %>
 <% end %>
