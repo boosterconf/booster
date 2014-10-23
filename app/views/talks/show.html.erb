@@ -104,11 +104,21 @@
 </div>
 
 <% if admin_reviewer_or_talk_owner?(@talk) %>
-    <div id="speaking_history">
-      <h4>Speaking history</h4>
+    <% if @talk.speaking_history.present? %>
+        <div id="speaking_history">
+          <h4>Speaking history</h4>
 
-      <p><%= h(@talk.speaking_history) %></p>
-    </div>
+          <p><%= h(@talk.speaking_history) %></p>
+        </div>
+    <% end %>
+
+    <% if @talk.equipment.present? %>
+        <div id="equipment">
+          <h4>Comment to organizers</h4>
+
+          <p><%= h(@talk.equipment) %></p>
+        </div>
+    <% end %>
 
     <div id="reviews">
       <%= render partial: 'review_form' %>
