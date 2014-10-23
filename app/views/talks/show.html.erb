@@ -65,16 +65,16 @@
 </div>
 <% if @talk.is_tutorial? %>
 
-    <div class="outline">
-      <% if admin_reviewer_or_talk_owner?(@talk) %>
+    <% if admin_reviewer_or_talk_owner?(@talk) %>
+        <div class="outline">
           <strong>Outline</strong>
           <% if contains_html(@talk.outline) %>
               <%= sanitize @talk.outline %>
           <% else %>
               <%= simple_format h(@talk.outline) %>
           <% end %>
-      <% end %>
-    </div>
+        </div>
+    <% end %>
 
     <div class="appropriate_for_roles">
       <strong>Primarily for:</strong>
@@ -104,13 +104,14 @@
 </div>
 
 <% if admin_reviewer_or_talk_owner?(@talk) %>
-    <div id="reviews">
-      <%= render partial: 'review_form' %>
-    </div>
-
     <div id="speaking_history">
       <h4>Speaking history</h4>
+
       <p><%= h(@talk.speaking_history) %></p>
+    </div>
+
+    <div id="reviews">
+      <%= render partial: 'review_form' %>
     </div>
 <% end %>
 
