@@ -4,17 +4,15 @@
 
 <%= form_for @user, :url => '/register_lightning_talk/create_details' do |f| %>
 
-    <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
-
     <%= f.fields_for :bio do |bio| %>
-        <%= bio.label :title, "Work title:" %>
-        <%= bio.text_field :title, :size => 60 %>
+        <%= bio.label :title, 'Work title:' %>
+        <%= bio.text_field :title, placeholder: 'Project manager or Troublemaker?' %>
 
-        <%= bio.label :twitter_handle, "Twitter handle:" %>
-        @<%= bio.text_field :twitter_handle, :size => 60 %>
+        <%= bio.label :twitter_handle, 'Twitter handle:' %>
+        @<%= bio.text_field :twitter_handle, placeholder: 'So that we can tag you better', style: 'width: 190px' %>
 
-        <%= bio.label :blog, "Blog url" %>
-        <%= bio.text_field :blog, :size => 60 %>
+        <%= bio.label :blog, 'Blog url' %>
+        <%= bio.text_field :blog, placeholder: 'Who doesn\'t love a little free PR?' %>
 
         <div>
           <div style="float:right">
@@ -30,13 +28,16 @@
             </div>
           </div>
           <div>
-            <%= bio.label :bio, "Bio" %>
+            <%= bio.label :bio, 'Bio' %>
             <%= bio.text_area :bio, :rows => 13, :class => 'input-xxlarge' %>
           </div>
         </div>
-        <div class="form-actions">
-          <%= f.submit "Finish", :class => "btn btn-primary" %>
-        </div>
     <% end %>
+
+    <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
+
+    <div class="form-actions">
+      <%= f.submit "Finish", :class => "btn btn-primary" %>
+    </div>
 
 <% end %>

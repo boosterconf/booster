@@ -49,7 +49,7 @@ class RegisterWorkshopController < ApplicationController
       BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver
       SlackNotifier.notifyTalk(@workshop)
 
-      if current_user.has_all_statistics
+      if current_user.has_all_statistics?
         redirect_to register_workshop_finish_url
       else
         redirect_to register_workshop_details_url

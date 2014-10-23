@@ -7,5 +7,9 @@ class Bio < ActiveRecord::Base
                                         ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png'],
                                     :message => " only image files are allowed "
   validates_attachment_size :picture, :less_than => 3.megabyte,
-                            :message => " max size is 3 M "
+                            :message => " max size is 3 M"
+
+  def good_enough?
+    picture && bio
+  end
 end

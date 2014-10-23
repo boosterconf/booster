@@ -181,7 +181,7 @@ class User < ActiveRecord::Base
     write_attribute(:featured_speaker, true)
   end
 
-  def has_all_statistics
+  def has_all_statistics?
     self.gender != nil && self.birthyear != nil
   end
 

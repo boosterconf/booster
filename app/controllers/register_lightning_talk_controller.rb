@@ -23,7 +23,7 @@ class RegisterLightningTalkController < ApplicationController
       @user.registration.save!
       redirect_to '/register_lightning_talk/talk'
     else
-      render :action => 'start'
+      render action: :start
     end
   end
 
@@ -42,13 +42,13 @@ class RegisterLightningTalkController < ApplicationController
       BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver
       SlackNotifier.notifyTalk(@talk)
 
-      if current_user.has_all_statistics
+      if current_user.has_all_statistics? && current_user.bio && current_user.bio.good_enough?
         redirect_to '/register_lightning_talk/finish'
       else
         redirect_to '/register_lightning_talk/details'
       end
     else
-      render :action => 'talk'
+      render action: :talk
     end
   end
 
@@ -64,7 +64,7 @@ class RegisterLightningTalkController < ApplicationController
     if @user.save
       redirect_to '/register_lightning_talk/finish'
     else
-      render :action => 'details'
+      render action: :details
     end
   end
 
