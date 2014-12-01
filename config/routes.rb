@@ -145,6 +145,7 @@ Booster2013::Application.routes.draw do
   match 'info/openspaces' => 'info#openspaces'
   match 'info/fishbowl' => 'info#fishbowl'
   match 'info/conference_dinner' => 'info#conference_dinner'
+  match 'info/coc' => 'info#coc'
 
   match 'admin' => 'admin#index'
 
