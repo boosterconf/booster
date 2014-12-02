@@ -4,7 +4,9 @@
       <h1 style='padding-top: 50px'>Call for Papers is open</h1>
       <div class="cfp">
         <h2><%= link_to 'Submit your idea!', info_cfp_url, :class => 'btn btn-primary btn-large wide cfp-button'%></h2>
-        <p><h3>We're accepting ideas for lightning talks and workshops.</h3></p>
+        <p style="padding-top: 20px;">
+          <h3>We're accepting ideas for lightning talks and workshops until <%= Dates::CFP_TUTORIAL_ENDS.to_formatted_s(:short_ordinal)%>.</h3>
+        </p>
         <p><h3>Want to be a part of Booster 2015? Submit your proposal now!</h3></p>
       </div>
     </div>
