@@ -147,7 +147,7 @@ class UsersController < ApplicationController
   def redirect_to_front_page
     flash[:error] = "We have reached the limit on the number of participants for this conference. Please contact us at kontakt@boosterconf.no and we will see what we can do."
     logger.error("Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.")
-    BoosterMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver
+    #BoosterMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver
     redirect_to root_path
   end
 
