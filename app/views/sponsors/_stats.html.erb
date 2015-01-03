@@ -1,45 +1,11 @@
 <table class="table table-striped">
-    <tr>
-      <td>Accepted:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'accepted'") %></td>
-    </tr>
 
+  <% @stats.each do |status, number_of_sponsors| %>
     <tr>
-      <td>Declined:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'declined'") %></td>
+      <td><%= status %>:</td>
+      <td><%= number_of_sponsors %></td>
     </tr>
-    <tr>
-      <td>In Dialogue:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'dialogue'") %></td>
-    </tr>
-    <tr>
-      <td>Suggested (with email):</td>
-      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email != '' ") %></td>
-    </tr>
-    <tr>
-      <td>Suggested (missing email):</td>
-      <td><%= Sponsor.count(:conditions => "status = 'suggested' AND email = ''") %></td>
-    </tr>
-    <tr>
-      <td>Contacted:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'contacted'") %></td>
-    </tr>
-    <tr>
-      <td>Reminded:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'reminded'") %></td>
-    </tr>
-    <tr>
-      <td>Don't ask</td>
-      <td><%= Sponsor.count(:conditions => "status = 'never'") %></td>
-    </tr>
-    <tr>
-      <td>Last year:</td>
-      <td><%= Sponsor.count(:conditions => "was_sponsor_last_year = 't'") %></td>
-    </tr>
-    <tr>
-      <td>Both years:</td>
-      <td><%= Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'") %></td>
-    </tr>
+      <% end if @stats %>
   </table>
 
   <table class="table table-striped">

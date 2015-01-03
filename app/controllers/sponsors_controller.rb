@@ -2,15 +2,12 @@ class SponsorsController < ApplicationController
 
   before_filter :require_admin
   before_filter :find_sponsor, only: [:show, :update, :destroy, :email]
+  before_filter :find_sponsors, only: [:index, :update]
+  before_filter :find_events_and_stats, only: [:index, :update]
 
   respond_to :html, :js
 
   def index
-    @sponsors = Sponsor.all(:include => :user).sort
-
-    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
-
-    @events = Event.last(15).reverse
 
   end
 
@@ -77,17 +74,6 @@ class SponsorsController < ApplicationController
     end
   end
 
-  def create_sponsor_tickets
-    first_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
-    second_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
-
-    first_sponsor_ticket.company = @sponsor.name
-    second_sponsor_ticket.company = @sponsor.name
-
-    first_sponsor_ticket.save!(:validate => false)
-    second_sponsor_ticket.save!(:validate => false)
-  end
-
   def destroy
     @sponsor.destroy
 
@@ -96,13 +82,15 @@ class SponsorsController < ApplicationController
 
   def email
     if @sponsor.is_ready_for_email?
-      BoosterMailer.initial_sponsor_mail(@sponsor).deliver
-      @sponsor.status = 'contacted'
-      @sponsor.last_contacted_at = Time.now.to_datetime
-      @sponsor.save
+      Sponsor.transaction do
+        BoosterMailer.initial_sponsor_mail(@sponsor).deliver
+        @sponsor.status = 'contacted'
+        @sponsor.last_contacted_at = Time.now.to_datetime
+        @sponsor.save
 
-      event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
-      event.save
+        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+        event.save
+      end
 
       redirect_to(sponsors_path, :notice => 'Email was sent and sponsor status set to \'Contacted\'.')
     else
@@ -134,6 +122,38 @@ class SponsorsController < ApplicationController
   private
   def find_sponsor
     @sponsor = Sponsor.find(params[:id])
+  end
+  def find_sponsors
+    @sponsors = Sponsor.all(:include => :user).sort
+  end
+
+  def find_events_and_stats
+    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
+    @stats = {
+        'Accepted' => Sponsor.count(:conditions => "status = 'accepted'"),
+        'Declined' => Sponsor.count(:conditions => "status = 'declined'"),
+        'In dialogue' => Sponsor.count(:conditions => "status = 'dialogue'"),
+        'Suggested (with email)' => Sponsor.count(:conditions => "status = 'suggested' AND email != ''"),
+        'Suggested (missing email)' => Sponsor.count(:conditions => "status = 'suggested' AND email = ''"),
+        'Contacted' => Sponsor.count(:conditions => "status = 'contacted'"),
+        'Reminded' => Sponsor.count(:conditions => "status = 'reminded'"),
+        'Don\'t ask' => Sponsor.count(:conditions => "status = 'never'"),
+        'Both years' => Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'"),
+        'New this year' => Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 'f'")
+    }
+
+    @events = Event.last(15).reverse
+  end
+
+  def create_sponsor_tickets
+    first_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
+    second_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
+
+    first_sponsor_ticket.company = @sponsor.name
+    second_sponsor_ticket.company = @sponsor.name
+
+    first_sponsor_ticket.save!(:validate => false)
+    second_sponsor_ticket.save!(:validate => false)
   end
 
 end
