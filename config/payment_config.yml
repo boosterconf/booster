@@ -7,7 +7,7 @@ free_prices: &free_prices
 prices: &prices
   early_bird: 5500
   full_price: 7000
-  lightning: 4400
+  lightning: 3500
   reviewer: 4400
   dinner: 0
   <<: *free_prices
