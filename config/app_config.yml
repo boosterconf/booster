@@ -5,7 +5,7 @@ development:
   lightning_registration_open: true
   program_released: false
   speakers_released: false
-  early_bird_ends: 2015-01-24 23:59:59
+  early_bird_ends: 2015-01-31 23:59:59 +1
   opening_keynote: 312
   closing_keynote: 314
 
@@ -15,7 +15,7 @@ test:
   tutorial_registration_open: true
   lightning_registration_open: false
   program_released: false
-  early_bird_ends: 2015-01-24 23:59:59
+  early_bird_ends: 2015-01-31 23:59:59 +1
 
 staging:
   year: 2015
@@ -24,7 +24,7 @@ staging:
   lightning_registration_open: true
   program_released: false
   speakers_released: false
-  early_bird_ends: 2015-01-24 23:59:59
+  early_bird_ends: 2015-01-31 23:59:59 +1
   opening_keynote: 194
   closing_keynote: 196
 
@@ -35,6 +35,6 @@ production:
   lightning_registration_open: false
   program_released: false
   speakers_released: false
-  early_bird_ends: 2015-01-24 23:59:59
+  early_bird_ends: 2015-01-31 23:59:59 +1
   opening_keynote: 312
   closing_keynote: 314

@@ -1,44 +1,62 @@
-<div class="row">
-  <div class="span11">
-    <div class="hello">
-      <h1 style='padding-top: 50px'>Call for Papers is open</h1>
-      <div class="cfp">
-        <h2><%= link_to 'Submit your idea!', info_cfp_url, :class => 'btn btn-primary btn-large wide cfp-button'%></h2>
-        <p style="padding-top: 20px;">
-          <h3>We're accepting ideas for lightning talks and workshops until <%= Dates::CFP_TUTORIAL_ENDS.to_formatted_s(:short_ordinal)%>.</h3>
-        </p>
-        <p><h3>Want to be a part of Booster 2015? Submit your proposal now!</h3></p>
+<div class="container">
+<div class="row-fluid">
+    <div class="hello span9" >
+      <div class="hello-inner">
+        <h2>Booster 2015, 11-13 March</h2>
+        <h1>Get your tickets now!</h1>
+        <h2>Early-bird closes <%= AppConfig.early_bird_ends.to_formatted_s(:short_ordinal) %>.</h2>
+        <div style="padding-top: 40px; padding-bottom: 30px; margin-bottom: 0px">
+          <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
+          <%= link_to 'Register group ticket', new_group_registration_url, :class => "btn btn-primary btn-large" %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="span11" style="text-align: center; padding-top: 40px;">
-      <p>Got questions? We're available on <%= mail_to 'kontakt@boosterconf.no' %> and
-        <a href="http://twitter.com/boosterconf">@boosterconf</a>.</p>
-  </div>
-</div>
 
-<!--
-<div class="row speakers-box">
-  <div class="speakers">
-    <h3>Speaking at Booster 2015</h3>
-    <% for speaker in @speakers.shuffle.take(4) do %>
+  <div class="span3 right-column pull-right" style="border-left: 0px solid #F6AB6F; border-radius: 0px; margin: 10px;">
+    <div class="cfp">
+      <p><b>Want to be a part of Booster 2015? Submit your proposal now!</b></p>
+      <p>We're accepting ideas for lightning talks and workshops until <%= Dates::CFP_TUTORIAL_ENDS.to_formatted_s(:short_ordinal)%>.</p>
+
+      <p><%= link_to 'Submit your idea!', info_cfp_url, :class => 'btn btn-primary btn-large cfp-button'%></p>
+    </div>
+  </div>
+ </div>
+
+
+
+<div class="speakers-box">
+  <h4>Some of our speakers this year</h4>
+  <div class="speakers row-fluid">
+    <% for group in @speakers.shuffle.take(4).each_slice(2) %>
+      <div class="speaker-group span6">
+      <% for speaker in group %>
         <div class="frontpage-speaker">
-          <span>
+          <div>
             <a href="/info/speakers">
               <%= image_tag speaker.bio.picture.url %>
             </a>
-          </span>
-          <span>
-            <b><%= speaker[:full_name] %></b> <br /> <i><%= speaker.bio[:title] %></i>
+          </div>
+          <div>
+            <b><%= speaker.full_name %></b> <br /> <i><%= speaker.bio[:title] %></i>
             <% if speaker.bio[:twitter_handle].length > 0 %>
                 <br />
                 <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
                   &#64;<%= speaker.bio[:twitter_handle] %>
                 </a>
             <% end %>
-          </span>
+          </div>
         </div>
+        <% end %>
+      </div>
     <% end %>
+    </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span11" style="text-align: center; padding-top: 40px;">
+      <p>Got questions? We're available on <%= mail_to 'kontakt@boosterconf.no' %> and
+        <a href="http://twitter.com/boosterconf">@boosterconf</a>.</p>
   </div>
 </div>
---> 
+
+</div>

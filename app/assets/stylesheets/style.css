@@ -374,18 +374,24 @@ div.error + table {
   margin-bottom: 0.38em;
 }
 
+.speakers .speaker-group {
+    text-align: center;
+    margin-left: 0;
+}
+
 .frontpage-speaker {
-    margin-left: 34px;
-    width: 20%;
+    vertical-align: top;
+    display: inline-block;
+    width: 49%;
     min-width: 166px;
-    float: left;
+    padding-bottom: 20px;
 }
 
 .frontpage-speaker img {
   border: 3px solid #d3d1cb;
   border-radius: 5px;
-  min-width: 160px;
-  min-height: 160px;
+  width: 160px;
+  height: 160px;
 }
 
 .social-links .nav > li > a {
@@ -417,6 +423,10 @@ div.error + table {
     padding-bottom: 30px;
 }
 
+.cfp {
+    padding: 10px;
+}
+
 /* ==================== media queries ==================== */
 
 @media screen and (max-width: 693px) {
@@ -434,21 +444,16 @@ footer .inner {
    background: url(/assets/bg-footer-2people.png) no-repeat 18em bottom;
 }
 
-} /* end this media query */
-@media screen and (min-width: 1200px) {
-  .speakers-box {
-      background: url(/assets/bg-hello.png) no-repeat 1em 1em;
-  }
-
-  .speakers {
-    width: 80%
-  }
+.cfp {
+    border-top: 8px solid #F6AB6F;
 }
+
+} /* end this media query */
 
 @media screen and (min-width: 700px) {
 
 .hello h1 {
-   font-size: 3.5em;
+   font-size: 3.0em;
    line-height: 1.1;
 }
 
@@ -477,13 +482,24 @@ footer .inner {
     font-size: 32px
 }
 
+.hello {
+    border-right: 8px solid #F6AB6F;
+    padding-top: 30px;
+    box-sizing: border-box;
+}
+
+.cfp {
+    border-top: none;
+    box-sizing: border-box;
+}
+
 } /* end this media query */
 
 
 @media screen and (min-width: 980px) {
 
 .hello h1 {
-   font-size: 4.25em;
+   font-size: 3.5em;
    line-height: 1.1;
 }
 
@@ -500,15 +516,15 @@ footer .inner {
 
 .hello {
    background: url(/assets/folk06.png) no-repeat;
-    background-position: 90% 170px;
+    background-position: 90% 210px;
     background-size: 10%;
 }
 
-.hello .cfp {
-   background: url(/assets/bg-footer-2people.png) no-repeat;
-   background-position: 60px 0px;
-   background-size: 15%;
-}
+/*.hello .hello-inner {*/
+   /*background: url(/assets/bg-footer-2people.png) no-repeat;*/
+   /*background-position: 60px 175px;*/
+   /*background-size: 15%;*/
+/*}*/
 
 .inner {
    width: 70em;                /* 1120px */
@@ -520,6 +536,19 @@ footer .inner {
 
 .sponsorarea .inner {
    background-color: #fff;
+}
+
+.speakers-box {
+  /*background: url(/assets/bg-hello.png) no-repeat 1em 1em;*/
+  background: url(/assets/bg-footer-2people.png) no-repeat 1em 1em;
+  background-position: 0px 55px;
+  background-size: 15%;
+}
+
+.speakers {
+    width: 85%;
+    margin-right: 0px;
+    padding-top: 20px;
 }
 
 } /* end this media query */
