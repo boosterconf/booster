@@ -24,33 +24,35 @@
 
 
 
-<div class="speakers-box">
-  <h4>Some of our speakers this year</h4>
-  <div class="speakers row-fluid">
-    <% for group in @speakers.shuffle.take(4).each_slice(2) %>
-      <div class="speaker-group span6">
-      <% for speaker in group %>
-        <div class="frontpage-speaker">
-          <div>
-            <a href="/info/speakers">
-              <%= image_tag speaker.bio.picture.url %>
-            </a>
+<% if @speakers.size >= 4 %>
+  <div class="speakers-box">
+    <h4>Some of our speakers this year</h4>
+    <div class="speakers row-fluid">
+      <% for group in @speakers.shuffle.take(4).each_slice(2) %>
+        <div class="speaker-group span6">
+        <% for speaker in group %>
+          <div class="frontpage-speaker">
+            <div>
+              <a href="/info/speakers">
+                <%= image_tag speaker.bio.picture.url %>
+              </a>
+            </div>
+            <div>
+              <b><%= speaker.full_name %></b> <br /> <i><%= speaker.bio[:title] %></i>
+              <% if speaker.bio[:twitter_handle].length > 0 %>
+                  <br />
+                  <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
+                    &#64;<%= speaker.bio[:twitter_handle] %>
+                  </a>
+              <% end %>
+            </div>
           </div>
-          <div>
-            <b><%= speaker.full_name %></b> <br /> <i><%= speaker.bio[:title] %></i>
-            <% if speaker.bio[:twitter_handle].length > 0 %>
-                <br />
-                <a href="http://twitter.com/<%= speaker.bio[:twitter_handle] %>" title="Twitter" target="_blank">
-                  &#64;<%= speaker.bio[:twitter_handle] %>
-                </a>
-            <% end %>
-          </div>
+          <% end %>
         </div>
-        <% end %>
+      <% end %>
       </div>
-    <% end %>
-    </div>
-</div>
+  </div>
+<% end %>
 
 <div class="row-fluid">
   <div class="span11" style="text-align: center; padding-top: 40px;">
