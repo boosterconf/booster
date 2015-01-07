@@ -425,7 +425,7 @@ div.error + table {
 }
 
 .cfp {
-    padding: 10px;
+    text-align: center;
 }
 
 /* ==================== media queries ==================== */
@@ -473,29 +473,27 @@ footer .inner {
    background: url(/assets/bg-footer-5people.png) no-repeat 18em bottom;
 }
 
-.hello .cfp h2 .cfp-button {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-top:30px;
-    margin-bottom:30px;
-    padding-left: 100px;
-    padding-right: 100px;
-    font-size: 32px
-}
-
 .hello {
     border-right: 8px solid #F6AB6F;
     padding-top: 30px;
-    box-sizing: border-box;
 }
 
 .cfp {
     border-top: none;
-    box-sizing: border-box;
+    margin-left: 0;
+    padding-top: 30px;
 }
 
 } /* end this media query */
 
+
+@media screen and (max-width: 980px) {
+
+    .cfp h3 {
+        font-size: 1.2em;
+    }
+
+} /* end this media query */
 
 @media screen and (min-width: 980px) {
 
