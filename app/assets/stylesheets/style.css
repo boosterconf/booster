@@ -385,6 +385,7 @@ div.error + table {
     width: 49%;
     min-width: 166px;
     padding-bottom: 20px;
+    text-align: left;
 }
 
 .frontpage-speaker img {
@@ -546,7 +547,7 @@ footer .inner {
 }
 
 .speakers {
-    width: 85%;
+    width: 80%;
     margin-right: 0px;
     padding-top: 20px;
 }
