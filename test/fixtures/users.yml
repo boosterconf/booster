@@ -8,6 +8,7 @@ quentin:
   role: Developer
   birthyear: 1984
   hometown: Bergen
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("quentin" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -17,6 +18,7 @@ god:
   name: Jahve
   first_name: Jahve
   last_name: the LORD
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("god" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -27,6 +29,7 @@ reviewer:
   name: Ms Nitty Pickersen
   first_name: Nitty
   last_name: Pickersen
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("reviewer" + salt) %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -36,6 +39,7 @@ test:
   name: Test
   first_name: Test
   last_name: Whatever
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -45,6 +49,7 @@ other:
   name: Other Guy
   first_name: Other
   last_name: Guy
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -54,6 +59,7 @@ sponsor:
   name: Sponsor Dude
   first_name: Sponsor
   last_name: Dude
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -63,6 +69,7 @@ multispeaker:
   name: Mr Talk Talkative
   first_name: Talk
   last_name: Talkative, Esq.
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
@@ -72,6 +79,7 @@ singlespeaker:
   name: C. Oncise
   first_name: C.
   last_name: Oncise
+  accepted_privacy_guidelines: true
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
