@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_filter :require_admin, only: [:index, :delete_bio, :phone_list, :dietary_requirements]
   before_filter :require_admin_or_self, only: [:show, :edit, :update]
   before_filter :require_admin_or_speaker, only: [:create_bio]
+  before_filter :require_unauthenticated_or_admin, only: [:new, :create]
+  before_filter :registration_is_open, only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -22,8 +24,6 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
     end
 
-    init_registration
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @user }
@@ -31,23 +31,10 @@ class UsersController < ApplicationController
   end
 
   def new
-    if current_user && !current_user.is_admin
-      redirect_to current_user_url
-      return
-    end
-
-    if no_more_registrations_allowed
-      redirect_to_front_page
-      return
-    end
-
     @user = User.new
-    @user.build_registration
-    if params[:invited]
-      @user.registration.ticket_type_old = "speaker"
+    if params[:invited] && current_user.is_admin?
       @user.invited = true
-      @user.registration.registration_complete = true
-      @user.registration.manual_payment = false
+      @user.build_bio
     else
       # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
@@ -62,23 +49,8 @@ class UsersController < ApplicationController
     init_registration
   end
 
-  def init_registration
-    unless @user.registration
-      @user.build_registration
-      @user.registration.save!
-    end
-  end
-
   def create
-    if current_user && !current_user.is_admin
-      redirect_to current_user_url
-      return
-    end
-
-    if no_more_registrations_allowed
-      redirect_to_front_page
-      return
-    end
+    puts params[:user]
 
     User.transaction do
       @user = User.new(params[:user])
@@ -86,18 +58,29 @@ class UsersController < ApplicationController
       @user.registration_ip = request.remote_ip
       @user.roles = params[:roles].join(",") if params[:roles]
 
-      if @user.valid?
-        unless @user.registration.free_ticket || @user.registration.discounted_ticket?
-          @user.registration.ticket_type_old = Registration.current_normal_ticket_type
-        end
+      unless @user.registration.free_ticket || @user.registration.discounted_ticket?
+        @user.registration.ticket_type_old = Registration.current_normal_ticket_type
+      end
 
-        @user.save
+      if @user.invited && current_user.is_admin?
+        @user.registration.registration_complete = true
+        @user.registration.ticket_type_old = 'speaker'
+        @user.registration.manual_payment = false
+        puts 'is like totally invited'
+      end
 
-        unless @user.registration.save
-          raise @user.registration.errors.inspect
-        end
+      puts @user.registration.registration_complete
 
-        if @user.registration.manual_payment
+      if @user.save
+
+        puts "yeah pony pony"
+        puts @user.registration.registration_complete
+        puts @user.registration.registration_complete
+
+        if @user.invited
+          flash[:notice] = "You have registered #{@user.email}"
+          redirect_to @user
+        elsif @user.registration.manual_payment
           flash[:notice] = "We will contact you to confirm the details."
           BoosterMailer.manual_registration_confirmation(@user).deliver
           BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
@@ -119,10 +102,6 @@ class UsersController < ApplicationController
 
   def login(user)
     UserSession.create(user)
-  end
-
-  def no_more_registrations_allowed
-    User.count >= AppConfig.max_users_limit
   end
 
   def redirect_to_front_page
@@ -184,7 +163,7 @@ class UsersController < ApplicationController
   def delete_bio
     @user = User.find(params[:id])
     if @user.bio.delete
-      flash[:notice] = "Removed bio"
+      flash[:notice] = 'Removed bio'
     else
       flash[:notice] = "Couldn't remove bio"
     end
@@ -201,7 +180,6 @@ class UsersController < ApplicationController
 
   def new_skeleton
     @user = User.new
-    @user.registration = Registration.new
   end
 
   # TODO: Lag egen type for skeleton users
@@ -239,8 +217,7 @@ class UsersController < ApplicationController
     end
 
 
-    existing_users = users.select { |u| user_already_exists(u.email) }
-    new_users = users.select { |u| !user_already_exists(u.email) }
+    existing_users, new_users = users.partition { |u| user_already_exists(u.email) }
 
     if all_emails_are_valid(new_users) && @invoice.valid?
       @invoice.save!
@@ -313,7 +290,7 @@ class UsersController < ApplicationController
     total = 0
     for day in date_range do
       for user in users_by_date[day] || []
-        total += user.registration.price || 0 if user.registration && user.registration.paid?
+        total += user.registration.price || 0 if user.registration.paid?
       end
       per_date << total
     end
@@ -322,5 +299,15 @@ class UsersController < ApplicationController
 
   def tokenize(string)
     string.gsub(/[,;:\n]/, " ").split
+  end
+
+  def registration_is_open
+    if no_more_registrations_allowed
+      return redirect_to_front_page
+    end
+  end
+
+  def no_more_registrations_allowed
+    User.count >= AppConfig.max_users_limit
   end
 end

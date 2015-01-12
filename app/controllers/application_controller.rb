@@ -99,6 +99,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_unauthenticated_or_admin
+    if current_user && !current_user.is_admin
+      return redirect_to current_user_url
+    end
+  end
+
   def store_location
     session[:return_to] = request.url
   end

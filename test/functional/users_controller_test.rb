@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
 
-  SOME_EMAIL = "a@b.no"
+  SOME_EMAIL = 'a@b.no'
 
   context 'An unauthenticated user' do
 
@@ -72,18 +72,18 @@ class UsersControllerTest < ActionController::TestCase
 
     end
 
-    context "trying to create a new user with limit for number of users reached" do
+    context 'trying to create a new user with limit for number of users reached' do
       setup do
         User.stubs(:count).returns(500)
         AppConfig.stubs(:max_users_limit).returns(500)
       end
 
-      should "give an error message when create is called" do
-        post :create, :user => create_user_params
+      should 'get an error message when create is called' do
+        post :create, user: create_user_params
         assert flash[:error]
       end
 
-      should "give an error message when new is called" do
+      should 'get an error message when new is called' do
         get :new
         assert flash[:error]
       end
@@ -93,25 +93,25 @@ class UsersControllerTest < ActionController::TestCase
 
       context 'with one email only' do
         setup do
-          @emails = "a@b.no"
+          @emails = 'a@b.no'
         end
 
         should 'create a new user' do
-          assert_difference('User.count' "+1") do
-            assert_difference('Registration.count' "+1") do
+          assert_difference('User.count' '+1') do
+            assert_difference('Registration.count' '+1') do
               post :create_group_registration, :invoice => create_invoice_params, :emails => @emails
             end
           end
         end
 
         should 'create a new invoice' do
-          assert_difference('Invoice.count' "+1") do
-            post :create_group_registration, :invoice => create_invoice_params, :emails => @emails
+          assert_difference('Invoice.count' '+1') do
+            post :create_group_registration, invoice: create_invoice_params, emails: @emails
           end
         end
 
         should 'add user to invoice' do
-          post :create_group_registration, :invoice => create_invoice_params, :emails => @emails
+          post :create_group_registration, invoice: create_invoice_params, emails: @emails
 
           @registration = Registration.unscoped.order("id asc").last
           @invoice = Invoice.unscoped.order("id asc").last
@@ -148,7 +148,7 @@ class UsersControllerTest < ActionController::TestCase
 
       context 'with three emails' do
         setup do
-          @emails = "a@b.no,c@d.no; e@f.no"
+          @emails = 'a@b.no,c@d.no; e@f.no'
         end
 
         should 'create three new users' do
@@ -159,8 +159,8 @@ class UsersControllerTest < ActionController::TestCase
           end
         end
 
-        should 'create a new invoice' do
-          assert_difference('Invoice.count', 1) do
+        should 'create one new invoice' do
+          assert_difference('Invoice.count', +1) do
             post :create_group_registration, :invoice => create_invoice_params, :emails => @emails
           end
         end
@@ -205,8 +205,7 @@ class UsersControllerTest < ActionController::TestCase
       end
     end
 
-    should "not be able to create a bio" do
-
+    should 'not be able to create a bio' do
       @normal_user.registration = Registration.new
       @normal_user.registration.ticket_type_old = 'early_bird'
       @normal_user.registration.save
@@ -241,39 +240,51 @@ class UsersControllerTest < ActionController::TestCase
 
     should 'be able to delete bio' do
       q = users(:quentin)
-      bio = Bio.new(:title => "test")
-      User.update(q, { :bio => bio })
+      bio = Bio.new(title: 'test')
+      User.update(q, { bio: bio })
 
       post :delete_bio, :id => q.id
 
       assert_response 302
       assert q.bio.nil?
     end
-  end
 
+    context 'registering an invited speaker' do
+      setup do
+        @invited_speaker_params = create_user_params.merge!({ invited: true })
+      end
+
+      should 'not send an email' do
+        assert_no_difference('ActionMailer::Base.deliveries.size') do
+          post :create, user: @invited_speaker_params
+        end
+      end
+      
+    end
+  end
 
   private
   def create_user_params
-    update_user_params.merge!({ "email" => "test@mail.com" })
+    update_user_params.merge!({ 'email' => 'test@mail.com' })
   end
 
   def update_user_params
-    { "accepted_privacy_guidelines" => "1", "company" => "Test", "first_name" => "Test", "last_name" => "Osteron", "accept_optional_email" => "1",
-      "password" => "fjasepass", "password_confirmation" => "fjasepass", "phone_number" => "92043382", "role" => "Developer", "birthyear" => 1984, "hometown" => "Bergen",
-      "registration_attributes" => { "ticket_type_old" => "full_price", "manual_payment" => "", "free_ticket" => "false", "includes_dinner" => "1" }
+    { 'accepted_privacy_guidelines' => '1', 'company' => 'Test', 'first_name' => 'Test', 'last_name' => 'Osteron', 'accept_optional_email' => '1',
+      'password' => 'fjasepass', 'password_confirmation' => 'fjasepass', 'phone_number' => '92043382', 'role' => 'Developer', 'birthyear' => 1984, 'hometown' => 'Bergen',
+      'registration_attributes' => { 'ticket_type_old' => 'full_price', 'manual_payment' => '', 'free_ticket' => 'false', 'includes_dinner' => "1" }
     }
   end
 
   def create_speaker_params
-    { "company" => "DRW", "first_name" => "Dan", "last_name" => "North", "bio_attributes" =>
-        { "title" => "Boss", "blog" => "dannorth.net", "twitter_handle" => "tastapod", "bio" => "Testtest" },
-      "gender" => "M", "password_confirmation" => "test", "role" => "Developer", "featured_speaker" => "0",
-      "phone_number" => "93400346", "hometown" => "London", "registration_attributes" => { "includes_dinner" => "1" },
-      "password" => "test", "birthyear" => "1976", "email" => "dan@north.net" }
+    { 'company' => 'DRW', 'first_name' => 'Dan', 'last_name' => 'North', 'bio_attributes' =>
+        { 'title' => 'Boss', 'blog' => 'dannorth.net', 'twitter_handle' => 'tastapod', 'bio' => 'Testtest' },
+      'gender' => 'M', 'password_confirmation' => 'test', 'role' => 'Developer', 'featured_speaker' => '0',
+      'phone_number' => '93400346', 'hometown' => 'London', 'registration_attributes' => { 'includes_dinner' => '1' },
+      'password' => 'test', 'birthyear' => '1976', 'email' => 'dan@north.net' }
   end
 
   def create_invoice_params
-    { "your_reference" => "Karianne Berg", "email" => "karianne.berg@gmail.com" }
+    { 'your_reference' => 'Karianne Berg', 'email' => 'karianne.berg@gmail.com' }
   end
 
   def login_quentin

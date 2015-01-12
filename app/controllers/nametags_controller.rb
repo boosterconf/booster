@@ -75,7 +75,7 @@ class NametagPdf < Prawn::Document
       fill_color "F6AB6F"
       registration = user.registration
       ticket_type_text = ''
-      if registration == NIL
+      if registration == nil
         ticket_type_text = ''
       elsif registration.ticket_type_old == 'organizer'
         ticket_type_text = 'Organizer'

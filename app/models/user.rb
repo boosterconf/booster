@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
                   :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
                   :registration_attributes, :bio_attributes, :first_name, :last_name
 
-  has_one :registration
-  has_one :bio
+  has_one :registration, autosave: true
+  has_one :bio, autosave: true
   has_many :speakers
   has_many :talks, :through => :speakers
 
@@ -21,15 +21,13 @@ class User < ActiveRecord::Base
     c.validate_login_field = false
   end
 
-
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
   validates_presence_of :first_name, :message => "You have to specify a first name."
   validates_presence_of :last_name, :message => "You have to specify a last name."
   validates_presence_of :company, :message => "You have to specify a company."
 
-  validates_each :accepted_privacy_guidelines do |record, attr, value|
-    record.errors.add attr, 'You have to accept that we send you emails regarding the conference.' if value == false
-  end
+  # A user always has a registration, so no more null checks
+  after_initialize { |user| user.build_registration unless user.registration }
 
   def full_name
       if read_attribute(:first_name)

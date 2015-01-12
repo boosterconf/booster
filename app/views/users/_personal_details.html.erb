@@ -1,10 +1,4 @@
 <fieldset id="personal_details">
-  <% if admin? %>
-  <div class="field name">
-    Old name field: <%= @user.full_name %>
-  </div>
-  <% end %>
-
   <div class="field first_name">
     <%= f.label :first_name, "First name" %>
     <%= text_field(:user, :first_name, :placeholder => "Please tell us your first name", :class => 'input-xlarge', :required => true) %>
