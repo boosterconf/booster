@@ -66,16 +66,9 @@ class UsersController < ApplicationController
         @user.registration.registration_complete = true
         @user.registration.ticket_type_old = 'speaker'
         @user.registration.manual_payment = false
-        puts 'is like totally invited'
       end
 
-      puts @user.registration.registration_complete
-
       if @user.save
-
-        puts "yeah pony pony"
-        puts @user.registration.registration_complete
-        puts @user.registration.registration_complete
 
         if @user.invited
           flash[:notice] = "You have registered #{@user.email}"

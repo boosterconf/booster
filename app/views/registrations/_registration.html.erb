@@ -58,11 +58,16 @@
     <p>
       <%= link_to "Update registration manually", edit_registration_path(@user.registration) %>
     </p>
+
+    <p>
+      <%= link_to "Register abstract for this user", assign_talk_path(@user) %>
+    </p>
+
     <p>
       <%= link_to "Print name tag", nametag_path(@user, :format => 'pdf') %>
     </p>
     <p>
-      <% if @user.bio == nil && admin? %>
+      <% unless @user.bio %>
           <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
       <% end %>
     </p>

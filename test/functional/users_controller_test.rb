@@ -259,7 +259,7 @@ class UsersControllerTest < ActionController::TestCase
           post :create, user: @invited_speaker_params
         end
       end
-      
+
     end
   end
 

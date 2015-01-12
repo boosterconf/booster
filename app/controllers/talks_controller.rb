@@ -39,22 +39,21 @@ class TalksController < ApplicationController
     @user = User.new
     @types = TalkType.all
 
-
     render action: @talk.is_tutorial? ? 'edit_tutorial' : 'edit_lightning_talk'
   end
 
   def assign
     @talk = Talk.new
     @tags = Tag.all
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     @types = TalkType.all
   end
 
   def create_assigned
     params[:talk].merge!({ acceptance_status: 'accepted' })
 
-    @talk = Talk.new(params)
-    @user = User.find(params[:assigned_user_id])
+    @talk = Talk.new(params[:talk])
+    @user = User.find(params[:user_id])
     @types = TalkType.all
 
     if @talk.save

@@ -72,6 +72,9 @@ Booster2013::Application.routes.draw do
   match '/lightning_talks' => 'talks#lightning_talks'
   match '/talks/cheat_sheet' => 'talks#cheat_sheet'
   match '/talks/vote' => 'talks#vote'
+
+
+
   resources :talks do
     resources :comments
     resources :reviews
@@ -134,6 +137,8 @@ Booster2013::Application.routes.draw do
   match 'users/current' => 'users#current', :as => :current_user
   match 'users/:id/create_bio' => 'users#create_bio'
   match 'users/:id/delete_bio' => 'users#delete_bio'
+  get 'users/:user_id/assign_talk' => 'talks#assign', as: :assign_talk
+  post 'users/:user_id/assign_talk' => 'talks#create_assigned', as: :create_assigned_talk
 
   match 'info/organizers' => 'info#organizers'
   match 'info/monetary_policy' => 'info#monetary_policy'
