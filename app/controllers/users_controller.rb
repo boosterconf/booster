@@ -42,22 +42,19 @@ class UsersController < ApplicationController
     end
 
     @user = User.new
-    @user.registration = Registration.new
+    @user.build_registration
     if params[:invited]
       @user.registration.ticket_type_old = "speaker"
       @user.invited = true
+      @user.registration.registration_complete = true
       @user.registration.manual_payment = false
     else
       # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
-      @user.registration.ticket_type_old = params[:ticket_type_old] || current_normal_ticket_type
+      @user.registration.ticket_type_old = params[:ticket_type_old] || Registration.current_normal_ticket_type
     end
 
     @user.registration.includes_dinner = !@user.registration.discounted_ticket?
-  end
-
-  def current_normal_ticket_type
-    early_bird_is_active? ? "early_bird" : "full_price"
   end
 
   def edit
@@ -67,10 +64,7 @@ class UsersController < ApplicationController
 
   def init_registration
     unless @user.registration
-      @user.registration = Registration.new
-      # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
-      @user.registration.manual_payment = true
-      @user.registration.ticket_type_old = current_normal_ticket_type
+      @user.build_registration
       @user.registration.save!
     end
   end
@@ -90,11 +84,11 @@ class UsersController < ApplicationController
       @user = User.new(params[:user])
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
-      @user.roles = params[:roles].join(",") unless params[:roles] == nil
+      @user.roles = params[:roles].join(",") if params[:roles]
 
       if @user.valid?
         unless @user.registration.free_ticket || @user.registration.discounted_ticket?
-          @user.registration.ticket_type_old = current_normal_ticket_type
+          @user.registration.ticket_type_old = Registration.current_normal_ticket_type
         end
 
         @user.save
@@ -103,22 +97,13 @@ class UsersController < ApplicationController
           raise @user.registration.errors.inspect
         end
 
-        unless current_user
-          login @user
-        end
-
         if @user.registration.manual_payment
           flash[:notice] = "We will contact you to confirm the details."
           BoosterMailer.manual_registration_confirmation(@user).deliver
           BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
-          #@user.registration.invoiced = SendRegning.new.send_invoice(
-          #    PAYMENT_CONFIG['send_regning_url'], @user.id, @user.full_name, @user.email, @user.zip, @user.city,
-          #    @user.registration.ticket_type_old, @user.registration.ticket_price)
-
           redirect_to @user
         elsif @user.registration.free_ticket
           flash[:notice] = "We will contact you to confirm the details."
-          #BoosterMailer.free_registration_confirmation(@user).deliver
           BoosterMailer.free_registration_notification(current_user, @user, user_url(@user)).deliver
           redirect_to @user
         else
@@ -127,17 +112,13 @@ class UsersController < ApplicationController
         end
       else
         flash[:error] = "An error occured. Please follow the instructions below."
-        render :action => 'new'
+        render action: :new
       end
     end
   end
 
   def login(user)
     UserSession.create(user)
-  end
-
-  def early_bird_is_active?
-    Time.now < AppConfig.early_bird_ends
   end
 
   def no_more_registrations_allowed
@@ -153,24 +134,25 @@ class UsersController < ApplicationController
 
   def create_bio
     @user = User.find(params[:id])
-    if @user.bio == nil
-      @user.bio = Bio.new
+
+    unless @user.bio
+      @user.build_bio.save
     end
-    render :action => 'edit'
+
+    render action: :edit
   end
 
   def update
-    @user = User.find(params[:id], :include => :registration)
+    @user = User.find(params[:id], include: :registration)
     @user.roles_will_change!
-    @user.roles = params[:roles].join(",") unless params[:roles] == nil
+    @user.roles = params[:roles].join(",") if params[:roles]
     @user.assign_attributes(params[:user])
-    if @user.valid?
-      @user.registration.unfinished = false
-      @user.save
-      flash[:notice] = "Updated profile."
+    @user.registration.unfinished = false
+    if @user.save
+      flash[:notice] = 'Updated profile.'
       redirect_to @user
     else
-      render :action => 'edit'
+      render action: :edit
     end
   end
 
@@ -250,7 +232,7 @@ class UsersController < ApplicationController
     emails = params[:emails]
 
     users = tokenize(emails).map do |email|
-      user = User.create_unfinished(email, current_normal_ticket_type)
+      user = User.create_unfinished(email, Registration.current_normal_ticket_type)
       user.company = params[:company]
       user.registration.invoice = @invoice
       user

@@ -35,10 +35,9 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     should 'be able to create a new user' do
-      post :create, :user => create_user_params
-      assert_not_nil assigns :user
-      assert_nil flash[:notice]
-      assert_nil flash[:error]
+      assert_difference 'User.count', +1 do
+        post :create, :user => create_user_params
+      end
     end
 
     context 'following an invalid user creation reference link' do
@@ -217,33 +216,36 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
-  context "A speaker" do
-    should "be allowed to create/edit own bio" do
-      q = login_quentin
-      q.registration = Registration.new
-      q.registration.ticket_type_old = 'speaker'
-      q.registration.save
-      assert q.id && q.registration.id
-      post :create_bio, :id => q.id
+  context 'A speaker' do
+    should 'be allowed to create/edit own bio' do
+
+      login_as :multispeaker
+
+      post :create_bio, id: users(:multispeaker).id
       assert_response 200
     end
   end
 
-  context "An administrator" do
+  context 'An administrator' do
     setup do
       login_as :god
     end
 
-    should "be able to create bio" do
-      post :create_bio, :id => users(:quentin).id
+    should 'be able to create bio' do
+      assert_difference 'Bio.count', +1 do
+        post :create_bio, id: users(:singlespeaker).id
+      end
+
       assert_response 200
     end
 
-    should "be able to delete bio" do
+    should 'be able to delete bio' do
       q = users(:quentin)
       bio = Bio.new(:title => "test")
-      User.update(q, {:bio => bio})
+      User.update(q, { :bio => bio })
+
       post :delete_bio, :id => q.id
+
       assert_response 302
       assert q.bio.nil?
     end
@@ -252,26 +254,26 @@ class UsersControllerTest < ActionController::TestCase
 
   private
   def create_user_params
-    update_user_params.merge!({"email" => "test@mail.com"})
+    update_user_params.merge!({ "email" => "test@mail.com" })
   end
 
   def update_user_params
-    {"accepted_privacy_guidelines" => "1", "company" => "Test", "first_name" => "Test", "last_name" => "Osteron", "accept_optional_email" => "1",
-     "password" => "fjasepass", "password_confirmation" => "fjasepass", "phone_number" => "92043382", "role" => "Developer", "birthyear" => 1984, "hometown" => "Bergen",
-     "registration_attributes" => {"ticket_type_old" => "full_price", "manual_payment" => "", "free_ticket" => "false", "includes_dinner" => "1"}
+    { "accepted_privacy_guidelines" => "1", "company" => "Test", "first_name" => "Test", "last_name" => "Osteron", "accept_optional_email" => "1",
+      "password" => "fjasepass", "password_confirmation" => "fjasepass", "phone_number" => "92043382", "role" => "Developer", "birthyear" => 1984, "hometown" => "Bergen",
+      "registration_attributes" => { "ticket_type_old" => "full_price", "manual_payment" => "", "free_ticket" => "false", "includes_dinner" => "1" }
     }
   end
 
   def create_speaker_params
-    {"company" => "DRW", "first_name" => "Dan", "last_name" => "North", "bio_attributes" =>
-        {"title" => "Boss", "blog" => "dannorth.net", "twitter_handle" => "tastapod", "bio" => "Testtest"},
-     "gender" => "M", "password_confirmation" => "test", "role" => "Developer", "featured_speaker" => "0",
-     "phone_number" => "93400346", "hometown" => "London", "registration_attributes" => {"includes_dinner" => "1"},
-     "password" => "test", "birthyear" => "1976", "email" => "dan@north.net"}
+    { "company" => "DRW", "first_name" => "Dan", "last_name" => "North", "bio_attributes" =>
+        { "title" => "Boss", "blog" => "dannorth.net", "twitter_handle" => "tastapod", "bio" => "Testtest" },
+      "gender" => "M", "password_confirmation" => "test", "role" => "Developer", "featured_speaker" => "0",
+      "phone_number" => "93400346", "hometown" => "London", "registration_attributes" => { "includes_dinner" => "1" },
+      "password" => "test", "birthyear" => "1976", "email" => "dan@north.net" }
   end
 
   def create_invoice_params
-    {"your_reference" => "Karianne Berg", "email" => "karianne.berg@gmail.com"}
+    { "your_reference" => "Karianne Berg", "email" => "karianne.berg@gmail.com" }
   end
 
   def login_quentin

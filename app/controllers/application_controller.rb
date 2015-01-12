@@ -83,6 +83,7 @@ class ApplicationController < ActionController::Base
   def require_admin_or_speaker
     unless params[:id] == 'favicon'
       user = User.find(params[:id])
+
       unless current_user.is_admin? || user.registration.ticket_type_old == 'speaker'
         flash[:error] = "Speakers only!"
         access_denied

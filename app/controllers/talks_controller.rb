@@ -51,33 +51,17 @@ class TalksController < ApplicationController
   end
 
   def create_assigned
-    extended_params = params[:talk].merge!({:acceptance_status => "accepted"})
+    params[:talk].merge!({ acceptance_status: 'accepted' })
 
-    @talk = Talk.new(extended_params)
+    @talk = Talk.new(params)
     @user = User.find(params[:assigned_user_id])
-    @tags = Tag.find_all()
     @types = TalkType.all
-
-    # Tag handling
-    tag_names = []
-    tags = []
-    if params[:item] && params[:item][:tags]
-      tag_names = params[:item][:tags]
-      if params[:uncommited_tag] && params[:uncommited_tag].chomp() != ""
-        tag_names.push(params[:uncommited_tag].chomp())
-      end
-    elsif params[:uncommited_tag] && params[:uncommited_tag].chomp() != ""
-      tag_names.push(params[:uncommited_tag].chomp())
-    end
-    @talk.tags = Tag.create_and_return_tags(tag_names)
-
-    @talk.users << @user
 
     if @talk.save
       flash[:notice] = 'Abstract assigned'
-      redirect_to(@talk)
+      redirect_to @talk
     else
-      render :action => 'assign'
+      render action: :assign
     end
 
   end

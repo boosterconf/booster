@@ -28,6 +28,12 @@ class Registration < ActiveRecord::Base
   #validates_presence_of :user 
 
   before_create :create_or_update_payment_info
+  before_create :set_default_values
+
+  def set_default_values
+    self.manual_payment ||= true
+    self.ticket_type_old ||= self.class.current_normal_ticket_type
+  end
 
   def ticket_description
     TICKET_TEXTS[self.ticket_type_old] || ticket_type_old
@@ -186,5 +192,13 @@ class Registration < ActiveRecord::Base
   def update_price
     self.price = ticket_price
     self.free_ticket = price == 0
+  end
+
+  def self.current_normal_ticket_type
+    early_bird_is_active? ? "early_bird" : "full_price"
+  end
+
+  def self.early_bird_is_active?
+    Time.now < AppConfig.early_bird_ends
   end
 end
