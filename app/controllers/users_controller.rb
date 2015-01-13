@@ -46,7 +46,6 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    init_registration
   end
 
   def create
