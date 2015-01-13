@@ -23,7 +23,6 @@
               <%= f.fields_for :registration do |reg| %>
 
                   <%= reg.hidden_field :ticket_type_old %>
-                  <%= reg.hidden_field :invited %>
                   <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
 
                   <div class="clearfix">&nbsp;</div>
