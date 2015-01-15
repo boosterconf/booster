@@ -226,7 +226,7 @@ class BoosterMailer < ActionMailer::Base
 
     mail(:to => FROM_EMAIL,
          :from => FROM_EMAIL,
-         :subject => "ROOTS APP organizer notification - take action!")
+         :subject => "Booster webapp organizer notification - take action!")
   end
 
   def reminder_to_earlier_participants_email(user)
