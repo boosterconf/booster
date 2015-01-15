@@ -35,9 +35,6 @@ class TalksStuffController < ApplicationController
         fill
         font_size 30
 
-        move_down 80
-
-
         font 'siri'
         fill_color "white"
 
