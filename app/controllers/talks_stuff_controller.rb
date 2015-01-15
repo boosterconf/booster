@@ -18,7 +18,7 @@ class TalksStuffController < ApplicationController
 
   class TalkPdf < Prawn::Document
     def initialize(talks, view)
-      super(:page_size => "A6", :margin => 30)
+      super(:page_size => "A4", :margin => 30)
 
 
       font_families.update("siri" => {
@@ -29,17 +29,17 @@ class TalksStuffController < ApplicationController
                            })
 
       talks.each_with_index do |talk, index|
-        fill_color "f2f0e6"
+        #fill_color "f2f0e6"
 
-        rectangle [-30, 390], 298, 420
-        fill
-        font_size 30
+        #rectangle [-30, 390], 298, 420
+        #fill
+        font_size 40
 
         font 'siri'
         fill_color "white"
 
         if talk.title
-          font_size 26
+          font_size 36
           text talk.title, :align => :center, :style => :bold
         else
           font_size 15
@@ -47,7 +47,7 @@ class TalksStuffController < ApplicationController
         end
 
         move_down 10
-        font_size 15
+        font_size 20
         fill_color "6D6C69"
         text talk.speaker_name || '', :align => :center, :style => :normal
 
@@ -59,7 +59,7 @@ class TalksStuffController < ApplicationController
         move_down 25
 
         move_down 10
-        font_size 12
+        font_size 20
         fill_color "6D6C69"
         text talk.appropriate_for_roles
 
