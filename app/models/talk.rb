@@ -34,6 +34,11 @@ class Talk < ActiveRecord::Base
           .map{|u| u.full_name ? u.full_name : 'another speaker'}.join(" and ")
   end
 
+  def speaker_companies
+    users.sort{|x,y| x.company && y.company ? x.company <=> y.company : x.company ? -1 : 1}
+        .map{|u| u.company ? u.company : 'another speaker'}.join(" and ")
+  end
+
   def speaker_name_or_email
     users.sort{|x,y| x.full_name && y.full_name ? x.full_name <=> y.full_name : x.full_name ? -1 : 1}
         .map{|u| u.full_name ? u.full_name : u.email ? "(#{u.email})" : 'another speaker'}.join(" and ")
