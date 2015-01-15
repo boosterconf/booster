@@ -1,32 +1,73 @@
 
 <%= form_for @talk, :url => {:action => "create_assigned"} do |f| %>
+
+    <div class="field type">
+      <%= f.collection_select :talk_type_id, (current_user.is_admin? ? TalkType.all : TalkType.workshops), :id, :name_and_duration, :class => 'input-xlarge' %>
+    </div>
+
     <input type="hidden" name="user_id" value="<%= @user.id %>"/>
 
     <fieldset id="talk_details">
 
-      <div class="field type">
-        <%= f.label :type, "Type of talk" %>
-        <%= f.collection_select :talk_type_id, @types, :id, :name_and_duration %>
-      </div>
-
-      <div class="field language">
-        <input id="talk_language_english" name="talk[language]" type="radio" value="English" style="display:inline" <%=@talk.language == 'English' ? "checked" : "" %> />
-        <label for="talk_language_english">English</label><br/>
-        <input id="talk_language_norwegian" name="talk[language]" type="radio" value="Norwegian" style="display:inline" <%=@talk.language == 'Norwegian ' ? "checked" : "" %>/>
-        <label for="talk_language_norwegian">Norwegian</label>
-      </div>
-
       <div class="field title">
         <%= f.label :title, "Title" %>
-        <%= f.text_field :title %>
+
+        <%= f.text_field :title, :size => "80", :class => "input-xxlarge" %>
       </div>
 
       <div class="field abstract">
         <%= f.label :description, "Abstract" %>
-        <%= f.text_area :description, :class => "mceEditor" %>
+
+        <%= f.text_area :description, :class => "tinymce span10" %>
       </div>
 
-    </fieldset>
+      <%= tinymce %>
+
+      <div class="control-group">
+
+        <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?', :class => 'control-label' %>
+        <div class="controls">
+          <fieldset>
+            <% Roles.all.each do |role| %>
+                <label class="checkbox">
+                  <%= check_box_tag "appropriate_for_roles[]", role, @talk.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
+                  <%= label_tag "appropriate_for_roles_#{role}", Roles.label[role] %>
+                </label>
+            <% end %>
+          </fieldset>
+        </div>
+      </div>
+
+      <legend>Information visible only for the organizing committee and yourself</legend>
+
+      <div class="field outline">
+        <%= f.label :outline, "Outline" %>
+
+        <%= f.text_area :outline, :class => "tinymce span10" %>
+      </div>
+
+      <%= tinymce %>
+
+      <div class="field max_participants">
+        <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 20, please): " %>
+        <%= f.text_field :max_participants, :class => 'input-small' %>
+      </div>
+
+      <div class="field speaking_history">
+        <%= f.label :speaking_history, 'Have you held this presentation before? If so; where?' %>
+        <%= f.text_area :speaking_history, :class => 'input-xxlarge', :rows => 5 %>
+      </div>
+
+      <div class="field participant_requirements">
+        <%= f.label :participant_requirements, 'What do the participants have to bring to the presentation?' %>
+        <%= f.text_area :participant_requirements, :class => 'input-xxlarge', :rows => 5 %>
+      </div>
+
+      <div class="field equipment">
+        <%= f.label :equipment, 'Do you need any extra equipment for your session? Any specific room setup?
+      Leave comments for the organizers here.' %>
+        <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5 %>
+      </div>
 
     <br><br>
 

@@ -50,7 +50,7 @@ class TalksController < ApplicationController
   end
 
   def create_assigned
-    params[:talk].merge!({ acceptance_status: 'accepted' })
+    params[:talk].merge!({ acceptance_status: 'accepted', language: 'english' })
 
     @talk = Talk.new(params[:talk])
     @user = User.find(params[:user_id])
@@ -60,6 +60,7 @@ class TalksController < ApplicationController
       flash[:notice] = 'Abstract assigned'
       redirect_to @talk
     else
+
       render action: :assign
     end
 

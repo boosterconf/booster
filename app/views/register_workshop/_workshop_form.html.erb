@@ -1,7 +1,7 @@
 <%= form_for @workshop, url: post_to do |f| %>
 
     <div class="field type">
-      <%= f.collection_select :talk_type_id, TalkType.workshops, :id, :name_and_duration, :class => 'input-xlarge' %>
+      <%= f.collection_select :talk_type_id, (current_user.is_admin? ? TalkType.all :TalkType.workshops), :id, :name_and_duration, :class => 'input-xlarge' %>
     </div>
 
     <legend>Information visible for everyone</legend>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <legend>information visible only for the organizing committee and yourself</legend>
+    <legend>Information visible only for the organizing committee and yourself</legend>
 
     <div class="field outline">
       <%= f.label :outline, "Outline" %>
@@ -71,7 +71,9 @@
       <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5 %>
     </div>
 
-    <%= render :partial => 'talks/additional', :locals => {:f => f} %>
+    <% if @workshop.new_record? %>
+        <%= render :partial => 'talks/additional', :locals => { :f => f } %>
+    <% end %>
 
     <div class="form-actions">
       <%= f.submit @workshop.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary' %>
