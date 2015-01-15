@@ -57,7 +57,9 @@ class TalksStuffController < ApplicationController
         move_down 25
         text_box talk.speaker_companies, :at => [0, 80], :align => :center
 
-        move_down 125
+        move_down 100
+        text talk.id.to_s
+        move_down 25
 
         move_down 10
         font_size 12
