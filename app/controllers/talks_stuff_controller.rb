@@ -48,7 +48,7 @@ class TalksStuffController < ApplicationController
 
         move_down 10
         font_size 20
-        fill_color "6D6C69"
+        fill_color "#000000"
         text talk.speaker_name || '', :align => :center, :style => :normal
 
         move_down 25
@@ -60,12 +60,12 @@ class TalksStuffController < ApplicationController
 
         move_down 10
         font_size 20
-        fill_color "6D6C69"
+        fill_color "#000000"
         text talk.appropriate_for_roles
 
         move_down 150
 
-        fill_color "F6AB6F"
+        fill_color "#000000"
 
         text_box talk.talk_type.name, :at => [0, 160], :align => :center
 
