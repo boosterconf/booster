@@ -9,17 +9,16 @@
 <p>We would like you to confirm that you are still able to present at the
   conference, and that your assigned slot works with your schedule. 
   Please do so by replying to this email as soon as possible,
-  and before February 24th, so that we can publish the conference program. </p>
+  and before January 31th, so that we can publish the conference program. </p>
 
 <% if @talk.is_tutorial? %>
     <p>There are a few practical details we need you to attend to:</p>
  <p>
-        You have been assigned a date and time for your workshop, which you can find in 
-  <a href="https://docs.google.com/spreadsheet/ccc?key=0AsSmC89I-7PrdDNJRVpOMC1sTmEzSE5HUWhDM3FDdlE&usp=sharing">
-    this google spreadsheet.
-  </a> </p>
+   Please let us know if you cannot attend the whole conference and we need to accommodate this when
+   assigning days and timeslots.
+  </p>
     <p>
-      It is still possible to edit your talk by using this url: <%= edit_talk_url(@talk, :host => "boosterconf.no") %>
+      It is still possible to edit your talk by using this url: <%= edit_talk_url(@talk, :host => 'boosterconf.no') %>
     </p>
 
     <p>You are entitled to free entrance to the conference and conference
@@ -30,16 +29,18 @@
 <% end %>
 <% unless @speaker.has_accepted_tutorial? %>
     <p>Because you have an accepted talk, you are entitled to a discounted
-      ticket price, but you still need to buy a ticket. Please do so as soon
-      as possible by going to <%= @current_user_url %> and go to payment from
-      there. You have to log in first, using the email address and password
-      you provided at registration time.</p>
+      ticket price, but you still need to buy a ticket. We will send an
+      invoice to your email when you confirm that you'll be present at the
+      conference.
+    </p>
 
     <p>If you have already paid for a normal ticket, the difference between the
       discounted ticket price and the price you paid will be refunded.</p>
 <% end %>
 <% unless @speaker.invited? %>
-    <p>Please note that we will not normally cover travel and lodging. However, we will make an exception in some cases. Confer with our <a href="http://www.boosterconf.no/info/monetary_policy">monetary policy</a> for the details, and contact us on kontakt@boosterconf.no if you think you are eligible. If you need a hotel room in Bergen, we recommend the
+    <p>Please note that we will not normally cover travel and lodging. However, we will make an exception in some cases.
+      Confer with our <a href="http://www.boosterconf.no/info/monetary_policy">monetary policy</a> for the details,
+      and contact us on kontakt@boosterconf.no if you think you are eligible. If you need a hotel room in Bergen, we recommend the
       conference hotel,
       Scandic Bergen City. Please contact them by telephone +47 55 30 90 80
       or by email at bergencity@scandichotels.com.</p>
