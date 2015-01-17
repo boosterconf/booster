@@ -11,7 +11,7 @@
     </p>
 <% end %>
 
-<% if @talk.accepted? %>
+<% if @talk.accepted? && @talk.speakers_confirmed? %>
     <p><%= image_tag("approved_talk.png") %> approved</p>
 <% end %>
 

@@ -3,7 +3,7 @@
   <div class="span8">
     <h4>
       <%= link_to lightning_talk.title, lightning_talk %>
-      <%= image_tag("approved_talk.png") if lightning_talk.accepted? %>
+      <%= image_tag("approved_talk.png") if lightning_talk.accepted? && lightning_talk.speakers_confirmed? %>
       <%= image_tag("icon_slides.gif") if admin? && lightning_talk.slide.file? %>
     </h4>
 

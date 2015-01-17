@@ -3,7 +3,7 @@
   <div class="span8">
     <h4>
       <%= link_to workshop.title, workshop %>
-      <%= image_tag("approved_talk.png") if workshop.accepted? %>
+      <%= image_tag("approved_talk.png") if workshop.accepted? && workshop.speakers_confirmed? %>
       <%= image_tag("icon_slides.gif") if admin? && workshop.slide.file? %>
     </h4>
 
