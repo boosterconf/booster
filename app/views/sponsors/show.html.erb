@@ -54,7 +54,7 @@
 
 <p>
   <b>Was sponsor last year:</b>
-  <%=h @sponsor.was_sponsor_last_year ? "Yes" : "No" %>
+  <%= YesNo.new(@sponsor.was_sponsor_last_year) %>
 </p>
 
 <p>

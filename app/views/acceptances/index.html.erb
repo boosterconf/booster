@@ -43,10 +43,10 @@
           <img src="images/<%= talk.acceptance_status %>.gif" alt="<%= talk.acceptance_status %>"/>
         </td>
         <td>
-          <%= talk.email_sent ? "Yes" : "No" %>
+          <%= YesNo.new(talk.email_sent) %>
         </td>
         <td>
-          <%= talk.speakers_confirmed ? "Yes" : "No" %>
+          <%= YesNo.new(talk.speakers_confirmed) %>
         </td>
 
         <% if talk.invited? %>

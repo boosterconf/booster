@@ -49,12 +49,12 @@
     </tr>
     <tr>
       <th>Conference dinner:</th>
-      <td><%= @user.registration.includes_dinner ? "Yes" : "No" %></td>
+      <td><%= YesNo.new(@user.registration.includes_dinner) %></td>
     </tr>
     <% if @user.registration.may_attend_speakers_dinner? %>
         <tr>
           <th>Speaker's dinner:</th>
-          <td><%= @user.registration.speakers_dinner ? "Yes" : "No" %></td>
+          <td><%= YesNo.new(@user.registration.speakers_dinner) %></td>
         </tr>
     <% end %>
     <% unless @user.registration.ticket_type_old == 'student' %>

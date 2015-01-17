@@ -10,9 +10,9 @@
       <% end %>
     </td>
 
-    <td class='sp-email'><%= h sponsor.has_email? ? 'Yes' : 'No' %></td>
+    <td class='sp-email'><%= YesNo.new(sponsor.has_email?) %></td>
     <td class='sp-invoice'><%= h sponsor.invoice_status %></td>
-    <td><%= h sponsor.was_sponsor_last_year? ? 'Yes' : 'No' %></td>
+    <td><%= YesNo.new(sponsor.was_sponsor_last_year?) %></td>
     <td class='no-filter'><%= link_to image_tag('mimiglyphs/31.png'), sponsor %></td>
     <td class='no-filter'><%= link_to image_tag('mimiglyphs/39.png'), edit_sponsor_path(sponsor) %></td>
     <td class='no-filter'><%= link_to image_tag('mimiglyphs/51.png'), sponsor, :confirm => 'Are you sure?', :method => :delete %></td>

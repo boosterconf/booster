@@ -19,10 +19,10 @@
     <td><%= user.email %></td>
     <td><%= user.full_name %></td>
     <td><%= user.company %></td>
-    <td><%= user.is_admin ? "Yes" : "" %></td>
-    <td><%= user.featured_speaker ? "Yes" : "" %></td>
-    <td><%= user.feature_as_organizer ? "Yes" : "" %></td>
-    <td><%= user.invited ? "Yes" : "" %></td>
+    <td><%= YesNo.new(user.is_admin) %></td>
+    <td><%= YesNo.new(user.featured_speaker) %></td>
+    <td><%= YesNo.new(user.feature_as_organizer) %></td>
+    <td><%= YesNo.new(user.invited) %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <%# TODO: Delete not implemented. %>
