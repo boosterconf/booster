@@ -15,7 +15,16 @@ class Talk < ActiveRecord::Base
   has_many :timeslots
 
   validates_attachment_content_type :slide,
-                                    :content_type => ['application/pdf', 'application/vnd.ms-powerpoint', 'application/ms-powerpoint', %r{application/vnd.openxmlformats-officedocument}, %r{application/vnd.oasis.opendocument}, 'application/zip', 'application/x-7z-compressed', 'application/x-gtar']
+                                    :content_type => [
+                                        'application/pdf',
+                                        'application/vnd.ms-powerpoint',
+                                        'application/ms-powerpoint',
+                                        %r{application/vnd.openxmlformats-officedocument},
+                                        %r{application/vnd.oasis.opendocument},
+                                        'application/zip',
+                                        'application/x-7z-compressed',
+                                        'application/x-gtar'
+                                    ]
 
   validates_attachment_size :slide, :less_than => 50.megabytes
 
@@ -179,6 +188,10 @@ class Talk < ActiveRecord::Base
 
   def has_been_reviewed_by(user)
     reviews.map { |r| r.reviewer }.include?(user)
+  end
+
+  def invited?
+    self.users.any?(&:invited)
   end
 
   def self.all_pending_and_approved

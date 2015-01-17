@@ -34,8 +34,6 @@
       <tr>
         <td>
           <%= h(talk.speaker_name) %>
-          <%= talk.speaker_invited ? "(invited)" : "" %>
-
         </td>
         <td>
           <%= link_to h(talk.title), talk %>
@@ -51,7 +49,9 @@
           <%= talk.speakers_confirmed ? "Yes" : "No" %>
         </td>
 
-        <% if talk.email_sent? || talk.speakers_confirmed? %>
+        <% if talk.invited? %>
+            <td colspan="4">Invited</td>
+        <% elsif talk.email_sent? || talk.speakers_confirmed? %>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
