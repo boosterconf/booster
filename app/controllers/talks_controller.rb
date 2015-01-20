@@ -56,6 +56,8 @@ class TalksController < ApplicationController
     @user = User.find(params[:user_id])
     @types = TalkType.all
 
+    @talk.users << @user
+
     if @talk.save
       flash[:notice] = 'Abstract assigned'
       redirect_to @talk
