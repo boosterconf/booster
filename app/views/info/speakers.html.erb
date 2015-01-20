@@ -18,6 +18,12 @@
                 &#64;<%= speaker.bio[:twitter_handle] %>
               </a>
           <% end %>
+
+          <% if speaker.bio.blog
+               short_url = speaker.bio.blog.sub(/^https?\:\/\//, '').sub(/^www./,'')
+          %>
+                - <%= link_to short_url, speaker.bio.blog, { title: 'Website', target: '_blank' } %>
+          <% end %>
           <br/><br/>
 
           <p>
