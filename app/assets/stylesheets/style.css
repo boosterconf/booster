@@ -342,9 +342,7 @@ div.error + table {
     position: absolute;
     left: 5px;
     top: 5px;
-    height: 157px;
-    margin: 0px !important;
-    border: 3px solid #d3d1cb;
+    margin: 0 !important;
 }
 
 .speaker .content {
