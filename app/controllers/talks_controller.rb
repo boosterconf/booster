@@ -154,6 +154,11 @@ class TalksController < ApplicationController
     @talks = Talk.all_accepted_lightning_talks
   end
 
+  def accepted
+    @talks = Talk.all_accepted
+    @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
+  end
+
   protected
   def login_required
     return unless current_user

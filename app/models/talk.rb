@@ -214,7 +214,7 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_accepted
-    all(:include => :slots, :conditions => "acceptance_status = 'accepted'")
+    all(:include => :timeslots, :conditions => "acceptance_status = 'accepted'")
   end
 
   def self.all_accepted_tutorials
