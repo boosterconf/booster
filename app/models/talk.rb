@@ -12,7 +12,7 @@ class Talk < ActiveRecord::Base
   belongs_to :talk_type
   has_many :reviews, order: 'created_at desc', include: :reviewer
   has_attached_file :slide, PAPERCLIP_CONFIG
-  has_many :timeslots
+  has_many :slots
 
   validates_attachment_content_type :slide,
                                     :content_type => [

@@ -1,16 +1,17 @@
 class SlotsController < ApplicationController
 
+  respond_to :html
+
   before_filter :require_admin
 
   # GET /slots
   # GET /slots.xml
   def index
-    @periods = Period.find(:all, :include => :slots)
+    periods = Period.all(include: :slots)
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @slots }
-    end
+    @days = periods.group_by(&:day)
+
+    respond_with @days
   end
 
   # GET /slots/1

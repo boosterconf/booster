@@ -10,4 +10,8 @@ class Period < ActiveRecord::Base
     day.strftime("%a") + " " + start_time.strftime("%H:%M") + "-" + end_time.strftime("%H:%M")
   end
 
+  def day_of_the_week
+    strftime('%a')
+  end
+
 end

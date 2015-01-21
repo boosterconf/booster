@@ -1,20 +1,17 @@
 <h1>Listing slots</h1>
 
 
-<% for period in @periods %>
-    <h2><%= h period.day.strftime("%a") %> <%= h period.start_time.strftime("%H:%M") %>
-      - <%= h period.end_time.strftime("%H:%M") %></h2>
+<% for day in @days.keys %>
+
+    <h2><%= day.strftime('%a') %></h2>
+
     <table>
-      <tr>
-        <th>Room</th>
-        <th>Talk</th>
-      </tr>
-      <% for slot in period.slots %>
+      <% for period in @days[day] %>
           <tr>
-            <td><%= h slot.room %></td>
-            <td><%= h slot.talk.title %></td>
-            <td><%= link_to 'Destroy', slot, :confirm => 'Are you sure?', :method => :delete %></td>
-            <td><%= link_to 'Edit', edit_slot_path(slot) %></td>
+            <td><%= h period.start_time.strftime('%H:%M') %> - <%= h period.end_time.strftime('%H:%M') %></td>
+            <% for slot in period.slots %>
+                <td><%= slot.talk.title %> <br /> <span class="small"><%= slot.room %></span></td>
+            <% end %>
           </tr>
       <% end %>
     </table>
