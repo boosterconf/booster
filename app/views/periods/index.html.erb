@@ -1,0 +1,23 @@
+<h1>Listing periods</h1>
+
+<table>
+  <tr>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Day</th>
+  </tr>
+
+  <% @periods.each do |period| %>
+      <tr>
+        <td><%=h period.start_time.strftime("%H:%M") %></td>
+        <td><%=h period.end_time.strftime("%H:%M") %></td>
+        <td><%=h period.day.strftime("%A %b %d") %></td>
+        <td><%= link_to 'Edit', edit_period_path(period) %></td>
+        <td><%= link_to 'Destroy', period, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New period', new_period_path %>

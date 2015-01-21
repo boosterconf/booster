@@ -1,0 +1,17 @@
+<p>
+  <b>Room:</b>
+  <%=h @slot.room %>
+</p>
+
+<p>
+  <b>Period:</b>
+  <%=h @slot.period.start_time %>-<%=h @slot.period.end_time %>
+</p>
+
+<p>
+  <b>Talk:</b>
+  <%=h @slot.talk.title %>
+</p>
+
+<%= link_to 'Edit', edit_slot_path(@slot) %> |
+<%= link_to 'Back', slots_path %>

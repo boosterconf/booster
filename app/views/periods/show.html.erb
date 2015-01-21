@@ -1,0 +1,18 @@
+<p>
+  <b>Start time:</b>
+  <%=h @period.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%=h @period.end_time %>
+</p>
+
+<p>
+  <b>Day:</b>
+  <%=h @period.day %>
+</p>
+
+
+<%= link_to 'Edit', edit_period_path(@period) %> |
+<%= link_to 'Back', periods_path %>

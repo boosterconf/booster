@@ -1,7 +1,13 @@
 <h2>Editing tag</h2>
 
 <% form_for(@tag) do |f| %>
-  <%= f.error_messages %>
+    <% if @tag.errors %>
+        <ul>
+          <% @tag.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
 
   <p>
     <%= f.label :title %><br />

@@ -1,5 +1,11 @@
 Booster2013::Application.routes.draw do
 
+  resources :periods
+
+
+  resources :slots
+
+
   resources :timeslots
 
   resources :reviews

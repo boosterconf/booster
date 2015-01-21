@@ -1,0 +1,24 @@
+<h1>Listing slots</h1>
+
+
+<% for period in @periods %>
+    <h2><%= h period.day.strftime("%a") %> <%= h period.start_time.strftime("%H:%M") %>
+      - <%= h period.end_time.strftime("%H:%M") %></h2>
+    <table>
+      <tr>
+        <th>Room</th>
+        <th>Talk</th>
+      </tr>
+      <% for slot in period.slots %>
+          <tr>
+            <td><%= h slot.room %></td>
+            <td><%= h slot.talk.title %></td>
+            <td><%= link_to 'Destroy', slot, :confirm => 'Are you sure?', :method => :delete %></td>
+            <td><%= link_to 'Edit', edit_slot_path(slot) %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>
+<br/>
+
+<%= link_to 'New slot', new_slot_path %>

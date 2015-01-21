@@ -1,0 +1,27 @@
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  room: MyString
+  period: one
+  talk: two
+
+two:
+  room: MyString
+  period: one
+  talk: ten
+
+three:
+  room: MyString
+  period: one
+  talk: spans_several_slots
+
+four:
+  room: MyString
+  period: two
+  talk: spans_several_slots
+
+five:
+  room: MyString
+  period: two
+  talk: not_full_tutorial

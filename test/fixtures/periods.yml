@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  start_time: 2011-05-23 10:00
+  end_time: 2011-05-23 11:30
+  day: 2011-05-23
+
+two:
+  start_time: 2011-05-23 12:00
+  end_time: 2011-05-23 13:30
+  day: 2011-05-23

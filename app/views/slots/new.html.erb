@@ -1,0 +1,33 @@
+<h1>New slot</h1>
+
+<%= form_for(@slot) do |f| %>
+    <% if @slot.errors %>
+        <ul>
+          <% @slot.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
+
+    <p>
+      <%= f.label :room %><br />
+      <%= f.select :room, @rooms %>
+    </p>
+
+    <p>
+      <%= f.label :period %><br />
+
+      <%= f.collection_select :period, @periods, :id, :to_s %>
+    </p>
+
+    <p>
+      <%= f.label :talk %><br />
+      <%= f.collection_select :talk, @talks, :id, :title %>
+    </p>
+
+    <p>
+      <%= f.submit 'Create' %>
+    </p>
+<% end %>
+
+<%= link_to 'Back', slots_path %>
