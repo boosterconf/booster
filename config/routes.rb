@@ -149,6 +149,7 @@ Booster2013::Application.routes.draw do
   get 'users/:user_id/assign_talk' => 'talks#assign', as: :assign_talk
   post 'users/:user_id/assign_talk' => 'talks#create_assigned', as: :create_assigned_talk
 
+
   match 'info/organizers' => 'info#organizers'
   match 'info/monetary_policy' => 'info#monetary_policy'
   match 'info/cfp' => 'info#cfp'
@@ -160,6 +161,7 @@ Booster2013::Application.routes.draw do
   match 'info/fishbowl' => 'info#fishbowl'
   match 'info/conference_dinner' => 'info#conference_dinner'
   match 'info/coc' => 'info#coc'
+  match 'info/preconf' => 'info#preconf'
 
   match 'admin' => 'admin#index'
 
