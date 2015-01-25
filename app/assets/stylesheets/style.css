@@ -347,17 +347,23 @@ div.error + table {
     padding: 5px;
 }
 
-.speaker img {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    margin: 0 !important;
-}
-
 .speaker .content {
-    margin-left: 180px;
     background-color: #FFFFFF;
     padding: 10px;
+}
+
+.speaker-meta {
+  width: 75%;
+  float: left;
+}
+
+.speaker-image {
+  box-sizing: border-box;
+  width: 25%;
+  height: auto;
+  margin: 0px !important;
+  float: left;
+  padding-right: 10px;
 }
 
 .speakers-box {
@@ -438,6 +444,16 @@ div.error + table {
 /* ==================== media queries ==================== */
 
 @media screen and (max-width: 693px) {
+  .speaker-header:before,
+  .speaker-header:after {
+    content: " ";
+    display: table;
+  }
+
+  .speaker-header:after {
+    clear: both;
+  }
+
   #meta {
     float: left;
     text-align: left;
@@ -459,6 +475,9 @@ footer .inner {
 } /* end this media query */
 
 @media screen and (min-width: 700px) {
+  .speaker-meta {
+    margin-bottom: 15px;
+  }
 
 .hello h1 {
    font-size: 3.0em;
