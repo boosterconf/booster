@@ -60,6 +60,10 @@ header {
    background-color: #1790A0;
 }
 
+a.a-bit-bigger {
+    font-size: larger;
+}
+
 hr {
     border-top: 1px solid #DBD9D2;
     border-bottom: 1px solid #DBD9D2;
