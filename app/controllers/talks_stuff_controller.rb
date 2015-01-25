@@ -52,7 +52,7 @@ class TalksStuffController < ApplicationController
         text talk.speaker_name || '', :align => :center, :style => :normal
 
         move_down 25
-        text_box talk.speaker_companies, :at => [0, 80], :align => :center
+        text_box talk.users.map(&:company).join(','), :at => [0, 80], :align => :center
 
         move_down 100
         text talk.id.to_s

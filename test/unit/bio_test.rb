@@ -29,7 +29,6 @@ class BioTest < ActiveSupport::TestCase
     user = @bio.user
     user.bio.picture = sample_file
     assert_equal "batman.jpg", user.bio.picture_file_name
-    p user.bio.picture.path
   end
 
   def sample_file(filename = "batman.jpg")

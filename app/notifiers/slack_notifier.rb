@@ -10,7 +10,7 @@ class SlackNotifier
 
 
   def self.notifyTalk(talk)
-    name = talk.speaker_name_or_email
+    name = talk.users.map(&:name_or_email).join(',')
     talk_type = talk.talk_type.name.downcase
     title = talk.title
     talk_url = Rails.application.routes.url_helpers.talk_url(talk)

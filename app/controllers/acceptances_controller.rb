@@ -17,7 +17,7 @@ class AcceptancesController < ApplicationController
   def accept
     @talk = Talk.find(params[:id], :include => [{:users => :registration}])
 
-    if @talk.email_is_sent?
+    if @talk.email_sent?
       flash[:error] = "Cannot change status on talk '#{@talk.title}': Email already sent!"
       redirect_to :controller => :acceptances
       return
@@ -34,7 +34,7 @@ class AcceptancesController < ApplicationController
   def refuse
     @talk = Talk.find(params[:id])
 
-    if (@talk.email_is_sent?)
+    if (@talk.email_sent?)
       flash[:error] = "Cannot change status on talk '#{@talk.title}': Email already sent!"
       redirect_to :controller => :acceptances
       return
@@ -51,7 +51,7 @@ class AcceptancesController < ApplicationController
   def await
     @talk = Talk.find(params[:id])
 
-    if (@talk.email_is_sent?)
+    if (@talk.email_sent?)
       flash[:error] = "Cannot change status on talk '#{@talk.title}': Email already sent!"
       redirect_to :controller => :acceptances
       return

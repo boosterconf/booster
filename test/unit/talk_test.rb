@@ -1,72 +1,74 @@
 require 'test_helper'
 
 class TalkTest < ActiveSupport::TestCase
-  context 'talk' do
-    should 'increment comments count when adding a comment' do
-      talk = talks(:one)
-      comments_count = talk.comments_count
-      talk.comments << Comment.new(:title => 'en tittel', :description => 'en beskrivelse', :user => User.last)
-      talk = Talk.find(talk.id)
-      assert_equal comments_count + 1, talk.comments_count
+
+  should 'increment comments count when adding a comment' do
+    talk = talks(:one)
+    comments_count = talk.comments_count
+    talk.comments << Comment.new(:title => 'en tittel', :description => 'en beskrivelse', :user => User.last)
+    talk = Talk.find(talk.id)
+    assert_equal comments_count + 1, talk.comments_count
+  end
+
+  should 'not list refused talks' do
+    refused = talks(:one).refuse!
+    talks(:two).accept!
+    not_refused = Talk.all_pending_and_approved
+
+    refute not_refused.include?(refused)
+    assert not_refused.size > 0
+  end
+
+  context 'changing acceptance statuses' do
+
+    setup do
+      @talk = Talk.new
     end
 
     should 'be pending by default' do
-      talk = Talk.new
-      assert talk.pending?
+      assert @talk.pending?
     end
 
     should 'be accepted' do
-      talk = Talk.new
-      talk.accept!
+      @talk.accept!
 
-      assert talk.accepted?
-      refute talk.refused?
-      refute talk.pending?
+      assert @talk.accepted?
+      refute @talk.refused?
+      refute @talk.pending?
     end
 
     should 'be refused' do
-      talk = Talk.new
-      talk.refuse!
+      @talk.refuse!
 
-      assert talk.refused?
-      refute talk.accepted?
-      refute talk.pending?
+      assert @talk.refused?
+      refute @talk.accepted?
+      refute @talk.pending?
     end
 
     should 'be able to regret' do
-      talk = Talk.new
-      talk.regret!
-      assert talk.pending?
-      refute talk.refused?
-      refute talk.accepted?
+      @talk.regret!
+      assert @talk.pending?
+      refute @talk.refused?
+      refute @talk.accepted?
+    end
+  end
+
+  context '#is_presented_by' do
+
+    should 'be true when user is amongst talk\'s speakers ' do
+      talk = talks(:three)
+
+      assert talk.is_presented_by?(talk.users.first)
+
     end
 
-    should 'not list refused talks' do
-      refused = talks(:one).refuse!
-      talks(:two).accept!
-      not_refused = Talk.all_pending_and_approved
+    should 'be false when user is not amongst talk\'s speakers ' do
+      talk = talks(:three)
 
-      refute not_refused.include?(refused)
-      assert not_refused.size > 0
-    end
-
-    context '#is_presented_by' do
-
-      should 'be true when user is amongst talk\'s speakers ' do
-        talk = talks(:three)
-
-        assert talk.is_presented_by?(talk.users.first)
-
-      end
-
-      should 'be false when user is not amongst talk\'s speakers ' do
-        talk = talks(:three)
-
-        refute talk.is_presented_by?(users(:god))
-
-      end
+      refute talk.is_presented_by?(users(:god))
 
     end
+  end
 
 =begin
       should "increment participants count when adding a participant" do
@@ -111,5 +113,4 @@ class TalkTest < ActiveSupport::TestCase
       assert_equal periods(:one).start_time, talk.start_time
     end
 =end
-  end
 end

@@ -30,12 +30,26 @@ class User < ActiveRecord::Base
   after_initialize { |user| user.build_registration unless user.registration }
 
   def full_name
-      if read_attribute(:first_name)
-        read_attribute(:first_name) + ' ' + read_attribute(:last_name)
-      else
-        read_attribute(:name)
-      end
+    if read_attribute(:first_name)
+      read_attribute(:first_name) + ' ' + read_attribute(:last_name)
+    elsif read_attribute(:name)
+      read_attribute(:name)
+    else
+      'unnamed speaker'
     end
+  end
+
+  def unnamed?
+    full_name == 'unnamed speaker'
+  end
+
+  def name_or_email
+    if full_name
+      full_name
+    else
+      email
+    end
+  end
 
   def attending_speakers_dinner(will_attend)
     self.registration.speakers_dinner = will_attend
@@ -204,7 +218,7 @@ class User < ActiveRecord::Base
       when "all", "", nil
         return find(:all, :include => :registration)
       when "admin"
-        return find(:all, :conditions => {:is_admin => true}, :include => :registration)
+        return find(:all, :conditions => { :is_admin => true }, :include => :registration)
       when "speakers"
         return find(:all, :include => [:registration, :talks]).reject { |u| u.talks.empty? }
       when "paid"
@@ -231,7 +245,7 @@ class User < ActiveRecord::Base
     self.find_all_by_invited(true)
   end
 
-  def self.all_accepted_speakers 
+  def self.all_accepted_speakers
     self.all.select { |u| u.has_accepted_tutorial? || u.has_accepted_lightning_talk? }
   end
 
@@ -277,7 +291,7 @@ class User < ActiveRecord::Base
     user.email = email.present? ? email : ""
     user.first_name = first_name if first_name.present?
     user.last_name = last_name if last_name.present?
-    user.password = SecureRandom.urlsafe_base64  # må sette passord, av grunner bare authlogic forstår
+    user.password = SecureRandom.urlsafe_base64 # må sette passord, av grunner bare authlogic forstår
     user.registration.ticket_type_old = ticket_type
     user.registration.manual_payment = true
     user.registration.includes_dinner = true

@@ -39,73 +39,41 @@ class Talk < ActiveRecord::Base
   end
 
   def speaker_name
-    users.sort{|x,y| x.full_name && y.full_name ? x.full_name <=> y.full_name : x.full_name ? -1 : 1}
-          .map{|u| u.full_name ? u.full_name : 'another speaker'}.join(" and ")
+    SpeakerName.new(self.users)
   end
 
-  def speaker_companies
-    users.sort{|x,y| x.company && y.company ? x.company <=> y.company : x.company ? -1 : 1}
-        .map{|u| u.company ? u.company : 'another speaker'}.join(" and ")
-  end
-
-  def speaker_name_or_email
-    users.sort{|x,y| x.full_name && y.full_name ? x.full_name <=> y.full_name : x.full_name ? -1 : 1}
-        .map{|u| u.full_name ? u.full_name : u.email ? "(#{u.email})" : 'another speaker'}.join(" and ")
-  end
-
-  def speaker_invited
-    users.any?(&:invited)
+  def speaker_emails
+    users.map(&:email).join(', ')
   end
 
   def is_presented_by?(speaker)
     users.include?(speaker)
   end
 
-  def speaker_emails
-    users.map(&:email).join(", ")
-  end
-
-  def describe_audience_level
-    case audience_level
-      when 'novice' then
-        'Novice'
-      when 'intermediate' then
-        'Intermediate'
-      when 'expert' then
-        'Expert'
-      else
-        ''
-    end
-  end
-
-  def email_is_sent?
-    email_sent
-  end
-
   def accept!
-    self.acceptance_status = "accepted"
+    self.acceptance_status = 'accepted'
     self
   end
 
   def accepted?
-    self.acceptance_status == "accepted"
+    self.acceptance_status == 'accepted'
   end
 
   def pending?
-    self.acceptance_status == "pending"
+    self.acceptance_status == 'pending'
   end
 
   def refused?
-    self.acceptance_status == "refused"
+    self.acceptance_status == 'refused'
   end
 
   def refuse!
-    self.acceptance_status = "refused"
+    self.acceptance_status = 'refused'
     self
   end
 
   def regret!
-    self.acceptance_status = "pending"
+    self.acceptance_status = 'pending'
     self
   end
 
@@ -129,11 +97,6 @@ class Talk < ActiveRecord::Base
     for speaker in self.users
       speaker.update_ticket_type!(current_user)
     end
-  end
-
-  def average_feedback_score
-    score = self.sum_of_votes.to_f / self.num_of_votes.to_f
-    "%.2f" % score
   end
 
   def is_in_one_of_these(periods)
@@ -189,14 +152,6 @@ class Talk < ActiveRecord::Base
 
   def self.all_with_speakers
     with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
-  end
-
-  def self.add_feedback(talk_id, sum, num)
-    talk = Talk.find(talk_id, :include => :users)
-    talk.sum_of_votes = sum
-    talk.num_of_votes = num
-
-    talk.save
   end
 
   def self.add_comment(talk_id, comment)

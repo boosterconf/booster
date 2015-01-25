@@ -147,12 +147,6 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => "kontakt@boosterconf.no", :from => FROM_EMAIL, :subject => title, :from => FROM_EMAIL)
   end
 
-  def feedback_email(talk, group)
-    @talk = talk
-    @group = group
-    mail(:to => talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2015")
-  end
-
   def talk_feedback_email(talk_feedback)
     @talk_feedback = talk_feedback
     mail(:to => talk_feedback.talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster 2015")
