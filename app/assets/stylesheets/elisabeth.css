@@ -7,124 +7,125 @@ Author: elisabethirgens.no
 html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p,
 blockquote, pre, abbr, address, cite, code, del, dfn, em, img,
 ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, 
-article, aside, figure, footer, header, hgroup, menu, nav, section, 
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, figure, footer, header, hgroup, menu, nav, section,
 time, mark, audio, video {
-   margin: 0;
-   padding: 0;
-   border: 0;
-   outline: 0;
-   font-size: 100%;
-   vertical-align: baseline;
-   background: transparent;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
 }
+
 article, aside, figure, footer, header, hgroup, nav, section {
-   display: block;
+    display: block;
 }
-
-
 
 /* ==================== main structure ==================== */
 
 html {
-   background: #F2F0E6;
+    background: #F2F0E6;
 }
 
 body {
-   width: 100%;
+    width: 100%;
 }
 
 .inner {
-   margin: 0 auto;
-   width: 95%;
+    margin: 0 auto;
+    width: 95%;
 }
 
-#content {	                       
-   padding-top: 2em;
-   margin-bottom: 2em;
+#content {
+    padding-top: 2em;
+    margin-bottom: 2em;
 }
 
 .sponsorarea {
-   background-color: #fff;
-   border-top: 2px solid #D3D1CB;
-   border-bottom: 2px solid #D3D1CB;
-   padding: 2em 0 1em 0;
+    background-color: #fff;
+    border-top: 2px solid #D3D1CB;
+    border-bottom: 2px solid #D3D1CB;
+    padding: 2em 0 1em 0;
 }
 
 footer {
-   border-bottom: 50px solid #D3D1CB;
-   padding-top: 3em;
+    border-bottom: 50px solid #D3D1CB;
+    padding-top: 3em;
 }
 
-p, 
-ul, 
+p,
+ul,
 ol {
-   font-size: 1em;
-   margin-bottom: 1em;
+    font-size: 1em;
+    margin-bottom: 1em;
 }
 
 ul {
-   list-style-position: inside;
 }
 
-a:link, 
+ol > li > ol {
+    list-style-type: lower-alpha
+}
+
+a:link,
 a:visited {
-	text-decoration: none;
-   color: #1790a0;
+    text-decoration: none;
+    color: #1790a0;
 }
 
 a:hover {
-   color: #006F77;
+    color: #006F77;
 }
 
-a:active, 
-a:focus { 
-   position : relative; 
-   top : 1px; 
+a:active,
+a:focus {
+    position: relative;
+    top: 1px;
 }
 
 .hello p {
-   line-height: 1.4;
-   margin: 0 auto 0.5em auto;
-   max-width: 30em;
-   text-align: center;
+    line-height: 1.4;
+    margin: 0 auto 0.5em auto;
+    max-width: 30em;
+    text-align: center;
 }
 
 .hello h1 {
-   color: #6D6C69; 
-   text-align: center;
+    color: #6D6C69;
+    text-align: center;
 }
 
 .hello h2 {
-   text-align: center;
+    text-align: center;
 }
 
 .hello div {
-   text-align: center;
-   margin-bottom: 20px;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .beammeup {
-   background-color: #D3D1CB; 
-   border-radius: 8px 8px 0px 0px;
-   margin-bottom: 0;
-   max-width: 10.5em;
-   padding: 0.25em 1.5em 0.25em 1.5em;
+    background-color: #D3D1CB;
+    border-radius: 8px 8px 0px 0px;
+    margin-bottom: 0;
+    max-width: 10.5em;
+    padding: 0.25em 1.5em 0.25em 1.5em;
 }
- 
+
 .beammeup a {
-   color: #8D8B87;
-}  
+    color: #8D8B87;
+}
 
 .beammeup:hover {
-   background-color: #BCBAB4; 
-}    
-   
-   
+    background-color: #BCBAB4;
+}
+
 /* ==================== other general styles for the whole page ==================== */
 
 img {
-   max-width: 100%;
+    max-width: 100%;
 }
 
 a.btn {
@@ -143,58 +144,60 @@ a.btn {
 /* ==================== div#content ==================== */
 
 .hello {
-   margin-bottom: 0;
+    margin-bottom: 0;
 }
 
 .sponsorlogos {
-   list-style-type: none;
+    list-style-type: none;
 }
 
 .sponsorlogos li {
-   float: left;
-   width: 33%;
+    float: left;
+    width: 33%;
 }
 
 .sponsorlogos li a {
-   display: block;
-   padding: 0 1em;
-   text-align: center;
+    display: block;
+    padding: 0 1em;
+    text-align: center;
 }
-
 
 /* ==================== footer#bottom ==================== */
 
-
 .contactbuttons {
-   list-style-type: none;
-   margin: 0  0 2em 0;
+    list-style-type: none;
+    margin: 0 0 2em 0;
 }
 
 #btntwitter:hover {
-   background-color: #0A6A7C;
+    background-color: #0A6A7C;
 }
 
 #btnfacebook {
-   background-color: #58B8BF;
+    background-color: #58B8BF;
 }
 
 #btnfacebook:hover {
-   background-color: #3599A2;
+    background-color: #3599A2;
 }
 
 #btnlanyrd {
-   background-color: #ABCD75;
+    background-color: #ABCD75;
 }
 
 #btnlanyrd:hover {
-   background-color: #89B54F;
+    background-color: #89B54F;
 }
 
 /* ==================== self-clear floats from handcraftedcss.com ==================== */
 
-.group:after {content: "."; display: block; height: 0; clear: both; visibility: hidden;}
-
-
+.group:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
 
 /* ==================== all done, go away now ==================== */
 
