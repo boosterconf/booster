@@ -7,11 +7,6 @@
       <%= image_tag("icon_slides.gif") if admin? && workshop.slide.file? %>
     </h4>
 
-    <% if workshop.timeslot %>
-      <strong>Location</strong>
-      <span><%= workshop.timeslot.location %> </span>
-    <% end %>
-
     <p class="muted">
       Workshop - Suggested by <%= workshop.speaker_name %>,
       <%= time_ago_in_words(workshop.created_at) %> ago.
@@ -27,14 +22,6 @@
 
       <%= link_to "Read more...", workshop %>
     </p>
-
-    <% unless workshop.tags.size == 0 %>
-        <div class="tags">
-          Tags: |
-          <% workshop.tags.each do |tag| %>
-              <%= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %> |
-          <% end %>
-        </div>
-    <% end %>
+    
   </div>
 </div>
