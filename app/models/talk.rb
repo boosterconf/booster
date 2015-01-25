@@ -61,29 +61,8 @@ class Talk < ActiveRecord::Base
     users.include?(speaker)
   end
 
-  def starts_now?(day_time)
-    if timeslots.length > 0
-      day_time.start_with?(timeslot.day) && day_time.end_with?(timeslot.time)
-    else
-      true
-    end
-  end
-
-  def timeslot 
-    timeslots.sort! {|a,b| a.time <=> b.time} 
-    timeslots[0]
-  end
-
   def speaker_emails
     users.map(&:email).join(", ")
-  end
-
-  def option_text
-    %Q[#{id} - "#{trunc(title, 30)}" (#{trunc(speaker_name, 20)})]
-  end
-
-  def trunc(text, length)
-    (text.length < length + 3) ? text : "#{text.first(length)}..."
   end
 
   def describe_audience_level
@@ -97,10 +76,6 @@ class Talk < ActiveRecord::Base
       else
         ''
     end
-  end
-
-  def license
-    "by"
   end
 
   def email_is_sent?
@@ -187,7 +162,7 @@ class Talk < ActiveRecord::Base
   end
 
   def has_been_reviewed_by(user)
-    reviews.map { |r| r.reviewer }.include?(user)
+    reviews.map(&:reviewer).include?(user)
   end
 
   def invited?
@@ -200,33 +175,20 @@ class Talk < ActiveRecord::Base
     }
   end
 
-  def self.all_pending_and_approved_tag(tag)
-    talks_tmp = all(:order => 'acceptance_status, id desc').select {
-        |t| !t.users.first.nil? && !t.refused?
-    }
-    talks = []
-    talks_tmp.each do |talk|
-      if talk.tags.include? tag
-        talks.push talk
-      end
-    end
-    talks
-  end
-
   def self.all_accepted
-    all(:include => :timeslots, :conditions => "acceptance_status = 'accepted'")
+    all(include: [:slots, :users => :registration], conditions: "acceptance_status = 'accepted'")
   end
 
   def self.all_accepted_tutorials
-    unscoped.all(:include => [:talk_type], :conditions => ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title")
+    unscoped.all(include: [:talk_type], conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title")
   end
 
   def self.all_accepted_lightning_talks
-    all(:include => :talk_type, :conditions => ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 'f'"], :order => "title ")
+    all(include: :talk_type, conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 'f'"], :order => "title ")
   end
 
   def self.all_with_speakers
-    with_exclusive_scope { find(:all, :include => :users, :order => "users.last_name ") }
+    with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
   end
 
   def self.add_feedback(talk_id, sum, num)
@@ -258,10 +220,6 @@ class Talk < ActiveRecord::Base
 
   def to_s
     "\"#{self.title}\" by #{self.speaker_name}"
-  end
-
-  def self.find_all_with_ids(id_array)
-    self.find_all(:conditions => {:id => id_array})
   end
 
 end
