@@ -11,18 +11,17 @@
 
     <p>
       <%= f.label :room %><br />
-      <%= f.select :room, @rooms %>
+      <%= f.collection_select :room_id, @rooms, :id, :name %>
     </p>
 
     <p>
       <%= f.label :period %><br />
-
-      <%= f.collection_select :period, @periods, :id, :to_s %>
+      <%= f.collection_select :period_id, @periods, :id, :to_s %>
     </p>
 
     <p>
       <%= f.label :talk %><br />
-      <%= f.collection_select :talk, @talks, :id, :title %>
+      <%= f.collection_select :talk_id, @talks, :id, :title %>
     </p>
 
     <p>

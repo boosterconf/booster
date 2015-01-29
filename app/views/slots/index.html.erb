@@ -10,7 +10,7 @@
           <tr>
             <td><%= h period.start_time.strftime('%H:%M') %> - <%= h period.end_time.strftime('%H:%M') %></td>
             <% for slot in period.slots %>
-                <td><%= slot.talk.title %> <br /> <span class="small"><%= slot.room %></span></td>
+                <td><%= slot.talk.title %> <br /> <span class="small"><%= slot.room.name %></span></td>
             <% end %>
           </tr>
       <% end %>

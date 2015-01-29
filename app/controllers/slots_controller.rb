@@ -3,6 +3,7 @@ class SlotsController < ApplicationController
   respond_to :html
 
   before_filter :require_admin
+  before_filter :find_backing_data, only: [:new, :edit]
 
   # GET /slots
   # GET /slots.xml
@@ -21,7 +22,7 @@ class SlotsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @slot }
+      format.xml { render :xml => @slot }
     end
   end
 
@@ -30,37 +31,26 @@ class SlotsController < ApplicationController
   def new
     @slot = Slot.new
 
-    create_backing_data
-
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @slot }
+      format.xml { render :xml => @slot }
     end
   end
 
   # GET /slots/1/edit
   def edit
-
     @slot = Slot.find(params[:id])
-
-    create_backing_data()
   end
 
   # POST /slots
   # POST /slots.xml
   def create
+    @slot = Slot.new(params[:slot])
 
-    @slot = Slot.new :room => params[:slot][:room], :period_id => params[:slot][:period], :talk_id => params[:slot][:talk]
-    create_backing_data()
-
-    respond_to do |format|
-      if @slot.save
-        format.html { redirect_to(slots_url, :notice => 'Slot was successfully created.') }
-        format.xml  { render :xml => @slot, :status => :created, :location => @slot }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @slot.errors, :status => :unprocessable_entity }
-      end
+    if @slot.save
+      redirect_to(slots_url, notice: 'Slot was successfully created.')
+    else
+      render action: :new
     end
   end
 
@@ -68,15 +58,13 @@ class SlotsController < ApplicationController
   # PUT /slots/1.xml
   def update
     @slot = Slot.find(params[:id])
-    create_backing_data
-
     respond_to do |format|
       if @slot.update_attributes(params[:slot])
         format.html { redirect_to(@slot, :notice => 'Slot was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @slot.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @slot.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -89,16 +77,15 @@ class SlotsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(slots_url) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
 
   private
-  def create_backing_data
+  def find_backing_data
     @periods = Period.all
     @talks = Talk.all_accepted_tutorials
-
-    @rooms = [["KP10", "KP10"], ["KP11", "KP11"], ["Sydneshaugen", "Sydneshaugen"], ["Muséplass", "Muséplass"], ["Strangehagen", "Strangehagen"], ["Dragefjellet", "Dragefjellet"], ["Teatergaten", "Teatergaten"], ["Hødden", "Hødden"], ["Galgebakken", "Galgebakken"], ["Tårnplass", "Tårnplass"]]
+    @rooms = Room.all
   end
 end

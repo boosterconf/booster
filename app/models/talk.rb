@@ -13,6 +13,7 @@ class Talk < ActiveRecord::Base
   has_many :reviews, order: 'created_at desc', include: :reviewer
   has_attached_file :slide, PAPERCLIP_CONFIG
   has_many :slots
+  has_many :periods
 
   validates_attachment_content_type :slide,
                                     :content_type => [

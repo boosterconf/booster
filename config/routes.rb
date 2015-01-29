@@ -1,15 +1,12 @@
 Booster2013::Application.routes.draw do
 
-  resources :periods
+  resources :rooms
 
+  resources :periods
 
   resources :slots
 
-
-  resources :timeslots
-
   resources :reviews
-
 
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
   get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
