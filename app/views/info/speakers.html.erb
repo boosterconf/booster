@@ -11,20 +11,21 @@
 
         <div class="content">
 
-          <b><%= speaker.full_name %></b> - <i><%= speaker.bio[:title] %></i>
-          <% if speaker.bio[:twitter_handle].length > 0 %>
-              <br/>
-              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-                &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-              </a>
-          <% end %>
+	  <div class="speaker-meta">
+            <b><%= speaker.full_name %></b> - <i><%= speaker.bio[:title] %></i>
+            <% if speaker.bio[:twitter_handle].length > 0 %>
+            <br/>
+            <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+              &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
+            </a>
+            <% end %>
 
-          <% if speaker.bio.blog
+            <% if speaker.bio.blog
                short_url = speaker.bio.blog.sub(/^https?\:\/\//, '').sub(/^www./,'')
-          %>
-                - <%= link_to short_url, speaker.bio.blog, { title: 'Website', target: '_blank' } %>
-          <% end %>
-          <br/><br/>
+               %>
+            - <%= link_to short_url, speaker.bio.blog, { title: 'Website', target: '_blank' } %>
+            <% end %>
+	  </div>
 
           <p>
             <%= simple_format speaker.bio[:bio] %>

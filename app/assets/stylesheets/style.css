@@ -343,16 +343,22 @@ div.error + table {
 }
 
 .speaker img {
+    width: 80px;
     position: absolute;
-    left: 5px;
-    top: 5px;
-    margin: 0 !important;
+    left: 15px;
+    top: 15px;
+    height: 157px;
+    margin: 0px !important;
 }
 
 .speaker .content {
-    margin-left: 180px;
     background-color: #FFFFFF;
     padding: 10px;
+}
+
+.speaker-meta {
+    height: 90px;
+    margin-left: 90px;
 }
 
 .speakers-box {
