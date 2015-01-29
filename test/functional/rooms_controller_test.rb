@@ -21,7 +21,7 @@ class RoomsControllerTest < ActionController::TestCase
       post :create, room: { capacity: @room.capacity, name: @room.name }
     end
 
-    assert_redirected_to room_path(assigns(:room))
+    assert_redirected_to rooms_path
   end
 
   test "should show room" do
