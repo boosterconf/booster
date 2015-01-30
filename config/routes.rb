@@ -75,7 +75,6 @@ Booster2013::Application.routes.draw do
   match '/lightning_talks' => 'talks#lightning_talks'
   match '/talks/cheat_sheet' => 'talks#cheat_sheet'
   match '/talks/vote' => 'talks#vote'
-  match '/talks/accepted' => 'talks#accepted'
 
 
 
@@ -84,6 +83,9 @@ Booster2013::Application.routes.draw do
     resources :reviews
     member do
       get :article_tags
+    end
+    collection do
+      get :accepted
     end
   end
 

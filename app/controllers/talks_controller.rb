@@ -155,7 +155,7 @@ class TalksController < ApplicationController
   end
 
   def accepted
-    @talks = Talk.all_accepted
+    @talks = Talk.all_confirmed
     @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
   end
 

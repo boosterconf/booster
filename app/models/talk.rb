@@ -143,6 +143,10 @@ class Talk < ActiveRecord::Base
     all(include: [:slots, :users => :registration], conditions: "acceptance_status = 'accepted'")
   end
 
+  def self.all_confirmed
+    all(include: [:slots, :users => :registration], conditions: "acceptance_status = 'accepted' AND speakers_confirmed = true")
+  end
+
   def self.all_accepted_tutorials
     unscoped.all(include: [:talk_type], conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title")
   end
