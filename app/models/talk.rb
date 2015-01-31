@@ -95,26 +95,26 @@ class Talk < ActiveRecord::Base
 =end
 
   def update_speakers(current_user)
-    for speaker in self.users
+    self.users.each do |speaker|
       speaker.update_ticket_type!(current_user)
     end
   end
 
   def is_in_one_of_these(periods)
-    self.periods.each { |period|
+    self.periods.each do |period|
       if periods.include? period
         return true
       end
-    }
+    end
     false
   end
 
   def start_time
-    periods.sort! { |first, second| first.start_time <=> second.start_time }.first.start_time
+    periods.sort(&:start_time).first.start_time
   end
 
   def end_time
-    periods.sort! { |first, second| first.end_time <=> second.end_time }.last.end_time
+    periods.sort(&:end_time).last.end_time
   end
 
   def is_scheduled?
@@ -157,13 +157,6 @@ class Talk < ActiveRecord::Base
 
   def self.all_with_speakers
     with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
-  end
-
-  def self.add_comment(talk_id, comment)
-    comm = FeedbackComment.new
-    comm.comment = comment
-    comm.talk = Talk.find(talk_id)
-    comm.save!
   end
 
   def self.count_accepted

@@ -1,17 +1,41 @@
 <h1>Listing slots</h1>
 
 
-<% for day in @days.keys %>
+<% @days.keys.each do |day|
+  periods_for_day = @days[day]
+%>
+
 
     <h2><%= day.strftime('%a') %></h2>
 
-    <table>
-      <% for period in @days[day] %>
+    <table style="border: 1px solid black; padding: 5px">
+      <tr>
+        <th></th>
+        <% @rooms.each do |room| %>
+            <th style="border: 1px solid black; padding: 5px">
+              <%= room.name %>
+            </th>
+        <% end %>
+      </tr>
+      <% periods_for_day.each do |period| %>
           <tr>
-            <td><%= h period.start_time.strftime('%H:%M') %> - <%= h period.end_time.strftime('%H:%M') %></td>
-            <% for slot in period.slots %>
-                <td><%= slot.talk.title %> <br /> <span class="small"><%= slot.room.name %></span></td>
+            <th style="border: 1px solid black; padding: 5px">
+              <%= h period.start_time.strftime('%H:%M') %> - <%= h period.end_time.strftime('%H:%M') %>
+            </th>
+
+            <% @rooms.each do |room| %>
+                <td style="border: 1px solid black; padding: 5px">
+                  <%=
+                      talk = period.talk_in(room)
+                      if talk
+                        link_to talk.title, talk
+                      else
+                        link_to 'Assign talk here', new_slot_url(slot: { room_id: room.id, period_id: period.id })
+                      end
+                  %>
+                </td>
             <% end %>
+
           </tr>
       <% end %>
     </table>

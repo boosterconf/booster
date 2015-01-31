@@ -167,7 +167,6 @@ ActiveRecord::Schema.define(:version => 20150129082313) do
   end
 
   create_table "slots", :force => true do |t|
-    t.string   "room"
     t.integer  "period_id"
     t.integer  "talk_id"
     t.datetime "created_at"

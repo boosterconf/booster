@@ -3,7 +3,7 @@ class SlotsController < ApplicationController
   respond_to :html
 
   before_filter :require_admin
-  before_filter :find_backing_data, only: [:new, :edit]
+  before_filter :find_backing_data #, only: [:new, :edit]
 
   # GET /slots
   # GET /slots.xml
@@ -11,6 +11,7 @@ class SlotsController < ApplicationController
     periods = Period.all(include: :slots)
 
     @days = periods.group_by(&:day)
+    @rooms = Room.all.sort_by(&:capacity).reverse
 
     respond_with @days
   end
@@ -19,22 +20,14 @@ class SlotsController < ApplicationController
   # GET /slots/1.xml
   def show
     @slot = Slot.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml { render :xml => @slot }
-    end
+    respond_with @slot
   end
 
   # GET /slots/new
   # GET /slots/new.xml
   def new
-    @slot = Slot.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml { render :xml => @slot }
-    end
+    @slot = Slot.new(params[:slot])
+    respond_with @slot
   end
 
   # GET /slots/1/edit
@@ -58,14 +51,10 @@ class SlotsController < ApplicationController
   # PUT /slots/1.xml
   def update
     @slot = Slot.find(params[:id])
-    respond_to do |format|
-      if @slot.update_attributes(params[:slot])
-        format.html { redirect_to(@slot, :notice => 'Slot was successfully updated.') }
-        format.xml { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml { render :xml => @slot.errors, :status => :unprocessable_entity }
-      end
+    if @slot.update_attributes(params[:slot])
+      redirect_to(@slot, :notice => 'Slot was successfully updated.')
+    else
+      render :action => "edit"
     end
   end
 
@@ -75,12 +64,8 @@ class SlotsController < ApplicationController
     @slot = Slot.find(params[:id])
     @slot.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(slots_url) }
-      format.xml { head :ok }
-    end
+    redirect_to(slots_url, notice: 'Slot was successfully deleted.')
   end
-
 
   private
   def find_backing_data

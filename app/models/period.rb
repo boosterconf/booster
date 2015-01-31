@@ -14,4 +14,10 @@ class Period < ActiveRecord::Base
     strftime('%a')
   end
 
+  def talk_in(room)
+    slot = slots.find { |slot| slot.room == room }
+    return nil unless slot
+    slot.talk
+  end
+
 end
