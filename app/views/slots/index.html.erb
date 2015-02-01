@@ -25,14 +25,17 @@
 
             <% @rooms.each do |room| %>
                 <td style="border: 1px solid black; padding: 5px">
-                  <%=
-                      talk = period.talk_in(room)
-                      if talk
-                        link_to talk.title, talk
-                      else
-                        link_to 'Assign talk here', new_slot_url(slot: { room_id: room.id, period_id: period.id })
-                      end
+                  <%
+                     talk = period.talk_in(room)
+                     slot = period.slot_in(room)
+                     if talk
                   %>
+                      <%= link_to talk.title, talk %> <br />
+                      <%= link_to '[Remove]', slot, confirm: 'Are you sure?', method: :delete, class: 'action' %>
+                  <% else %>
+                      None <br />
+                      <%= link_to '[Assign]', new_slot_url(slot: { room_id: room.id, period_id: period.id }), class: 'action' %>
+                  <% end %>
                 </td>
             <% end %>
 

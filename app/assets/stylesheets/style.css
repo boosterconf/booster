@@ -185,6 +185,11 @@ a:hover {
     color: #1790a0;
 }
 
+a.action {
+    color: #c9090b;
+    font-size: small;
+}
+
 /* jquery-ui overrides */
 .ui-widget-content {
   background: #f2f0e6;
