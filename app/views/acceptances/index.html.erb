@@ -59,26 +59,21 @@
         </td>
 
         <% if talk.invited? %>
-            <td colspan="4">Invited</td>
-        <% elsif talk.email_sent? || talk.speakers_confirmed? %>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>&nbsp;</td>
-            <td>
-              <% if talk.speakers_confirmed? %>
-                  <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
-              <% else %>
-                  <%= link_to_if talk.accepted?, 'Confirm', :action => 'confirm', :id => talk.id %>
-              <% end %>
-            </td>
-            <td>&nbsp;</td>
-
+            <td colspan="5">Invited</td>
         <% else %>
             <td>
-              <%= link_to_unless talk.accepted?, 'Accept', :action => 'accept', :id => talk.id %>
+              <% if talk.accepted? %>
+                Accepted!
+              <% else %>
+                <%= link_to talk.accepted?, 'Accept', :action => 'accept', :id => talk.id %>    
+              <% end %> 
             </td>
             <td>
-              <%= link_to_unless talk.refused?, 'Reject', :action => 'refuse', :id => talk.id %>
+              <% if talk.refused? %>
+                Rejected
+              <% else %>
+                <%= link_to talk.refused?, 'Reject', :action => 'refuse', :id => talk.id %>
+              <% end %> 
             </td>
             <td>
               <%= link_to_unless talk.pending?, 'Await', :action => 'await', :id => talk.id %>
@@ -91,7 +86,10 @@
               <% end %>
             </td>
             <td>
-              <%= link_to_unless talk.email_sent?, 'Send mail', :action => 'send_mail', :id => talk.id %>
+              <% if talk.email_sent? %>
+              <% else %>
+                <%= link_to talk.email_sent?, 'Send mail', :action => 'send_mail', :id => talk.id %>
+              <% end %>
             </td>
 						<td>
               <%= link_to_unless talk.could_not_attend?, 'Could not attend', :action => 'could_not_attend', :id => talk.id %>
