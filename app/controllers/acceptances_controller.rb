@@ -54,6 +54,7 @@ class AcceptancesController < ApplicationController
     @talk = Talk.find(params[:id])
 
     @talk.could_not_attend!
+    @talk.speakers_confirmed = false
     @talk.save!
     @talk.update_speakers(current_user)
 
