@@ -1,80 +1,262 @@
 /* START PROGRAM */
 
 .program {
-  margin: 20px auto;
-  width:  680px;
+  margin: 10px 0 0 0;
 }
 
-.program table {
-  width: 100%;
+.program .program-row {
+  margin-bottom: 15px;
 }
 
-.program th {
-  background-color: #D3D1CB;
-  font-size: 1.2em;
-  line-height: 1;
-  padding: 20px;
-  text-align: left;
+.program .period {
+  background-color: #d3d1cb;
 }
 
-.program td {
-  padding: 20px; 
-  font-size: 1.1em;
+.program header.time {
+  border-bottom: none;
+  color: #6D6C69;
+  background-color: #f2f0e6;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px;
 }
 
-.program .time {
-  width: 25%;
+.program .period header {
+  background-color: #1790a0;
+  color: #fff;
+  padding: 3px 5px;
 }
 
-.program .what {
-  width: 75%;
+.program .period header .location {
+  text-align: right;
+  background-color: #1790a0;
+  color: #fff;
+  display: inline-block;
 }
 
-.program .location {
-  width: 10em;
+.program header.break, .program header.break .location {
+  background-color: #d3d1cb;
+  color: #777;
 }
 
-.program .meta {
-  font-style: italic;
-  font-size: 0.9em;
+.program header.break, .program header.openspace  {
+  padding: 6px 5px;
+}
+
+.program .period .slot {
+  line-height: 1.2em;
+}
+
+.program .period .plenary-type {
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.program .period .slot .talk {
+  font-size: 14px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.program .period .slot .talk:hover {
+  cursor: pointer;
+  background-color: #e2e0d9;
+}
+
+.program h3 {
+  font-weight: bold;
+  color: #6D6C69;
+}
+
+.program .period .slot .talk {
+  font-weight: normal;
   display: block;
 }
 
-.program .odd {
-  background-color: #F2F0E6; 
-}
-
-.program .even {
-  background-color: #F9F7EF;
-}
-
-.program .title {
-  font-weight: bold;
-}
-
-.program .author {
+.author {
   font-style: italic;
 }
 
-.program ul {
-  list-style: none;
-  margin: 0;
+.program .period .slot .talk .description {
+  display: none;
+  padding: 5px 0px;
+  color: black;
 }
 
-.program ul .location {
-  background-color: #D3D1CB;
+.program .period .slot .talk .description p {
+  margin-bottom: 10px;
 }
 
-@media screen and (max-width: 700px) {
-  .program {
-    margin: 10px auto;
-    width: 460px;
+.program-column h3, .program-column-8 h3 {
+  line-height: 1;
+}
+
+.lightning-talk h3 {
+  line-height: 1;
+}
+
+.lightning-talk-slot .talk {
+  border-bottom: 2px dotted #6D6C69;;
+}
+
+.lightning-talk-slot .talk:last-child {
+  border-bottom: none;
+}
+
+.slot a, section.period a {
+  color: #6D6C69;
+}
+
+@media (min-width: 1200px) {
+
+  .program-column {
+    width: 158px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column-8 {
+    width: 137px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-column header, .program-column-8 header {
+    display: block;
+  }
+
+  .program-column .talk, .program-column-8 .talk {
+    min-height: 150px;
+  }
+
+  .lightning-talk {
+    width: 370px;
+    float: left;
+    margin-left: 30px;
+  }
+
+  .lightning-talk:first-of-type {
+    margin-left: 0;
+  }
+
+  .location-small {
+    display:none;
   }
 }
 
-@media screen and (max-width: 480px) {
-  .program {
-    margin: 5px auto;
-    width: 320px;
+@media (min-width: 979px) and (max-width: 1199px) {
+  .program-column {
+    width: 125px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column-8 {
+    width: 108px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-column header, .program-column-8 header {
+    display: block;
+  }
+
+  .lightning-talk {
+    width: 293px;
+    float: left;
+    margin-left: 30px;
+  }
+
+  .lightning-talk:first-of-type {
+    margin-left: 0;
+  }
+
+  .location-small {
+    display:none;
+  }
+
+  .lightning-talk-slot .talk {
+    border-bottom: 2px dotted #6D6C69;;
+  }
+
+  .lightning-talk-slot .talk:last-child {
+    border-bottom: none;
   }
 }
+
+@media (min-width: 768px) and (max-width: 978px) {
+
+  .location-small {
+    display:block;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-column header, .program-column-8 header {
+    display: none;
+  }
+
+  .program header.time {
+    display: block;
+    padding: 5px;
+    background-color: #1790a0;
+    color: #fff;
+    margin: 0;
+  }
+
+  .workshop-slot section {
+    border-bottom: 2px dotted #6D6C69;;
+  }
+
+  .workshop-slot section:last-child {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .location-small {
+    display:block;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type{
+    margin-left: 0;
+  }
+
+  .program header.time {
+    border-bottom: 5px solid #F6AB6F;
+  }
+
+  .program-column header, .program-column-8 header {
+    display: none;
+  }
+
+  .program header.time {
+    display: block;
+    padding: 5px;
+    background-color: #1790a0;
+    color: #fff;
+    margin: 0;
+  }
+
+  .workshop-slot section {
+    border-bottom: 2px dotted #6D6C69;;
+  }
+
+  .workshop-slot section:last-child {
+    border-bottom: none;
+  }
+
+}
+/* END PROGRAM */

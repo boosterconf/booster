@@ -4,12 +4,12 @@ class Period < ActiveRecord::Base
 
   has_many :slots, order: 'room_id'
 
-  validates_uniqueness_of :start_time, :scope => [:end_time, :day]
+  validates_uniqueness_of :start_time, scope: [:end_time, :day]
 
-  TYPES = %w(workshop lightning)
+  TYPES = %w(workshop lightning keynote break)
 
   def to_s
-    day.strftime('%a') + ' ' + start_and_end_time
+    day_of_the_week + ' ' + start_and_end_time
   end
 
   def start_and_end_time

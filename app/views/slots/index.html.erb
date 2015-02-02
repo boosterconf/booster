@@ -1,4 +1,4 @@
-<h1>Listing slots</h1>
+<h1>Program builder (tm)</h1>
 
 
 <% @days.keys.each do |day|
@@ -20,7 +20,7 @@
       <% periods_for_day.each do |period| %>
           <tr>
             <th style="border: 1px solid black; padding: 5px">
-              <%= h period.start_time.strftime('%H:%M') %> - <%= h period.end_time.strftime('%H:%M') %>
+              <%= period.start_time.strftime('%H:%M') %> - <%= period.end_time.strftime('%H:%M') %>
             </th>
 
             <% @rooms.each do |room| %>
@@ -43,6 +43,3 @@
       <% end %>
     </table>
 <% end %>
-<br/>
-
-<%= link_to 'New slot', new_slot_path %>

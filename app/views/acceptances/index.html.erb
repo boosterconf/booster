@@ -1,12 +1,20 @@
 <script type="text/javascript">
     $(document).ready(function () {
-                $("#acceptances").tablesorter({
-                    theme: 'blue',
-                    // use save sort widget
-                    widgets: ["saveSort"]
+      $("#acceptances").tablesorter({
+          theme: 'blue',
+           // use save sort widget
+          widgets: ["saveSort"]
 
-                });
-            }
+        });
+
+
+        $("#acceptances").sieve({
+            itemSelector: 'tbody tr',
+            textSelector: 'td:not(.no-filter), td select option[selected]',
+            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
+        });
+
+      }
     );
 </script>
 <h1>Approval of talk</h1>
