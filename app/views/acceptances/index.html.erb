@@ -72,6 +72,7 @@
               <% end %>
             </td>
             <td>&nbsp;</td>
+						<td><%= link_to_unless talk.could_not_attend?, 'Could not attend', :action => 'could_not_attend', :id => talk.id %></td>
 
         <% else %>
             <td>
