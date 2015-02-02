@@ -8,9 +8,11 @@ class AcceptancesController < ApplicationController
     num_accepted = Talk.count_accepted
     num_refused  = Talk.count_refused
     num_pending  = Talk.count_pending
+    num_could_not_attend  = Talk.could_not_attend
     @types       = {:accepted => num_accepted,
                     :refused  => num_refused,
-                    :pending  => num_pending
+                    :pending  => num_pending,
+                    :could_not_attend  => num_could_not_attend                    
     }
   end
 
@@ -45,6 +47,17 @@ class AcceptancesController < ApplicationController
     @talk.update_speakers(current_user)
 
     flash[:notice] = "#{@talk.speaker_name}'s talk '#{@talk.title}' refused."
+    redirect_to :controller => :acceptances
+  end
+
+  def could_not_attend
+    @talk = Talk.find(params[:id])
+
+    @talk.could_not_attend!
+    @talk.save!
+    @talk.update_speakers(current_user)
+
+    flash[:notice] = "#{@talk.speaker_name}'s talk '#{@talk.title}' set to status 'could not attend'"
     redirect_to :controller => :acceptances
   end
 

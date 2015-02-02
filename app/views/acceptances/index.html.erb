@@ -29,6 +29,7 @@
     <th>&nbsp;</th>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
+		<th>&nbsp;</th>
   </tr>
   <% for talk in @talks %>
       <tr>
@@ -83,6 +84,9 @@
             </td>
             <td>
               <%= link_to_unless talk.email_sent?, 'Send mail', :action => 'send_mail', :id => talk.id %>
+            </td>
+						<td>
+              <%= link_to_unless talk.could_not_attend?, 'Could not attend', :action => 'could_not_attend', :id => talk.id %>
             </td>
         <% end %>
       </tr>

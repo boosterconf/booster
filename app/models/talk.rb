@@ -64,6 +64,15 @@ class Talk < ActiveRecord::Base
     self.acceptance_status == 'pending'
   end
 
+  def could_not_attend!
+    self.acceptance_status = 'could_not_attend'
+    self
+  end
+
+  def could_not_attend?
+    self.acceptance_status == 'could_not_attend'
+  end
+
   def refused?
     self.acceptance_status == 'refused'
   end
@@ -161,6 +170,10 @@ class Talk < ActiveRecord::Base
 
   def self.count_accepted
     self.count(:conditions => "acceptance_status = 'accepted'")
+  end
+
+  def self.could_not_attend
+    self.count(:conditions => "acceptance_status = 'could_not_attend'")
   end
 
   def self.count_refused
