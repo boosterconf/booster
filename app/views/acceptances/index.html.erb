@@ -94,7 +94,9 @@
               </td>
           <% elsif talk.accepted?%>
             <td>
-                <% unless talk.speakers_confirmed? %>
+                <% if talk.speakers_confirmed? %>
+                  <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
+                <% else %> 
                   <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %> 
                 <% end %>
             </td>
