@@ -488,7 +488,7 @@ footer .inner {
 .cfp {
     border-top: none;
     margin-left: 0;
-    padding-top: 30px;
+    margin-top: 30px;
 }
 
 } /* end this media query */
