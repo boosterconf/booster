@@ -30,7 +30,7 @@ staging:
 
 production:
   year: 2015
-  max_users_limit: 224
+  max_users_limit: 300
   tutorial_registration_open: false
   lightning_registration_open: false
   program_released: false
