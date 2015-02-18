@@ -9,37 +9,101 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
 
 
-    context "trying to delete a registration" do
+    context "trying to soft delete a registration" do
       should "be able to" do
 
         assert_difference('Registration.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :confirmation => "joh"
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
         end
 
         assert_redirected_to registrations_path
       end
 
+      should "only soft delete it" do
 
-      should "get an error message and leave the registration untouched if confirmation does not match name" do
-        assert_no_difference('Registration.count') do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :confirmation => "jjj"
+        assert_no_difference('Registration.with_deleted.count') do
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
         end
 
-        assert_not_nil flash[:error]
+        assert_redirected_to registrations_path
+      end
+
+      should "also delete the user" do
+
+        assert_difference('User.count', -1) do
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+        end
+
+        assert_redirected_to registrations_path
+      end
+
+      should "only soft delete the user" do
+
+        assert_no_difference('User.with_deleted.count') do
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+        end
+
+        assert_redirected_to registrations_path
       end
 
       should "delete all users talks too" do
         assert_difference('Talk.count', -1) do
-          delete :destroy, :id => registrations(:six).id, :name => "John H. Example", :confirmation => "joh"
+          delete :destroy, :id => registrations(:six).id, :name => "John H. Example"
+        end
+      end
+
+      should "only soft delete all users talks" do
+        assert_no_difference('Talk.with_deleted.count') do
+          delete :destroy, :id => registrations(:six).id, :name => "John H. Example"
         end
       end
 
       should "not delete the talks of a user if the talk has several speakers" do
         assert_difference('Talk.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :confirmation => "joh"
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
         end
       end
     end
+
+    context "trying to really delete a registration" do
+      should "not be able to if it hasn't been soft deleted" do
+
+        assert_no_difference('Registration.with_deleted.count') do
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :really => true
+        end
+
+        assert_redirected_to registrations_path
+      end
+
+      should "be able to if it has been soft deleted" do
+
+        assert_difference('Registration.with_deleted.count', -1) do
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :really => true
+        end
+
+        assert_redirected_to deleted_registrations_path
+      end
+
+      should "also really delete the user" do
+
+        assert_difference('User.with_deleted.count', -1) do
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :really => true
+        end
+
+        assert_redirected_to deleted_registrations_path
+      end
+
+      # should "really delete all users talks too" do
+      #   assert_difference('Talk.with_deleted.count', -1) do
+      #     delete :destroy, :id => registrations(:six).id, :name => "John H. Example"
+      #     delete :destroy, :id => registrations(:six).id, :name => "John H. Example", :really => true
+      #   end
+      # end
+    end
+
+
 
     context "updating other people's registrations" do
       should "trigger free registration email when a free registration is completed" do
@@ -84,11 +148,6 @@ class RegistrationsControllerTest < ActionController::TestCase
 
     should "not be able to delete_registrations" do
       delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :confirmation => "joh"
-      assert_response 302
-    end
-
-    should "not be able to view confirm_delete" do
-      get :confirm_delete, :id => registrations(:one).id
       assert_response 302
     end
 

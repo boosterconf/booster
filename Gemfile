@@ -22,6 +22,8 @@ gem 'rails_12factor'
 
 gem 'rest-client'
 
+gem "paranoia", "~> 1.0"
+
 group :production do
   gem 'heroku-deflater'
   gem 'pg'

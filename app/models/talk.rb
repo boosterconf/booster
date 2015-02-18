@@ -1,5 +1,6 @@
 class Talk < ActiveRecord::Base
-  default_scope :order => 'talks.created_at desc'
+  acts_as_paranoid
+  #default_scope :order => 'talks.created_at desc'
 
   attr_accessible :talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
                   :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status,
@@ -165,7 +166,9 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_with_speakers
-    with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
+    #with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
+    talks = Talk.includes(:users, :talk_type)
+    talks.sort_by { |talk| talk.users}
   end
 
   def self.count_accepted

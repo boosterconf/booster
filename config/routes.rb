@@ -60,8 +60,9 @@ Booster2013::Application.routes.draw do
   match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url
 
   resources :registrations do
+    get :deleted, on: :collection
     member do
-      get :confirm_delete
+      get :restore
     end
   end
 

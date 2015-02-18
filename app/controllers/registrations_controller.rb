@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
   before_filter :require_user
   before_filter :require_admin_or_owner, :except => [:index]
-  before_filter :require_admin, :only => [:index, :destroy, :confirm_delete, :phone_list, :send_welcome_email]
+  before_filter :require_admin, :only => [:index, :destroy, :restore, :phone_list, :send_welcome_email]
 
   def index
     @registrations = Registration.find_by_params(params)
@@ -17,6 +17,10 @@ class RegistrationsController < ApplicationController
 
       @income_per_date = total_price_per_date(@registrations, @date_range)
     end
+  end
+
+  def deleted
+    @registrations = Registration.only_deleted
   end
 
   def send_welcome_email()
@@ -91,29 +95,82 @@ class RegistrationsController < ApplicationController
   end
 
   def destroy
-    @registration = Registration.find(params[:id])
+    @really = params[:really]
 
-    if params[:name][0..2].downcase == params[:confirmation][0..2].downcase
+    #Really delete
+    if @really
+      @registration = Registration.only_deleted.find_by_id(params[:id])
+
+      if @registration
+        @registration.user.talks.each { |talk|
+          if talk.users.size === 1
+            talk.destroy!
+          end
+        }
+
+        @registration.user.destroy!
+        @registration.destroy!
+
+        flash[:notice] = "Really deleted user #{@registration.user.full_name}"
+        redirect_to :action => 'deleted'
+      else
+        flash[:notice] = "User not found or must be soft deleted first"
+        redirect_to :action => 'index'
+      end
+    else
+      #Soft delete
+      @registration = Registration.find(params[:id])
       @registration.user.talks.each { |talk|
-        if talk.users.size == 1
-          talk.delete
+        if talk.users.size === 1
+          talk.destroy
         end
       }
 
-      @registration.user.delete
-      @registration.delete
+      @registration.user.destroy
+      @registration.destroy
 
-      flash[:notice] = "Deleted user #{@registration.user.full_name}"
+      flash[:notice] = "Soft-deleted user #{@registration.user.full_name}"
       redirect_to :action => 'index'
-    else
-      flash[:error] = "Wrong letters - try again"
-      render :action => "confirm_delete"
     end
   end
 
-  def confirm_delete
-    @registration = Registration.find(params[:id])
+  def restore
+    @registration = Registration.with_deleted.find(params[:id])
+
+    @registration.user.restore
+    @registration.user.talks.only_deleted.each { |talk|
+        puts 'Restoring deleted Talk: ' + talk.to_s + ', SPEAKERS: ' + talk.users.size.to_s
+        talk.restore
+      }
+
+    @registration.restore
+
+    flash[:notice] = "Restored user #{@registration.user.full_name}"
+    redirect_to :action => 'deleted'
   end
+
+
+  #Delete this??
+  # def really_destroy
+  #   @registration = Registration.find(params[:id])
+  #
+  #   if params[:name][0..2].downcase == params[:confirmation][0..2].downcase
+  #     @registration.user.talks.each { |talk|
+  #       puts 'Talk: ' + talk.to_s + ', SPEAKERS: ' + talk.users.size.to_s
+  #       if talk.users.size === 1
+  #         talk.really_delete
+  #       end
+  #     }
+  #
+  #     @registration.user.really_delete
+  #     @registration.really_delete
+  #
+  #     flash[:notice] = "Deleted user #{@registration.user.full_name}"
+  #     redirect_to :action => 'index'
+  #   else
+  #     flash[:error] = "Wrong letters - try again"
+  #   end
+  # end
 
   protected
   def require_admin_or_owner
@@ -123,7 +180,7 @@ class RegistrationsController < ApplicationController
       redirect_to new_user_session_url
       return false
     end
-    @registration = Registration.find(params[:id]) unless params[:id].blank?
+    @registration = Registration.with_deleted.find(params[:id]) unless params[:id].blank?
     if (@registration && @registration.user == current_user) || admin?
       return true
     else

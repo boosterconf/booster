@@ -1,0 +1,77 @@
+<div style="float: right">
+  <%= link_to 'Back to active users', :registrations  %>
+</div>
+
+<h2>Soft-Deleted Users</h2>
+
+<% unless @registrations.length == 0 %>
+
+    <h3><%= @registrations.length %> brukere:</h3>
+
+    <table class="table table-striped">
+      <tr>
+        <th>UserID</th>
+        <th>User</th>
+        <th>Email</th>
+        <th>Registered</th>
+        <th>Ticket</th>
+        <th>Status</th>
+        <th>Paid</th>
+        <th>Invoice</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+      <% for registration in @registrations %>
+          <% if registration.user.nil? %>
+              BAD DATA for this registration with id <%= registration.id %> at <%= registration.updated_at %>
+              <br/>
+              <% next %>
+          <% end %>
+          <tr>
+            <td>
+              <%= registration.user.id %>
+            </td>
+            <td>
+              <% if registration.unfinished %>
+                  <span style="color: red; font-weight: bold">
+                    <%= link_to h('[U]'), registration.user %>
+                  </span>
+              <% else %>
+                <%= link_to h(registration.user.full_name), registration.user %>
+              <% end %>
+              (<%= h registration.user.company %>)
+            </td>
+            <td>
+              <%= link_to h(registration.user.email), "mailto:#{h(registration.user.email)}" %>
+            </td>
+            <td><%= time_ago_in_words(registration.created_at) %> ago</td>
+            <td>
+              <%= h registration.ticket_type_old %>
+              <% if %w(lightning speaker).include?(registration.ticket_type_old) %>
+                  (<%= registration.user.talks.size %> abstracts)
+              <% end %>
+            </td>
+            <td>
+              <%= h registration.status %>
+            </td>
+            <td>
+              <%= registration.paid_amount %>
+            </td>
+            <td>
+              <% if registration.invoice.present? %>
+                <%= link_to('Invoice', registration.invoice) %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to_unless(registration.paid?, 'Restore', :action => 'restore', :id => registration.id) %>
+            </td>
+            <td>
+              <%= link_to_unless(registration.paid?, 'Really delete!', { :controller => "registrations", :action => "destroy", :id => registration.id, :really => true }, data: {confirm: "Are you sure?"}, :method => :delete) %>
+            </td>
+          </tr>
+      <% end %>
+
+<% else %>
+    <p>There are no deleted users.</p>
+<% end %>
+</table>

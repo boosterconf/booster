@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_paranoid
   attr_accessible :accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
                   :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
                   :password, :password_confirmation, :city, :zip,
@@ -298,6 +299,10 @@ class User < ActiveRecord::Base
     user.registration.unfinished = true
     user.registration.unique_reference = SecureRandom.urlsafe_base64
     user
+  end
+
+  def talks
+    Talk.unscoped { super }
   end
 
 end

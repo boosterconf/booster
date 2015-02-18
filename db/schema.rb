@@ -149,7 +149,10 @@ ActiveRecord::Schema.define(:version => 20150201161258) do
     t.string   "unique_reference"
     t.integer  "invoice_id"
     t.boolean  "speakers_dinner"
+    t.datetime "deleted_at"
   end
+
+  add_index "registrations", ["deleted_at"], :name => "index_registrations_on_deleted_at"
 
   create_table "reviews", :force => true do |t|
     t.integer  "talk_id"
@@ -176,9 +179,12 @@ ActiveRecord::Schema.define(:version => 20150201161258) do
   end
 
   create_table "speakers", :force => true do |t|
-    t.integer "talk_id"
-    t.integer "user_id"
+    t.integer  "talk_id"
+    t.integer  "user_id"
+    t.datetime "deleted_at"
   end
+
+  add_index "speakers", ["deleted_at"], :name => "index_speakers_on_deleted_at"
 
   create_table "sponsors", :force => true do |t|
     t.string   "name"
@@ -274,7 +280,10 @@ ActiveRecord::Schema.define(:version => 20150201161258) do
     t.string   "type"
     t.boolean  "speakers_confirmed"
     t.text     "speaking_history"
+    t.datetime "deleted_at"
   end
+
+  add_index "talks", ["deleted_at"], :name => "index_talks_on_deleted_at"
 
   create_table "ticket_types", :force => true do |t|
     t.string   "type"
@@ -339,7 +348,11 @@ ActiveRecord::Schema.define(:version => 20150201161258) do
     t.string   "gender"
     t.string   "first_name"
     t.string   "last_name"
+    t.boolean  "confirmed_speaker"
+    t.datetime "deleted_at"
   end
+
+  add_index "users", ["deleted_at"], :name => "index_users_on_deleted_at"
 
   create_table "votes", :force => true do |t|
     t.integer  "talk_id"

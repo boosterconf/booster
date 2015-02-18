@@ -1,3 +1,6 @@
+<div style="float: right">
+  <%= link_to 'Show deleted users', :deleted_registrations  %>
+</div>
 <h2>Users</h2>
 
 
@@ -28,6 +31,7 @@
     #image_tag line_chart_xy.to_url
 %>
 
+<div>
 <h3>Requires follow-up</h3>
 
 <ul>
@@ -39,7 +43,7 @@
   <li><%= link_to "Has been invoiced", :filter => 'er_fakturert' %>. When we receive a payment, we need to update these users.
   </li>
 </ul>
-
+</div>
 
 <h3>Other searches</h3>
 
@@ -117,7 +121,7 @@
               <% end %>
             </td>
             <td>
-              <%= link_to_unless(registration.paid?, 'Slett bruker', :action => 'confirm_delete', :id => registration.id) %>
+              <%= link_to_unless(registration.paid?, 'Slett bruker', { :controller => "registrations", :action => "destroy", :id => registration.id }, :method => :delete) %>
             </td>
           </tr>
       <% end %>

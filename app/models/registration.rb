@@ -14,6 +14,8 @@ class Registration < ActiveRecord::Base
       'reviewer' => 'Reviewer ticket for Booster'
   }
 
+  acts_as_paranoid
+
   attr_accessible :comments, :includes_dinner, :description,
                   :ticket_type_old, :free_ticket, :user_id, :paid_amount, :payment_reference,
                   :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete,
@@ -200,5 +202,9 @@ class Registration < ActiveRecord::Base
 
   def self.early_bird_is_active?
     Time.now < AppConfig.early_bird_ends
+  end
+
+  def user
+    User.unscoped { super }
   end
 end
