@@ -15,9 +15,6 @@
         <th>Email</th>
         <th>Registered</th>
         <th>Ticket</th>
-        <th>Status</th>
-        <th>Paid</th>
-        <th>Invoice</th>
         <th>&nbsp;</th>
         <th>&nbsp;</th>
       </tr>
@@ -48,18 +45,7 @@
             <td>
               <%= h registration.ticket_type_old %>
               <% if %w(lightning speaker).include?(registration.ticket_type_old) %>
-                  (<%= registration.user.talks.size %> abstracts)
-              <% end %>
-            </td>
-            <td>
-              <%= h registration.status %>
-            </td>
-            <td>
-              <%= registration.paid_amount %>
-            </td>
-            <td>
-              <% if registration.invoice.present? %>
-                <%= link_to('Invoice', registration.invoice) %>
+                  (<%= registration.user.talks.with_deleted.size %> abstracts)
               <% end %>
             </td>
             <td>

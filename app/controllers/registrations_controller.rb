@@ -104,13 +104,6 @@ class RegistrationsController < ApplicationController
 
   def soft_delete
     @registration = Registration.find(params[:id])
-    @registration.user.talks.each do |talk|
-      if talk.has_single_speaker?
-        talk.destroy
-      end
-    end
-
-    @registration.user.destroy
     @registration.destroy
 
     flash[:notice] = "Soft-deleted user #{@registration.user.full_name}"
@@ -121,13 +114,7 @@ class RegistrationsController < ApplicationController
     @registration = Registration.only_deleted.find_by_id(params[:id])
 
     if @registration
-      @registration.user.talks.each { |talk|
-        if talk.has_single_speaker?
-          talk.destroy!
-        end
-      }
 
-      @registration.user.destroy!
       @registration.destroy!
 
       flash[:notice] = "Really deleted user #{@registration.user.full_name}"
@@ -140,11 +127,6 @@ class RegistrationsController < ApplicationController
 
   def restore
     @registration = Registration.with_deleted.find(params[:id])
-
-    @registration.user.restore
-    @registration.user.talks.only_deleted.each do |talk|
-      talk.restore
-    end
 
     @registration.restore
 
