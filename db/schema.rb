@@ -348,7 +348,6 @@ ActiveRecord::Schema.define(:version => 20150201161258) do
     t.string   "gender"
     t.string   "first_name"
     t.string   "last_name"
-    t.boolean  "confirmed_speaker"
     t.datetime "deleted_at"
   end
 

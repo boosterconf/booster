@@ -52,6 +52,10 @@ class Talk < ActiveRecord::Base
     users.include?(speaker)
   end
 
+  def has_single_speaker?
+    users.size == 1
+  end
+
   def accept!
     self.acceptance_status = 'accepted'
     self

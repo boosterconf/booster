@@ -23,22 +23,22 @@ class RegistrationsController < ApplicationController
     @registrations = Registration.only_deleted
   end
 
-  def send_welcome_email()
-    User.all.each do | a_user |
+  def send_welcome_email
+    User.all.each do |a_user|
       BoosterMailer.welcome_email(a_user).deliver if a_user.email && a_user.first_name
     end
     redirect_to registrations_url
   end
 
-  def send_test_welcome_email()
-    User.find_all_by_email("kjersti.berg@gmail.com").each do | a_user |
+  def send_test_welcome_email
+    User.find_all_by_email("kjersti.berg@gmail.com").each do |a_user|
       puts a_user
       BoosterMailer.welcome_email(a_user).deliver
     end
     redirect_to registrations_url
   end
 
-  def send_speakers_dinner_email 
+  def send_speakers_dinner_email
     User.all_accepted_speakers.each do |user|
       print "Mailing: #{user.email}...\n"
       BoosterMailer.speakers_dinner_email(user).deliver
@@ -95,42 +95,46 @@ class RegistrationsController < ApplicationController
   end
 
   def destroy
-    @really = params[:really]
-
-    #Really delete
-    if @really
-      @registration = Registration.only_deleted.find_by_id(params[:id])
-
-      if @registration
-        @registration.user.talks.each { |talk|
-          if talk.users.size === 1
-            talk.destroy!
-          end
-        }
-
-        @registration.user.destroy!
-        @registration.destroy!
-
-        flash[:notice] = "Really deleted user #{@registration.user.full_name}"
-        redirect_to :action => 'deleted'
-      else
-        flash[:notice] = "User not found or must be soft deleted first"
-        redirect_to :action => 'index'
-      end
+    if params[:really]
+      really_delete
     else
-      #Soft delete
-      @registration = Registration.find(params[:id])
+      soft_delete
+    end
+  end
+
+  def soft_delete
+    @registration = Registration.find(params[:id])
+    @registration.user.talks.each do |talk|
+      if talk.has_single_speaker?
+        talk.destroy
+      end
+    end
+
+    @registration.user.destroy
+    @registration.destroy
+
+    flash[:notice] = "Soft-deleted user #{@registration.user.full_name}"
+    redirect_to registrations_url
+  end
+
+  def really_delete
+    @registration = Registration.only_deleted.find_by_id(params[:id])
+
+    if @registration
       @registration.user.talks.each { |talk|
-        if talk.users.size === 1
-          talk.destroy
+        if talk.has_single_speaker?
+          talk.destroy!
         end
       }
 
-      @registration.user.destroy
-      @registration.destroy
+      @registration.user.destroy!
+      @registration.destroy!
 
-      flash[:notice] = "Soft-deleted user #{@registration.user.full_name}"
-      redirect_to :action => 'index'
+      flash[:notice] = "Really deleted user #{@registration.user.full_name}"
+      redirect_to deleted_registrations_url
+    else
+      flash[:notice] = "User not found or must be soft deleted first"
+      redirect_to registrations_url
     end
   end
 
@@ -138,39 +142,16 @@ class RegistrationsController < ApplicationController
     @registration = Registration.with_deleted.find(params[:id])
 
     @registration.user.restore
-    @registration.user.talks.only_deleted.each { |talk|
-        puts 'Restoring deleted Talk: ' + talk.to_s + ', SPEAKERS: ' + talk.users.size.to_s
-        talk.restore
-      }
+    @registration.user.talks.only_deleted.each do |talk|
+      talk.restore
+    end
 
     @registration.restore
 
     flash[:notice] = "Restored user #{@registration.user.full_name}"
-    redirect_to :action => 'deleted'
+    redirect_to deleted_registrations_url
   end
 
-
-  #Delete this??
-  # def really_destroy
-  #   @registration = Registration.find(params[:id])
-  #
-  #   if params[:name][0..2].downcase == params[:confirmation][0..2].downcase
-  #     @registration.user.talks.each { |talk|
-  #       puts 'Talk: ' + talk.to_s + ', SPEAKERS: ' + talk.users.size.to_s
-  #       if talk.users.size === 1
-  #         talk.really_delete
-  #       end
-  #     }
-  #
-  #     @registration.user.really_delete
-  #     @registration.really_delete
-  #
-  #     flash[:notice] = "Deleted user #{@registration.user.full_name}"
-  #     redirect_to :action => 'index'
-  #   else
-  #     flash[:error] = "Wrong letters - try again"
-  #   end
-  # end
 
   protected
   def require_admin_or_owner
@@ -182,7 +163,7 @@ class RegistrationsController < ApplicationController
     end
     @registration = Registration.with_deleted.find(params[:id]) unless params[:id].blank?
     if (@registration && @registration.user == current_user) || admin?
-      return true
+      true
     else
       flash[:notice] = "You are not allowed to see this page"
       redirect_to root_url
