@@ -36,12 +36,12 @@ class User < ActiveRecord::Base
     elsif read_attribute(:name)
       read_attribute(:name)
     else
-      'unnamed speaker'
+      'unnamed'
     end
   end
 
   def unnamed?
-    full_name == 'unnamed speaker'
+    full_name == 'unnamed'
   end
 
   def name_or_email
