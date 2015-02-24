@@ -41,7 +41,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
@@ -53,7 +53,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
@@ -69,7 +69,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
@@ -81,7 +81,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
@@ -103,7 +103,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
@@ -115,7 +115,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
@@ -127,7 +127,7 @@
         <% period = @periods.pop %>
         <header class='time'><%= period %></header>
         <% period.slots.each do |slot| %>
-            <%= render 'workshop_section_8', location: slot.room.name, time: period.start_and_end_time, talk: slot.talk %>
+            <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
