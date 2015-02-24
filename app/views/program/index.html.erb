@@ -6,16 +6,16 @@
     <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
     <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-    <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[383] %>
+    <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[507] %>
 
     <div class='program-row row'>
       <div class="span12 ">
-        <header class='time'>10:30 - 11:15</header>
-        <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
+        <header class='time'>10:30 - 11:15  Lightning talks</header>
+        <% render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
                    talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <%= render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
+        <% render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
                    talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <%= render 'lightning_talk_section', location: 'Muséplass', time: '10:30 - 11:15',
+        <% render 'lightning_talk_section', location: 'Muséplass', time: '10:30 - 11:15',
                    talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
       </div>
     </div>
@@ -24,12 +24,12 @@
 
     <div class='program-row row'>
       <div class="span12">
-        <header class='time'>11:30 - 12:15</header>
-        <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
+        <header class='time'>11:30 - 12:15 Lightning talks</header>
+        <% render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
                    talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <%= render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
+        <% render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
                    talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <%= render 'lightning_talk_section', location: 'Muséplass', time: '11:30 - 12:15',
+        <% render 'lightning_talk_section', location: 'Muséplass', time: '11:30 - 12:15',
                    talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
       </div>
     </div>
@@ -134,7 +134,7 @@
 
     <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
 
-    <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[383] %>
+    <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[497] %>
     <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
   </div>
 </div>
