@@ -18,7 +18,7 @@ class SlotsController < ApplicationController
 
   # GET /slots/new
   def new
-    @talks = Talk.all_unassigned_tutorials
+    #@talks = Talk.all_unassigned_tutorials
 
     @slot = Slot.new(params[:slot])
   end
