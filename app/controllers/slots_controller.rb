@@ -18,6 +18,8 @@ class SlotsController < ApplicationController
 
   # GET /slots/new
   def new
+    @talks = Talk.all_unassigned_tutorials
+
     @slot = Slot.new(params[:slot])
   end
 
@@ -52,7 +54,6 @@ class SlotsController < ApplicationController
   end
 
   private
-
   def find_slot
     @slot = Slot.find(params[:id])
     render not_found unless @slot

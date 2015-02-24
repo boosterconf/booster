@@ -16,7 +16,7 @@
 
     <p>
       <%= f.label :period %><br />
-      <%= f.collection_select :period_id, @periods, :id, :to_s %>
+      <%= f.collection_select :period_id, @periods, :id, :to_s, {:include_blank => 'Please Select'} %>
     </p>
 
     <p>

@@ -1,0 +1,11 @@
+.program-editor {
+    border: 1px solid black;
+    padding: 5px;
+    table-layout: fixed;
+}
+
+.program-editor td, .program-editor th {
+    width: 11.1%;
+    border: 1px solid black;
+    padding: 5px
+}

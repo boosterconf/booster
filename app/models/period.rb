@@ -17,7 +17,7 @@ class Period < ActiveRecord::Base
   end
 
   def day_of_the_week
-    strftime('%a')
+    start_time.strftime('%a')
   end
 
   def talk_in(room)

@@ -7,8 +7,8 @@ class Talk < ActiveRecord::Base
                   :slide, :outline, :appropriate_for_roles, :speakers_confirmed, :speaking_history
 
   has_many :speakers
-  has_many :users, :through => :speakers
-  has_many :comments, :order => 'created_at', :include => :user
+  has_many :users, through: :speakers
+  has_many :comments, order: 'created_at', include: :user
   has_and_belongs_to_many :tags
   belongs_to :talk_type
   has_many :reviews, order: 'created_at desc', include: :reviewer
@@ -34,7 +34,7 @@ class Talk < ActiveRecord::Base
   validates :description, presence: true
   validates :language, presence: true
   validates :talk_type_id, presence: true
-  
+
   after_initialize do |talk|
     talk.acceptance_status ||= 'pending'
     talk.year = AppConfig.year
@@ -165,6 +165,13 @@ class Talk < ActiveRecord::Base
     unscoped.all(include: [:talk_type], conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title")
   end
 
+  def self.all_unassigned_tutorials
+    includes(:slots).includes(:talk_type).where(acceptance_status: 'accepted',
+                                                'slots.talk_id' => nil,
+                                                'talk_types.eligible_for_free_ticket' => 't'
+    )
+  end
+
   def self.all_accepted_lightning_talks
     all(include: :talk_type, conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 'f'"], :order => "title ")
   end
@@ -172,7 +179,7 @@ class Talk < ActiveRecord::Base
   def self.all_with_speakers
     #with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
     talks = Talk.includes(:users, :talk_type)
-    talks.sort_by { |talk| talk.users}
+    talks.sort_by { |talk| talk.users }
   end
 
   def self.count_accepted
