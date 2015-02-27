@@ -19,4 +19,5 @@
 //= require jquery.sieve
 //= require tinymce-jquery
 //= require tag.it
+//= require program
 //= require_tree .

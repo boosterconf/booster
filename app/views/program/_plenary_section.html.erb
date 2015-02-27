@@ -1,18 +1,17 @@
-<div class="program-row row">
-  <div class="span12">
-    <section class="period">
-      <header>
-        <time class="time"><%= time %></time>
-        <span class="location"><%= location %></span>
-      </header>
-      <a href="<%= talk_path(talk.id) %>">
-        <div class="slot">
-          <div class="plenary-type">
-            <h4>Keynote: <%= talk.title %></h4>
-            <span class='author'><%= talk.speaker_name %></span>
-          </div>
+<div class="program-row">
+  <section class="period">
+    <header>
+      <time class="time"><%= time %></time>
+      <span class="location"><%= location %></span>
+    </header>
+    <a class="single-talk" href="<%= talk_path(talk.id) %>">
+      <div class="slot">
+        <div class="plenary-type talk">
+          <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= talk.title %></h4>
+          <span class='author'><%= talk.speaker_name %></span>
+          <div class='description'><%= talk.description.html_safe %></div>
         </div>
-      </a>
-    </section>
-  </div>
+      </div>
+    </a>
+  </section>
 </div>

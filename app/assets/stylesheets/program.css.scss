@@ -1,203 +1,202 @@
 /* START PROGRAM */
+$primary-color: #1790a0;
+$highlight-color: #F6AB6F;
+$light-neutral: #d3d1cb;
+$lighter-neutral: #e2e0d9;
+$dark-neutral: #757470;
+$text-color: #51504e;
+$text-color-negative: #ffffff;
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row;
+}
 
 .program {
   margin: 10px 0 0 0;
-}
 
-.program .program-row {
-  margin-bottom: 15px;
-}
-
-.program .period {
-  background-color: #d3d1cb;
-}
-
-.program header.time {
-  border-bottom: none;
-  color: #6D6C69;
-  background-color: #f2f0e6;
-  font-weight: bold;
-  font-size: 18px;
-  padding: 5px;
-}
-
-.program .period header {
-  background-color: #1790a0;
-  color: #fff;
-  padding: 3px 5px;
-}
-
-.program .period header .location {
-  text-align: right;
-  background-color: #1790a0;
-  color: #fff;
-  display: inline-block;
-}
-
-.program header.break, .program header.break .location {
-  background-color: #d3d1cb;
-  color: #777;
-}
-
-.program header.break, .program header.openspace  {
-  padding: 6px 5px;
-}
-
-.program .period .slot {
-  line-height: 1.2em;
-}
-
-.program .period .plenary-type {
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-top: 5px;
-}
-
-.program .period .slot .talk {
-  font-size: 14px;
-  padding-left: 10px;
-  padding-bottom: 10px;
-  padding-top: 5px;
-}
-
-.program .period .slot .talk:hover {
-  cursor: pointer;
-  background-color: #e2e0d9;
-}
-
-.program h3 {
-  font-weight: bold;
-  color: #6D6C69;
-}
-
-.program .period .slot .talk {
-  font-weight: normal;
-  display: block;
-}
-
-.author {
-  font-style: italic;
-}
-
-.program .period .slot .talk .description {
-  display: none;
-  padding: 5px 0px;
-  color: black;
-}
-
-.program .period .slot .talk .description p {
-  margin-bottom: 10px;
-}
-
-.program-column h3, .program-column-8 h3 {
-  line-height: 1;
-}
-
-.lightning-talk h3 {
-  line-height: 1;
-}
-
-.lightning-talk-slot .talk {
-  border-bottom: 2px dotted #6D6C69;;
-}
-
-.lightning-talk-slot .talk:last-child {
-  border-bottom: none;
-}
-
-.slot a, section.period a {
-  color: #6D6C69;
-}
-
-@media (min-width: 1200px) {
-
-  .program-column {
-    width: 158px;
-    float: left;
-    margin-left: 10px;
+  .nav-tabs li a {
+    background-color: transparent;
+    color: $text-color;
   }
 
-  .program-column-8 {
-    width: 137px;
-    float: left;
-    margin-left: 10px;
+  .nav-tabs li.active a {
+    background-color: $light-neutral;
   }
 
-  .program-column:first-of-type, .program-column-8:first-of-type {
-    margin-left: 0;
+
+  .nav-tabs li a:hover {
+    background-color: $highlight-color;
   }
 
-  .program-column header, .program-column-8 header {
-    display: block;
+  .program-row {
+    margin-bottom: 15px;
+
   }
 
-  .program-column .talk, .program-column-8 .talk {
-    min-height: 150px;
+  .period {
+    background-color: $light-neutral;
+
+    header {
+      background-color: $primary-color;
+      color: $text-color-negative;
+      padding: 3px 5px;
+    }
+
+    .location {
+      text-align: right;
+      background-color: $primary-color;
+      color: $text-color-negative;
+      display: inline-block;
+    }
+
+    header.time {
+      border-bottom: none;
+      color: $dark-neutral;
+      background-color: #f2f0e6;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 5px;
+    }
+
+    .slot {
+      line-height: 1.2em;
+
+      .talk {
+        font-size: 14px;
+        padding: 5px 10px 5px 10px;
+        font-weight: normal;
+        display: block;
+
+        .author {
+          color: $text-color;
+        }
+
+        .description {
+          display: none;
+          padding: 5px 0;
+          color: $text-color;
+
+          p {
+            margin-bottom: 10px;
+          }
+        }
+      }
+    }
+
+    .plenary-type {
+      padding: 5px 10px 5px 10px;
+    }
   }
 
-  .lightning-talk {
-    width: 370px;
-    float: left;
-    margin-left: 30px;
+  header.break, header.break .location {
+    background-color: $light-neutral;
+    color: $text-color;
   }
 
-  .lightning-talk:first-of-type {
-    margin-left: 0;
+  header.break, header.openspace {
+    padding: 6px 5px;
   }
 
-  .location-small {
-    display:none;
-  }
-}
-
-@media (min-width: 979px) and (max-width: 1199px) {
-  .program-column {
-    width: 125px;
-    float: left;
-    margin-left: 10px;
+  h2 {
+    font-size: 140%;
   }
 
-  .program-column-8 {
-    width: 108px;
-    float: left;
-    margin-left: 10px;
+  h3, h4, h5 {
+    font-family: "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; // This overrides the bold
+    font-weight: normal;
+    color: $text-color;
   }
 
-  .program-column:first-of-type, .program-column-8:first-of-type {
-    margin-left: 0;
+  .program-column h3 {
+    line-height: 1;
   }
 
-  .program-column header, .program-column-8 header {
-    display: block;
-  }
-
-  .lightning-talk {
-    width: 293px;
-    float: left;
-    margin-left: 30px;
-  }
-
-  .lightning-talk:first-of-type {
-    margin-left: 0;
-  }
-
-  .location-small {
-    display:none;
+  .lightning-talk h3 {
+    line-height: 1;
   }
 
   .lightning-talk-slot .talk {
-    border-bottom: 2px dotted #6D6C69;;
+    border-bottom: 2px dotted $dark-neutral;;
   }
 
   .lightning-talk-slot .talk:last-child {
     border-bottom: none;
+  }
+
+  .slot a, section.period a {
+    color: $dark-neutral;
+  }
+}
+
+@media (min-width: 979px) {
+
+  header.time {
+    background-color: transparent;
+  }
+
+  .talk:hover {
+    cursor: pointer;
+    background-color: $lighter-neutral;
+  }
+
+  .program-column {
+    width: 200px;
+    float: left;
+    margin-left: 10px;
+  }
+
+  .lightning-sections {
+    @include flexbox;
+  }
+
+  .workshop-slot {
+    @include flexbox;
+  }
+
+  .lightning-talk header {
+    font-size: 110%;
+  }
+
+  .lightning-talk-slot .author, .plenary-type .author {
+    font-size: larger;
+  }
+
+  .program-column:first-of-type {
+    margin-left: 0;
+  }
+
+  .program-column header {
+    display: block;
+  }
+
+  .program-column .talk {
+    min-height: 150px;
+  }
+
+  .lightning-talk {
+    width: 400px;
+    float: left;
+    margin-left: 30px;
+  }
+
+  .lightning-talk:first-of-type {
+    margin-left: 0;
+  }
+
+  .location-small {
+    display: none;
   }
 }
 
 @media (min-width: 768px) and (max-width: 978px) {
 
   .location-small {
-    display:block;
+    display: block;
   }
 
   .program-column:first-of-type, .program-column-8:first-of-type {
@@ -211,13 +210,13 @@
   .program header.time {
     display: block;
     padding: 5px;
-    background-color: #1790a0;
-    color: #fff;
+    background-color: $primary-color;
+    color: $text-color-negative;
     margin: 0;
   }
 
   .workshop-slot section {
-    border-bottom: 2px dotted #6D6C69;;
+    border-bottom: 2px dotted $dark-neutral;
   }
 
   .workshop-slot section:last-child {
@@ -226,37 +225,66 @@
 }
 
 @media (max-width: 767px) {
-  .location-small {
-    display:block;
+  .program {
+    a {
+      text-decoration: none;
+    }
   }
 
-  .program-column:first-of-type, .program-column-8:first-of-type{
+  .location-small {
+    display: block;
+  }
+
+  .program-column:first-of-type, .program-column-8:first-of-type {
     margin-left: 0;
   }
 
   .program header.time {
-    border-bottom: 5px solid #F6AB6F;
+    border-bottom: 3px solid $highlight-color;
   }
 
-  .program-column header, .program-column-8 header {
+  .program-column header {
     display: none;
   }
 
   .program header.time {
     display: block;
     padding: 5px;
-    background-color: #1790a0;
-    color: #fff;
+    background-color: $primary-color;
+    color: $text-color-negative;
     margin: 0;
   }
 
   .workshop-slot section {
-    border-bottom: 2px dotted #6D6C69;;
+    border-bottom: 2px dotted $dark-neutral;
   }
 
   .workshop-slot section:last-child {
     border-bottom: none;
   }
 
+  .talk:hover {
+  }
+
+  .follow-me {
+    padding: 10px 20px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .follow-me.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  .follow-me.fixed.absolute {
+    position: absolute;
+    z-index: 2;
+  }
+
 }
+
 /* END PROGRAM */
