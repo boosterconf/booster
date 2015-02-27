@@ -10,13 +10,13 @@
 
     <div class='program-row row'>
       <div class="span12 ">
-        <header class='time'>10:30 - 11:15  Lightning talks</header>
-        <% render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
-                   talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <% render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
-                   talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <% render 'lightning_talk_section', location: 'Muséplass', time: '10:30 - 11:15',
-                   talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
+        <header class='time'>10:30 - 11:15</header>
+        <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
+                   talks: [@talks[401], @talks[432], @talks[371], @talks[338]] %>
+        <%= render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
+                   talks: [@talks[344], @talks[353], @talks[451], @talks[404]] %>
+        <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '10:30 - 11:15',
+                   talks: [@talks[474], @talks[444], @talks[464], @talks[360]] %>
       </div>
     </div>
 
@@ -24,13 +24,13 @@
 
     <div class='program-row row'>
       <div class="span12">
-        <header class='time'>11:30 - 12:15 Lightning talks</header>
-        <% render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
-                   talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <% render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
-                   talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
-        <% render 'lightning_talk_section', location: 'Muséplass', time: '11:30 - 12:15',
-                   talks: [@talks[383], @talks[383], @talks[383], @talks[383]] %>
+        <header class='time'>11:30 - 12:15</header>
+        <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
+                   talks: [@talks[489], @talks[374], @talks[388], @talks[503]] %>
+        <%= render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
+                   talks: [@talks[460], @talks[473], @talks[453], @talks[433]] %>
+        <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '11:30 - 12:15',
+                   talks: [@talks[337], @talks[420], @talks[486], @talks[457]] %>
       </div>
     </div>
 
@@ -39,26 +39,26 @@
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
 
-    <%= render 'break_section', location: 'Downstairs', time: '15:00-15:30', title: 'Coffee break' %>
+    <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
 
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
       </div>
     </div>
 
-    <%= render 'break_section', location: 'Bølgen & Moi', time: '19:00-00:00', title: 'Conference dinner' %>
+    <%= render 'break_section', location: 'Galleri Nygaten', time: '19:00-00:00', title: 'Conference dinner' %>
 
     <h2>Thursday March 14</h2>
 
@@ -67,7 +67,7 @@
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
@@ -79,7 +79,7 @@
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
@@ -92,7 +92,7 @@
     <%= render 'open_space_section', location: 'Dragefjellet and more', time: '14:00-14:45', title: 'Open spaces 1' %>
     <%= render 'open_space_section', location: 'Dragefjellet and more', time: '14:45-15:30', title: 'Open spaces 2' %>
 
-    <%= render 'open_space_section', location: 'Litteraturhuset - Alver', time: '18:00-01:00', title: 'Geek beer/Community night' %>
+    <%= render 'open_space_section', location: 'TBA', time: '18:00-01:00', title: 'Geek beer/Community night' %>
 
     <h2>Friday March 15</h2>
 
@@ -101,7 +101,7 @@
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
@@ -113,7 +113,7 @@
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
@@ -125,7 +125,7 @@
     <div class='program-row row'>
       <div class="workshop-slot span12">
         <% period = @periods.pop %>
-        <header class='time'><%= period %></header>
+        <header class='time'><%= period.start_and_end_time %></header>
         <% period.slots.each do |slot| %>
             <%= render 'workshop_section_8', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk %>
         <% end %>
