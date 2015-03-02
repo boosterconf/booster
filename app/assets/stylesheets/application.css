@@ -16,6 +16,7 @@
 = require jquery.ui.all
 = require jquery_notification
 = require jquery-tablesorter/theme.blue
+= require modal
 = require style
 = require program
 = require_tree .

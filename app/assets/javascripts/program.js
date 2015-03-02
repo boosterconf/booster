@@ -22,16 +22,6 @@ $(document).ready(function () {
     showAll();
   });
 
-  $('.single-talk').on('click', function (e) {
-    if (document.documentElement.clientWidth <= 798) {
-      e.preventDefault();
-      $(".description").hide();
-      $.when( $(this).find(".description").toggle()).then(function() {
-        $(document).trigger('updateStickies');
-      })
-    }
-  });
-
 });
 
 function StickyTitles(stickies) {
