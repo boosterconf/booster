@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  showDay(1);
+  showDay(2);
 
   $('#choose-day1').on('click', function (e) {
     e.preventDefault();
