@@ -3,35 +3,17 @@
     <div class="hello span9" >
       <div class="hello-inner">
         <h2>Booster 2015, 11-13 March</h2>
-        <h1>Get your tickets now!</h1>
-        <!--<h2>Early-bird closes <%= AppConfig.early_bird_ends.to_formatted_s(:short_ordinal) %>.</h2>-->
-        <p style="text-align: left; max-width:33em">
-          If you want to know what is happening at Booster, check out our fantastic
-          <%= link_to 'speakers', info_speakers_url%> and all the awesome <%= link_to 'sessions', accepted_talks_url %>
-          they will be doing this year!
-        </p>
-        <p style="text-align: left; max-width:33em">
-          And don't forget to book your ticket for our exclusive standalone <%= link_to 'pre-conference workshops', info_preconf_url, {:style => 'white-space: nowrap'}%>
-          before it's to late!
-        </p>
-        <div style="padding-top: 40px; padding-bottom: 30px; margin-bottom: 0px">
-          <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
-          <%= link_to 'Register group ticket', new_group_registration_url, :class => "btn btn-primary btn-large" %>
-        </div>
+        <p>
+          <a href="https://twitter.com/hashtag/booster2015?src=hash" target="_new">#‎booster2015‬</a>
+          is over! To all our wonderful speakers,
+           participants, sponsors and volunteers, <strong>THANK YOU!</strong>
+           We hope you had a blast at Booster!</p>
+           <p>We hope you had a great time at this year’s conference!
+             We’re always seeking to improve and know that you can help us. It only takes 2 minutes to do so.
+              <a href="http://ow.ly/Km19k">Click here &amp; give us invaluable feedback.</a>
+           </p>
       </div>
-    </div>
-
-  <div class="cfp span3 right-column well">
-      <h2>Attention!</h2>
-      <p><b>This year we're also doing full-day pre-conference workshops with our keynote speakers
-        <a href="http://twitter.com/johannarothman" title="@johannarothman" target="_blank">@johannarothman</a> and Vitaly from
-        <a href="http://twitter.com/smashingmag" title="@smashingmag" target="_blank">@smashingmag</a>!</b></p>
-
-      <p style="margin-top: 30px"><%= link_to 'Sign up now!', info_preconf_url, :class => 'btn btn-primary btn-large cfp-button'%></p>
-  </div>
  </div>
-
-
 
 <% if @speakers.size >= 4 %>
   <div class="speakers-box">
