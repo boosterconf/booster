@@ -13,20 +13,20 @@ body {
 
 input, button, select, textarea, .ui-widget, div {
   font-family: "Siri Core Regular", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
-  font-style: normal; 
+  font-style: normal;
 }
 
 h1, h2, h3, h4, h5 {
-   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
-   font-weight: bold; 
+   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
+   font-weight: bold;
    line-height: 1.1;
    text-rendering: optimizeLegibility;
 }
 
 /* To select the proper type face, all tags that uses font-weight bold must be listed in this selector list. */
 strong, th, b, .program .title {
-   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; 
-   font-weight: bold; 
+   font-family: "Siri Core Bold", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
+   font-weight: bold;
 }
 
 h1 {
@@ -36,7 +36,7 @@ h1 {
 }
 
 .high {
-  padding-top: 30px; 
+  padding-top: 30px;
 }
 
 .wide{
@@ -92,7 +92,7 @@ article {
 .navbar .btn-navbar.disabled,
 .navbar .btn-navbar[disabled] {
   background-color: #1790A0;
-  background-image: none; 
+  background-image: none;
 }
 .navbar .btn-navbar:focus {
   outline: none;
@@ -132,7 +132,7 @@ nav {
    float: left;
    margin-bottom: 0;
    margin-left: -5px;
-   max-width: 300px; 
+   max-width: 300px;
 }
 
 #meta {
@@ -151,14 +151,14 @@ nav {
    margin-bottom: 0;
 }
 
-.whenandwhere, 
+.whenandwhere,
 .tagline {
    color: #fff;
    font-family: "Siri Core Regular", "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif;
    font-size: 1em;
    font-weight: normal;
    line-height: 1.2;
-   text-transform: uppercase;  
+   text-transform: uppercase;
 }
 
 .masthead {
@@ -541,7 +541,7 @@ footer .inner {
 
 .hello {
    background: url(/assets/folk06.png) no-repeat;
-    background-position: 90% 210px;
+    background-position: 90% 100%;
     background-size: 10%;
 }
 
