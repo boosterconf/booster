@@ -10,18 +10,18 @@
 </p>
 <% else %>
 <p>
-  Jeg vil gjerne invitere <%= @sponsor.name %> til å sponse Boosterkonferansen 2015!
+  Jeg vil gjerne invitere <%= @sponsor.name %> til å sponse Boosterkonferansen <%= Dates::CONFERENCE_YEAR %>!
 </p>
 <% end %>
 
 <p>
   Jeg er en av deltagerne i komiteen som nå er godt i gang med arbeidet med neste års konferanse som avholdes 
-  <strong>11.-13. mars 2015</strong> i Scandic Bergen City konferansesenter. Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse
+  <strong><%= Dates::CONFERENCE_DATES %></strong> i Scandic Bergen City konferansesenter. Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse
 </p>
 
 <p>
   Booster 2014 var helt utsolgt, og som vanlig fikk vi svært høy grad av positive tilbakemeldinger fra deltagerne! Noe av det som gjør at folk er veldig fornøyde er at vi har en unik kombinasjon av gode og anerkjente speakere, en intim atmosfære og overkommelige priser. Dette hadde vi ikke fått til uten sponsorene våre, derfor er vi nå tidlig ute for å høre om
-  <%= @sponsor.name %> ønsker å være med som sponsor av Booster 2015.
+  <%= @sponsor.name %> ønsker å være med som sponsor av Booster <%= Dates::CONFERENCE_YEAR %>.
 </p>
 
 <p>
@@ -63,7 +63,7 @@
 </p><p>
   Med vennlig hilsen <br />
   <%= @sender.full_name %><br />
-  for Booster 2015
+  for Booster <%= Dates::CONFERENCE_YEAR %>
 </p>
 </body>
 </html>

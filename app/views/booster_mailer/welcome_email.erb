@@ -3,7 +3,7 @@
 <p>Hello <%= @user.first_name %>,
 </p>
 
-<p>Booster 2015 starts Wednesday next week. Here is some important
+<p>Booster <%= Dates::CONFERENCE_YEAR %> starts Wednesday next week. Here is some important
   information you will need. Key points:</p>
 
 <ul>
@@ -15,7 +15,7 @@
 
 <h3>LOCATION AND TRANSPORT</h3>
 
-<p>Booster 2015 takes place at the Scandic Bergen City Hotel.
+<p>Booster <%= Dates::CONFERENCE_YEAR %> takes place at the Scandic Bergen City Hotel.
 You can get there by airport bus, taxi, bus/light rail or car. The
 closest bus stop is at Olav Kyrres gate, and the closest light rail
 stop and airport bus is at Festplassen. The best place to park your
@@ -68,7 +68,7 @@ expect this to be the party of the year! The theatre group will come on stage af
 
 <h3>TWITTER</h3>
 <p>The official Twitter account for the Booster conference is
-@boosterconf. Please use the hash tag #booster2015 when you tweet about
+@boosterconf. Please use the hash tag #booster<%= Dates::CONFERENCE_YEAR %> when you tweet about
 the conference, so that other people can easily find your tweets and
 follow the conference.</p>
 
