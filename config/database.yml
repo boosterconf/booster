@@ -12,7 +12,7 @@ development:
 #  local postgres  
   adapter: postgresql
   encoding: unicode
-  database: booster2014
+  database: boosterconf
   host: localhost
   template: template0
 
