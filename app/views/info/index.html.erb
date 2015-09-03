@@ -3,10 +3,21 @@
     <div class="hello span12" >
       <div class="hello-inner">
         <h2>Booster 2016, 9-11 March</h2>
-        <p>
-			Get ready for another Booster conference! CFP <a href="">here!</a>
-        </p>
+        <h1>Get your tickets now!</h1>
+        <h2>Early-bird closes <%= AppConfig.early_bird_ends.to_formatted_s(:short_ordinal) %>.</h2>
+        <div style="padding-top: 40px; padding-bottom: 30px; margin-bottom: 0px">
+          <%= link_to 'Register single ticket', new_user_url, :class => "btn btn-primary btn-large" %>
+          <%= link_to 'Register group ticket', new_group_registration_url, :class => "btn btn-primary btn-large" %>
+        </div>
       </div>
+    </div>
+
+  <div class="cfp span3 right-column">
+      <h3>Want to be a part of Booster 2015? There is still time to submit a proposal!</h3>
+      <p>We're accepting ideas for lightning talks and workshops until <%= Dates::CFP_TUTORIAL_ENDS.to_formatted_s(:short_ordinal)%>.</p>
+
+      <p><%= link_to 'Submit your idea!', info_cfp_url, :class => 'btn btn-primary btn-large cfp-button'%></p>
+  </div>
  </div>
 
 <% if @speakers.size >= 4 %>
