@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
+//= require jquery-ui
 //= require bootstrap
 //= require jquery-tablesorter
 //= require jquery-tablesorter/parsers/parser-input-select

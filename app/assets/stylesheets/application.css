@@ -13,7 +13,7 @@
 = require bootstrap
 = require bootstrap-responsive
 = require font-awesome
-= require jquery.ui.all
+= require jquery-ui
 = require jquery_notification
 = require jquery-tablesorter/theme.blue
 = require modal
