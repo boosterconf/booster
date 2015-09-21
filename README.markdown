@@ -112,8 +112,15 @@ Heroku SendGrid:
 
 ## Solutions to common errors
 
-NokoGiri might fail during bundle install. Try gem install nokogiri -v '1.6.6.2' (use suggested version). If this fails
-due to lack of libxml2, try gem install nokogiri -v '1.6.6.2' -- --use-system-libraries
+#### NokoGiri
+
+NokoGiri might fail during bundle install. Try:
+
+    $gem install nokogiri -v '1.6.6.2' (use suggested version).
+
+If this fails due to lack of libxml2, try
+
+    $gem install nokogiri -v '1.6.6.2' -- --use-system-libraries
 
 ## GIT (github)
 
