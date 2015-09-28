@@ -1,7 +1,7 @@
 <html>
 <body><p>Hello, <%= @name %></p>
 
-<p>This is a confirmation that we have received your payment for your participation at Booster 2015.</p>
+<p>This is a confirmation that we have received your payment for your participation at Booster <%= Dates::CONFERENCE_YEAR %>.</p>
 
 <p>Payment info: <%= @payment_text.strip %><br/>
   Total cost: (NOK) <%= @amount %> incl. tax</p>
@@ -9,7 +9,7 @@
 <p>If you have any question or feedback regarding the conference,
   feel free to respond to this email.</p>
 
-<p>Welcome to Booster 2015!</p>
+<p>Welcome to Booster <%= Dates::CONFERENCE_YEAR %>!</p>
 
 <p>- The Booster conference organizers</p>
 </body>

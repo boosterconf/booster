@@ -14,6 +14,8 @@ module Dates
 	CFP_LIGHTNING_ENDS = Date.parse("2015-11-15")
 	CFP_TUTORIALS_BEGINS = Date.parse("2015-09-03")
 	CFP_TUTORIAL_ENDS = Date.parse("2015-11-15")
+  CONFERENCE_YEAR = '2016'
+  CONFERENCE_DATES = "9-11 March #{CONFERENCE_YEAR}"
 end
 
 module Booster2013

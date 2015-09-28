@@ -10,17 +10,31 @@
 </p>
 <% else %>
 <p>
+<<<<<<< HEAD
   Jeg vil gjerne invitere <%= @sponsor.name %> til å sponse Boosterkonferansen 2016!
+=======
+  Jeg vil gjerne invitere <%= @sponsor.name %> til å sponse Boosterkonferansen <%= Dates::CONFERENCE_YEAR %>!
+>>>>>>> origin/master
 </p>
 <% end %>
 
 <p>
+<<<<<<< HEAD
   Vi er nå i gang med planleggingen av neste års konferanse, sett gjerne av datoene 
   <strong>9.-11. mars 2016</strong> med en gang. Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse. Som vanlig vil det meste av programmet bestå av workshops og foredrag som er sendt inn på vår Call For Paper (cfp), denne har vi akkurat åpnet nå. Vi vet at våre sponsorer er sterke fagmiljø, så vi håper som vanlig på at vi får mange spennende forslag fra dere!
 </p>
 
 <p>
   Boosterkonferansen er en intim konferanse med et sterkt faglig innhold, dette får vi til på grunn av noen viktige faktorer; mye frivillig innsats, ingen honorar til speakere og en solid base av sponsorer. Vi håper <%= @sponsor.name %> vil bidra til dette ved å være med som sponsor av Booster 2016.
+=======
+  Jeg er en av deltagerne i komiteen som nå er godt i gang med arbeidet med neste års konferanse som avholdes 
+  <strong><%= Dates::CONFERENCE_DATES %></strong> i Scandic Bergen City konferansesenter. Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse
+</p>
+
+<p>
+  Booster 2014 var helt utsolgt, og som vanlig fikk vi svært høy grad av positive tilbakemeldinger fra deltagerne! Noe av det som gjør at folk er veldig fornøyde er at vi har en unik kombinasjon av gode og anerkjente speakere, en intim atmosfære og overkommelige priser. Dette hadde vi ikke fått til uten sponsorene våre, derfor er vi nå tidlig ute for å høre om
+  <%= @sponsor.name %> ønsker å være med som sponsor av Booster <%= Dates::CONFERENCE_YEAR %>.
+>>>>>>> origin/master
 </p>
 
 <p>
@@ -62,7 +76,7 @@
 </p><p>
   Med vennlig hilsen <br />
   <%= @sender.full_name %><br />
-  for Booster 2015
+  for Booster <%= Dates::CONFERENCE_YEAR %>
 </p>
 </body>
 </html>

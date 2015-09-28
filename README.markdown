@@ -110,6 +110,17 @@ Heroku SendGrid:
     # For å sjekke user/pass:
     $ heroku config --long --app booster2015
 
+## Solutions to common errors
+
+#### NokoGiri
+
+NokoGiri might fail during bundle install. Try:
+
+    $gem install nokogiri -v '1.6.6.2' (use suggested version).
+
+If this fails due to lack of libxml2, try
+
+    $gem install nokogiri -v '1.6.6.2' -- --use-system-libraries
 
 ## GIT (github)
 

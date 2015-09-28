@@ -119,7 +119,7 @@ class Registration < ActiveRecord::Base
   end
 
   def self.find_by_invoice(invoice_id)
-    if invoice_id =~ /^2015t?-(\d+)$/
+    if invoice_id =~ /^2016t?-(\d+)$/
       Registration.find($1.to_i)
     else
       raise 'Invalid invoice_id #{invoice_id}'
@@ -127,8 +127,8 @@ class Registration < ActiveRecord::Base
   end
 
   def invoice_id
-    return '2015-#{id}' if Rails.env == 'production'
-    '2015t-#{id}'
+    return '2016-#{id}' if Rails.env == 'production'
+    '2016t-#{id}'
   end
 
   def payment_url(payment_notifications_url, return_url)
