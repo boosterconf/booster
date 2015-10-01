@@ -55,6 +55,11 @@
     </div>
 
     <div class="form-actions">
+      <p>
+        Please be aware that by submitting a talk to Booster, you agree to follow our
+        <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
+      </p>
+
       <%= f.submit "Next", :class => "btn btn-primary" %>
     </div>
 <% end %>
