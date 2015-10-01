@@ -1,21 +1,16 @@
 <%= render :partial => 'steps', :locals => {:active_id => "talk"} %>
 <h2>What's your passion?</h2>
 
-<ul>
-  <li>The format of a lightning talk is no more than 10 minutes.</li>
-  <li>You must provide the slides the day before the conference</li>
-  <li>Slides must be in PDF or a PowerPoint-compatible format. No other formats will be accepted.</li>
-  <li>We will provide a PC for running the presentation. As a general rule, we do not allow presenters to use their
-    own computer for the presentation. Please use the comment field if you have special requirements.
-  </li>
-</ul>
-
-
 <%= form_for @talk, :url => '/register_lightning_talk/create_talk' do |f| %>
 
     <% if flash[:error] %>
         <p class="flash-error"><%= flash[:error] %></p>
     <% end %>
+
+    <legend>Talk length</legend>
+    <div class="field type">
+      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'input-xlarge' %>
+    </div>
 
     <legend>Language</legend>
     <p>In what language will you deliver your talk? Please select the language you are most comfortable with. </p>
@@ -31,7 +26,7 @@
     <legend>Talk details</legend>
     <p>
       The abstract will be published on the website as soon
-      as you submit it, and will be used by the committee during talk selection. It is therefore important that you
+      as you submit it, and will be used by the organizers during talk selection. It is therefore important that you
       provide a detailed abstract. This will help us to select in the selection process and increase the chances
       of your talk being selected.
     </p>

@@ -29,6 +29,7 @@ class RegisterLightningTalkController < ApplicationController
 
   def talk
     @talk = LightningTalk.new
+    @talk_types = TalkType.talks
   end
 
   def create_talk

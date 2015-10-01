@@ -6,7 +6,11 @@ class TalkType < ActiveRecord::Base
   end
 
   def self.workshops
-    where(:is_workshop => true)
+    where(is_workshop: true)
+  end
+
+  def self.talks
+    where(is_workshop: false, eligible_for_cfp: true)
   end
 
 end

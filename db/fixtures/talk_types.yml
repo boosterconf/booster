@@ -42,3 +42,12 @@ keynote:
   eligible_for_cfp: false
   eligible_for_free_ticket: true
   is_workshop: false
+
+short_talk:
+  id: 6
+  name: Short talk
+  description: 30 minute talk
+  duration: 30 mins
+  eligible_for_cfp: true
+  eligible_for_free_ticket: false
+  is_workshop: false

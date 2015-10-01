@@ -3,13 +3,17 @@
 
 <h3>Introduction</h3>
 <p>
-  Do you have something you want to share? A controversial idea, an interesting experience or something you have learnt lately? Submit your abstract and get a chance to be part of a great team of speakers at Booster <%= Dates::CONFERENCE_YEAR %>. All speakers get free or discounted admission to the conference and conference dinner, as well as a special speaker's dinner.
+  Do you have something you want to share? A controversial idea, an interesting experience or something you have learnt
+  lately? Submit your abstract and get a chance to be part of a great team of speakers at
+  Booster <%= Dates::CONFERENCE_YEAR %>. All speakers get free or discounted admission to the conference and
+  conference dinner, as well as a special speaker's dinner.
 </p>
 <p>
-  By filling out this form, your abstract for a lightning talk, short talk or workshop will be added to the list of suggestions for this year's conference. You may change the content of your abstract at any time during the period that the CfP is open. Everyone will be able to see your suggestion as soon as it is registered.
+  By filling out this form, your abstract for a lightning talk, short talk or workshop will be added to the list of
+  suggestions for this year's conference. You may change the content of your abstract at any time during the period
+  that the CfP is open. Everyone will be able to see your suggestion as soon as it is registered.
 </p>
 
-  <!--<a class="btn btn-primary btn-large" disabled>Submit a workshop</a>-->
   <%= link_to "Submit a workshop", register_workshop_start_url, :class => "btn btn-primary btn-large" %>
   &nbsp;
   &nbsp;
@@ -19,8 +23,7 @@
 <!--<strong>The CFP for lightning talks closed February 2nd 2016.</strong>-->
 <!--</p>-->
 
-  <!--<a class="btn btn-primary btn-large" disabled>Submit a lightning talk</a>-->
-  <%= link_to "Submit a lightning talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>
+  <%= link_to "Submit a talk", register_lightning_talk_start_url, :class => "btn btn-primary btn-large" %>
 </p>
 
 <h3>Topics</h3>
@@ -36,20 +39,23 @@
   <li>Process and leadership. Thoughts, methods and techniques to help us build and run great teams that deliver.</li>
   <li>Front-end. HTML, SVG, SASS, JavaScript - if these are in your day-to-day vocabulary we want to hear how you do it.</li>
   <li>UX. We are still working out how to make software for humans. Help!</li>
-  <li>Entrepeneurship. Finding an idea, refining it, building it and doing it all over again.</li>
-  <li>Security. The world isn't all rainbows and unicorns, a healthy dose of paranoia and some solid tools to help would be appreciated</li>
-  <li>Architecture. Anyone can write a few lines of code, but how to get them to stick together in coherent, useful and orderly way?</li>
+  <li>Entrepreneurship. Finding an idea, refining it, building it and doing it all over again.</li>
+  <li>Security. The world isn't all rainbows and unicorns, a healthy dose of paranoia and some solid tools to help
+    would be appreciated</li>
+  <li>Architecture. Anyone can write a few lines of code, but how to get them to stick together in coherent, useful and
+    orderly way?</li>
   <li>Devops. Tools and techniques to deal with both the tech and people sides of devops.</li>
   <li>Fun stuff. Built a robot? Made a language? Pet projects that are just plain weird, interesting or enjoyable.</li>
-  <li>Anything else. IoT, torrenting, coding in schools - as long as it is sort of related to software we're interested. Just submit and let us decide!</li>
+  <li>Anything else. IoT, torrenting, coding in schools - as long as it is sort of related to software we're interested.
+    Just submit and let us decide!</li>
 </ul>
 <h3>The different types of talks</h3>
 <p>
   Long ago we decided not to fill Booster with talks. We want you to come back to work after the conference with
-  fresh ideas and real knowledge you can use, and we belive that happens when you get fired up about new ideas, and 
+  fresh ideas and real knowledge you can use, and we believe that happens when you get fired up about new ideas, and
   get a chance to work deeply with them. We have three formats for sessions at Booster. Lightning talks, only ten 
   minutes long. Longer talks, no more than 30 minutes, go slightly more in depth. And the majority of the conference 
-  is dedicated to workshop sessions, to really get in depth and pick up new skills.
+  is dedicated to workshop sessions, to really get down'n'dirty and pick up new skills.
 </p>
 
 <h4>Lightning talks</h4>
@@ -65,15 +71,20 @@
 </p>
 <h4>Workshops</h4>
 <p>
-  A workshop can be short (1.5 hrs), half-day (3 hrs) or full-day (4.5 hrs). You work with a small group of people who want to learn a particular technology or method that you know well. Workshops are interactive and hands-on, and focused on learning by doing.
+  A workshop can be short (1.5 hrs), half-day (3 hrs) or full-day (4.5 hrs). You work with a small group of people who
+  want to learn a particular technology or method that you know well. Workshops are interactive and hands-on, and
+  focused on learning by doing.
 </p>
 <h3>What's in it for me?</h3>
   <ul>
     <li><strong>Getting a forum</strong> to present and discuss your ideas with other smart people.</li>
-    <li><strong>Saving money.</strong> If you get a lightning or short talk abstract accepted, you will get 50 % off the price of a full price ticket. If you get a workshop accepted, you will get a free ticket.</li>
+    <li><strong>Saving money.</strong> If you get a lightning or short talk abstract accepted, you will get 50 % off
+      the price of a full price ticket. If you get a workshop accepted, you will get a free ticket.</li>
     <li><strong>Eternal glory!</strong></li>
   </ul>
 <p>
-  We are not able to cover travel and accommodation for all speakers. However, if monetary concerns makes it difficult for you to present at Booster, you should apply for reimbursement when submitting your proposal. Our <%= link_to "monetary policy", :controller => "info", :action => "monetary_policy" %> has all the details.
+  We are not able to cover travel and accommodation for all speakers. However, if monetary concerns makes it difficult
+  for you to present at Booster, you should apply for reimbursement when submitting your proposal.
+  Our <%= link_to "monetary policy", info_monetary_policy_path %> has all the details.
 </p>
 </article>
