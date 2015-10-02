@@ -6,7 +6,9 @@
 
 <% if @sponsor.was_sponsor_last_year %>
 <p>
-  Tusen takk for at <%= @sponsor.name %> sponset Booster 2015! Konferansen var nok en gang en sterk faglig opplevelse til en overkommelig pris for deltagerne, sammen bidrar vi til å gjøre IT-Bergen litt bedre! Jeg vil med dette invitere dere til å sponse Booster <%= Dates::CONFERENCE_YEAR %>.
+  Tusen takk for at <%= @sponsor.name %> sponset Booster 2015! Konferansen var nok en gang en sterk faglig opplevelse
+  til en overkommelig pris for deltagerne. <% if @sponsor.is_in_bergen? %> Sammen bidrar vi til å gjøre IT-Bergen litt
+      bedre!<% end %> Jeg vil med dette invitere dere til å sponse Booster <%= Dates::CONFERENCE_YEAR %>.
 </p>
 <% else %>
 <p>
@@ -21,16 +23,22 @@
   
   </p>
 <p>  
-  Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere, testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse. Som vanlig vil det meste av programmet bestå av workshops og foredrag som er sendt inn på vår Call For Paper (cfp), denne har vi akkurat åpnet nå. Vi vet at våre sponsorer er sterke fagmiljøer, så vi håper som vanlig på at vi får mange spennende forslag fra dere!
+  Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere,
+  testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse. Som vanlig vil det
+  meste av programmet bestå av workshops og foredrag som er sendt inn på Call For Papers (CFP), denne har vi akkurat
+  åpnet nå. Vi vet at dere har et sterkt fagmiljø, så vi håper som vanlig på at vi får mange spennende forslag
+  fra dere!
 </p>
 
 <p>
-  Booster er en intim konferanse med et sterkt faglig innhold, dette får vi til på grunn av noen viktige faktorer; mye frivillig innsats, ingen honorar til speakere og en solid base av sponsorer. Vi håper <%= @sponsor.name %> vil bidra til dette ved å være med som sponsor av Booster <%= Dates::CONFERENCE_YEAR %>.
+  Booster er en intim konferanse med et sterkt faglig innhold til en overkommelig pris. Dette får vi til på grunn av
+  noen viktige faktorer: mye frivillig innsats, ingen honorar til speakere og en solid base av sponsorer.
+  Vi håper <%= @sponsor.name %> vil <% if @sponsor.was_sponsor_last_year %>fortsette å<% end %> bidra til dette ved å
+  være med som sponsor av Booster <%= Dates::CONFERENCE_YEAR %>.
 </p>
 
-
 <p>
-  Vi har behold samme sponsorpakke som i fjor, som sponsor får du:
+  Vi har beholdt samme sponsorpakke som i fjor, som sponsor får du:
 <ul>
   <li>Logo på trykt materiell som program, flyvebrev, plakater osv</li>
   <li>Logo på konferansens nettsider</li>
@@ -47,10 +55,13 @@
 </p>
 
 <p>
-  Hvis du ikke var på konferansen i fjor, eller bare ikke husker helt hvem som var der, vil jeg gjerne minne deg på noen av høydepunktene. Johanna Rothman(US), Vaughn Vernon(US), Vitaly Friedman, Jim Benson(US), Ivana Gancheva(N), Einar Høst(N), Geir Amsjø(N), Sandi Metz ... Vil du se hele programmet kan du sjekke det ut her: http://2015.boosterconf.no/program
+  Hvis du ikke var på konferansen i fjor, eller bare ikke husker helt hvem som var der, vil jeg gjerne minne deg på
+  noen av høydepunktene. Johanna Rothman (US), Vaughn Vernon (US), Vitaly Friedman (DE), Jim Benson (US), Ivana Gancheva (N),
+  Einar Høst (N), Geir Amsjø (N), Sandi Metz (US)... Vil du se hele programmet fra i fjor, kan du sjekke det ut her:
+  http://2015.boosterconf.no/program
 </p>
 
-
+<p>
   <% if @sponsor.is_in_bergen? %>
       Et sponsorat av Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
       ansatte. Vi har et vidt spekter av deltakere, alt fra studenter som jobber som frivillige til folk med flere tiårs erfaring.
