@@ -144,7 +144,7 @@ class BoosterMailer < ActionMailer::Base
 
   def error_mail(title, body)
     @body = body
-    mail(:to => "kontakt@boosterconf.no", :from => FROM_EMAIL, :subject => title, :from => FROM_EMAIL)
+    mail(to: "kontakt@boosterconf.no", from: FROM_EMAIL, subject: title)
   end
 
   def talk_feedback_email(talk_feedback)

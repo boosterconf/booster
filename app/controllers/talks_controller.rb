@@ -3,7 +3,7 @@ class TalksController < ApplicationController
   before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
   before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
-  before_filter :setup_talk_types
+  before_filter :setup_talk_types, only: :edit
 
   respond_to :html
 

@@ -32,7 +32,7 @@ class SpeakerNameTest < ActiveSupport::TestCase
       end
 
       should 'be the named speaker\'s full name followed by \"and another speaker\"' do
-        assert_equal SpeakerName.new(@users).to_s, "#{@users.last.full_name} and unnamed speaker"
+        assert_equal SpeakerName.new(@users).to_s, "#{@users.last.full_name} and unnamed"
       end
     end
   end
