@@ -1,4 +1,4 @@
- Booster2013::Application.routes.draw do
+Booster2013::Application.routes.draw do
 
   resources :rooms
 
@@ -53,11 +53,11 @@
 
   resources :user_sessions
 
-  match 'login' => 'user_sessions#new', :as => :login, via: :all
-  match 'logout' => 'user_sessions#destroy', :as => :logout, via: :all
+  match 'login' => 'user_sessions#new', :as => :login
+  match 'logout' => 'user_sessions#destroy', :as => :logout
 
-  match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url, via: :all
-  match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url, via: :all
+  match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url
+  match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url
 
   resources :registrations do
     get :deleted, on: :collection
@@ -73,10 +73,10 @@
     end
   end
 
-  match '/workshops' => 'talks#workshops', via: :all
-  match '/lightning_talks' => 'talks#lightning_talks', via: :all
-  match '/talks/cheat_sheet' => 'talks#cheat_sheet', via: :all
-  match '/talks/vote' => 'talks#vote', via: :all
+  match '/workshops' => 'talks#workshops'
+  match '/lightning_talks' => 'talks#lightning_talks'
+  match '/talks/cheat_sheet' => 'talks#cheat_sheet'
+  match '/talks/vote' => 'talks#vote'
 
 
 
@@ -124,47 +124,47 @@
     end
   end
 
-  match '/stuff' => 'talks_stuff#index', via: :all
+  match '/stuff' => 'talks_stuff#index'
 
-  match '/register_lightning_talk/start' => 'register_lightning_talk#start', via: :all
-  match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user', via: :all
-  match '/register_lightning_talk/talk' => 'register_lightning_talk#talk', via: :all
-  match '/register_lightning_talk/create_talk' => 'register_lightning_talk#create_talk', via: :all
-  match '/register_lightning_talk/details' => 'register_lightning_talk#details', via: :all
-  match '/register_lightning_talk/create_details' => 'register_lightning_talk#create_details', via: :all
-  match '/register_lightning_talk/finish' => 'register_lightning_talk#finish', via: :all
+  match '/register_lightning_talk/start' => 'register_lightning_talk#start'
+  match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user'
+  match '/register_lightning_talk/talk' => 'register_lightning_talk#talk'
+  match '/register_lightning_talk/create_talk' => 'register_lightning_talk#create_talk'
+  match '/register_lightning_talk/details' => 'register_lightning_talk#details'
+  match '/register_lightning_talk/create_details' => 'register_lightning_talk#create_details'
+  match '/register_lightning_talk/finish' => 'register_lightning_talk#finish'
 
-  match '/register_workshop/start' => 'register_workshop#start', via: :all
-  match '/register_workshop/create_user' => 'register_workshop#create_user', via: :all
-  match '/register_workshop/talk' => 'register_workshop#talk', via: :all
-  match '/register_workshop/create_talk' => 'register_workshop#create_talk', via: :all
-  match '/register_workshop/details' => 'register_workshop#details', via: :all
-  match '/register_workshop/create_details' => 'register_workshop#create_details', via: :all
-  match '/register_workshop/finish' => 'register_workshop#finish', via: :all
+  match '/register_workshop/start' => 'register_workshop#start'
+  match '/register_workshop/create_user' => 'register_workshop#create_user'
+  match '/register_workshop/talk' => 'register_workshop#talk'
+  match '/register_workshop/create_talk' => 'register_workshop#create_talk'
+  match '/register_workshop/details' => 'register_workshop#details'
+  match '/register_workshop/create_details' => 'register_workshop#create_details'
+  match '/register_workshop/finish' => 'register_workshop#finish'
 
 #match 'login' => 'user_sessions#new', :as => :login
 #match 'logout' => 'user_sessions#destroy', :as => :logout
-  match 'users/current' => 'users#current', :as => :current_user, via: :all
-  match 'users/:id/create_bio' => 'users#create_bio', via: :all
-  match 'users/:id/delete_bio' => 'users#delete_bio', via: :all
+  match 'users/current' => 'users#current', :as => :current_user
+  match 'users/:id/create_bio' => 'users#create_bio'
+  match 'users/:id/delete_bio' => 'users#delete_bio'
   get 'users/:user_id/assign_talk' => 'talks#assign', as: :assign_talk
   post 'users/:user_id/assign_talk' => 'talks#create_assigned', as: :create_assigned_talk
 
 
-  match 'info/organizers' => 'info#organizers', via: :all
-  match 'info/monetary_policy' => 'info#monetary_policy', via: :all
-  match 'info/cfp' => 'info#cfp', via: :all
-  match 'info/sponsors' => 'info#sponsors', via: :all
-  match 'info/about' => 'info#about', via: :all
-  match 'info/tickets' => 'info#tickets', via: :all
-  match 'info/speakers' => 'info#speakers', via: :all
-  match 'info/openspaces' => 'info#openspaces', via: :all
-  match 'info/fishbowl' => 'info#fishbowl', via: :all
-  match 'info/conference_dinner' => 'info#conference_dinner', via: :all
-  match 'info/coc' => 'info#coc', via: :all
-  match 'info/preconf' => 'info#preconf', via: :all
+  match 'info/organizers' => 'info#organizers'
+  match 'info/monetary_policy' => 'info#monetary_policy'
+  match 'info/cfp' => 'info#cfp'
+  match 'info/sponsors' => 'info#sponsors'
+  match 'info/about' => 'info#about'
+  match 'info/tickets' => 'info#tickets'
+  match 'info/speakers' => 'info#speakers'
+  match 'info/openspaces' => 'info#openspaces'
+  match 'info/fishbowl' => 'info#fishbowl'
+  match 'info/conference_dinner' => 'info#conference_dinner'
+  match 'info/coc' => 'info#coc'
+  match 'info/preconf' => 'info#preconf'
 
-  match 'admin' => 'admin#index', via: :all
+  match 'admin' => 'admin#index'
 
 
 # You can have the root of your site routed with "root"
