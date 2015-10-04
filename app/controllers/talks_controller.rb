@@ -3,6 +3,8 @@ class TalksController < ApplicationController
   before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
   before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
+  before_filter :setup_talk_types
+
   respond_to :html
 
   def index
@@ -172,5 +174,9 @@ class TalksController < ApplicationController
       flash[:error] = 'You are required to be the owner of this talk or an administrator to view this page.'
       access_denied
     end
+  end
+
+  def setup_talk_types
+    @talk_types = current_user.is_admin? ? TalkType.all : TalkType.workshops
   end
 end
