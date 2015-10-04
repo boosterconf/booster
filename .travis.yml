@@ -3,10 +3,9 @@ rvm:
   - 2.2.2
 sudo: false
 env:
-#  - DB=sqlite
   - DB=postgresql
 script:
-  - RAILS_ENV=test bundle exec rake db:schema:load
+  - RAILS_ENV=test bundle exec rake db:migrate --trace
   - RAILS_ENV=test bundle exec rake db:seed
   - RAILS_ENV=test bundle exec rake db:test:prepare
   - RAILS_ENV=test bundle exec rake test
