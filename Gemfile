@@ -2,19 +2,27 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '3.2.22'
-gem "authlogic", '~> 3.3.0'
+gem 'railties', '4.2.4'
+gem 'rails', '4.2.4'
+gem "authlogic", '~> 3.4.2'
 gem 'paperclip', '~>3.0'
+
+gem 'responders', '~> 2.0'
 
 gem 'tinymce-rails'
 gem "font-awesome-rails"
 gem 'aws-sdk', '~> 1.3.4'
 
-gem 'coffee-rails', '~> 3.2.1'
+gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
+
+# The following group of gems are here to make transition from Rails 3.x to Rails 4.x easier 
+gem 'rails-observers'
+gem 'protected_attributes'
+gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'
 
 gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
 
@@ -23,7 +31,7 @@ gem 'rails_12factor'
 
 gem 'rest-client'
 
-gem "paranoia", "~> 1.0"
+gem "paranoia", "~> 2.1.3"
 gem 'test-unit'
 
 group :production do
@@ -50,6 +58,6 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
-group :assets do
-  gem 'sass-rails', '~> 3.2.3'
-end
+#group :assets do
+gem 'sass-rails' #, '~> 3.2.3'
+#end
