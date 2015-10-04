@@ -11,13 +11,13 @@ class TalksController < ApplicationController
   end
 
   def article_tags
-    @tags = Tag.all(:order => :title)
+    @tags = Tag.all(order: :title)
     @tag = Tag.find(params[:id])
     @talks = @tag.talks
   end
 
   def show
-    @talk = Talk.find(params[:id], :include => [:users, :comments, :reviews])
+    @talk = Talk.find(params[:id], include: [:users, :comments, :reviews])
     @review = Review.new
   end
 
