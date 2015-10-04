@@ -162,12 +162,6 @@ class TalksController < ApplicationController
   end
 
   protected
-  def login_required
-    return unless current_user
-    flash[:error] = 'Please log in first.'
-    access_denied
-  end
-
   def is_admin_or_owner
     talk = Talk.find(params[:id])
     unless current_user.is_admin? || talk.users.include?(current_user)
