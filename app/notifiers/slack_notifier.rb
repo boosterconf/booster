@@ -9,7 +9,7 @@ class SlackNotifier
   @@BOT_NAME = 'Boosterbot' + @@ENV_LABEL
 
 
-  def self.notifyTalk(talk)
+  def self.notify_talk(talk)
     name = talk.users.map(&:name_or_email).join(',')
     talk_type = talk.talk_type.name.downcase
     title = talk.title
@@ -19,12 +19,12 @@ class SlackNotifier
       abstract = abstract + "... <#{talk_url}|read more>"
     end
 
-    body = createTalkBody(name, talk_type, title, abstract, talk_url)
-    self.postTalkNotification(@@API_URL, talk_type, body)
+    body = create_talk_body(name, talk_type, title, abstract, talk_url)
+    self.post_talk_notification(@@API_URL, talk_type, body)
 
   end
 
-  def self.createTalkBody(name, talk_type, title, abstract, talk_url)
+  def self.create_talk_body(name, talk_type, title, abstract, talk_url)
      {
         :username => @@BOT_NAME,
         :attachments => [{
@@ -42,7 +42,7 @@ class SlackNotifier
     }
   end
 
-  def self.postTalkNotification(url, talk_type, body)
+  def self.post_talk_notification(url, talk_type, body)
     if url
 
       if @@SLACK_TEST_CHANNEL && !body[:channel]
@@ -70,13 +70,13 @@ class SlackNotifier
     end
   end
 
-  def self.notifySponsor(sponsor)
+  def self.notify_sponsor(sponsor)
     name = sponsor.name
     count = Sponsor.count(:conditions => "status = 'accepted'")
     body = {
             :username => @@BOT_NAME,
             :channel => '#sponsors',
-            :text => "*Good news everyone!* #{name} has agreed to be a sponsor! We now have #{count} sponsors."
+            :text => "*Good news everyone!* #{name} has agreed to be a partner! We now have #{count} partners."
         }
     self.postToSlack(body)
   end

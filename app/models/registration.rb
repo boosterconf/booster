@@ -4,7 +4,7 @@ class Registration < ActiveRecord::Base
       'early_bird' => 'Early bird ticket for Booster',
       'full_price' => 'Regular ticket for Booster',
       'lightning' => 'Lightning talk ticket for Booster',
-      'sponsor' => 'Sponsor ticket Booster',
+      'sponsor' => 'Partner ticket Booster',
       'volunteer' => 'Volunteer at Booster',
       'student' => 'Student for Booster',
       'organizer' => 'Organizer for Booster',

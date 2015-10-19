@@ -2,7 +2,7 @@
   <p>
     <strong>Date:</strong> <%= time_ago_in_words(event.created_at) %> ago (<%= event.created_at %>) <br/>
     <strong>Created by:</strong> <%= event.user ? event.user.full_name : 'System' %> <br/>
-    <strong>Sponsor:</strong> <%= event.sponsor ? event.sponsor.name : 'Deleted' %> <br/>
+    <strong>Partner:</strong> <%= event.sponsor ? event.sponsor.name : 'Deleted' %> <br/>
     <%= simple_format event.comment %>
   </p>
 </div>

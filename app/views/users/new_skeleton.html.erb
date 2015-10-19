@@ -20,7 +20,7 @@
     <%= f.fields_for :registration do |reg| %>
         <%= reg.label :ticket_type_old, "Ticket type" %><br>
         <%= reg.select :ticket_type_old, [
-                ['Sponsor ticket', 'sponsor'],
+                ['Partner ticket', 'sponsor'],
                 ['Volunteer', 'volunteer'],
                 ['Reviewer', 'reviewer'],
                 ['Organizer', 'organizer'],

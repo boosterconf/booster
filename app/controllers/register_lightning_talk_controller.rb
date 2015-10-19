@@ -41,7 +41,7 @@ class RegisterLightningTalkController < ApplicationController
       current_user.update_ticket_type!
 
       BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver
-      SlackNotifier.notifyTalk(@talk)
+      SlackNotifier.notify_talk(@talk)
 
       if current_user.has_all_statistics? && current_user.bio && current_user.bio.good_enough?
         redirect_to '/register_lightning_talk/finish'

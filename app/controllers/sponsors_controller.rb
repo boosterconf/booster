@@ -30,7 +30,7 @@ class SponsorsController < ApplicationController
     @sponsor = Sponsor.new(params[:sponsor])
 
     if @sponsor.save
-      redirect_to sponsors_path, notice: 'Sponsor was successfully created.'
+      redirect_to sponsors_path, notice: 'Partner was successfully created.'
     else
       render action: :new
     end
@@ -45,19 +45,19 @@ class SponsorsController < ApplicationController
         Rails.cache.delete('all_accepted_sponsors')
 
         if @sponsor.status_changed?
-          event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Sponsor status changed to #{@sponsor.status_text}")
+          event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Partner status changed to #{@sponsor.status_text}")
           event.save
 
           if @sponsor.status == 'accepted'
             create_sponsor_tickets
-            SlackNotifier.notifySponsor(@sponsor)
+            SlackNotifier.notify_sponsor(@sponsor)
           end
         end
 
         respond_to do |format|
           format.html {
             if @sponsor.save
-              redirect_to sponsors_path, notice: "Sponsor #{@sponsor.name} was successfully updated."
+              redirect_to sponsors_path, notice: "Partner #{@sponsor.name} was successfully updated."
             else
               render action: :edit
             end
@@ -77,7 +77,7 @@ class SponsorsController < ApplicationController
   def destroy
     @sponsor.destroy
 
-    redirect_to sponsors_url, notice: "Sponsor #{@sponsor.name} was successfully updated."
+    redirect_to sponsors_url, notice: "Partner #{@sponsor.name} was successfully updated."
   end
 
   def email
@@ -92,7 +92,7 @@ class SponsorsController < ApplicationController
         event.save
       end
 
-      redirect_to(sponsors_path, :notice => 'Email was sent and sponsor status set to \'Contacted\'.')
+      redirect_to(sponsors_path, :notice => 'Email was sent and partner status set to \'Contacted\'.')
     else
       flash[:error] = 'No email sent: must have status suggested and responsible set'
       redirect_to sponsors_path

@@ -6,13 +6,13 @@
 
 <% if @sponsor.was_sponsor_last_year %>
 <p>
-  Tusen takk for at <%= @sponsor.name %> sponset Booster 2015! Konferansen var nok en gang en sterk faglig opplevelse
+  Tusen takk for at <%= @sponsor.name %> var partner for Booster 2015! Konferansen var nok en gang en sterk faglig opplevelse
   til en overkommelig pris for deltagerne. <% if @sponsor.is_in_bergen? %> Sammen bidrar vi til å gjøre IT-Bergen litt
       bedre!<% end %> Jeg vil med dette invitere dere til å sponse Booster <%= Dates::CONFERENCE_YEAR %>.
 </p>
 <% else %>
 <p>
-  Jeg vil gjerne invitere <%= @sponsor.name %> til å sponse Boosterkonferansen <%= Dates::CONFERENCE_YEAR %>!
+  Jeg vil gjerne invitere <%= @sponsor.name %> til å være partner for Boosterkonferansen <%= Dates::CONFERENCE_YEAR %>!
 </p>
 <% end %>
 
@@ -32,13 +32,13 @@
 
 <p>
   Booster er en intim konferanse med et sterkt faglig innhold til en overkommelig pris. Dette får vi til på grunn av
-  noen viktige faktorer: mye frivillig innsats, ingen honorar til speakere og en solid base av sponsorer.
+  noen viktige faktorer: mye frivillig innsats, ingen honorar til speakere og en solid base av partnere.
   Vi håper <%= @sponsor.name %> vil <% if @sponsor.was_sponsor_last_year %>fortsette å<% end %> bidra til dette ved å
-  være med som sponsor av Booster <%= Dates::CONFERENCE_YEAR %>.
+  være med som partner av Booster <%= Dates::CONFERENCE_YEAR %>.
 </p>
 
 <p>
-  Vi har beholdt samme sponsorpakke som i fjor, som sponsor får du:
+  Vi har beholdt samme partnerpakke som i fjor, som partner får du:
 <ul>
   <li>Logo på trykt materiell som program, flyvebrev, plakater osv</li>
   <li>Logo på konferansens nettsider</li>
@@ -51,7 +51,7 @@
 </ul>
 </p>
 <p>
-  Prisen på sponsorpakken er kr. 28.000,- + MVA.
+  Prisen på partnerpakken er kr. 28.000,- + MVA.
 </p>
 
 <p>
@@ -63,7 +63,7 @@
 
 <p>
   <% if @sponsor.is_in_bergen? %>
-      Et sponsorat av Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
+      Et partner av Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
       ansatte. Vi har et vidt spekter av deltakere, alt fra studenter som jobber som frivillige til folk med flere tiårs erfaring.
   <% end %>
   For mer informasjon om oss, besøk våre nettsider på <a href="http://www.boosterconf.no">boosterconf.no</a>.

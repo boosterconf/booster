@@ -144,7 +144,7 @@ desc "Send out information to previous speaker about early bird"
     puts "Sent all #{users.count} mails"
   end
 
-  desc "Send out information to sponsors before the conference"
+  desc "Send out information to partners before the conference"
   task :sponsor_reminder => :sent_email do
     sponsors = Sponsor.all_accepted
 

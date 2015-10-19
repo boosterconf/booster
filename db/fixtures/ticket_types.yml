@@ -12,8 +12,8 @@ full_price:
 
 sponsor_price:
   id: 3
-  name: Sponsor Booster 2013
-  description: Free ticket for sponsors only
+  name: Partner at Booster 2013
+  description: Free ticket for partners only
   price: 0
 
 volunteer_price:
