@@ -8,7 +8,7 @@
     </h4>
 
     <p class="muted">
-      Lightning talk - Suggested by <%= lightning_talk.speaker_name %>,
+      <%= lightning_talk.talk_type.name_and_duration %> - Suggested by <%= lightning_talk.speaker_name %>,
       <%= time_ago_in_words(lightning_talk.created_at) %> ago.
     </p>
 
