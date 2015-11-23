@@ -5,8 +5,7 @@ class TalksStuffController < ApplicationController
   def index
     @talks = Talk.all
 
-    respond_to do |format|
-      format.html
+    return respond_to do |format|
       format.pdf do
         pdf = TalkPdf.new(@talks, view_context)
         send_data pdf.render,
@@ -49,7 +48,7 @@ class TalksStuffController < ApplicationController
         move_down 10
         font_size 20
         fill_color "#000000"
-        text talk.speaker_name || '', :align => :center, :style => :normal
+        text talk.speaker_name.to_s || '', :align => :center, :style => :normal
 
         move_down 25
         text_box talk.users.map(&:company).join(','), :at => [0, 80], :align => :center
