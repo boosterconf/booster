@@ -232,4 +232,13 @@ class BoosterMailer < ActionMailer::Base
     @name = user.full_name
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Share your knowledge at Booster #{Dates::CONFERENCE_YEAR}!")
   end
+
+  def reminder_to_unfinished_speakers(user)
+    @name = user.first_name
+    mail(to: user.email,
+         from: FROM_EMAIL,
+         subject: "Remember to send in your proposal",
+         cc: FROM_EMAIL
+    )
+  end
 end

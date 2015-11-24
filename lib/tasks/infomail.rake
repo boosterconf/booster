@@ -156,5 +156,15 @@ desc "Send out information to previous speaker about early bird"
 
     puts "Sent all #{sponsors.count} mails"
   end
+
+  desc "Remind unfinished speakers to send in their proposal"
+  task :unfinished_speaker_reminder => :mail_settings do
+    speakers = User.joins(:registration).where("registrations.ticket_type_old IN (?)", ["lightning", "speaker"])
+    unfinished = speakers.select { |speakers| speakers.talks.count == 0 }.reject(&:invited?)
+    unfinished.each do |user|
+      print "Mailing: #{user.email}...\n"
+      BoosterMailer.reminder_to_unfinished_speakers(user).deliver
+    end
+  end
 end
 
