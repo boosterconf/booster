@@ -1,8 +1,8 @@
 development:
   year: 2016
   max_users_limit: 2000
-  tutorial_registration_open: true
-  lightning_registration_open: true
+  tutorial_registration_open: false
+  lightning_registration_open: false
   program_released: false
   speakers_released: false
   early_bird_ends: 2016-02-09 23:59:59 +1
@@ -10,7 +10,7 @@ development:
 test:
   year: 2016
   max_users_limit: 2000
-  tutorial_registration_open: true
+  tutorial_registration_open: false
   lightning_registration_open: false
   program_released: true
   early_bird_ends: 2016-02-09 23:59:59 +1
@@ -18,8 +18,8 @@ test:
 staging:
   year: 2016
   max_users_limit: 2000
-  tutorial_registration_open: true
-  lightning_registration_open: true
+  tutorial_registration_open: false
+  lightning_registration_open: false
   program_released: false
   speakers_released: false
   early_bird_ends: 2016-02-09 23:59:59 +1
@@ -27,8 +27,8 @@ staging:
 production:
   year: 2016
   max_users_limit: 300
-  tutorial_registration_open: true
-  lightning_registration_open: true
+  tutorial_registration_open: false
+  lightning_registration_open: false
   program_released: false
   speakers_released: false
   early_bird_ends: 2016-02-09 23:59:59 +1

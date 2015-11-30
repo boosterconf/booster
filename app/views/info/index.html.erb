@@ -6,12 +6,12 @@
 
 
         <div class="cfp">
-          <h3>Want to be a part of Booster <%= Dates::CONFERENCE_YEAR %>? Why don't you submit a proposal?</h3>
+          <h3>Registration for <%= Dates::CONFERENCE_YEAR %> is open!</h3>
 
-          <p>We're accepting ideas for lightning talks and workshops
-            until <%= Dates::CFP_TUTORIAL_ENDS.to_formatted_s(:short_ordinal) %>.</p>
-
-          <p><%= link_to 'Submit your idea!', info_cfp_url, :class => 'btn btn-primary btn-large cfp-button' %></p>
+          <p>
+            <%= link_to 'Register a person!', new_user_url, class: 'btn btn-primary btn-large' %>
+            <%= link_to 'Register a group!', new_group_registration_url, class: 'btn btn-primary btn-large' %>
+          </p>
         </div>
       </div>
     </div>
