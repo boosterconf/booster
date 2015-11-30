@@ -15,8 +15,8 @@ class SlackNotifier
     title = talk.title
     talk_url = Rails.application.routes.url_helpers.talk_url(talk)
     abstract = Nokogiri::HTML.fragment(ActionView::Base.full_sanitizer.sanitize(talk.description)[0..500]).to_s
-    if (talk.description.length > 500)
-      abstract = abstract + "... <#{talk_url}|read more>"
+    if talk.description.length > 500
+      abstract = "#{abstract}... <#{talk_url}|read more>"
     end
 
     body = create_talk_body(name, talk_type, title, abstract, talk_url)
@@ -72,16 +72,16 @@ class SlackNotifier
 
   def self.notify_sponsor(sponsor)
     name = sponsor.name
-    count = Sponsor.count(:conditions => "status = 'accepted'")
+    count = Sponsor.where(status: 'accepted').count
     body = {
             :username => @@BOT_NAME,
             :channel => '#sponsors',
             :text => "*Good news everyone!* #{name} has agreed to be a partner! We now have #{count} partners."
         }
-    self.postToSlack(body)
+    self.post_to_slack(body)
   end
 
-  def self.postToSlack(body)
+  def self.post_to_slack(body)
     url = @@API_URL
     if url
 
@@ -111,9 +111,9 @@ class SlackNotifier
   end
 
 
-  def self.postReply(params, message)
+  def self.post_reply(params, message)
     channel = params[:channel_name]
-    channel = channel == 'directmessage' ? '@' + params[:user_name] : '#' + channel
+    channel = channel == 'directmessage' ? "@#{params[:user_name]}" : "##{channel}"
     body = {
         :username => @@BOT_NAME,
         :channel => channel,

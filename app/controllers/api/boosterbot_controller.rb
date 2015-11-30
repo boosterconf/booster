@@ -48,7 +48,20 @@ module Api
     end
 
     def command_stats(text)
-      answer("OK, #{params[:user_name]}, here are some statistics for you.")
+      message = "OK, #{params[:user_name]}, here are some statistics for you.\n"
+      talk_type_to_number = Talk.includes(:talk_type).group_by { |t| t.talk_type.name}.map { |k,v| [k, v.size]}.to_h
+
+      message << "Submission statistics: \n"
+      talk_type_to_number.each do |talk_type, number|
+        message << "#{talk_type}: #{number}\n"
+      end
+      message << "Total: #{Talk.count} submissions\n\n"
+
+      message << "Participant statistics:\n"
+      message << "Early bird tickets: #{Registration.where(ticket_type_old: "early_bird").count}\n"
+      message << "Full price tickets: #{Registration.where(ticket_type_old: "full_price").count}\n"
+
+      answer(message)
     end
 
     def command_sponsors(text)
@@ -66,10 +79,8 @@ module Api
     end
 
     def answer(message)
-      SlackNotifier.postReply(params, message)
-      # render :plain, :text => message, :status => 200
+      SlackNotifier.post_reply(params, message)
       render :nothing => true, :status => 204
-      return
     end
 
     def strip_first(text)
