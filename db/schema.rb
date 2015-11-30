@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150201161258) do
+ActiveRecord::Schema.define(:version => 20150209233348) do
 
   create_table "bios", :force => true do |t|
     t.integer  "user_id"
