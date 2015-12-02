@@ -1,13 +1,9 @@
+@import "./fonts";
+
+$font-family-sans-serif: 'VAG Rounded';
+$headings-font-family: 'Fira Sans';
+$headings-font-weight: 800;
+
 @import "bootstrap";
 
-@import "./fonts";
 @import "./jquery_notification";
-
-body {
-    font-family: 'VAG Rounded';
-}
-
-h1, h2, h3 {
-    font-family: 'Fira Sans';
-    font-weight: 800;
-}
