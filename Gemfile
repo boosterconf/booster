@@ -6,6 +6,12 @@ gem 'rails', '3.2.22'
 gem "authlogic", '~> 3.3.0'
 gem 'paperclip', '~>3.0'
 
+gem 'bootstrap', '~> 4.0.0.alpha1'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
+
 gem 'tinymce-rails'
 gem "font-awesome-rails"
 gem 'aws-sdk', '~> 1.3.4'
@@ -52,5 +58,5 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', '~> 3.2.3'
+  gem 'sass-rails'
 end
