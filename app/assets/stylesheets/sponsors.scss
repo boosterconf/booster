@@ -1,0 +1,20 @@
+.jumbotron.sponsorarea {
+  text-align:center;
+}
+ul.sponsorlogos {
+  display: inline-block;
+  zoom: 1;
+  list-style: none;
+  width:80%;
+  -webkit-padding-start:0;
+}
+
+ul.sponsorlogos li {
+  height: 120px;
+  display: inline-block;
+  margin: 10px 10px;
+}
+
+ul.sponsorlogos li a img {
+  height: 100%;
+}
