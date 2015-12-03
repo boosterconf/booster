@@ -1,0 +1,9 @@
+.main-nav {
+    width: calc(100%);
+    position: absolute;
+    padding: 2.0rem 1.5rem;
+
+    .nav-link {
+	line-height: 40px;
+    }
+}
