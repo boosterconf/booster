@@ -1,26 +1,24 @@
 .rocket {
   height: 600px;
-  background: -webkit-linear-gradient($brand-success, $brand-primary); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient($brand-success, $brand-primary); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient($brand-success, $brand-primary); /* For Firefox 3.6 to 15 */
-  background: linear-gradient($brand-success, $brand-primary); /* Standard syntax */
+  position:relative;
+  background: -webkit-linear-gradient(#EFF9CF, #BBEBDE); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(#EFF9CF, #BBEBDE); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(#EFF9CF, #BBEBDE); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(#EFF9CF, #BBEBDE); /* Standard syntax */
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: row; /* works with row or column */
-  flex-direction: row;
-  -webkit-align-items: center;
-  align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
 
   .middle-of-image {
     font-size: 40px;
+    margin: 0 auto;
 
     .font-page-conference-dates {
       margin-right: 40px;
     }
 
-    .rocket_image {
+    .rocket-image {
       height: 220px;
     }
 
@@ -28,6 +26,13 @@
       margin-left: 40px;
     }
 
+  }
+
+  .smoke-image {
+    position:absolute;
+    bottom: -120px;
+    left: -250px;
+    width: 130%;
   }
 
 
