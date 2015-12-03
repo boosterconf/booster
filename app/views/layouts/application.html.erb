@@ -27,6 +27,60 @@ conference is for all IT professionals seeking to learn from each other and from
 
 <body>
 	
+<header id="top" role="banner">
+  <div class="container-fluid">
+    <nav class="navbar" role="navigation">
+      <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
+	&#9776;
+      </button>
+
+      <a class="navbar-brand" href="/"><%= image_tag "icons/logo.svg", height: 40 %></a>
+
+      <div class="collapse navbar-toggleable-xs">
+        <ul class="nav navbar-nav pull-right">
+          <% if AppConfig.program_released %>
+          <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
+          <% end %>
+          <% if AppConfig.speakers_released %>
+          <li class="nav-item"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'Sessions', accepted_talks_url, class: 'nav-link' %></li>
+          <% end %>
+          <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
+          <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
+          <% end %>
+          <li class="nav-item"><%= link_to 'For partners', info_sponsors_url, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to 'About us', info_about_url, class: 'nav-link' %></li>
+          <% if logged_in %>
+          <li class="nav-item"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
+          <li class="nav-item"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
+          <% else %>
+          <!--li><%#= link_to 'Register', new_user_url, class: 'nav-link' %></li-->
+          <li class="nav-item"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
+          <% end %>
+          <% if admin? %>
+          <li class="nav-item"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
+          <% end %>
+          <% if reviewer? %>
+          <li class="nav-item"><%= link_to 'Reviews', reviews_path, class: 'nav-link' %></li>
+          <% end %>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </nav>
+  </div>
+  <div class="inner group">
+    <div id="meta">
+      <p class="whenandwhere">9–11 March <%= Dates::CONFERENCE_YEAR %> • Bergen, Norway</p>
+
+      <p class="tagline">A software conference for&nbsp;the whole team</p>
+    </div>
+
+
+  </div>
+  <!-- end inner -->
+</header>
+
 	<div class="rocket">
 
     </div>
@@ -137,58 +191,8 @@ conference is for all IT professionals seeking to learn from each other and from
 	        <h1>You are awesome.<br/>Hope to see you soon!</h1>
 			<a href="#">Return to top</a>
 	      </div>		
-	 </div>
+	</div>
 	
-<header id="top" role="banner">
-  <div class="container-fluid">
-    <nav class="navbar" role="navigation">
-      <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-	&#9776;
-      </button>
-      <div class="collapse navbar-toggleable-xs">
-	<a class="navbar-brand" href="/"><%= image_tag "icons/logo.svg", height: 40 %></a>
-        <ul class="nav navbar-nav pull-right">
-          <% if AppConfig.program_released %>
-          <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
-          <% end %>
-          <% if AppConfig.speakers_released %>
-          <li class="nav-item"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Sessions', accepted_talks_url, class: 'nav-link' %></li>
-          <% end %>
-          <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
-          <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
-          <% end %>
-          <li class="nav-item"><%= link_to 'For partners', info_sponsors_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'About us', info_about_url, class: 'nav-link' %></li>
-          <% if logged_in %>
-          <li class="nav-item"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
-          <% else %>
-          <!--li><%#= link_to 'Register', new_user_url, class: 'nav-link' %></li-->
-          <li class="nav-item"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
-          <% end %>
-          <% if admin? %>
-          <li class="nav-item"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
-          <% end %>
-          <% if reviewer? %>
-          <li class="nav-item"><%= link_to 'Reviews', reviews_path, class: 'nav-link' %></li>
-          <% end %>
-        </ul>
-      </div><!--/.nav-collapse -->
-    </nav>
-  </div>
-  <div class="inner group">
-    <div id="meta">
-      <p class="whenandwhere">9–11 March <%= Dates::CONFERENCE_YEAR %> • Bergen, Norway</p>
-
-      <p class="tagline">A software conference for&nbsp;the whole team</p>
-    </div>
-  </div>
-  <!-- end inner -->
-</header>
-
 <div class="inner" role="main">
   <%= yield %>
 </div>
