@@ -8,7 +8,7 @@
         <g id="elementer" transform="translate(-881.000000, -201.000000)">
             <g id="rocket" transform="translate(884.000000, 206.000000)">
                 <g id="Group-4942" transform="translate(45.000000, 209.000000)">
-                    <mask id="mask-2" sketch:name="Clip 4818" fill="white">
+                    <mask id="mask-2" fill="white">
                         <use xlink:href="#path-1"></use>
                     </mask>
                     <g id="Clip-4818"></g>
@@ -138,7 +138,7 @@
                     <path d="M19.5975,11.6572 C19.3635,11.6562 19.1765,11.3312 19.1785,10.9322 C19.1805,10.5332 19.3725,10.2112 19.6055,10.2122 C19.8395,10.2132 20.0275,10.5382 20.0245,10.9372 C20.0225,11.3362 19.8315,11.6582 19.5975,11.6572" id="Fill-4941" fill="#F9B12C" mask="url(#mask-2)"></path>
                 </g>
                 <g id="Group-5120" transform="translate(53.000000, 157.000000)">
-                    <mask id="mask-4" sketch:name="Clip 4944" fill="white">
+                    <mask id="mask-4" fill="white">
                         <use xlink:href="#path-3"></use>
                     </mask>
                     <g id="Clip-4944"></g>
