@@ -1,5 +1,7 @@
 @import "./fonts";
 
+$gray-lightest: #F2F2F2;
+
 $brand-primary: #BBEBDE;
 $brand-success: #E1F28C;
 $brand-info: #6F6F6F;
@@ -18,3 +20,31 @@ $headings-font-weight: 800;
 @import "rocket";
 @import "main-nav";
 @import "sponsors";
+
+.full-image {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.img-responsive {
+    height: auto;
+    width: 100%;
+}
+
+.frontpage-element {
+    background: $gray-lightest;
+
+    &:nth-child(2n) {
+	background: pink;
+    }
+}
+
+.frontpage-element-body {
+    padding: 35px 30px 20px 30px;
+}
+
+.frontpage-element-body-headline {
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 26px;
+}

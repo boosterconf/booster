@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
-
 gem 'rails', '3.2.22'
 gem "authlogic", '~> 3.3.0'
 gem 'paperclip', '~>3.0'
