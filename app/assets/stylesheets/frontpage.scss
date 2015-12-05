@@ -1,0 +1,35 @@
+.full-image {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.img-responsive {
+  height: auto;
+  width: 100%;
+}
+
+.frontpage-element {
+  position: relative;
+  background: $gray-lightest;
+
+  &:nth-child(2n) {
+    @include media-breakpoint-up(lg) {
+      .frontpage-element-header {
+	@include make-col-push(6);
+      }
+      .frontpage-element-body {
+	@include make-col-pull(6);
+      }
+    }
+  }
+}
+
+.frontpage-element-body {
+  padding: 35px 30px 20px 30px;
+}
+
+.frontpage-element-body-headline {
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 26px;
+}
