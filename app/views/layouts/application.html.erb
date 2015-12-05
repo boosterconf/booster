@@ -10,9 +10,9 @@
   <meta name="description" content="The Booster conference is in Bergen, Norway <%= Dates::CONFERENCE_DATES %>. The
 conference is for all IT professionals seeking to learn from each other and from experts in their fields"/>
   <meta name="keywords" content="booster conference, conference, software, agile, programming, bergen, norway,booster, roots conference, roots, it conference, software conference, methodology, testing, craftsmanship, software development, user experience, tools, project management"/>
-  <meta name="thumbnail" content="<%= asset_path 'booster.png' %>" />
+  <meta name="thumbnail" content="<%= asset_path 'booster.png' %>"/>
 
-  <meta property="og:image" content="<%= asset_path 'booster.png' %>" />
+  <meta property="og:image" content="<%= asset_path 'booster.png' %>"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -26,12 +26,12 @@ conference is for all IT professionals seeking to learn from each other and from
 </head>
 
 <body>
-	
+
 <header id="top" role="banner">
   <div class="container-fluid">
     <nav class="navbar main-nav" role="navigation">
       <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">
-	&#9776;
+        &#9776;
       </button>
 
       <a class="navbar-brand" href="/"><%= image_tag "icons/logo.svg", height: 40 %></a>
@@ -39,172 +39,72 @@ conference is for all IT professionals seeking to learn from each other and from
       <div class="collapse navbar-toggleable-xs">
         <ul class="nav navbar-nav pull-right">
           <% if AppConfig.program_released %>
-          <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
           <% end %>
           <% if AppConfig.speakers_released %>
-          <li class="nav-item"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Sessions', accepted_talks_url, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Sessions', accepted_talks_url, class: 'nav-link' %></li>
           <% end %>
           <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
-          <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
           <% end %>
           <li class="nav-item"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>
           <li class="nav-item"><%= link_to 'About us', info_about_url, class: 'nav-link' %></li>
           <% if logged_in %>
-          <li class="nav-item"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
-          <li class="nav-item"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
           <% else %>
-          <!--li><%#= link_to 'Register', new_user_url, class: 'nav-link' %></li-->
-          <li class="nav-item"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
+              <!--li><%#= link_to 'Register', new_user_url, class: 'nav-link' %></li-->
+              <li class="nav-item"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
           <% end %>
           <% if admin? %>
-          <li class="nav-item"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
           <% end %>
           <% if reviewer? %>
-          <li class="nav-item"><%= link_to 'Reviews', reviews_path, class: 'nav-link' %></li>
+              <li class="nav-item"><%= link_to 'Reviews', reviews_path, class: 'nav-link' %></li>
           <% end %>
         </ul>
-      </div><!--/.nav-collapse -->
+      </div>
+      <!--/.nav-collapse -->
     </nav>
   </div>
 
 </header>
 
-	<div class="rocket">
+<div class="rocket">
 
-      <div class="middle-of-image">
-        <span class="font-page-conference-dates">9th - 11th March</span>
-        <%= image_tag "icons/rocket.svg", class: "rocket-image" %>
-        <span class="front-page-location">Bergen, Norway</span>
-      </div>
-      <%= image_tag "icons/smoke.svg", class: "smoke-image" %>
+  <div class="middle-of-image">
+    <span class="font-page-conference-dates">9th - 11th March</span>
+    <%= image_tag "icons/rocket.svg", class: "rocket-image" %>
+    <span class="front-page-location">Bergen, Norway</span>
+  </div>
+  <%= image_tag "icons/smoke.svg", class: "smoke-image" %>
 
-    </div>
-	
-	<div class="row">
-		<div class="col-lg-6">
-			(bilde)
-		</div>
-		<div class="col-lg-6">
-			<h2>Workshops</h2>
-			<p>
-				We don't have any hour-long talks. Instead we have the bite-sized wisdom of lightning talks and the immersion of tutorials, making you come back from the conference with reak knowledge you can use.
-			</p>
-		</div>
-	</div>
-	
-	<div class="row">		
-		<div class="col-lg-6">
-			<h2>Lightning talks</h2>
-			<p>
-				We don't have any hour-long talks. Instead we have the bite-sized wisdom of lightning talks and the immersion of tutorials, making you come back from the conference with reak knowledge you can use.
-			</p>
-		</div>
-		<div class="col-lg-6">
-			(bilde)
-		</div>
-	</div>
-	
-	<div class="jumbotron">
-	      <div class="container">
-	        <h1>Beautiful city of Bergen</h1>
-	        <p>(info here..)</p>	        
-	      </div>
-	 </div>	
-	
-	<div class="jumbotron">
-	      <div class="container">
-	        <h1>Super awesome speakers!</h1>
-	      </div>		
-	 </div>
-	
-	<div class="row">		
-		<div class="col-lg-3">			
-			<p>(speaker-bilde)</p>
-		</div>
-		<div class="col-lg-3">			
-			<p>(speaker-bilde)</p>
-		</div>
-		<div class="col-lg-3">			
-			<p>(speaker-bilde)</p>
-		</div>
-		<div class="col-lg-3">			
-			<p>(speaker-bilde)</p>
-		</div>
-	</div>
+</div>
 
-	<div class="jumbotron">
-	      <div class="container">
-	        <p>(bilde)</p>
-			<h1>Our very own barista</h1>
-			<p>Year arfetr.. .fgfd gfdg dfg dfg dfg fd g</p>
-	      </div>		
-	 </div>
-	
-	<div class="row">		
-		<div class="col-lg-2">			
-			<p>(sponsor1)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor2)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor3)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor4)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor5)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor6)</p>
-		</div>
-	</div>
-	<div class="row">		
-		<div class="col-lg-2">			
-			<p>(sponsor7)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor8)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor9)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor10)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor11)</p>
-		</div>
-		<div class="col-lg-2">			
-			<p>(sponsor12)</p>
-		</div>
-	</div>
-	
-	<div class="jumbotron">
-	      <div class="container">
-	        <h1>You are awesome.<br/>Hope to see you soon!</h1>
-			<a href="#">Return to top</a>
-	      </div>		
-	</div>
-	
 <div class="inner" role="main">
   <%= yield %>
 </div>
 
 <div class="jumbotron sponsorarea">
-    <ul class="sponsorlogos">
-      <% @our_sponsors.each do |sponsor| %>
-          <li>
-            <!--<%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>-->
-            <%= link_to image_tag('http://booster2013-production.s3.amazonaws.com/logos/66/Pasted_image_at_2015_11_05_09_59_AM_normal.png?1446722919', alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
-          </li>
-      <% end %>
-    </ul>
+  <ul class="sponsorlogos">
+    <% @our_sponsors.each do |sponsor| %>
+        <li>
+          <!--<%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>-->
+          <%= link_to image_tag('http://booster2013-production.s3.amazonaws.com/logos/66/Pasted_image_at_2015_11_05_09_59_AM_normal.png?1446722919', alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
+        </li>
+    <% end %>
+  </ul>
 </div>
-<!-- end sponsorarea -->
+
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>You are awesome.<br/>Hope to see you soon!</h1>
+    <a href="#">Return to top</a>
+  </div>
+</div>
 
 <script type="text/javascript">//<![CDATA[
 $('.sponsorlogos').shuffle();
@@ -214,12 +114,16 @@ $('.sponsorlogos').shuffle();
   <div class="inner">
     <h3 class="contacttitle">Don’t be a stranger!</h3>
     <ul class="contactbuttons">
-      <li><a href="http://twitter.com/boosterconf" target="_blank" title="Follow Booster on Twitter" class="btn" id="btntwitter">Follow
-        @boosterconf on Twitter</a></li>
-      <li><a href="http://facebook.com/boosterconf" target="_blank" title="Find us on Facebook" class="btn" id="btnfacebook">Find us on
-        Facebook</a></li>
-      <li><a href="http://lanyrd.com/2016/booster2016/" target="_blank" title="Track Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd" class="btn" id="btnlanyrd">Track
-        Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd</a></li>
+      <li>
+        <a href="http://twitter.com/boosterconf" target="_blank" title="Follow Booster on Twitter" class="btn" id="btntwitter">Follow
+          @boosterconf on Twitter</a></li>
+      <li>
+        <a href="http://facebook.com/boosterconf" target="_blank" title="Find us on Facebook" class="btn" id="btnfacebook">Find
+          us on
+          Facebook</a></li>
+      <li>
+        <a href="http://lanyrd.com/2016/booster2016/" target="_blank" title="Track Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd" class="btn" id="btnlanyrd">Track
+          Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd</a></li>
       <li><a href="http://2014.boosterconf.no" target="_blank" class="btn" title="Booster 2014">Booster 2014</a>
         <a href="http://2015.boosterconf.no" target="_blank" class="btn" title="Booster 2015">Booster 2015</a></li>
     </ul>
@@ -230,13 +134,20 @@ $('.sponsorlogos').shuffle();
 <%= yield :javascript %>
 
 <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-37448589-1', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-37448589-1', 'auto');
+    ga('send', 'pageview');
 
 </script>
 
@@ -252,10 +163,10 @@ $('.sponsorlogos').shuffle();
 </script>
 
 <script type="text/javascript">
-    $.notify.defaults( {
+    $.notify.defaults({
         globalPosition: 'top left',
         elementPosition: 'right'
-    } );
+    });
     $.notify("<%= flash[:notice] %>", "success");
 </script>
 

@@ -1,58 +1,59 @@
-<div class="container">
-  <div class="row-fluid">
-    <div class="hello span12">
-      <div class="hello-inner">
-        <h2>Booster 2016, 9-11 March</h2>
+<div class="row">
+  <div class="col-lg-6">
+    (bilde)
+  </div>
+  <div class="col-lg-6">
+    <h2>Workshops</h2>
+    <p>
+      We don't have any hour-long talks. Instead we have the bite-sized wisdom of lightning talks and the immersion of tutorials, making you come back from the conference with reak knowledge you can use.
+    </p>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-lg-6">
+    <h2>Lightning talks</h2>
+    <p>
+      We don't have any hour-long talks. Instead we have the bite-sized wisdom of lightning talks and the immersion of tutorials, making you come back from the conference with reak knowledge you can use.
+    </p>
+  </div>
+  <div class="col-lg-6">
+    (bilde)
+  </div>
+</div>
 
-        <div class="cfp">
-          <h3>Registration for <%= Dates::CONFERENCE_YEAR %> is open!</h3>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Beautiful city of Bergen</h1>
+    <p>(info here..)</p>
+  </div>
+</div>
 
-          <p>
-            <%= link_to 'Register a person!', new_user_url, class: 'btn btn-primary btn-large' %>
-            <%= link_to 'Register a group!', new_group_registration_url, class: 'btn btn-primary btn-large' %>
-          </p>
-        </div>
-      </div>
-    </div>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Super awesome speakers!</h1>
+  </div>
+</div>
 
-    <% if @speakers.size >= 4 %>
-        <div class="speakers-box">
-          <h4>Some of our speakers this year (<%= link_to 'See the rest', info_speakers_url %>)</h4>
+<div class="row">
+  <div class="col-lg-3">
+    <p>(speaker-bilde)</p>
+  </div>
+  <div class="col-lg-3">
+    <p>(speaker-bilde)</p>
+  </div>
+  <div class="col-lg-3">
+    <p>(speaker-bilde)</p>
+  </div>
+  <div class="col-lg-3">
+    <p>(speaker-bilde)</p>
+  </div>
+</div>
 
-          <div class="speakers row-fluid">
-            <% for group in @speakers.shuffle.take(4).each_slice(2) %>
-                <div class="speaker-group span6">
-                  <% for speaker in group %>
-                      <div class="frontpage-speaker">
-                        <div>
-                          <a href="/info/speakers">
-                            <%= image_tag speaker.bio.picture.url %>
-                          </a>
-                        </div>
-                        <div>
-                          <b><%= speaker.full_name %></b> <br/> <i><%= speaker.bio[:title] %></i>
-                          <% if speaker.bio[:twitter_handle].length > 0 %>
-                              <br/>
-                              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-                                &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-                              </a>
-                          <% end %>
-                        </div>
-                      </div>
-                  <% end %>
-                </div>
-            <% end %>
-          </div>
-        </div>
-    <% end %>
-
-    <div class="row-fluid">
-      <div class="span11" style="text-align: center; padding-top: 40px;">
-        <p>Got questions? We're available on <%= mail_to 'kontakt@boosterconf.no' %> and
-          <a href="http://twitter.com/boosterconf">@boosterconf</a>.</p>
-      </div>
-    </div>
-
+<div class="jumbotron">
+  <div class="container">
+    <p>(bilde)</p>
+    <h1>Our very own barista</h1>
+    <p>Year arfetr.. .fgfd gfdg dfg dfg dfg fd g</p>
   </div>
 </div>
