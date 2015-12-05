@@ -33,3 +33,41 @@
   font-style: italic;
   font-size: 26px;
 }
+
+.jumbotron {
+  position: relative;
+  text-align: center;
+}
+
+.jumbotron-bg {
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  & > img {
+    height: 100%;
+    width: auto;
+    opacity: 0;
+  }
+}
+
+.jumbotron-text-over-background {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  padding: 30px;
+  h1, p {
+    color: white;
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-style: italic;
+  }
+}
+
+.full-width {
+  padding-right: 0;
+  padding-left: 0;
+}
