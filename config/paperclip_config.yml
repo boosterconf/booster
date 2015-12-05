@@ -8,7 +8,7 @@ test:
   storage: filesystem
 
 development:
-  <%= ENV["USE_S3"] ? "<<: *s3" : "storage: filesystem" %>
+  <<: *s3
 
 staging:
   <<: *s3

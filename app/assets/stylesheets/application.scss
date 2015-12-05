@@ -1,5 +1,7 @@
 @import "./fonts";
 
+$enable-flex: true;
+
 $gray-lightest: #F2F2F2;
 
 $brand-primary: #BBEBDE;
@@ -17,6 +19,7 @@ $headings-font-weight: 800;
 @import "bootstrap";
 
 @import "./jquery_notification";
+@import "common";
 @import "rocket";
 @import "main-nav";
 @import "sponsors";

@@ -28,35 +28,49 @@
                                                       you come back from the conference with real knowledge you can use."
                                        } %>
 
-<div class="jumbotron full-width">
-  <div class="jumbotron-bg" style='background-image: url("/images/bryggen-long.jpg")'>
+<div class="imagetron">
+  <div class="imagetron-bg" style='background-image: url("/images/bryggen-long.jpg")'>
     <%= image_tag '/images/bryggen.jpeg', class: 'img-responsive' %>
   </div>
-  <div class="container jumbotron-text-over-background">
-    <h1>Beautiful city of Bergen</h1>
+  <div class="container imagetron-text-over-background">
+    <h2>Beautiful city of Bergen</h2>
 
-    <p>Bergen is pretty awesome okay.</p>
+    <p>Bergen is pretty awesome, okay?</p>
   </div>
 </div>
 
 <div class="jumbotron">
   <div class="container">
-    <h1>Super awesome speakers!</h1>
+    <h2>Super awesome speakers!</h2>
+
+    <p class="lead">
+      <%= link_to "View all", info_speakers_path %>
+    </p>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-lg-3">
-    <p>(speaker-bilde)</p>
-  </div>
-  <div class="col-lg-3">
-    <p>(speaker-bilde)</p>
-  </div>
-  <div class="col-lg-3">
-    <p>(speaker-bilde)</p>
-  </div>
-  <div class="col-lg-3">
-    <p>(speaker-bilde)</p>
+<div class="speakers container-fluid">
+  <div class="row">
+    <% @speakers.+(@speakers).each do |speaker| %>
+    <div class="minor-block col-xs-3 col-md-3">
+      <div class="row">
+	<div class="minor-block-img col-md-12">
+	  <%= image_tag speaker.bio.picture.url, class: "img-responsive" %>
+	</div>
+      </div>
+    </div>
+    <% end %>
+
+    <% @speakers.+(@speakers).each do |speaker| %>
+    <div class="minor-block-body col-xs-9 col-md-3">
+      <div class="minor-block-body-inner">
+        <h2><%= speaker.full_name %></h2>
+
+        <p class="lead"><%= speaker.bio.title %></p>
+      </div>
+    </div>
+    <% end %>
+
   </div>
 </div>
 
@@ -64,7 +78,7 @@
   <div class="container">
     <p>(bilde)</p>
 
-    <h1>Our very own barista</h1>
+    <h2>Our very own barista</h2>
 
     <p>Year arfetr.. .fgfd gfdg dfg dfg dfg fd g</p>
   </div>
