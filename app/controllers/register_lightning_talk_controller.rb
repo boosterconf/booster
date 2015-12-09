@@ -33,8 +33,9 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_talk
-    @talk = LightningTalk.new(params[:talk])
-    @talk.talk_type = TalkType.find_by_id(@talk.talk_type_id)
+    talk_type = TalkType.find_by_id(@talk.talk_type_id)
+    @talk = talk_type == "LightningTalk" ? LightningTalk.new(params[:talk]) : ShortTalk.new(params[:talk])
+    @talk.talk_type = talk_type
     @talk.year = AppConfig.year
     @talk.users << current_user
     if @talk.save
