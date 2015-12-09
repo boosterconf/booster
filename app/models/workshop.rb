@@ -1,7 +1,7 @@
 class Workshop < Talk
 
   validates :max_participants, presence: true,
-            numericality: { only_integer: true, greater_than_or_equal: 20 }
+            numericality: {only_integer: true, greater_than_or_equal: 20}
 
   validates :appropriate_for_roles, presence: true
 
@@ -22,9 +22,6 @@ class Workshop < Talk
 
   def is_tutorial?
     true
-  end
-  def is_short_talk?
-    false
   end
 
   def self.all_accepted

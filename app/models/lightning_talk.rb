@@ -14,10 +14,6 @@ class LightningTalk < Talk
     false
   end
 
-  def is_short_talk?
-    false
-  end
-
   def self.all_accepted
     unscoped.all(include: [:talk_type],
                  conditions: ["acceptance_status = 'accepted'"],
