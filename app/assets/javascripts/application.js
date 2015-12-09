@@ -13,12 +13,11 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require bootstrap
 //= require jquery-tablesorter
 //= require jquery-tablesorter/parsers/parser-input-select
 //= require jquery.sieve
 //= require tinymce-jquery
 //= require tag.it
-//= require tether
-//= require bootstrap-sprockets
 //= require program
 //= require_tree .
