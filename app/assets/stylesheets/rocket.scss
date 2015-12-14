@@ -32,7 +32,9 @@
 
   .smoke-image {
     position:absolute;
-    bottom: -10%;
+    /* Changed this to 0, from -10%, to prevent the smoke to hide the call to action bar.*/
+    bottom: 0;
+    /*bottom: -10%;*/
     left: -18.5%;
     width: 130%;
   }

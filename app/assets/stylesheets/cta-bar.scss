@@ -1,0 +1,21 @@
+.calltoaction {
+  margin: 0 auto;
+  z-index: 999;
+  font-size: 18px;
+  padding: 10px 180px;
+  background-color: $brand-danger;
+  color: white;
+  text-align: center;
+}
+
+.calltoaction span {
+  padding: 4px 25px;
+}
+
+.calltoaction button {
+  border-radius: 40px;
+  border: 0;
+  margin: 5px 20px;
+  padding: 4px 25px;
+  background-color: #373a3c;
+}
