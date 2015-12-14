@@ -99,37 +99,21 @@ conference is for all IT professionals seeking to learn from each other and from
 </div>
 
 
-<div class="jumbotron">
-  <div class="container">
-    <h1>You are awesome.<br/>Hope to see you soon!</h1>
-    <a href="#">Return to top</a>
-  </div>
-</div>
+<footer>
+    <div class="jumbotron">
+      <div class="container">
+        <%= image_tag "icons/spread.svg", id: "footer-image" %>
+        <h2 id="footer-text">You are awesome.<br/>Hope to see you soon!</h2>
+        <p class="centered-text">
+        <a href="#">Return to top</a>
+        </p>
+      </div>
+    </div>
+</footer>
 
 <script type="text/javascript">//<![CDATA[
 $('.sponsorlogos').shuffle();
 //]]></script>
-
-<footer>
-  <div class="inner">
-    <h3 class="contacttitle">Don’t be a stranger!</h3>
-    <ul class="contactbuttons">
-      <li>
-        <a href="http://twitter.com/boosterconf" target="_blank" title="Follow Booster on Twitter" class="btn" id="btntwitter">Follow
-          @boosterconf on Twitter</a></li>
-      <li>
-        <a href="http://facebook.com/boosterconf" target="_blank" title="Find us on Facebook" class="btn" id="btnfacebook">Find
-          us on
-          Facebook</a></li>
-      <li>
-        <a href="http://lanyrd.com/2016/booster2016/" target="_blank" title="Track Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd" class="btn" id="btnlanyrd">Track
-          Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd</a></li>
-      <li><a href="http://2014.boosterconf.no" target="_blank" class="btn" title="Booster 2014">Booster 2014</a>
-        <a href="http://2015.boosterconf.no" target="_blank" class="btn" title="Booster 2015">Booster 2015</a></li>
-    </ul>
-    <p class="beammeup"><a href="/#top">Take me back to the top!</a></p>
-  </div>
-</footer>
 
 <%= yield :javascript %>
 

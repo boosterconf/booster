@@ -95,3 +95,33 @@
 .minor-block-body-inner {
 }
 
+footer .jumbotron {
+  background: linear-gradient(#EFF9CF, #BBEBDE);
+  position: relative;
+
+  #footer-image {
+    height: auto;
+    width: 100%;
+  }
+
+  #footer-text {
+    position: absolute;
+    left:0;
+    right: 0;
+    top: 43%;
+    transform: translateY(-50%);
+    text-align: center;
+    font-family: $font-family-sans-serif;
+    text-transform: none;
+    font-size: 16pt;
+  }
+
+  .centered-text {
+    text-align: center;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
+
