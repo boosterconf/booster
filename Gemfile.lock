@@ -254,3 +254,6 @@ DEPENDENCIES
   thin
   tinymce-rails
   uglifier (>= 1.0.3)
+
+BUNDLED WITH
+   1.10.3

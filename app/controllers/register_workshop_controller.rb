@@ -110,7 +110,7 @@ class RegisterWorkshopController < ApplicationController
 
   private
   def setup_talk_types
-    @talk_types = current_user.is_admin? ? TalkType.all : TalkType.workshops
+    @talk_types = current_user.try(:is_admin?) ? TalkType.all : TalkType.workshops
   end
 
 end
