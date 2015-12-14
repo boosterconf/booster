@@ -19,7 +19,9 @@
     }
 
     .rocket-image {
-      height: 220px;
+      height: 420px;
+      bottom: -110px;
+      position: relative;
     }
 
     .front-page-location {
@@ -30,10 +32,9 @@
 
   .smoke-image {
     position:absolute;
-    bottom: -120px;
-    left: -250px;
+    bottom: -10%;
+    left: -18.5%;
     width: 130%;
   }
-
 
 }
