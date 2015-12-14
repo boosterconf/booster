@@ -91,8 +91,7 @@ conference is for all IT professionals seeking to learn from each other and from
   <ul class="sponsorlogos">
     <% @our_sponsors.each do |sponsor| %>
         <li>
-          <!--<%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>-->
-          <%= link_to image_tag('http://booster2013-production.s3.amazonaws.com/logos/66/Pasted_image_at_2015_11_05_09_59_AM_normal.png?1446722919', alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
+          <%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
         </li>
     <% end %>
   </ul>

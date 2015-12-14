@@ -7,7 +7,15 @@ class Sponsor < ActiveRecord::Base
                   :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id,
                   :was_sponsor_last_year, :events, :logo, :publish_logo, :website
 
-  has_attached_file :logo, PAPERCLIP_CONFIG.merge({styles: {:normal => '150x'}, :default_style => :normal})
+  has_attached_file :logo, PAPERCLIP_CONFIG.merge({
+                                                      styles: {
+                                                          normal: {
+                                                              geometry: '150x',
+                                                              convert_options: '-colorspace Gray'
+                                                          }
+                                                      },
+                                                      default_style: :normal
+                                                  })
   validates_attachment_content_type :logo,
                                     :content_type =>
                                         %w(image/jpg image/jpeg image/pjpeg image/gif image/png image/x-png),
@@ -48,7 +56,7 @@ class Sponsor < ActiveRecord::Base
   end
 
   def self.all_accepted
-      self.find_all_by_status('accepted')
+    self.find_all_by_status('accepted')
   end
 
   def has_email?
@@ -69,13 +77,13 @@ class Sponsor < ActiveRecord::Base
 
   def invoice_status
     if self.accepted?
-        if paid != nil
-          'Paid'
-        elsif invoiced != nil
-          'Invoiced'
-        else
-          'Not invoiced'
-        end
+      if paid != nil
+        'Paid'
+      elsif invoiced != nil
+        'Invoiced'
+      else
+        'Not invoiced'
+      end
     else
       '-'
     end
