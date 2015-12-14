@@ -157,6 +157,24 @@ $('.sponsorlogos').shuffle();
     $.notify("<%= flash[:notice] %>", "success");
 </script>
 
+<% if current_user %>
+    <script>
+        var _smplyBtr = _smplyBtr || {};
+        _smplyBtr.email = "<%= current_user.email %>";
+        _smplyBtr.name = "<%= current_user.full_name %>" ;
+
+        _smplyBtr.appKey = "GHNBQHMW";
+        (function() {
+            var sb = document.createElement('script');
+            sb.type = 'text/javascript';
+            sb.async = true;
+            sb.src = "https://www.simplybetter.io/widget_api/applications/client_js.js?appkey=" +_smplyBtr.appKey;
+            var s = document.getElementsByTagName('body')[0];
+            s.appendChild(sb);
+        })();
+    </script>
+<% end %>
+
 
 </body>
 </html>
