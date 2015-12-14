@@ -108,12 +108,35 @@ footer .jumbotron {
     position: absolute;
     left:0;
     right: 0;
-    top: 43%;
     transform: translateY(-50%);
     text-align: center;
     font-family: $font-family-sans-serif;
     text-transform: none;
-    font-size: 16pt;
+
+    @include media-breakpoint-up(xs) {
+      top: 38%;
+      font-size: 10px;
+    }
+
+    @include media-breakpoint-up(sm) {
+      font-size: 18px;
+      top: 40%;
+    }
+
+    @include media-breakpoint-up(md) {
+      font-size: 24px;
+      top: 41%;
+    }
+
+    @include media-breakpoint-up(lg) {
+      top: 43%;
+      font-size: 28px;
+    }
+    @include media-breakpoint-up(xl) {
+      top: 43%;
+      font-size: 34px;
+    }
+
   }
 
   .centered-text {
