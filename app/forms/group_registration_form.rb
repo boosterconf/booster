@@ -9,6 +9,7 @@ class GroupRegistrationForm
   attribute :adress
   attribute :zip
   attribute :your_reference
+  attribute :text
   attribute :company
   attribute :emails
 
@@ -21,7 +22,6 @@ class GroupRegistrationForm
   validates :valid_emails, presence: true
   validates :email, presence: true, if: lambda { |gr| gr.delivery_method == 'email' }
   validates :adress, presence: true, if: lambda { |gr| gr.delivery_method == 'snail_mail' }
-
 
   def valid_emails
     emails_string_to_array.each do |email|
@@ -43,7 +43,13 @@ class GroupRegistrationForm
   end
 
   def persist!
-    @invoice = Invoice.create!(email: email, adress: adress, zip: zip, your_reference: your_reference)
+    @invoice = Invoice.create!(
+        email: email,
+        adress: adress,
+        zip: zip,
+        your_reference: your_reference,
+        text: text
+    )
     new_user_emails = emails_string_to_array.reject { |email| user_already_exists(email) }
     new_user_emails.each do |email|
       user = User.create_unfinished(email, Registration.current_normal_ticket_type)

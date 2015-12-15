@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151209162942) do
+ActiveRecord::Schema.define(:version => 20151215205528) do
 
   create_table "bios", :force => true do |t|
     t.integer  "user_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20151209162942) do
     t.string   "status",         :default => "not_invoiced"
     t.datetime "invoiced_at"
     t.datetime "paid_at"
+    t.string   "text"
   end
 
   create_table "participants", :force => true do |t|

@@ -1,7 +1,7 @@
 class Invoice < ActiveRecord::Base
 
   attr_accessible :adress, :city, :our_reference, :recipient_name, :your_reference, :zip, :country,
-                  :email, :status, :delivery_method, :created_at, :invoiced_at
+                  :email, :status, :delivery_method, :text, :created_at, :invoiced_at
 
   has_many :registrations
 
