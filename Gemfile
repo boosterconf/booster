@@ -26,6 +26,8 @@ gem 'rest-client'
 gem "paranoia", "~> 1.0"
 gem 'test-unit'
 
+gem 'virtus'
+
 group :production do
   gem 'heroku-deflater'
   gem 'pg'

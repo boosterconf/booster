@@ -192,59 +192,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def group_registration
-    @invoice = Invoice.new
-  end
-
-  def create_group_registration
-    @invoice = Invoice.new(params[:invoice])
-
-    emails = params[:emails]
-
-    users = tokenize(emails).map do |email|
-      user = User.create_unfinished(email, Registration.current_normal_ticket_type)
-      user.company = params[:company]
-      user.registration.invoice = @invoice
-      user
-    end
-
-
-    existing_users, new_users = users.partition { |u| user_already_exists(u.email) }
-
-    if all_emails_are_valid(new_users) && @invoice.valid?
-      @invoice.save!
-
-      User.transaction do
-        new_users.each do |user|
-          user.save!(validate: false)
-          BoosterMailer.ticket_assignment(user).deliver
-        end
-
-        existing_users.each do |u|
-          user = User.find_by_email(u.email)
-          user.company = params[:company]
-          user.registration.invoice = @invoice
-          user.save!(:validate => false)
-        end
-      end
-      render :action => 'group_registration_confirmation'
-    else
-      flash[:error] = "Contains one or more invalid email address: #{emails}"
-      render :action => 'group_registration'
-    end
-  end
-
-  def all_emails_are_valid(users)
-    users.each do |user|
-      return false unless user.has_valid_email? && !user_already_exists(user.email)
-    end
-    true
-  end
-
-  def user_already_exists(email)
-    User.find_by_email(email)
-  end
-
   def from_reference
 
     if current_user
@@ -287,10 +234,6 @@ class UsersController < ApplicationController
       per_date << total
     end
     per_date
-  end
-
-  def tokenize(string)
-    string.gsub(/[,;:\n]/, " ").split
   end
 
   def registration_is_open

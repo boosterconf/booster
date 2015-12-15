@@ -5,19 +5,16 @@ class Invoice < ActiveRecord::Base
 
   has_many :registrations
 
-  validates :email, :format => { :with => Authlogic::Regex.email }, :allow_blank => true
+  validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
+  validates :zip, presence: true
 
 
   def total
-    registrations.map(&:price).inject(0) { |sum, price| sum + price }
+    registrations.map(&:price).sum
   end
 
   def delivery_method
     self.email.present? ? 'email' : 'snail_mail'
-  end
-
-  def delivery_method=(method)
-    # Hack
   end
 
   def possible_to_change?
