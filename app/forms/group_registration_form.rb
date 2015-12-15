@@ -18,8 +18,9 @@ class GroupRegistrationForm
   validates :zip, presence: true
   validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
 
-  validate :valid_emails
-
+  validates :valid_emails, presence: true
+  validates :email, presence: true, if: lambda { |gr| gr.delivery_method == 'email' }
+  validates :adress, presence: true, if: lambda { |gr| gr.delivery_method == 'snail_mail' }
 
 
   def valid_emails
@@ -53,9 +54,12 @@ class GroupRegistrationForm
     end
   end
 
-  private
   def emails_string_to_array
-    emails.gsub(/[,;:\n]/, " ").split
+    if emails
+      emails.gsub(/[,;:\n]/, " ").split
+    else
+      []
+    end
   end
 
   def user_already_exists(email)
