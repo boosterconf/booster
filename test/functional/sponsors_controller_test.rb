@@ -38,7 +38,7 @@ class SponsorsControllerTest < ActionController::TestCase
     end
 
     should "be able to update sponsor" do
-      put :update, :id => sponsors(:one).to_param, :sponsor => {}
+      put :update, id: sponsors(:one).to_param, sponsor: {}
       assert_redirected_to sponsors_path
     end
 

@@ -22,7 +22,7 @@ class SponsorsController < ApplicationController
     @users = User.all_organizers
     @sponsor = Sponsor.find(params[:id], include: :events)
 
-    @event = Event.new(:sponsor => @sponsor)
+    @event = Event.new(sponsor: @sponsor)
   end
 
   def create
@@ -36,7 +36,7 @@ class SponsorsController < ApplicationController
   end
 
   def update
-    @sponsor = SponsorTicketCreator.new(Sponsor.find(params[:id]))
+    @sponsor = SponsorStatusEventCreator.new(user: current_user, sponsor: SponsorTicketCreator.new(Sponsor.find(params[:id])))
     @sponsor.assign_attributes(params[:sponsor])
 
     User.transaction do
@@ -45,9 +45,6 @@ class SponsorsController < ApplicationController
         Rails.cache.delete('all_accepted_sponsors')
 
         if @sponsor.status_changed?
-          event = Event.new(user: current_user, sponsor_id: @sponsor.id, comment: "Partner status changed to #{@sponsor.status_text}")
-          event.save
-
           if @sponsor.status == 'accepted'
             SlackNotifier.notify_sponsor(@sponsor)
           end
@@ -58,19 +55,18 @@ class SponsorsController < ApplicationController
             if @sponsor.save
               redirect_to sponsors_path, notice: "Partner #{@sponsor.name} was successfully updated."
             else
+              @users = User.all_organizers
+              @event = Event.new(sponsor_id: @sponsor.id)
               render action: :edit
             end
           }
           format.js {
             if @sponsor.save
               flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
-              render
             else
               flash[:error] = "Status for #{@sponsor.name} was NOT changed to #{Sponsor::STATES[@sponsor.status]} "
-              render
             end
-
-
+            render
           }
         end
       end
@@ -126,6 +122,7 @@ class SponsorsController < ApplicationController
   def find_sponsor
     @sponsor = Sponsor.find(params[:id])
   end
+
   def find_sponsors
     @sponsors = Sponsor.all(:include => :user).sort
   end
