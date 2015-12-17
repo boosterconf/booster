@@ -36,19 +36,20 @@ class SponsorsController < ApplicationController
   end
 
   def update
-    @sponsor = SponsorStatusEventCreator.new(user: current_user, sponsor: SponsorTicketCreator.new(Sponsor.find(params[:id])))
+    @sponsor = SponsorAcceptedSlackNotifier.new(
+        SponsorStatusEventCreator.new(
+            user: current_user, sponsor: SponsorTicketCreator.new(
+                                  Sponsor.find(params[:id]
+                                  )
+                              )
+        )
+    )
     @sponsor.assign_attributes(params[:sponsor])
 
     User.transaction do
       Sponsor.transaction do
 
         Rails.cache.delete('all_accepted_sponsors')
-
-        if @sponsor.status_changed?
-          if @sponsor.status == 'accepted'
-            SlackNotifier.notify_sponsor(@sponsor)
-          end
-        end
 
         respond_to do |format|
           format.html {
