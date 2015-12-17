@@ -15,7 +15,7 @@ class Sponsor < ActiveRecord::Base
 
   STATES = {
       'suggested' => 'Suggested',
-      'dialogue' => 'In Dialogue',
+      'dialogue' => 'In dialogue',
       'contacted' => 'Contacted',
       'reminded' => 'Reminded',
       'declined' => 'Declined',

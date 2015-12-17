@@ -271,3 +271,6 @@ DEPENDENCIES
   tinymce-rails
   uglifier (>= 1.0.3)
   virtus
+
+BUNDLED WITH
+   1.10.3

@@ -8,7 +8,6 @@ class SponsorsController < ApplicationController
   respond_to :html, :js
 
   def index
-
   end
 
   def show
@@ -21,7 +20,7 @@ class SponsorsController < ApplicationController
 
   def edit
     @users = User.all_organizers
-    @sponsor = Sponsor.find(params[:id], :include => :events)
+    @sponsor = Sponsor.find(params[:id], include: :events)
 
     @event = Event.new(:sponsor => @sponsor)
   end
@@ -37,6 +36,7 @@ class SponsorsController < ApplicationController
   end
 
   def update
+    @sponsor = SponsorTicketCreator.new(Sponsor.find(params[:id]))
     @sponsor.assign_attributes(params[:sponsor])
 
     User.transaction do
@@ -45,11 +45,10 @@ class SponsorsController < ApplicationController
         Rails.cache.delete('all_accepted_sponsors')
 
         if @sponsor.status_changed?
-          event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Partner status changed to #{@sponsor.status_text}")
+          event = Event.new(user: current_user, sponsor_id: @sponsor.id, comment: "Partner status changed to #{@sponsor.status_text}")
           event.save
 
           if @sponsor.status == 'accepted'
-            create_sponsor_tickets
             SlackNotifier.notify_sponsor(@sponsor)
           end
         end
@@ -63,11 +62,15 @@ class SponsorsController < ApplicationController
             end
           }
           format.js {
-            @sponsors = Sponsor.all(:include => :user).sort
-            @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
-            @events = Event.last(15).reverse
-            flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
-            render
+            if @sponsor.save
+              flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
+              render
+            else
+              flash[:error] = "Status for #{@sponsor.name} was NOT changed to #{Sponsor::STATES[@sponsor.status]} "
+              render
+            end
+
+
           }
         end
       end
@@ -143,17 +146,6 @@ class SponsorsController < ApplicationController
     }
 
     @events = Event.last(15).reverse
-  end
-
-  def create_sponsor_tickets
-    first_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
-    second_sponsor_ticket = User.create_unfinished(nil, 'sponsor')
-
-    first_sponsor_ticket.company = @sponsor.name
-    second_sponsor_ticket.company = @sponsor.name
-
-    first_sponsor_ticket.save!(:validate => false)
-    second_sponsor_ticket.save!(:validate => false)
   end
 
 end
