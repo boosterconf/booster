@@ -81,12 +81,22 @@
   </div>
 </div>
 
-<div class="jumbotron">
-  <div class="container">
-    <p>(bilde)</p>
-
+<div class="imagetron">
+  <div class="imagetron-bg"  style='background: 
+    linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), url("/images/bryggen-long.jpg"); background-size: cover;'>
+    <%= image_tag '/images/bryggen-long.jpg', class: 'img-responsive' %>
+  </div>
+  <div class="container imagetron-text-over-background">
+    <%= image_tag '/images/by.png', class: 'img-responsive', style: 'width: 50px' %>
     <h2>Our very own barista</h2>
 
-    <p>Year arfetr.. .fgfd gfdg dfg dfg dfg fd g</p>
+    <p style="max-width: 27rem; margin: auto;">
+      Year after year Vidar Graawe Farland provide the Booster delegates with the 
+      best coffee Bergen has to offer for free. Why? &laquo;I keep coming back, 
+      simply because it's loads of fun!&raquo;
+      </p>
   </div>
 </div>
