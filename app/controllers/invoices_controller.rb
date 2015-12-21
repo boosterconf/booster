@@ -4,9 +4,10 @@ class InvoicesController < ApplicationController
 
   before_filter :require_admin
   before_filter :find_invoice, only: [:update, :edit, :show, :add_user, :remove_user, :invoiced, :paid]
+  before_filter :find_users_without_invoice
 
   def index
-    @invoices = Invoice.order("invoiced_at desc", "created_at asc").all()
+    @invoices = Invoice.order("invoiced_at desc", "created_at asc").all
 
     respond_with @invoices
   end
@@ -41,32 +42,28 @@ class InvoicesController < ApplicationController
       redirect_to @invoice, notice: 'Invoice was successfully updated.'
     else
       flash.now[:error] = 'Unable to update invoice'
-      render :action => "edit"
+      render action: :edit
     end
   end
 
   def add_user
-    registration = User.find(params[:user_id]).registration
-    registration.invoice_id = @invoice.id
-    registration.save
+    user = User.find(params[:user_id])
+    if user.registration.invoice_line
+      head :bad_request
+    else
+      invoice_line = @invoice.add_user(user)
 
-    render :json => {
-        :id => registration.user.id,
-        :name => registration.user.full_name,
-        :email => registration.user.email,
-        :ticket_type_old => registration.ticket_type_old,
-        :price => registration.price
-    }
+      render json: invoice_line.to_json
+    end
+
   end
 
-  def remove_user
-    registration = User.find(params[:user_id]).registration
-    registration.invoice_id = nil
-    registration.save
+  def remove_line
+    InvoiceLine.find(params[:invoice_line_id]).destroy
 
-    render :json => {
-        :id => registration.user.id
-    }
+    render json: {
+               id: params[:invoice_line_id]
+           }
   end
 
   def invoiced
@@ -77,7 +74,7 @@ class InvoicesController < ApplicationController
       r.invoiced = true
       r.save
     end
-    redirect_to action: 'index'
+    redirect_to action: :index
   end
 
   def paid
@@ -89,11 +86,18 @@ class InvoicesController < ApplicationController
       r.save
     end
 
-    redirect_to action: 'index'
+    redirect_to action: :index
   end
 
   private
   def find_invoice
     @invoice = Invoice.find(params[:id])
+  end
+
+  def find_users_without_invoice
+    @users = Registration.includes(:invoice_line)
+                 .where(invoice_lines: { registration_id: nil })
+                 .where("ticket_type_old IN (?)", Registration::PAYING_TICKET_TYPES)
+                 .map(&:user).map { |u| ["#{u.name_or_email} - #{u.company}", u.id]}
   end
 end

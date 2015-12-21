@@ -36,14 +36,16 @@ class SponsorsController < ApplicationController
   end
 
   def update
-    @sponsor = SponsorAcceptedSlackNotifier.new(
-        SponsorStatusEventCreator.new(
-            user: current_user, sponsor: SponsorTicketCreator.new(
-                                  Sponsor.find(params[:id]
-                                  )
-                              )
+    @sponsor =
+        SponsorAcceptedSlackNotifier.new(
+            SponsorInvoiceCreator.new(
+                SponsorStatusEventCreator.new(
+                    user: current_user, sponsor: SponsorTicketCreator.new(
+                                          Sponsor.find(params[:id])
+                                      )
+                )
+            )
         )
-    )
     @sponsor.assign_attributes(params[:sponsor])
 
     User.transaction do

@@ -45,10 +45,10 @@ class User < ActiveRecord::Base
   end
 
   def name_or_email
-    if full_name
-      full_name
-    else
+    if unnamed?
       email
+    else
+      full_name
     end
   end
 

@@ -3,15 +3,9 @@ class Invoice < ActiveRecord::Base
   attr_accessible :adress, :city, :our_reference, :recipient_name, :your_reference, :zip, :country,
                   :email, :status, :delivery_method, :text, :created_at, :invoiced_at
 
-  has_many :registrations
-
   validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
-  validates :zip, presence: true
-
-
-  def total
-    registrations.map(&:price).sum
-  end
+  validates :status, inclusion: { in: %w(not_invoiced invoiced) }
+  has_many :invoice_lines
 
   def delivery_method
     self.email.present? ? 'email' : 'snail_mail'
@@ -25,8 +19,16 @@ class Invoice < ActiveRecord::Base
     status == 'invoiced'
   end
 
-  def registrations
-    Registration.where(invoice_id: id)
+  def add_user(user)
+    invoice_lines.create!(
+        text: "#{user.registration.ticket_description} for #{user.email}",
+        price: user.registration.ticket_price,
+        registration: user.registration
+    )
+  end
+
+  def total
+    invoice_lines.map(&:price).sum
   end
 
 end

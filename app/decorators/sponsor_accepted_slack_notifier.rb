@@ -3,7 +3,7 @@ class SponsorAcceptedSlackNotifier < SimpleDelegator
   def initialize(sponsor)
     @old_status = sponsor.status
     @sponsor = sponsor
-    super(@sponsor)
+    super
   end
 
   def save

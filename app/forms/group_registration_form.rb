@@ -14,6 +14,7 @@ class GroupRegistrationForm
   attribute :emails
 
   attr_reader :invoice
+  attr_reader :registrations
 
   validates :delivery_method, presence: true
   validates :zip, presence: true
@@ -50,12 +51,17 @@ class GroupRegistrationForm
         your_reference: your_reference,
         text: text
     )
+
+    @registrations = []
+
     new_user_emails = emails_string_to_array.reject { |email| user_already_exists(email) }
     new_user_emails.each do |email|
       user = User.create_unfinished(email, Registration.current_normal_ticket_type)
       user.company = company
       user.registration.invoice = @invoice
+      @invoice.add_user(user)
       user.save!(validate: false)
+      registrations << user.registration
       BoosterMailer.ticket_assignment(user).deliver
     end
   end

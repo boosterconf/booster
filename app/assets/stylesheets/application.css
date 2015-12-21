@@ -14,10 +14,11 @@
 = require bootstrap-responsive
 = require font-awesome
 = require jquery-ui
-= require jquery_notification
 = require jquery-tablesorter/theme.blue
 = require modal
 = require style
 = require program
+= require selectize
+= require selectize.default
 = require_tree .
  */

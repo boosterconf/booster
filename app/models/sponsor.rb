@@ -1,7 +1,8 @@
 class Sponsor < ActiveRecord::Base
 
   belongs_to :user
-  has_many :events, :dependent => :destroy
+  has_many :events, dependent: :destroy
+  has_one :invoice
 
   attr_accessible :comment, :contact_person_first_name, :contact_person_last_name, :contact_person_phone_number,
                   :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id,
@@ -83,6 +84,10 @@ class Sponsor < ActiveRecord::Base
 
   def should_show_logo?
     self.publish_logo && self.logo.exists? && self.accepted?
+  end
+
+  def contact_person_full_name
+    contact_person_first_name + " " + contact_person_last_name
   end
 
   def <=>(other)

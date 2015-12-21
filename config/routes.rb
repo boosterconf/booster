@@ -110,7 +110,7 @@ Booster2013::Application.routes.draw do
   resources :invoices do
     member do
       post :add_user
-      post :remove_user
+      post :remove_line
       post :invoiced
       post :paid
     end
