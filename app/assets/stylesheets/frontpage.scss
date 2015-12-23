@@ -50,6 +50,13 @@
   }
 }
 
+.imagetron-img {
+  width: 75px;
+  border-radius: 75px;
+  margin-bottom: 20px;
+  border: 2px solid black;
+}
+
 .imagetron-text-over-background {
   position: absolute;
   top: 50%;
@@ -57,7 +64,12 @@
   right: 0;
   transform: translateY(-50%);
   padding: 30px;
-    
+  width: 600px;
+
+  h2 {
+    font-size: floor(($font-size-base * 3.0));
+  }
+
   h2, p {
     color: white;
   }
