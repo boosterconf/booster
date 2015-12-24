@@ -16,6 +16,10 @@ $font-family-sans-serif: 'VAG Rounded';
 $headings-font-family: 'Fira Sans';
 $headings-font-weight: 800;
 
+html, body {
+  height: 100%;
+}
+
 @import "bootstrap";
 
 @import "./jquery_notification";

@@ -1,5 +1,6 @@
 .rocket {
-  height: 600px;
+  height: 80%;
+  max-height: 800px;
   position:relative;
   background: -webkit-linear-gradient(#EFF9CF, #BBEBDE); /* For Safari 5.1 to 6.0 */
   background: -o-linear-gradient(#EFF9CF, #BBEBDE); /* For Opera 11.1 to 12.0 */
@@ -10,22 +11,45 @@
   -webkit-flex-direction: column;
   flex-direction: column;
 
+  background: image-url("icons/smoke.svg") bottom center/1000px no-repeat, linear-gradient(#EFF9CF, #BBEBDE);
+
+  @include media-breakpoint-up(md) {
+      background: image-url("icons/smoke.svg") bottom center no-repeat, linear-gradient(#EFF9CF, #BBEBDE);
+  }
+
   .middle-of-image {
-    font-size: 40px;
+    width: 100%;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    font-size: 15px;
     margin: 0 auto;
 
+    @include media-breakpoint-up(md) {
+	bottom: 270px;
+	font-size: 45px;
+    }
+
     .font-page-conference-dates {
-      margin-right: 40px;
+      margin-right: 20px;
     }
 
     .rocket-image {
-      height: 420px;
-      bottom: -110px;
+      width: 45px;
+      height: 350px;
+      bottom: -65px;
       position: relative;
+
+      @include media-breakpoint-up(md) {
+	width: 100px;
+	bottom: -115px;
+      }
     }
 
     .front-page-location {
-      margin-left: 40px;
+      margin-left: 20px;
     }
 
   }
