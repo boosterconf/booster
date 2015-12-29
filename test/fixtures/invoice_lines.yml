@@ -3,9 +3,7 @@
 one:
   text: MyString
   price: 1
-  invoices: 
 
 two:
   text: MyString
   price: 1
-  invoices: 

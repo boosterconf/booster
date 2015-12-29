@@ -19,6 +19,16 @@ class Invoice < ActiveRecord::Base
     status == 'invoiced'
   end
 
+  def pay!
+    self.paid_at = DateTime.now
+    self.status = 'paid'
+  end
+
+  def invoice!
+    self.invoiced_at = DateTime.now
+    self.status = 'invoiced'
+  end
+
   def add_user(user)
     invoice_lines.create!(
         text: "#{user.registration.ticket_description} for #{user.email}",
@@ -29,6 +39,23 @@ class Invoice < ActiveRecord::Base
 
   def total
     invoice_lines.map(&:price).sum
+  end
+
+  def self.create_sponsor_invoice_for(sponsor)
+
+    return if sponsor.invoice
+
+    invoice = create!(
+        email: sponsor.email,
+        our_reference: sponsor.user.try(:full_name),
+        your_reference: sponsor.contact_person_full_name
+    )
+
+    invoice.invoice_lines.create!(
+        sponsor_id: sponsor.id,
+        text: "Partnership package for Booster #{AppConfig.year}",
+        price: AppConfig.sponsor_price_in_nok_before_vat
+    )
   end
 
 end

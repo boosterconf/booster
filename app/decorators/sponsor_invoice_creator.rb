@@ -13,17 +13,7 @@ class SponsorInvoiceCreator < SimpleDelegator
   private
   def create_sponsor_invoice
     if status_was_changed_to_accepted && !@sponsor.invoiced
-      invoice = Invoice.create!(
-          email: @sponsor.email,
-          our_reference: @sponsor.user.full_name,
-          your_reference: @sponsor.contact_person_full_name
-      )
-
-      invoice.invoice_lines.create!(
-          sponsor: @sponsor,
-          text: "Partnership package for Booster #{AppConfig.year}",
-          price: AppConfig.sponsor_price_in_nok_before_vat
-      )
+      Invoice.create_sponsor_invoice_for(@sponsor)
     end
 
     true

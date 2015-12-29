@@ -67,24 +67,15 @@ class InvoicesController < ApplicationController
   end
 
   def invoiced
-    @invoice.invoiced_at = DateTime.now
-    @invoice.status = 'invoiced'
+    @invoice.invoice!
     @invoice.save
-    @invoice.registrations.each do |r|
-      r.invoiced = true
-      r.save
-    end
+
     redirect_to action: :index
   end
 
   def paid
-    @invoice.paid_at = DateTime.now 
-    @invoice.status = 'paid'
+    @invoice.pay!
     @invoice.save
-    @invoice.registrations.each do |r|
-      r.paid_amount = r.ticket_price
-      r.save
-    end
 
     redirect_to action: :index
   end

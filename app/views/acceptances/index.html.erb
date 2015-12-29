@@ -22,6 +22,7 @@
             $.notify("Oops! an error occurred.", "error");
         });
         $(".email").bind("ajax:success", function (evt, data, status, xhr) {
+            $.notify("Email sent", "success");
             $(evt.target).remove();
         });
       }
@@ -35,8 +36,8 @@
   Total number of submitted talks: <%= @talks.size %><br><br>
   <ul>
   <% @types.each_pair { |key, value| %>
-    <li> 
-      <img src="images/<%= key %>.gif" alt="<%= key %>"/> : <%= value %> 
+    <li>
+      <img src="images/<%= key %>.gif" alt="<%= key %>"/> : <%= value %>
       <%= key %>
     </li>
   <% } %>
@@ -87,17 +88,17 @@
           </td>
           <% if talk.pending? %>
               <td>
-                <%= link_to 'Accept', :action => 'accept', :id => talk.id %>   
+                <%= link_to 'Accept', :action => 'accept', :id => talk.id %>
               </td>
               <td>
-                <%= link_to 'Reject', :action => 'refuse', :id => talk.id %> 
+                <%= link_to 'Reject', :action => 'refuse', :id => talk.id %>
               </td>
           <% elsif talk.accepted?%>
             <td>
                 <% if talk.speakers_confirmed? %>
                   <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
-                <% else %> 
-                  <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %> 
+                <% else %>
+                  <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %>
                 <% end %>
             </td>
             <td>
@@ -111,7 +112,9 @@
           <% end %>
           <td>
             <% if !talk.email_sent? && (talk.accepted? || talk.refused?) %>
-              <%= link_to image_tag('mimiglyphs/57.png'), { :action => 'send_mail', :id => talk.id, remote: true }, class: 'email' %>
+              <%= link_to send_mail_acceptance_path(talk.id), remote: true, class: "email" do %>
+                    <i class='fa fa-envelope'></i>
+              <% end %>
             <% end %>
           </td>
         <% end %>

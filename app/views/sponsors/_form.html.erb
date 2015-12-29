@@ -25,8 +25,8 @@
         <label class="control-label">Contact person</label>
 
         <div class="controls">
-          <%= f.text_field :contact_person_first_name, :placeholder => "First name" %>
-          <%= f.text_field :contact_person_last_name, :placeholder => "Last name" %>
+          <%= f.text_field :contact_person_first_name, placeholder: "First name" %>
+          <%= f.text_field :contact_person_last_name, placeholder: "Last name" %>
         </div>
       </div>
 
@@ -43,20 +43,6 @@
 
         <div class="controls">
           <%= f.text_field :email %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :invoiced, :class => "control-label" %>
-        <div class="controls">
-          <%= f.date_select :invoiced, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
-        </div>
-      </div>
-
-      <div class="control-group">
-        <%= f.label :paid, :class => "control-label" %>
-        <div class="controls">
-          <%= f.date_select :paid, :include_blank => true, :default => nil, :start_year => Time.now.year, :end_year => Time.now.year + 1 %>
         </div>
       </div>
 

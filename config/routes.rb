@@ -65,7 +65,7 @@ Booster2013::Application.routes.draw do
     end
   end
 
-  resources :sponsors do
+  resources :sponsors, except: [:show] do
     resources :events
     member do
       post :email
