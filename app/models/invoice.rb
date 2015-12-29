@@ -43,7 +43,7 @@ class Invoice < ActiveRecord::Base
 
   def self.create_sponsor_invoice_for(sponsor)
 
-    return if sponsor.invoice
+    return if sponsor.invoice_line
 
     invoice = create!(
         email: sponsor.email,
