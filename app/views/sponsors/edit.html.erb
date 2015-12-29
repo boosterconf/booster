@@ -1,11 +1,19 @@
-<h1>Editing sponsor</h1>
+<% if @sponsor.invoice_line %>
+    <p>
+      <%= link_to "Go to sponsor invoice", @sponsor.invoice_line.invoice %>
+    </p>
+<% end %>
+
+<% if @sponsor.accepted? %>
+    Sponsor tickets:
+<% end %>
 
 <%= render 'form' %>
 
 <legend>Comments</legend>
 
 <div id="new_comment">
-  <%= form_for [@sponsor, @event], :html => {:class => "form-inline"}, :remote => true do |f| %>
+  <%= form_for [@sponsor, @event], :html => { :class => "form-inline" }, :remote => true do |f| %>
 
       <%= f.text_area :comment, :class => "input-xxlarge", :cols => 30, :rows => 8 %>
       <%= f.submit "Add comment", :class => "btn" %>

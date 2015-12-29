@@ -26,7 +26,6 @@ class SlackNotifier
 
   def self.create_talk_body(name, talk_type, title, abstract, talk_url)
      {
-        :username => @@BOT_NAME,
         :attachments => [{
             :fallback => "*Good news everyone!* #{name} just proposed a #{talk_type} called <#{talk_url}|#{title}>",
             :pretext => "*Good news, everyone!* #{name} just proposed a #{talk_type} called <#{talk_url}|#{title}>",
@@ -70,18 +69,10 @@ class SlackNotifier
     end
   end
 
-  def self.notify_sponsor(sponsor)
-    name = sponsor.name
-    count = Sponsor.where(status: 'accepted').count
-    body = {
-            :username => @@BOT_NAME,
-            :channel => '#sponsors',
-            :text => "*Good news everyone!* #{name} has agreed to be a partner! We now have #{count} partners."
-        }
-    self.post_to_slack(body)
-  end
-
   def self.post_to_slack(body)
+
+    body.merge!({:username => @@BOT_NAME})
+
     url = @@API_URL
     if url
 
@@ -107,6 +98,7 @@ class SlackNotifier
       end
     else
       puts "Warning: Environment variable SLACK_URL is not set in #{Rails.env}. Skipping Slack notification."
+      puts "Body would have been #{body}"
     end
   end
 

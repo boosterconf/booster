@@ -29,10 +29,6 @@
 
 <h1>Partner list</h1>
 
-<div id="notice">
-    <%= render "shared/notice" %>
-</div>
-
 <a href="#" class="toggle">Show/hide statistics</a><br/>
 <div id="stats" class="stats" style="display:none">
   <%= render partial: 'sponsors/stats' %>
@@ -50,17 +46,15 @@
     <th>Name</th>
     <th>Responsible</th>
     <th class="extractor-select">Status</th>
-    <th>Has Email?</th>
-    <th>Invoice?</th>
+    <th>Has email?</th>
     <th>Partner last year</th>
     <th colspan="4"></th>
-    </tr>
   </tr>
   </thead>
   <tbody>
   <% @sponsors.each do |sponsor| %>
-      <tr id='row-id-<%=sponsor.id %>'>
-        <%= render partial: 'sponsors/tablerow', locals: {sponsor: sponsor} %>
+      <tr id='row-id-<%= sponsor.id %>'>
+        <%= render partial: 'sponsors/tablerow', locals: { sponsor: sponsor } %>
       </tr>
 
   <% end %>

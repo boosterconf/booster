@@ -27,18 +27,13 @@ class SponsorsControllerTest < ActionController::TestCase
       assert_redirected_to sponsors_path
     end
 
-    should "be able to show a sponsor" do
-      get :show, :id => sponsors(:one).to_param
-      assert_response :success
-    end
-
     should "be ble to show edit form" do
       get :edit, :id => sponsors(:one).to_param
       assert_response :success
     end
 
     should "be able to update sponsor" do
-      put :update, :id => sponsors(:one).to_param, :sponsor => {}
+      put :update, id: sponsors(:one).to_param, sponsor: {}
       assert_redirected_to sponsors_path
     end
 

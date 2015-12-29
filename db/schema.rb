@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151226185442) do
+ActiveRecord::Schema.define(:version => 20151229203349) do
 
   create_table "bios", :force => true do |t|
     t.integer  "user_id"
@@ -85,6 +85,20 @@ ActiveRecord::Schema.define(:version => 20151226185442) do
     t.datetime "departs_at"
     t.datetime "arrives_at"
   end
+
+  create_table "invoice_lines", :force => true do |t|
+    t.string   "text"
+    t.integer  "price"
+    t.integer  "sponsor_id"
+    t.integer  "registration_id"
+    t.integer  "invoice_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "invoice_lines", ["invoice_id"], :name => "index_invoice_lines_on_invoice_id"
+  add_index "invoice_lines", ["registration_id"], :name => "index_invoice_lines_on_registration_id"
+  add_index "invoice_lines", ["sponsor_id"], :name => "index_invoice_lines_on_sponsor_id"
 
   create_table "invoices", :force => true do |t|
     t.string   "our_reference"
@@ -212,8 +226,6 @@ ActiveRecord::Schema.define(:version => 20151226185442) do
   create_table "sponsors", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.date     "invoiced"
-    t.date     "paid"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
