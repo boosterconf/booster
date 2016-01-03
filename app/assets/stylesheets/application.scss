@@ -3,6 +3,7 @@
 $enable-flex: true;
 
 $gray-lightest: #F2F2F2;
+$gray-lighter: #E5E5E5;
 
 $brand-primary: #BBEBDE;
 $brand-success: #E1F28C;
@@ -20,10 +21,17 @@ html, body {
   height: 100%;
 }
 
+.img-superfluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 @import "bootstrap";
 
 @import "./jquery_notification";
 @import "common";
+@import "quad-list";
 @import "rocket";
 @import "cta-bar";
 @import "main-nav";

@@ -4,7 +4,7 @@ gem 'rails', '3.2.22'
 gem "authlogic", '~> 3.3.0'
 gem 'paperclip', '~>3.0'
 
-gem 'bootstrap', '~> 4.0.0.alpha1'
+gem 'bootstrap', '~> 4.0.0.alpha2'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'

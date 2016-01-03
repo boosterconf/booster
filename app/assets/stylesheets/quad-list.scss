@@ -1,0 +1,15 @@
+.quad-list {
+  display: flex;
+  padding: 0;
+
+  @include media-breakpoint-up(md) {
+    flex-direction: column;
+  }
+
+  & [class^="col-"], .row {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

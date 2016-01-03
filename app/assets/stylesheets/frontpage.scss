@@ -25,7 +25,15 @@
 }
 
 .frontpage-element-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   padding: 35px 30px 20px 30px;
+
+  @include media-breakpoint-up(md) {
+    padding: 60px 120px;
+  }
 }
 
 .frontpage-element-body-headline {
@@ -40,6 +48,7 @@
 }
 
 .imagetron-bg {
+  overflow: hidden;
   background-position: center center;
   background-repeat: no-repeat;
 
@@ -64,7 +73,10 @@
   right: 0;
   transform: translateY(-50%);
   padding: 30px;
-  width: 600px;
+
+  @include media-breakpoint-up(md) {
+    width: 600px;
+  }
 
   h2 {
     font-size: floor(($font-size-base * 3.0));
@@ -80,15 +92,16 @@
   padding-left: 0;
 }
 
-.minor-block {
+.minor-block-body {
   position: relative;
+  background: $gray-lightest;
 
   .lead {
     margin: 0;
   }
 
   &:nth-child(2n-1) {
-    background: $gray-lightest;
+    background: $gray-lighter;
   }
 }
 
