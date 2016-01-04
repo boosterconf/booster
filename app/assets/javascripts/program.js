@@ -38,7 +38,7 @@ function StickyTitles(stickies) {
       thisObj.scroll();
     });
 
-    $(document).on('updateStickies', function (e) {
+    $(document).on('updateStickies', function () {
       thisObj.calculatePositions(stickies);
     });
   };
@@ -74,7 +74,7 @@ function StickyTitles(stickies) {
         }
       }
     });
-  }
+  };
 }
 
 var showDay = function (dayNumber) {
@@ -99,7 +99,7 @@ var showAll = function () {
 };
 
 var hideAllDays = function () {
-  days = ['#day1', '#day2', '#day3'];
+  var days = ['#day1', '#day2', '#day3'];
 
   var i;
   for (i = 0; i < days.length; i++) {
@@ -109,7 +109,7 @@ var hideAllDays = function () {
 };
 
 var deleselectAllDays = function () {
-  days = ['#choose-day1', '#choose-day2', '#choose-day3', '#choose-all'];
+  var days = ['#choose-day1', '#choose-day2', '#choose-day3', '#choose-all'];
 
   var i;
   for (i = 0; i < days.length; i++) {
