@@ -29,14 +29,14 @@ conference is for all IT professionals seeking to learn from each other and from
 
 <header id="top" role="banner">
   <nav class="navbar main-nav" role="navigation">
-    <button class="navbar-toggler hidden-sm-up pull-right" type="button" data-toggle="collapse" data-target="#main-nav-collapse">
+    <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#main-nav-collapse">
       &#9776;
     </button>
 
     <a class="navbar-brand" href="/"><%= image_tag "icons/logo.svg", height: 40 %></a>
 
     <div id="main-nav-collapse" class="collapse navbar-toggleable-xs">
-      <ul class="nav navbar-nav pull-right">
+      <ul class="nav navbar-nav pull-xs-right">
         <% if AppConfig.program_released %>
         <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
         <% end %>
