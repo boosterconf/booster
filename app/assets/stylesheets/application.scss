@@ -51,3 +51,8 @@ article {
     background: none;
   }
 }
+
+#main-content > article > * {
+  max-width: 900px;
+  margin: auto;
+}
