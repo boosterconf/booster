@@ -37,3 +37,17 @@ html, body {
 @import "main-nav";
 @import "sponsors";
 @import "frontpage";
+@import "main-header";
+
+article {
+  p, h1, h2, h3, h4, h5, h6 {
+    padding: $spacer-x $spacer-y;
+  }
+}
+
+.info-index {
+  #main-header {
+    position: absolute;
+    background: none;
+  }
+}

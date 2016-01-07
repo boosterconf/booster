@@ -25,10 +25,10 @@ conference is for all IT professionals seeking to learn from each other and from
 
 </head>
 
-<body>
+<body class="<%= "#{controller.controller_name}-#{controller.action_name}" %>">
 
-<header id="top" role="banner">
-  <nav class="navbar main-nav" role="navigation">
+<header id="main-header" role="banner">
+  <nav class="navbar main-nav p-l-1" role="navigation">
     <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#main-nav-collapse">
       &#9776;
     </button>
@@ -68,19 +68,13 @@ conference is for all IT professionals seeking to learn from each other and from
     <!--/.nav-collapse -->
   </nav>
 
+  <p class="p-l-1">9th - 11th March 2016 - Bergen, Norway</p>
+
 </header>
 
-<div class="rocket">
+<%= yield (:pre_content) %>
 
-  <div class="middle-of-image">
-    <span class="font-page-conference-dates">9th - 11th March</span>
-    <%= image_tag "icons/rocket.svg", class: "rocket-image" %>
-    <span class="front-page-location">Bergen, Norway</span>
-  </div>
-
-</div>
-
-<div class="inner" role="main">
+<div id="main-content" class="inner" role="main">
   <%= yield %>
 </div>
 
