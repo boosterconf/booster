@@ -57,35 +57,44 @@
 </div>
 
 <div class="quad-list container-fluid">
-  <div>
-    <% @speakers.+(@speakers).each do |speaker| %>
+  <div class="quad-list-big hidden-md-down">
     <div class="row">
-      <div class="col-xs-12 col-md-3">
+      <% @speakers.+(@speakers).each do |speaker| %>
+      <div class="col-xs-3">
 	<%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
       </div>
+      <% end %>
     </div>
-    <% end %>
-  </div>
 
-  <div class="row col-xs-3 col-md-12">
-    <% @speakers.+(@speakers).each do |speaker| %>
-    <div class="col-xs-12 col-md-3">
-      <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
-    </div>
-    <% end %>
-  </div>
+    <div class="row">
+      <% @speakers.+(@speakers).each do |speaker| %>
+      <div class="col-xs-3 minor-block-body">
+	<div class="minor-block-body-inner">
+          <h2><%= speaker.full_name %></h2>
 
-  <div class="row col-xs-9 col-md-12">
-    <% @speakers.+(@speakers).each do |speaker| %>
-    <div class="col-xs-9 col-md-3 minor-block-body">
-      <div class="minor-block-body-inner">
-        <h2><%= speaker.full_name %></h2>
-
-        <p class="lead"><%= speaker.bio.title %></p>
+          <p class="lead"><%= speaker.bio.title %></p>
+	</div>
       </div>
+      <% end %>
     </div>
-    <% end %>
+  </div>
 
+  <div class="quad-list-small hidden-lg-up">
+    <div class="row">
+      <% @speakers.+(@speakers).each do |speaker| %>
+      <div class="col-xs-3">
+	<%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+      </div>
+
+      <div class="col-xs-9 minor-block-body">
+	<div class="minor-block-body-inner">
+          <h2><%= speaker.full_name %></h2>
+
+          <p class="lead"><%= speaker.bio.title %></p>
+	</div>
+      </div>
+      <% end %>
+    </div>
   </div>
 </div>
 
