@@ -17,16 +17,6 @@ $font-family-sans-serif: 'VAG Rounded';
 $headings-font-family: 'Fira Sans';
 $headings-font-weight: 800;
 
-html, body {
-  height: 100%;
-}
-
-.img-superfluid {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 @import "bootstrap";
 
 @import "./jquery_notification";
@@ -38,6 +28,22 @@ html, body {
 @import "sponsors";
 @import "frontpage";
 @import "main-header";
+
+html, body {
+  height: 100%;
+}
+
+p, article {
+  a {
+    text-decoration: underline;
+  }
+}
+
+.img-superfluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 article {
   p, h1, h2, h3, h4, h5, h6 {
