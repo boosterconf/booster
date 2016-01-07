@@ -2,13 +2,8 @@
   height: 80%;
   max-height: 400px;
   position:relative;
-  background: -webkit-linear-gradient(#EFF9CF, #BBEBDE); /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(#EFF9CF, #BBEBDE); /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(#EFF9CF, #BBEBDE); /* For Firefox 3.6 to 15 */
   background: linear-gradient(#EFF9CF, #BBEBDE); /* Standard syntax */
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
   flex-direction: column;
 
   background: image-url("icons/smoke.svg") bottom center/1000px no-repeat, linear-gradient(#EFF9CF, #BBEBDE);
