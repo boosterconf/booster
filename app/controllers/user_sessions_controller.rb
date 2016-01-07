@@ -11,6 +11,7 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       redirect_back_or_default root_url
     else
+      flash[:error] = 'Username or password was not recognized.' if @user_session.errors.any?
       render :action => :new
     end
   end
