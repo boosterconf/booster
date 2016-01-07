@@ -1,9 +1,10 @@
 <article class="inner group">
-  <h2>
-    Our speakers
-    <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align"}) %>
-  </h2>
-
+  <div class="header-join">
+    <h2>
+      Our speakers
+    </h2>
+  </div>
+  
   <% for speaker in @speakers.shuffle do %>
   <div class="speaker">
     <div class="content">
