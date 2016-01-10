@@ -1,0 +1,22 @@
+<div class="talks">
+<h2>Short talks</h2>
+
+<% @talks.each do |talk| %>
+    <h3>
+      <%= link_to talk.title, talk %>
+      <%= image_tag("icon_slides.gif") if admin? && talk.slide.file? %>
+    </h3>
+
+    <p class="muted">
+      <%=  talk.talk_type.name_and_duration %> - Presented by <%= talk.speaker_name %>.
+    </p>
+
+    <p>
+      <% if contains_html talk.description %>
+          <%= sanitize talk.description.strip %>
+      <% else %>
+          <%= simple_format h(talk.description.strip) %>
+      <% end %>
+    </p>
+<% end %>
+</div>
