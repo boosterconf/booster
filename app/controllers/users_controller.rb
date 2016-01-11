@@ -201,13 +201,17 @@ class UsersController < ApplicationController
 
     emails = params[:emails]
 
+    if emails.empty?
+      flash[:error] = 'No emails entered'
+      return render :action => 'group_registration'
+    end
+
     users = tokenize(emails).map do |email|
       user = User.create_unfinished(email, Registration.current_normal_ticket_type)
       user.company = params[:company]
       user.registration.invoice = @invoice
       user
     end
-
 
     existing_users, new_users = users.partition { |u| user_already_exists(u.email) }
 

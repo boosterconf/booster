@@ -56,6 +56,10 @@ article {
   }
 }
 
+article .btn-group > button {
+  outline: 0 !important;
+}
+
 .info-index {
   #main-header {
     position: absolute;
