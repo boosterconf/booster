@@ -178,7 +178,7 @@ class UsersController < ApplicationController
   def create_skeleton
     email = params[:user][:email]
 
-    if email.present? && user_already_exists(email)
+    if email.present? && User.find_by_email(email)
       flash[:error] = "This email already has a user"
       render action: 'new_skeleton'
     else
