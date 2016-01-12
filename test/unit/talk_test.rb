@@ -16,7 +16,6 @@ class TalkTest < ActiveSupport::TestCase
     not_refused = Talk.all_pending_and_approved
 
     refute not_refused.include?(refused)
-    assert not_refused.size > 0
   end
 
   context 'changing acceptance statuses' do
