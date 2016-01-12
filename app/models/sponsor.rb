@@ -8,7 +8,15 @@ class Sponsor < ActiveRecord::Base
                   :email, :last_contacted_at, :location, :name, :status, :user_id,
                   :was_sponsor_last_year, :events, :logo, :publish_logo, :website
 
-  has_attached_file :logo, PAPERCLIP_CONFIG.merge({styles: {:normal => '150x'}, :default_style => :normal})
+  has_attached_file :logo, PAPERCLIP_CONFIG.merge({
+                                                      styles: {
+                                                          :normal => '150x'
+                                                      },
+                                                      :default_style => :normal,
+                                                      convert_options: {
+                                                          s3_headers: { 'Cache-Control' => 'max-age=2592000', 'Expires' => 30.days.from_now.httpdate }
+                                                      }
+                                                  })
   validates_attachment_content_type :logo,
                                     :content_type =>
                                         %w(image/jpg image/jpeg image/pjpeg image/gif image/png image/x-png),
