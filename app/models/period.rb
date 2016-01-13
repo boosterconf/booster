@@ -1,6 +1,6 @@
 class Period < ActiveRecord::Base
 
-  attr_accessible :day, :start_time, :end_time
+  attr_accessible :day, :start_time, :end_time, :period_type
 
   has_many :slots, order: 'room_id'
 
