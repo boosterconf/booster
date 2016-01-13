@@ -6,7 +6,7 @@ class Period < ActiveRecord::Base
 
   validates_uniqueness_of :start_time, scope: [:end_time, :day]
 
-  TYPES = %w(workshop lightning keynote break)
+  TYPES = %w(workshop lightning keynote break short_talk)
 
   def to_s
     day_of_the_week + ' ' + start_and_end_time
