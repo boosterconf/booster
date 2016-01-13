@@ -89,6 +89,6 @@ class InvoicesController < ApplicationController
     @users = Registration.includes(:invoice_line)
                  .where(invoice_lines: { registration_id: nil })
                  .where("ticket_type_old IN (?)", Registration::PAYING_TICKET_TYPES)
-                 .map(&:user).map { |u| ["#{u.name_or_email} - #{u.company}", u.id]}
+                 .map(&:user).reject(&:nil?).map { |u| ["#{u.name_or_email} - #{u.company}", u.id]}
   end
 end
