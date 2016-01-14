@@ -2,12 +2,9 @@
   <div class="row-fluid">
     <div class="hello span12">
       <div class="hello-inner">
-        <h2>Booster 2016, 9-11 March</h2>
-
+        <h2>Booster <%= Dates::CONFERENCE_YEAR %> kicks off March 9-11!</h2>
 
         <div class="cfp">
-          <p><b>Booster <%= Dates::CONFERENCE_YEAR %> kicks off March 9-11!</b></p>
-
           <p>
             If you register now, you get our early bird price - only NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>!
             Better hurry though, the bird leaves <%= AppConfig.early_bird_ends.strftime('%b %d') %>.
