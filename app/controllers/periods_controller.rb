@@ -30,7 +30,7 @@ class PeriodsController < ApplicationController
     @period = Period.find(params[:id])
 
       if @period.update_attributes(params[:period])
-        redirect_to(@period, notice: 'Period was successfully updated.')
+        redirect_to(periods_url, notice: 'Period was successfully updated.')
       else
         render action: :edit
     end
