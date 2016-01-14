@@ -5,7 +5,7 @@ development:
   lightning_registration_open: false
   program_released: false
   speakers_released: false
-  early_bird_ends: 2016-02-09 23:59:59 +1
+  early_bird_ends: 2016-02-01 23:59:59 +1
   sponsor_price_in_nok_before_vat: 28000
 
 test:
@@ -14,7 +14,7 @@ test:
   tutorial_registration_open: false
   lightning_registration_open: false
   program_released: true
-  early_bird_ends: 2016-02-09 23:59:59 +1
+  early_bird_ends: 2016-02-01 23:59:59 +1
   sponsor_price_in_nok_before_vat: 28000
 
 staging:
@@ -24,7 +24,7 @@ staging:
   lightning_registration_open: false
   program_released: false
   speakers_released: false
-  early_bird_ends: 2016-02-09 23:59:59 +1
+  early_bird_ends: 2016-02-01 23:59:59 +1
   sponsor_price_in_nok_before_vat: 28000
 
 production:
@@ -34,5 +34,5 @@ production:
   lightning_registration_open: false
   program_released: false
   speakers_released: false
-  early_bird_ends: 2016-02-09 23:59:59 +1
+  early_bird_ends: 2016-02-01 23:59:59 +1
   sponsor_price_in_nok_before_vat: 28000
