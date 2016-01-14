@@ -6,7 +6,12 @@
 
 
         <div class="cfp">
-          <h3>Registration for <%= Dates::CONFERENCE_YEAR %> is open!</h3>
+          <p><b>Booster <%= Dates::CONFERENCE_YEAR %> kicks off March 9-11!</b></p>
+
+          <p>
+            If you register now, you get our early bird price - only NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>!
+            Better hurry though, the bird leaves <%= AppConfig.early_bird_ends.strftime('%b %d') %>.
+          </p>
 
           <p>
             <%= link_to 'Register a person!', new_user_url, class: 'btn btn-primary btn-large' %>
