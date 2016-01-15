@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
   def index
     talks = Talk.all_pending_and_approved
 
-    @workshops, @lightning_talks = talks.partition {|t| t.is_tutorial? }
+    @workshops, @lightning_talks = talks.partition {|t| t.is_workshop? }
 
     respond_with @workshops
   end

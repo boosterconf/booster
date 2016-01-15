@@ -10,7 +10,7 @@ class TalksController < ApplicationController
   def index
     @talks = Talk.all_pending_and_approved
     @lightning_talks = @talks.select(&:is_lightning_talk?)
-    @workshops = @talks.select(&:is_tutorial?)
+    @workshops = @talks.select(&:is_workshop?)
     @short_talks = @talks.select(&:is_short_talk?)
   end
 
@@ -43,7 +43,7 @@ class TalksController < ApplicationController
     @user = User.new
     @types = TalkType.all
 
-    render action: @talk.is_tutorial? ? 'edit_tutorial' : 'edit_lightning_talk'
+    render action: @talk.is_workshop? ? 'edit_tutorial' : 'edit_lightning_talk'
   end
 
   def assign
@@ -135,7 +135,7 @@ class TalksController < ApplicationController
       flash[:notice] = 'Abstract updated.'
       redirect_to(@talk)
     else
-      render action: @talk.is_tutorial? ? 'edit_tutorial' : 'edit_lightning_talk'
+      render action: @talk.is_workshop? ? 'edit_tutorial' : 'edit_lightning_talk'
     end
   end
 

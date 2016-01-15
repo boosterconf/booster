@@ -133,7 +133,7 @@ class User < ActiveRecord::Base
   end
 
   def has_accepted_or_pending_tutorial?
-    tutorials = self.talks.find_all { |talk| talk.is_tutorial? && (talk.accepted? || talk.pending?) }
+    tutorials = self.talks.find_all { |talk| talk.is_workshop? && (talk.accepted? || talk.pending?) }
     !tutorials.empty?
   end
 
@@ -143,7 +143,7 @@ class User < ActiveRecord::Base
   end
 
   def has_accepted_tutorial?
-    talks = self.talks.find_all { |talk| talk.is_tutorial? && talk.accepted? }
+    talks = self.talks.find_all { |talk| talk.is_workshop? && talk.accepted? }
     !talks.empty?
   end
 
@@ -153,8 +153,8 @@ class User < ActiveRecord::Base
   end
 
   def has_all_tutorials_refused?
-    refused_tutorials = self.talks.find_all { |talk| talk.refused? && talk.is_tutorial? }
-    all_tutorials = self.talks.find_all { |talk| talk.is_tutorial? }
+    refused_tutorials = self.talks.find_all { |talk| talk.refused? && talk.is_workshop? }
+    all_tutorials = self.talks.find_all { |talk| talk.is_workshop? }
     all_tutorials.size == refused_tutorials.size
   end
 
