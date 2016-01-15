@@ -13,7 +13,7 @@
         <th></th>
         <% @rooms.each do |room| %>
             <th style="border: 1px solid black; padding: 5px">
-              <%= room.name %>
+              <%= room.name %> <small>(<%= room.capacity %>)<small>
             </th>
         <% end %>
       </tr>
@@ -31,11 +31,11 @@
                      slot = period.slot_in(room)
                      if talk
                   %>
-                      <%= link_to talk.title, talk %> <br />
-                      <%= link_to '[Remove]', slot, confirm: 'Are you sure?', method: :delete, class: 'action' %>
+                      <%= link_to talk.title, talk %> <small>(cap: <%= talk.max_participants %>) </small><br />
+                      <small><%= link_to '[Remove]', slot, confirm: 'Are you sure?', method: :delete, class: 'action' %></small>
                   <% else %>
                       None <br />
-                      <%= link_to '[Assign]', new_slot_url(slot: { room_id: room.id, period_id: period.id }), class: 'action' %>
+                      <small><%= link_to '[Assign]', new_slot_url(slot: { room_id: room.id, period_id: period.id }), class: 'action' %></small>
                   <% end %>
                 </td>
             <% end %>
