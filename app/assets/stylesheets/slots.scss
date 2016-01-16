@@ -1,0 +1,39 @@
+.program-editor {
+    border: 1px solid black;
+    padding: 5px;
+    table-layout: fixed;
+}
+
+.program-editor td, .program-editor th {
+    width: 11.1%;
+    border: 1px solid black;
+    padding: 5px
+}
+
+.acceptance-status {
+    position: relative;
+}
+
+@mixin corner-triangle($color) {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  display: block;
+  border-left: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  border-top: 20px solid $color;
+}
+
+.accepted_and_confirmed:after {
+  @include corner-triangle(green)
+}
+.accepted:after {
+    @include corner-triangle(yellow)
+}
+
+.could_not_attend:after {
+  @include corner-triangle(red)
+}
