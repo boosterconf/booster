@@ -59,4 +59,23 @@
     width: 130%;
   }
 
+  .rocket-title {
+    width: 220px;
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-weight: normal;
+    font-family: VAG Rounded;
+    font-style: normal;
+    font-size: 18px;
+
+    @include media-breakpoint-up(md) {
+      bottom: 30px;
+      width: 500px;
+      font-size: 40px;
+    }
+  }
+
 }
