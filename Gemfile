@@ -11,6 +11,7 @@ source 'https://rails-assets.org' do
 end
 
 gem 'tinymce-rails'
+gem 'selectize-rails'
 gem "font-awesome-rails"
 gem 'aws-sdk', '~> 1.3.4'
 
@@ -29,6 +30,8 @@ gem 'rest-client'
 
 gem "paranoia", "~> 1.0"
 gem 'test-unit'
+
+gem 'virtus'
 
 group :production do
   gem 'heroku-deflater'
@@ -56,5 +59,5 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
+  gem 'sass-rails', '~> 3.2.3'
 end

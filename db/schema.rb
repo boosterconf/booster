@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150209233348) do
+ActiveRecord::Schema.define(:version => 20151229203349) do
 
   create_table "bios", :force => true do |t|
     t.integer  "user_id"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.datetime "picture_updated_at"
   end
 
+  add_index "bios", ["user_id"], :name => "index_bios_on_user_id"
+
   create_table "comments", :force => true do |t|
     t.integer  "talk_id"
     t.integer  "user_id"
@@ -38,6 +40,9 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["talk_id"], :name => "index_comments_on_talk_id"
+  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+
   create_table "events", :force => true do |t|
     t.text     "comment"
     t.integer  "sponsor_id"
@@ -45,6 +50,9 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "events", ["sponsor_id"], :name => "index_events_on_sponsor_id"
+  add_index "events", ["user_id"], :name => "index_events_on_user_id"
 
   create_table "feedback_comments", :force => true do |t|
     t.integer "talk_id"
@@ -78,6 +86,20 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.datetime "arrives_at"
   end
 
+  create_table "invoice_lines", :force => true do |t|
+    t.string   "text"
+    t.integer  "price"
+    t.integer  "sponsor_id"
+    t.integer  "registration_id"
+    t.integer  "invoice_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "invoice_lines", ["invoice_id"], :name => "index_invoice_lines_on_invoice_id"
+  add_index "invoice_lines", ["registration_id"], :name => "index_invoice_lines_on_registration_id"
+  add_index "invoice_lines", ["sponsor_id"], :name => "index_invoice_lines_on_sponsor_id"
+
   create_table "invoices", :force => true do |t|
     t.string   "our_reference"
     t.string   "your_reference"
@@ -92,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.string   "status",         :default => "not_invoiced"
     t.datetime "invoiced_at"
     t.datetime "paid_at"
+    t.string   "text"
   end
 
   create_table "participants", :force => true do |t|
@@ -112,6 +135,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.string   "currency"
     t.string   "registered_by"
   end
+
+  add_index "payment_notifications", ["registration_id"], :name => "index_payment_notifications_on_registration_id"
 
   create_table "periods", :force => true do |t|
     t.time     "start_time"
@@ -153,6 +178,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
   end
 
   add_index "registrations", ["deleted_at"], :name => "index_registrations_on_deleted_at"
+  add_index "registrations", ["invoice_id"], :name => "index_registrations_on_invoice_id"
+  add_index "registrations", ["user_id"], :name => "index_registrations_on_user_id"
 
   create_table "reviews", :force => true do |t|
     t.integer  "talk_id"
@@ -162,6 +189,9 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "reviews", ["reviewer_id"], :name => "index_reviews_on_reviewer_id"
+  add_index "reviews", ["talk_id"], :name => "index_reviews_on_talk_id"
 
   create_table "rooms", :force => true do |t|
     t.string   "name"
@@ -178,6 +208,10 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.integer  "room_id"
   end
 
+  add_index "slots", ["period_id"], :name => "index_slots_on_period_id"
+  add_index "slots", ["room_id"], :name => "index_slots_on_room_id"
+  add_index "slots", ["talk_id"], :name => "index_slots_on_talk_id"
+
   create_table "speakers", :force => true do |t|
     t.integer  "talk_id"
     t.integer  "user_id"
@@ -185,12 +219,13 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
   end
 
   add_index "speakers", ["deleted_at"], :name => "index_speakers_on_deleted_at"
+  add_index "speakers", ["talk_id", "user_id"], :name => "index_speakers_on_talk_id_and_user_id"
+  add_index "speakers", ["talk_id"], :name => "index_speakers_on_talk_id"
+  add_index "speakers", ["user_id"], :name => "index_speakers_on_user_id"
 
   create_table "sponsors", :force => true do |t|
     t.string   "name"
     t.string   "email"
-    t.date     "invoiced"
-    t.date     "paid"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -209,6 +244,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.string   "website"
   end
 
+  add_index "sponsors", ["user_id"], :name => "index_sponsors_on_user_id"
+
   create_table "tags", :force => true do |t|
     t.string   "title"
     t.datetime "created_at"
@@ -219,6 +256,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.integer "talk_id"
     t.integer "tag_id"
   end
+
+  add_index "tags_talks", ["tag_id", "talk_id"], :name => "index_tags_talks_on_tag_id_and_talk_id"
 
   create_table "talk_feedbacks", :force => true do |t|
     t.integer  "talk_id"
@@ -284,6 +323,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
   end
 
   add_index "talks", ["deleted_at"], :name => "index_talks_on_deleted_at"
+  add_index "talks", ["id", "type"], :name => "index_talks_on_id_and_type"
+  add_index "talks", ["talk_type_id"], :name => "index_talks_on_talk_type_id"
 
   create_table "ticket_types", :force => true do |t|
     t.string   "type"
@@ -302,6 +343,8 @@ ActiveRecord::Schema.define(:version => 20150209233348) do
     t.datetime "updated_at", :null => false
     t.integer  "talk_id"
   end
+
+  add_index "timeslots", ["talk_id"], :name => "index_timeslots_on_talk_id"
 
   create_table "topics", :force => true do |t|
     t.string   "title"

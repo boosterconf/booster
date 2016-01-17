@@ -24,3 +24,5 @@ local_env.yml
 public/system
 
 latest.dump
+.floo
+.flooignore

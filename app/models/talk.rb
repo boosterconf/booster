@@ -107,7 +107,7 @@ class Talk < ActiveRecord::Base
   end
 =end
 
-  def update_speakers(current_user)
+  def update_speakers!(current_user)
     self.users.each do |speaker|
       speaker.update_ticket_type!(current_user)
     end
@@ -147,10 +147,21 @@ class Talk < ActiveRecord::Base
     self.users.any?(&:invited)
   end
 
+  def status
+    if invited?
+      "invited"
+    elsif speakers_confirmed?
+      "accepted_and_confirmed"
+    else
+      acceptance_status
+    end
+  end
+
   def self.all_pending_and_approved
-    all(order: 'acceptance_status, id desc', include: :reviews).select {
-        |t| !t.refused? && !t.users.first.nil? && t.year == AppConfig.year
-    }
+    self.includes(:reviews, :talk_type)
+        .where(year: AppConfig.year)
+        .where('acceptance_status != ?', 'refused')
+        .order('acceptance_status, id desc')
   end
 
   def self.all_accepted
@@ -183,19 +194,23 @@ class Talk < ActiveRecord::Base
   end
 
   def self.count_accepted
-    self.count(:conditions => "acceptance_status = 'accepted'")
+    self.where(acceptance_status: 'accepted').count
+  end
+
+  def self.count_accepted_and_confirmed
+    self.where(acceptance_status: 'accepted', speakers_confirmed: true).count
   end
 
   def self.could_not_attend
-    self.count(:conditions => "acceptance_status = 'could_not_attend'")
+    self.where(acceptance_status: 'could_not_attend').count
   end
 
   def self.count_refused
-    self.count(:conditions => "acceptance_status = 'refused'")
+    self.where(acceptance_status: 'refused').count
   end
 
   def self.count_pending
-    self.count(:conditions => "acceptance_status = 'pending'")
+    self.where(acceptance_status: 'pending').count
   end
 
   def to_s

@@ -1,20 +1,21 @@
 class Sponsor < ActiveRecord::Base
 
   belongs_to :user
-  has_many :events, :dependent => :destroy
+  has_many :events, dependent: :destroy
+  has_one :invoice_line
 
   attr_accessible :comment, :contact_person_first_name, :contact_person_last_name, :contact_person_phone_number,
-                  :email, :invoiced, :last_contacted_at, :location, :name, :paid, :status, :user_id,
+                  :email, :last_contacted_at, :location, :name, :status, :user_id,
                   :was_sponsor_last_year, :events, :logo, :publish_logo, :website
 
   has_attached_file :logo, PAPERCLIP_CONFIG.merge({
                                                       styles: {
-                                                          normal: {
-                                                              geometry: '150x',
-                                                              convert_options: '-colorspace Gray'
-                                                          }
+                                                          :normal => '150x'
                                                       },
-                                                      default_style: :normal
+                                                      :default_style => :normal,
+                                                      convert_options: {
+                                                          s3_headers: { 'Cache-Control' => 'max-age=2592000', 'Expires' => 30.days.from_now.httpdate }
+                                                      }
                                                   })
   validates_attachment_content_type :logo,
                                     :content_type =>
@@ -23,7 +24,7 @@ class Sponsor < ActiveRecord::Base
 
   STATES = {
       'suggested' => 'Suggested',
-      'dialogue' => 'In Dialogue',
+      'dialogue' => 'In dialogue',
       'contacted' => 'Contacted',
       'reminded' => 'Reminded',
       'declined' => 'Declined',
@@ -34,13 +35,7 @@ class Sponsor < ActiveRecord::Base
   def status_text
     state = STATES[status]
 
-    if self.accepted?
-      if paid != nil
-        state = 'Paid'
-      elsif invoiced != nil
-        state = 'Invoiced, not paid'
-      end
-    elsif state == 'Suggested'
+    if state == 'Suggested'
       if self.email.present?
         state += ' (with email)'
       else
@@ -75,22 +70,12 @@ class Sponsor < ActiveRecord::Base
     self.status == 'accepted'
   end
 
-  def invoice_status
-    if self.accepted?
-      if paid != nil
-        'Paid'
-      elsif invoiced != nil
-        'Invoiced'
-      else
-        'Not invoiced'
-      end
-    else
-      '-'
-    end
-  end
-
   def should_show_logo?
     self.publish_logo && self.logo.exists? && self.accepted?
+  end
+
+  def contact_person_full_name
+    contact_person_first_name + " " + contact_person_last_name
   end
 
   def <=>(other)

@@ -8,7 +8,7 @@
 
     <h2><%= day.strftime('%a') %></h2>
 
-    <table class="program-editor">
+    <table class="program-editor table table-striped">
       <tr>
         <th></th>
         <% @rooms.each do |room| %>
@@ -20,7 +20,8 @@
       <% periods_for_day.each do |period| %>
           <tr>
             <th>
-              <%= period.start_time.strftime('%H:%M') %> - <%= period.end_time.strftime('%H:%M') %>
+              <%= period.start_and_end_time %> <br>
+              <small><%= period.period_type.humanize %></small>
             </th>
 
             <% @rooms.each do |room| %>

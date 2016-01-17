@@ -1,0 +1,33 @@
+<h2>Thank you for registering!</h2>
+
+<p>
+  We've now registered <%= @group_registration.registrations.count %> tickets for you. They have been assigned
+  to the following
+  email addresses:
+</p>
+
+<ul>
+  <% @group_registration.registrations.each do |registration| %>
+      <li><%= registration.user.email %> (<%= registration.ticket_description %> - NOK <%= registration.ticket_price %>
+        )
+      </li>
+  <% end %>
+</ul>
+<p><strong>This invoice has a total of NOK <%= @group_registration.invoice.total %> (excluding VAT).</strong></p>
+
+<p>If not already registered, they will each have received an email with instructions for completing the
+  registrations.</p>
+
+<p>We have also prepared an invoice that will be sent soon
+  by <%= @group_registration.invoice.email.present? ? "email" : "snail mail" %>
+  to the address
+  <b><%= @group_registration.invoice.email.present? ? @group_registration.invoice.email : @group_registration.invoice.adress %></b>.
+</p>
+<p>
+  <% if @group_registration.invoice.your_reference.present? %>
+      Your reference is "<%= @group_registration.invoice.your_reference %>".
+  <% end %>
+  <% if @group_registration.invoice.text.present? %>
+      The invoice text is "<%= @group_registration.invoice.text %>".
+  <% end %>
+</p>

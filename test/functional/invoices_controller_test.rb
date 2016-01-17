@@ -13,11 +13,6 @@ class InvoicesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:invoices)
   end
 
-  test "should get new" do
-    get :new
-		assert_redirected_to edit_invoice_path(assigns(:invoice))
-  end
-
   test "should create invoice" do
     assert_difference('Invoice.count') do
       post :create, invoice: create_invoice_params
@@ -42,7 +37,7 @@ class InvoicesControllerTest < ActionController::TestCase
   end
 
   def create_invoice_params
-    { "email" => "a@b.no"}
+    { "email" => "a@b.no", "zip" => "1234" }
   end
 
 end

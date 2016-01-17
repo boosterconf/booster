@@ -38,6 +38,14 @@ class ApplicationController < ActionController::Base
     admin_or_reviewer? || talk.is_presented_by?(current_user)
   end
 
+  def require_admin_or_talk_owner
+    talk = Talk.find(params[:id])
+
+    unless admin? || (current_user && talk.is_presented_by?(current_user))
+      access_denied
+    end
+  end
+
   def admin_or_reviewer?
     return false unless current_user
 

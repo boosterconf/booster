@@ -14,6 +14,8 @@ class Registration < ActiveRecord::Base
       'reviewer' => 'Reviewer ticket for Booster'
   }
 
+  PAYING_TICKET_TYPES = %w(early_bird full_price lightning student reviewer)
+
   acts_as_paranoid
 
   attr_accessible :comments, :includes_dinner, :description,
@@ -25,9 +27,7 @@ class Registration < ActiveRecord::Base
   belongs_to :user
   has_one :payment_notification
   belongs_to :invoice
-
-  #validates_presence_of :invoice_address, :if => Proc.new { |reg| reg.manual_payment }
-  #validates_presence_of :user 
+  has_one :invoice_line
 
   before_create :create_or_update_payment_info
   before_create :set_default_values
@@ -107,6 +107,10 @@ class Registration < ActiveRecord::Base
 
   def normal_ticket?
     %w(early_bird full_price).include? ticket_type_old
+  end
+
+  def has_paying_ticket?
+    PAYING_TICKET_TYPES.include?(ticket_type_old)
   end
 
   def paid?

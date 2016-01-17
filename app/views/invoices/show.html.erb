@@ -7,21 +7,17 @@
 <p><%= @invoice.delivery_method == 'email' ? @invoice.email : @invoice.adress %></p>
 <legend>Total (ex. MVA):</legend><p><%= @invoice.total %></p>
 
-<legend>Registrations (<%= @invoice.registrations.size %>):</legend>
+<legend>Lines (<%= @invoice.invoice_lines.size %>):</legend>
 
 <table class="table table-striped">
   <tr>
-  	<th>Name</th>
-  	<th>Email</th>
-  	<th>Ticket type</th>
+  	<th>Text</th>
   	<th>Price</th>
   </tr>
-  <% @invoice.registrations.each do |registration| %>
+  <% @invoice.invoice_lines.each do |line| %>
   	<tr>
-  		<td><%= registration.user.full_name %></td>
-  		<td><%= registration.user.email %></td>
-  		<td><%= registration.ticket_type_old %></td>
-  		<td><%= registration.price %></td>
+  		<td><%= line.text %></td>
+  		<td><%= line.price %></td>
   	</tr>
   <% end %>
 </table>

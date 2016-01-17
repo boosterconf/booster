@@ -1,12 +1,12 @@
 class Period < ActiveRecord::Base
 
-  attr_accessible :day, :start_time, :end_time
+  attr_accessible :day, :start_time, :end_time, :period_type
 
   has_many :slots, order: 'room_id'
 
   validates_uniqueness_of :start_time, scope: [:end_time, :day]
 
-  TYPES = %w(workshop lightning keynote break)
+  TYPES = %w(workshop lightning keynote break short_talk)
 
   def to_s
     day_of_the_week + ' ' + start_and_end_time

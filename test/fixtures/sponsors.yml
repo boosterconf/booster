@@ -3,13 +3,9 @@
 one:
   name: MyString
   email: MyString
-  invoiced: 2011-09-19
-  paid: 2011-09-19
   user: god
 
 two:
   name: MyString
   email: MyString
-  invoiced: 2011-09-19
-  paid: 2011-09-19
-  user: 
+  user:

@@ -1,0 +1,33 @@
+<%= form_for(@period) do |f| %>
+    <% if @period.errors %>
+        <ul>
+          <% @period.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+          <% end %>
+        </ul>
+    <% end %>
+
+    <p>
+      <%= f.label :start_time %><br />
+      <%= f.time_select :start_time, {:minute_step => 15} %>
+    </p>
+
+    <p>
+      <%= f.label :end_time %><br />
+      <%= f.time_select :end_time, {:minute_step => 15} %>
+    </p>
+
+    <p>
+      <%= f.label :day %><br />
+      <%= f.date_select :day %>
+    </p>
+
+    <p>
+      <%= f.label :period_type %><br />
+      <%= f.select :period_type, Period::TYPES %>
+    </p>
+
+    <p>
+      <%= f.submit @period.new_record? ? 'Create' : 'Update' %>
+    </p>
+<% end %>

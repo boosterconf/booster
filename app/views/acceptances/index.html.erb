@@ -7,7 +7,6 @@
 
         });
 
-
         $("#acceptances").sieve({
             itemSelector: 'tbody tr',
             textSelector: 'td:not(.no-filter), td select option[selected]',
@@ -22,22 +21,21 @@
             $.notify("Oops! an error occurred.", "error");
         });
         $(".email").bind("ajax:success", function (evt, data, status, xhr) {
+            $.notify("Email sent", "success");
             $(evt.target).remove();
         });
       }
     );
 </script>
 <h1>Approval of talk</h1>
-<div id="notice">
-    <%= render "shared/notice" %>
-</div>
+
 <p>
   Total number of submitted talks: <%= @talks.size %><br><br>
   <ul>
-  <% @types.each_pair { |key, value| %>
-    <li> 
-      <img src="images/<%= key %>.gif" alt="<%= key %>"/> : <%= value %> 
-      <%= key %>
+  <% @types.each_pair { |status, count| %>
+    <li>
+      <img src="images/<%= status %>.gif" alt="<%= status %>"/> : <%= count %>
+      <%= status.to_s.humanize.downcase %>
     </li>
   <% } %>
 </ul>
@@ -65,14 +63,8 @@
           (<%= talk.talk_type.name %>)
         </td>
         <td>
-          <img src="images/<%= talk.acceptance_status %>.gif" alt="<%= talk.acceptance_status %>"/>
-          <% if talk.invited? %>
-            Invited
-          <% elsif talk.speakers_confirmed? %>
-            Confirmed
-          <% else %>
-            <%= talk.acceptance_status.capitalize %>
-          <% end %>
+          <img src="images/<%= talk.status %>.gif" alt="<%= talk.status %>"/>
+            <%= talk.status.humanize %>
         </td>
         <% if talk.invited? %>
             <td></td>
@@ -87,17 +79,17 @@
           </td>
           <% if talk.pending? %>
               <td>
-                <%= link_to 'Accept', :action => 'accept', :id => talk.id %>   
+                <%= link_to 'Accept', :action => 'accept', :id => talk.id %>
               </td>
               <td>
-                <%= link_to 'Reject', :action => 'refuse', :id => talk.id %> 
+                <%= link_to 'Reject', :action => 'refuse', :id => talk.id %>
               </td>
           <% elsif talk.accepted?%>
             <td>
                 <% if talk.speakers_confirmed? %>
                   <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
-                <% else %> 
-                  <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %> 
+                <% else %>
+                  <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %>
                 <% end %>
             </td>
             <td>
@@ -111,7 +103,9 @@
           <% end %>
           <td>
             <% if !talk.email_sent? && (talk.accepted? || talk.refused?) %>
-              <%= link_to image_tag('mimiglyphs/57.png'), { :action => 'send_mail', :id => talk.id, remote: true }, class: 'email' %>
+              <%= link_to send_mail_acceptance_path(talk.id), remote: true, class: "email" do %>
+                    <i class='fa fa-envelope'></i>
+              <% end %>
             <% end %>
           </td>
         <% end %>

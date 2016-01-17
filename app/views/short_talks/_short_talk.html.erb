@@ -1,0 +1,36 @@
+<div class="row talk" id="<%= dom_id(short_talk) %>">
+
+  <div class="span8">
+    <h4>
+      <%= link_to short_talk.title, short_talk %>
+      <%= image_tag("approved_talk.png") if short_talk.accepted? && short_talk.speakers_confirmed? %>
+      <%= image_tag("icon_slides.gif") if admin? && short_talk.slide.file? %>
+    </h4>
+
+    <p class="muted">
+      <%= short_talk.talk_type.name_and_duration %> - Suggested by <%= short_talk.speaker_name %>,
+      <%= time_ago_in_words(short_talk.created_at) %> ago.
+    </p>
+
+    <p>
+      <% if contains_html short_talk.description %>
+          <%= sanitize short_talk.description %>
+      <% else %>
+          <%= simple_format h(short_talk.description) %>
+      <% end %>
+
+      <%= link_to "Read more...", short_talk %>
+    </p>
+
+    <%# link_to "#{talk.comments_count or 0} comment(s).", talk_path(talk, :anchor => "comments") %>
+
+    <% unless short_talk.tags.size == 0 %>
+        <div class="tags">
+          Tags: |
+          <% short_talk.tags.each do |tag| %>
+              <%= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %> |
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+</div>

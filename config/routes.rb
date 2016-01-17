@@ -8,12 +8,11 @@ Booster2013::Application.routes.draw do
 
   resources :reviews
 
+  resources :group_registrations, only: [:new, :create]
+
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
   get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
   post 'users/create_skeleton' => 'users#create_skeleton', :as => :create_skeleton_user
-
-  get 'users/group_registration' => 'users#group_registration', :as => :new_group_registration
-  post 'users/create_group_registration' => 'users#create_group_registration', :as => :create_group_registration
 
   get 'users/current/attending_dinner' => 'users#attending_dinner', :as => :attending_dinner_url
   get 'users/current/not_attending_dinner' => 'users#not_attending_dinner', :as => :not_attending_dinner_url
@@ -66,7 +65,7 @@ Booster2013::Application.routes.draw do
     end
   end
 
-  resources :sponsors do
+  resources :sponsors, except: [:show] do
     resources :events
     member do
       post :email
@@ -111,7 +110,7 @@ Booster2013::Application.routes.draw do
   resources :invoices do
     member do
       post :add_user
-      post :remove_user
+      post :remove_line
       post :invoiced
       post :paid
     end

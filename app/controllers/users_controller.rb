@@ -178,7 +178,7 @@ class UsersController < ApplicationController
   def create_skeleton
     email = params[:user][:email]
 
-    if email.present? && user_already_exists(email)
+    if email.present? && User.find_by_email(email)
       flash[:error] = "This email already has a user"
       render action: 'new_skeleton'
     else
@@ -192,6 +192,7 @@ class UsersController < ApplicationController
     end
   end
 
+<<<<<<< HEAD
   def group_registration
     @invoice = Invoice.new
   end
@@ -249,6 +250,8 @@ class UsersController < ApplicationController
     User.find_by_email(email)
   end
 
+=======
+>>>>>>> master
   def from_reference
 
     if current_user
@@ -291,10 +294,6 @@ class UsersController < ApplicationController
       per_date << total
     end
     per_date
-  end
-
-  def tokenize(string)
-    string.gsub(/[,;:\n]/, " ").split
   end
 
   def registration_is_open

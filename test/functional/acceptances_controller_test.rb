@@ -34,7 +34,7 @@ class AcceptancesControllerTest < ActionController::TestCase
     @talk = talks(:nine)
     get :accept, :id => @talk.id
 
-    assert_equal true, Registration.find(@talk.users[0].registration.id).registration_complete? # TODO: Fails
+    assert_equal true, Registration.find(@talk.users[0].registration.id).registration_complete?
   end
 
   def test_refuse_should_set_talk_as_refused

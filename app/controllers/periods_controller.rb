@@ -2,74 +2,45 @@ class PeriodsController < ApplicationController
 
   before_filter :require_admin
 
-  # GET /periods
-  # GET /periods.xml
-  def index
-    @periods = Period.all
+  respond_to :html
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @periods }
-    end
+  def index
+    @periods = Period.order(:day, :start_time)
   end
 
-  # GET /periods/new
-  # GET /periods/new.xml
   def new
     @period = Period.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @period }
-    end
   end
 
-  # GET /periods/1/edit
   def edit
     @period = Period.find(params[:id])
   end
 
-  # POST /periods
-  # POST /periods.xml
   def create
     @period = Period.new(params[:period])
 
-    respond_to do |format|
-      if @period.save
-        format.html { redirect_to(periods_url, :notice => 'Period was successfully created.') }
-        format.xml  { render :xml => @period, :status => :created, :location => @period }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @period.errors, :status => :unprocessable_entity }
-      end
+    if @period.save
+      redirect_to(periods_url, notice: 'Period was successfully created.')
+    else
+      render action: :new
     end
   end
 
-  # PUT /periods/1
-  # PUT /periods/1.xml
   def update
     @period = Period.find(params[:id])
 
-    respond_to do |format|
       if @period.update_attributes(params[:period])
-        format.html { redirect_to(@period, :notice => 'Period was successfully updated.') }
-        format.xml  { head :ok }
+        redirect_to(periods_url, notice: 'Period was successfully updated.')
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @period.errors, :status => :unprocessable_entity }
-      end
+        render action: :edit
     end
   end
 
-  # DELETE /periods/1
-  # DELETE /periods/1.xml
   def destroy
     @period = Period.find(params[:id])
     @period.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(periods_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(periods_url)
   end
+
 end

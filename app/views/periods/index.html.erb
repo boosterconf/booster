@@ -1,17 +1,17 @@
-<h1>Listing periods</h1>
+<h1>Program structure</h1>
 
-<table>
+<table class="table table-striped">
   <tr>
-    <th>Start time</th>
-    <th>End time</th>
+    <th>Time</th>
     <th>Day</th>
+    <th>Type</th>
   </tr>
 
   <% @periods.each do |period| %>
       <tr>
-        <td><%=h period.start_time.strftime("%H:%M") %></td>
-        <td><%=h period.end_time.strftime("%H:%M") %></td>
+        <td><%=h period.start_and_end_time %></td>
         <td><%=h period.day.strftime("%A %b %d") %></td>
+        <td><%=h period.period_type.humanize %></td>
         <td><%= link_to 'Edit', edit_period_path(period) %></td>
         <td><%= link_to 'Destroy', period, :confirm => 'Are you sure?', :method => :delete %></td>
       </tr>
