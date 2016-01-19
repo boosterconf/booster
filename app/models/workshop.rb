@@ -20,7 +20,7 @@ class Workshop < Talk
     false
   end
 
-  def is_tutorial?
+  def is_workshop?
     true
   end
   def is_short_talk?
