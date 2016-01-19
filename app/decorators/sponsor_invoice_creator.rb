@@ -12,7 +12,7 @@ class SponsorInvoiceCreator < SimpleDelegator
 
   private
   def create_sponsor_invoice
-    if status_was_changed_to_accepted && !@sponsor.invoiced
+    if status_was_changed_to_accepted && @sponsor.not_invoiced?
       Invoice.create_sponsor_invoice_for(@sponsor)
     end
 

@@ -78,6 +78,10 @@ class Sponsor < ActiveRecord::Base
     contact_person_first_name + " " + contact_person_last_name
   end
 
+  def not_invoiced?
+    invoice_line.nil?
+  end
+
   def <=>(other)
     self.name <=> other.name
   end
