@@ -19,7 +19,7 @@ class InfoController < ApplicationController
     @feedback = Feedback.new
   end
 
-  def organizers
+  def about
     @organizers = User.featured_organizers.shuffle
   end
 
