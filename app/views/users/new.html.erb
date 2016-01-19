@@ -9,53 +9,38 @@
   </p>
 
   <%= form_for(@user) do |f| %>
-      <%= render :partial => 'price_info', :locals => {:f => f} %>
+      <%= render :partial => 'price_info', :locals => { :f => f } %>
 
       <div class="row">
         <div class="span8">
 
-          <%= render :partial => 'personal_details', :locals => {:f => f} %>
+          <%= render partial: 'personal_details', locals: { f: f } %>
 
-          <%= render :partial => 'passwords', :locals => {:f => f} %>
+          <%= render partial: 'passwords', locals: { f: f } %>
 
           <%= f.hidden_field :invited %>
 
-          <fieldset id="registration_details">
-            <%= f.fields_for :registration do |reg| %>
 
-                <%= reg.hidden_field :ticket_type_old %>
-                <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+          <%= f.fields_for :registration do |reg| %>
 
-                <div class="clearfix">&nbsp;</div>
+              <%= reg.hidden_field :ticket_type_old %>
+              <%= render partial: 'confirmations', locals: { reg: reg, f: f } %>
 
-                <%= render :partial => 'roles', :locals => {:f => f} %>
-                <%= render :partial => 'user_stats', :locals => {:f => f} %>
+              <%= render partial: 'roles', locals: { f: f } %>
+              <%= render partial: 'user_stats', locals: { f: f } %>
 
-                <% unless @user.invited %>
-                  <%= reg.hidden_field :manual_payment, :value => 'true' %>
-                    <!--fieldset>
-                      <label class="radio" id="manual_payment">
-                        <%= reg.radio_button :manual_payment, 'true' %>
-                        Please send me an invoice.
-                      </label>
-                      <label class="radio" id="paypal">
-                        <%= reg.radio_button :manual_payment, 'false' %>
-                        I want to pay with PayPal.
-                      </label>
-                    </fieldset-->
-                    <%= render :partial => 'payment_details', :locals => {:reg => reg, :f => f} %>
-                <% end %>
+              <% unless @user.invited %>
+                  <%= reg.hidden_field :manual_payment, value: 'true' %>
+                  <%= render partial: 'payment_details', locals: { reg: reg, f: f } %>
+              <% end %>
 
-                <div id="register_submit"><%= f.submit "Register", :class => 'btn btn-primary' %></div>
-            <% end %>
-          </fieldset>
+                <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
+
+              <div id="register_submit">
+                <%= f.submit "Register", class: 'btn btn-primary' %>
+              </div>
+          <% end %>
         </div>
   <% end %>
   </div>
-  <div class="row">
-    <div class="clearfix">&nbsp;</div>
-    <div class="span7">
-      <div class="alert alert-block">By registering, you accept that we can send you email about the conference.</div>
-    </div>
-  </div>
-</div>
+</article>

@@ -1,24 +1,21 @@
-<fieldset id="user_stats">
-  <p class="geeky">
-    To better understand our audience, and create a better conference, we hope you will indulge us and provide us with
-    some additional information about yourself. These will NOT be publicized.
-  </p>
+<p class="geeky">
+  To better understand our audience, and create a better conference, we hope you will indulge us and provide us with
+  some additional information about yourself. These will NOT be publicized.
+</p>
+<div class="radio">
+  <label>
+    <%= f.radio_button :gender, 'M' %>
+    Male
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <%= f.radio_button :gender, 'F' %>
+    Female
+  </label>
+</div>
 
-  <div class="field">
-    <fieldset>
-      <label class="radio">
-        <%= f.radio_button :gender, 'M'%>
-        Male
-      </label>
-      <label class="radio">
-        <%= f.radio_button :gender, 'F'%>
-        Female
-      </label>
-    </fieldset>
-  </div>
-
-  <div class="field">
-    <%= f.label :birthyear, "Birth year" %>
-    <%= text_field(:user, :birthyear, :placeholder => "When were you born?", :class => 'input-xlarge') %>
-  </div>
+<fieldset class="form-group">
+  <%= f.label :birthyear, "Birth year" %>
+  <%= text_field(:user, :birthyear, placeholder: "When were you born?", class: 'form-control') %>
 </fieldset>

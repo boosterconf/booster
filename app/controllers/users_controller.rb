@@ -192,7 +192,6 @@ class UsersController < ApplicationController
     end
   end
 
-<<<<<<< HEAD
   def group_registration
     @invoice = Invoice.new
   end
@@ -250,8 +249,6 @@ class UsersController < ApplicationController
     User.find_by_email(email)
   end
 
-=======
->>>>>>> master
   def from_reference
 
     if current_user
