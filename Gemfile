@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'railties', '4.2.4'
-gem 'rails', '4.2.4'
+gem 'railties', '4.2.5'
+gem 'rails', '4.2.5'
 gem "authlogic", '~> 3.4.2'
 gem 'paperclip', '~>3.0'
 
@@ -20,7 +20,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
 
-# The following group of gems are here to make transition from Rails 3.x to Rails 4.x easier 
+# The following group of gems are here to make transition from Rails 3.x to Rails 4.x easier
 gem 'rails-observers'
 gem 'protected_attributes'
 gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'
