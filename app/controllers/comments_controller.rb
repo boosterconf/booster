@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  include ActionView::RecordIdentifier # for dom_id
+
   before_filter :require_user, :only => [:create, :edit]
 
   def index
