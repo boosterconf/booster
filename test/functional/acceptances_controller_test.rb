@@ -70,7 +70,7 @@ class AcceptancesControllerTest < ActionController::TestCase
     assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type_old
     get :await, id: @talk.id
     assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type_old
-    assert_false Registration.find(@talk.users[0].registration.id).registration_complete
+    assert !Registration.find(@talk.users[0].registration.id).registration_complete
   end
 
   def test_await_does_not_roll_back_ticket_type_for_special_users

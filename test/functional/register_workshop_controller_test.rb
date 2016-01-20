@@ -76,7 +76,7 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         end
 
         should "be marked as unfinished" do
-          assert_true @registration.unfinished
+          assert @registration.unfinished
         end
 
         should "have email set" do

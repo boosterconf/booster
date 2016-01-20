@@ -21,8 +21,8 @@ class SpeakerNameTest < ActiveSupport::TestCase
 
       should 'be both the speakers full names separated by \"and\"' do
         speaker_name = SpeakerName.new(@users).to_s
-        assert_true (speaker_name == "#{@users.first.full_name} and #{@users.last.full_name}") ||
-                        (speaker_name == "#{@users.last.full_name} and #{@users.first.full_name}")
+        assert (speaker_name == "#{@users.first.full_name} and #{@users.last.full_name}") ||
+                (speaker_name == "#{@users.last.full_name} and #{@users.first.full_name}")
       end
     end
 
