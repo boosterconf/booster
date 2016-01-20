@@ -101,6 +101,10 @@ class Talk < ActiveRecord::Base
     !is_lightning_talk?
   end
 
+  def is_short_talk?
+    false
+  end
+
 =begin
   def is_full?
     participants.size >= max_participants
