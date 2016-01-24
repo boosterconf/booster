@@ -5,9 +5,10 @@
     </h2>
   </div>
 
-  <div class="speakers-body">
-    <% @speakers.shuffle.each_with_index do |speaker,index| %>
-        <div class="speaker <%= 'odd' if index%2 != 0 %>">
+  <div class="speakers-body .container">
+    <div class="row">
+        <% @speakers.shuffle.each_with_index do |speaker,index| %>
+        <div class="speaker <%= 'odd' if index%2 != 0 %> col-md-12">
           <div class="left">
             <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
           </div>
@@ -47,6 +48,7 @@
           </div>
         </div>
     <% end %>
+    </div>
   </div>
 
 
