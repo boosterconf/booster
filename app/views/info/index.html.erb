@@ -69,7 +69,7 @@
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
     <div class="row">
-      <% @speakers.+(@speakers).each do |speaker| %>
+      <% @speakers.each do |speaker| %>
       <div class="col-xs-3">
 	<%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
       </div>
