@@ -2,14 +2,14 @@
 
 $enable-flex: true;
 
+$gray-darky: #36404D;
 $gray-lightest: #F2F2F2;
 $gray-lighter: #E5E5E5;
 
-$brand-primary: #BBEBDE;
+$brand-primary: #F29C75;
 $brand-success: #E1F28C;
-$brand-info: #6F6F6F;
-$brand-warning: #36404D;
-$brand-danger: #DD9B77;
+$brand-info: $gray-darky;
+$brand-warning: #DD9B77;
 
 $link-color: #36404D;
 
