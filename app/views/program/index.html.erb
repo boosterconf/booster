@@ -25,28 +25,28 @@
       <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[704] %>
 
       <div class='program-row'>
-        <header class='time follow-me'>10:30 - 11:15 - Lightning talks</header>
+        <% period = @periods.pop %>
+        <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
-          <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '10:30 - 11:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
+          <% period.slots.each do |slot| %>
+          <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                     talks: slot.talk_positions.map(&:talk) %>
+          <% end %>
         </div>
       </div>
 
       <%= render 'break_section', location: 'Downstairs', time: '11:15-11:30', title: 'Coffee break' %>
 
-      <div class="program-row">
-        <header class='time follow-me'>11:30 - 12:15 - Lightning talks</header>
+      
+
+      <div class='program-row'>
+        <% period = @periods.pop %>
+        <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
-          <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '11:30 - 12:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
+          <% period.slots.each do |slot| %>
+              <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                         talks: slot.talk_positions.map(&:talk) %>
+          <% end %>
         </div>
       </div>
 
