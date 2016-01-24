@@ -30,7 +30,12 @@
 
     <p>
       <%= f.label :talk %><br/>
-      <%= f.collection_select :talk_id, @talks, :id, :title, {}, { class: "select-talk" } %>
+      <%= select_tag :talk_id, options_from_collection_for_select(@talks, :id, :title), { prompt: true, class: "select-talk" } %>
+    </p>
+
+    <p>
+      <%= f.label :position %><br/>
+      <%= select_tag :position, options_for_select((1..4).to_a, @position) %>
     </p>
 
     <p>
