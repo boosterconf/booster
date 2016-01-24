@@ -4,50 +4,50 @@
       Our speakers
     </h2>
   </div>
-  
-  <% for speaker in @speakers.shuffle do %>
-  <div class="speaker">
-    <div class="content">
-      <div class="speaker-header">
-        <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
 
-	      <div class="speaker-meta">
-          <b><%= speaker.full_name %></b>
-          <div><i><%= speaker.bio[:title] %></i></div>
+  <div class="speakers-body">
+    <% @speakers.shuffle.each_with_index do |speaker,index| %>
+        <div class="speaker <%= 'odd' if index%2 != 0 %>">
+          <div class="left">
+            <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
+          </div>
+          <div class="right">
+            <div class="content">
+              <div class="speaker-header">
 
-          <% if speaker.bio[:twitter_handle].length > 0 %>
+                <div class="speaker-meta">
+                  <span class="speaker-name"><b><%= speaker.full_name %></b></span>
+                  <div><i><%= speaker.bio[:title] %></i></div>
 
-          <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-            &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-          </a>
-          <% end %>
+                  <% if speaker.bio[:twitter_handle].length > 0 %>
 
-          <% if speaker.bio.blog
-             short_url = speaker.bio.blog.sub(/^https?\:\/\//, '').sub(/^www./,'')
-             %>
-          - <%= link_to short_url, speaker.bio.blog, { title: 'Website', target: '_blank' } %>
-          <% end %>
-	      </div>
-      </div>
+                      <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+                        &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
+                      </a>
+                  <% end %>
+                </div>
+              </div>
 
-      <p>
-        <%= simple_format speaker.bio[:bio] %>
-      </p>
+              <div class="speaker-bio">
+                <%= simple_format speaker.bio[:bio] %>
+              </div>
 
-      <% unless speaker.accepted_talks.empty? %>
-      <p>
-        <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
-      </p>
-      <ul style="list-style-type: none;">
-        <% speaker.accepted_talks.each do |talk| %>
-        <li><%= link_to h(talk.title), talk %></li>
-        <% end %>
-      </ul>
+              <% unless speaker.accepted_talks.empty? %>
+                  <p>
+                    <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
+                  </p>
+                  <ul style="list-style-type: none;">
+                    <% speaker.accepted_talks.each do |talk| %>
+                        <li><%= link_to h(talk.title), talk %></li>
+                    <% end %>
+                  </ul>
 
-      <% end %>
-    </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    <% end %>
   </div>
-  <% end %>
 
 
 </article>
