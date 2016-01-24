@@ -49,12 +49,12 @@
 	</p>
 
 	<h4>Conference dinner</h4>
-	
+
 	<p>One of the highlights of any conference is always the conference dinner and Booster is no exception. All participants are welcome to our conference dinner at location at date and time.
 	</p>
 
 	<h4>Code of conduct</h4>
-	
+
 	<p>The Booster team is very proud of our <a href="/info/coc">Code of Conduct</a>. All participants, speakers, volunteers and organizers have agreed to follow the <a href="/info/coc">Code of Conduct</a>.
 	</p>
 
@@ -74,12 +74,12 @@
 	        	<b><%= organizer.full_name %></b>
 	        	<div><i><%= organizer.bio[:title] %></i></div>
 
-	        	<% if organizer.bio[:twitter_handle].length > 0 %>
+	        	<% if organizer.bio[:twitter_handle] && organizer.bio[:twitter_handle].length > 0 %>
 	        	<a href="http://twitter.com/<%= organizer.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
 	            	&#64;<%= organizer.bio[:twitter_handle].sub(/@/, '') %>
 	        	</a>
 	        	<% end %>
-		    </div>			
+		    </div>
 		  </div>
 	    </div>
 	  </div>
