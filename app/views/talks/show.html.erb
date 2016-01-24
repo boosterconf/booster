@@ -1,3 +1,4 @@
+<article>
 <%= content_for :title, h(@talk.title) %>
 <h2 class="page_title"><%= h @talk.title %></h2>
 <h4><%= render :partial => @talk.users %></h4>
@@ -122,7 +123,7 @@
       <%= render partial: 'review_form' %>
     </div>
 <% end %>
-
+</article>
 
 <%# if logged_in %>
 <!--h3 id="new_comment">Add new comment:</h3>

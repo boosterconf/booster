@@ -160,7 +160,9 @@ class TalksController < ApplicationController
 
   def accepted
     @talks = Talk.all_confirmed
-    @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
+    @lightning_talks = @talks.select(&:is_lightning_talk?)
+    @workshops = @talks.select(&:is_workshop?)
+    @short_talks = @talks.select(&:is_short_talk?)
   end
 
   protected
