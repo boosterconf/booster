@@ -2,7 +2,9 @@
 <% content_for :title, @user.full_name %>
 
 <% if @user.bio == nil && admin? %>
+<p>
     <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
+  </p>
 <% end %>
 
 
