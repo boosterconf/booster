@@ -16,8 +16,6 @@
   </p>
 
 <%= form_for @group_registration, url: group_registrations_path do |f| %>
-
-  <%= form_for @invoice, url: create_group_registration_path, class: 'form' do |f| %>
       <div class='form-group'>
         <label>How do you want to receive the invoice?</label>
         <div class="btn-group">
@@ -55,7 +53,6 @@
         <%= f.submit "Send me an invoice", :class => "btn btn-primary" %>
       </div>
   <% end %>
-</div>
 
 <% content_for :javascript do %>
     <script type="text/javascript">
