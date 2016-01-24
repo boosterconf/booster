@@ -26,20 +26,46 @@
             </th>
 
             <% @rooms.each do |room| %>
-                <% talk = period.talk_in(room) %>
-                <td class="acceptance-status <%= talk.try(:status) %>">
-                  <% if talk %>
-                      <%= link_to talk.title, talk %>
-                      <% if talk.is_workshop? %>
-                          <small>(cap: <%= talk.max_participants %>)</small>
-                          <br/>
+                <% if period.period_type == "lightning" %>
+                    <td>
+                      <table>
+                        <% (1..4).each do |position| %>
+                            <tr>
+                              <% talk = period.talk_in(room, position) %>
+                              <td class="acceptance-status <%= talk.try(:status) %>">
+                                <% if talk %>
+                                    <%= link_to talk.title, talk %>
+                                    <% if talk.max_participants %>
+                                        <small>(cap: <%= talk.max_participants %>)</small>
+                                        <br/>
+                                    <% end %>
+                                    <small><%= link_to '[Remove]', period.slot_in(room), confirm: 'Are you sure?', method: :delete, class: 'action' %></small>
+                                <% else %>
+                                    None <br/>
+                                    <small><%= link_to '[Assign]', new_slot_url(slot: { room_id: room.id, period_id: period.id },  position: position), class: 'action' %></small>
+                                <% end %>
+                              </td>
+                            </tr>
+                        <% end %>
+                      </table>
+                    </td>
+                <% else %>
+
+                    <% talk = period.talk_in(room) %>
+                    <td class="acceptance-status <%= talk.try(:status) %>">
+                      <% if talk %>
+                          <%= link_to talk.title, talk %>
+                          <% if talk.max_participants %>
+                              <small>(cap: <%= talk.max_participants %>)</small>
+                              <br/>
+                          <% end %>
+                          <small><%= link_to '[Remove]', period.slot_in(room), confirm: 'Are you sure?', method: :delete, class: 'action' %></small>
+                      <% else %>
+                          None <br/>
+                          <small><%= link_to '[Assign]', new_slot_url(slot: { room_id: room.id, period_id: period.id }), class: 'action' %></small>
                       <% end %>
-                      <small><%= link_to '[Remove]', period.slot_in(room), confirm: 'Are you sure?', method: :delete, class: 'action' %></small>
-                  <% else %>
-                      None <br/>
-                      <small><%= link_to '[Assign]', new_slot_url(slot: { room_id: room.id, period_id: period.id }), class: 'action' %></small>
-                  <% end %>
-                </td>
+                    </td>
+                <% end %>
             <% end %>
           </tr>
       <% end %>
