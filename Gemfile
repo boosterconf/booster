@@ -45,6 +45,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'taps'
+  gem 'dotenv-rails'
 end
 
 group :test do

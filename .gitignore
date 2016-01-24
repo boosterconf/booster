@@ -26,3 +26,4 @@ public/system
 latest.dump
 .floo
 .flooignore
+.env
