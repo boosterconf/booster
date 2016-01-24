@@ -1,4 +1,4 @@
-<article class="inner">
+<article>
   <div class="header-join">
     <h2>Register for Booster <%= Dates::CONFERENCE_YEAR %></h2>
   </div>
@@ -10,9 +10,6 @@
 
   <%= form_for(@user) do |f| %>
       <%= render :partial => 'price_info', :locals => { :f => f } %>
-
-      <div class="row">
-        <div class="span8">
 
           <%= render partial: 'personal_details', locals: { f: f } %>
 
@@ -40,7 +37,5 @@
                 <%= f.submit "Register", class: 'btn btn-primary' %>
               </div>
           <% end %>
-        </div>
   <% end %>
-  </div>
 </article>
