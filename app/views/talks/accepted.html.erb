@@ -1,31 +1,34 @@
 <article>
-<div class="inner group">
-<% content_for :title, "Accepted sessions" %>
-<h2 class="page_title">Accepted sessions
+
+    <% content_for :title, "Accepted sessions" %>
+    <h2 class="page_title">Accepted sessions
+
   <span class="feed" title="Watch new talks">
     <%= link_to talks_path(:format => :rss) do %>
     <%= image_tag('/images/icon_feed.png') %>
     <% end %>
   </span>
-</h2>
+    </h2>
 
-<p>These are the currently accepted sessions. This list is subject to change.</p>
+    <p>These are the currently accepted sessions. This list is subject to change.</p>
 
-<p>
-  <a href="#lightning"> Go to lightning talks</a> | <%= link_to 'All proposals', talks_url %>
-</p>
+    <p>
+      <a href="#lightning"> Go to lightning talks</a> | <a href="#short">Go to short talks</a> | <%= link_to 'All proposals', talks_url %>
+    </p>
 
-<br/>
+    <% unless @workshops.empty? %>
+        <h3 id="workshops">Workshops</h3>
+        <%= render partial: @workshops %>
+    <% end %>
 
-<% unless @workshops.empty? %>
-    <h3 id="workshops">Workshops</h3>
-    <%= render :partial => @workshops %>
-<% end %>
+    <% unless @short_talks.empty? %>
+        <h3 id="short">Short talks</h3>
+        <%= render partial: @short_talks %>
+    <% end %>
 
-<% unless @lightning_talks.empty? %>
-    <h3 id="lightning">Lightning talks</h3>
-    <%= render :partial => @lightning_talks %>
-<% end %>
+    <% unless @lightning_talks.empty? %>
+        <h3 id="lightning">Lightning talks</h3>
+        <%= render partial: @lightning_talks %>
+    <% end %>
 
-</div>
 </article>
