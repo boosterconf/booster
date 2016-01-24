@@ -1,7 +1,6 @@
 <article>
-  <div class="inner group">
-    <% content_for :title, "Suggested topics" %>
-    <h2 class="page_title">Suggested talks
+  <% content_for :title, "Suggested topics" %>
+  <h2 class="page_title">Suggested talks
   <span class="feed" title="Watch new talks">
     <%= link_to talks_path(:format => :rss) do %>
     <%= image_tag('/images/icon_feed.png') %>
@@ -30,8 +29,8 @@
         <%= render partial: @short_talks %>
     <% end %>
 
-    <p>Missing anything?
-      <br/>  <%= link_to 'Suggest your own talk!', info_cfp_url, :class => "btn btn-primary btn-large" %>
-    </p>
-  </div>
+  <p>Missing anything?
+    <br/>  <%= link_to 'Suggest your own talk!', info_cfp_url, :class => "btn btn-primary btn-large" %>
+  </p>
+
 </article>
