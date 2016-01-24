@@ -1,4 +1,13 @@
-<h1>New slot</h1>
+<script type="javascript">
+    $(document).ready(function () {
+        $('.select-talk').selectize({
+            sortField: 'text',
+            allowEmptyOption: true
+        });
+    });
+</script>
+
+<h1>Create a new slot</h1>
 
 <%= form_for(@slot) do |f| %>
     <% if @slot.errors %>
@@ -10,18 +19,18 @@
     <% end %>
 
     <p>
-      <%= f.label :room %><br />
+      <%= f.label :room %><br/>
       <%= f.collection_select :room_id, @rooms, :id, :name %>
     </p>
 
     <p>
-      <%= f.label :period %><br />
-      <%= f.collection_select :period_id, @periods, :id, :to_s, {:include_blank => 'Please Select'} %>
+      <%= f.label :period %><br/>
+      <%= f.collection_select :period_id, @periods, :id, :to_s, { :include_blank => 'Please Select' } %>
     </p>
 
     <p>
-      <%= f.label :talk %><br />
-      <%= f.collection_select :talk_id, @talks, :id, :title %>
+      <%= f.label :talk %><br/>
+      <%= f.collection_select :talk_id, @talks, :id, :title, {}, { class: "select-talk" } %>
     </p>
 
     <p>

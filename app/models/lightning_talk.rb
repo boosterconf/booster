@@ -10,7 +10,7 @@ class LightningTalk < Talk
     true
   end
 
-  def is_tutorial?
+  def is_workshop?
     false
   end
 

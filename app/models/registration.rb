@@ -44,14 +44,16 @@ class Registration < ActiveRecord::Base
     # destroy and destroy! When we upgrade to Rails 4, this can be removed
     method = self.deleted_at ? :destroy! : :destroy
 
-    talks = self.user.talks
-    talks.each do |talk|
-      if talk.has_single_speaker?
-        talk.send(method)
+    if self.user != nil
+      talks = self.user.talks
+      talks.each do |talk|
+        if talk.has_single_speaker?
+          talk.send(method)
+        end
       end
-    end
 
-    self.user.send(method)
+      self.user.send(method)
+    end
   end
 
   def restore_talks_and_user

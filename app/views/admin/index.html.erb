@@ -7,15 +7,14 @@
   <li><%= link_to 'Talks', talks_path %></li>
   <li><%= link_to 'Partners', sponsors_path %></li>
   <li><%= link_to 'Acceptances', acceptances_path %></li>
+  <li><%= link_to 'Program builder', slots_path %></li>
   <li><%= link_to 'See all reviews', reviews_path %></li>
-  <li><%= link_to 'Register an invited speaker', new_user_path(:invited => "true") %></li>
+  <li><%= link_to 'Register an invited speaker', new_user_path(invited: true) %></li>
   <li><%= link_to 'Create a skeleton user', new_skeleton_user_path %></li>
 
   <!--
   <li><%#= #link_to 'Invitees', :controller => 'invitees', :action => 'index' %></li>
   <li><%#= #link_to 'Talk feedbacks', :controller => 'talk_feedbacks', :action => 'index' %></li>
-  <li><%#= #link_to 'Periods', :controller => 'periods', :action => 'index' %></li>
-  <li><%#= #link_to 'Slots', :controller => 'slots', :action => 'index' %></li>
   <li><%#= #link_to 'Ticket types', :controller => 'ticket_types', :action => 'index' %></li>
   <li><%#= #link_to 'Email addresses', :controller => 'emails', :action => 'index' %></li>
    -->

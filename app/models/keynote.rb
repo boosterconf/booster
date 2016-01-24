@@ -8,7 +8,7 @@ class Keynote < Talk
     false
   end
 
-  def is_tutorial?
+  def is_workshop?
     false
   end
 

@@ -39,7 +39,7 @@
     <% end %>
     <%= render :partial => "talks/upload_slide" %>
 
-    <% if @talk.is_tutorial? %>
+    <% if @talk.is_workshop? %>
         <p>
           <strong>Extra equipment:</strong>
           <%= h @talk.equipment %>
@@ -65,7 +65,7 @@
       <%= simple_format h(@talk.description) %>
   <% end %>
 </div>
-<% if @talk.is_tutorial? %>
+<% if @talk.is_workshop? %>
 
     <% if admin_reviewer_or_talk_owner?(@talk) %>
         <div class="outline">

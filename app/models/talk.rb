@@ -97,8 +97,12 @@ class Talk < ActiveRecord::Base
     talk_type.name == 'Lightning talk'
   end
 
-  def is_tutorial?
+  def is_workshop?
     !is_lightning_talk?
+  end
+
+  def is_short_talk?
+    false
   end
 
 =begin

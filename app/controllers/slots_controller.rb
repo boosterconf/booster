@@ -61,7 +61,7 @@ class SlotsController < ApplicationController
 
   def find_backing_data
     @periods = Period.all
-    @talks = Talk.all_accepted_tutorials
+    @talks = Talk.all_accepted.sort_by(&:title)
     @rooms = Room.all
   end
 end

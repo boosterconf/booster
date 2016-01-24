@@ -3,7 +3,7 @@ class AddTypeToTalk < ActiveRecord::Migration
     add_column :talks, :type, :string
 
     Talk.all.each do |talk|
-      if talk.is_tutorial?
+      if talk.is_workshop?
         talk.type = Workshop.to_s
       elsif talk.is_lightning_talk?
         talk.type = LightningTalk.to_s
