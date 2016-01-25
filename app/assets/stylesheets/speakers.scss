@@ -11,6 +11,7 @@
     }
 
     .left {
+      width: 100%;
 
       .speaker-image {
         display: block;
@@ -22,12 +23,19 @@
 
     }
 
+    @media (min-width: 544px){
+
+      .right {
+        margin-top: 30px;
+      }
+
+    }
+
     .right {
 
       .speaker-header {
-        margin-top: 50px;
         margin-left: 20px;
-        margin-bottom: 20px;
+        margin-top: 0px;
 
         .speaker-name{
           font-family: 'Fira Sans';
