@@ -155,6 +155,7 @@ Booster2013::Application.routes.draw do
   match 'info/cfp' => 'info#cfp'
   match 'info/sponsors' => 'info#sponsors'
   match 'info/about' => 'info#about'
+  match 'info/kids' => 'info#kids'
   match 'info/tickets' => 'info#tickets'
   match 'info/speakers' => 'info#speakers'
   match 'info/openspaces' => 'info#openspaces'
