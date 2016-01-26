@@ -9,6 +9,7 @@
   </p>
 
   <%= form_for(@user) do |f| %>
+
       <%= render :partial => 'price_info', :locals => { :f => f } %>
 
           <%= render partial: 'personal_details', locals: { f: f } %>
