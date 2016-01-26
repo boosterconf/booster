@@ -24,7 +24,24 @@
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-      <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[704] %>
+      <!-- <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[704] %> -->
+      <div class="program-row">
+        <section class="period">
+          <header>
+            <time class="time"><%= '09:15-10:15' %></time>
+            <span class="location"><%= 'Dragefjellet' %></span>
+          </header>
+          <a class="single-talk" href="# %>">
+            <div class="slot">
+              <div class="plenary-type talk">
+                <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= "TBA" %></h4>
+                <span class='author'><%= "TBA" %></span>
+                <div class='description'><%= "TBA" %></div>
+              </div>
+            </div>
+          </a>
+        </section>
+      </div>
 
       <div class='program-row'>
         <% period = @periods.pop %>
@@ -80,7 +97,7 @@
         <section class="period">
           <header class="break">
             <time class="time">19:00-00:00</time>
-            <span class="location">Galleri Nygaten <%= link_to "(map)", "https://www.google.no/maps/dir/''/galleri+nygaten/@60.391396,5.3280495,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x463cfea8c868738f:0x63124a9d917ba00f!2m2!1d5.330733!2d60.392707", target: '_new' %></span>
+            <span class="location">TBA</span>
             <span>&mdash; Conference dinner</span>
           </header>
         </section>
@@ -142,7 +159,7 @@
         </div>
       </div>
 
-      <%= render 'open_space_section', location: 'Lysverket', time: '20:00-01:00', title: 'Fishbowl / Community Night' %>
+      <!-- <%= render 'open_space_section', location: 'TBA', time: '20:00-01:00', title: 'Fishbowl / Community Night' %> -->
     </div>
 
     <div id="day3">
@@ -186,7 +203,24 @@
 
       <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
 
-      <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[704] %>
+      <!-- <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[704] %> -->
+      <div class="program-row">
+        <section class="period">
+          <header>
+            <time class="time"><%= '15:15-16:15' %></time>
+            <span class="location"><%= 'Dragefjellet' %></span>
+          </header>
+          <a class="single-talk" href="# %>">
+            <div class="slot">
+              <div class="plenary-type talk">
+                <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= "TBA" %></h4>
+                <span class='author'><%= "TBA" %></span>
+                <div class='description'><%= "TBA" %></div>
+              </div>
+            </div>
+          </a>
+        </section>
+      </div>
       <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
     </div>
   </div>
