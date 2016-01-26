@@ -30,9 +30,9 @@ staging:
 production:
   year: 2016
   max_users_limit: 300
-  tutorial_registration_open: true
-  lightning_registration_open: true
-  program_released: false
-  speakers_released: false
+  tutorial_registration_open: false
+  lightning_registration_open: false
+  program_released: true
+  speakers_released: true
   early_bird_ends: 2016-02-01 23:59:59 +1
   sponsor_price_in_nok_before_vat: 28000
