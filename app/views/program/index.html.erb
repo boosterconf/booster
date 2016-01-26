@@ -1,23 +1,25 @@
 <div class="group">
-  <div class="program">
-
+  <div class="header-join">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active">
-        <a id="choose-day1" href="#day1" aria-controls="choose-day1" role="tab">Wed</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-day1" href="#day1" aria-controls="choose-day1" role="tab">Wed</a>
       </li>
-      <li role="presentation">
-        <a id="choose-day2" href="#day2" aria-controls="choose-day2" role="tab">Thu</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-day2" href="#day2" aria-controls="choose-day2" role="tab">Thu</a>
       </li>
-      <li role="presentation">
-        <a id="choose-day3" href="#day3" aria-controls="choose-day3" role="tab">Fri</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-day3" href="#day3" aria-controls="choose-day3" role="tab">Fri</a>
       </li>
-      <li role="presentation">
-        <a id="choose-all" href="#" aria-controls="choose-all" role="tab">All</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-all" href="#" aria-controls="choose-all" role="tab">All</a>
       </li>
     </ul>
+  </div>
+
+  <div class="program">
 
     <div id="day1">
-      <h2>Wednesday March 9</h2>
+      <h2>Wednesday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
@@ -86,7 +88,7 @@
     </div>
 
     <div id="day2">
-      <h2>Thursday March 12</h2>
+      <h2>Thursday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
@@ -144,7 +146,7 @@
     </div>
 
     <div id="day3">
-      <h2>Friday March 13</h2>
+      <h2>Friday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
