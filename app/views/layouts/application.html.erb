@@ -85,9 +85,14 @@ conference is for all IT professionals seeking to learn from each other and from
           <%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
         </li>
     <% end %>
+    
+<!-- image_tag '/images/bergen1920.jpg', class: 'img-superfluid' -->      
+<li><%= link_to image_tag('/images/knowit_logo.svg', alt: 'Knowit', width: "240", height: "54"), 'www.knowit.no', target: '_blank', title: 'knowit' %></li>
+<li><%= link_to image_tag('/images/knowit_logo.svg', alt: 'Knowit', width: "240", height: "54"), 'www.knowit.no', target: '_blank', title: 'knowit' %></li>
   </ul>
 </div>
 
+<li><%= link_to image_tag('/images/knowit_logo.png', width:"240", height:"54", alt: 'Knowit'), 'www.knowit.no', target: '_blank', title: 'knowit' %></li>
 
 <footer>
     <div class="jumbotron m-b-0">

@@ -18,10 +18,16 @@ class Sponsor < ActiveRecord::Base
                                                                 'Cache-Control' => 'max-age=2592000',
                                                                 'Expires' => 30.days.from_now.httpdate
                                                             }
+                                                          },  
+                                                          bigger: {
+                                                              geometry: '240x',
+                                                              s3_headers: {
+                                                                  'Cache-Control' => 'max-age=2592000',
+                                                                  'Expires' => 30.days.from_now.httpdate
+                                                              }
                                                           }
-
                                                       },
-                                                      default_style: :normal,
+                                                      default_style: :bigger,
                                                   })
   validates_attachment_content_type :logo,
                                     :content_type =>
