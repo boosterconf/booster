@@ -1,10 +1,9 @@
-/* START PROGRAM */
 $primary-color: #1790a0;
 $highlight-color: #F6AB6F;
 $light-neutral: #d3d1cb;
 $lighter-neutral: #e2e0d9;
 $dark-neutral: #757470;
-$text-color: #51504e;
+$text-color: $gray-dark;
 $text-color-negative: #ffffff;
 
 @mixin flexbox {
@@ -17,7 +16,16 @@ $text-color-negative: #ffffff;
 }
 
 .program {
-  margin: 10px 0 0 0;
+  max-width: 1200px;
+  margin: auto;
+
+  .author {
+    font-size: 14px !important;
+  }
+
+  header.time {
+    padding: $spacer-x $spacer-y;
+  }
 
   .nav-tabs li a {
     background-color: transparent;
@@ -34,22 +42,37 @@ $text-color-negative: #ffffff;
   }
 
   .program-row {
-    margin-bottom: 15px;
+  }
 
+  .lightning-talk-slot .single-talk {
+    .talk {
+      background-color: $gray-lightest;
+    }
+    
+    &:nth-child(2n) {
+      .talk {
+        background-color: $gray-lighter;
+      }
+    }
+  }
+
+  .workshop-slot .period {
+    background-color: $gray-lightest;
+
+    &:nth-child(2n) {
+      background-color: $gray-lighter;
+    }
   }
 
   .period {
-    background-color: $light-neutral;
-
     header {
-      background-color: $primary-color;
+      background-color: $gray-dark;
       color: $text-color-negative;
       padding: 3px 5px;
     }
 
     .location {
       text-align: right;
-      background-color: $primary-color;
       color: $text-color-negative;
       display: inline-block;
     }
@@ -68,12 +91,13 @@ $text-color-negative: #ffffff;
 
       .talk {
         font-size: 14px;
-        padding: 5px 10px 5px 10px;
+        padding: $spacer-x $spacer-y;
         font-weight: normal;
         display: block;
 
         .author {
           color: $text-color;
+          font-style: italic;
         }
 
         .description {
@@ -94,22 +118,27 @@ $text-color-negative: #ffffff;
   }
 
   header.break, header.break .location {
-    background-color: $light-neutral;
+    background-color: $brand-primary;
     color: $text-color;
   }
 
-  header.break, header.openspace {
-    padding: 6px 5px;
+  .period > header {
+    padding: $spacer-x $spacer-y;
   }
 
   h2 {
-    font-size: 140%;
+    padding: $spacer-y $spacer-x $spacer-y $spacer-x;
+    margin-bottom: 0;
   }
 
   h3, h4, h5 {
     font-family: "Siri Core", 'Lucida Sans Unicode', 'Lucida Sans', Verdana, sans-serif; // This overrides the bold
-    font-weight: normal;
+    font-weight: bold;
+    font-size: 14px;
+    text-transform: none;
+    font-style: normal;
     color: $text-color;
+    margin-bottom: 2px;
   }
 
   .program-column h3 {
@@ -120,20 +149,45 @@ $text-color-negative: #ffffff;
     line-height: 1;
   }
 
-  .lightning-talk-slot .talk {
-    border-bottom: 2px dotted $dark-neutral;;
-  }
-
-  .lightning-talk-slot .talk:last-child {
-    border-bottom: none;
-  }
-
   .slot a, section.period a {
     color: $dark-neutral;
   }
+
+  .follow-me {
+    padding: $spacer-x $spacer-y;
+    background: $gray-dark;
+    color: white;
+  }
+
+  .location-small {
+    margin-top: 7px;
+    color: $brand-primary;
+    text-transform: uppercase;
+    font-size: 13px;
+  }
+
+  .follow-wrapper .time {
+    padding: $spacer-x $spacer-y;
+  }
+
+  .lightning-talk.period header {
+    background-color: $brand-primary;
+
+    & .location {
+      color: $gray-dark;
+    }
+  }
 }
 
-@media (min-width: 979px) {
+@media (min-width: 1200px) {
+
+  .follow-wrapper {
+    margin-bottom: $spacer-y;
+  }
+
+  .break {
+    margin-top: $spacer-y;
+  }
 
   header.time {
     background-color: transparent;
@@ -210,17 +264,9 @@ $text-color-negative: #ffffff;
   .program header.time {
     display: block;
     padding: 5px;
-    background-color: $primary-color;
+    background-color: $gray-dark;
     color: $text-color-negative;
     margin: 0;
-  }
-
-  .workshop-slot section {
-    border-bottom: 2px dotted $dark-neutral;
-  }
-
-  .workshop-slot section:last-child {
-    border-bottom: none;
   }
 }
 
@@ -239,37 +285,18 @@ $text-color-negative: #ffffff;
     margin-left: 0;
   }
 
-  .program header.time {
-    border-bottom: 3px solid $highlight-color;
-  }
-
   .program-column header {
     display: none;
   }
 
   .program header.time {
     display: block;
-    padding: 5px;
-    background-color: $primary-color;
+    background-color: $gray-dark;
     color: $text-color-negative;
     margin: 0;
   }
 
-  .workshop-slot section {
-    border-bottom: 2px dotted $dark-neutral;
-  }
-
-  .workshop-slot section:last-child {
-    border-bottom: none;
-  }
-
   .talk:hover {
-  }
-
-  .follow-me {
-    padding: 10px 20px;
-    position: relative;
-    z-index: 3;
   }
 
   .follow-me.fixed {
@@ -285,6 +312,7 @@ $text-color-negative: #ffffff;
     z-index: 2;
   }
 
+  .program .follow-wrapper {
+    margin-bottom: 0;
+  }
 }
-
-/* END PROGRAM */

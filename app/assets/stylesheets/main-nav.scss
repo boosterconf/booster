@@ -1,0 +1,17 @@
+.main-nav {
+    width: calc(100%);
+    padding: 1.0rem 1.5rem;
+    z-index: 10;
+
+    .nav-link {
+	line-height: 40px;
+    }
+
+    .navbar-brand img {
+      width: 120px;
+
+      @include media-breakpoint-up(md) {
+	width: 200px;
+      }
+    }
+}

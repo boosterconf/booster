@@ -1,0 +1,20 @@
+#main-header {
+  width: 100%;
+  padding-bottom: $spacer-y;
+  background: image-url("icons/cloud2.svg") left -100px top -30px/190px no-repeat, image-url("icons/cloud2.svg") center bottom 20px/100px no-repeat, image-url("icons/cloud2.svg") right -65px top -30px/180px no-repeat, image-url("icons/cloud1.svg") 95% 90%/50px no-repeat, linear-gradient(#EFF9CF, #BBEBDE);
+
+  & > * {
+    max-width: 900px;
+    margin: auto;
+  }
+}
+
+.header-join {
+  max-width: 100% !important;
+  background: #BBEBDE;
+
+  & > * {
+    max-width: 900px;
+    margin: auto;
+  }
+}

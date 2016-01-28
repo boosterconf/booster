@@ -1,0 +1,55 @@
+.speakers-body {
+
+  .speaker{
+    background-color: #F2F2F2;
+    display: inline-block;
+    display: -webkit-flex;
+    display: flex;
+
+    &.odd{
+      background-color: #E6E6E6;
+    }
+
+    .left {
+      width: 100%;
+
+      .speaker-image {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 50px;
+        margin-bottom: 50px;
+      }
+
+    }
+
+    @media (min-width: 544px){
+
+      .right {
+        margin-top: 30px;
+      }
+
+    }
+
+    .right {
+
+      .speaker-header {
+        margin-left: 20px;
+        margin-top: 0px;
+
+        .speaker-name{
+          font-family: 'Fira Sans';
+          font-size: 20px;
+        }
+      }
+
+      .speaker-bio {
+
+      }
+      padding-bottom: 0px;
+      padding-top: 0px;
+    }
+
+  }
+
+}

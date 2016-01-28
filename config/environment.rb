@@ -15,9 +15,9 @@ ActionView::Base.field_error_proc = proc do |html, instance|
       html = %(<div class="clearfix error">#{html}</div>).html_safe
     elsif html =~ /<input|<textarea/
       if instance.error_message.kind_of?(Array)
-        html = %(<div class="clearfix error">#{html}<span class="help-inline">&nbsp;#{instance.error_message.join(',')}</span></div>).html_safe
+        html = %(<div class="form-group has-danger">#{html}<span class="text-help">&nbsp;#{instance.error_message.join(',')}</span></div>).html_safe
       else
-        html = %(<div class="clearfix error">#{html}<span class="help-inline">&nbsp;#{instance.error_message}</span></div>).html_safe
+        html = %(<div class="form-group has-danger">#{html}<span class="text-help">&nbsp;#{instance.error_message}</span></div>).html_safe
       end
     end
     html

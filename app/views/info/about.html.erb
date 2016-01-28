@@ -1,58 +1,23 @@
 <article class="inner">
-  <h2>What is Booster?</h2>
+  <div class="header-join">
+    <h2>What makes Booster special?</h2>
+  </div>
 
-  <p>The Booster conference is an IT conference for the whole development team, and will take place <%= Dates::CONFERENCE_DATES %> in
-    Bergen, Norway.
-    Squeezed in between the mountains of western Norway and the fjords, the location provides for a unique experience.
+   <p>Booster is a software conference for the entire team. That means if you’re a developer, project managers, architect, UX-professional, tester or security professional, we have something for you!
   </p>
 
-  <p>
-    Booster is a software conference aimed at developers, project managers/scrum masters, architects, UX people,
-    testers, test managers and security professionals.
-  </p>
+   <p>Our goal is that you come back from the conference with real knowledge you can use.
+   </p>
 
-  <p>
-    We don&#8217;t do the traditional hour-long lectures. Instead we have the bite-sized wisdom of lightning talks and
-    the immersion of tutorials, making you come back from the conference with real knowledge you can use.
-  </p>
+   <p>We also focus on long breaks for networking, provide excellent coffee and good food. Keep it short and simple!
+   </p>
 
-  <p>
-    Meeting other people is a large part of what makes a conference worth attending. At Booster we want to make it easy
-    to chat with other participants and speakers. That&#8217;s why we have long breaks, provide excellent coffee and
-    good food, and a conference dinner included in the price. We also invite local user communities to take part in the
-    conference. Speakers are encouraged to hang around during breaks, and participate at the conference dinner and
-    community events.
-  </p>
+   <h2>Practical information for Booster 2016
+   </h2>
 
+   <h3>Where and When</h3>
 
-  <h2>Why is the Booster conference different?
-    <%= image_tag("maskott3.png", {:width => "120px", :class => "pull-right"}) %>
-  </h2>
-
-  <ul>
-    <li><strong>We're in Bergen</strong>, the most beautiful city in Norway.</li>
-    <li><strong>We believe that lack of communication is one of the industry's biggest problems.</strong> We aim to
-      gather
-      developers, project managers/scrum masters, architects, UX people, testers, test managers and security
-      professionals in one conference.
-    </li>
-    <li><strong>We don't have any hour-long talks</strong>. Instead we have the bite-sized wisdom of lightning talks and
-      the immersion of tutorials, making you come back from the conference with real knowledge you can use.
-    </li>
-    <li><strong>We care about the social aspects, too.</strong> The most interesting parts of a conference often happen
-      in the breaks. That's why we have top notch food, long breaks, a conference dinner included in the price, a high
-      speaker-participant ratio and friendly speakers that are happy to talk with the participants.
-    </li>
-  </ul>
-
-  <h2>Who are we?</h2>
-  <p>
-    Meet <a href="/info/organizers">the volunteers behind Booster <%= Dates::CONFERENCE_YEAR %>.</a>
-  </p>
-
-  <h2>Practical information</h2>
-
-  <p>
+	<p>
     The conference takes place <%= Dates::CONFERENCE_DATES %> at
     <a href="http://www.scandichotels.com/en/Hotels/Countries/Norway/Bergen/Hotels/Scandic-Bergen-City/" target="_blank">
       Scandic Hotel Bergen City</a> in Bergen, Norway. The closest airport is
@@ -62,16 +27,62 @@
     the hotel is called Festplassen.
   </p>
 
-  <!--p>
-    To book a room at the conference hotel, contact the hotel by phone (+47 55 30 90 80) or e-mail <a href="mailto:bergencity@scandichotels.com">bergencity@scandichotels.com</a>. Booking code is 'Booster'. The special rate for Booster participants is NOK 1290 for a single room, and NOK 1490 for a double room. This rate is not available on the Scandic hotels website.
-  </p-->
-
-  <p>
+	<p>
   <iframe width="300" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.no/maps?ie=UTF8&amp;q=scandic+hotel+bergen&amp;fb=1&amp;gl=no&amp;hq=scandic+hotel&amp;hnear=Bergen&amp;cid=0,0,5996699683404040037&amp;ei=NlXLTJ-oAoiDOsLFmeEB&amp;ved=0CDUQnwIwAw&amp;ll=60.391293,5.317497&amp;spn=0.006295,0.006295&amp;t=h&amp;output=embed"></iframe>
   <br/>
   <small>
     <a href="http://maps.google.no/maps?ie=UTF8&amp;q=scandic+hotel+bergen&amp;fb=1&amp;gl=no&amp;hq=scandic+hotel&amp;hnear=Bergen&amp;cid=0,0,5996699683404040037&amp;ei=NlXLTJ-oAoiDOsLFmeEB&amp;ved=0CDUQnwIwAw&amp;ll=60.391293,5.317497&amp;spn=0.006295,0.006295&amp;t=h&amp;source=embed" style="color:#0000FF;text-align:left">See
       a larger map</a></small>
-  </p>
+  	</p>
 
+	<h4>First registration</h4>
+
+	<p>Registration happens between 08-09:00 at the Booster stand. You’ll find the registration stand close to the hotel reception. One of our great volunteers will present you with your access pass and a goodie bag.
+	</p>
+
+	<h4>Food and breaks</h4>
+
+	<p>As a participant you can enjoy one of Bergen’s best hotel lunches. Lunch is served in the restaurant.
+	</p>
+
+	<p>Snacks are provided in the breaks, and we also have our very own barista. If coffee isn’t your thing, this year we’re introducing tea into the mix!
+	</p>
+
+	<h4>Conference dinner</h4>
+
+	<p>One of the highlights of any conference is always the conference dinner and Booster is no exception. All participants are welcome to our conference dinner!
+	</p>
+
+	<h4>Code of conduct</h4>
+
+	<p>The Booster team is very proud of our <a href="/info/coc">Code of Conduct</a>. All participants, speakers, volunteers and organizers have agreed to follow the <a href="/info/coc">Code of Conduct</a>.
+	</p>
+
+    <h2>Who are we?</h2>
+
+
+<div class="container-fluid">
+	<div class="row">
+	  <% for organizer in @organizers.shuffle do %>
+	  <div class="col-md-3 col-xs-6">
+	    <div class="content">
+	      <div class="organizer-header">
+	        <%= image_tag organizer.bio.picture.url, class: 'organizer-image' %>
+
+		    <div class="organizer-meta">
+	        	<b><%= organizer.full_name %></b>
+	        	<div><i><%= organizer.bio[:title] %></i></div>
+
+	        	<% if organizer.bio[:twitter_handle] && organizer.bio[:twitter_handle].length > 0 %>
+	        	<a href="http://twitter.com/<%= organizer.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+	            	&#64;<%= organizer.bio[:twitter_handle].sub(/@/, '') %>
+	        	</a>
+	        	<% end %>
+		    </div>
+		  </div>
+	    </div>
+	  </div>
+  	  <% end %>
+	</div>
+		</div>
 </article>

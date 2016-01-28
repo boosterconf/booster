@@ -2,9 +2,15 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'rails', '3.2.22'
+gem 'rails', '3.2.22.1'
 gem "authlogic", '~> 3.3.0'
 gem 'paperclip', '~>3.0'
+
+gem 'bootstrap', '~> 4.0.0.alpha2'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
 
 gem 'tinymce-rails'
 gem 'selectize-rails'
@@ -39,6 +45,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'taps'
+  gem 'dotenv-rails'
 end
 
 group :test do

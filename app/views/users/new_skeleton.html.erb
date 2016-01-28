@@ -1,3 +1,4 @@
+<article>
 <h2>Register a skeleton user</h2>
 
 <%= render "shared/notice" %>
@@ -7,30 +8,44 @@
 </p>
 
 <%= form_for @user, :url => create_skeleton_user_path do |f| %>
+  <fieldset class="form-group">
+    <%= f.label :first_name, "First name" %>
+    <%= text_field(:user, :first_name, class: 'form-control') %>
+  </fieldset>
 
-    <%= f.label :first_name %>
-    <%= text_field(:user, :first_name, :class => 'input-xlarge') %>
+  <fieldset class="form-group">
+    <%= f.label :last_name, "Last name" %>
+    <%= text_field(:user, :last_name, class: 'form-control') %>
+  </fieldset>
 
-    <%= f.label :last_name %>
-    <%= text_field(:user, :last_name, :class => 'input-xlarge') %>
+  <fieldset class="form-group">
+    <%= f.label :company, "Company" %>
+    <%= text_field(:user, :company, class: 'form-control') %>
+  </fieldset>
 
+  <fieldset class="form-group">
     <%= f.label :email %>
-    <%= email_field(:user, :email, :class => 'input-xlarge') %>
+    <%= email_field(:user, :email, class: 'form-control') %>
+  </fieldset>
 
-    <%= f.fields_for :registration do |reg| %>
-        <%= reg.label :ticket_type_old, "Ticket type" %><br>
-        <%= reg.select :ticket_type_old, [
-                ['Partner ticket', 'sponsor'],
-                ['Volunteer', 'volunteer'],
-                ['Reviewer', 'reviewer'],
-                ['Organizer', 'organizer'],
-                ['Student', 'student'],
-                ['Academic', 'academic']
-        ] %>
-    <% end %>
+  <fieldset class="form-group">
+    <%= f.label :phone_number, "Phone" %>
+    <%= text_field(:user, :phone_number, class: 'form-control') %>
+  </fieldset>
 
-    <%= f.label :company %>
-    <%= text_field(:user, :company, :class => 'input-xlarge') %>
-    <br/>
+  <fieldset class="form-group">
+      <%= f.fields_for :registration do |reg| %>
+          <%= reg.label :ticket_type_old, "Ticket type" %>
+          <%= reg.select :ticket_type_old, [
+                  ['Partner ticket', 'sponsor'],
+                  ['Volunteer', 'volunteer'],
+                  ['Reviewer', 'reviewer'],
+                  ['Organizer', 'organizer'],
+                  ['Student', 'student'],
+                  ['Academic', 'academic']
+          ], {}, { class: 'form-control' } %>
+      <% end %>
+  </fieldset>
     <%= f.submit "Create!", :class => "btn btn-primary" %>
 <% end %>
+</article>

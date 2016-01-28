@@ -1,4 +1,4 @@
-<div class="inner group">
+<article>
   <% content_for :title, "Suggested topics" %>
   <h2 class="page_title">Suggested talks
   <span class="feed" title="Watch new talks">
@@ -6,32 +6,31 @@
     <%= image_tag('/images/icon_feed.png') %>
     <% end %>
   </span>
-  </h2>
+    </h2>
 
-  <p>
-    <a href="#lightning">Go to lightning talks</a> | <%= link_to 'Accepted', accepted_talks_url %>
-  </p>
+    <p>
+      <a href="#lightning">Go to lightning talks</a> | <a href="#short">Go to short talks</a> | <%= link_to 'Accepted', accepted_talks_url %>
+    </p>
 
-  <p>Every abstract is visible to everyone, in order to encourage discussion.</p>
+    <p>Every abstract is visible to everyone, in order to encourage discussion.</p>
 
-  <br/>
+    <% unless @workshops.empty? %>
+        <h3 id="workshops">Workshops</h3>
+        <%= render partial: @workshops %>
+    <% end %>
 
-  <% unless @workshops.empty? %>
-      <h3 id="workshops">Workshops</h3>
-      <%= render partial: @workshops %>
-  <% end %>
+    <% unless @lightning_talks.empty? %>
+        <h3 id="lightning">Lightning talks</h3>
+        <%= render partial: @lightning_talks %>
+    <% end %>
 
-  <% unless @lightning_talks.empty? %>
-      <h3 id="lightning">Lightning talks</h3>
-      <%= render partial: @lightning_talks %>
-  <% end %>
-
-  <% unless @short_talks.empty? %>
-      <h3 id="short">Short talks</h3>
-      <%= render partial: @short_talks %>
-  <% end %>
+    <% unless @short_talks.empty? %>
+        <h3 id="short">Short talks</h3>
+        <%= render partial: @short_talks %>
+    <% end %>
 
   <p>Missing anything?
     <br/>  <%= link_to 'Suggest your own talk!', info_cfp_url, :class => "btn btn-primary btn-large" %>
   </p>
-</div>
+
+</article>
