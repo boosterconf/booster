@@ -1,5 +1,6 @@
 .rocket {
   height: 80%;
+  min-height: 300px;
   max-height: 400px;
   position:relative;
   background: linear-gradient(#EFF9CF, #BBEBDE); /* Standard syntax */
@@ -16,7 +17,7 @@
   .middle-of-image {
     width: 100%;
     position: absolute;
-    bottom: 50px;
+    bottom: 20px;
     left: 50%;
     text-align: center;
     transform: translateX(-50%);
