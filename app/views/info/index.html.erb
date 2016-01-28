@@ -19,6 +19,73 @@
   </span>
   <a class="btn btn-info" href="/info/tickets">Get your ticket</a>
 </div>
+
+<div class="jumbotron m-b-0">
+  <div class="container text-xs-center">
+    <h2>Super amazing speakers!</h2>
+
+    <p>Our speakers come from all over the world to teach, learn and delight.</p>
+
+    <p class="lead">
+      <%= link_to "View all", info_speakers_path %>
+    </p>
+  </div>
+</div>
+
+<div class="quad-list container-fluid">
+  <div class="quad-list-big hidden-md-down">
+    <div class="row">
+      <% @speakers.each do |speaker| %>
+          <div class="col-xs-3">
+            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+          </div>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <% @speakers.each do |speaker| %>
+          <div class="col-xs-3 minor-block-body">
+            <div class="minor-block-body-inner">
+              <h2><%= speaker.full_name %></h2>
+
+              <p class="lead"><%= speaker.bio.title %></p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="quad-list-small hidden-lg-up">
+    <div class="row">
+      <% @speakers.each do |speaker| %>
+          <div class="col-xs-3">
+            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+          </div>
+
+          <div class="col-xs-9 minor-block-body">
+            <div class="minor-block-body-inner">
+              <h2><%= speaker.full_name %></h2>
+
+              <p class="lead"><%= speaker.bio.title %></p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div class="imagetron">
+  <div class="imagetron-bg" style='background-image: url("/images/bergen1920.jpg")'>
+    <%= image_tag '/images/bergen1920.jpg', class: 'img-superfluid' %>
+  </div>
+  <div class="container imagetron-text-over-background">
+    <h2>Beautiful city of Bergen</h2>
+
+    <p>Bergen is pretty awesome, okay?</p>
+  </div>
+</div>
+
 <%= render partial: 'frontpage_element', locals: {
     headline: "Workshops",
     path_to_image: "/assets/workshops.jpg",
@@ -42,71 +109,6 @@
     path_to_image: "/assets/open_spaces.jpg",
     text: "Open spaces is about conversations. Join an open space, or suggest an open space about your favorite topic."
     } %>
-
-<div class="imagetron">
-  <div class="imagetron-bg" style='background-image: url("/images/bergen1920.jpg")'>
-    <%= image_tag '/images/bergen1920.jpg', class: 'img-superfluid' %>
-  </div>
-  <div class="container imagetron-text-over-background">
-    <h2>Beautiful city of Bergen</h2>
-
-    <p>Bergen is pretty awesome, okay?</p>
-  </div>
-</div>
-
-<div class="jumbotron m-b-0">
-  <div class="container text-xs-center">
-    <h2>Super amazing speakers!</h2>
-
-    <p>Our speakers come from all over the world to teach, learn and delight.</p>
-
-    <p class="lead">
-      <%= link_to "View all", info_speakers_path %>
-    </p>
-  </div>
-</div>
-
-<div class="quad-list container-fluid">
-  <div class="quad-list-big hidden-md-down">
-    <div class="row">
-      <% @speakers.each do |speaker| %>
-      <div class="col-xs-3">
-	<%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
-      </div>
-      <% end %>
-    </div>
-
-    <div class="row">
-      <% @speakers.each do |speaker| %>
-      <div class="col-xs-3 minor-block-body">
-	<div class="minor-block-body-inner">
-          <h2><%= speaker.full_name %></h2>
-
-          <p class="lead"><%= speaker.bio.title %></p>
-	</div>
-      </div>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="quad-list-small hidden-lg-up">
-    <div class="row">
-      <% @speakers.each do |speaker| %>
-      <div class="col-xs-3">
-	<%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
-      </div>
-
-      <div class="col-xs-9 minor-block-body">
-	<div class="minor-block-body-inner">
-          <h2><%= speaker.full_name %></h2>
-
-          <p class="lead"><%= speaker.bio.title %></p>
-	</div>
-      </div>
-      <% end %>
-    </div>
-  </div>
-</div>
 
 <div class="imagetron">
   <div class="imagetron-bg"  style='background: url("/images/bergen1920.jpg")'>
