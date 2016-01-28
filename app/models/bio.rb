@@ -1,7 +1,20 @@
 class Bio < ActiveRecord::Base
   belongs_to :user
   attr_accessible :picture, :title, :twitter_handle, :blog, :bio
-  has_attached_file :picture, PAPERCLIP_CONFIG.merge({:styles => {:thumb => '100x100#', :normal => '160x'}, :default_style => :normal, :default_url => '/assets/placeholder.jpg'})
+  has_attached_file :picture, PAPERCLIP_CONFIG.merge({
+              styles: {
+                  quad: {
+                    geometry: '400x400',
+                    convert_options: '-colorspace Gray',
+                    s3_headers: {
+                        'Cache-Control' => 'max-age=2592000',
+                        'Expires' => 30.days.from_now.httpdate
+                    }
+                  }
+              },
+              default_style: :quad,
+              default_url: '/assets/placeholder.jpg'                            
+          })
   validates_attachment_content_type :picture,
                                     :content_type =>
                                         ['image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png', 'image/x-png'],
