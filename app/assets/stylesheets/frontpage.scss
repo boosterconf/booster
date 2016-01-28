@@ -93,9 +93,13 @@
 }
 
 .minor-block-body {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
   position: relative;
   background: $gray-lightest;
-
+  justify-content: flex-start;
+  
   .lead {
     margin: 0;
   }
@@ -110,14 +114,8 @@
   padding: 0;
 }
 
-.minor-block-body {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  padding-left: 30px;
-}
-
 .minor-block-body-inner {
+  padding: $spacer-x $spacer-y;
 }
 
 footer .jumbotron {
