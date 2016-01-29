@@ -3,6 +3,28 @@
     padding: 1.0rem 1.5rem;
     z-index: 10;
 
+    @include media-breakpoint-down(xs) {
+        [class^="navbar-toggleable"] {
+            width: 100%;
+        }
+
+        .navbar-nav {
+            background: white;
+            clear: both;
+        }
+
+        .nav-item {
+            width: 100%;
+            float: none;
+            margin-left: 0 !important;
+            padding: 0 $spacer-x;
+
+            &+.nav-item {
+                border-top: 1px solid $gray-lightest;
+            }
+        }
+    }
+
     .nav-link {
 	line-height: 40px;
     }
