@@ -69,7 +69,8 @@ h5, h6 {
 
 article {
   p, h1, h2, h3, h4, h5, h6, form {
-    padding: $spacer-x $spacer-y;
+    padding-left: $spacer-x;
+    padding-right: $spacer-x;
   }
   ul {
     padding-bottom: $spacer-y;
@@ -89,7 +90,8 @@ article .btn-group > button {
 
 #main-content > article > * {
   max-width: 900px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #notifications {

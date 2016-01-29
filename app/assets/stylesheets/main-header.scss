@@ -12,9 +12,15 @@
 .header-join {
   max-width: 100% !important;
   background: #BBEBDE;
+  margin-bottom: $spacer-y;
 
   & > * {
     max-width: 900px;
     margin: auto;
+  }
+
+  h2 {
+    padding-top: $spacer-y;
+    padding-bottom: $spacer-y;
   }
 }
