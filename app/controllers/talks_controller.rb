@@ -119,6 +119,18 @@ class TalksController < ApplicationController
     @tags = Tag.all
     @types = TalkType.all
 
+    # TODO I'm so sorry...
+    @talk.type = case @talk.talk_type.name
+                   when "Short talk"
+                     ShortTalk.name
+                   when "Lightning talk"
+                     LightningTalk.name
+                   when "Keynote"
+                     Keynote.name
+                   else
+                     Workshop.name
+                 end
+
     # Tag handling
     tag_names = []
     if params[:item] && params[:item][:tags]

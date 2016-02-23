@@ -9,8 +9,8 @@
 
 <ul>
   <% @group_registration.registrations.each do |registration| %>
-      <li><%= registration.user.email %> (<%= registration.ticket_description %> - NOK <%= registration.ticket_price %>
-        )
+      <li>
+        <%= registration.user.email %> (<%= registration.ticket_description %> - NOK <%= registration.ticket_price %>)
       </li>
   <% end %>
 </ul>

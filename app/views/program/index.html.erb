@@ -24,8 +24,8 @@
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-      <!-- <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[704] %> -->
-      <div class="program-row">
+      <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[711] %>
+      <!--div class="program-row">
         <section class="period">
           <header>
             <time class="time"><%= '09:15-10:15' %></time>
@@ -41,7 +41,7 @@
             </div>
           </a>
         </section>
-      </div>
+      </div-->
 
       <div class='program-row'>
         <% period = @periods.pop %>
