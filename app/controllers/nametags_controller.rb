@@ -34,66 +34,63 @@ end
 
 class NametagPdf < Prawn::Document
   def initialize(users, view)
-    super(:page_size => "A6", :margin => 30)
+    super(:page_size => "A6", :margin => 20)
 
 
-    font_families.update("siri" => {
-        :normal => "#{Rails.root}/app/assets/fonts/siriregular.ttf",
-        :italic => "#{Rails.root}/app/assets/fonts/siriitalic.ttf",
-        :bold => "#{Rails.root}/app/assets/fonts/siribold.ttf",
-        :bold_italic => "#{Rails.root}/app/assets/fonts/siribolditalic.ttf"
+    font_families.update("VAGRounded" => {
+        :normal => "#{Rails.root}/app/assets/fonts/VAGRounded-Light.ttf"
+    })
+
+    font_families.update("FiraSans" => {
+        :normal => "#{Rails.root}/app/assets/fonts/FiraSans-HeavyItalic.ttf"
     })
 
     users.each_with_index do |user, index|
-      fill_color "f2f0e6"
+      image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 40, :at => [-20, bounds.height + 20]
 
-      rectangle [-30, 390], 298, 420
-      fill
+      move_down 195
 
-      image "#{Rails.root}/app/assets/images/nametag-top.png", :width => 300, at: [-30, 390]
-      move_down 80
-
-
-      font 'siri'
-      fill_color "1790A0"
+      font 'VAGRounded'
+      fill_color "303030"
 
       if user.full_name
-        font_size 26
-        text user.full_name, :align => :center, :style => :bold
+        font_size 30
+        text user.full_name, :align => :center
       else
-        font_size 15
-        text user.email || '', :align => :center, :style => :bold
+        font_size 20
+        text user.email || '', :align => :center
       end
 
       move_down 10
       font_size 15
-      fill_color "6D6C69"
       text user.company || '', :align => :center, :style => :normal
 
-      move_down 150
+      move_up bounds.height
 
-      fill_color "F6AB6F"
+      font 'FiraSans'
+      font_size 23
+
+      fill_color "FF9966"
       registration = user.registration
       ticket_type_text = ''
       if registration == nil
         ticket_type_text = ''
       elsif registration.ticket_type_old == 'organizer'
-        ticket_type_text = 'Organizer'
+        ticket_type_text = 'ORGANIZER'
       elsif registration.user.confirmed_speaker?
-        ticket_type_text = 'Speaker'
+        ticket_type_text = 'SPEAKER'
       elsif registration.ticket_type_old == 'volunteer'
-        ticket_type_text = 'Volunteer'
+        ticket_type_text = 'VOLUNTEER'
       elsif registration.ticket_type_old == 'student'
-        ticket_type_text ='Student'
+        ticket_type_text ='STUDENT'
       elsif registration.ticket_type_old == 'academic'
-        ticket_type_text ='Academic'
+        ticket_type_text ='ACADEMIC'
       elsif registration.ticket_type_old == 'guest'
-        ticket_type_text ='Guest - limited access'
+        ticket_type_text ='GUEST - LIMITED ACCESS'
       end
 
-      text_box ticket_type_text, :at => [0, 80], :align => :center
+      text_box ticket_type_text, :at => [0, 30], :align => :center
 
-      image "#{Rails.root}/app/assets/images/nametag-bottom.png", :width => 290, :at => [-25,60]
 
       if index < users.size - 1
         start_new_page
