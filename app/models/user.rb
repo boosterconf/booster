@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   def full_name
     if read_attribute(:first_name)
-      read_attribute(:first_name) + ' ' + read_attribute(:last_name)
+      (read_attribute(:first_name) or "") + ' ' + (read_attribute(:last_name) or "")
     elsif read_attribute(:name)
       read_attribute(:name)
     else
