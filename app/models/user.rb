@@ -194,6 +194,10 @@ class User < ActiveRecord::Base
     write_attribute(:featured_speaker, true)
   end
 
+  def is_on_twitter?
+    bio.twitter_handle.length > 0  
+  end
+  
   def has_all_statistics?
     self.gender != nil && self.birthyear != nil
   end
