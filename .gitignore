@@ -18,6 +18,7 @@ local_env.yml
 /tmp
 .env
 .idea
+*.swp
 *.pxm
 *~
 .DS_Store
