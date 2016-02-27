@@ -9,7 +9,7 @@
     <div class="row">
         <% @speakers.shuffle.each_with_index do |speaker,index| %>
             <div class="speaker <%= 'odd' if index%2 != 0 %> col-md-12">
-              <div class="row">
+              <div class="row speaker-row">
               <div class="left col-sm-6">
                 <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
               </div>
