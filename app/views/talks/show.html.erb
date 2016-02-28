@@ -12,12 +12,6 @@
     </p>
 <% end %>
 
-<% if @talk.accepted? && @talk.speakers_confirmed? %>
-    <p><%= image_tag("approved_talk.png") %> approved</p>
-<% end %>
-
-<p>Talk type: <%= @talk.talk_type.name_and_duration %></p>
-
 <div class="tags">
   <% unless @talk.tags.empty? %>
       <b>Tags:</b>
@@ -31,6 +25,10 @@
 
 <% if @talk.users.include?(current_user) || admin? %>
     <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
+
+    <% if @talk.accepted? && @talk.speakers_confirmed? %>
+      <p><%= image_tag("approved_talk.png") %> approved</p>
+    <% end %>
 
     <% if @talk.slide_file_name.present? %>
         <h3>Presentation slides</h3>
