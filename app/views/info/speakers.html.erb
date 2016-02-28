@@ -18,18 +18,24 @@
                   <h3><%= speaker.full_name %></h3>
                   <div class="speaker-meta">
 		    <p>
-                      <i><%= speaker.bio[:title] %></i><br />
+                      <i><%= speaker.bio[:title] %></i>
 
                       <% if speaker.is_on_twitter? %>
-                            <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+                            <br />
+			    <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
                               &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
                             </a>
                       <% end %>
-		      </p>
-                    </div>
+		    </p>
+                  </div>
 
                   <div class="speaker-bio">
                     <%= simple_format speaker.bio[:bio] %>
+		    <% if speaker.has_blog? %>
+		      <p>
+			<%= speaker[:first_name] %> blogs at <a href="<%= speaker.bio[:blog] %>" target="_blank"><%= speaker.bio[:blog] %></a>
+	              </p>
+		    <% end %>
 		 </div>
 
                   <% unless speaker.accepted_talks.empty? %>
