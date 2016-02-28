@@ -15,20 +15,18 @@
               </div>
               <div class="right col-sm-6">
                 <div class="content">
-                  <div class="speaker-header">
-
-                    <div class="speaker-meta">
-                      <span class="speaker-name"><b><%= speaker.full_name %></b></span>
-                      <div><i><%= speaker.bio[:title] %></i></div>
+                  <h3><%= speaker.full_name %></h3>
+                  <div class="speaker-meta">
+		    <p>
+                      <i><%= speaker.bio[:title] %></i><br />
 
                       <% if speaker.is_on_twitter? %>
-
-                          <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-                            &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-                          </a>
+                            <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+                              &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
+                            </a>
                       <% end %>
+		      </p>
                     </div>
-                  </div>
 
                   <div class="speaker-bio">
                     <%= simple_format speaker.bio[:bio] %>
