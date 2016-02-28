@@ -1,7 +1,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
       $("#acceptances").tablesorter({
-          theme: 'blue',
            // use save sort widget
           widgets: ["saveSort"]
 
@@ -10,11 +9,7 @@
         $("#acceptances").sieve({
             itemSelector: 'tbody tr',
             textSelector: 'td:not(.no-filter), td select option[selected]',
-            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>",
-            complete: function(){
-                // update the zebra widget after Sieve completes
-                $table.trigger('applyWidgets');
-            }
+            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
         });
 
         $(".email").bind("ajax:error", function (evt, data, status, xhr) {
