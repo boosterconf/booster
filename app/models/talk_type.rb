@@ -5,6 +5,18 @@ class TalkType < ActiveRecord::Base
     "#{name} (#{duration})"
   end
 
+  def is_keynote?
+    name == "Keynote"
+  end
+  
+  def is_lightning_talk?
+    name == "Lightning talk"
+  end
+  
+  def is_short_talk?
+    name == "Short talk"
+  end
+
   def self.workshops
     where(is_workshop: true)
   end

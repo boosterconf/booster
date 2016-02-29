@@ -92,17 +92,15 @@ class Talk < ActiveRecord::Base
   end
 
   def is_lightning_talk?
-    # TODO: Megahack!
-    return false unless talk_type
-    talk_type.name == 'Lightning talk'
+    talk_type.is_lightning_talk?
   end
 
   def is_workshop?
-    !is_lightning_talk?
+    talk_type.is_workshop
   end
 
   def is_short_talk?
-    false
+    talk_type.is_short_talk?
   end
 
 =begin
