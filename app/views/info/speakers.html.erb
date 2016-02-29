@@ -10,13 +10,17 @@
         <% @speakers.shuffle.each_with_index do |speaker,index| %>
             <div class="speaker <%= 'odd' if index%2 != 0 %> col-md-12">
               <div class="row speaker-row">
-              <div class="left col-sm-6">
+	      <div class="left col-sm-6">
+              <% unless speaker.bio == nil %>
                 <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
-              </div>
+              <% end %>
+	      </div>
               <div class="right col-sm-6">
                 <div class="content">
                   <h3><%= speaker.full_name %></h3>
-                  <div class="speaker-meta">
+                  
+		  <% unless speaker.bio == nil %>
+		  <div class="speaker-meta">
 		    <p>
                       <i><%= speaker.bio[:title] %></i>
 
@@ -37,19 +41,19 @@
 	              </p>
 		    <% end %>
 		 </div>
+		 <% end %>
+                 <% unless speaker.accepted_talks.empty? %>
+                   <p>
+                     <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
+                   </p>
+                   <ul style="list-style-type: none;">
+                     <% speaker.accepted_talks.each do |talk| %>
+                       <li><%= link_to h(talk.title), talk %></li>
+                     <% end %>
+                   </ul>
 
-                  <% unless speaker.accepted_talks.empty? %>
-                      <p>
-                        <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
-                      </p>
-                      <ul style="list-style-type: none;">
-                        <% speaker.accepted_talks.each do |talk| %>
-                            <li><%= link_to h(talk.title), talk %></li>
-                        <% end %>
-                      </ul>
-
-                  <% end %>
-                </div>
+                 <% end %>
+               </div>
               </div>
                 </div>
             </div>

@@ -195,11 +195,11 @@ class User < ActiveRecord::Base
   end
 
   def is_on_twitter?
-    bio.twitter_handle.length > 0  
+    bio.twitter_handle && bio.twitter_handle.length > 0  
   end
 
   def has_blog?
-    bio.blog.length > 0
+    bio.blog && bio.blog.length > 0
   end
 
   def has_all_statistics?

@@ -35,7 +35,7 @@
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
     <div class="row">
-      <% @speakers.each do |speaker| %>
+      <% @featured_speakers.each do |speaker| %>
           <div class="col-xs-3">
             <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
           </div>
@@ -43,7 +43,7 @@
     </div>
 
     <div class="row">
-      <% @speakers.each do |speaker| %>
+      <% @featured_speakers.each do |speaker| %>
           <div class="col-xs-3 minor-block-body">
             <div class="minor-block-body-inner">
               <h2><%= speaker.full_name %></h2>
@@ -57,7 +57,7 @@
 
   <div class="quad-list-small hidden-lg-up">
     <div class="row">
-      <% @speakers.each do |speaker| %>
+      <% @featured_speakers.each do |speaker| %>
           <div class="col-xs-3">
             <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
           </div>
