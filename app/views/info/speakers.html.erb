@@ -47,7 +47,7 @@
                    </p>
                    <ul style="list-style-type: none;">
                      <% speaker.accepted_talks.each do |talk| %>
-                       <li><%= link_to h(talk.title), talk %></li>
+                       <li><%= link_to h(talk.talk_type.name + ": " + talk.title), talk %></li>
                      <% end %>
                    </ul>
 
