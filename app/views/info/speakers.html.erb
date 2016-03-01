@@ -17,8 +17,7 @@
 	      </div>
               <div class="right col-sm-6">
                 <div class="content">
-                  <h3><%= speaker.full_name %></h3>
-                  
+	          <h3><a name="<%= speaker.full_name %>"><%= speaker.full_name %></a></h3>                  
 		  <% unless speaker.bio == nil %>
 		  <div class="speaker-meta">
 		    <p>
