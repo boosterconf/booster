@@ -7,6 +7,7 @@ free_prices: &free_prices
 prices: &prices
   early_bird: 5500
   full_price: 7000
+  one_day: 3500
   lightning: 3500
   reviewer: 4400
   dinner: 0
@@ -16,6 +17,7 @@ development: &development
   prices:
     early_bird: 10
     full_price: 12
+    one_day: 5
     lightning: 5
     reviewer: 5
     <<: *free_prices
@@ -27,6 +29,7 @@ staging:
   prices:
     early_bird: 10
     full_price: 12
+    one_day: 5
     lightning: 5
     reviewer: 5
     <<: *free_prices
@@ -38,6 +41,7 @@ test:
   prices:
     early_bird: 10
     full_price: 12
+    one_day: 5
     lightning: 5
     reviewer: 5
     <<: *free_prices
