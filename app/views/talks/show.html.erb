@@ -1,7 +1,20 @@
 <article>
 <%= content_for :title, h(@talk.title) %>
 <h2 class="page_title"><%= h @talk.title %></h2>
-<h4><%= render :partial => @talk.users %></h4>
+<% if admin? %>
+  <h4><%= render :partial => @talk.users %></h4>
+<% end %>
+
+<% unless admin? && @talk.accepted? && @talk.speakers_confirmed? %>
+  <% @talk.users.collect do | user | %>
+    <% if user.bio != nil %>
+      <h4><a href="../info/speakers/#<%=user.full_name %>"><%= user.full_name %></a></h4>
+    <% else %>
+      <h4><%= user.full_name %></h4>
+    <% end %>
+  <% end %>
+<% end %>
+
 <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
 <% if reviewer? %>
