@@ -48,7 +48,7 @@ class NametagPdf < Prawn::Document
     users.each_with_index do |user, index|
       image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 40, :at => [-20, bounds.height + 20]
 
-      move_down 195
+      move_down 210
 
       font 'VAGRounded'
       fill_color "303030"
