@@ -146,6 +146,11 @@ class User < ActiveRecord::Base
     talks = self.talks.find_all { |talk| talk.is_workshop? && talk.accepted? }
     !talks.empty?
   end
+  
+  def has_accepted_talk?
+    talks = self.talks.find_all { |talk| talk.accepted? }
+    !talks.empty?
+  end
 
   def has_all_talks_refused?
     refused_talks = self.talks.find_all { |talk| talk.refused? }
@@ -255,7 +260,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_accepted_speakers
-    self.all.select { |u| u.has_accepted_tutorial? || u.has_accepted_lightning_talk? }
+    self.all.select { |u| u.has_accepted_talk? }
   end
 
   def self.all_tutorial_speakers
