@@ -3,7 +3,8 @@
 <p></p><strong>Total number of companies: <%= @companies.size %></strong></p>
 
 <ol>
+
 <% for company in @companies %>
-    <li><%= company.company.present? ? company.company : "(n/a)" %>: <%= company.num_of_participants %></li>
+    <li><%= company[0] %> : <%= company [1] %></li>
 <% end %>
 </ol>
