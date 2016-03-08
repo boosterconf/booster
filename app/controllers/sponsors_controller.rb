@@ -8,6 +8,7 @@ class SponsorsController < ApplicationController
   respond_to :html, :js
 
   def index
+    @users = User.all_organizers
   end
 
   def new
@@ -33,6 +34,7 @@ class SponsorsController < ApplicationController
   end
 
   def update
+    @users = User.all_organizers
     @sponsor =
         SponsorAcceptedSlackNotifier.new(
             SponsorInvoiceCreator.new(
@@ -55,17 +57,28 @@ class SponsorsController < ApplicationController
             if @sponsor.save
               redirect_to sponsors_path, notice: "Partner #{@sponsor.name} was successfully updated."
             else
-              @users = User.all_organizers
               @event = Event.new(sponsor_id: @sponsor.id)
               render action: :edit
             end
           }
+
           format.js {
-            if @sponsor.save
-              flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
+	    notice = "I have no idea what just happened." #obvs should not actually ever happen..
+	    if params[:sponsor].has_key?(:user_id)
+	      unless @sponsor.user.nil?
+	        notice = "Responsible for #{@sponsor.name} changed to #{@sponsor.user.full_name}"
+	      else
+	        notice = "Nobody is responsible for #{@sponsor.name} anymore."
+	      end
+	    elsif params[:sponsor].has_key?(:status)
+	      notice = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]}"
+	    end 
+
+	    if @sponsor.save
+              flash[:notice] = notice
             else
-              flash[:error] = "Status for #{@sponsor.name} was NOT changed to #{Sponsor::STATES[@sponsor.status]} "
-            end
+              flash[:error] = "#{@sponsor.name} was NOT updated!"
+	    end
             render
           }
         end

@@ -1,6 +1,18 @@
 
     <td><%= h sponsor.name[0..25] %></td>
-    <td><%= h sponsor.user ? sponsor.user.full_name : '' %></td>
+    
+    <% if sponsor.user != nil %>
+    <td class='no-filter' data-sort='<%= sponsor.user.full_name %>' data-filter='<%= sponsor.user.full_name %>'>
+    <% else %>
+    <td class='no-filter' data-sort='' data-filter=''>
+    <% end %>
+          <%= form_for(sponsor, :html => { :style => 'margin: 0;', :dataType => :js }, :remote => true, :method => :put) do |f| %>
+	    <%= f.select(:user_id,
+                options_from_collection_for_select(@users, :id, :full_name, sponsor.user.nil? ? 0 : sponsor.user.id ), {:include_blank => 'None'},
+                    {:style => 'margin-bottom: 0; width: 130px;', :onchange => "$(this).parent('form').submit();"} ) %>
+          <% end %>
+    </td>
+
 
     <td class='no-filter' data-sort='<%= sponsor.status %>' data-filter='<%= sponsor.status %>'>
       <%= form_for(sponsor, :html => { :style => 'margin: 0;', :dataType => :js }, :remote => true, :method => :put) do |f| %>
