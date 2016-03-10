@@ -227,6 +227,10 @@ class User < ActiveRecord::Base
     email.match(Authlogic::Regex.email)
   end
 
+  def self.find_by_email(email)
+   self.where('lower(email) = ?', email.downcase).first
+  end
+
   def self.find_with_filter(filter)
     case filter
       when "all", "", nil
