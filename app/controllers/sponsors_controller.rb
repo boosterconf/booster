@@ -87,12 +87,14 @@ class SponsorsController < ApplicationController
   end
 
   def destroy
+    @users = User.all_organizers
     @sponsor.destroy
 
-    redirect_to sponsors_url, notice: "Partner #{@sponsor.name} was successfully updated."
+    redirect_to sponsors_url, notice: "Partner #{@sponsor.name} was deleted."
   end
 
   def email
+    @users = User.all_organizers
     if @sponsor.is_ready_for_email?
       Sponsor.transaction do
         BoosterMailer.initial_sponsor_mail(@sponsor).deliver
@@ -100,11 +102,11 @@ class SponsorsController < ApplicationController
         @sponsor.last_contacted_at = Time.now.to_datetime
         @sponsor.save
 
-        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent to #{@sponsor.contact_person_name} (#{@sponsor.email})")
         event.save
       end
 
-      redirect_to(sponsors_path, :notice => 'Email was sent and partner status set to \'Contacted\'.')
+      redirect_to(sponsors_path, :notice => "Email sent to #{@sponsor.name} (#{@sponsor.contact_person_name} #{@sponsor.email}) and partner status set to 'Contacted'.")
     else
       flash[:error] = 'No email sent: must have status suggested and responsible set'
       redirect_to sponsors_path
@@ -112,17 +114,17 @@ class SponsorsController < ApplicationController
   end
 
   def ajax_email
+    @users = User.all_organizers
     if @sponsor.is_ready_for_email?
       BoosterMailer.initial_sponsor_mail(@sponsor).deliver
       @sponsor.status = 'contacted'
       @sponsor.last_contacted_at = Time.now.to_datetime
       if @sponsor.save
-        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent to #{@sponsor.contact_person_name} (#{@sponsor.email})")
         event.save
 
-        redirect_to(sponsors_path, :notice => "Email was sent to #{@sponsor.name} and sponsor status set to \'Contacted\'.")
+        redirect_to(sponsors_path, :notice => "Email was sent to #{@sponsor.name} ((#{@sponsor.contact_person_name} #{@sponsor.email}) and partner status set to 'Contacted'.")
       else
-
         redirect_to sponsors_path
       end
     else
