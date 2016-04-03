@@ -3,7 +3,7 @@ class NametagsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @users = User.all(:include => :registration, :order => "name, created_at DESC")
+    @users = User.all(:include => :registration, :order => "last_name, created_at DESC")
 
     respond_to do |format|
       format.html

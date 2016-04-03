@@ -163,11 +163,11 @@ class UsersController < ApplicationController
   end
 
   def phone_list
-    @users = User.all(:order => "registrations.ticket_type_old, name", :include => :registration, :conditions => "registrations.ticket_type_old = 'volunteer' OR registrations.ticket_type_old = 'organizer'")
+    @users = User.all(:order => "registrations.ticket_type_old, last_name", :include => :registration, :conditions => "registrations.ticket_type_old = 'volunteer' OR registrations.ticket_type_old = 'organizer'")
   end
 
   def dietary_requirements
-    @users = User.all(:order => "registrations.ticket_type_old, name", :include => :registration, :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
+    @users = User.all(:order => "registrations.ticket_type_old, last_name", :include => :registration, :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
   end
 
   def new_skeleton

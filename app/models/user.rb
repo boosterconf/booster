@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
                   :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
                   :password, :password_confirmation, :city, :zip,
                   :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
-                  :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd, :name,
+                  :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd,
                   :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
                   :registration_attributes, :bio_attributes, :first_name, :last_name
 
@@ -33,8 +33,6 @@ class User < ActiveRecord::Base
   def full_name
     if read_attribute(:first_name)
       (read_attribute(:first_name) or "") + ' ' + (read_attribute(:last_name) or "")
-    elsif read_attribute(:name)
-      read_attribute(:name)
     else
       'unnamed'
     end
@@ -146,7 +144,7 @@ class User < ActiveRecord::Base
     talks = self.talks.find_all { |talk| talk.is_workshop? && talk.accepted? }
     !talks.empty?
   end
-  
+
   def has_accepted_talk?
     talks = self.talks.find_all { |talk| talk.accepted? }
     !talks.empty?
@@ -200,7 +198,7 @@ class User < ActiveRecord::Base
   end
 
   def is_on_twitter?
-    bio.twitter_handle && bio.twitter_handle.length > 0  
+    bio.twitter_handle && bio.twitter_handle.length > 0
   end
 
   def has_blog?
@@ -323,4 +321,3 @@ class User < ActiveRecord::Base
   end
 
 end
-

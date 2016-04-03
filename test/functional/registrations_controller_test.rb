@@ -117,7 +117,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
         assert last_email_sent.subject.include?("free ticket"), "Subject '#{last_email_sent.subject}' did not include 'free ticket'"
       end
-      
+
       should "trigger payment confirmation email when a non-free registration is completed" do
         subject = registrations(:one)
 
