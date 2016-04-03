@@ -95,16 +95,6 @@ namespace :infomail do
     end
   end
 
-  desc "Send out talk feedback to all speakers"
-  task :talk_feedback_email => :sent_email do
-    talk_feedbacks = TalkFeedback.all
-
-    for talk_feedback in talk_feedbacks
-      print "Mailing feedback for talk #{talk_feedback.talk.title}...\n"
-      BoosterMailer.deliver_talk_feedback_email(talk_feedback)
-    end
-  end
-
   desc "Send out information to tutorial speakers about the speaker's dinner"
   task :speakers_dinner => :sent_email do
     users = User.all_accepted_speakers
@@ -167,4 +157,3 @@ desc "Send out information to previous speaker about early bird"
     end
   end
 end
-

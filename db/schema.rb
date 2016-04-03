@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403203454) do
+ActiveRecord::Schema.define(version: 20160403204921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,24 +56,6 @@ ActiveRecord::Schema.define(version: 20160403203454) do
 
   add_index "events", ["sponsor_id"], name: "index_events_on_sponsor_id", using: :btree
   add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
-
-  create_table "feedback_comments", force: :cascade do |t|
-    t.integer "talk_id"
-    t.string  "comment", limit: 255
-  end
-
-  create_table "feedback_votes", force: :cascade do |t|
-    t.integer "talk_id"
-    t.integer "feedback_id"
-    t.string  "comment",     limit: 255
-    t.integer "vote"
-  end
-
-  create_table "feedbacks", force: :cascade do |t|
-    t.string   "comment",    limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-  end
 
   create_table "invitees", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -261,18 +243,6 @@ ActiveRecord::Schema.define(version: 20160403203454) do
   end
 
   add_index "tags_talks", ["tag_id", "talk_id"], name: "index_tags_talks_on_tag_id_and_talk_id", using: :btree
-
-  create_table "talk_feedbacks", force: :cascade do |t|
-    t.integer  "talk_id"
-    t.integer  "num_start"
-    t.integer  "num_end"
-    t.integer  "num_green"
-    t.integer  "num_yellow"
-    t.integer  "num_red"
-    t.text     "comments"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
   create_table "talk_positions", force: :cascade do |t|
     t.integer "talk_id",              null: false

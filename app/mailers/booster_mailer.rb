@@ -132,11 +132,6 @@ class BoosterMailer < ActionMailer::Base
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster #{Dates::CONFERENCE_YEAR} at Scandic Hotel Bergen City, Wednesday March 11.")
   end
 
-  def open_feedback_email(feedback)
-    @feedback = feedback
-    mail(:to => FROM_EMAIL, :from => FROM_EMAIL, :subject => "Anonymous feedback from website")
-  end
-
   def promo_email(user)
     @user = user
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "[Booster] Bergen Coding Dojo har startet opp!")
@@ -145,11 +140,6 @@ class BoosterMailer < ActionMailer::Base
   def error_mail(title, body)
     @body = body
     mail(to: "kontakt@boosterconf.no", from: FROM_EMAIL, subject: title)
-  end
-
-  def talk_feedback_email(talk_feedback)
-    @talk_feedback = talk_feedback
-    mail(:to => talk_feedback.talk.users.map(&:email), :from => FROM_EMAIL, :subject => "Feedback on your presentation at Booster #{Dates::CONFERENCE_YEAR}")
   end
 
   def hotel_program_email(user)

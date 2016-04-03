@@ -16,7 +16,6 @@ class InfoController < ApplicationController
 
   def index
     @featured_speakers = User.featured_speakers.shuffle[0...4]
-    @feedback = Feedback.new
   end
 
   def about

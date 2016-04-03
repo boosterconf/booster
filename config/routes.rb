@@ -98,8 +98,6 @@
 
   resources :receipts
 
-  resources :feedbacks
-
   resources :payment_notifications
 
   resources :password_resets
