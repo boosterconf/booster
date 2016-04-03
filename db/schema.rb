@@ -9,30 +9,33 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20160122193609) do
+ActiveRecord::Schema.define(version: 20160403195916) do
 
-  create_table "bios", :force => true do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "bios", force: :cascade do |t|
     t.integer  "user_id"
-    t.string   "title"
+    t.string   "title",                limit: 255
     t.text     "bio"
-    t.string   "twitter_handle"
-    t.string   "blog"
+    t.string   "twitter_handle",       limit: 255
+    t.string   "blog",                 limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "picture_file_name"
-    t.string   "picture_content_type"
+    t.string   "picture_file_name",    limit: 255
+    t.string   "picture_content_type", limit: 255
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
   end
 
-  add_index "bios", ["user_id"], :name => "index_bios_on_user_id"
+  add_index "bios", ["user_id"], name: "index_bios_on_user_id", using: :btree
 
-  create_table "comments", :force => true do |t|
+  create_table "comments", force: :cascade do |t|
     t.integer  "talk_id"
     t.integer  "user_id"
-    t.string   "title"
+    t.string   "title",        limit: 255
     t.text     "description"
     t.boolean  "is_displayed"
     t.boolean  "is_a_review"
@@ -40,114 +43,114 @@ ActiveRecord::Schema.define(:version => 20160122193609) do
     t.datetime "updated_at"
   end
 
-  add_index "comments", ["talk_id"], :name => "index_comments_on_talk_id"
-  add_index "comments", ["user_id"], :name => "index_comments_on_user_id"
+  add_index "comments", ["talk_id"], name: "index_comments_on_talk_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
-  create_table "events", :force => true do |t|
+  create_table "events", force: :cascade do |t|
     t.text     "comment"
     t.integer  "sponsor_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "events", ["sponsor_id"], :name => "index_events_on_sponsor_id"
-  add_index "events", ["user_id"], :name => "index_events_on_user_id"
+  add_index "events", ["sponsor_id"], name: "index_events_on_sponsor_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
-  create_table "feedback_comments", :force => true do |t|
+  create_table "feedback_comments", force: :cascade do |t|
     t.integer "talk_id"
-    t.string  "comment"
+    t.string  "comment", limit: 255
   end
 
-  create_table "feedback_votes", :force => true do |t|
+  create_table "feedback_votes", force: :cascade do |t|
     t.integer "talk_id"
     t.integer "feedback_id"
-    t.string  "comment"
+    t.string  "comment",     limit: 255
     t.integer "vote"
   end
 
-  create_table "feedbacks", :force => true do |t|
-    t.string   "comment"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "feedbacks", force: :cascade do |t|
+    t.string   "comment",    limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "invitees", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "phone_number"
+  create_table "invitees", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.string   "email",              limit: 255
+    t.string   "phone_number",       limit: 255
     t.integer  "user_id"
-    t.string   "status"
-    t.string   "areas_of_expertise"
-    t.string   "notes"
+    t.string   "status",             limit: 255
+    t.string   "areas_of_expertise", limit: 255
+    t.string   "notes",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "departs_at"
     t.datetime "arrives_at"
   end
 
-  create_table "invoice_lines", :force => true do |t|
-    t.string   "text"
+  create_table "invoice_lines", force: :cascade do |t|
+    t.string   "text",            limit: 255
     t.integer  "price"
     t.integer  "sponsor_id"
     t.integer  "registration_id"
     t.integer  "invoice_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
-  add_index "invoice_lines", ["invoice_id"], :name => "index_invoice_lines_on_invoice_id"
-  add_index "invoice_lines", ["registration_id"], :name => "index_invoice_lines_on_registration_id"
-  add_index "invoice_lines", ["sponsor_id"], :name => "index_invoice_lines_on_sponsor_id"
+  add_index "invoice_lines", ["invoice_id"], name: "index_invoice_lines_on_invoice_id", using: :btree
+  add_index "invoice_lines", ["registration_id"], name: "index_invoice_lines_on_registration_id", using: :btree
+  add_index "invoice_lines", ["sponsor_id"], name: "index_invoice_lines_on_sponsor_id", using: :btree
 
-  create_table "invoices", :force => true do |t|
-    t.string   "our_reference"
-    t.string   "your_reference"
-    t.string   "recipient_name"
-    t.string   "adress"
-    t.string   "zip"
-    t.string   "city"
-    t.datetime "created_at",                                 :null => false
-    t.datetime "updated_at",                                 :null => false
-    t.string   "email"
-    t.string   "country"
-    t.string   "status",         :default => "not_invoiced"
+  create_table "invoices", force: :cascade do |t|
+    t.string   "our_reference",  limit: 255
+    t.string   "your_reference", limit: 255
+    t.string   "recipient_name", limit: 255
+    t.string   "adress",         limit: 255
+    t.string   "zip",            limit: 255
+    t.string   "city",           limit: 255
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
+    t.string   "email",          limit: 255
+    t.string   "country",        limit: 255
+    t.string   "status",         limit: 255, default: "not_invoiced"
     t.datetime "invoiced_at"
     t.datetime "paid_at"
-    t.string   "text"
+    t.string   "text",           limit: 255
   end
 
-  create_table "participants", :force => true do |t|
+  create_table "participants", force: :cascade do |t|
     t.integer  "talk_id"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "payment_notifications", :force => true do |t|
+  create_table "payment_notifications", force: :cascade do |t|
     t.text     "params"
     t.integer  "registration_id"
-    t.string   "status"
-    t.string   "transaction_id"
+    t.string   "status",          limit: 255
+    t.string   "transaction_id",  limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "paid_amount"
-    t.string   "currency"
-    t.string   "registered_by"
+    t.string   "currency",        limit: 255
+    t.string   "registered_by",   limit: 255
   end
 
-  add_index "payment_notifications", ["registration_id"], :name => "index_payment_notifications_on_registration_id"
+  add_index "payment_notifications", ["registration_id"], name: "index_payment_notifications_on_registration_id", using: :btree
 
-  create_table "periods", :force => true do |t|
+  create_table "periods", force: :cascade do |t|
     t.time     "start_time"
     t.time     "end_time"
     t.date     "day"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "period_type", :default => "workshop"
+    t.string   "period_type", limit: 255, default: "workshop"
   end
 
-  create_table "registrations", :force => true do |t|
+  create_table "registrations", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "comments"
     t.decimal  "price"
@@ -157,50 +160,50 @@ ActiveRecord::Schema.define(:version => 20160122193609) do
     t.datetime "updated_at"
     t.boolean  "is_earlybird"
     t.boolean  "includes_dinner"
-    t.string   "description"
+    t.string   "description",                 limit: 255
     t.text     "ticket_type_old"
     t.text     "payment_notification_params"
     t.datetime "payment_complete_at"
     t.decimal  "paid_amount"
     t.text     "payment_reference"
-    t.boolean  "registration_complete",       :default => false
+    t.boolean  "registration_complete",                   default: false
     t.boolean  "manual_payment"
     t.text     "invoice_address"
     t.text     "invoice_description"
-    t.boolean  "free_ticket",                 :default => false
-    t.string   "completed_by"
-    t.boolean  "invoiced",                    :default => false
+    t.boolean  "free_ticket",                             default: false
+    t.string   "completed_by",                limit: 255
+    t.boolean  "invoiced",                                default: false
     t.boolean  "unfinished"
-    t.string   "unique_reference"
+    t.string   "unique_reference",            limit: 255
     t.integer  "invoice_id"
     t.boolean  "speakers_dinner"
     t.datetime "deleted_at"
   end
 
-  add_index "registrations", ["deleted_at"], :name => "index_registrations_on_deleted_at"
-  add_index "registrations", ["invoice_id"], :name => "index_registrations_on_invoice_id"
-  add_index "registrations", ["user_id"], :name => "index_registrations_on_user_id"
+  add_index "registrations", ["deleted_at"], name: "index_registrations_on_deleted_at", using: :btree
+  add_index "registrations", ["invoice_id"], name: "index_registrations_on_invoice_id", using: :btree
+  add_index "registrations", ["user_id"], name: "index_registrations_on_user_id", using: :btree
 
-  create_table "reviews", :force => true do |t|
+  create_table "reviews", force: :cascade do |t|
     t.integer  "talk_id"
     t.integer  "reviewer_id"
-    t.string   "subject"
+    t.string   "subject",     limit: 255
     t.text     "text"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
-  add_index "reviews", ["reviewer_id"], :name => "index_reviews_on_reviewer_id"
-  add_index "reviews", ["talk_id"], :name => "index_reviews_on_talk_id"
+  add_index "reviews", ["reviewer_id"], name: "index_reviews_on_reviewer_id", using: :btree
+  add_index "reviews", ["talk_id"], name: "index_reviews_on_talk_id", using: :btree
 
-  create_table "rooms", :force => true do |t|
-    t.string   "name"
+  create_table "rooms", force: :cascade do |t|
+    t.string   "name",       limit: 255
     t.integer  "capacity"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
-  create_table "slots", :force => true do |t|
+  create_table "slots", force: :cascade do |t|
     t.integer  "period_id"
     t.integer  "talk_id"
     t.datetime "created_at"
@@ -208,58 +211,58 @@ ActiveRecord::Schema.define(:version => 20160122193609) do
     t.integer  "room_id"
   end
 
-  add_index "slots", ["period_id"], :name => "index_slots_on_period_id"
-  add_index "slots", ["room_id"], :name => "index_slots_on_room_id"
-  add_index "slots", ["talk_id"], :name => "index_slots_on_talk_id"
+  add_index "slots", ["period_id"], name: "index_slots_on_period_id", using: :btree
+  add_index "slots", ["room_id"], name: "index_slots_on_room_id", using: :btree
+  add_index "slots", ["talk_id"], name: "index_slots_on_talk_id", using: :btree
 
-  create_table "speakers", :force => true do |t|
+  create_table "speakers", force: :cascade do |t|
     t.integer  "talk_id"
     t.integer  "user_id"
     t.datetime "deleted_at"
   end
 
-  add_index "speakers", ["deleted_at"], :name => "index_speakers_on_deleted_at"
-  add_index "speakers", ["talk_id", "user_id"], :name => "index_speakers_on_talk_id_and_user_id"
-  add_index "speakers", ["talk_id"], :name => "index_speakers_on_talk_id"
-  add_index "speakers", ["user_id"], :name => "index_speakers_on_user_id"
+  add_index "speakers", ["deleted_at"], name: "index_speakers_on_deleted_at", using: :btree
+  add_index "speakers", ["talk_id", "user_id"], name: "index_speakers_on_talk_id_and_user_id", using: :btree
+  add_index "speakers", ["talk_id"], name: "index_speakers_on_talk_id", using: :btree
+  add_index "speakers", ["user_id"], name: "index_speakers_on_user_id", using: :btree
 
-  create_table "sponsors", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
+  create_table "sponsors", force: :cascade do |t|
+    t.string   "name",                        limit: 255
+    t.string   "email",                       limit: 255
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "status"
-    t.string   "contact_person_phone_number"
-    t.string   "location"
+    t.string   "status",                      limit: 255
+    t.string   "contact_person_phone_number", limit: 255
+    t.string   "location",                    limit: 255
     t.boolean  "was_sponsor_last_year"
     t.datetime "last_contacted_at"
-    t.string   "contact_person_first_name"
-    t.string   "contact_person_last_name"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
+    t.string   "contact_person_first_name",   limit: 255
+    t.string   "contact_person_last_name",    limit: 255
+    t.string   "logo_file_name",              limit: 255
+    t.string   "logo_content_type",           limit: 255
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
-    t.boolean  "publish_logo",                :default => false
-    t.string   "website"
+    t.boolean  "publish_logo",                            default: false
+    t.string   "website",                     limit: 255
   end
 
-  add_index "sponsors", ["user_id"], :name => "index_sponsors_on_user_id"
+  add_index "sponsors", ["user_id"], name: "index_sponsors_on_user_id", using: :btree
 
-  create_table "tags", :force => true do |t|
-    t.string   "title"
+  create_table "tags", force: :cascade do |t|
+    t.string   "title",      limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "tags_talks", :id => false, :force => true do |t|
+  create_table "tags_talks", id: false, force: :cascade do |t|
     t.integer "talk_id"
     t.integer "tag_id"
   end
 
-  add_index "tags_talks", ["tag_id", "talk_id"], :name => "index_tags_talks_on_tag_id_and_talk_id"
+  add_index "tags_talks", ["tag_id", "talk_id"], name: "index_tags_talks_on_tag_id_and_talk_id", using: :btree
 
-  create_table "talk_feedbacks", :force => true do |t|
+  create_table "talk_feedbacks", force: :cascade do |t|
     t.integer  "talk_id"
     t.integer  "num_start"
     t.integer  "num_end"
@@ -271,142 +274,128 @@ ActiveRecord::Schema.define(:version => 20160122193609) do
     t.datetime "updated_at"
   end
 
-  create_table "talk_positions", :force => true do |t|
-    t.integer "talk_id",                 :null => false
-    t.integer "slot_id",                 :null => false
-    t.integer "position", :default => 1
+  create_table "talk_positions", force: :cascade do |t|
+    t.integer "talk_id",              null: false
+    t.integer "slot_id",              null: false
+    t.integer "position", default: 1
   end
 
-  create_table "talk_types", :force => true do |t|
-    t.string   "name"
-    t.string   "description"
+  create_table "talk_types", force: :cascade do |t|
+    t.string   "name",                     limit: 255
+    t.string   "description",              limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "duration"
+    t.string   "duration",                 limit: 255
     t.boolean  "eligible_for_cfp"
     t.boolean  "eligible_for_free_ticket"
     t.boolean  "is_workshop"
   end
 
-  create_table "talks", :force => true do |t|
+  create_table "talks", force: :cascade do |t|
     t.integer  "topic_id"
-    t.string   "title"
+    t.string   "title",                    limit: 255
     t.text     "description"
     t.boolean  "presenting_naked"
-    t.string   "video_url"
+    t.string   "video_url",                limit: 255
     t.integer  "position"
     t.boolean  "submitted"
-    t.string   "audience_level"
-    t.integer  "votes_count",              :default => 0
+    t.string   "audience_level",           limit: 255
+    t.integer  "votes_count",                          default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "allow_commercial_use"
-    t.string   "allow_derivatives"
-    t.string   "slide_file_name"
-    t.string   "slide_content_type"
+    t.string   "allow_derivatives",        limit: 255
+    t.string   "slide_file_name",          limit: 255
+    t.string   "slide_content_type",       limit: 255
     t.integer  "slide_file_size"
     t.datetime "slide_updated_at"
     t.integer  "period_id"
     t.integer  "comments_count"
-    t.string   "acceptance_status",        :default => "pending"
-    t.boolean  "email_sent",               :default => false
+    t.string   "acceptance_status",        limit: 255, default: "pending"
+    t.boolean  "email_sent",                           default: false
     t.integer  "sum_of_votes"
     t.integer  "num_of_votes"
     t.integer  "talk_type_id"
     t.integer  "max_participants"
-    t.integer  "participants_count",       :default => 0
-    t.string   "language"
+    t.integer  "participants_count",                   default: 0
+    t.string   "language",                 limit: 255
     t.text     "participant_requirements"
     t.text     "equipment"
-    t.string   "room_setup"
+    t.string   "room_setup",               limit: 255
     t.integer  "year"
     t.text     "outline"
-    t.string   "appropriate_for_roles"
-    t.string   "type"
+    t.string   "appropriate_for_roles",    limit: 255
+    t.string   "type",                     limit: 255
     t.boolean  "speakers_confirmed"
     t.text     "speaking_history"
     t.datetime "deleted_at"
   end
 
-  add_index "talks", ["deleted_at"], :name => "index_talks_on_deleted_at"
-  add_index "talks", ["id", "type"], :name => "index_talks_on_id_and_type"
-  add_index "talks", ["talk_type_id"], :name => "index_talks_on_talk_type_id"
+  add_index "talks", ["deleted_at"], name: "index_talks_on_deleted_at", using: :btree
+  add_index "talks", ["id", "type"], name: "index_talks_on_id_and_type", using: :btree
+  add_index "talks", ["talk_type_id"], name: "index_talks_on_talk_type_id", using: :btree
 
-  create_table "ticket_types", :force => true do |t|
-    t.string   "type"
-    t.string   "name"
+  create_table "ticket_types", force: :cascade do |t|
+    t.string   "type",        limit: 255
+    t.string   "name",        limit: 255
     t.text     "description"
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "timeslots", :force => true do |t|
-    t.string   "location"
-    t.string   "day"
-    t.string   "time"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "timeslots", force: :cascade do |t|
+    t.string   "location",   limit: 255
+    t.string   "day",        limit: 255
+    t.string   "time",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "talk_id"
   end
 
-  add_index "timeslots", ["talk_id"], :name => "index_timeslots_on_talk_id"
+  add_index "timeslots", ["talk_id"], name: "index_timeslots_on_talk_id", using: :btree
 
-  create_table "topics", :force => true do |t|
-    t.string   "title"
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                       limit: 255,                 null: false
+    t.string   "crypted_password",            limit: 255,                 null: false
+    t.string   "password_salt",               limit: 255,                 null: false
+    t.string   "persistence_token",           limit: 255,                 null: false
+    t.string   "name",                        limit: 255
+    t.string   "company",                     limit: 255
+    t.string   "phone_number",                limit: 255
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "users", :force => true do |t|
-    t.string   "email",                                          :null => false
-    t.string   "crypted_password",                               :null => false
-    t.string   "password_salt",                                  :null => false
-    t.string   "persistence_token",                              :null => false
-    t.string   "name"
-    t.string   "company"
-    t.string   "phone_number"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "login_count",                 :default => 0,     :null => false
-    t.integer  "failed_login_count",          :default => 0,     :null => false
+    t.integer  "login_count",                             default: 0,     null: false
+    t.integer  "failed_login_count",                      default: 0,     null: false
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
+    t.string   "current_login_ip",            limit: 255
+    t.string   "last_login_ip",               limit: 255
     t.boolean  "is_admin"
-    t.string   "perishable_token"
-    t.string   "registration_ip"
+    t.string   "perishable_token",            limit: 255
+    t.string   "registration_ip",             limit: 255
     t.boolean  "accepted_privacy_guidelines"
     t.boolean  "accept_optional_email"
-    t.string   "hometown"
-    t.string   "role"
+    t.string   "hometown",                    limit: 255
+    t.string   "role",                        limit: 255
     t.boolean  "female"
     t.integer  "birthyear"
     t.boolean  "member_dnd"
-    t.boolean  "featured_speaker",            :default => false
-    t.boolean  "feature_as_organizer",        :default => false
-    t.boolean  "invited",                     :default => false
-    t.string   "dietary_requirements"
-    t.string   "roles"
-    t.string   "city"
-    t.string   "zip"
-    t.string   "gender"
-    t.string   "first_name"
-    t.string   "last_name"
+    t.boolean  "featured_speaker",                        default: false
+    t.boolean  "feature_as_organizer",                    default: false
+    t.boolean  "invited",                                 default: false
+    t.string   "dietary_requirements",        limit: 255
+    t.string   "roles",                       limit: 255
+    t.string   "city",                        limit: 255
+    t.string   "zip",                         limit: 255
+    t.string   "gender",                      limit: 255
+    t.string   "first_name",                  limit: 255
+    t.string   "last_name",                   limit: 255
     t.datetime "deleted_at"
   end
 
-  add_index "users", ["deleted_at"], :name => "index_users_on_deleted_at"
-
-  create_table "votes", :force => true do |t|
-    t.integer  "talk_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
 
 end

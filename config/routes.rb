@@ -75,9 +75,6 @@
   match '/workshops' => 'talks#workshops', via: :all
   match '/lightning_talks' => 'talks#lightning_talks', via: :all
   match '/talks/cheat_sheet' => 'talks#cheat_sheet', via: :all
-  match '/talks/vote' => 'talks#vote', via: :all
-
-
 
   resources :talks do
     resources :comments
