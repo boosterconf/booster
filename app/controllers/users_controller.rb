@@ -81,9 +81,6 @@ class UsersController < ApplicationController
           flash[:notice] = "We will contact you to confirm the details."
           BoosterMailer.free_registration_notification(current_user, @user, user_url(@user)).deliver
           redirect_to @user
-        else
-          BoosterMailer.registration_confirmation(@user).deliver
-          redirect_to @user.registration.payment_url(payment_notifications_url, user_url(@user))
         end
       else
         flash[:error] = "An error occured. Please follow the instructions below."

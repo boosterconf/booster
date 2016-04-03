@@ -11,44 +11,16 @@
 <% elsif registration.registration_complete %>
 
     Payment is registered. See you at Booster!
-    
-<% elsif registration.manual_payment %>
 
+<% elsif registration.manual_payment %>
     <p>
       We'll send an invoice to <%= registration.user.email %> for NOK <%= registration.ticket_price %> + VAT. This page will be updated when payment is registered.
     </p>
 <% else %>
-
     <p>
-      We have not yet registered your payment. This can be caused by a number of things:
+      We have not yet registered your payment. This can be caused by a number of things, but no worries.
+      Send us <a href="mailto:kontakt@boosterconf.no">an email</a>, and we'll fix it.
     </p>
-
-    <ul>
-      <li>
-        You may not <%= link_to "have paid",
-                                registration.payment_url(payment_notifications_url, user_url(@user)) %>.
-      </li>
-      <li>
-        Something might have gone wrong during the payment process
-        <%= link_to "View payment status",
-                    registration.payment_url(payment_notifications_url, user_url(@user)) %>.
-      </li>
-      <% if registration.created_at > 15.minutes.ago %>
-          <li>
-            It might take a while before we have registered the payment
-          </li>
-      <% end %>
-      <li>Unable to use Paypal? We can send an invoice instead.
-        <%= link_to "Update invoice information", edit_registration_path(registration) %>
-      </li>
-      <% if registration.created_at < 3.hours.ago %>
-          <li>
-            Still in trouble? No worries, you still get to go to the conference,
-            Send us <a href="mailto:kontakt@boosterconf.no">an email</a>, and we'll fix it.
-          </li>
-      <% end %>
-    </ul>
-
 <% end %>
 
 

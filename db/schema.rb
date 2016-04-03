@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403204921) do
+ActiveRecord::Schema.define(version: 20160403210227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -108,20 +108,6 @@ ActiveRecord::Schema.define(version: 20160403204921) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "payment_notifications", force: :cascade do |t|
-    t.text     "params"
-    t.integer  "registration_id"
-    t.string   "status",          limit: 255
-    t.string   "transaction_id",  limit: 255
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.decimal  "paid_amount"
-    t.string   "currency",        limit: 255
-    t.string   "registered_by",   limit: 255
-  end
-
-  add_index "payment_notifications", ["registration_id"], name: "index_payment_notifications_on_registration_id", using: :btree
 
   create_table "periods", force: :cascade do |t|
     t.time     "start_time"

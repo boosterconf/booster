@@ -98,8 +98,6 @@
 
   resources :receipts
 
-  resources :payment_notifications
-
   resources :password_resets
 
   resources :invoices do

@@ -138,27 +138,6 @@ class Registration < ActiveRecord::Base
     '2016t-#{id}'
   end
 
-  def payment_url(payment_notifications_url, return_url)
-    values = {
-        :business => PAYMENT_CONFIG[:paypal_email],
-        :cmd => '_cart',
-        :upload => '1',
-        :currency_code => 'NOK',
-        :notify_url => payment_notifications_url,
-        :return => return_url,
-        :invoice => invoice_id,
-        :amount_1 => price_including_vat,
-        :item_name_1 => description,
-        :item_number_1 => '1',
-        :quantity_1 => '1'
-    }
-
-    PAYMENT_CONFIG[:paypal_url] +'?'+values.map do
-    |k, v|
-      '#{k}=#{CGI::escape(v.to_s)}'
-    end.join('&')
-  end
-
   def price_including_vat
     price * 1.25
   end
@@ -183,24 +162,24 @@ class Registration < ActiveRecord::Base
         when 'er_fakturert'
           return where(
             {
-              :free_ticket => false, 
-              :registration_complete => false, 
-              :manual_payment => true, 
+              :free_ticket => false,
+              :registration_complete => false,
+              :manual_payment => true,
               :invoiced => true
             })
         when 'skal_foelges_opp'
           return where(
             {
-              :free_ticket => false, 
-              :registration_complete => false, 
+              :free_ticket => false,
+              :registration_complete => false,
               :manual_payment => false
             })
         when 'skal_faktureres'
           return where(
             {
-              :free_ticket => false, 
-              :registration_complete => false, 
-              :manual_payment => true, 
+              :free_ticket => false,
+              :registration_complete => false,
+              :manual_payment => true,
               :invoiced => false
             })
         when 'dinner'
