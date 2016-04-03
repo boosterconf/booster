@@ -4,8 +4,8 @@ class User < ActiveRecord::Base
                   :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
                   :password, :password_confirmation, :city, :zip,
                   :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
-                  :invited, :is_admin, :last_login_at, :last_request_at, :login_count, :member_dnd,
-                  :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :role, :roles,
+                  :invited, :is_admin, :last_login_at, :last_request_at, :login_count,
+                  :password_salt, :perishable_token, :persistence_token, :phone_number, :registration_ip, :roles,
                   :registration_attributes, :bio_attributes, :first_name, :last_name
 
   has_one :registration, autosave: true

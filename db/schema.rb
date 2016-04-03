@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403201508) do
+ActiveRecord::Schema.define(version: 20160403203454) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -378,10 +378,8 @@ ActiveRecord::Schema.define(version: 20160403201508) do
     t.boolean  "accepted_privacy_guidelines"
     t.boolean  "accept_optional_email"
     t.string   "hometown",                    limit: 255
-    t.string   "role",                        limit: 255
     t.boolean  "female"
     t.integer  "birthyear"
-    t.boolean  "member_dnd"
     t.boolean  "featured_speaker",                        default: false
     t.boolean  "feature_as_organizer",                    default: false
     t.boolean  "invited",                                 default: false
