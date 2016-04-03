@@ -1,7 +1,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
       $("#acceptances").tablesorter({
-          theme: 'blue',
            // use save sort widget
           widgets: ["saveSort"]
 
@@ -10,11 +9,7 @@
         $("#acceptances").sieve({
             itemSelector: 'tbody tr',
             textSelector: 'td:not(.no-filter), td select option[selected]',
-            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>",
-            complete: function(){
-                // update the zebra widget after Sieve completes
-                $table.trigger('applyWidgets');
-            }
+            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
         });
 
         $(".email").bind("ajax:error", function (evt, data, status, xhr) {
@@ -27,10 +22,11 @@
       }
     );
 </script>
-<h1>Approval of talk</h1>
+<h1>Approval of talks</h1>
 
 <p>
   Total number of submitted talks: <%= @talks.size %><br><br>
+  
   <ul>
   <% @types.each_pair { |status, count| %>
     <li>
@@ -40,11 +36,12 @@
   <% } %>
 </ul>
 </p>
-<table id="acceptances" class="table table-striped">
+<table id="acceptances" class="table table-striped table-sortable">
   <thead>
     <tr>
       <th>Speaker</th>
       <th>Title</th>
+      <th>Type</th>
       <th>Status</th>
       <th>&nbsp;</th>
       <th>&nbsp;</th>
@@ -60,7 +57,9 @@
         </td>
         <td>
           <%= link_to h(talk.title), talk %>
-          (<%= talk.talk_type.name %>)
+	</td>
+        <td>
+	  <%= talk.talk_type.name %>
         </td>
         <td>
           <img src="images/<%= talk.status %>.gif" alt="<%= talk.status %>"/>

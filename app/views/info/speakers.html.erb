@@ -1,52 +1,64 @@
 <article class="inner group">
-  <h2>
-    Our speakers
-    <%= image_tag("folk-samlet.png", {:width => "450px", :class => "frontpage-img-align"}) %>
-  </h2>
+  <div class="header-join">
+    <h2>
+      Our speakers
+    </h2>
+  </div>
 
-  <% for speaker in @speakers.shuffle do %>
-  <div class="speaker">
-    <div class="content">
-      <div class="speaker-header">
-        <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
-
-	      <div class="speaker-meta">
-          <b><%= speaker.full_name %></b>
-          <div><i><%= speaker.bio[:title] %></i></div>
-
-          <% if speaker.bio[:twitter_handle].length > 0 %>
-
-          <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-            &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-          </a>
-          <% end %>
-
-          <% if speaker.bio.blog
-             short_url = speaker.bio.blog.sub(/^https?\:\/\//, '').sub(/^www./,'')
-             %>
-          - <%= link_to short_url, speaker.bio.blog, { title: 'Website', target: '_blank' } %>
-          <% end %>
+  <div class="speakers-body .container">
+    <div class="row">
+        <% @speakers.shuffle.each_with_index do |speaker,index| %>
+            <div class="speaker <%= 'odd' if index%2 != 0 %> col-md-12">
+              <div class="row speaker-row">
+	      <div class="left col-sm-6">
+              <% unless speaker.bio == nil %>
+                <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
+              <% end %>
 	      </div>
-      </div>
+              <div class="right col-sm-6">
+                <div class="content">
+	          <h3><a name="<%= speaker.full_name %>"><%= speaker.full_name %></a></h3>                  
+		  <% unless speaker.bio == nil %>
+		  <div class="speaker-meta">
+		    <p>
+                      <i><%= speaker.bio[:title] %></i>
 
-      <p>
-        <%= simple_format speaker.bio[:bio] %>
-      </p>
+                      <% if speaker.is_on_twitter? %>
+                            <br />
+			    <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+                              &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
+                            </a>
+                      <% end %>
+		    </p>
+                  </div>
 
-      <% unless speaker.accepted_talks.empty? %>
-      <p>
-        <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
-      </p>
-      <ul style="list-style-type: none;">
-        <% speaker.accepted_talks.each do |talk| %>
-        <li><%= link_to h(talk.title), talk %></li>
+                  <div class="speaker-bio">
+                    <%= simple_format speaker.bio[:bio] %>
+		    <% if speaker.has_blog? %>
+		      <p>
+			<%= speaker[:first_name] %> blogs at <a href="<%= speaker.bio[:blog] %>" target="_blank"><%= speaker.bio[:blog] %></a>
+	              </p>
+		    <% end %>
+		 </div>
+		 <% end %>
+                 <% unless speaker.accepted_talks.empty? %>
+                   <p>
+                     <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
+                   </p>
+                   <ul style="list-style-type: none;">
+                     <% speaker.accepted_talks.each do |talk| %>
+                       <li><%= link_to h(talk.talk_type.name + ": " + talk.title), talk %></li>
+                     <% end %>
+                   </ul>
+
+                 <% end %>
+               </div>
+              </div>
+                </div>
+            </div>
         <% end %>
-      </ul>
-
-      <% end %>
     </div>
   </div>
-  <% end %>
 
 
 </article>

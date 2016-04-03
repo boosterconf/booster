@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-  showDay(3);
+  showAll();
+
   $('#choose-day1').on('click', function (e) {
     e.preventDefault();
     showDay(1);
@@ -82,7 +83,7 @@ var showDay = function (dayNumber) {
   $("#day" + dayNumber).show();
 
   deleselectAllDays();
-  $("#choose-day" + dayNumber).parent().addClass("active");
+  $("#choose-day" + dayNumber).addClass("active");
   new StickyTitles($("#day" + dayNumber + " .follow-me")).load();
 };
 
@@ -90,10 +91,10 @@ var showAll = function () {
   $('#day1').show();
   $('#day2').show();
   $('#day3').show();
-  $('#choose-day3').parent().removeClass("active");
-  $('#choose-day2').parent().removeClass("active");
-  $('#choose-day1').parent().removeClass("active");
-  $('#choose-all').parent().addClass("active");
+  $('#choose-day3').removeClass("active");
+  $('#choose-day2').removeClass("active");
+  $('#choose-day1').removeClass("active");
+  $('#choose-all').addClass("active");
 
   new StickyTitles($(".follow-me")).load();
 };
@@ -114,6 +115,6 @@ var deleselectAllDays = function () {
   var i;
   for (i = 0; i < days.length; i++) {
     var day = days[i];
-    $(day).parent().removeClass("active");
+    $(day).removeClass("active");
   }
 };

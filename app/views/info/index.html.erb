@@ -1,60 +1,131 @@
-<div class="container">
-  <div class="row-fluid">
-    <div class="hello span12">
-      <div class="hello-inner">
-        <h2>Booster <%= Dates::CONFERENCE_YEAR %> kicks off March 9-11!</h2>
+<% content_for :pre_content do %>
+<div class="rocket">
 
-        <div class="cfp">
-          <p>
-            If you register now, you get our early bird price - only NOK <%= PAYMENT_CONFIG[:prices]['early_bird'].to_i %>!
-            Better hurry though, the bird leaves <%= AppConfig.early_bird_ends.strftime('%b %d') %>.
-          </p>
+  <div class="middle-of-image">
+    <span class="font-page-conference-dates">15th - 17th March 2017</span>
+    <%= image_tag "icons/rocket.svg", class: "rocket-image" %>
+    <span class="front-page-location">Bergen, Norway</span>
+  </div>
 
-          <p>
-            <%= link_to 'Register a person!', new_user_url, class: 'btn btn-primary btn-large' %>
-            <%= link_to 'Register a group!', new_group_registration_url, class: 'btn btn-primary btn-large' %>
-          </p>
-        </div>
-      </div>
-    </div>
+  <h1 class="rocket-title">
+The 2016 conference is over, thank you for joining! Mark the dates for 2017 in your calendar. Videos will be out soon.
+</h1>
+</div>
+<% end %>
 
-    <% if @speakers.size >= 4 %>
-        <div class="speakers-box">
-          <h4>Some of our speakers this year (<%= link_to 'See the rest', info_speakers_url %>)</h4>
+<div class="calltoaction">
+  <span>
+    <!-- We're accepting ideas for lightning talks and workshops until 15th November. -->
+    CfP will open in September
+  </span>
+</div>
 
-          <div class="speakers row-fluid">
-            <% for group in @speakers.shuffle.take(4).each_slice(2) %>
-                <div class="speaker-group span6">
-                  <% for speaker in group %>
-                      <div class="frontpage-speaker">
-                        <div>
-                          <a href="/info/speakers">
-                            <%= image_tag speaker.bio.picture.url %>
-                          </a>
-                        </div>
-                        <div>
-                          <b><%= speaker.full_name %></b> <br/> <i><%= speaker.bio[:title] %></i>
-                          <% if speaker.bio[:twitter_handle].length > 0 %>
-                              <br/>
-                              <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-                                &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-                              </a>
-                          <% end %>
-                        </div>
-                      </div>
-                  <% end %>
-                </div>
-            <% end %>
+<div class="jumbotron m-b-0">
+  <div class="container text-xs-center">
+    <h2>Super amazing speakers!</h2>
+
+    <p>Our speakers come from all over the world to teach, learn and delight.</p>
+
+    <p class="lead">
+      <%= link_to "View all", info_speakers_path %>
+    </p>
+  </div>
+</div>
+
+<div class="quad-list container-fluid">
+  <div class="quad-list-big hidden-md-down">
+    <div class="row">
+      <% @featured_speakers.each do |speaker| %>
+          <div class="col-xs-3">
+            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
           </div>
-        </div>
-    <% end %>
-
-    <div class="row-fluid">
-      <div class="span11" style="text-align: center; padding-top: 40px;">
-        <p>Got questions? We're available on <%= mail_to 'kontakt@boosterconf.no' %> and
-          <a href="http://twitter.com/boosterconf">@boosterconf</a>.</p>
-      </div>
+      <% end %>
     </div>
 
+    <div class="row">
+      <% @featured_speakers.each do |speaker| %>
+          <div class="col-xs-3 minor-block-body">
+            <div class="minor-block-body-inner">
+              <h2><a href="info/speakers/#<%=speaker.full_name %>"><%= speaker.full_name %></a></h2>
+
+              <p class="lead"><%= speaker.bio.title %></p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="quad-list-small hidden-lg-up">
+    <div class="row">
+      <% @featured_speakers.each do |speaker| %>
+          <div class="col-xs-3">
+            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+          </div>
+
+          <div class="col-xs-9 minor-block-body">
+            <div class="minor-block-body-inner">
+              <h2><%= speaker.full_name %></h2>
+
+              <p class="lead"><%= speaker.bio.title %></p>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+<div class="imagetron">
+  <div class="imagetron-bg" style='background-image: url("/images/bergen1920.jpg")'>
+    <%= image_tag '/images/bergen1920.jpg', class: 'img-superfluid' %>
+  </div>
+  <div class="container imagetron-text-over-background">
+    <h2>Beautiful city of Bergen</h2>
+
+    <p>Bergen "the city of seven mountains" is the proud home of Booster. Norwegian beauty surrounds the historic coastal city located in the city fjord.</p>
+  </div>
+</div>
+
+<%= render partial: 'frontpage_element', locals: {
+    headline: "Workshops",
+    path_to_image: "/assets/workshops.jpg",
+    text: "We strongly believe in learning by doing. Join a workshop and bring back practical knowledge to your workplace."
+    } %>
+
+<%= render partial: 'frontpage_element', locals: {
+    headline: "Lightning talks",
+    path_to_image: "/assets/talk.jpg",
+    text: "Lightning talks are fast-paced 10-minute talks about all the latest trends, buzzwords and more."
+    } %>
+
+<%= render partial: 'frontpage_element', locals: {
+    headline: "Short talks",
+    path_to_image: "/assets/short_talk.jpg",
+    text: "Short talks are 30-minute talks meant to give you a deeper understanding of a subject and acts as a supplement for our lightning talks."
+    } %>
+
+<%= render partial: 'frontpage_element', locals: {
+    headline: "Open spaces",
+    path_to_image: "/assets/open_spaces.jpg",
+    text: "Open spaces is about conversations. Join an open space, or suggest an open space about your favorite topic."
+    } %>
+
+<div class="imagetron">
+  <div class="imagetron-bg"  style='background-image: url("/assets/coffee.jpg")'>
+    <%= image_tag '/assets/coffee.jpg', class: 'img-superfluid' %>
+  </div>
+  <div class="container imagetron-text-over-background">
+    <%= image_tag '/images/barista.jpg', class: 'imagetron-img' %>
+    <%= image_tag '/images/tedragen.png', class: 'imagetron-img' %>
+    <h2>Our very own baristas</h2>
+
+    <p>
+      Year after year Vidar Graawe Farland provide the Booster attendees with the
+      best coffee Bergen has to offer. Why? &laquo;I keep coming back,
+      simply because it's loads of fun!&raquo;
+      </p>
+      <p>This year there be dragons as well! Local black metal heroes and tea enthusiasts
+      Tedragen will be serving up exotic and exciting teas brewed fresh and perfect.
+      </p>
   </div>
 </div>

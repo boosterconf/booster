@@ -7,6 +7,7 @@ module Api
 
     def email
       @sponsors = Sponsor.all(:include => :user).sort
+      @users = User.all_organizers
       @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
       @events = Event.last(15).reverse
 
@@ -15,7 +16,7 @@ module Api
         @sponsor.status = 'contacted'
         @sponsor.last_contacted_at = Time.now.to_datetime
         if @sponsor.save
-          event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+          event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent to #{@sponsor.contact_person_name} (#{@sponsor.email}    )")
           event.save
 
           respond_to do |format|

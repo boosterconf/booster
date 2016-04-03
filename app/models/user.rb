@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
 
   def full_name
     if read_attribute(:first_name)
-      read_attribute(:first_name) + ' ' + read_attribute(:last_name)
+      (read_attribute(:first_name) or "") + ' ' + (read_attribute(:last_name) or "")
     elsif read_attribute(:name)
       read_attribute(:name)
     else
@@ -146,6 +146,11 @@ class User < ActiveRecord::Base
     talks = self.talks.find_all { |talk| talk.is_workshop? && talk.accepted? }
     !talks.empty?
   end
+  
+  def has_accepted_talk?
+    talks = self.talks.find_all { |talk| talk.accepted? }
+    !talks.empty?
+  end
 
   def has_all_talks_refused?
     refused_talks = self.talks.find_all { |talk| talk.refused? }
@@ -194,6 +199,14 @@ class User < ActiveRecord::Base
     write_attribute(:featured_speaker, true)
   end
 
+  def is_on_twitter?
+    bio.twitter_handle && bio.twitter_handle.length > 0  
+  end
+
+  def has_blog?
+    bio.blog && bio.blog.length > 0
+  end
+
   def has_all_statistics?
     self.gender != nil && self.birthyear != nil
   end
@@ -212,6 +225,10 @@ class User < ActiveRecord::Base
 
   def has_valid_email?
     email.match(Authlogic::Regex.email)
+  end
+
+  def self.find_by_email(email)
+   self.where('lower(email) = ?', email.downcase).first
   end
 
   def self.find_with_filter(filter)
@@ -247,7 +264,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_accepted_speakers
-    self.all.select { |u| u.has_accepted_tutorial? || u.has_accepted_lightning_talk? }
+    self.all.select { |u| u.has_accepted_talk? }
   end
 
   def self.all_tutorial_speakers

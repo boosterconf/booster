@@ -20,10 +20,11 @@ class Period < ActiveRecord::Base
     start_time.strftime('%a')
   end
 
-  def talk_in(room)
+  def talk_in(room, position=1)
     slot = slot_in(room)
     return nil unless slot
-    slot.talk
+
+    slot.talk_positions.find { |t| t.position == position }.try(:talk)
   end
 
   def slot_in(room)

@@ -1,23 +1,24 @@
-<fieldset id="confirmations">
+<% unless @user.registration.student? %>
+    <div class="checkbox">
+      <label>
+        <%= reg.check_box :includes_dinner, class: "checkbox" %>
+        I'd like to attend the conference dinner on Wednesday
+      </label>
+    </div>
+<% end %>
 
-  <% unless @user.registration.student? %>
-      <div class="checkbox">
-        <%= reg.check_box :includes_dinner, :class => "checkbox" %>
-        <%= reg.label :includes_dinner, "I'd like to attend the conference dinner on Wednesday", :style => "display:inline", :class => "checkbox" %>
-      </div>
-  <% end %>
+<% if @user.registration.may_attend_speakers_dinner? %>
+    <div class="checkbox">
+      <label>
+        <%= reg.check_box :speakers_dinner %>
+        I'd like to attend the speaker's dinner on Thursday
+      </label>
+    </div>
+<% end %>
 
-  <% if @user.registration.may_attend_speakers_dinner? %>
-      <div class="checkbox">
-        <%= reg.check_box :speakers_dinner, :class => "checkbox" %>
-        <%= reg.label :speakers_dinner, "I'd like to attend the speaker's dinner on Thursday", :style => "display:inline", :class => "checkbox" %>
-      </div>
-  <% end %>
-
-  <div class="checkbox">
-    <%= f.check_box 'accept_optional_email', :class => "checkbox" %>
-    <%= f.label 'accept_optional_email',
-                "I would like to receive information about similar conferences.", :style => "display:inline", :class => "checkbox" %>
-  </div>
-
-</fieldset>
+<div class="checkbox">
+  <label>
+    <%= f.check_box 'accept_optional_email' %>
+    I would like to receive information about similar conferences.
+  </label>
+</div>

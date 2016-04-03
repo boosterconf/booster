@@ -1,21 +1,19 @@
-<% content_for :title, "Change password" %>
-<h2 class="page_title">Change your password?</h2>
+<article class="inner">
+  <div class="header-join">
+    <h2>Change your password?</h2>
+  </div>
 
-<p>
-  In order to change your password, you will have to
-  give us the email address you registered with so that
-  we can send you password reset information. You can
-  also use this form to change your password.
-</p>
-
-<%= form_tag password_resets_path do %>
   <p>
-    <%= label_tag :email, "Email" %>
-    <%= text_field_tag :email %>
+    In order to change your password, you will have to
+    give us the email address you registered with so that
+    we can send you password reset information. You can
+    also use this form to change your password.
   </p>
-	<p>
-		<%= submit_tag "Send me a password reset link!" %>
-	</p>		  
-<% end %>
 
-
+  <%= form_tag password_resets_path do %>
+    <div class='form-group'>
+      <%= email_field_tag :email, nil, class: 'form-control', placeholder: 'Enter your email address' %>
+    </div>
+		<%= submit_tag "Send me a password reset link!", class: 'btn btn-primary' %>
+  <% end %>
+</article>

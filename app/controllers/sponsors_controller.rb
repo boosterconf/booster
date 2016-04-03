@@ -8,6 +8,7 @@ class SponsorsController < ApplicationController
   respond_to :html, :js
 
   def index
+    @users = User.all_organizers
   end
 
   def new
@@ -33,6 +34,7 @@ class SponsorsController < ApplicationController
   end
 
   def update
+    @users = User.all_organizers
     @sponsor =
         SponsorAcceptedSlackNotifier.new(
             SponsorInvoiceCreator.new(
@@ -55,17 +57,28 @@ class SponsorsController < ApplicationController
             if @sponsor.save
               redirect_to sponsors_path, notice: "Partner #{@sponsor.name} was successfully updated."
             else
-              @users = User.all_organizers
               @event = Event.new(sponsor_id: @sponsor.id)
               render action: :edit
             end
           }
+
           format.js {
-            if @sponsor.save
-              flash[:notice] = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]} "
+	    notice = "I have no idea what just happened." #obvs should not actually ever happen..
+	    if params[:sponsor].has_key?(:user_id)
+	      unless @sponsor.user.nil?
+	        notice = "Responsible for #{@sponsor.name} changed to #{@sponsor.user.full_name}"
+	      else
+	        notice = "Nobody is responsible for #{@sponsor.name} anymore."
+	      end
+	    elsif params[:sponsor].has_key?(:status)
+	      notice = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]}"
+	    end 
+
+	    if @sponsor.save
+              flash[:notice] = notice
             else
-              flash[:error] = "Status for #{@sponsor.name} was NOT changed to #{Sponsor::STATES[@sponsor.status]} "
-            end
+              flash[:error] = "#{@sponsor.name} was NOT updated!"
+	    end
             render
           }
         end
@@ -74,12 +87,14 @@ class SponsorsController < ApplicationController
   end
 
   def destroy
+    @users = User.all_organizers
     @sponsor.destroy
 
-    redirect_to sponsors_url, notice: "Partner #{@sponsor.name} was successfully updated."
+    redirect_to sponsors_url, notice: "Partner #{@sponsor.name} was deleted."
   end
 
   def email
+    @users = User.all_organizers
     if @sponsor.is_ready_for_email?
       Sponsor.transaction do
         BoosterMailer.initial_sponsor_mail(@sponsor).deliver
@@ -87,11 +102,11 @@ class SponsorsController < ApplicationController
         @sponsor.last_contacted_at = Time.now.to_datetime
         @sponsor.save
 
-        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent to #{@sponsor.contact_person_name} (#{@sponsor.email})")
         event.save
       end
 
-      redirect_to(sponsors_path, :notice => 'Email was sent and partner status set to \'Contacted\'.')
+      redirect_to(sponsors_path, :notice => "Email sent to #{@sponsor.name} (#{@sponsor.contact_person_name} #{@sponsor.email}) and partner status set to 'Contacted'.")
     else
       flash[:error] = 'No email sent: must have status suggested and responsible set'
       redirect_to sponsors_path
@@ -99,17 +114,17 @@ class SponsorsController < ApplicationController
   end
 
   def ajax_email
+    @users = User.all_organizers
     if @sponsor.is_ready_for_email?
       BoosterMailer.initial_sponsor_mail(@sponsor).deliver
       @sponsor.status = 'contacted'
       @sponsor.last_contacted_at = Time.now.to_datetime
       if @sponsor.save
-        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent")
+        event = Event.new(:user => current_user, :sponsor => @sponsor, :comment => "Email sent to #{@sponsor.contact_person_name} (#{@sponsor.email})")
         event.save
 
-        redirect_to(sponsors_path, :notice => "Email was sent to #{@sponsor.name} and sponsor status set to \'Contacted\'.")
+        redirect_to(sponsors_path, :notice => "Email was sent to #{@sponsor.name} ((#{@sponsor.contact_person_name} #{@sponsor.email}) and partner status set to 'Contacted'.")
       else
-
         redirect_to sponsors_path
       end
     else

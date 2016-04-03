@@ -1,0 +1,108 @@
+@import "./fonts";
+
+$enable-flex: true;
+
+$gray-dark: #36404D;
+$gray-lightest: #F2F2F2;
+$gray-lighter: #E5E5E5;
+
+$brand-primary: #F29C75;
+$brand-success: #E1F28C;
+$brand-info: $gray-dark;
+$brand-warning: #DD9B77;
+
+$navbar-light-active-color: $gray-dark;
+$nav-tabs-active-link-hover-border-color: transparent;
+$nav-tabs-justified-link-border-color: transparent;
+$nav-tabs-border-color: transparent;
+$nav-tabs-border-width: 0;
+$link-color: #36404D;
+
+$font-family-sans-serif: 'VAG Rounded';
+$headings-font-family: 'Fira Sans';
+$headings-font-weight: 800;
+
+$border-radius: 0;
+$btn-border-radius: 2rem;
+
+@import "bootstrap";
+@import "font-awesome";
+
+@import "./jquery_notification";
+@import "common";
+@import "quad-list";
+@import "rocket";
+@import "cta-bar";
+@import "main-nav";
+@import "sponsors";
+@import "frontpage";
+@import "main-header";
+@import "speakers";
+@import "slots";
+@import "program_old";
+@import "kids";
+@import "acceptances";
+
+html, body {
+  height: 100%;
+}
+
+p, article {
+  a {
+    text-decoration: underline;
+  }
+}
+
+h5, h6 {
+    font-family: $font-family-base;
+}
+
+.nav-tabs {
+    font-family: $headings-font-family;
+    font-weight: $headings-font-weight;
+    text-transform: uppercase;
+}
+
+.img-superfluid {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+article {
+  p, h1, h2, h3, h4, h5, h6, form {
+    padding-left: $spacer-x;
+    padding-right: $spacer-x;
+  }
+  ul {
+    padding-bottom: $spacer-y;
+  }
+}
+
+article .btn-group > button {
+  outline: 0 !important;
+}
+
+.info-index {
+  #main-header {
+    position: absolute;
+    background: none;
+  }
+}
+
+#main-content > article > * {
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#notifications {
+  padding: $spacer-y $spacer-x 0 $spacer-x;
+  .alert:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.organizer-image {
+	max-width: 200px;
+}

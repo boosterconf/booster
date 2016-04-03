@@ -149,12 +149,12 @@
   get 'users/:user_id/assign_talk' => 'talks#assign', as: :assign_talk
   post 'users/:user_id/assign_talk' => 'talks#create_assigned', as: :create_assigned_talk
 
-
   match 'info/organizers' => 'info#organizers', via: :all
   match 'info/monetary_policy' => 'info#monetary_policy', via: :all
   match 'info/cfp' => 'info#cfp', via: :all
   match 'info/sponsors' => 'info#sponsors', via: :all
   match 'info/about' => 'info#about', via: :all
+   match 'info/kids' => 'info#kids', via: :all
   match 'info/tickets' => 'info#tickets', via: :all
   match 'info/speakers' => 'info#speakers', via: :all
   match 'info/openspaces' => 'info#openspaces', via: :all

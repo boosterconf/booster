@@ -1,50 +1,56 @@
 <%= f.fields_for :bio do |bio| %>
-    <div style="float:left;width:100%;">
-      <div style="background-color:#fafad2;padding:10px;float:left;width:80%;margin-top:10px;">
-        <div style="float:right;">
+    <div>
+      <div>
+        <div>
           <% if show_links && admin? %>
               <%= link_to("Delete bio", {:action => "delete_bio", :id => @user.id},
                           :confirm => "Are you sure you want to delete this bio?") %>
           <% end %>
         </div>
+        
         <h3>Speaker bio</h3>
+        <div>
+          <% if admin? %>
+          <div class="form-group">
+              <%= f.check_box :featured_speaker %>
+              <%= f.label :featured_speaker, "Feature this user on front page" %>
+            </div>
+            <div class="form-group">
+              <%= f.check_box :feature_as_organizer %>
+              <%= f.label :feature_as_organizer, "Feature this user on organizers page" %>
+            </div>
+          <% end %>
 
-        <div style="float:left; width:100%;">
-          <div style="float:left;width:40%; padding:10px;">
-            <% if admin? %>
-                <%= f.check_box :featured_speaker %>
-                <%= f.label :featured_speaker, "Feature this user on speaker page" %>
-                <%= f.check_box :feature_as_organizer %>
-                <%= f.label :feature_as_organizer, "Feature this user on organizers page" %>
-            <% end %>
-            <%= bio.label :title, "Work title:" %>
-            <%= bio.text_field :title, :size => 60 %>
-
-            <%= bio.label :twitter_handle, "Twitter handle:" %>
-            <%= bio.text_field :twitter_handle, :size => 60 %>
-
-            <%= bio.label :blog, "Blog url" %>
-            <%= bio.text_field :blog, :size => 60 %>
-
-          </div>
           <div>
-            <div style="float:right">
-              <div style="margin: 5px;">
-                <% if @user.bio.picture_file_name.present? %>
-                    <%= image_tag @user.bio.picture.url %>
-                <% else %>
-                    <%= image_tag('placeholder.jpg') %>
-                <% end %>
-              </div>
-              <div class="pull-right">
-                <%= bio.file_field :picture %>
-              </div>
+            <div>
+              <% if @user.bio.picture_file_name.present? %>
+                  <%= image_tag @user.bio.picture.url %>
+              <% else %>
+                  <%= image_tag('placeholder.jpg') %>
+              <% end %>
+            </div>
+            <div class="pull-right">
+              <%= bio.file_field :picture %>
             </div>
           </div>
+
+          <div class="form-group">
+            <%= bio.label :title, "Work title:" %>
+            <%= bio.text_field :title, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= bio.label :twitter_handle, "Twitter handle:" %>
+            <%= bio.text_field :twitter_handle, class: 'form-control'%>
+          </div>
+          <div class="form-group">
+            <%= bio.label :blog, "Blog url" %>
+            <%= bio.text_field :blog, class: 'form-control' %>
+          </div>
         </div>
-        <div>
+        <div class="form-group">
           <%= bio.label :bio, "Bio" %>
-          <%= bio.text_area :bio, :rows => 13, :class => 'input-xxlarge' %>
+          <%= bio.text_area :bio, :rows => 13, :class => 'form-control' %>
         </div>
 
         <% if show_links %>

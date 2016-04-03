@@ -8,7 +8,7 @@ class SlotsController < ApplicationController
 
   # GET /slots
   def index
-    periods = Period.all(include: { slots: [:talk, :room] } )
+    periods = Period.all(include: :slots )
     @days = periods.group_by(&:day)
   end
 
@@ -21,6 +21,7 @@ class SlotsController < ApplicationController
     #@talks = Talk.all_unassigned_tutorials
 
     @slot = Slot.new(params[:slot])
+    @position = params[:position]
   end
 
   # GET /slots/1/edit
@@ -29,7 +30,8 @@ class SlotsController < ApplicationController
 
   # POST /slots
   def create
-    @slot = Slot.new(params[:slot])
+    @slot = Slot.where(params[:slot]).first_or_initialize
+    @slot.talk_positions.build(talk_id: params[:talk_id], position: params[:position])
 
     if @slot.save
       redirect_to(slots_url, notice: 'Slot was successfully created.')

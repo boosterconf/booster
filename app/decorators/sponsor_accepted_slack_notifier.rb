@@ -11,7 +11,7 @@ class SponsorAcceptedSlackNotifier < SimpleDelegator
   end
 
   private
-  def notify_slack
+  def notify_slack    
     if status_was_changed_to_accepted
       count = Sponsor.where(status: 'accepted').count
       body = {

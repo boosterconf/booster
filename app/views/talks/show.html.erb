@@ -1,6 +1,20 @@
+<article>
 <%= content_for :title, h(@talk.title) %>
 <h2 class="page_title"><%= h @talk.title %></h2>
-<h4><%= render :partial => @talk.users %></h4>
+<% if admin? %>
+  <h4><%= render :partial => @talk.users %></h4>
+<% end %>
+
+<% unless admin? && @talk.accepted? && @talk.speakers_confirmed? %>
+  <% @talk.users.collect do | user | %>
+    <% if user.bio != nil %>
+      <h4><a href="../info/speakers/#<%=user.full_name %>"><%= user.full_name %></a></h4>
+    <% else %>
+      <h4><%= user.full_name %></h4>
+    <% end %>
+  <% end %>
+<% end %>
+
 <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
 <% if reviewer? %>
@@ -10,12 +24,6 @@
         <%= @talk.users.collect { |u| u.email }.join(',') %></a>
     </p>
 <% end %>
-
-<% if @talk.accepted? && @talk.speakers_confirmed? %>
-    <p><%= image_tag("approved_talk.png") %> approved</p>
-<% end %>
-
-<p>Talk type: <%= @talk.talk_type.name_and_duration %></p>
 
 <div class="tags">
   <% unless @talk.tags.empty? %>
@@ -31,6 +39,10 @@
 <% if @talk.users.include?(current_user) || admin? %>
     <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
+    <% if @talk.accepted? && @talk.speakers_confirmed? %>
+      <p><%= image_tag("approved_talk.png") %> approved</p>
+    <% end %>
+
     <% if @talk.slide_file_name.present? %>
         <h3>Presentation slides</h3>
         <p><%= link_to image_tag("icon_slides.gif"), @talk.slide.url %><%= link_to "Download", @talk.slide.url %></p>
@@ -39,7 +51,7 @@
     <% end %>
     <%= render :partial => "talks/upload_slide" %>
 
-    <% if @talk.is_workshop? %>
+    <% if @talk.talk_type.is_workshop %>
         <p>
           <strong>Extra equipment:</strong>
           <%= h @talk.equipment %>
@@ -65,7 +77,8 @@
       <%= simple_format h(@talk.description) %>
   <% end %>
 </div>
-<% if @talk.is_workshop? %>
+
+<% if @talk.talk_type.is_workshop %>
 
     <% if admin_reviewer_or_talk_owner?(@talk) %>
         <div class="outline">
@@ -78,14 +91,15 @@
         </div>
     <% end %>
 
-    <div class="appropriate_for_roles">
+    <p>
       <strong>Primarily for:</strong>
       <%
          roles = @talk.appropriate_for_roles ? @talk.appropriate_for_roles.split(',') : []
          role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
       %>
       <%= role_names.join(', ') %>
-    </div>
+    </p>
+
     <p>
       <strong>Participant requirements:</strong>
       <%= h @talk.participant_requirements %>
@@ -122,7 +136,7 @@
       <%= render partial: 'review_form' %>
     </div>
 <% end %>
-
+</article>
 
 <%# if logged_in %>
 <!--h3 id="new_comment">Add new comment:</h3>

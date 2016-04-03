@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20151229203349) do
+ActiveRecord::Schema.define(:version => 20160122193609) do
 
   create_table "bios", :force => true do |t|
     t.integer  "user_id"
@@ -269,6 +269,12 @@ ActiveRecord::Schema.define(:version => 20151229203349) do
     t.text     "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "talk_positions", :force => true do |t|
+    t.integer "talk_id",                 :null => false
+    t.integer "slot_id",                 :null => false
+    t.integer "position", :default => 1
   end
 
   create_table "talk_types", :force => true do |t|

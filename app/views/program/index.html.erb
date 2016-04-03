@@ -1,52 +1,71 @@
 <div class="group">
-  <div class="program">
-
+  <div class="header-join">
     <ul class="nav nav-tabs">
-      <li role="presentation" class="active">
-        <a id="choose-day1" href="#day1" aria-controls="choose-day1" role="tab">Wed</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-day1" href="#day1" aria-controls="choose-day1" role="tab">Wed</a>
       </li>
-      <li role="presentation">
-        <a id="choose-day2" href="#day2" aria-controls="choose-day2" role="tab">Thu</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-day2" href="#day2" aria-controls="choose-day2" role="tab">Thu</a>
       </li>
-      <li role="presentation">
-        <a id="choose-day3" href="#day3" aria-controls="choose-day3" role="tab">Fri</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-day3" href="#day3" aria-controls="choose-day3" role="tab">Fri</a>
       </li>
-      <li role="presentation">
-        <a id="choose-all" href="#" aria-controls="choose-all" role="tab">All</a>
+      <li role="presentation" class="nav-item">
+        <a class="nav-link" id="choose-all" href="#" aria-controls="choose-all" role="tab">All</a>
       </li>
     </ul>
+  </div>
+
+  <div class="program">
 
     <div id="day1">
-      <h2>Wednesday March 9</h2>
+      <h2>Wednesday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-      <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[704] %>
+      <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[711] %>
+      <!--div class="program-row">
+        <section class="period">
+          <header>
+            <time class="time"><%= '09:15-10:15' %></time>
+            <span class="location"><%= 'Dragefjellet' %></span>
+          </header>
+          <a class="single-talk" href="# %>">
+            <div class="slot">
+              <div class="plenary-type talk">
+                <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= "TBA" %></h4>
+                <span class='author'><%= "TBA" %></span>
+                <div class='description'><%= "TBA" %></div>
+              </div>
+            </div>
+          </a>
+        </section>
+      </div-->
 
       <div class='program-row'>
-        <header class='time follow-me'>10:30 - 11:15 - Lightning talks</header>
+        <% period = @periods.pop %>
+        <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
-          <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '10:30 - 11:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Teatergaten', time: '10:30 - 11:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '10:30 - 11:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
+          <% period.slots.each do |slot| %>
+          <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                     talks: slot.talk_positions.map(&:talk) %>
+          <% end %>
         </div>
       </div>
 
       <%= render 'break_section', location: 'Downstairs', time: '11:15-11:30', title: 'Coffee break' %>
 
-      <div class="program-row">
-        <header class='time follow-me'>11:30 - 12:15 - Lightning talks</header>
+      
+
+      <div class='program-row'>
+        <% period = @periods.pop %>
+        <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
-          <%= render 'lightning_talk_section', location: 'Dragefjellet', time: '11:30 - 12:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Teatergaten', time: '11:30 - 12:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
-          <%= render 'lightning_talk_section', location: 'Sydneshaugen', time: '11:30 - 12:15',
-                     talks: [@talks[704], @talks[704], @talks[704], @talks[704]] %>
+          <% period.slots.each do |slot| %>
+              <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                         talks: slot.talk_positions.map(&:talk) %>
+          <% end %>
         </div>
       </div>
 
@@ -78,7 +97,7 @@
         <section class="period">
           <header class="break">
             <time class="time">19:00-00:00</time>
-            <span class="location">Galleri Nygaten <%= link_to "(map)", "https://www.google.no/maps/dir/''/galleri+nygaten/@60.391396,5.3280495,16z/data=!4m8!4m7!1m0!1m5!1m1!1s0x463cfea8c868738f:0x63124a9d917ba00f!2m2!1d5.330733!2d60.392707", target: '_new' %></span>
+            <span class="location">Kalfaret brygghus (<%= link_to "map", "https://www.google.no/maps/place/Kalfaret+Brygghus+-+mikrobryggeri/@60.3865971,5.3485812,15z/data=!4m2!3m1!1s0x0:0xeedf9c7f7e0c8d70", target: "_new" %>)</span>
             <span>&mdash; Conference dinner</span>
           </header>
         </section>
@@ -86,7 +105,7 @@
     </div>
 
     <div id="day2">
-      <h2>Thursday March 12</h2>
+      <h2>Thursday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
@@ -140,11 +159,11 @@
         </div>
       </div>
 
-      <%= render 'open_space_section', location: 'Lysverket', time: '20:00-01:00', title: 'Fishbowl / Community Night' %>
+      <!-- <%= render 'open_space_section', location: 'Dragefjellet', time: '20:00-01:00', title: 'Fishbowl / Community Night' %> -->
     </div>
 
     <div id="day3">
-      <h2>Friday March 13</h2>
+      <h2>Friday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
@@ -184,7 +203,8 @@
 
       <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
 
-      <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[704] %>
+      <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[713] %>
+
       <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
     </div>
   </div>

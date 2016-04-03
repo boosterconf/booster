@@ -9,6 +9,12 @@ gem 'paperclip', '~>4.3'
 
 gem 'responders', '~> 2.0'
 
+gem 'bootstrap', '~> 4.0.0.alpha2'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-tether', '>= 1.1.0'
+end
+
 gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
@@ -47,6 +53,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'quiet_assets'
   gem 'taps'
+  gem 'dotenv-rails'
 end
 
 group :test do

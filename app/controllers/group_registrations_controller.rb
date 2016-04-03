@@ -6,7 +6,6 @@ class GroupRegistrationsController < ApplicationController
 
   def create
     @group_registration = GroupRegistrationForm.new(params[:group_registration_form])
-
     if @group_registration.save
       render action: 'confirmation'
     else

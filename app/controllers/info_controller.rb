@@ -11,15 +11,15 @@ class InfoController < ApplicationController
 #  end
 
   def speakers
-    @speakers = User.featured_speakers
+    @speakers = User.all_accepted_speakers
   end
 
   def index
-    @speakers = User.featured_speakers.shuffle[0..4]
+    @featured_speakers = User.featured_speakers.shuffle[0...4]
     @feedback = Feedback.new
   end
 
-  def organizers
+  def about
     @organizers = User.featured_organizers.shuffle
   end
 

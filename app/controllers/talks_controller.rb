@@ -3,7 +3,7 @@ class TalksController < ApplicationController
   before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
   before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
-  before_filter :setup_talk_types, only: :edit
+  before_filter :setup_talk_types, only: [:edit, :update]
 
   respond_to :html
 
@@ -119,6 +119,18 @@ class TalksController < ApplicationController
     @tags = Tag.all
     @types = TalkType.all
 
+    # TODO I'm so sorry...
+    @talk.type = case @talk.talk_type.name
+                   when "Short talk"
+                     ShortTalk.name
+                   when "Lightning talk"
+                     LightningTalk.name
+                   when "Keynote"
+                     Keynote.name
+                   else
+                     Workshop.name
+                 end
+
     # Tag handling
     tag_names = []
     if params[:item] && params[:item][:tags]
@@ -160,7 +172,9 @@ class TalksController < ApplicationController
 
   def accepted
     @talks = Talk.all_confirmed
-    @lightning_talks, @workshops = @talks.partition { |talk| talk.is_lightning_talk? }
+    @lightning_talks = @talks.select(&:is_lightning_talk?)
+    @workshops = @talks.select(&:is_workshop?)
+    @short_talks = @talks.select(&:is_short_talk?)
   end
 
   protected

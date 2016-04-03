@@ -10,9 +10,9 @@
   <meta name="description" content="The Booster conference is in Bergen, Norway <%= Dates::CONFERENCE_DATES %>. The
 conference is for all IT professionals seeking to learn from each other and from experts in their fields"/>
   <meta name="keywords" content="booster conference, conference, software, agile, programming, bergen, norway,booster, roots conference, roots, it conference, software conference, methodology, testing, craftsmanship, software development, user experience, tools, project management"/>
-  <meta name="thumbnail" content="<%= asset_path 'booster.png' %>" />
+  <meta name="thumbnail" content="<%= asset_path 'icons/logo.svg' %>"/>
 
-  <meta property="og:image" content="<%= asset_path 'booster.png' %>" />
+  <meta property="og:image" content="<%= asset_path 'icons/logo.svg' %>"/>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,120 +23,112 @@ conference is for all IT professionals seeking to learn from each other and from
   <%= csrf_meta_tag %>
   <%= tinymce_assets %>
 
-  <link rel="stylesheet"
-        href="//f.fontdeck.com/s/css/Uf28uh55+ApRRbdMqWM/5y2U+0o/<%= Rails.application.routes.default_url_options[:host] %>/25614.css"
-        type="text/css" />
 </head>
 
-<body>
-<header id="top" role="banner">
-  <nav role="navigation">
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <div class="nav-collapse collapse">
-             <ul class="nav pull-right">
-                <% if AppConfig.program_released %>
-                  <li><%= link_to 'Program', '/program' %></li>
-                <% end %>
-                <% if AppConfig.speakers_released %>
-                  <li><%= link_to 'Speakers', info_speakers_url %></li>
-                  <li><%= link_to 'Sessions', accepted_talks_url %></li>
-                <% end %>
-                <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
-                  <li><%= link_to 'Call for presentations', info_cfp_url %></li>
-                  <li><%= link_to 'Proposals', talks_url %></li>
-                <% end %>
-                <li><%= link_to 'For partners', info_sponsors_url %></li>
-                <li><%= link_to 'Code of Conduct', info_coc_url %></li>
-                <li><%= link_to 'About us', info_about_url %></li>
-                <% if logged_in %>
-                    <li><%= link_to 'My profile', current_user_url %></li>
-                    <li><%= link_to_unless_current "Log out", logout_path %></li>
-                <% else %>
-                    <!--li><%#= link_to 'Register', new_user_url %></li-->
-                    <li><%= link_to 'Log in', login_url %></li>
-                <% end %>
-                <% if admin? %>
-                    <li><%= link_to 'Admin', admin_path %></li>
-                <% end %>
-                <% if reviewer? %>
-                    <li><%= link_to 'Reviews', reviews_path %></li>
-                <% end %>
-              </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
+<body class="<%= "#{controller.controller_name}-#{controller.action_name}" %>">
+
+<header id="main-header" role="banner">
+  <nav class="navbar main-nav p-l-1" role="navigation">
+    <button class="navbar-toggler hidden-sm-up pull-xs-right" type="button" data-toggle="collapse" data-target="#main-nav-collapse">
+      &#9776;
+    </button>
+
+    <a class="navbar-brand" href="/"><%= image_tag "icons/logo.svg", height: 40 %></a>
+
+    <div id="main-nav-collapse" class="collapse navbar-toggleable-xs">
+      <ul class="nav navbar-nav pull-sm-right">
+        <% if AppConfig.program_released %>
+            <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
+        <% end %>
+        <% if AppConfig.speakers_released %>
+            <li class="nav-item"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
+        <% end %>
+        <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
+            <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
+        <% end %>
+        <li class="nav-item"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to 'About us', info_about_url, class: 'nav-link' %></li>
+        <li class="nav-item"><%= link_to 'Kids', info_kids_url, class: 'nav-link' %></li>
+        <% if logged_in %>
+            <li class="nav-item"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
+            <li class="nav-item"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
+        <% else %>
+            <!--li><%#= link_to 'Register', new_user_url, class: 'nav-link' %></li-->
+            <li class="nav-item"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
+        <% end %>
+        <% if admin? %>
+            <li class="nav-item"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
+        <% end %>
+        <% if reviewer? %>
+            <li class="nav-item"><%= link_to 'Reviews', reviews_path, class: 'nav-link' %></li>
+        <% end %>
+      </ul>
     </div>
+    <!--/.nav-collapse -->
   </nav>
-  <div class="inner group">
-    <h1 class="logo"><a href="/"><%= image_tag "booster.png" %></a></h1>
 
-    <div id="meta">
-      <p class="whenandwhere">9–11 March <%= Dates::CONFERENCE_YEAR %> • Bergen, Norway</p>
+  <p class="p-l-1">9th - 11th March 2016 - Bergen, Norway</p>
 
-      <p class="tagline">A software conference for&nbsp;the whole team</p>
-    </div>
-  </div>
-  <!-- end inner -->
 </header>
 
-<div class="inner" role="main">
+<%= yield (:pre_content) %>
+
+<div id="main-content" class="inner" role="main">
   <%= yield %>
 </div>
 
-<div class="sponsorarea">
-  <section class="inner group">
-    <h4 class="sponsortitle"> <% if not @our_sponsors.empty?  %> Our partners. <% end %> <%= link_to 'How to become a partner', info_sponsors_url %></h4>
-    <ul class="sponsorlogos">
-      <% @our_sponsors.each do |sponsor| %>
-          <li>
-            <%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
-          </li>
-      <% end %>
-    </ul>
-  </section>
+<div class="jumbotron sponsorarea m-b-0">
+  <ul class="sponsorlogos">
+    <% @our_sponsors.each do |sponsor| %>
+        <li>
+          <%= link_to image_tag(sponsor.logo.url, alt: sponsor.name), sponsor.website, target: '_blank', title: sponsor.name %>
+        </li>
+    <% end %>
+  </ul>
 </div>
-<!-- end sponsorarea -->
+
+<footer>
+  <div class="jumbotron m-b-0">
+    <div class="container">
+      <%= image_tag "icons/spread.svg", id: "footer-image" %>
+      <h2 id="footer-text">You are awesome.<br/>Hope to see you soon!</h2>
+
+      <p class="centered-text">
+        <a href="#">Return to top</a>
+      </p>
+    </div>
+  </div>
+</footer>
 
 <script type="text/javascript">//<![CDATA[
 $('.sponsorlogos').shuffle();
 //]]></script>
 
-<footer>
-  <div class="inner">
-    <h3 class="contacttitle">Don’t be a stranger!</h3>
-    <ul class="contactbuttons">
-      <li><a href="http://twitter.com/boosterconf" target="_blank" title="Follow Booster on Twitter" class="btn" id="btntwitter">Follow
-        @boosterconf on Twitter</a></li>
-      <li><a href="http://facebook.com/boosterconf" target="_blank" title="Find us on Facebook" class="btn" id="btnfacebook">Find us on
-        Facebook</a></li>
-      <li><a href="http://lanyrd.com/2016/booster2016/" target="_blank" title="Track Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd" class="btn" id="btnlanyrd">Track
-        Booster <%= Dates::CONFERENCE_YEAR %> on Lanyrd</a></li>
-      <li><a href="http://2014.boosterconf.no" target="_blank" class="btn" title="Booster 2014">Booster 2014</a>
-        <a href="http://2015.boosterconf.no" target="_blank" class="btn" title="Booster 2015">Booster 2015</a></li>
-    </ul>
-    <p class="beammeup"><a href="/#top">Take me back to the top!</a></p>
-  </div>
-</footer>
-
 <%= yield :javascript %>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js" integrity="sha384-vZ2WRJMwsjRMW/8U7i6PWi6AlO1L79snBrmgiDpgIWJ82z8eA5lenwvxbMV1PAh7" crossorigin="anonymous"></script>
 
-  ga('create', 'UA-37448589-1', 'auto');
-  ga('send', 'pageview');
+<% if !current_user || (current_user && !current_user.is_admin) %>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-</script>
+        ga('create', 'UA-37448589-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+<% end %>
 
 <script type="text/javascript">
     setTimeout(function () {
@@ -150,31 +142,12 @@ $('.sponsorlogos').shuffle();
 </script>
 
 <script type="text/javascript">
-    $.notify.defaults( {
+    $.notify.defaults({
         globalPosition: 'top left',
         elementPosition: 'right'
-    } );
+    });
     $.notify("<%= flash[:notice] %>", "success");
 </script>
-
-<% if current_user %>
-    <script>
-        var _smplyBtr = _smplyBtr || {};
-        _smplyBtr.email = "<%= current_user.email %>";
-        _smplyBtr.name = "<%= current_user.full_name %>" ;
-
-        _smplyBtr.appKey = "GHNBQHMW";
-        (function() {
-            var sb = document.createElement('script');
-            sb.type = 'text/javascript';
-            sb.async = true;
-            sb.src = "https://www.simplybetter.io/widget_api/applications/client_js.js?appkey=" +_smplyBtr.appKey;
-            var s = document.getElementsByTagName('body')[0];
-            s.appendChild(sb);
-        })();
-    </script>
-<% end %>
-
 
 </body>
 </html>

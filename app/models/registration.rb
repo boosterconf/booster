@@ -4,6 +4,7 @@ class Registration < ActiveRecord::Base
       'early_bird' => 'Early bird ticket for Booster',
       'full_price' => 'Regular ticket for Booster',
       'lightning' => 'Lightning talk ticket for Booster',
+      'one_day' => 'One day ticket for Booster',
       'sponsor' => 'Partner ticket Booster',
       'volunteer' => 'Volunteer at Booster',
       'student' => 'Student for Booster',
@@ -14,7 +15,7 @@ class Registration < ActiveRecord::Base
       'reviewer' => 'Reviewer ticket for Booster'
   }
 
-  PAYING_TICKET_TYPES = %w(early_bird full_price lightning student reviewer)
+  PAYING_TICKET_TYPES = %w(early_bird full_price one_day lightning student reviewer)
 
   acts_as_paranoid
 

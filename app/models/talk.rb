@@ -13,7 +13,7 @@ class Talk < ActiveRecord::Base
   belongs_to :talk_type
   has_many :reviews, order: 'created_at desc', include: :reviewer
   has_attached_file :slide, PAPERCLIP_CONFIG
-  has_many :slots
+  has_and_belongs_to_many :slots, join_table: 'talk_positions'
 
   validates_attachment_content_type :slide,
                                     :content_type => [
@@ -92,13 +92,15 @@ class Talk < ActiveRecord::Base
   end
 
   def is_lightning_talk?
-    # TODO: Megahack!
-    return false unless talk_type
-    talk_type.name == 'Lightning talk'
+    talk_type.is_lightning_talk?
   end
 
   def is_workshop?
-    !is_lightning_talk?
+    talk_type.is_workshop
+  end
+
+  def is_short_talk?
+    talk_type.is_short_talk?
   end
 
 =begin
