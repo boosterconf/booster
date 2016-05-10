@@ -10,8 +10,8 @@
     <p>If you want to facilitate the workshop together with somebody else, please enter their email address here. We'll
       send him or her
       an email so that they can finish their registration.</p>
-    <div class="field email">
+    <fieldset class="form-group">
       <%= f.label :additional_speaker_email %>
-      <%= text_field_tag(:additional_speaker_email, "", :class => 'input-xlarge') %>
-    </div>
+      <%= text_field_tag(:additional_speaker_email, "", :class => 'form-control') %>
+    </fieldset>
 <% end %>

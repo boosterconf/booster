@@ -1,9 +1,9 @@
 <%= form_for @workshop, url: post_to do |f| %>
 
-    <legend>Talk length</legend>
-    <div class="field type">
-      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'input-xlarge' %>
-    </div>
+    <fieldset class="form-group">
+      <legend>Talk length</legend>
+      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'form-control' %>
+    </fieldset>
 
     <legend>Information visible for everyone</legend>
     <p>
@@ -12,63 +12,58 @@
       provide a detailed abstract. This will help us to select in the selection process and increase the chances
       of your talk being selected.
     </p>
-    <div class="field title">
+    <fieldset class="form-group">
       <%= f.label :title, "Title" %>
 
-      <%= f.text_field :title, :size => "80", :class => "input-xxlarge" %>
-    </div>
+      <%= f.text_field :title, :size => "80", :class => "form-control" %>
+    </fieldset>
 
-    <div class="field abstract">
+    <fieldset class="form-group">
       <%= f.label :description, "Abstract" %>
 
       <%= f.text_area :description, :class => "tinymce span10" %>
-    </div>
+    </fieldset>
 
-    <div class="control-group">
-
-      <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?', :class => 'control-label' %>
-      <div class="controls">
-        <fieldset>
+    <fieldset class="form-group">
+      <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?' %>
           <% Roles.all.each do |role| %>
               <label class="checkbox">
                 <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
-                <%= label_tag "appropriate_for_roles_#{role}", Roles.label[role] %>
+                <%= Roles.label[role]  %>
               </label>
           <% end %>
-        </fieldset>
-      </div>
-    </div>
+    </fieldset>
 
     <legend>Information visible only for the organizing committee and yourself</legend>
 
-    <div class="field outline">
+    <fieldset class="form-group">
       <%= f.label :outline, "Outline" %>
 
       <%= f.text_area :outline, :class => "tinymce span10" %>
-    </div>
+    </fieldset>
 
     <%= tinymce %>
 
-    <div class="field max_participants">
+    <fieldset class="form-group">
       <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 20, please): " %>
-      <%= f.text_field :max_participants, :class => 'input-small' %>
-    </div>
+      <%= f.text_field :max_participants, :class => 'form-control' %>
+    </fieldset>
 
-    <div class="field speaking_history">
+    <fieldset class="form-group">
       <%= f.label :speaking_history, 'Have you held this presentation before? If so; where?' %>
-      <%= f.text_area :speaking_history, :class => 'input-xxlarge', :rows => 5 %>
-    </div>
+      <%= f.text_area :speaking_history, :class => 'form-control', :rows => 5 %>
+    </fieldset>
 
-    <div class="field participant_requirements">
+    <fieldset class="form-group">
       <%= f.label :participant_requirements, 'What do the participants have to bring to the presentation?' %>
-      <%= f.text_area :participant_requirements, :class => 'input-xxlarge', :rows => 5 %>
-    </div>
+      <%= f.text_area :participant_requirements, :class => 'form-control', :rows => 5 %>
+    </fieldset>
 
-    <div class="field equipment">
+    <fieldset class="form-group">
       <%= f.label :equipment, 'Do you need any extra equipment for your session? Any specific room setup?
       Leave comments for the organizers here.' %>
-      <%= f.text_area :equipment, :class => 'input-xxlarge', :rows => 5 %>
-    </div>
+      <%= f.text_area :equipment, :class => 'form-control', :rows => 5 %>
+    </fieldset>
 
     <% if @workshop.new_record? %>
         <%= render :partial => 'talks/additional', :locals => { :f => f } %>
