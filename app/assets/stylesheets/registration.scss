@@ -1,0 +1,14 @@
+.steps {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.steps div {
+    display: inline;
+    padding-right: 10px;
+    color: #cccccc;
+}
+
+.steps .active {
+    color: black;
+}

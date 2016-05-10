@@ -27,10 +27,12 @@
     <fieldset class="form-group">
       <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?' %>
           <% Roles.all.each do |role| %>
-              <label class="checkbox">
+              <div class="checkbox">
+              <label>
                 <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
                 <%= Roles.label[role]  %>
               </label>
+              </div>
           <% end %>
     </fieldset>
 

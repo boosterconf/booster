@@ -8,11 +8,12 @@
         <p class="flash-error"><%= flash[:error] %></p>
     <% end %>
 
-    <legend>Talk length</legend>
-    <div class="field type">
-      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'input-xlarge' %>
-    </div>
+    <fieldset class="form-group">
+      <legend>Talk length</legend>
+      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'form-control' %>
+    </fieldset>
 
+    <fieldset class="form-group">
     <legend>Language</legend>
     <p>In what language will you deliver your talk? Please select the language you are most comfortable with. 
     <label class="radio">
@@ -24,6 +25,7 @@
       Norwegian
     </label>
     </p>
+    </fieldset>
     <legend>Talk details</legend>
     <p>
       The abstract will be published on the website as soon
