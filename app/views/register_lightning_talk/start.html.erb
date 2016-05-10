@@ -1,3 +1,4 @@
+<article>
 <div class="row">
   <div class="span12">
 
@@ -9,7 +10,7 @@
       Please start by telling us a little about yourself.
 
     </p>
-    <%= form_for @user, :class => "form-horizontal", :url => '/register_lightning_talk/create_user' do |f| %>
+      <%= form_for @user, :url => '/register_lightning_talk/create_user' do |f| %>
 
         <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
         <%= render :partial => 'users/roles', :locals => {:f => f} %>
@@ -26,3 +27,4 @@
     <% end %>
   </div>
 </div>
+</article>
