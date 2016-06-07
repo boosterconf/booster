@@ -69,47 +69,4 @@ class TalkTest < ActiveSupport::TestCase
     end
   end
 
-=begin
-      should "increment participants count when adding a participant" do
-      talk = Talk.first
-      participant_count = talk.participants_count
-      talk.participants << Participant.new(:user => User.last)
-      talk = Talk.find(talk.id)
-      assert_equal participant_count + 1, talk.participants_count
-    end
-
-
-    should "not be full if current number of participants are less than maximum number of participants" do
-      talk = talks(:not_full_tutorial)
-      assert !talk.is_full?
-    end
-
-    should "be full if current number of participants are equal to maximum number of participants" do
-      talk = talks(:full_tutorial)
-      assert talk.is_full?
-    end
-
-    should "not be in supplied periods if supplied periods are empty" do
-      talk = talks(:two)
-      periods = []
-      assert !talk.is_in_one_of_these(periods)
-    end
-
-    should "be in supplied periods if supplied periods contains one of the talk's periods" do
-      talk = talks(:spans_several_slots)
-      periods = (Array.new << talk.periods.first)
-      assert talk.is_in_one_of_these(periods)
-    end
-
-
-    should "have start time equal to the period's start time if talk belongs to a single period" do
-      talk = talks(:ten)
-      assert_equal talk.periods.first.start_time, talk.start_time
-    end
-
-    should "have start time equal to the first period's start time if talk belongs to several periods" do
-      talk = talks(:spans_several_slots)
-      assert_equal periods(:one).start_time, talk.start_time
-    end
-=end
 end
