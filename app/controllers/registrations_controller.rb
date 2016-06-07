@@ -115,7 +115,9 @@ class RegistrationsController < ApplicationController
 
     if @registration
 
-      @registration.destroy!
+      @registration.user.really_destroy!
+      @registration.really_destroy!
+
 
       flash[:notice] = "Really deleted user #{@registration.user.full_name}"
       redirect_to deleted_registrations_url
