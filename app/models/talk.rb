@@ -192,7 +192,7 @@ class Talk < ActiveRecord::Base
   def self.all_with_speakers
     #with_exclusive_scope { find(:all, include: :users, order: 'users.last_name ') }
     talks = Talk.includes(:users, :talk_type)
-    talks.sort_by { |talk| talk.users }
+    talks.order("users.last_name")
   end
 
   def self.count_accepted
