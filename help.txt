@@ -1,0 +1,40 @@
+UPDATE THIS GODDAMNED FILE IF SOMETHING DOES NOT WORK
+ask in slack #github-og-app if you have problems
+
+To get up and running:
+    Clone repository: git clone https://github.com/boosterconf/booster.git 
+    Pull database: heroku pg:pull HEROKU_POSTGRESQL_COPPER boosterconf --app booster2017
+    Get all gems: bundle install
+    Set s3 access: 
+      export s3_secret_access_key= <get from someone>
+      export s3_access_key_id= <see above>
+
+You may also need to:
+    Install bundler (gem install bundler)
+    Install PostGres (bash at it with a combo of homebrew, bundler and google-fu)
+    Install ImageMagick (see above)
+    Install heroku command line tools
+    
+
+Afterwards:
+Run app locally:
+    rails s
+
+Run tests:
+    rake db:test:prepare
+    rake test
+
+Push db to staging:
+    heroku pg:push boosterconf HEROKU_POSTGRESQL_COPPER --app staging-boosterconf
+
+Push app to staging
+    Make sure you have added the remote: git remote add staging git@heroku.com:staging-boosterconf.git
+    Push: git push staging
+
+Push db to production:
+
+Push app to production:
+
+
+Handy tips:
+Emails does not get sent when running local app, instead text is printed to console
