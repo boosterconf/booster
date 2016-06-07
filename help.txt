@@ -36,3 +36,5 @@ Push db to production:
 Push app to production:
 
 
+Handy tips:
+Emails does not get sent when running local app, instead text is printed to console
