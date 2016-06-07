@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160403210227) do
+ActiveRecord::Schema.define(version: 20160607162603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -299,17 +299,6 @@ ActiveRecord::Schema.define(version: 20160403210227) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "timeslots", force: :cascade do |t|
-    t.string   "location",   limit: 255
-    t.string   "day",        limit: 255
-    t.string   "time",       limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
-    t.integer  "talk_id"
-  end
-
-  add_index "timeslots", ["talk_id"], name: "index_timeslots_on_talk_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                       limit: 255,                 null: false
