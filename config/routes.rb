@@ -38,7 +38,7 @@
     member do
       get :accept
       get :refuse
-      get :await
+      get :pending
       get :confirm
       get :could_not_attend
       get :unconfirm

@@ -39,7 +39,7 @@ class AcceptancesController < ApplicationController
     redirect_to acceptances_path, notice: "#{@talk.speaker_name}'s talk '#{@talk.title}' refused."
   end
 
-  def await
+  def pending
     @talk = Talk.find(params[:id])
 
     return redirect_on_email_sent if @talk.email_sent

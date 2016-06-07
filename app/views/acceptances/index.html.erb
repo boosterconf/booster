@@ -73,7 +73,7 @@
         <% else %>
           <td>
             <% unless talk.pending? || talk.email_sent? %>
-              <%= link_to 'Reset', :action => 'await', :id => talk.id %>
+              <%= link_to 'Reset', :action => 'pending', :id => talk.id %>
             <% end %>
           </td>
           <% if talk.pending? %>

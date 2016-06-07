@@ -65,18 +65,18 @@ class AcceptancesControllerTest < ActionController::TestCase
     assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end
 
-  def test_await_rolls_back_ticket_type_for_normal_users
+  def test_pending_rolls_back_ticket_type_for_normal_users
     @talk = talks(:nine)
     assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type_old
-    get :await, id: @talk.id
+    get :pending, id: @talk.id
     assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type_old
     assert !Registration.find(@talk.users[0].registration.id).registration_complete
   end
 
-  def test_await_does_not_roll_back_ticket_type_for_special_users
+  def test_pending_does_not_roll_back_ticket_type_for_special_users
     @talk = talks(:five)
     assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
-    get :await, :id => @talk.id
+    get :pending, :id => @talk.id
     assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end
 end
