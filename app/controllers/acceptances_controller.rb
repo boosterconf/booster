@@ -17,9 +17,9 @@ class AcceptancesController < ApplicationController
 
   def accept
     @talk = Talk.find(params[:id], include: [{ users: :registration }])
-
+    
     return redirect_on_email_sent if @talk.email_sent
-
+    
     @talk.accept!
     @talk.save
     @talk.update_speakers!(current_user)

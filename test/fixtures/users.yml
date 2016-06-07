@@ -1,11 +1,9 @@
 quentin:
   email: whatever@whatever.com
-  name: Quentin
   first_name: Quentin
   last_name: Quintinus
   company: MyCo
   phone_number: 99887766
-  role: Developer
   birthyear: 1984
   hometown: Bergen
   accepted_privacy_guidelines: true
@@ -15,7 +13,6 @@ quentin:
 
 god:
   email: god@paradise.net
-  name: Jahve
   first_name: Jahve
   last_name: the LORD
   accepted_privacy_guidelines: true
@@ -26,7 +23,6 @@ god:
 
 reviewer:
   email: reviewer@example.com
-  name: Ms Nitty Pickersen
   first_name: Nitty
   last_name: Pickersen
   accepted_privacy_guidelines: true
@@ -36,7 +32,6 @@ reviewer:
 
 test:
   email: test@whatever.com
-  name: Test
   first_name: Test
   last_name: Whatever
   accepted_privacy_guidelines: true
@@ -46,7 +41,6 @@ test:
 
 other:
   email: other@whatever.com
-  name: Other Guy
   first_name: Other
   last_name: Guy
   accepted_privacy_guidelines: true
@@ -56,7 +50,6 @@ other:
 
 sponsor:
   email: sponsor@whatever.com
-  name: Sponsor Dude
   first_name: Sponsor
   last_name: Dude
   accepted_privacy_guidelines: true
@@ -66,7 +59,6 @@ sponsor:
 
 multispeaker:
   email: very@expressive.com
-  name: Mr Talk Talkative
   first_name: Talk
   last_name: Talkative, Esq.
   accepted_privacy_guidelines: true
@@ -76,7 +68,6 @@ multispeaker:
 
 singlespeaker:
   email: not@much.com
-  name: C. Oncise
   first_name: C.
   last_name: Oncise
   accepted_privacy_guidelines: true
