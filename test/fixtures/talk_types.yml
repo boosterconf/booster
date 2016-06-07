@@ -3,9 +3,11 @@ lightning_talk:
   description: Really short
   eligible_for_cfp: true
   eligible_for_free_ticket: false
+  is_workshop: false
 
 tutorial:
   name: tutorial
   description: Friggin' long
   eligible_for_cfp: true
   eligible_for_free_ticket: true
+  is_workshop: true
