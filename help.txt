@@ -8,6 +8,7 @@ To get up and running:
     Set s3 access: 
       export s3_secret_access_key= <get from someone>
       export s3_access_key_id= <see above>
+    Start PostGres
 
 You may also need to:
     Install bundler (gem install bundler)
@@ -37,4 +38,5 @@ Push app to production:
 
 
 Handy tips:
-Emails does not get sent when running local app, instead text is printed to console
+    Emails does not get sent when running local app, instead text is printed to console
+    Use pgAdmin to poke around the database
