@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
   def index
     @registrations = Registration.find_by_params(params)
 
-    @ticket_type_olds = @registrations.collect { |r| r.ticket_type_old }.uniq
+    @ticket_types = @registrations.collect { |r| r.ticket_type_old }.uniq
 
     if @registrations.length > 0
       first_registration = @registrations.min { |x, y| x.created_at.to_date <=> y.created_at.to_date }

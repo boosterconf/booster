@@ -2,7 +2,7 @@
 
 <ul>
   <li><%= link_to "Alle", :conditions => '' %></li>
-  <% for ticket_type_old in @ticket_type_olds %>
+  <% for ticket_type_old in @ticket_types %>
     <li><%= link_to ticket_type_old, :conditions => { :ticket_type_old => ticket_type_old }  %></li>
   <% end %>
   <li><%= link_to "Completed", :conditions => { :registration_complete => 1 }  %></li>
