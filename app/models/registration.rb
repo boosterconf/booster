@@ -29,6 +29,7 @@ class Registration < ActiveRecord::Base
   has_one :payment_notification
   belongs_to :invoice
   has_one :invoice_line
+  belongs_to :ticket_type
 
   before_create :create_or_update_payment_info
   before_create :set_default_values

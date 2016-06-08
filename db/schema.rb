@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160607162603) do
+ActiveRecord::Schema.define(version: 20160608085356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "bios", force: :cascade do |t|
     t.integer  "user_id"
@@ -146,10 +147,12 @@ ActiveRecord::Schema.define(version: 20160607162603) do
     t.integer  "invoice_id"
     t.boolean  "speakers_dinner"
     t.datetime "deleted_at"
+    t.integer  "ticket_type_id",                          default: 2
   end
 
   add_index "registrations", ["deleted_at"], name: "index_registrations_on_deleted_at", using: :btree
   add_index "registrations", ["invoice_id"], name: "index_registrations_on_invoice_id", using: :btree
+  add_index "registrations", ["ticket_type_id"], name: "index_registrations_on_ticket_type_id", using: :btree
   add_index "registrations", ["user_id"], name: "index_registrations_on_user_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
@@ -340,4 +343,5 @@ ActiveRecord::Schema.define(version: 20160607162603) do
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
 
+  add_foreign_key "registrations", "ticket_types"
 end
