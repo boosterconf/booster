@@ -5,7 +5,7 @@ class Bio < ActiveRecord::Base
               styles: {
                   quad: {
                     geometry: '400x400',
-                    convert_options: '-colorspace Gray',
+                    convert_options: '-colorspace Gray -colorspace sRGB',
                     s3_headers: {
                         'Cache-Control' => 'max-age=2592000',
                         'Expires' => 30.days.from_now.httpdate
@@ -13,7 +13,7 @@ class Bio < ActiveRecord::Base
                   }
               },
               default_style: :quad,
-              default_url: '/assets/placeholder.jpg'                            
+              default_url: '/assets/placeholder.jpg'
           })
   validates_attachment_content_type :picture,
                                     :content_type =>
