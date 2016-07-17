@@ -296,6 +296,7 @@ class User < ActiveRecord::Base
     user.registration.includes_dinner = true
     user.registration.unfinished = true
     user.registration.unique_reference = SecureRandom.urlsafe_base64
+    user.create_bio
     user
   end
 
