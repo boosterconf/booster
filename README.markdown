@@ -15,7 +15,7 @@
 Install the following tools or the equivalent.
 
 * git
-* [RubyInstaller 1.9.2](http://rubyinstaller.org)
+* [RubyInstaller](http://rubyinstaller.org)
 * [Rubyinstaller DevKit](http://rubyinstaller.org/downloads/) [Howto here](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
 * [Rubymine](http://www.jetbrains.com/ruby/download/download_thanks.jsp?os=win) (IDE) - we have an OS licence, ask Karianne
 * [PgAdmin](https://www.pgadmin.org/download/windows.php) 
