@@ -1,7 +1,9 @@
-<article>
-<div class="talks">
+<article class="inner">
+  <div class="header-join">
 <h2>Workshops</h2>
+</div>
 
+<div class="talks">
 <% @talks.each do |talk| %>
     <h3>
       <%= link_to talk.title, talk %>
@@ -14,10 +16,10 @@
     <% if talk.timeslot %>
 	    <p>
 	    	<strong>Location:</strong> <%= talk.timeslot.location %>
-	    	<br /> 
-	    	<strong>Starts at:</strong> <%= talk.timeslot.day %> <%= talk.timeslot.time %> 
+	    	<br />
+	    	<strong>Starts at:</strong> <%= talk.timeslot.day %> <%= talk.timeslot.time %>
 	    </p>
-    <% end %> 
+    <% end %>
 
     <p>
       <% if contains_html talk.description %>

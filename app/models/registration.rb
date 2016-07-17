@@ -26,7 +26,6 @@ class Registration < ActiveRecord::Base
 
   default_scope  { order('registrations.created_at desc') }
   belongs_to :user
-  has_one :payment_notification
   belongs_to :invoice
   has_one :invoice_line
   belongs_to :ticket_type
@@ -39,7 +38,7 @@ class Registration < ActiveRecord::Base
   def set_default_values
     self.manual_payment ||= true
     self.ticket_type_old ||= self.class.current_normal_ticket_type
-    self.ticket_type = TicketType.current_normal_ticket 
+    self.ticket_type = TicketType.current_normal_ticket
   end
 
   def destroy_talks_and_user

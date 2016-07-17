@@ -72,7 +72,7 @@ class SponsorsController < ApplicationController
 	      end
 	    elsif params[:sponsor].has_key?(:status)
 	      notice = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]}"
-	    end 
+	    end
 
 	    if @sponsor.save
               flash[:notice] = notice
@@ -157,7 +157,7 @@ class SponsorsController < ApplicationController
         'New this year' => Sponsor.where(status: 'accepted', was_sponsor_last_year: false).count
     }
 
-    @events = Event.last(15).reverse
+    @events = Event.first(15)
   end
 
 end

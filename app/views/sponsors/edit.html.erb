@@ -1,29 +1,35 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Edit <%= @sponsor.name %></h2>
+  </div>
 <% if @sponsor.invoice_line %>
     <p>
       <%= link_to "Go to sponsor invoice", @sponsor.invoice_line.invoice %>
     </p>
 <% end %>
-
+<div>
 <% if @sponsor.accepted? %>
-    Sponsor tickets:
+    Sponsor tickets: TBD? Not sure what is supposed to be here. 
 <% end %>
 
 <%= render 'form' %>
 
 <legend>Comments</legend>
-
+</div>
 <div id="new_comment">
-  <%= form_for [@sponsor, @event], :html => { :class => "form-inline" }, :remote => true do |f| %>
-
-      <%= f.text_area :comment, :class => "input-xxlarge", :cols => 30, :rows => 8 %>
+  <%= form_for [@sponsor, @event], :html => { :class => "" }, :remote => true do |f| %>
+      <%= f.text_area :comment, :class => "input-xxlarge", cols: 100, :rows => 8 %>
+      <div class="form-actions">
       <%= f.submit "Add comment", :class => "btn" %>
-
+    </div>
   <% end %>
 </div>
 
 <div id="comments">
   <%= render @sponsor.events %>
 </div>
-
+<div>
 <%= link_to 'Show', @sponsor %> |
 <%= link_to 'Back', sponsors_path %>
+</div>
+</article>

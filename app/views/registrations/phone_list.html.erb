@@ -1,5 +1,7 @@
-<h3>Users</h3>
-
+<article class="inner">
+  <div class="header-join">
+<h2>Users</h2>
+</div>
 <ul>
   <li><%= link_to "Alle", :conditions => '' %></li>
   <% for ticket_type_old in @ticket_types %>
@@ -37,3 +39,5 @@
   </tr>
 <% end %>
 </table>
+
+</article>

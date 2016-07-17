@@ -1,4 +1,7 @@
+<article class="inner">
+  <div class="header-join">
 <h2>Editing tag</h2>
+</div>
 
 <% form_for(@tag) do |f| %>
     <% if @tag.errors %>
@@ -20,3 +23,4 @@
 
 <%= link_to 'Show', @tag %> |
 <%= link_to 'Back', tags_path %>
+</article>

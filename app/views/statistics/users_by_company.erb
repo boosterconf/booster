@@ -1,4 +1,8 @@
-<h2><%= @title %></h2>
+<article class="inner">
+  <div class="header-join">
+    <h2><%= @title %></h2>
+</div>
+
 
 <p></p><strong>Total number of companies: <%= @companies.size %></strong></p>
 
@@ -8,3 +12,5 @@
     <li><%= company[0] %> : <%= company [1] %></li>
 <% end %>
 </ol>
+
+</article>

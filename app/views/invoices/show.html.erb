@@ -1,7 +1,8 @@
-<p id="notice"><%= notice %></p>
-
+<article class="inner">
+<div class="header-join">
 <h2>Invoice</h2>
-
+</div>
+<p id="notice"><%= notice %></p>
 <legend>Recipient:</legend>
 <p><%= @invoice.recipient_name %></p>
 <p><%= @invoice.delivery_method == 'email' ? @invoice.email : @invoice.adress %></p>
@@ -21,3 +22,5 @@
   	</tr>
   <% end %>
 </table>
+
+</article>

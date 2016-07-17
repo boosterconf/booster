@@ -64,20 +64,26 @@
 
     <p>Status: <%= @invoice.status.humanize %></p>
 
+    <div class="form-group">
     <label for="recipient_name">Recipient name</label>
-    <%= f.text_field :recipient_name %>
-
+    <%= f.text_field :recipient_name, class: 'form-control' %>
+  </div>
+  <div class="form-group">
     <label for="address">Snail mail address</label>
-    <%= f.text_area :adress, rows: 5 %>
+    <%= f.text_area :adress, rows: 5, class: 'form-control'  %>
+  </div>
 
+<div class="form-group">
     <label for="email">Email address</label>
-    <%= f.text_field :email %>
-
+    <%= f.text_field :email, class: 'form-control'  %>
+</div>
     <legend>Details:</legend>
-    <select id="add-user">
+    <div class="form-group">
+    <select id="add-user" class="form-control">
       <option value="">Select or search</option>
       <%= options_for_select(@users) %>
     </select>
+  </div>
     <button id="add-user-button">Add user by id</button>
     <table class="table table-striped" id="users">
       <tr>
@@ -93,7 +99,7 @@
           </tr>
       <% end %>
     </table>
-    <div class="actions">
+    <div class="form-actions">
       <%= f.submit %>
     </div>
 <% end %>

@@ -1,5 +1,6 @@
-<article>
+<article class="inner">
   <% content_for :title, "Suggested topics" %>
+  <div class="header-join">
   <h2 class="page_title">Suggested talks
   <span class="feed" title="Watch new talks">
     <%= link_to talks_path(:format => :rss) do %>
@@ -7,6 +8,7 @@
     <% end %>
   </span>
     </h2>
+  </div>
 
     <p>
       <a href="#lightning">Go to lightning talks</a> | <a href="#short">Go to short talks</a> | <%= link_to 'Accepted', accepted_talks_url %>

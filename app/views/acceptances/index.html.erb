@@ -1,3 +1,4 @@
+<article class="inner">
 <script type="text/javascript">
     $(document).ready(function () {
       $("#acceptances").tablesorter({
@@ -22,11 +23,12 @@
       }
     );
 </script>
-<h1>Approval of talks</h1>
-
+<div class="header-join">
+<h2>Approval of talks</h2>
+</div>
 <p>
   Total number of submitted talks: <%= @talks.size %><br><br>
-  
+
   <ul>
   <% @types.each_pair { |status, count| %>
     <li>
@@ -112,3 +114,4 @@
   <% end %>
   </tbody>
 </table>
+</article>

@@ -1,6 +1,7 @@
-<article>
+<article class="inner">
 <%= content_for :title, "Assign an abstract to #{@user.full_name}" %>
+<div class="header-join">
 <h2 class="page_title">Assign an abstract to <%= @user.full_name %></h2>
-
+</div>
 <%= render :partial => 'assign_form' %>
 </article>

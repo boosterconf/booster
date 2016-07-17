@@ -6,41 +6,9 @@
         });
     });
 </script>
-
-<h1>Create a new slot</h1>
-
-<%= form_for(@slot) do |f| %>
-    <% if @slot.errors %>
-        <ul>
-          <% @slot.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-          <% end %>
-        </ul>
-    <% end %>
-
-    <p>
-      <%= f.label :room %><br/>
-      <%= f.collection_select :room_id, @rooms, :id, :name %>
-    </p>
-
-    <p>
-      <%= f.label :period %><br/>
-      <%= f.collection_select :period_id, @periods, :id, :to_s, { :include_blank => 'Please Select' } %>
-    </p>
-
-    <p>
-      <%= f.label :talk %><br/>
-      <%= select_tag :talk_id, options_from_collection_for_select(@talks, :id, :title), { prompt: true, class: "select-talk" } %>
-    </p>
-
-    <p>
-      <%= f.label :position %><br/>
-      <%= select_tag :position, options_for_select((1..4).to_a, @position) %>
-    </p>
-
-    <p>
-      <%= f.submit 'Create' %>
-    </p>
-<% end %>
-
-<%= link_to 'Back', slots_path %>
+<article class="inner">
+<div class="header-join">
+<h2>Create empty slot</h2>
+</div>
+<%= render 'form' %>
+</article>

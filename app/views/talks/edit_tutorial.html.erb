@@ -1,6 +1,7 @@
-<article>
+<article class="inner">
+  <div class="header-join">
 <h2 class="page_title">Edit your workshop</h2>
-
+</div>
 <% @workshop = @talk %>
 
 <%= render partial: 'register_workshop/workshop_form', locals: { post_to: talk_url(@talk) } %>

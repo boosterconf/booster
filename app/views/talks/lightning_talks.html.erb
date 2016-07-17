@@ -1,7 +1,8 @@
-<article>
-<div class="talks">
+<article class="inner">
+<div class="header-join">
 <h2>Lightning talks</h2>
-
+</div>
+<div class="talks">
 <% @talks.each do |talk| %>
     <h3>
       <%= link_to talk.title, talk %>

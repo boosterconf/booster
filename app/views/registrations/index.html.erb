@@ -1,11 +1,13 @@
+<article class="inner">
+  <div class="header-join">
 <h2>Users</h2>
-
+</div>
 <div>
 <h3>Requires follow-up</h3>
 
 <ul>
   <li><%= link_to "Paypal users that haven't paid yet", :filter => 'skal_foelges_opp' %>. These must be contacted to
-    hear if they will try to pay again, receive an invoice, or not participate at all. Note: Paypal is no longer a payment option. 
+    hear if they will try to pay again, receive an invoice, or not participate at all. Note: Paypal is no longer a payment option.
   </li>
   <li><%= link_to "To be invoiced", :filter => 'skal_faktureres' %>. Send to André to invoice (for now).
   </li>
@@ -100,3 +102,4 @@
     <p>No users found</p>
 <% end %>
 </table>
+</article>

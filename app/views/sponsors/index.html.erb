@@ -1,3 +1,5 @@
+<article class="inner">
+
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -14,7 +16,7 @@
         $("#sponsors").sieve({
             itemSelector: 'tbody tr',
             textSelector: 'td:not(.no-filter), td select option[selected]',
-            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
+            searchTemplate: "<div><label>Search: <input type='text'></label></div>"
         });
 
         $(".toggle").click(function () {
@@ -26,20 +28,22 @@
         });
     });
 </script>
-
-<h1>Partner list</h1>
-
-<a href="#" class="toggle">Show/hide statistics</a><br/>
-<div id="stats" class="stats" style="display:none">
-  <%= render partial: 'sponsors/stats' %>
+<div class="header-join">
+<h2>Partner list</h2>
 </div>
-
-<a href="#" class="toggleevents">Show/hide latest <%= @events.length %> events</a><br/>
-
-<div id="events" class="events" style="display: none;">
-  <%= render @events %>
+<div>
+  <a href="#" class="toggle">Show/hide statistics</a><br/>
+  <div id="stats" class="stats" style="display:none">
+    <%= render partial: 'sponsors/stats' %>
+  </div>
+  <a href="#" class="toggleevents">Show/hide latest <%= @events.length %> events</a><br/>
+  <div id="events" class="events" style="display: none;">
+    <%= render @events %>
+  </div>
 </div>
-
+<div style="margin-bottom: 20px;">
+<%= link_to 'New partner', new_sponsor_path, class: '' %>
+</div>
 <table id="sponsors" class="table table-striped">
   <thead>
   <tr>
@@ -64,4 +68,4 @@
 
 <br/>
 
-<%= link_to 'New partner', new_sponsor_path %>
+</article>

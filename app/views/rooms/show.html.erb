@@ -1,3 +1,7 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Room <%= @room.name %></h2>
+  </div>
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -10,6 +14,8 @@
   <%= @room.capacity %>
 </p>
 
-
+<div class="form-actions">
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
+</div>
+</article>

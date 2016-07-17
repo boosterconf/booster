@@ -1,4 +1,7 @@
+<article class="inner">
+  <div class="header-join">
 <h2>Statistics</h2>
+</div>
 
 <ul>
   <li><%=link_to "Number of participants per company", users_by_company_statistics_path %></li>
@@ -6,3 +9,5 @@
   <li><%=link_to "Number of accepted speakers per company", users_by_company_statistics_path(:filter => 'accepted') %></li>
   <li><%=link_to "Number of participants per company (excluding speakers and sponsors)", users_by_company_statistics_path(:filter => 'participants') %></li>
 </ul>
+
+</article>

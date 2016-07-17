@@ -1,5 +1,4 @@
 <div class="form-horizontal">
-
   <%= form_for @sponsor, html: { multipart: true } do |f| %>
 
       <% if @sponsor.errors.any? %>
@@ -103,6 +102,7 @@
 
       <div class="form-actions">
         <%= f.submit 'Update', :class => "btn btn-primary" %>
+        <%= link_to 'Back', sponsors_path, class: 'btn btn-default' %>
       </div>
   <% end %>
 

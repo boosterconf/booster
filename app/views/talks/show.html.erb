@@ -1,6 +1,8 @@
-<article>
+<article class="inner">
 <%= content_for :title, h(@talk.title) %>
-<h2 class="page_title"><%= h @talk.title %></h2>
+<div class="header-join">
+<h2><%= h @talk.title %></h2>
+</div>
 <% if admin? %>
   <h4><%= render :partial => @talk.users %></h4>
 <% end %>
@@ -145,5 +147,3 @@
 
     <h3><%#= link_to "Log in to write a new comment", new_user_session_url(:save => true) %></h3>
 <%# end %>
-
-

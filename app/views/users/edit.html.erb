@@ -1,5 +1,8 @@
-<article>
+<article class="inner">
 <% content_for :title, @user.full_name %>
+<div class="header-join">
+<h2 class="page_title">Change your registration</h2>
+</div>
 
 <% if @user.bio == nil && admin? %>
 <p>
@@ -9,11 +12,9 @@
 
 
 <% @user.errors.full_messages.each do |msg| %>
-        <p><%= msg %></p>
-    <% end %>
+    <p class="has-error"><%= msg %></p>
+<% end %>
 
-
-<h2 class="page_title">Change your registration</h2>
 <div class="row">
   <div class="span12">
     <%= form_for(@user) do |f| %>

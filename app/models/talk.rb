@@ -167,15 +167,25 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_accepted
-    all(include: [:slots, :users => :registration], conditions: "acceptance_status = 'accepted'")
+    Talk.includes(:talk_type)
+        .where(acceptance_status: 'accepted')
+        .order('title')
+        .to_a
   end
 
   def self.all_confirmed
-    all(include: [:slots, :users => :registration], conditions: "acceptance_status = 'accepted' AND speakers_confirmed = true")
+    Talk.includes(:talk_type)
+        .where(acceptance_status: 'accepted', speakers_confirmed: true)
+        .order('title')
+        .to_a
   end
 
   def self.all_accepted_tutorials
-    unscoped.all(include: [:talk_type], conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"], :order => "title")
+    Talk.includes(:talk_type)
+        .where(acceptance_status: 'accepted')
+        .where(talk_types: {eligible_for_free_ticket: true})
+        .order('title')
+        .to_a
   end
 
   def self.all_unassigned_tutorials
@@ -186,7 +196,11 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_accepted_lightning_talks
-    all(include: :talk_type, conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 'f'"], :order => "title ")
+    Talk.includes(:talk_type)
+        .where(acceptance_status: 'accepted')
+        .where(talk_types: {eligible_for_free_ticket: false})
+        .order('title')
+        .to_a
   end
 
   def self.all_with_speakers
