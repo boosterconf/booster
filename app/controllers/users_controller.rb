@@ -74,12 +74,12 @@ class UsersController < ApplicationController
           redirect_to @user
         elsif @user.registration.manual_payment
           flash[:notice] = "We will contact you to confirm the details."
-          BoosterMailer.manual_registration_confirmation(@user).deliver
-          BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver
+          BoosterMailer.manual_registration_confirmation(@user).deliver_now
+          BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver_now
           redirect_to @user
         elsif @user.registration.free_ticket
           flash[:notice] = "We will contact you to confirm the details."
-          BoosterMailer.free_registration_notification(current_user, @user, user_url(@user)).deliver
+          BoosterMailer.free_registration_notification(current_user, @user, user_url(@user)).deliver_now
           redirect_to @user
         end
       else
@@ -96,7 +96,7 @@ class UsersController < ApplicationController
   def redirect_to_front_page
     flash[:error] = "We have reached the limit on the number of participants for this conference. Please contact us at kontakt@boosterconf.no and we will see what we can do."
     logger.error("Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.")
-    BoosterMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver
+    BoosterMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver_now
     redirect_to root_path
   end
 
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:id], include: :registration)
+    @user = User.includes(:registration).find(params[:id])
     @user.roles_will_change!
     @user.roles = params[:roles].join(",") if params[:roles]
     @user.assign_attributes(params[:user])
@@ -160,7 +160,7 @@ class UsersController < ApplicationController
   end
 
   def phone_list
-    @users = User.all(:order => "registrations.ticket_type_old, last_name", :include => :registration, :conditions => "registrations.ticket_type_old = 'volunteer' OR registrations.ticket_type_old = 'organizer'")
+    @users = User.all_organizers_and_volunteers
   end
 
   def dietary_requirements
@@ -218,7 +218,7 @@ class UsersController < ApplicationController
       User.transaction do
         new_users.each do |user|
           user.save!(validate: false)
-          BoosterMailer.ticket_assignment(user).deliver
+          BoosterMailer.ticket_assignment(user).deliver_now
         end
 
         existing_users.each do |u|
@@ -253,7 +253,7 @@ class UsersController < ApplicationController
       return
     end
 
-    registration = Registration.find_by_unique_reference(params[:reference], :include => [:user])
+    registration = Registration.includes(:user).where(unique_reference: params[:reference]).to_a.first
 
     unless registration.present?
       flash[:error] = "This link does no longer work"

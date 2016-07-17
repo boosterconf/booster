@@ -8,10 +8,10 @@ class Talk < ActiveRecord::Base
 
   has_many :speakers
   has_many :users, through: :speakers
-  has_many :comments, order: 'created_at', include: :user
+  has_many :comments, -> { order 'created_at'}
   has_and_belongs_to_many :tags
   belongs_to :talk_type
-  has_many :reviews, order: 'created_at desc', include: :reviewer
+  has_many :reviews, -> { order 'created_at desc'}
   has_attached_file :slide, PAPERCLIP_CONFIG
   has_and_belongs_to_many :slots, join_table: 'talk_positions'
 

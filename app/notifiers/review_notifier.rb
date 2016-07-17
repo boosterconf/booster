@@ -7,7 +7,7 @@ class ReviewNotifier
     notification_recipients.delete(review.reviewer)
 
     notification_recipients.each do |recipient|
-      BoosterMailer.review_created(review, recipient.email).deliver
+      BoosterMailer.review_created(review, recipient.email).deliver_now
     end
   end
 

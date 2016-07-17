@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :registration, :bio
 
-  default_scope :order => 'users.created_at desc'
+  default_scope { includes(:registration).order('users.created_at desc')}
 
   acts_as_authentic do |c|
     c.login_field = :email
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
 
   def deliver_password_reset_instructions!
     reset_perishable_token!
-    BoosterMailer.password_reset_instructions(self).deliver
+    BoosterMailer.password_reset_instructions(self).deliver_now
   end
 
   def confirmed_speaker?
@@ -229,30 +229,6 @@ class User < ActiveRecord::Base
    self.where('lower(email) = ?', email.downcase).first
   end
 
-  def self.find_with_filter(filter)
-    case filter
-      when "all", "", nil
-        return find(:all, :include => :registration)
-      when "admin"
-        return find(:all, :conditions => { :is_admin => true }, :include => :registration)
-      when "speakers"
-        return find(:all, :include => [:registration, :talks]).reject { |u| u.talks.empty? }
-      when "paid"
-        return find(:all, :include => :registration).select { |u| u.registration and u.registration.paid? }
-      when "unpaid"
-        return find(:all, :include => :registration).select { |u| u.registration and not u.registration.paid? and u.talks.empty? }
-      when "volunteer"
-        return find(:all, :include => :registration).select { |u| u.registration and u.registration.ticket_type_old == "volunteer" }
-      when "student"
-        return find(:all, :include => :registration).select { |u| u.registration and (u.registration.ticket_type_old == "student" or u.registration.ticket_type_old == "mod251") }
-      when "paying_speaker"
-        return find(:all, :include => [:registration, :talks]).reject { |u| u.talks.empty? }.
-            select { |u| u.registration and u.registration.paid? }
-      else
-        raise "Illegal filter #{filter}"
-    end
-  end
-
   def self.all_but_invited_speakers
     self.find_all_by_invited(false)
   end
@@ -274,12 +250,15 @@ class User < ActiveRecord::Base
   end
 
   def self.all_organizers
-    self.all(:include => :registration).select { |u| u.registration != NIL && u.registration.ticket_type_old == "organizer" }
+    User.includes(:registration).to_a.select {|u| u.registration.ticket_type_old == 'organizer'}
+  end
+  
+  def self.all_organizers_and_volunteers
+    User.includes(:registration).to_a.select {|u| ['organizer', 'volunteer'].include? u.registration.ticket_type_old}
   end
 
   def self.featured_speakers
-    potential_speakers = all(:conditions => ['featured_speaker = ?', true], :include => [:bio, :talks],
-                             :order => 'created_at DESC')
+    potential_speakers = User.includes(:bio, :talks).where(featured_speaker: true).order('created_at DESC')
     speakers = []
     potential_speakers.each do |sp|
       if sp.is_featured?
@@ -294,11 +273,15 @@ class User < ActiveRecord::Base
   end
 
   def self.all_normal_participants
-    User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(early_bird full_price sponsor organizer reviewer)], :include => [:registration])
+    User.includes(:registration).to_a.select {|u| %w(early_bird full_price sponsor organizer reviewer).include? u.registration.ticket_type_old }
+  end
+  
+  def self.all_participants
+    User.includes(:registration).to_a
   end
 
   def self.all_speakers
-    User.all(:conditions => ['registrations.ticket_type_old IN (?)', %w(lightning speaker)], :include => [:registration])
+      User.includes(:registration).to_a.select {|u| %w(lightning speaker).include? u.registration.ticket_type_old }
   end
 
   def self.create_unfinished(email, ticket_type, first_name=nil, last_name=nil)

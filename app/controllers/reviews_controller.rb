@@ -20,7 +20,7 @@ class ReviewsController < ApplicationController
     @review.talk_id = params[:talk_id]
 
     if @review.save
-      @review = Review.find(@review.id, include: [:reviewer, :talk])
+      @review = Review.includes(:reviewer, :talk).find(@review.id)
       ReviewNotifier.new.notify_create(@review)
       respond_with @review, location: talk_url(@review.talk_id)
     else

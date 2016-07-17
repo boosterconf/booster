@@ -157,7 +157,7 @@ class UsersControllerTest < ActionController::TestCase
     should 'be able to delete bio' do
       q = users(:quentin)
       bio = Bio.new(title: 'test')
-      User.update(q, { bio: bio })
+      User.update(q.id, { bio: bio })
 
       post :delete_bio, :id => q.id
 

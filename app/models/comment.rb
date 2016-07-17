@@ -3,7 +3,7 @@ class Comment < ActiveRecord::Base
   belongs_to :talk, :counter_cache => true
   validates_presence_of :title, :description
 
-  default_scope :order => 'created_at desc', :limit => 100, :include => [:talk, :user]
+  default_scope { order('created_at desc')}
 
   attr_accessible :title, :description
 end

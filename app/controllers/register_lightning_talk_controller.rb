@@ -42,7 +42,7 @@ class RegisterLightningTalkController < ApplicationController
     if @talk.save
       current_user.update_ticket_type!
 
-      BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver
+      BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now
       SlackNotifier.notify_talk(@talk)
 
       if current_user.has_all_statistics? && current_user.bio && current_user.bio.good_enough?

@@ -12,7 +12,7 @@ module Api
       @events = Event.last(15).reverse
 
       if @sponsor.is_ready_for_email?
-        BoosterMailer.initial_sponsor_mail(@sponsor).deliver
+        BoosterMailer.initial_sponsor_mail(@sponsor).deliver_now
         @sponsor.status = 'contacted'
         @sponsor.last_contacted_at = Time.now.to_datetime
         if @sponsor.save

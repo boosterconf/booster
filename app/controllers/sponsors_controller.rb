@@ -97,7 +97,7 @@ class SponsorsController < ApplicationController
     @users = User.all_organizers
     if @sponsor.is_ready_for_email?
       Sponsor.transaction do
-        BoosterMailer.initial_sponsor_mail(@sponsor).deliver
+        BoosterMailer.initial_sponsor_mail(@sponsor).deliver_now
         @sponsor.status = 'contacted'
         @sponsor.last_contacted_at = Time.now.to_datetime
         @sponsor.save
@@ -116,7 +116,7 @@ class SponsorsController < ApplicationController
   def ajax_email
     @users = User.all_organizers
     if @sponsor.is_ready_for_email?
-      BoosterMailer.initial_sponsor_mail(@sponsor).deliver
+      BoosterMailer.initial_sponsor_mail(@sponsor).deliver_now
       @sponsor.status = 'contacted'
       @sponsor.last_contacted_at = Time.now.to_datetime
       if @sponsor.save
@@ -139,22 +139,22 @@ class SponsorsController < ApplicationController
   end
 
   def find_sponsors
-    @sponsors = Sponsor.all(:include => :user).sort
+    @sponsors = Sponsor.includes(:user).order(:name).to_a
   end
 
   def find_events_and_stats
     @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
     @stats = {
-        'Accepted' => Sponsor.count(:conditions => "status = 'accepted'"),
-        'Declined' => Sponsor.count(:conditions => "status = 'declined'"),
-        'In dialogue' => Sponsor.count(:conditions => "status = 'dialogue'"),
-        'Suggested (with email)' => Sponsor.count(:conditions => "status = 'suggested' AND email != ''"),
-        'Suggested (missing email)' => Sponsor.count(:conditions => "status = 'suggested' AND email = ''"),
-        'Contacted' => Sponsor.count(:conditions => "status = 'contacted'"),
-        'Reminded' => Sponsor.count(:conditions => "status = 'reminded'"),
-        'Don\'t ask' => Sponsor.count(:conditions => "status = 'never'"),
-        'Both years' => Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 't'"),
-        'New this year' => Sponsor.count(:conditions => "status = 'accepted' AND was_sponsor_last_year = 'f'")
+        'Accepted' => Sponsor.where(status: 'accepted').count,
+        'Declined' => Sponsor.where(status: 'declined').count,
+        'In dialogue' => Sponsor.where(status: 'dialogue').count,
+        'Suggested (with email)' => Sponsor.where(status: 'suggested').where.not(email: '').count,
+        'Suggested (missing email)' => Sponsor.where(status: 'suggested', email: '').count,
+        'Contacted' => Sponsor.where(status: 'contacted').count,
+        'Reminded' => Sponsor.where(status: 'reminded').count,
+        'Don\'t ask' => Sponsor.where(status: 'never').count,
+        'Both years' => Sponsor.where(status: 'accepted', was_sponsor_last_year: true).count,
+        'New this year' => Sponsor.where(status: 'accepted', was_sponsor_last_year: false).count
     }
 
     @events = Event.last(15).reverse

@@ -25,7 +25,7 @@ class RegistrationsController < ApplicationController
 
   def send_welcome_email
     User.all.each do |a_user|
-      BoosterMailer.welcome_email(a_user).deliver if a_user.email && a_user.first_name
+      BoosterMailer.welcome_email(a_user).deliver_now if a_user.email && a_user.first_name
     end
     redirect_to registrations_url
   end
@@ -33,7 +33,7 @@ class RegistrationsController < ApplicationController
   def send_test_welcome_email
     User.find_all_by_email("kjersti.berg@gmail.com").each do |a_user|
       puts a_user
-      BoosterMailer.welcome_email(a_user).deliver
+      BoosterMailer.welcome_email(a_user).deliver_now
     end
     redirect_to registrations_url
   end
@@ -41,14 +41,13 @@ class RegistrationsController < ApplicationController
   def send_speakers_dinner_email
     User.all_accepted_speakers.each do |user|
       print "Mailing: #{user.email}...\n"
-      BoosterMailer.speakers_dinner_email(user).deliver
+      BoosterMailer.speakers_dinner_email(user).deliver_now
     end
     redirect_to registrations_url
   end
 
   def edit
     @registration = Registration.find(params[:id])
-    @registration.payment_notification ||= @registration.build_payment_notification
   end
 
   # PUT /registrations/1
@@ -79,9 +78,9 @@ class RegistrationsController < ApplicationController
         flash[:notice] = "Information updated and confirmation mail sent"
 
         if @registration.free_ticket?
-          BoosterMailer.free_registration_completion(@registration.user).deliver
+          BoosterMailer.free_registration_completion(@registration.user).deliver_now
         else
-          BoosterMailer.payment_confirmation(@registration).deliver
+          BoosterMailer.payment_confirmation(@registration).deliver_now
         end
       else
         flash[:notice] = "Information updated"

@@ -21,7 +21,7 @@ class TalksController < ApplicationController
   end
 
   def show
-    @talk = Talk.find(params[:id], include: [:users, :comments, :reviews])
+    @talk = Talk.includes(:users, :comments, :reviews).find(params[:id])
     @review = Review.new
   end
 
@@ -105,7 +105,7 @@ class TalksController < ApplicationController
 
     if @talk.save
       flash[:notice] = 'Abstract published'
-      BoosterMailer.talk_confirmation(@user, @talk, talk_url(@talk)).deliver
+      BoosterMailer.talk_confirmation(@user, @talk, talk_url(@talk)).deliver_now
       redirect_to @talk
     else
       render action: 'new'

@@ -75,7 +75,7 @@ class ApplicationController < ActionController::Base
     return access_denied unless current_user
 
     if params[:talk_id] =~ LOOKS_NUMBER_LIKE
-      talk = Talk.find(params[:talk_id], include: :users)
+      talk = Talk.includes(:users).where(id: params[:talk_id]).first
       unless admin_or_reviewer? || talk.is_presented_by?(current_user)
         flash[:error] = 'Shame on you!'
         return access_denied

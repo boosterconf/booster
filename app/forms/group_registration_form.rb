@@ -62,7 +62,7 @@ class GroupRegistrationForm
       @invoice.add_user(user)
       user.save!(validate: false)
       registrations << user.registration
-      BoosterMailer.ticket_assignment(user).deliver
+      BoosterMailer.ticket_assignment(user).deliver_now
     end
   end
 

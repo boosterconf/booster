@@ -2,7 +2,7 @@ class Period < ActiveRecord::Base
 
   attr_accessible :day, :start_time, :end_time, :period_type
 
-  has_many :slots, order: 'room_id'
+  has_many :slots, -> {order 'room_id'}
 
   validates_uniqueness_of :start_time, scope: [:end_time, :day]
 

@@ -7,7 +7,7 @@ class InvoicesController < ApplicationController
   before_filter :find_users_without_invoice
 
   def index
-    @invoices = Invoice.order("invoiced_at desc", "created_at asc").all
+    @invoices = Invoice.order("invoiced_at desc", "created_at asc").to_a
 
     respond_with @invoices
   end

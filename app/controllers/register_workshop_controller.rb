@@ -47,7 +47,7 @@ class RegisterWorkshopController < ApplicationController
         add_additional_speaker
       end
 
-      BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver
+      BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver_now
       SlackNotifier.notify_talk(@workshop)
 
       if current_user.has_all_statistics?
@@ -71,7 +71,7 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def send_email_to_organizers_to_go_fix_it(additional_speaker_email)
-    BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@workshop.title}. Go fix!").deliver
+    BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@workshop.title}. Go fix!").deliver_now
   end
 
   def create_user_for_additional_speaker(additional_speaker_email, talk)
@@ -80,7 +80,7 @@ class RegisterWorkshopController < ApplicationController
     talk.users << additional_speaker
     talk.save!
 
-    BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver
+    BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver_now
   end
 
   def additional_speaker_already_has_registered_user(additional_speaker_email)

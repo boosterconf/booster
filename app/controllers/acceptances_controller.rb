@@ -16,7 +16,7 @@ class AcceptancesController < ApplicationController
   end
 
   def accept
-    @talk = Talk.find(params[:id], include: [{ users: :registration }])
+    @talk = Talk.includes(users: [:registration]).find(params[:id])
     
     return redirect_on_email_sent if @talk.email_sent
     
@@ -101,9 +101,9 @@ class AcceptancesController < ApplicationController
     return redirect_on_email_sent if @talk.email_sent
 
     if @talk.refused?
-      @talk.speakers.each { |speaker| BoosterMailer.talk_refusation_confirmation(@talk, speaker.user, current_user_url).deliver }
+      @talk.speakers.each { |speaker| BoosterMailer.talk_refusation_confirmation(@talk, speaker.user, current_user_url).deliver_now }
     elsif @talk.accepted?
-      @talk.speakers.each { |speaker| BoosterMailer.talk_acceptance_confirmation(@talk, speaker.user, current_user_url).deliver }
+      @talk.speakers.each { |speaker| BoosterMailer.talk_acceptance_confirmation(@talk, speaker.user, current_user_url).deliver_now }
     else
       return redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Talk not accepted/refused yet!"
     end

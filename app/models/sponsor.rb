@@ -63,7 +63,7 @@ class Sponsor < ActiveRecord::Base
   end
 
   def self.all_accepted
-    self.find_all_by_status('accepted')
+    Sponsor.where(status: 'accepted').to_a
   end
 
   def has_email?

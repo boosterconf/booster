@@ -66,8 +66,8 @@ module Api
 
     def command_sponsors(text)
       if text.empty?
-        count_accepted = Sponsor.count(:conditions => "status = 'accepted'")
-        count_dialogue = Sponsor.count(:conditions => "status = 'dialogue'")
+        count_accepted = Sponsor.where(status: 'accepted').count
+        count_dialogue = Sponsor.where(status: 'dialogue').count
         message = "Right now we have #{pluralize(count_accepted, ' accepted partner')}."
         if count_dialogue > 0
           message = message + " There are #{count_dialogue} in dialogue though, so maybe we'll get more soon!"

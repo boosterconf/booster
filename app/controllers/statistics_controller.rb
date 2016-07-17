@@ -10,7 +10,7 @@ class StatisticsController < ApplicationController
       case params[:filter]
         when 'speakers'
           @title = 'Antall deltakere med innsendt foredrag pr selskap'
-          @companies = companies_from_users(User.find_with_filter("speakers"))
+          @companies = companies_from_users(User.all_speakers)
         when 'accepted'
           @title = 'Antall deltakere med godkjent foredrag pr selskap'
           @companies = companies_from_users(User.all_accepted_speakers)
@@ -24,7 +24,7 @@ class StatisticsController < ApplicationController
       end
     else
       @title = 'Absolutt alle deltakere, antall pr selskap'
-      @companies = companies_from_users(User.find_with_filter("all"))
+      @companies = companies_from_users(User.all_participants)
     end
   end
   

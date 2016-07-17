@@ -24,7 +24,7 @@ class Registration < ActiveRecord::Base
                   :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete,
                   :speakers_dinner
 
-  default_scope :order => 'registrations.created_at desc'
+  default_scope  { order('registrations.created_at desc') }
   belongs_to :user
   has_one :payment_notification
   belongs_to :invoice
