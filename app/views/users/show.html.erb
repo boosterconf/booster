@@ -100,6 +100,37 @@
 
 <h3>Participant information</h3>
 <%= render partial: @user.registration %>
+
+
+<h3>Speaker bio</h3>
+<% if @user.bio %>
+<div>
+  <% if @user.bio.picture_file_name.present? %>
+      <%= image_tag @user.bio.picture.url %>
+  <% else %>
+      <%= image_tag('placeholder.jpg') %>
+  <% end %>
+</div>
+
+<div class="form-group">
+  <label>Work title</label>
+  <input type="text" class="form-control" disabled value="<%= @user.bio.title %>" />
+</div>
+
+<div class="form-group">
+  <label>Twitter handle</label>
+  <input type="text" class="form-control" disabled value="<%= @user.bio.twitter_handle %>" />
+</div>
+<div class="form-group">
+  <label>Blog url</label>
+  <input type="text" class="form-control" disabled value="<%= @user.bio.blog %>"/>
+</div>
+<div class="form-group">
+  <label>Bio</label>
+  <textarea class="form-control" disabled><%= @user.bio.bio %></textarea>
+</div>
+
+<% end %>
 <p>
   <%= link_to "Make changes to your registration", edit_user_path(@user), :class => "btn btn-primary" %>
 </p>
