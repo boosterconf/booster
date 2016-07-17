@@ -39,12 +39,13 @@ class RegisterWorkshopController < ApplicationController
     @workshop = Workshop.new(params[:talk])
     @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @workshop.users << current_user
-
     if @workshop.save
       current_user.update_ticket_type!
 
       if has_entered_additional_speaker_email
-        add_additional_speaker
+        additional_speaker = find_additional_speaker
+        @workshop.users << additional_speaker
+        @workshop.save!
       end
 
       BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver_now
@@ -60,27 +61,16 @@ class RegisterWorkshopController < ApplicationController
     end
   end
 
-  def add_additional_speaker
+  def find_additional_speaker
     additional_speaker_email = params[:additional_speaker_email]
 
-    if additional_speaker_already_has_registered_user(additional_speaker_email)
-      send_email_to_organizers_to_go_fix_it(additional_speaker_email)
-    else
-      create_user_for_additional_speaker(additional_speaker_email, @workshop)
+    unless additional_speaker_already_has_registered_user(additional_speaker_email)
+      additional_speaker = User.create_unfinished(additional_speaker_email, 'speaker')
+      additional_speaker.save(:validate => false)      
+      BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver_now
     end
-  end
-
-  def send_email_to_organizers_to_go_fix_it(additional_speaker_email)
-    BoosterMailer.organizer_notification("User #{additional_speaker_email} should be a speaker at #{@workshop.title}. Go fix!").deliver_now
-  end
-
-  def create_user_for_additional_speaker(additional_speaker_email, talk)
-    additional_speaker = User.create_unfinished(additional_speaker_email, 'speaker')
-    additional_speaker.save(:validate => false)
-    talk.users << additional_speaker
-    talk.save!
-
-    BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver_now
+    
+    User.where(email: additional_speaker_email).first
   end
 
   def additional_speaker_already_has_registered_user(additional_speaker_email)

@@ -52,12 +52,6 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
             end
           end
         end
-
-        should 'send an email to us' do
-          assert_difference('ActionMailer::Base.deliveries.size', +2) do
-            post :create_talk, :talk => create_talk_params, :additional_speaker_email => @existing_email
-          end
-        end
       end
 
       context "create a new user" do
