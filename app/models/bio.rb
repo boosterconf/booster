@@ -13,7 +13,7 @@ class Bio < ActiveRecord::Base
                   }
               },
               default_style: :quad,
-              default_url: '/assets/placeholder.jpg'
+              default_url: '/assets/images/placeholder.jpg'
           })
   validates_attachment_content_type :picture,
                                     :content_type =>
