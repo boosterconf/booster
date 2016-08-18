@@ -4,45 +4,45 @@
 <h2>Could you help us understand more about who you are?</h2>
 
 <%= form_for @user, :url => '/register_lightning_talk/create_details' do |f| %>
+  <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
 
-    <%= f.fields_for :bio do |bio| %>
-        <fieldset class="form-group">
-        <%= bio.label :title, 'Work title' %>
-        <%= bio.text_field :title, placeholder: 'Project manager or Troublemaker?',  :class => 'form-control' %>
-        </fieldset>
-        <fieldset class="form-group">
-        <%= bio.label :twitter_handle, 'Twitter handle' %>
-        <%= bio.text_field :twitter_handle, placeholder: 'So that we can tag you better',  :class => 'form-control' %>
-        </fieldset>
-        <fieldset class="form-group">
-        <%= bio.label :blog, 'Blog url' %>
-        <%= bio.text_field :blog, placeholder: 'Who doesn\'t love a little free PR?', :class => 'form-control' %>
-        </fieldset>
-        <fieldset>
-            <%= bio.label :picture, 'Picture (Will be posted on the website)' %>
-            <div style="margin: 5px;">
-              <% if @user.bio.picture_file_name.present? %>
-                  <%= image_tag @user.bio.picture.url %>
-              <% else %>
-                  <%= image_tag('placeholder.jpg') %>
-              <% end %>
-            </div>
-              <%= bio.file_field :picture, :class => 'form-control' %>
-          <div>
-          <fieldset class="form-group">
-            <%= bio.label :bio, 'Bio' %>
-            <%= bio.text_area :bio, :rows => 13, :class => 'form-control' %>
-            </fieldset>
-          </div>
-        </fieldset>
-    <% end %>
+  <%= f.fields_for :bio do |bio| %>
+      <div>
+        <div>
+          <% if @user.bio.picture_file_name.present? %>
+              <%= image_tag @user.bio.picture.url %>
+          <% else %>
+              <%= image_tag('placeholder.jpg') %>
+          <% end %>
+        </div>
+        <div class="pull-right">
+          <%= bio.file_field :picture %>
+        </div>
+      </div>
 
-    <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
+      <div class="form-group">
+        <%= bio.label :title, "Work title:" %>
+        <%= bio.text_field :title, class: 'form-control' %>
+      </div>
 
-    <div class="form-actions">
-      <%= f.submit "Finish", :class => "btn btn-primary" %>
-    </div>
+      <div class="form-group">
+        <%= bio.label :twitter_handle, "Twitter handle:" %>
+        <%= bio.text_field :twitter_handle, class: 'form-control'%>
+      </div>
+      <div class="form-group">
+        <%= bio.label :blog, "Blog url" %>
+        <%= bio.text_field :blog, class: 'form-control' %>
+      </div>
+      </div>
+      <div class="form-group">
+      <%= bio.label :bio, "Bio" %>
+      <%= bio.text_area :bio, :rows => 13, :class => 'form-control' %>
+      </div>
 
+      <div class="form-actions">
+        <%= f.submit "Finish", :class => "btn btn-primary" %>
+      </div>
+  <% end %>
 <% end %>
 
 </article>
