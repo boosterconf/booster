@@ -12,8 +12,8 @@
               <div class="row speaker-row">
 	      <div class="left col-sm-6">
               <% unless speaker.bio == nil %>
-                <% if @user.bio.picture_file_name.present? %>
-                    <%= image_tag @user.bio.picture.url, class: 'speaker-image'%>
+                <% if speaker.bio.picture_file_name.present? %>
+                    <%= image_tag speaker.bio.picture.url, class: 'speaker-image'%>
                 <% else %>
                     <%= image_tag('placeholder.jpg', class: 'speaker-image' ) %>
                 <% end %>
