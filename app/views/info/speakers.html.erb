@@ -15,7 +15,7 @@
                 <% if speaker.bio.picture_file_name.present? %>
                     <%= image_tag speaker.bio.picture.url, class: 'speaker-image'%>
                 <% else %>
-                    <%= image_tag('placeholder.jpg', class: 'speaker-image' ) %>
+                    <%= image_tag('placeholder.jpg', class: 'speaker-image', style: 'width: 400px' ) %>
                 <% end %>
               <% end %>
 	      </div>
