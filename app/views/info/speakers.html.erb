@@ -12,12 +12,16 @@
               <div class="row speaker-row">
 	      <div class="left col-sm-6">
               <% unless speaker.bio == nil %>
-                <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
+                <% if @user.bio.picture_file_name.present? %>
+                    <%= image_tag @user.bio.picture.url, class: 'speaker-image'%>
+                <% else %>
+                    <%= image_tag('placeholder.jpg', class: 'speaker-image' ) %>
+                <% end %>
               <% end %>
 	      </div>
               <div class="right col-sm-6">
                 <div class="content">
-	          <h3><a name="<%= speaker.full_name %>"><%= speaker.full_name %></a></h3>                  
+	          <h3><a name="<%= speaker.full_name %>"><%= speaker.full_name %></a></h3>
 		  <% unless speaker.bio == nil %>
 		  <div class="speaker-meta">
 		    <p>
