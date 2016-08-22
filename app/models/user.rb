@@ -238,7 +238,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_accepted_speakers
-    self.all.select { |u| u.has_accepted_talk? }
+    self.all.select { |u| u.has_accepted_talk? || u.invited == true }
   end
 
   def self.all_tutorial_speakers
@@ -252,7 +252,7 @@ class User < ActiveRecord::Base
   def self.all_organizers
     User.includes(:registration).to_a.select {|u| u.registration.ticket_type_old == 'organizer'}
   end
-  
+
   def self.all_organizers_and_volunteers
     User.includes(:registration).to_a.select {|u| ['organizer', 'volunteer'].include? u.registration.ticket_type_old}
   end
@@ -275,7 +275,7 @@ class User < ActiveRecord::Base
   def self.all_normal_participants
     User.includes(:registration).to_a.select {|u| %w(early_bird full_price sponsor organizer reviewer).include? u.registration.ticket_type_old }
   end
-  
+
   def self.all_participants
     User.includes(:registration).to_a
   end
