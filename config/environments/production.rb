@@ -8,6 +8,8 @@ Booster2013::Application.configure do
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
 
+  config.log_level = :info
+
   config.eager_load = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
