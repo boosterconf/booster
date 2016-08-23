@@ -2,7 +2,7 @@
 
     <fieldset class="form-group">
       <legend>Talk length</legend>
-      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'form-control' %>
+      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, {}, {:class => 'form-control'} %>
     </fieldset>
 
     <legend>Information visible for everyone</legend>
