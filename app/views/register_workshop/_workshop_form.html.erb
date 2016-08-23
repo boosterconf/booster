@@ -42,6 +42,11 @@
       <%= f.label :outline, "Outline" %>
 
       <%= f.text_area :outline, :class => "tinymce span10" %>
+      <% if @talk.errors[:description] %>
+        <div class="error-message">
+          You must provide an abstract.
+        </div>
+      <% end %>
     </fieldset>
 
     <%= tinymce %>

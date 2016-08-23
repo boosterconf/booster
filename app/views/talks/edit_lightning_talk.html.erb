@@ -1,7 +1,7 @@
 <article class="inner">
   <div class="header-join">
-<h2 class="page_title">Edit your lightning talk</h2>
-</div>
+    <h2 class="page_title">Edit your lightning talk</h2>
+  </div>
 <script>
     $(document).ready(function () {
         var availableTags = [];
@@ -16,73 +16,19 @@
     });
 </script>
 
-<%= form_for @talk do |f| %>
+  <% if @talk.accepted? %>
+    <p><%= image_tag("approved_talk.png") %> Approved</p>
+    <% if @talk.slide_file_name.present? %>
+        <h4>Presentation slides</h4>
+        <p>
+          <%= link_to image_tag("icon_slides.gif"), @talk.slide.url %>
+          <%= link_to "Download", @talk.slide.url %>
+        </p>
+    <% end %>
+    <h4>Upload presentation slides</h4>
+    <%= render :partial => 'upload_slide' %>
+  <% end %>
 
-    <fieldset id="talk_details">
-
-      <% @talk.errors.full_messages.each do |msg| %>
-          <p><%= msg %></p>
-      <% end %>
-
-      <% if current_user.is_admin? %>
-          <div class="field type">
-            <%= f.label :talk_type, "Type of talk" %>
-            <%= f.collection_select :talk_type_id, TalkType.all, :id, :name_and_duration, :class => 'input-xlarge' %>
-          </div>
-      <% end %>
-
-      <div class="radios">
-        Tutorials must be held in English. Lightning talks can be held in English or Norwegian.
-        <fieldset>
-          <label class="radio" for="talk_language_english">
-            <input id="talk_language_english" name="talk[language]" type="radio" value="English" <%= @talk.language == 'English' ? "checked" : "" %> />
-            English
-          </label>
-          <label class="radio" for="talk_language_norwegian">
-            <input id="talk_language_norwegian" name="talk[language]" type="radio" value="Norwegian" <%= @talk.language == 'Norwegian' ? "checked" : "" %>/>
-            Norwegian
-          </label>
-        </fieldset>
-      </div>
-
-      <div class="field title">
-        <%= f.label :title, "Title" %>
-
-        <%= f.text_field :title, :class => 'input-xxlarge' %>
-      </div>
-
-      <div class="field abstract">
-        <%= f.label :description, "Abstract" %>
-
-        <%= f.text_area :description, :class => "tinymce span10" %>
-      </div>
-
-      <%= tinymce %>
-
-      <div class="field audience">
-        <%= f.label :audience_level, "Target audience level: " %>
-        <%= f.select :audience_level, [['Any', 'any'], ['Novice', 'novice'], ['Intermediate', 'intermediate'], ['Expert', 'expert']], :class => 'input-xxlarge' %>
-      </div>
-
-    </fieldset>
-
-    <br/>
-    <br/>
-
-    <div class="field buttons">
-      <%= f.submit "Save changes", :class => 'btn btn-primary' %>
-    </div>
-
-    <br/>
-
-    <div class="field buttons">
-      <%= link_to 'Back to talk', talk_path(@talk) %>
-    </div>
-
-<% end %>
-
-<h3>Upload presentation slides</h3>
-
-<%= render :partial => 'upload_slide' %>
+  <%= render partial: 'register_lightning_talk/talk_form', locals: { post_to: talk_url(@talk) } %>
 
 </article>

@@ -2,62 +2,6 @@
 <%= render :partial => 'steps', :locals => {:active_id => "talk"} %>
 <h2>What's your passion?</h2>
 
-<%= form_for @talk, :url => '/register_lightning_talk/create_talk' do |f| %>
+<%= render partial: 'talk_form', locals: { post_to: '/register_lightning_talk/create_talk' } %>
 
-    <% if flash[:error] %>
-        <p class="flash-error"><%= flash[:error] %></p>
-    <% end %>
-
-    <fieldset class="form-group">
-      <legend>Talk length</legend>
-      <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, :class => 'form-control' %>
-    </fieldset>
-
-    <fieldset class="form-group">
-    <legend>Language</legend>
-    <p>In what language will you deliver your talk? Please select the language you are most comfortable with.
-    <label class="radio">
-      <%= f.radio_button :language, 'English' %>
-      English
-    </label>
-    <label class="radio">
-      <%= f.radio_button :language, 'Norwegian' %>
-      Norwegian
-    </label>
-    </p>
-    </fieldset>
-    <legend>Talk details</legend>
-    <p>
-      The abstract will be published on the website as soon
-      as you submit it, and will be used by the organizers during talk selection. It is therefore important that you
-      provide a detailed abstract. This will help us to select in the selection process and increase the chances
-      of your talk being selected.
-    </p>
-    <fieldset class="form-group">
-      <%= f.label :title, "Title" %>
-
-      <%= f.text_field :title, :size => "80", :class => "form-control" %>
-    </fieldset>
-    <fieldset class="form-group">
-      <%= f.label :description, "Abstract" %>
-
-      <%= f.text_area :description, :class => "tinymce span10" %>
-    </fieldset>
-
-    <%= tinymce %>
-
-    <fieldset class="form-group">
-      <%= f.label :equipment, "Leave comments for the organizers here." %>
-      <%= f.text_area :equipment, :class => 'form-control', :rows => 5  %>
-    </fieldset>
-
-    <div class="form-actions">
-      <p>
-        Please be aware that by submitting a talk to Booster, you agree to follow our
-        <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
-      </p>
-
-      <%= f.submit "Next", :class => "btn btn-primary" %>
-    </div>
-<% end %>
 </article>

@@ -66,10 +66,10 @@ class RegisterWorkshopController < ApplicationController
 
     unless additional_speaker_already_has_registered_user(additional_speaker_email)
       additional_speaker = User.create_unfinished(additional_speaker_email, 'speaker')
-      additional_speaker.save(:validate => false)      
+      additional_speaker.save(:validate => false)
       BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver_now
     end
-    
+
     User.where(email: additional_speaker_email).first
   end
 
@@ -100,7 +100,7 @@ class RegisterWorkshopController < ApplicationController
 
   private
   def setup_talk_types
-    @talk_types = current_user.try(:is_admin?) ? TalkType.all : TalkType.workshops
+    @talk_types = TalkType.workshops
   end
 
 end

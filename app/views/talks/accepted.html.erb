@@ -1,21 +1,21 @@
 <article class="inner">
-
     <% content_for :title, "Accepted sessions" %>
 <div class="header-join">
-    <h2 class="page_title">Accepted sessions
-</div>
-  <span class="feed" title="Watch new talks">
-    <%= link_to talks_path(:format => :rss) do %>
-    <%= image_tag('/images/icon_feed.png') %>
-    <% end %>
-  </span>
+    <h2 class="page_title">
+      Accepted talks
+      <span class="feed" title="Watch new talks">
+        <%= link_to talks_path(:format => :rss) do %>
+        <%= image_tag('/images/icon_feed.png') %>
+        <% end %>
+      </span>
     </h2>
-
-    <p>These are the currently accepted sessions. This list is subject to change.</p>
+</div>
 
     <p>
       <a href="#lightning"> Go to lightning talks</a> | <a href="#short">Go to short talks</a> | <%= link_to 'All proposals', talks_url %>
     </p>
+
+        <p>These are the currently accepted sessions. This list is subject to change.</p>
 
     <% unless @workshops.empty? %>
         <h3 id="workshops">Workshops</h3>

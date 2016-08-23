@@ -21,11 +21,10 @@
       <% else %>
           <%= simple_format h(talk.description) %>
       <% end %>
-      <br/>
+    <p/>
+    <p>
       <%= link_to "Read more...", talk %>
     </p>
-
-    <%# link_to "#{talk.comments_count or 0} comment(s).", talk_path(talk, :anchor => "comments") %>
 
     <% unless talk.tags.size == 0 %>
         <div class="tags">

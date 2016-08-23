@@ -19,25 +19,6 @@
 
 <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
-<% if reviewer? %>
-    <h4>Send review feedback to </h4>
-    <p>
-      <a href="mailto:<%= @talk.users.collect { |u| u.email }.join(',') %>">
-        <%= @talk.users.collect { |u| u.email }.join(',') %></a>
-    </p>
-<% end %>
-
-<div class="tags">
-  <% unless @talk.tags.empty? %>
-      <b>Tags:</b>
-      <span><%= @talk.tags.map { |t| t.title }.join(", ") %></span>
-      <%# @talk.tags.each do |tag| %>
-      <%#= link_to tag.title, :controller => "talks", :action => "article_tags", :id => tag.id %>
-      <%# end %>
-  <% end %>
-</div>
-
-
 <% if @talk.users.include?(current_user) || admin? %>
     <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
 
@@ -47,11 +28,11 @@
 
     <% if @talk.slide_file_name.present? %>
         <h3>Presentation slides</h3>
-        <p><%= link_to image_tag("icon_slides.gif"), @talk.slide.url %><%= link_to "Download", @talk.slide.url %></p>
-    <% else %>
-        <h3>Upload presentation</h3>
+        <p>
+          <%= link_to image_tag("icon_slides.gif"), @talk.slide.url %>
+          <%= link_to "Download", @talk.slide.url %>
+        </p>
     <% end %>
-    <%= render :partial => "talks/upload_slide" %>
 
     <% if @talk.talk_type.is_workshop %>
         <p>
@@ -83,14 +64,14 @@
 <% if @talk.talk_type.is_workshop %>
 
     <% if admin_reviewer_or_talk_owner?(@talk) %>
-        <div class="outline">
+        <p class="outline">
           <strong>Outline</strong>
           <% if contains_html(@talk.outline) %>
               <%= sanitize @talk.outline %>
           <% else %>
               <%= simple_format h(@talk.outline) %>
           <% end %>
-        </div>
+        </p>
     <% end %>
 
     <p>

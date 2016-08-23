@@ -77,7 +77,6 @@
   match '/talks/cheat_sheet' => 'talks#cheat_sheet', via: :all
 
   resources :talks do
-    resources :comments
     resources :reviews
     member do
       get :article_tags
