@@ -6,12 +6,10 @@
     </fieldset>
 
     <legend>Information visible for everyone</legend>
-    <p>
       The abstract will be published on the website as soon
       as you submit it, and will be used by the committee during talk selection. It is therefore important that you
       provide a detailed abstract. This will help us to select in the selection process and increase the chances
       of your talk being selected.
-    </p>
     <fieldset class="form-group">
       <%= f.label :title, "Title" %>
 
@@ -42,7 +40,7 @@
       <%= f.label :outline, "Outline" %>
 
       <%= f.text_area :outline, :class => "tinymce span10" %>
-      <% if @workshop.errors[:description] %>
+      <% if @workshop.errors[:description].present? %>
         <div class="error-message">
           You must provide an abstract.
         </div>
@@ -76,13 +74,10 @@
         <%= render :partial => 'talks/additional', :locals => { :f => f } %>
     <% end %>
 
+      Please be aware that by submitting a talk to Booster, you agree to follow our
+      <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
+
     <div class="form-actions">
-
-      <p>
-        Please be aware that by submitting a talk to Booster, you agree to follow our
-        <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
-      </p>
-
       <%= f.submit @workshop.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary' %>
     </div>
 <% end %>
