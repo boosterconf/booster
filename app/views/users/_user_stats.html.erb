@@ -1,7 +1,6 @@
-<p class="geeky">
-  To better understand our audience, and create a better conference, we hope you will indulge us and provide us with
-  some additional information about yourself. These will NOT be publicized.
-</p>
+<h2>Internal information</h2>
+To better understand our audience, and create a better conference, we hope you will indulge us and provide us with
+some additional information about yourself. This information will NOT be publicized or shared with any external party.
 <div class="radio">
   <label>
     <%= f.radio_button :gender, 'M' %>
@@ -18,4 +17,9 @@
 <fieldset class="form-group">
   <%= f.label :birthyear, "Birth year" %>
   <%= text_field(:user, :birthyear, placeholder: "When were you born?", class: 'form-control') %>
+</fieldset>
+
+<fieldset class="form-group">
+  <%= f.label :hear_about, "How did you hear about us?" %>
+  <%= f.text_area :hear_about, :class => "form-control" %>
 </fieldset>

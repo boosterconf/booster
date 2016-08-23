@@ -41,11 +41,20 @@
 
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
-        <%= render :partial => 'bio', :locals => {:f => f, :show_links => true} %>
+        <%= render :partial => 'bio', :locals => {:f => f } %>
 
         <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
 
     <% end %>
+
+      Accepted abstracts that will be displayed on speaker page:
+      <ul style="list-style-type: none;">
+        <% @user.talks.each do |talk| %>
+            <% if   talk.accepted? %>
+                <li><%= link_to h(talk.title), talk %></li>
+            <%end %>
+        <% end %>
+      </ul>
   </div>
 </div>
 </article>

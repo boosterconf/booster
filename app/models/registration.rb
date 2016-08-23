@@ -39,6 +39,7 @@ class Registration < ActiveRecord::Base
     self.manual_payment ||= true
     self.ticket_type_old ||= self.class.current_normal_ticket_type
     self.ticket_type = TicketType.current_normal_ticket
+    self.includes_dinner ||= true
   end
 
   def destroy_talks_and_user

@@ -7,16 +7,13 @@
   <h4><%= render :partial => @talk.users %></h4>
 <% end %>
 
-<% unless admin? && @talk.accepted? && @talk.speakers_confirmed? %>
-  <% @talk.users.collect do | user | %>
-    <% if user.bio != nil %>
+<% @talk.users.collect do | user | %>
+  <% if !admin? && @talk.accepted? && @talk.speakers_confirmed? %>
       <h4><a href="../info/speakers/#<%=user.full_name %>"><%= user.full_name %></a></h4>
     <% else %>
       <h4><%= user.full_name %></h4>
-    <% end %>
   <% end %>
 <% end %>
-
 <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
 <% if @talk.users.include?(current_user) || admin? %>
@@ -27,7 +24,7 @@
     <% end %>
 
     <% if @talk.slide_file_name.present? %>
-        <h3>Presentation slides</h3>
+        <h4>Presentation slides</h4>
         <p>
           <%= link_to image_tag("icon_slides.gif"), @talk.slide.url %>
           <%= link_to "Download", @talk.slide.url %>
@@ -88,10 +85,6 @@
       <%= h @talk.participant_requirements %>
     </p>
 
-<% end %>
-
-<% if false %>
-    <%= render :partial => "talks/slides" %>
 <% end %>
 
 <% if admin_reviewer_or_talk_owner?(@talk) %>

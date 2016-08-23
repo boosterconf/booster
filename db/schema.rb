@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823083358) do
+ActiveRecord::Schema.define(version: 20160823124848) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bios", force: :cascade do |t|
     t.integer  "user_id"
@@ -27,7 +30,7 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.datetime "picture_updated_at"
   end
 
-  add_index "bios", ["user_id"], name: "index_bios_on_user_id"
+  add_index "bios", ["user_id"], name: "index_bios_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.text     "comment"
@@ -37,8 +40,8 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "events", ["sponsor_id"], name: "index_events_on_sponsor_id"
-  add_index "events", ["user_id"], name: "index_events_on_user_id"
+  add_index "events", ["sponsor_id"], name: "index_events_on_sponsor_id", using: :btree
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "invitees", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -64,9 +67,9 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.datetime "updated_at",                  null: false
   end
 
-  add_index "invoice_lines", ["invoice_id"], name: "index_invoice_lines_on_invoice_id"
-  add_index "invoice_lines", ["registration_id"], name: "index_invoice_lines_on_registration_id"
-  add_index "invoice_lines", ["sponsor_id"], name: "index_invoice_lines_on_sponsor_id"
+  add_index "invoice_lines", ["invoice_id"], name: "index_invoice_lines_on_invoice_id", using: :btree
+  add_index "invoice_lines", ["registration_id"], name: "index_invoice_lines_on_registration_id", using: :btree
+  add_index "invoice_lines", ["sponsor_id"], name: "index_invoice_lines_on_sponsor_id", using: :btree
 
   create_table "invoices", force: :cascade do |t|
     t.string   "our_reference",  limit: 255
@@ -132,10 +135,10 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.integer  "ticket_type_id",                          default: 2
   end
 
-  add_index "registrations", ["deleted_at"], name: "index_registrations_on_deleted_at"
-  add_index "registrations", ["invoice_id"], name: "index_registrations_on_invoice_id"
-  add_index "registrations", ["ticket_type_id"], name: "index_registrations_on_ticket_type_id"
-  add_index "registrations", ["user_id"], name: "index_registrations_on_user_id"
+  add_index "registrations", ["deleted_at"], name: "index_registrations_on_deleted_at", using: :btree
+  add_index "registrations", ["invoice_id"], name: "index_registrations_on_invoice_id", using: :btree
+  add_index "registrations", ["ticket_type_id"], name: "index_registrations_on_ticket_type_id", using: :btree
+  add_index "registrations", ["user_id"], name: "index_registrations_on_user_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "talk_id"
@@ -146,8 +149,8 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "reviews", ["reviewer_id"], name: "index_reviews_on_reviewer_id"
-  add_index "reviews", ["talk_id"], name: "index_reviews_on_talk_id"
+  add_index "reviews", ["reviewer_id"], name: "index_reviews_on_reviewer_id", using: :btree
+  add_index "reviews", ["talk_id"], name: "index_reviews_on_talk_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -164,9 +167,9 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.integer  "room_id"
   end
 
-  add_index "slots", ["period_id"], name: "index_slots_on_period_id"
-  add_index "slots", ["room_id"], name: "index_slots_on_room_id"
-  add_index "slots", ["talk_id"], name: "index_slots_on_talk_id"
+  add_index "slots", ["period_id"], name: "index_slots_on_period_id", using: :btree
+  add_index "slots", ["room_id"], name: "index_slots_on_room_id", using: :btree
+  add_index "slots", ["talk_id"], name: "index_slots_on_talk_id", using: :btree
 
   create_table "speakers", force: :cascade do |t|
     t.integer  "talk_id"
@@ -174,10 +177,10 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.datetime "deleted_at"
   end
 
-  add_index "speakers", ["deleted_at"], name: "index_speakers_on_deleted_at"
-  add_index "speakers", ["talk_id", "user_id"], name: "index_speakers_on_talk_id_and_user_id"
-  add_index "speakers", ["talk_id"], name: "index_speakers_on_talk_id"
-  add_index "speakers", ["user_id"], name: "index_speakers_on_user_id"
+  add_index "speakers", ["deleted_at"], name: "index_speakers_on_deleted_at", using: :btree
+  add_index "speakers", ["talk_id", "user_id"], name: "index_speakers_on_talk_id_and_user_id", using: :btree
+  add_index "speakers", ["talk_id"], name: "index_speakers_on_talk_id", using: :btree
+  add_index "speakers", ["user_id"], name: "index_speakers_on_user_id", using: :btree
 
   create_table "sponsors", force: :cascade do |t|
     t.string   "name",                        limit: 255
@@ -200,7 +203,7 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.string   "website",                     limit: 255
   end
 
-  add_index "sponsors", ["user_id"], name: "index_sponsors_on_user_id"
+  add_index "sponsors", ["user_id"], name: "index_sponsors_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -213,7 +216,7 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.integer "tag_id"
   end
 
-  add_index "tags_talks", ["tag_id", "talk_id"], name: "index_tags_talks_on_tag_id_and_talk_id"
+  add_index "tags_talks", ["tag_id", "talk_id"], name: "index_tags_talks_on_tag_id_and_talk_id", using: :btree
 
   create_table "talk_positions", force: :cascade do |t|
     t.integer "talk_id",              null: false
@@ -272,9 +275,9 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.datetime "deleted_at"
   end
 
-  add_index "talks", ["deleted_at"], name: "index_talks_on_deleted_at"
-  add_index "talks", ["id", "type"], name: "index_talks_on_id_and_type"
-  add_index "talks", ["talk_type_id"], name: "index_talks_on_talk_type_id"
+  add_index "talks", ["deleted_at"], name: "index_talks_on_deleted_at", using: :btree
+  add_index "talks", ["id", "type"], name: "index_talks_on_id_and_type", using: :btree
+  add_index "talks", ["talk_type_id"], name: "index_talks_on_talk_type_id", using: :btree
 
   create_table "ticket_types", force: :cascade do |t|
     t.string   "type",        limit: 255
@@ -321,8 +324,10 @@ ActiveRecord::Schema.define(version: 20160823083358) do
     t.string   "first_name",                  limit: 255
     t.string   "last_name",                   limit: 255
     t.datetime "deleted_at"
+    t.string   "hear_about",                              default: ""
   end
 
-  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at"
+  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
 
+  add_foreign_key "registrations", "ticket_types"
 end
