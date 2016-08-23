@@ -21,7 +21,7 @@ class TalksController < ApplicationController
   end
 
   def show
-    @talk = Talk.includes(:users, :comments, :reviews).find(params[:id])
+    @talk = Talk.includes(:users, :reviews).find(params[:id])
     @review = Review.new
   end
 

@@ -8,7 +8,6 @@ one:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: refused
   talk_type: lightning_talk
   language: English
@@ -23,7 +22,6 @@ two:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: accepted
   talk_type: lightning_talk
   language: English
@@ -38,7 +36,6 @@ three:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
@@ -53,7 +50,6 @@ four:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
@@ -68,7 +64,6 @@ five:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
@@ -83,7 +78,6 @@ six:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: pending
   talk_type: tutorial
   language: English
@@ -98,7 +92,6 @@ seven:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: pending
   talk_type: lightning_talk
   language: English
@@ -113,7 +106,6 @@ eight:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: pending
   talk_type: tutorial
   language: English
@@ -128,7 +120,6 @@ nine:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 1
   acceptance_status: refused
   talk_type: tutorial
   language: English
@@ -143,7 +134,6 @@ ten:
   position: 1
   submitted: false
   audience_level: MyString
-  comments_count: 0
   acceptance_status: accepted
   talk_type: tutorial
   language: English

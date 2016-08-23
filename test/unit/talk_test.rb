@@ -2,14 +2,6 @@ require 'test_helper'
 
 class TalkTest < ActiveSupport::TestCase
 
-  should 'increment comments count when adding a comment' do
-    talk = talks(:one)
-    comments_count = talk.comments_count
-    talk.comments << Comment.new(:title => 'en tittel', :description => 'en beskrivelse', :user => User.last)
-    talk = Talk.find(talk.id)
-    assert_equal comments_count + 1, talk.comments_count
-  end
-
   should 'not list refused talks' do
     refused = talks(:one).refuse!
     talks(:two).accept!
