@@ -3,6 +3,8 @@ class Workshop < Talk
   validates :max_participants, presence: true,
             numericality: { only_integer: true, greater_than_or_equal: 20 }
 
+  attr_accessible :additional_speaker_email
+
   validates :appropriate_for_roles, presence: true
 
   after_initialize do |workshop|
@@ -26,7 +28,15 @@ class Workshop < Talk
   def is_short_talk?
     false
   end
+  
+  def additional_speaker_email
+    @additional_speaker_email
+  end
 
+  def additional_speaker_email=(val)
+    @additional_speaker_email = val
+  end
+  
   def self.all_accepted
     unscoped.all(include: [:talk_type],
                  conditions: ["acceptance_status = 'accepted' AND talk_types.eligible_for_free_ticket = 't'"],
