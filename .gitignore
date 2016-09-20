@@ -28,3 +28,5 @@ latest.dump
 .floo
 .flooignore
 .env
+
+/.vagrant

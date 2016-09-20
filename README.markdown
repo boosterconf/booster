@@ -4,6 +4,23 @@
 
 ## Setting up your environment
 
+### Vagrant
+Install Vagrant, and checkout this repository. Then do the following steps. 
+
+    $ cd booster
+    $ vagrant up # Wait for some time for this to complete
+    $ vagrant ssh
+    $ cd /vagrant
+    $ ./init.sh  # Wait for even longer. At the end of this script, you will be prompted for your heroku credentials, before the production database is pulled down.
+    $ # If the previous steps have succeeded, continue
+    $ heroku config --app booster2017 # Lists all the config variables from prod. 
+    $ export s3_access_key_id=<value from above>
+    $ export s3_secret_access_key=<value from above>
+    $ rails s -b 0.0.0.0 # We need to run rails on this ip, to get port forwarding from the vagrant machine. 
+
+Test app in your host system browser, and verify that the booster conf home page is shown on localhost:3000. 
+If failure, reach out to us on Slack. :)
+
 ### OSX / Linux
 
 * Ruby 2.2.2
