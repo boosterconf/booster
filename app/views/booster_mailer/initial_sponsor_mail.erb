@@ -5,28 +5,27 @@
 </p>
 
 <% if @sponsor.was_sponsor_last_year %>
-<p>
-  Tusen takk for at <%= @sponsor.name %> var partner for Booster 2015! Konferansen var nok en gang en sterk faglig opplevelse
-  til en overkommelig pris for deltagerne. <% if @sponsor.is_in_bergen? %> Sammen bidrar vi til å gjøre IT-Bergen litt
-      bedre!<% end %> Jeg vil med dette invitere dere til å støtte oss i arbeidet med Booster <%= Dates::CONFERENCE_YEAR %>.
-</p>
+  <p>
+    Tusen takk for at <%= @sponsor.name %> var partner for Booster <%= Dates::CONFERENCE_YEAR - 1 %>! Konferansen var nok
+    en gang en sterk faglig opplevelse til en overkommelig pris for deltagerne.
+    <% if @sponsor.is_in_bergen? %> Sammen bidrar vi til å gjøre IT-Bergen litt bedre!<% end %>
+    Jeg vil med dette invitere dere til å støtte oss i arbeidet med Booster <%= Dates::CONFERENCE_YEAR %>.
+  </p>
 <% else %>
-<p>
-  Jeg vil gjerne invitere <%= @sponsor.name %> til å være partner for Boosterkonferansen <%= Dates::CONFERENCE_YEAR %>!
-</p>
+  <p>
+    Jeg vil gjerne invitere <%= @sponsor.name %> til å være partner for Boosterkonferansen <%= Dates::CONFERENCE_YEAR %>!
+  </p>
 <% end %>
 
 <p>
-
-  Vi er godt i gang med planleggingen av konferansen, sett gjerne av datoene 
-  <strong>9. - 11. mars 2016</strong> med en gang. 
-  
-  </p>
-<p>  
+  Vi er godt i gang med planleggingen av konferansen, sett gjerne av datoene
+  <strong>15. - 17. mars <%= Dates::CONFERENCE_YEAR %></strong> med en gang.
+</p>
+<p>
   Booster har som ambisjon å være en konferanse for alle som jobber i et utviklingsteam: Utviklere, prosjektledere,
   testere, arkitekter, sikkerhetseksperter, produkteiere og de som jobber med brukeropplevelse. Som vanlig vil det
-  meste av programmet bestå av workshops og foredrag som er sendt inn på Call For Presentations (CFP), denne har vi akkurat
-  åpnet nå. Vi vet at dere har et sterkt fagmiljø, så vi håper som vanlig på at vi får mange spennende forslag
+  meste av programmet bestå av workshops og foredrag som er sendt inn på Call For Presentations (CFP). Denne har vi
+  akkurat åpnet nå. Vi vet at dere har et sterkt fagmiljø, så vi håper som vanlig på at vi får mange spennende forslag
   fra dere!
 </p>
 
@@ -38,45 +37,45 @@
 </p>
 
 <p>
-  Vi har beholdt samme partnerpakke som i fjor, som partner får du:
+  Partnerpakker er litt oppdatert i år. Nyhetene er en endagsbillett beregnet på ledere som vil besøke konferansen og
+  være med på middagen, samt tilgang til tidlig påmelding på Booster for Kids.
+  Som partner får du:
 <ul>
   <li>Logo på trykt materiell som program, flyvebrev, plakater osv</li>
   <li>Logo på konferansens nettsider</li>
   <li>Ha roll-up-banner i konferansens plenumsal</li>
   <li>Bruke Boosterkonferansens logo i markedsføring</li>
   <li>To billetter til konferansen og konferansemiddagen</li>
+  <li>En egen lederbillett som inkludrer en dag på konferansen og konferansemiddagen.</li>
   <li>Adgang til å distribuere markedsføringsmateriell som blir delt ut til deltagerne. Dette må forhåndsgodkjennes av
-    hensyn til plass og praktisk gjennomførbarhet.
-  </li>
+    hensyn til plass og praktisk gjennomførbarhet.</li>
+  <li>Tilgang til påmelding på Booster for Kids to uker før alle andre (Begrenset antall plasser)</li>
 </ul>
 </p>
 <p>
-  Prisen på pakken er kr. 28.000,- + MVA.
+  Prisen på pakken er kr. 29.000,- + MVA.
 </p>
 
 <p>
   Hvis du ikke var på konferansen i fjor, eller bare ikke husker helt hvem som var der, vil jeg gjerne minne deg på
-  noen av høydepunktene. Johanna Rothman (US), Vaughn Vernon (US), Vitaly Friedman (DE), Jim Benson (US), Ivana Gancheva (N),
-  Einar Høst (N), Geir Amsjø (N), Sandi Metz (US)... Vil du se hele programmet fra i fjor, kan du sjekke det ut her:
-  http://2015.boosterconf.no/program
+  noen av høydepunktene. Dave Snowden (UK), Anna Royzmann (US), Steve Klabnik (US), Adrian Roselli (US),
+  Maaret Pyhäjärvi (FI), Michael Rawling (UK), Ulrika Malmgren (SE)
+  Ivana Gancheva (N), Eirik Bjørsnøs (N), Geir Amsjø (N)... Vil du se hele programmet fra i fjor, kan du sjekke det ut her:
+  http://2016.boosterconf.no/program
 </p>
 
 <p>
   <% if @sponsor.is_in_bergen? %>
-      Et partnerskap med Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
-      ansatte. Vi har et vidt spekter av deltakere, alt fra studenter som jobber som frivillige til folk med flere tiårs erfaring.
+    Et partnerskap med Booster er en investering i det lokale fagmiljøet, og en god arena for rekruttering av nye
+    ansatte. Vi har et vidt spekter av deltakere, alt fra studenter som jobber som frivillige til folk med flere tiårs erfaring.
   <% end %>
   For mer informasjon om oss, besøk våre nettsider på <a href="http://www.boosterconf.no">boosterconf.no</a>.
-  </p>
-
+</p>
 <p>
-  Jeg håper at både du og
-  <%= @sponsor.name %> synes dette er et interessant tilbud og vil vurdere det. Dersom dere har spørsmål er det bare å
-  kontakte
-  meg, enten på epost
-  <%= @sender.email %> eller telefon
-  <%= @sender.phone_number %>.
-</p><p>
+  Jeg håper at både du og <%= @sponsor.name %> synes dette er et interessant tilbud og vil vurdere det. Dersom dere har
+  spørsmål er det bare å kontakte meg, enten på epost <%= @sender.email %> eller telefon <%= @sender.phone_number %>.
+</p>
+<p>
   Med vennlig hilsen <br />
   <%= @sender.full_name %><br />
   for Booster <%= Dates::CONFERENCE_YEAR %>
