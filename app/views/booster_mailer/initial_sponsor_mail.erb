@@ -6,9 +6,10 @@
 
 <% if @sponsor.was_sponsor_last_year %>
   <p>
-    Tusen takk for at <%= @sponsor.name %> var partner for Booster <%= Dates::CONFERENCE_YEAR - 1 %>! Konferansen var nok
-    en gang en sterk faglig opplevelse til en overkommelig pris for deltagerne.
-    <% if @sponsor.is_in_bergen? %> Sammen bidrar vi til å gjøre IT-Bergen litt bedre!<% end %>
+    Tusen takk for at <%= @sponsor.name %> var partner for Booster <%= Dates::CONFERENCE_YEAR - 1 %>! Konferansen var
+    nok en gang en suksess, med sterkt faglig innhold og svært gode tilbakemeldinger.
+    <% if @sponsor.is_in_bergen? %> Booster er blitt den viktigste faglige møteplassene for utviklingsmiljøet i Bergen.
+      Sammen bidrar vi til å gjøre IT-Bergen litt bedre!<% end %>
     Jeg vil med dette invitere dere til å støtte oss i arbeidet med Booster <%= Dates::CONFERENCE_YEAR %>.
   </p>
 <% else %>
@@ -41,8 +42,7 @@
   være med på middagen, samt tilgang til tidlig påmelding på Booster for Kids.
   Som partner får du:
 <ul>
-  <li>Logo på trykt materiell som program, flyvebrev, plakater osv</li>
-  <li>Logo på konferansens nettsider</li>
+  <li>Logo på konferansens nettsider og på eventuelt trykket materiale</li>
   <li>Ha roll-up-banner i konferansens plenumsal</li>
   <li>Bruke Boosterkonferansens logo i markedsføring</li>
   <li>To billetter til konferansen og konferansemiddagen</li>
