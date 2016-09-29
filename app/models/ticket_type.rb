@@ -4,11 +4,11 @@ class TicketType < ActiveRecord::Base
   attr_accessible :name, :reference, :price
 
   def self.current_normal_ticket
-     find_by_type("organizer")
+     find_by_reference("organizer")
   end
 
   def self.lightning_speaker
-    find_by_type("lightning_speaker")
+    find_by_reference("lightning_speaker")
   end
 
 end

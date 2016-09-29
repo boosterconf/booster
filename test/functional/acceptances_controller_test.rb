@@ -21,7 +21,7 @@ class AcceptancesControllerTest < ActionController::TestCase
   def test_accept_of_user_with_completed_registration_will_not_alter_ticket_type_old
     @talk = talks(:five)
     get :accept, :id => @talk.id
-    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type.type
+    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end
 
   def test_accept_of_lightning_talk_does_not_complete_registration_for_user
