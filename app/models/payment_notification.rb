@@ -1,3 +1,4 @@
+# TODO: Delete, it is no longer in use
 class PaymentNotification < ActiveRecord::Base
   belongs_to :registration
   serialize :params
