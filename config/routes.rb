@@ -152,7 +152,7 @@
   match 'info/organizers' => 'info#organizers', via: :all
   match 'info/monetary_policy' => 'info#monetary_policy', via: :all
   match 'info/cfp' => 'info#cfp', via: :all
-  match 'info/sponsors' => 'info#sponsors', via: :all
+  match 'info/partners' => 'info#partners', via: :all
   match 'info/about' => 'info#about', via: :all
    match 'info/kids' => 'info#kids', via: :all
   match 'info/tickets' => 'info#tickets', via: :all
