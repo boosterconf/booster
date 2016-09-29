@@ -1,0 +1,28 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Listing ticket types</h2>
+  </div>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Price</th>
+      <th></th>
+    </tr>
+
+    <% @ticket_types.each do |ticket_type| %>
+        <tr>
+          <td><%=h ticket_type.reference %></td>
+          <td><%=h ticket_type.name %></td>
+          <td><%=h ticket_type.price %></td>
+          <td><%= link_to 'Edit', edit_ticket_type_path(ticket_type) %></td>
+        </tr>
+    <% end %>
+  </table>
+
+  <div class="form-actions">
+    <%= link_to 'New ticket type', new_ticket_type_path, :class => "btn btn-primary" %>
+  </div>
+
+</article>

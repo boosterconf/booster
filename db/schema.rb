@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160823124848) do
+ActiveRecord::Schema.define(version: 20160929185320) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "bios", force: :cascade do |t|
     t.integer  "user_id"
@@ -280,7 +281,7 @@ ActiveRecord::Schema.define(version: 20160823124848) do
   add_index "talks", ["talk_type_id"], name: "index_talks_on_talk_type_id", using: :btree
 
   create_table "ticket_types", force: :cascade do |t|
-    t.string   "type",        limit: 255
+    t.string   "reference",   limit: 255
     t.string   "name",        limit: 255
     t.text     "description"
     t.decimal  "price"
