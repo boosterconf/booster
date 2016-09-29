@@ -1,0 +1,30 @@
+<article class="inner">
+<div class="row">
+  <div class="span12">
+
+    <%= render :partial => 'steps', :locals => {:active_id => "start"} %>
+
+    <h2>Who are you?</h2>
+
+    <p>
+      Please start by telling us a little about yourself.
+
+    </p>
+      <%= form_for @user, :url => '/register_short_talk/create_user' do |f| %>
+
+        <%= render :partial => 'users/personal_details', :locals => {:f => f} %>
+        <%= render :partial => 'users/roles', :locals => {:f => f} %>
+<%#= render :partial => 'users/confirmations', :locals => {:f => f} %>
+
+        <%= render :partial => 'users/passwords', :locals => {:f => f} %>
+
+        <div class="clearfix">&nbsp;</div>
+
+        <div class="form-actions">
+          <%= f.submit "Next", :class => "btn btn-primary" %>
+        </div>
+
+    <% end %>
+  </div>
+</div>
+</article>

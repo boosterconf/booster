@@ -133,6 +133,14 @@
   match '/register_workshop/create_details' => 'register_workshop#create_details', via: :all
   match '/register_workshop/finish' => 'register_workshop#finish', via: :all
 
+  match '/register_short_talk/start' => 'register_short_talk#start', via: :all
+  match '/register_short_talk/create_user' => 'register_short_talk#create_user', via: :all
+  match '/register_short_talk/talk' => 'register_short_talk#talk', via: :all
+  match '/register_short_talk/create_talk' => 'register_short_talk#create_talk', via: :all
+  match '/register_short_talk/details' => 'register_short_talk#details', via: :all
+  match '/register_short_talk/create_details' => 'register_short_talk#create_details', via: :all
+  match '/register_short_talk/finish' => 'register_short_talk#finish', via: :all
+
 #match 'login' => 'user_sessions#new', :as => :login
 #match 'logout' => 'user_sessions#destroy', :as => :logout
   match 'users/current' => 'users#current', :as => :current_user, via: :all

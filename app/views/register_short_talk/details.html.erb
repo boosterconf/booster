@@ -1,0 +1,15 @@
+<article class="inner">
+<%= render :partial => 'steps', :locals => {:active_id => "details" } %>
+
+<h2>What shall we tell the world?</h2>
+
+<%= form_for @user, :url => '/register_short_talk/create_details' do |f| %>
+  <%= render :partial => 'users/bio', :locals => {:f => f} %>
+  <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
+
+    <div class="form-actions">
+      <%= f.submit "Finish", :class => "btn btn-primary" %>
+    </div>
+<% end %>
+
+</article>

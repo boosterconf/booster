@@ -1,5 +1,10 @@
 class ShortTalk < Talk
 
+  after_initialize do |talk|
+    talk.acceptance_status ||= 'pending'
+    talk.language = 'english' # all short talks are english
+  end
+
   def is_lightning_talk?
     false
   end

@@ -1,8 +1,8 @@
-class RegisterLightningTalkController < ApplicationController
+class RegisterShortTalkController < ApplicationController
 
   def start
     if current_user
-      redirect_to '/register_lightning_talk/talk'
+      redirect_to '/register_short_talk/talk'
     end
     @user = User.new
     @user.registration = Registration.new
@@ -21,20 +21,19 @@ class RegisterLightningTalkController < ApplicationController
     if @user.save
       UserSession.create(:login => @user.email, :password => @user.password)
       @user.registration.save!
-      redirect_to '/register_lightning_talk/talk'
+      redirect_to '/register_short_talk/talk'
     else
       render action: :start
     end
   end
 
   def talk
-    @talk = LightningTalk.new
-    @talk.talk_type = TalkType.find_by_name("Lightning talk")
+    @talk = ShortTalk.new
   end
 
   def create_talk
-    @talk = LightningTalk.new(params[:talk])
-    @talk.talk_type = TalkType.find_by_name("Lightning talk")
+    @talk = ShortTalk.new(params[:talk])
+    @talk.talk_type = TalkType.find_by_name("Short talk")
     @talk.year = AppConfig.year
     @talk.users << current_user
     if @talk.save
@@ -44,9 +43,9 @@ class RegisterLightningTalkController < ApplicationController
       SlackNotifier.notify_talk(@talk)
 
       if current_user.has_all_statistics? && current_user.bio && current_user.bio.good_enough?
-        redirect_to '/register_lightning_talk/finish'
+        redirect_to '/register_short_talk/finish'
       else
-        redirect_to '/register_lightning_talk/details'
+        redirect_to '/register_short_talk/details'
       end
     else
       render action: :talk
@@ -63,7 +62,7 @@ class RegisterLightningTalkController < ApplicationController
     @user.update_attributes(params[:user])
 
     if @user.save
-      redirect_to '/register_lightning_talk/finish'
+      redirect_to '/register_short_talk/finish'
     else
       render action: :details
     end

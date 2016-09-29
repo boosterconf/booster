@@ -1,5 +1,8 @@
 class LightningTalk < Talk
 
+  after_initialize do |workshop|
+    workshop.acceptance_status ||= 'pending'
+  end
   # This is a hack to get path helpers working. See
   # http://stackoverflow.com/questions/4507149/best-practices-to-handle-routes-for-sti-subclasses-in-rails
   def self.model_name

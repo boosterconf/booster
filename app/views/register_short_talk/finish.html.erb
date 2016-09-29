@@ -1,0 +1,16 @@
+<article class="inner">
+<%= render :partial => 'steps', :locals => {:active_id => "finish" } %>
+
+<h1>Thank you for your contribution!</h1>
+
+<p>
+    Your talk has now been published on the website. You can find it <%= link_to "here", :controller=>"talks" %>.
+</p>
+
+<h3>What happens next?</h3>
+<p>
+    Your talk will be reviewed by the Booster committee. You will be contacted by the committee shortly after
+	CfP ends on <strong><%= Dates::CFP_LIGHTNING_ENDS.to_formatted_s(:long )%></strong>.
+</p>
+
+</article>

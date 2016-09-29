@@ -1,0 +1,7 @@
+<article class="inner">
+<%= render :partial => 'steps', :locals => {:active_id => "talk"} %>
+<h2>What's your passion?</h2>
+
+<%= render partial: 'talk_form', locals: { post_to: '/register_short_talk/create_talk' } %>
+
+</article>

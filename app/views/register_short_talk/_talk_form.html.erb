@@ -1,24 +1,11 @@
 <%= form_for @talk, url: post_to do |f| %>
 
-    <fieldset class="form-group">
-    <legend>Language</legend>
-    In what language will you deliver your talk? Please select the language you are most comfortable with.
-    <p>
-      <% if @talk.errors[:landuage].present? %>
-          <div class="error-message">
-            You must select a language.
-          </div>
-      <% end %>
-    <label class="radio">
-      <%= f.radio_button :language, 'English', required: '' %>
-      English
-    </label>
-    <label class="radio">
-      <%= f.radio_button :language, 'Norwegian' %>
-      Norwegian
-    </label>
+    <% @talk.errors.full_messages.each do |msg| %>
+        <p class="has-error"><%= msg %></p>
+    <% end %>
+      <p>
+    Short talks must be given in english.
     </p>
-    </fieldset>
     <legend>Talk details</legend>
       The abstract will be published on the website as soon
       as you submit it, and will be used by the organizers during talk selection. It is therefore important that you
