@@ -54,7 +54,7 @@ class Invoice < ActiveRecord::Base
     invoice.invoice_lines.create!(
         sponsor_id: sponsor.id,
         text: "Partnership package for Booster #{AppConfig.year}",
-        price: AppConfig.sponsor_price_in_nok_before_vat
+        price: AppConfig.partner_price_in_nok_before_vat
     )
   end
 
