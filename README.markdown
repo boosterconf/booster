@@ -5,7 +5,7 @@
 ## Setting up your environment
 
 ### Vagrant
-Install Vagrant, and checkout this repository. Then do the following steps. 
+Install Vagrant and VirtualBox, and checkout this repository. Then do the following steps. 
 
     $ cd booster
     $ vagrant up # Wait for some time for this to complete
