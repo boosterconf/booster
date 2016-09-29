@@ -1,5 +1,7 @@
 <%= form_for @workshop, url: post_to do |f| %>
-
+    <% @workshop.errors.full_messages.each do |msg| %>
+        <p class="has-error"><%= msg %></p>
+    <% end %>
     <fieldset class="form-group">
       <legend>Talk length</legend>
       <%= f.collection_select :talk_type_id, @talk_types, :id, :name_and_duration, {}, {:class => 'form-control'} %>
@@ -13,7 +15,7 @@
     <fieldset class="form-group">
       <%= f.label :title, "Title" %>
 
-      <%= f.text_field :title, :size => "80", :class => "form-control" %>
+      <%= f.text_field :title, :class => "form-control", required: '' %>
     </fieldset>
 
     <fieldset class="form-group">
@@ -51,7 +53,7 @@
 
     <fieldset class="form-group">
       <%= f.label :max_participants, "Maximum number of participants for this talk (no less than 20, please): " %>
-      <%= f.text_field :max_participants, :class => 'form-control' %>
+      <%= f.number_field :max_participants, in: 10..50, :class => 'form-control' %>
     </fieldset>
 
     <fieldset class="form-group">

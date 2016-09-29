@@ -5,8 +5,6 @@ class Workshop < Talk
 
   attr_accessible :additional_speaker_email
 
-  validates :appropriate_for_roles, presence: true
-
   after_initialize do |workshop|
     workshop.acceptance_status ||= 'pending'
     workshop.language = 'english' # all workshops are english
