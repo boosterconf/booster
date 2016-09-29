@@ -42,8 +42,8 @@ class RegisterWorkshopController < ApplicationController
     if @workshop.save
       current_user.update_ticket_type!
 
-      if has_entered_additional_speaker_email
-        additional_speaker = find_additional_speaker
+      if has_entered_additional_speaker_email(@workshop)
+        additional_speaker = find_additional_speaker(@workshop)
         @workshop.users << additional_speaker
         @workshop.save!
       end
@@ -61,12 +61,9 @@ class RegisterWorkshopController < ApplicationController
     end
   end
 
-  def find_additional_speaker
-    additional_speaker_email = params[:additional_speaker_email]
-    puts "==="
-    puts additional_speaker_email
-    puts "==="
-    
+  def find_additional_speaker(workshop)
+    additional_speaker_email = workshop.additional_speaker_email
+
     unless additional_speaker_already_has_registered_user(additional_speaker_email)
       additional_speaker = User.create_unfinished(additional_speaker_email, 'speaker')
       additional_speaker.save(:validate => false)
@@ -80,8 +77,8 @@ class RegisterWorkshopController < ApplicationController
     User.find_by_email(additional_speaker_email)
   end
 
-  def has_entered_additional_speaker_email
-    params[:additional_speaker_email].present?
+  def has_entered_additional_speaker_email(workshop)
+    workshop.additional_speaker_email.present?
   end
 
   def details

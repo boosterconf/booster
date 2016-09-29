@@ -22,6 +22,11 @@
       <%= f.label :description, "Abstract" %>
 
       <%= f.text_area :description, :class => "tinymce span10" %>
+      <% if @workshop.errors[:description].present? %>
+          <div class="error-message">
+            You must provide an abstract.
+          </div>
+      <% end %>
     </fieldset>
 
     <fieldset class="form-group">
@@ -40,13 +45,7 @@
 
     <fieldset class="form-group">
       <%= f.label :outline, "Outline" %>
-
       <%= f.text_area :outline, :class => "tinymce span10" %>
-      <% if @workshop.errors[:description].present? %>
-        <div class="error-message">
-          You must provide an abstract.
-        </div>
-      <% end %>
     </fieldset>
 
     <%= tinymce %>
