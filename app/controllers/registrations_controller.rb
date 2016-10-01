@@ -59,8 +59,10 @@ class RegistrationsController < ApplicationController
     if admin?
       if params[:ticket_change]
         @registration.ticket_type_old = params[:registration][:ticket_type_old]
+        #TODO: Need to get reference to correct tickettype object from ui.
+        #@registration.ticket_type = params[:registration][:ticket_type_old]
         @registration.includes_dinner = params[:registration][:includes_dinner]
-        @registration.create_or_update_payment_info
+        @registration.update_payment_info
       else
         @registration.completed_by = current_user.email if admin? and @registration.registration_complete
         @registration.registration_complete = params[:registration][:registration_complete]

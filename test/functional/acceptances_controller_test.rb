@@ -18,10 +18,10 @@ class AcceptancesControllerTest < ActionController::TestCase
     assert_equal true, Talk.find(@talk.id).accepted?
   end
 
-  def test_accept_of_user_with_completed_registration_will_not_alter_ticket_type_old
+  def test_accept_of_user_with_completed_registration_will_not_alter_ticket_type
     @talk = talks(:five)
     get :accept, :id => @talk.id
-    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_accept_of_lightning_talk_does_not_complete_registration_for_user
@@ -61,6 +61,7 @@ class AcceptancesControllerTest < ActionController::TestCase
 
   def test_refusal_of_tutorial_where_user_also_have_pending_lighting_talk_sets_ticket_type_to_lightning
     @talk = talks(:eight)
+
     get :refuse, :id => @talk.id
     assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type_old
   end

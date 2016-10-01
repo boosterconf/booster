@@ -16,10 +16,10 @@ class AcceptancesController < ApplicationController
   end
 
   def accept
-    @talk = Talk.includes(users: [:registration]).find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
     
     return redirect_on_email_sent if @talk.email_sent
-    
+
     @talk.accept!
     @talk.save
     @talk.update_speakers!(current_user)
@@ -28,7 +28,7 @@ class AcceptancesController < ApplicationController
   end
 
   def refuse
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
 
     return redirect_on_email_sent if @talk.email_sent
 
@@ -40,7 +40,7 @@ class AcceptancesController < ApplicationController
   end
 
   def pending
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
 
     return redirect_on_email_sent if @talk.email_sent
 
@@ -52,7 +52,7 @@ class AcceptancesController < ApplicationController
   end
 
   def could_not_attend
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
 
     @talk.could_not_attend!
     @talk.speakers_confirmed = false
@@ -65,7 +65,7 @@ class AcceptancesController < ApplicationController
   end
 
   def confirm
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
 
     unless @talk.accepted?
       return redirect_to acceptances_path, error: "Cannot confirm speaker on talk that is not accepted"
@@ -82,7 +82,7 @@ class AcceptancesController < ApplicationController
   end
 
   def unconfirm
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
 
     unless @talk.speakers_confirmed?
       redirect_to acceptances_path, error: "Cannot cancel speaker that is not confirmed"
@@ -96,7 +96,7 @@ class AcceptancesController < ApplicationController
   end
 
   def send_mail
-    @talk = Talk.find(params[:id])
+    @talk = Talk.find_by_id(params[:id])
 
     return redirect_on_email_sent if @talk.email_sent
 
@@ -117,5 +117,10 @@ class AcceptancesController < ApplicationController
   private
   def redirect_on_email_sent
     redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Email already sent!"
+  end
+
+  #TODO: Temp method, delete this
+  def load_talk(id)
+    Talk.includes(users: [{ registration: [:ticket_type]}]).find(id)
   end
 end

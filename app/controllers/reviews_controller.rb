@@ -2,7 +2,8 @@ class ReviewsController < ApplicationController
 
   respond_to :html, :js
 
-  before_filter :require_reviewer_admin_or_self
+  before_filter :require_admin, only: [:index, :destroy]
+  before_filter :admin_or_talk_owner, only: [:create, :update]
   before_filter :find_review, only: [:update, :destroy]
 
   def index
@@ -53,6 +54,23 @@ class ReviewsController < ApplicationController
   private
   def find_review
     @review = Review.find(params[:id])
+  end
+
+  def admin_or_talk_owner
+      return access_denied unless current_user
+
+      if params[:talk_id] =~ LOOKS_NUMBER_LIKE
+        talk = Talk.includes(:users).where(id: params[:talk_id]).first
+        unless admin? || talk.is_presented_by?(current_user)
+          flash[:error] = 'Shame on you!'
+          return access_denied
+        end
+      else
+        unless admin?
+          flash[:error] = 'Shame on you!'
+          return access_denied
+        end
+      end
   end
 
 end

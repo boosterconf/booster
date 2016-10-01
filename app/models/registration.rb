@@ -30,7 +30,6 @@ class Registration < ActiveRecord::Base
   has_one :invoice_line
   belongs_to :ticket_type
 
-  before_create :create_or_update_payment_info
   before_create :set_default_values
   before_destroy :destroy_talks_and_user
   before_restore :restore_talks_and_user
@@ -67,11 +66,11 @@ class Registration < ActiveRecord::Base
   end
 
   def ticket_description
-    TICKET_TEXTS[self.ticket_type_old] || ticket_type_old
+    ticket_type.name
   end
 
   def ticket_price
-    PAYMENT_CONFIG[:prices][ticket_type_old].to_i
+    ticket_type.price
   end
 
   def description
@@ -79,15 +78,15 @@ class Registration < ActiveRecord::Base
   end
 
   def speaker?
-    ticket_type_old == 'speaker' || ticket_type_old == 'lightning'
+    ticket_type.speaker?
   end
 
   def may_attend_speakers_dinner?
-    user != nil && user.confirmed_speaker? || reviewer? || organizer?
+    user != nil && user.confirmed_speaker? || organizer?
   end
 
   def free_ticket
-    ticket_price == 0
+    !ticket_type.paying_ticket?
   end
 
   def student?
@@ -95,36 +94,23 @@ class Registration < ActiveRecord::Base
   end
 
   def discounted_ticket?
-    %w(student lightning mod251 reviewer).include? ticket_type_old
+    ticket_type.discounted?
   end
 
   def special_ticket?
-    %w(sponsor volunteer organizer reviewer).include? ticket_type_old
-  end
-
-  def reviewer?
-      ticket_type_old == 'reviewer'
+    ticket_type.special_ticket?
   end
 
   def organizer?
-    ticket_type_old == 'organizer'
-  end
-
-  def normal_ticket?
-    %w(early_bird full_price).include? ticket_type_old
+    ticket_type.organizer?
   end
 
   def has_paying_ticket?
-    PAYING_TICKET_TYPES.include?(ticket_type_old)
+    ticket_type.paying_ticket?
   end
 
   def paid?
     paid_amount && paid_amount > 0
-  end
-
-  def complete!(current_user)
-    self.registration_complete = true
-    self.completed_by = current_user.email
   end
 
   def self.find_by_invoice(invoice_id)
@@ -194,7 +180,7 @@ class Registration < ActiveRecord::Base
     end
   end
 
-  def create_or_update_payment_info
+  def update_payment_info
     if paid?
       raise 'Cannot change a completed payment!'
     end
@@ -209,11 +195,7 @@ class Registration < ActiveRecord::Base
   end
 
   def self.current_normal_ticket_type
-    early_bird_is_active? ? "early_bird" : "full_price"
-  end
-
-  def self.early_bird_is_active?
-    Time.now < AppConfig.early_bird_ends
+    TicketType.current_normal_ticket.reference
   end
 
   def user

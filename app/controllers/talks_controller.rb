@@ -114,6 +114,11 @@ class TalksController < ApplicationController
 
   def update
     @talk = current_user.is_admin ? Talk.find(params[:id]) : current_user.talks.find(params[:id])
+
+    puts "---------------"
+    puts current_user.inspect
+    puts @talk.inspect
+
     @talk.assign_attributes(params[:talk])
     @talk.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @tags = Tag.all

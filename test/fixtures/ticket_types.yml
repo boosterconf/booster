@@ -1,41 +1,47 @@
 earlybird:
-  id: 1
   name: Earlybird-ticket for Booster 2013
   description: Earlybird ticket
+  reference: early_bird
   price: 5000
 
 full_price:
-  id: 2
   name: Ticket for Booster 2013
   description: Normal full price ticket
+  reference: full_price
   price: 7500
 
 sponsor_price:
-  id: 3
   name: Partner at Booster 2013
   description: Free ticket for partners only
+  reference: sponsor
   price: 0
 
 volunteer_price:
-  id: 4
   name: Volunteer at Booster 2013
   description: Free ticket for volunteers only
+  reference: volunteer
   price: 0
 
 student_price:
-  id: 5
   name: Student ticket for Booster 2013
   description: Student ticket for Booster 2013
+  reference: student
   price: 1000
 
 organizer_price:
-  id: 6
   name: Organizer for Booster 2013
   description: Free ticket for organizers of the conference
+  reference: organizer
   price: 0
 
 speaker_price:
-  id: 7
   name: Speaker at Booster 2013
   description: Free ticket for speakers only
+  reference: speaker
   price: 0
+
+lightning:
+  name: Lightning talk speaker at Booster 2013
+  description: Free ticket for speakers only
+  reference: lightning
+  price: 2500

@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :registration, :bio
 
-  default_scope { includes(:registration).order('users.created_at desc')}
+  default_scope { includes({registration: [:ticket_type]}).order('users.created_at desc')}
 
   acts_as_authentic do |c|
     c.login_field = :email
@@ -88,10 +88,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def reviewer?
-    registration ? registration.ticket_type_old == 'reviewer' : false
-  end
-
   def talks_this_year
     talks.select { |talk| talk.year == AppConfig.year }
   end
@@ -105,10 +101,18 @@ class User < ActiveRecord::Base
     self.has_accepted_lightning_talk? || self.has_accepted_tutorial?
   end
 
+  def invite_speaker
+    self.registration.registration_complete = true
+    self.registration.ticket_type_old = 'speaker'
+    self.registration.ticket_type = TicketType.speaker
+    self.registration.manual_payment = false
+  end
+
   def update_ticket_type!(current_user='Unknown')
     unless self.registration.special_ticket?
       if self.has_accepted_or_pending_tutorial?
         self.registration.ticket_type_old = 'speaker'
+        self.registration.ticket_type = TicketType.speaker
       elsif self.has_all_tutorials_refused? && self.has_pending_or_accepted_lightning_talk?
         self.update_to_lightning_talk_speaker
       elsif self.has_all_talks_refused?
@@ -168,6 +172,7 @@ class User < ActiveRecord::Base
 
   def update_to_lightning_talk_speaker
     self.registration.ticket_type_old = 'lightning'
+    self.registration.ticket_type = TicketType.lightning
   end
 
 

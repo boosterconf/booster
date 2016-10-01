@@ -45,6 +45,7 @@ class UserTest < ActiveSupport::TestCase
   def test_updating_ticket_type_for_user_with_pending_lightning_talk_sets_lightning_talk_ticket_type
     speaker = users(:test)
     speaker.update_ticket_type!('bogus')
+    assert_equal 'lightning', speaker.registration.ticket_type.reference
     assert_equal 'lightning', speaker.registration.ticket_type_old
   end
 

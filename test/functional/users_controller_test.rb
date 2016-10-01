@@ -94,11 +94,11 @@ class UsersControllerTest < ActionController::TestCase
     setup do
       @user = User.create_unfinished(SOME_EMAIL, "speaker")
       @user.save(:validate => false)
-
-      post :update, :id => @user.id, :user => update_user_params
     end
 
     should 'no longer be unfinished' do
+      post :update, :id => @user.id, :user => update_user_params
+
       registration = User.find_by_email(SOME_EMAIL).registration
       assert !registration.unfinished
     end
@@ -119,15 +119,6 @@ class UsersControllerTest < ActionController::TestCase
       should 'be redirected to profile page' do
         assert_redirected_to current_user_url
       end
-    end
-
-    should 'not be able to create a bio' do
-      @normal_user.registration = Registration.new
-      @normal_user.registration.ticket_type_old = 'early_bird'
-      @normal_user.registration.save
-      assert @normal_user.id && @normal_user.registration.id
-      post :create_bio, :id => @normal_user.id
-      assert_response 302
     end
   end
 

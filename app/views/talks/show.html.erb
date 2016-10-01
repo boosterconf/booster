@@ -60,7 +60,7 @@
 
 <% if @talk.talk_type.is_workshop %>
 
-    <% if admin_reviewer_or_talk_owner?(@talk) %>
+    <% if admin_or_talk_owner?(@talk) %>
         <p class="outline">
           <strong>Outline</strong>
           <% if contains_html(@talk.outline) %>
@@ -87,7 +87,7 @@
 
 <% end %>
 
-<% if admin_reviewer_or_talk_owner?(@talk) %>
+<% if admin_or_talk_owner?(@talk) %>
     <% if @talk.speaking_history.present? %>
         <div id="speaking_history">
           <h4>Speaking history</h4>

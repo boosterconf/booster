@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_filter :require_user, except: [:new, :create, :from_reference, :group_registration, :create_group_registration]
   before_filter :require_admin, only: [:index, :delete_bio, :phone_list, :dietary_requirements]
   before_filter :require_admin_or_self, only: [:show, :edit, :update]
-  before_filter :require_admin_or_speaker, only: [:create_bio]
   before_filter :require_unauthenticated_or_admin, only: [:new, :create]
   before_filter :registration_is_open, only: [:new, :create]
 
@@ -49,22 +48,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    puts params[:user]
-
     User.transaction do
       @user = User.new(params[:user])
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
       @user.roles = params[:roles].join(",") if params[:roles]
 
-      unless @user.registration.free_ticket || @user.registration.discounted_ticket?
+      unless @user.registration.ticket_type
         @user.registration.ticket_type_old = Registration.current_normal_ticket_type
+        @user.registration.ticket_type = TicketType.current_normal_ticket
       end
 
       if @user.invited && current_user.is_admin?
-        @user.registration.registration_complete = true
-        @user.registration.ticket_type_old = 'speaker'
-        @user.registration.manual_payment = false
+        @user.invite_speaker
       end
 
       if @user.save
@@ -111,7 +107,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.includes(:registration).find(params[:id])
+    @user = User.find(params[:id])
     @user.roles_will_change!
     @user.roles = params[:roles].join(",") if params[:roles]
     @user.assign_attributes(params[:user])

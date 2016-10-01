@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user_session, :current_user, :logged_in?, :admin?, :reviewer?, :admin_reviewer_or_talk_owner?
+  helper_method :current_user_session, :current_user, :logged_in?, :admin?, :admin_or_talk_owner?
 
   before_filter :load_sponsors
 
@@ -30,12 +30,8 @@ class ApplicationController < ActionController::Base
     current_user and current_user.is_admin
   end
 
-  def reviewer?
-    current_user and current_user.reviewer?
-  end
-
-  def admin_reviewer_or_talk_owner?(talk)
-    admin_or_reviewer? || talk.is_presented_by?(current_user)
+  def admin_or_talk_owner?(talk)
+    admin? || talk.is_presented_by?(current_user)
   end
 
   def require_admin_or_talk_owner
@@ -44,12 +40,6 @@ class ApplicationController < ActionController::Base
     unless admin? || (current_user && talk.is_presented_by?(current_user))
       access_denied
     end
-  end
-
-  def admin_or_reviewer?
-    return false unless current_user
-
-    current_user.is_admin || current_user.reviewer?
   end
 
   def require_admin
@@ -65,35 +55,6 @@ class ApplicationController < ActionController::Base
       user = User.find(params[:id])
       unless current_user.is_admin? || user == current_user
         flash[:error] = "You are not allowed to look at or edit other users' information"
-        access_denied
-      end
-    end
-  end
-
-  def require_reviewer_admin_or_self
-
-    return access_denied unless current_user
-
-    if params[:talk_id] =~ LOOKS_NUMBER_LIKE
-      talk = Talk.includes(:users).where(id: params[:talk_id]).first
-      unless admin_or_reviewer? || talk.is_presented_by?(current_user)
-        flash[:error] = 'Shame on you!'
-        return access_denied
-      end
-    else
-      unless admin_or_reviewer?
-        flash[:error] = 'Shame on you!'
-        return access_denied
-      end
-    end
-  end
-
-  def require_admin_or_speaker
-    unless params[:id] == 'favicon'
-      user = User.find(params[:id])
-
-      unless current_user.is_admin? || user.registration.ticket_type_old == 'speaker'
-        flash[:error] = "Speakers only!"
         access_denied
       end
     end

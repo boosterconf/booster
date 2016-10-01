@@ -9,7 +9,6 @@ prices: &prices
   full_price: 7000
   one_day: 3500
   lightning: 3500
-  reviewer: 4400
   dinner: 0
   <<: *free_prices
 
@@ -19,7 +18,6 @@ development: &development
     full_price: 12
     one_day: 5
     lightning: 5
-    reviewer: 5
     <<: *free_prices
   paypal_email: paypal_1297107898_biz@rootsconf.no
   paypal_url: "https://www.sandbox.paypal.com/cgi-bin/webscr"
@@ -31,7 +29,6 @@ staging:
     full_price: 12
     one_day: 5
     lightning: 5
-    reviewer: 5
     <<: *free_prices
   paypal_email: paypal_1297107898_biz@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
@@ -43,7 +40,6 @@ test:
     full_price: 12
     one_day: 5
     lightning: 5
-    reviewer: 5
     <<: *free_prices
   paypal_email: paypal_1297107898_biz@rootsconf.no
   paypal_url: "https://www.paypal.com/cgi-bin/webscr"
