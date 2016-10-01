@@ -44,40 +44,40 @@ class AcceptancesControllerTest < ActionController::TestCase
 
   def test_refuse_last_talk_sets_speakers_ticket_type_old_to_paying
     get :refuse, :id => @talk.id
-    assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_refuse_talk_with_other_talks_pending_does_not_alter_speakers_ticket_type
     @talk = talks(:four)
     get :refuse, :id => @talk.id
-    assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_refusal_of_user_with_special_ticket_will_not_alter_ticket_type
     @talk = talks(:five)
     get :refuse, :id => @talk.id
-    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_refusal_of_tutorial_where_user_also_have_pending_lighting_talk_sets_ticket_type_to_lightning
     @talk = talks(:eight)
 
     get :refuse, :id => @talk.id
-    assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_pending_rolls_back_ticket_type_for_normal_users
     @talk = talks(:nine)
-    assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type.reference
     get :pending, id: @talk.id
-    assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type.reference
     assert !Registration.find(@talk.users[0].registration.id).registration_complete
   end
 
   def test_pending_does_not_roll_back_ticket_type_for_special_users
     @talk = talks(:five)
-    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type.reference
     get :pending, :id => @talk.id
-    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type_old
+    assert_equal "sponsor", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 end

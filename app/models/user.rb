@@ -113,7 +113,7 @@ class User < ActiveRecord::Base
       if self.has_accepted_or_pending_tutorial?
         self.registration.ticket_type_old = 'speaker'
         self.registration.ticket_type = TicketType.speaker
-      elsif self.has_all_tutorials_refused? && self.has_pending_or_accepted_lightning_talk?
+      elsif self.has_all_tutorials_refused? && self.has_pending_or_accepted_talk?
         self.update_to_lightning_talk_speaker
       elsif self.has_all_talks_refused?
         self.update_to_paying_user
@@ -165,8 +165,8 @@ class User < ActiveRecord::Base
     all_tutorials.size == refused_tutorials.size
   end
 
-  def has_pending_or_accepted_lightning_talk?
-    talks = self.talks.find_all { |talk| talk.is_lightning_talk? && (talk.accepted? || talk.pending?) }
+  def has_pending_or_accepted_talk?
+    talks = self.talks.find_all { |talk| (talk.is_lightning_talk? || talk.is_short_talk?) && (talk.accepted? || talk.pending?) }
     !talks.empty?
   end
 
@@ -177,11 +177,13 @@ class User < ActiveRecord::Base
 
 
   def update_to_paying_user
-    if self.registration.ticket_type_old == "speaker" || self.registration.ticket_type_old == "lightning"
+    if self.registration.ticket_type.speaker?
       if self.is_early_bird?
         self.registration.ticket_type_old = 'early_bird'
+        self.registration.ticket_type = TicketType.early_bird
       else
         self.registration.ticket_type_old = 'full_price'
+        self.registration.ticket_type = TicketType.full_price
       end
     end
   end
@@ -235,13 +237,9 @@ class User < ActiveRecord::Base
   end
 
   def self.all_but_invited_speakers
-    self.find_all_by_invited(false)
+    User.where(invited: false)
   end
-
-  def self.all_invited_speakers
-    self.find_all_by_invited(true)
-  end
-
+  
   def self.all_accepted_speakers
     self.all.select { |u| u.has_accepted_talk? || u.invited == true }
   end

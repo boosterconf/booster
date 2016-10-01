@@ -6,7 +6,7 @@ class RegistrationsController < ApplicationController
   def index
     @registrations = Registration.find_by_params(params)
 
-    @ticket_types = @registrations.collect { |r| r.ticket_type_old }.uniq
+    @ticket_types = TicketType.all
 
     if @registrations.length > 0
       first_registration = @registrations.min { |x, y| x.created_at.to_date <=> y.created_at.to_date }
@@ -30,14 +30,6 @@ class RegistrationsController < ApplicationController
     redirect_to registrations_url
   end
 
-  def send_test_welcome_email
-    User.find_all_by_email("kjersti.berg@gmail.com").each do |a_user|
-      puts a_user
-      BoosterMailer.welcome_email(a_user).deliver_now
-    end
-    redirect_to registrations_url
-  end
-
   def send_speakers_dinner_email
     User.all_accepted_speakers.each do |user|
       print "Mailing: #{user.email}...\n"
@@ -48,6 +40,7 @@ class RegistrationsController < ApplicationController
 
   def edit
     @registration = Registration.find(params[:id])
+    @ticket_types = TicketType.all
   end
 
   # PUT /registrations/1

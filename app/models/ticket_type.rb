@@ -51,6 +51,14 @@ class TicketType < ActiveRecord::Base
     find_by_reference("lightning")
   end
 
+  def self.early_bird
+    find_by_reference("early_bird")
+  end
+
+  def self.full_price
+    find_by_reference("full_price")
+  end
+
   def self.early_bird_is_active?
     Time.now < AppConfig.early_bird_ends
   end

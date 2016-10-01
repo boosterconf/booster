@@ -1,134 +1,133 @@
 <article class="inner">
-<% content_for :title, @user.full_name %>
-<div class="header-join">
-<h2 class="page_title">My profile</h2>
-</div>
-<div class="row">
-  <table class="table span5">
-    <tr>
-      <th>Name:</th>
-      <td><%= h @user.full_name %></td>
-    </tr>
-    <tr>
-      <th>Company:</th>
-      <td><%= h @user.company %></td>
-    </tr>
-    <tr>
-      <th>Role:</th>
-      <td><%= h @user.roles_description %></td>
-    </tr>
-    <tr>
-      <th>E-mail:</th>
-      <td><%= h @user.email %></td>
-    </tr>
-    <tr>
-      <th>Phone number:</th>
-      <td><%= h @user.phone_number %></td>
-    </tr>
+  <% content_for :title, @user.full_name %>
+  <div class="header-join">
+    <h2 class="page_title">My profile</h2>
+  </div>
+  <div class="row">
+    <table class="table span5">
+      <tr>
+        <th>Name:</th>
+        <td><%= h @user.full_name %></td>
+      </tr>
+      <tr>
+        <th>Company:</th>
+        <td><%= h @user.company %></td>
+      </tr>
+      <tr>
+        <th>Role:</th>
+        <td><%= h @user.roles_description %></td>
+      </tr>
+      <tr>
+        <th>E-mail:</th>
+        <td><%= h @user.email %></td>
+      </tr>
+      <tr>
+        <th>Phone number:</th>
+        <td><%= h @user.phone_number %></td>
+      </tr>
 
-    <tr>
-      <th>Gender:</th>
-      <% if @user.gender %>
-          <td><%= h @user.gender == 'F' ? "Female" : "Male" %></td>
-      <% else %>
-          <td>-</td>
+      <tr>
+        <th>Gender:</th>
+        <% if @user.gender %>
+            <td><%= h @user.gender == 'F' ? "Female" : "Male" %></td>
+        <% else %>
+            <td>-</td>
+        <% end %>
+      </tr>
+
+      <tr>
+        <th>Birth year:</th>
+        <% if @user.birthyear %>
+            <td><%= h @user.birthyear %></td>
+        <% else %>
+            <td>-</td>
+        <% end %>
+      </tr>
+
+      <tr>
+        <th>Ticket type:</th>
+        <td><%= h @user.registration.ticket_description %></td>
+      </tr>
+      <tr>
+        <th>Conference dinner:</th>
+        <td><%= YesNo.new(@user.registration.includes_dinner) %></td>
+      </tr>
+      <% if @user.registration.may_attend_speakers_dinner? %>
+          <tr>
+            <th>Speaker's dinner:</th>
+            <td><%= YesNo.new(@user.registration.speakers_dinner) %></td>
+          </tr>
       <% end %>
-    </tr>
-
-    <tr>
-      <th>Birth year:</th>
-      <% if @user.birthyear %>
-          <td><%= h @user.birthyear %></td>
-      <% else %>
-          <td>-</td>
+      <% unless @user.registration.ticket_type_old == 'student' %>
+          <tr>
+            <th>Price:</th>
+            <td><%= @user.registration.ticket_price %></td>
+          </tr>
       <% end %>
-    </tr>
-
-    <tr>
-      <th>Ticket type:</th>
-      <td><%= h @user.registration.ticket_description %></td>
-    </tr>
-    <tr>
-      <th>Conference dinner:</th>
-      <td><%= YesNo.new(@user.registration.includes_dinner) %></td>
-    </tr>
-    <% if @user.registration.may_attend_speakers_dinner? %>
-        <tr>
-          <th>Speaker's dinner:</th>
-          <td><%= YesNo.new(@user.registration.speakers_dinner) %></td>
-        </tr>
-    <% end %>
-    <% unless @user.registration.ticket_type_old == 'student' %>
-        <tr>
-          <th>Price:</th>
-          <td><%= @user.registration.ticket_price %></td>
-        </tr>
-    <% end %>
-    <% if @user.registration.manual_payment %>
-        <tr>
-          <th>Invoice address:</th>
-          <td><%= @user.registration.invoice_address %></td>
-        </tr>
-        <tr>
-          <th>Invoice information:</th>
-          <td><%= @user.registration.invoice_description %></td>
-        </tr>
-    <% end %>
-    <% if admin? %>
-        <tr>
-          <th>Status:</th>
-          <td><%= @user.registration.status %></td>
-        </tr>
-    <% end %>
-
-    <% if admin? && @user.registration.unfinished %>
-        <th>Registration url:</th>
-        <td><%= user_from_reference_url(@user.registration.unique_reference) %></td>
-    <% end %>
-
-  </table>
-</div>
-
-<% unless @user.talks_this_year.blank? %>
-    <h3>Suggested talks</h3>
-    <ul class="talk_list">
-      <% for talk in @user.talks_this_year %>
-          <li><%= link_to h(talk.title), talk %></li>
+      <% if @user.registration.manual_payment %>
+          <tr>
+            <th>Invoice address:</th>
+            <td><%= @user.registration.invoice_address %></td>
+          </tr>
+          <tr>
+            <th>Invoice information:</th>
+            <td><%= @user.registration.invoice_description %></td>
+          </tr>
       <% end %>
-    </ul>
-<% end %>
+      <% if admin? %>
+          <tr>
+            <th>Status:</th>
+            <td><%= @user.registration.status %></td>
+          </tr>
+      <% end %>
 
-<h3>Participant information</h3>
-<%= render partial: @user.registration %>
+      <% if admin? && @user.registration.unfinished %>
+          <th>Registration url:</th>
+          <td><%= user_from_reference_url(@user.registration.unique_reference) %></td>
+      <% end %>
 
+    </table>
+  </div>
 
-<h3>Speaker bio</h3>
-<% if @user.bio %>
-<p>
-  <% if @user.bio.picture_file_name.present? %>
-      <%= image_tag @user.bio.picture.url %>
-  <% else %>
-      <%= image_tag('placeholder.jpg') %>
+  <% unless @user.talks_this_year.blank? %>
+      <h3>Suggested talks</h3>
+      <ul class="talk_list">
+        <% for talk in @user.talks_this_year %>
+            <li><%= link_to h(talk.title), talk %></li>
+        <% end %>
+      </ul>
   <% end %>
-</p>
-<p class="form-group">
-  <label>Work title</label>
-  <input type="text" class="form-control" disabled value="<%= @user.bio.title %>" />
-</p>
-<p class="form-group">
-  <label>Twitter handle</label>
-  <input type="text" class="form-control" disabled value="<%= @user.bio.twitter_handle %>" />
-</p>
-<p class="form-group">
-  <label>Blog url</label>
-  <input type="text" class="form-control" disabled value="<%= @user.bio.blog %>"/>
-</p>
-<p class="form-group">
-  <label>Bio</label>
-  <textarea class="form-control" disabled><%= @user.bio.bio %></textarea>
-</p>
-<% end %>
-<p>
-  <%= link_to "Make changes to your registration", edit_user_path(@user), :class => "btn btn-primary" %>
-</p>
+
+  <h3>Participant information</h3>
+  <%= render partial: @user.registration %>
+
+  <% if @user.bio %>
+      <h3>Speaker bio</h3>
+      <p>
+        <% if @user.bio.picture_file_name.present? %>
+            <%= image_tag @user.bio.picture.url %>
+        <% else %>
+            <%= image_tag('placeholder.jpg') %>
+        <% end %>
+      </p>
+      <p class="form-group">
+        <label>Work title</label>
+        <input type="text" class="form-control" disabled value="<%= @user.bio.title %>"/>
+      </p>
+      <p class="form-group">
+        <label>Twitter handle</label>
+        <input type="text" class="form-control" disabled value="<%= @user.bio.twitter_handle %>"/>
+      </p>
+      <p class="form-group">
+        <label>Blog url</label>
+        <input type="text" class="form-control" disabled value="<%= @user.bio.blog %>"/>
+      </p>
+      <p class="form-group">
+        <label>Bio</label>
+        <textarea class="form-control" disabled><%= @user.bio.bio %></textarea>
+      </p>
+  <% end %>
+  <p>
+    <%= link_to "Make changes to your registration", edit_user_path(@user), :class => "btn btn-primary" %>
+  </p>
 </article>

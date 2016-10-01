@@ -42,8 +42,8 @@
     <% unless @registration.registration_complete %>
       <div class="form-group">
         <%= hidden_field_tag :ticket_change %>
-      <label for="ticket_type_old">Ticket type</label>
-      <%= f.select :ticket_type_old, Registration::TICKET_TEXTS.invert.to_a, class: 'form-control' %>
+      <label for="ticket_type">Ticket type</label>
+      <%= f.select :ticket_type, @ticket_types, class: 'form-control' %>
     </div>
     <div class="form-group">
       <label for="invoice_description">Invoice information</label>
@@ -71,14 +71,7 @@
     <div class="checkbox">
       <label>
         <%= f.check_box :registration_complete %>
-          <%= case @registration.ticket_type_old
-              when "speaker" then "Presentation accepted"
-              when "volunteer" then "Registration confirmed"
-              when "organizer" then "Registration confirmed"
-              when "early_bird" then "Payment received"
-              when "full_price" then "Payment received"
-              else "Registration is paid/confirmed"
-            end %>
+          Registration is confirmed
       </label>
     </div>
     <div class="form-actions">

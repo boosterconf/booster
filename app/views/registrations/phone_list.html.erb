@@ -31,7 +31,7 @@
       <%= link_to h(registration.user.email), "mailto:#{h(registration.user.email)}" %>
     </td>
     <td>
-      <%=h registration.ticket_type_old %>
+      <%=h registration.ticket_type.name %>
     </td>
     <td>
       <%=h registration.user.phone_number %>
