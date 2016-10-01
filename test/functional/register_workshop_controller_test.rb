@@ -25,21 +25,19 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
           end
         end
       end
-=begin
+
       should "create a new user when additional speaker is given" do
         assert_difference('User.count' "+1") do
           assert_difference('Registration.count' "+1") do
-            post :create_talk, :talk => create_talk_params, :additional_speaker_email => EMAIL
+            post :create_talk, :talk => create_talk_params_with_additional_email(EMAIL)
           end
         end
       end
-
       should 'send only one email to each user when additional speaker is given' do
         assert_difference('ActionMailer::Base.deliveries.size', +2) do
-          post :create_talk, :talk => create_talk_params, :additional_speaker_email => EMAIL
+          post :create_talk, :talk => create_talk_params_with_additional_email(EMAIL)
         end
       end
-=end
       context 'when a user with given email already exists' do
         setup do
           @existing_email = users(:quentin).email
@@ -48,7 +46,7 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         should 'not create a new user' do
           assert_no_difference('User.count') do
             assert_no_difference('Registration.count') do
-              post :create_talk, :talk => create_talk_params, :additional_speaker_email => @existing_email
+              post :create_talk, :talk => create_talk_params_with_additional_email(@existing_email)
             end
           end
         end
@@ -56,11 +54,10 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
 
       context "create a new user" do
         setup do
-          post :create_talk, :talk => create_talk_params, :additional_speaker_email => EMAIL
+          post :create_talk, :talk => create_talk_params_with_additional_email(EMAIL)
           @registration = Registration.unscoped.order("id asc").last
           @user = User.unscoped.order("id asc").last
         end
-=begin
         should "have a random unique reference" do
           assert_not_nil @registration.unique_reference
         end
@@ -80,7 +77,6 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         should "be a speaker on the talk" do
           assert @user.talks.first.title == TITLE
         end
-=end
       end
 
     end
@@ -96,6 +92,18 @@ class RegisterWorkshopControllerTest < ActionController::TestCase
         'participant_requirements' => 'Nothing',
         'equipment' => 'Stables and hay',
         'appropriate_for_roles' => 'project_manager'
+    }
+  end
+  def create_talk_params_with_additional_email(additional_email)
+    {
+        'talk_type_id' => talk_types(:tutorial).id,
+        'title' => TITLE,
+        'description' => '<p>ponni</p>',
+        'max_participants' => '20',
+        'participant_requirements' => 'Nothing',
+        'equipment' => 'Stables and hay',
+        'appropriate_for_roles' => 'project_manager',
+        'additional_speaker_email' => additional_email
     }
   end
 
