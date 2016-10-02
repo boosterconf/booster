@@ -1,5 +1,5 @@
 <div id="price_info">
   <% unless @user.registration.free_ticket %>
-      <p>Price: NOK <%= @user.registration.ticket_price %>,- (excluding VAT).</p>
+      <%= @user.registration.ticket_description %>: NOK <%= @user.registration.ticket_price %>,- (excluding VAT).
   <% end %>
 </div>

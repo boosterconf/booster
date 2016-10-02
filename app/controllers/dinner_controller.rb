@@ -5,7 +5,7 @@ class DinnerController < ApplicationController
   before_filter :require_admin
 
   def index
-    @registrations = Registration.order(:ticket_type_old).all
+    @registrations = Registration.includes(:ticket_type).all
     respond_with @registrations
   end
 

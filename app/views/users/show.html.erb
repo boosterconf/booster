@@ -48,22 +48,23 @@
         <th>Ticket type:</th>
         <td><%= h @user.registration.ticket_description %></td>
       </tr>
-      <tr>
-        <th>Conference dinner:</th>
-        <td><%= YesNo.new(@user.registration.includes_dinner) %></td>
-      </tr>
+      <% if @user.registration.ticket_type.dinner_included %>
+        <tr>
+          <th>Conference dinner:</th>
+          <td><%= YesNo.new(@user.registration.includes_dinner) %></td>
+        </tr>
+      <% end %>
+
       <% if @user.registration.may_attend_speakers_dinner? %>
           <tr>
             <th>Speaker's dinner:</th>
             <td><%= YesNo.new(@user.registration.speakers_dinner) %></td>
           </tr>
       <% end %>
-      <% unless @user.registration.ticket_type_old == 'student' %>
-          <tr>
-            <th>Price:</th>
-            <td><%= @user.registration.ticket_price %></td>
-          </tr>
-      <% end %>
+        <tr>
+          <th>Price:</th>
+          <td><%= @user.registration.ticket_price %></td>
+        </tr>
       <% if @user.registration.manual_payment %>
           <tr>
             <th>Invoice address:</th>

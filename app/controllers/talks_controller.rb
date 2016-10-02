@@ -72,46 +72,6 @@ class TalksController < ApplicationController
 
   end
 
-  def create
-    extended_params = params[:talk].merge!({:acceptance_status => "pending"})
-    @talk = Talk.new(extended_params)
-    @tags = Tag.all
-    @types = TalkType.all
-
-    # Tag handling
-    tag_names = []
-    if params[:item] && params[:item][:tags]
-      tag_names = params[:item][:tags]
-      if params[:uncommited_tag] && params[:uncommited_tag].chomp() != ""
-        tag_names.push(params[:uncommited_tag].chomp())
-      end
-    elsif params[:uncommited_tag] && params[:uncommited_tag].chomp() != ""
-      tag_names.push(params[:uncommited_tag].chomp())
-    end
-    @talk.tags = Tag.create_and_return_tags(tag_names)
-    if current_user
-      @user = current_user
-      unless @user.registration.special_ticket?
-        if @talk.talk_type.eligible_for_free_ticket?
-          @user.registration.ticket_type_old = 'speaker'
-        elsif @user.registration.ticket_type_old != 'speaker'
-          @user.registration.ticket_type_old = 'lightning'
-        end
-      end
-      @user.save
-    end
-
-    @talk.users << @user
-
-    if @talk.save
-      flash[:notice] = 'Abstract published'
-      BoosterMailer.talk_confirmation(@user, @talk, talk_url(@talk)).deliver_now
-      redirect_to @talk
-    else
-      render action: 'new'
-    end
-  end
-
   def update
     @talk = current_user.is_admin ? Talk.find(params[:id]) : current_user.talks.find(params[:id])
 

@@ -1,4 +1,4 @@
-<% unless @user.registration.student? %>
+<% if @user.registration.dinner_included? %>
     <div class="checkbox">
       <label>
         <%= reg.check_box :includes_dinner, class: "checkbox" %>

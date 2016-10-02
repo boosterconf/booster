@@ -22,9 +22,3 @@
   <%= f.label :phone_number, "Phone" %>
   <%= text_field(:user, :phone_number, placeholder: "If we need to call you", class: 'form-control', required: true) %>
 </fieldset>
-
-<fieldset class="form-group">
-  <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
-  <%= text_area(:user, :dietary_requirements, placeholder: "Do you need something special for dinner?",
-                rows: 4, class: 'form-control') %>
-</fieldset>

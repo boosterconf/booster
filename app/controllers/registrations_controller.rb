@@ -12,7 +12,6 @@ class RegistrationsController < ApplicationController
       first_registration = @registrations.min { |x, y| x.created_at.to_date <=> y.created_at.to_date }
       @date_range = (first_registration.created_at.to_date-1..Date.today).to_a
       @all_per_date = total_by_date(@registrations, @date_range)
-      @registrations_per_ticket_type_old_per_date = per_ticket_type_old_by_date(@registrations, @date_range)
       @paid_per_date = total_by_date(@registrations, @date_range)
 
       @income_per_date = total_price_per_date(@registrations, @date_range)
@@ -51,19 +50,16 @@ class RegistrationsController < ApplicationController
     puts params[:registration]
     if admin?
       if params[:ticket_change]
-        @registration.ticket_type_old = params[:registration][:ticket_type_old]
-        #TODO: Need to get reference to correct tickettype object from ui.
-        #@registration.ticket_type = params[:registration][:ticket_type_old]
+        @registration.ticket_type = TicketType.find_by_id(params[:registration][:ticket_type_id])
         @registration.includes_dinner = params[:registration][:includes_dinner]
         @registration.update_payment_info
       else
-        @registration.completed_by = current_user.email if admin? and @registration.registration_complete
         @registration.registration_complete = params[:registration][:registration_complete]
+        @registration.completed_by = current_user.email if @registration.registration_complete
         @registration.payment_reference = params[:registration][:payment_reference]
         @registration.paid_amount = params[:registration][:paid_amount]
         @registration.invoiced = params[:registration][:invoiced]
-        @registration.user.is_admin =
-            (@registration.ticket_type_old == "organizer" && @registration.registration_complete)
+        @registration.user.is_admin = TicketType.find_by_id(params[:registration][:ticket_type_id]).organizer?
         @registration.user.save!
       end
     end
@@ -147,15 +143,6 @@ class RegistrationsController < ApplicationController
       redirect_to root_url
       false
     end
-  end
-
-  def per_ticket_type_old_by_date(registrations, date_range)
-    registrations_by_ticket_type_old = registrations.group_by { |u| u.ticket_type_old }
-    result = {}
-    for ticket_type_old in registrations_by_ticket_type_old.keys
-      result[ticket_type_old] = total_by_date(registrations_by_ticket_type_old[ticket_type_old], date_range)
-    end
-    result
   end
 
   def total_by_date(registrations, date_range)

@@ -8,6 +8,7 @@
       <th>Type</th>
       <th>Name</th>
       <th>Price</th>
+      <th>Dinner included</th>
       <th></th>
     </tr>
 
@@ -16,6 +17,7 @@
           <td><%=h ticket_type.reference %></td>
           <td><%=h ticket_type.name %></td>
           <td><%=h ticket_type.price %></td>
+          <td><%=h ticket_type.dinner_included %></td>
           <td><%= link_to 'Edit', edit_ticket_type_path(ticket_type) %></td>
         </tr>
     <% end %>

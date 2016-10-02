@@ -6,7 +6,7 @@
 <ul>
   <% for user in @users %>
 
-      <li><%= link_to h(user.full_name), user %> (<%= user.registration.ticket_type_old %>) - <%= user.dietary_requirements %></li>
+      <li><%= link_to h(user.full_name), user %> (<%= user.registration.ticket_type.reference %>) - <%= user.dietary_requirements %></li>
 
   <% end %>
 </ul>

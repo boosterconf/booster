@@ -1,21 +1,5 @@
 class Registration < ActiveRecord::Base
-  # TODO: Should perhaps be in some i18n-file somewhere and not hard-coded
-  TICKET_TEXTS = {
-      'early_bird' => 'Early bird ticket for Booster',
-      'full_price' => 'Regular ticket for Booster',
-      'lightning' => 'Lightning talk ticket for Booster',
-      'one_day' => 'One day ticket for Booster',
-      'sponsor' => 'Partner ticket Booster',
-      'volunteer' => 'Volunteer at Booster',
-      'student' => 'Student for Booster',
-      'organizer' => 'Organizer for Booster',
-      'speaker' => 'Speaker at Booster',
-      'academic' => 'Academic ticket Booster',
-      'new_speaker' => 'Speaker without abstracts',
-      'reviewer' => 'Reviewer ticket for Booster'
-  }
 
-  PAYING_TICKET_TYPES = %w(early_bird full_price one_day lightning student reviewer)
 
   acts_as_paranoid
 
@@ -38,7 +22,6 @@ class Registration < ActiveRecord::Base
     self.manual_payment ||= true
     self.ticket_type_old ||= self.class.current_normal_ticket_type
     self.ticket_type ||= TicketType.current_normal_ticket
-    self.includes_dinner ||= true
   end
 
   def destroy_talks_and_user
@@ -77,6 +60,10 @@ class Registration < ActiveRecord::Base
     ticket_description + ' ' + (registration_complete ? ' (Paid)' : '')
   end
 
+  def show_bio?
+    ticket_type.speaker?
+  end
+
   def speaker?
     ticket_type.speaker?
   end
@@ -89,8 +76,8 @@ class Registration < ActiveRecord::Base
     !ticket_type.paying_ticket?
   end
 
-  def student?
-    %w(student mod251).include? ticket_type_old
+  def dinner_included?
+    ticket_type.dinner_included
   end
 
   def discounted_ticket?

@@ -74,3 +74,13 @@ singlespeaker:
   password_salt: <%= salt = Authlogic::Random.hex_token %>
   crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
   persistence_token: <%= Authlogic::Random.hex_token %>
+
+
+late_registration:
+  email: late@much.com
+  first_name: S.O.
+  last_name: Tardy
+  accepted_privacy_guidelines: true
+  password_salt: <%= salt = Authlogic::Random.hex_token %>
+  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
+  persistence_token: <%= Authlogic::Random.hex_token %>

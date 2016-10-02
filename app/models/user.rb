@@ -103,7 +103,6 @@ class User < ActiveRecord::Base
 
   def invite_speaker
     self.registration.registration_complete = true
-    self.registration.ticket_type_old = 'speaker'
     self.registration.ticket_type = TicketType.speaker
     self.registration.manual_payment = false
   end
@@ -111,7 +110,6 @@ class User < ActiveRecord::Base
   def update_ticket_type!(current_user='Unknown')
     unless self.registration.special_ticket?
       if self.has_accepted_or_pending_tutorial?
-        self.registration.ticket_type_old = 'speaker'
         self.registration.ticket_type = TicketType.speaker
       elsif self.has_all_tutorials_refused? && self.has_pending_or_accepted_talk?
         self.update_to_lightning_talk_speaker
@@ -171,18 +169,21 @@ class User < ActiveRecord::Base
   end
 
   def update_to_lightning_talk_speaker
-    self.registration.ticket_type_old = 'lightning'
     self.registration.ticket_type = TicketType.lightning
   end
 
-
   def update_to_paying_user
+
+    puts "-------------------"
+    puts self.registration.ticket_type.inspect
+    puts self.registration.inspect
+    puts self.inspect
+    puts "----------"
+
     if self.registration.ticket_type.speaker?
       if self.is_early_bird?
-        self.registration.ticket_type_old = 'early_bird'
         self.registration.ticket_type = TicketType.early_bird
       else
-        self.registration.ticket_type_old = 'full_price'
         self.registration.ticket_type = TicketType.full_price
       end
     end
@@ -253,11 +254,11 @@ class User < ActiveRecord::Base
   end
 
   def self.all_organizers
-    User.includes(:registration).to_a.select {|u| u.registration.ticket_type_old == 'organizer'}
+    User.joins(registration: :ticket_type).where("ticket_types.reference" == "organizer")
   end
 
   def self.all_organizers_and_volunteers
-    User.includes(:registration).to_a.select {|u| ['organizer', 'volunteer'].include? u.registration.ticket_type_old}
+    User.includes(:registration).to_a.select {|u| ['organizer', 'volunteer'].include? u.registration.ticket_type.reference}
   end
 
   def self.featured_speakers
@@ -276,7 +277,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_normal_participants
-    User.includes(:registration).to_a.select {|u| %w(early_bird full_price sponsor organizer reviewer).include? u.registration.ticket_type_old }
+    User.includes(:registration).to_a.select {|u| u.registration.ticket_type.normal_ticket? }
   end
 
   def self.all_participants
@@ -284,7 +285,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_speakers
-      User.includes(:registration).to_a.select {|u| %w(lightning speaker).include? u.registration.ticket_type_old }
+      User.includes(:registration).to_a.select {|u| u.registration.ticket_type.speaker? }
   end
 
   def self.create_unfinished(email, ticket_type, first_name=nil, last_name=nil)
@@ -294,10 +295,9 @@ class User < ActiveRecord::Base
     user.first_name = first_name if first_name.present?
     user.last_name = last_name if last_name.present?
     user.password = SecureRandom.urlsafe_base64 # må sette passord, av grunner bare authlogic forstår
-    user.registration.ticket_type_old = ticket_type.reference
     user.registration.ticket_type = ticket_type
     user.registration.manual_payment = true
-    user.registration.includes_dinner = true
+    user.registration.includes_dinner = ticket_type.dinner_included
     user.registration.unfinished = true
     user.registration.unique_reference = SecureRandom.urlsafe_base64
     user.create_bio

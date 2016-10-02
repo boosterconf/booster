@@ -86,9 +86,9 @@ class InvoicesController < ApplicationController
   end
 
   def find_users_without_invoice
-    @users = Registration.includes(:invoice_line)
+    @users = Registration.includes(:invoice_line, :ticket_type)
                  .where(invoice_lines: { registration_id: nil })
-                 .where("ticket_type_old IN (?)", Registration::PAYING_TICKET_TYPES)
+                 .where("ticket_types.price > 0")
                  .map(&:user).reject(&:nil?).map { |u| ["#{u.name_or_email} - #{u.company}", u.id]}
   end
 end

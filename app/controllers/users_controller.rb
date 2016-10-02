@@ -37,10 +37,10 @@ class UsersController < ApplicationController
     else
       # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
       @user.registration.manual_payment = true
-      @user.registration.ticket_type_old = params[:ticket_type_old] || Registration.current_normal_ticket_type
+      @user.registration.ticket_type = TicketType.current_normal_ticket
     end
 
-    @user.registration.includes_dinner = !@user.registration.discounted_ticket?
+    @user.registration.includes_dinner = @user.registration.ticket_type.dinner_included
   end
 
   def edit
@@ -54,10 +54,7 @@ class UsersController < ApplicationController
       @user.registration_ip = request.remote_ip
       @user.roles = params[:roles].join(",") if params[:roles]
 
-      unless @user.registration.ticket_type
-        @user.registration.ticket_type_old = Registration.current_normal_ticket_type
-        @user.registration.ticket_type = TicketType.current_normal_ticket
-      end
+      @user.registration.ticket_type = TicketType.current_normal_ticket
 
       if @user.invited && current_user.is_admin?
         @user.invite_speaker
@@ -112,6 +109,7 @@ class UsersController < ApplicationController
     @user.roles = params[:roles].join(",") if params[:roles]
     @user.assign_attributes(params[:user])
     @user.registration.unfinished = false
+
     if @user.save
       flash[:notice] = 'Updated profile.'
       redirect_to @user
@@ -160,7 +158,9 @@ class UsersController < ApplicationController
   end
 
   def dietary_requirements
-    @users = User.all(:order => "registrations.ticket_type_old, last_name", :include => :registration, :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
+    @users = User.all(:order => "last_name",
+                      :include => :registration,
+                      :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
   end
 
   def new_skeleton

@@ -1,23 +1,7 @@
 class TicketType < ActiveRecord::Base
 
-  TICKET_TEXTS = {
-      'early_bird' => 'Early bird ticket for Booster',
-      'full_price' => 'Regular ticket for Booster',
-      'lightning' => 'Lightning talk ticket for Booster',
-      'one_day' => 'One day ticket for Booster',
-      'sponsor' => 'Partner ticket Booster',
-      'volunteer' => 'Volunteer at Booster',
-      'student' => 'Student for Booster',
-      'organizer' => 'Organizer for Booster',
-      'speaker' => 'Speaker at Booster',
-      'academic' => 'Academic ticket Booster',
-      'new_speaker' => 'Speaker without abstracts'
-  }
-
-  PAYING_TICKET_TYPES = %w(early_bird full_price one_day lightning student)
-
   has_many :registrations
-  attr_accessible :name, :reference, :price
+  attr_accessible :name, :reference, :price, :dinner_included
 
   def speaker?
     %w(lightning speaker).include? reference
@@ -29,6 +13,10 @@ class TicketType < ActiveRecord::Base
 
   def special_ticket?
     %w(sponsor volunteer organizer).include? reference
+  end
+
+  def normal_ticket?
+    %w(early_bird full_price sponsor organizer).include? reference
   end
 
   def paying_ticket?

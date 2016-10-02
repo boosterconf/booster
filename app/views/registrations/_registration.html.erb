@@ -11,15 +11,9 @@
 <% elsif registration.registration_complete %>
 
     Payment is registered. See you at Booster!
-
-<% elsif registration.manual_payment %>
-    <p>
-      We'll send an invoice to <%= registration.user.email %> for NOK <%= registration.ticket_price %> + VAT. This page will be updated when payment is registered.
-    </p>
 <% else %>
     <p>
-      We have not yet registered your payment. This can be caused by a number of things, but no worries.
-      Send us <a href="mailto:kontakt@boosterconf.no">an email</a>, and we'll fix it.
+      An invoice for NOK <%= registration.ticket_price %> + VAT will be sent to you. This page will be updated when payment is registered.
     </p>
 <% end %>
 

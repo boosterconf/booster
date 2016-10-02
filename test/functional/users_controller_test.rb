@@ -15,7 +15,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should 'get an early bird ticket' do
-        @registration.ticket_type_old = 'early_bird'
+        assert @registration.ticket_type.reference = 'early_bird'
       end
 
     end
@@ -29,7 +29,7 @@ class UsersControllerTest < ActionController::TestCase
       end
 
       should 'get a full price ticket' do
-        @registration.ticket_type_old = 'full_price'
+        assert @registration.ticket_type.reference = 'full_price'
       end
 
     end
@@ -178,7 +178,7 @@ class UsersControllerTest < ActionController::TestCase
   def update_user_params
     { 'accepted_privacy_guidelines' => '1', 'company' => 'Test', 'first_name' => 'Test', 'last_name' => 'Osteron', 'accept_optional_email' => '1',
       'password' => 'fjasepass', 'password_confirmation' => 'fjasepass', 'phone_number' => '92043382', 'role' => 'Developer', 'birthyear' => 1984, 'hometown' => 'Bergen',
-      'registration_attributes' => { 'ticket_type_old' => 'full_price', 'manual_payment' => '', 'free_ticket' => 'false', 'includes_dinner' => "1" }
+      'registration_attributes' => { 'manual_payment' => '', 'free_ticket' => 'false', 'includes_dinner' => "1" }
     }
   end
 

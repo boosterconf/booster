@@ -43,7 +43,7 @@
       <div class="form-group">
         <%= hidden_field_tag :ticket_change %>
         <label for="ticket_type">Ticket type</label>
-        <%= f.collection_select :ticket_type, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
+        <%= f.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
     </div>
     <div class="form-group">
       <label for="invoice_description">Invoice information</label>

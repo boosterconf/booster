@@ -26,6 +26,11 @@
         <%= f.text_field :price, :class => "form-control" %>
       </div>
 
+      <div class="form-group">
+        <%= f.check_box :dinner_included %>
+        <%= f.label :dinner_included, "Conference dinner included in ticket price" %>
+      </div>
+
       <div class="form-actions">
         <%= f.submit 'Update', :class => "btn btn-primary" %>
         <%= link_to 'Back', ticket_types_path, :class => "btn btn-default" %>

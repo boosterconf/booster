@@ -32,7 +32,6 @@
 
         <%= f.fields_for :registration do |reg| %>
             <fieldset id="registration_details">
-                <%= reg.hidden_field :ticket_type_old %>
                 <% if admin? %>
                   <label for="ticket_type">Ticket type</label>
                   <%= reg.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
@@ -41,12 +40,21 @@
                 <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
             </fieldset>
 
-            <br>
+        <% end %>
+
+        <% if @user.registration.ticket_type.dinner_included %>
+        <fieldset class="form-group">
+          <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
+          <%= text_area(:user, :dietary_requirements, placeholder: "Do you need something special for dinner?",
+                        rows: 4, class: 'form-control') %>
+        </fieldset>
         <% end %>
 
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
-        <%= render :partial => 'bio', :locals => {:f => f } %>
+        <% if @user.registration.show_bio? %>
+          <%= render :partial => 'bio', :locals => {:f => f } %>
+        <% end %>
 
         <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
 

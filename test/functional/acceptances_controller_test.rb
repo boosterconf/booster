@@ -14,6 +14,7 @@ class AcceptancesControllerTest < ActionController::TestCase
   end
 
   def test_accept_should_set_talk_as_accepted
+    @talk = talks(:three)
     get :accept, :id => @talk.id
     assert_equal true, Talk.find(@talk.id).accepted?
   end
@@ -38,19 +39,21 @@ class AcceptancesControllerTest < ActionController::TestCase
   end
 
   def test_refuse_should_set_talk_as_refused
+    @talk = talks(:three)
     get :refuse, :id => @talk.id
     assert_equal true, Talk.find(@talk.id).refused?
   end
 
-  def test_refuse_last_talk_sets_speakers_ticket_type_old_to_paying
+  def test_refuse_last_talk_sets_speakers_ticket_type_to_paying
+    @talk = talks(:three)
     get :refuse, :id => @talk.id
     assert_equal "early_bird", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_refuse_talk_with_other_talks_pending_does_not_alter_speakers_ticket_type
-    @talk = talks(:four)
+    @talk = talks(:seven)
     get :refuse, :id => @talk.id
-    assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type.reference
+    assert_equal "speaker", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end
 
   def test_refusal_of_user_with_special_ticket_will_not_alter_ticket_type
@@ -61,7 +64,6 @@ class AcceptancesControllerTest < ActionController::TestCase
 
   def test_refusal_of_tutorial_where_user_also_have_pending_lighting_talk_sets_ticket_type_to_lightning
     @talk = talks(:eight)
-
     get :refuse, :id => @talk.id
     assert_equal "lightning", Registration.find(@talk.users[0].registration.id).ticket_type.reference
   end

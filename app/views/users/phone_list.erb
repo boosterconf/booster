@@ -2,7 +2,7 @@
   <div class="header-join">
 <h2>Participant phone list</h2>
 </div>
-<table border="1" cellspacing="0">
+<table class="table table-striped table-condensed">
   <tr>
     <th>Name</th>
     <th>Role</th>
@@ -11,7 +11,7 @@
   <% for user in @users %>
       <tr>
         <td><%= user.full_name %></td>
-        <td><%= user.registration.ticket_type_old %></td>
+        <td><%= user.registration.ticket_type.reference %></td>
         <td><%= user.phone_number %></td>
       </tr>
   <% end %>
