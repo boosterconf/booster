@@ -29,13 +29,15 @@
   <%= form_for @registration do |f| %>
     <% unless @registration.free_ticket %>
     <div class="checkbox">
-      <label>Invoice manually
+      <label>
         <%= f.check_box :manual_payment %>
+        Invoice manually
       </label>
     </div>
       <div class="checkbox">
-        <label>Has been invoiced
+        <label>
           <%= f.check_box :invoiced %>
+          Has been invoiced
         </label>
       </div>
     <% end %>
