@@ -37,7 +37,7 @@ class Registration < ActiveRecord::Base
   def set_default_values
     self.manual_payment ||= true
     self.ticket_type_old ||= self.class.current_normal_ticket_type
-    self.ticket_type = TicketType.current_normal_ticket
+    self.ticket_type ||= TicketType.current_normal_ticket
     self.includes_dinner ||= true
   end
 

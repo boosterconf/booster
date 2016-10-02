@@ -25,7 +25,7 @@ class SponsorTicketCreator < SimpleDelegator
 
   def create_single_ticket
     puts "Creates sponsor ticket for #{@sponsor.name}"
-    ticket = User.create_unfinished(nil, 'sponsor')
+    ticket = User.create_unfinished(nil, TicketType.sponsor)
     ticket.company = @sponsor.name
     ticket.save(validate: false)
   end

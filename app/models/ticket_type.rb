@@ -47,6 +47,10 @@ class TicketType < ActiveRecord::Base
     find_by_reference("speaker")
   end
 
+  def self.sponsor
+    find_by_reference("sponsor")
+  end
+
   def self.lightning
     find_by_reference("lightning")
   end

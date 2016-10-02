@@ -20,8 +20,8 @@
 
 <ul>
   <li><%= link_to "All" %></li>
-  <% @ticket_types.each do |ticket_type_old| %>
-      <li><%= link_to ticket_type_old, :conditions => {:ticket_type_old => ticket_type_old} %></li>
+  <% @ticket_types.each do |ticket_type| %>
+      <li><%= link_to ticket_type.reference, :conditions => {:ticket_type => ticket_type} %></li>
   <% end %>
   <li><%= link_to "Completed", :filters => 'completed' %></li>
   <li><%= link_to "Not completed", :filters => 'not_completed' %></li>
@@ -76,8 +76,8 @@
             </td>
             <td><%= time_ago_in_words(registration.created_at) %> ago</td>
             <td>
-              <%= h registration.ticket_type_old %>
-              <% if %w(lightning speaker).include?(registration.ticket_type_old) %>
+              <%= h registration.ticket_type.reference %>
+              <% if registration.ticket_type.speaker? %>
                   (<%= registration.user.talks.size %> abstracts)
               <% end %>
             </td>

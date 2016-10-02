@@ -239,7 +239,7 @@ class User < ActiveRecord::Base
   def self.all_but_invited_speakers
     User.where(invited: false)
   end
-  
+
   def self.all_accepted_speakers
     self.all.select { |u| u.has_accepted_talk? || u.invited == true }
   end
@@ -294,7 +294,8 @@ class User < ActiveRecord::Base
     user.first_name = first_name if first_name.present?
     user.last_name = last_name if last_name.present?
     user.password = SecureRandom.urlsafe_base64 # må sette passord, av grunner bare authlogic forstår
-    user.registration.ticket_type_old = ticket_type
+    user.registration.ticket_type_old = ticket_type.reference
+    user.registration.ticket_type = ticket_type
     user.registration.manual_payment = true
     user.registration.includes_dinner = true
     user.registration.unfinished = true

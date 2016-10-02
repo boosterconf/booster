@@ -167,7 +167,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  # TODO: Lag egen type for skeleton users
   def create_skeleton
     email = params[:user][:email]
 
@@ -175,7 +174,10 @@ class UsersController < ApplicationController
       flash[:error] = "This email already has a user"
       render action: 'new_skeleton'
     else
-      @user = User.create_unfinished(email, params[:user][:registration_attributes][:ticket_type_old], params[:user][:first_name], params[:user][:last_name])
+
+      ticket_type = TicketType.find_by_id(params[:user][:registration_attributes][:ticket_type_id])
+
+      @user = User.create_unfinished(email, ticket_type, params[:user][:first_name], params[:user][:last_name])
       @user.company = params[:user][:company]
       @user.save!(:validate => false)
 
@@ -200,7 +202,7 @@ class UsersController < ApplicationController
     end
 
     users = tokenize(emails).map do |email|
-      user = User.create_unfinished(email, Registration.current_normal_ticket_type)
+      user = User.create_unfinished(email, TicketType.current_normal_ticket)
       user.company = params[:company]
       user.registration.invoice = @invoice
       user

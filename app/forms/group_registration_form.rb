@@ -56,7 +56,7 @@ class GroupRegistrationForm
 
     new_user_emails = emails_string_to_array.reject { |email| user_already_exists(email) }
     new_user_emails.each do |email|
-      user = User.create_unfinished(email, Registration.current_normal_ticket_type)
+      user = User.create_unfinished(email, TicketType.current_normal_ticket)
       user.company = company
       user.registration.invoice = @invoice
       @invoice.add_user(user)

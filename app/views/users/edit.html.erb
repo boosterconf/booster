@@ -33,6 +33,11 @@
         <%= f.fields_for :registration do |reg| %>
             <fieldset id="registration_details">
                 <%= reg.hidden_field :ticket_type_old %>
+                <% if admin? %>
+                  <label for="ticket_type">Ticket type</label>
+                  <%= reg.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
+                <% end %>
+
                 <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
             </fieldset>
 

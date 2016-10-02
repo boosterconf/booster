@@ -36,16 +36,8 @@
 
   <fieldset class="form-group">
       <%= f.fields_for :registration do |reg| %>
-          <%= reg.label :ticket_type_old, "Ticket type" %>
-          <%= reg.select :ticket_type_old, [
-                  ['Partner ticket', 'sponsor'],
-                  ['Volunteer', 'volunteer'],
-                  ['Reviewer', 'reviewer'],
-                  ['Organizer', 'organizer'],
-                  ['Student', 'student'],
-                  ['Academic', 'academic'],
-                  ['One-day', 'one_day']
-          ], {}, { class: 'form-control' } %>
+          <%= reg.label :ticket_type, "Ticket type" %>
+          <%= reg.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control' %>
       <% end %>
   </fieldset>
     <%= f.submit "Create!", :class => "btn btn-primary" %>

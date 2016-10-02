@@ -53,7 +53,7 @@ class UsersControllerTest < ActionController::TestCase
     context 'following a valid user creation link' do
       setup do
 
-        @user = User.create_unfinished(SOME_EMAIL, "speaker")
+        @user = User.create_unfinished(SOME_EMAIL, TicketType.speaker)
         @user.save(:validate => false)
 
         kill_all_sessions # TODO: not sure why we have to do this, but we do.
@@ -92,7 +92,7 @@ class UsersControllerTest < ActionController::TestCase
 
   context 'An unfinished user updating his profile info' do
     setup do
-      @user = User.create_unfinished(SOME_EMAIL, "speaker")
+      @user = User.create_unfinished(SOME_EMAIL, TicketType.speaker)
       @user.save(:validate => false)
     end
 
@@ -111,7 +111,7 @@ class UsersControllerTest < ActionController::TestCase
 
     context 'that follows a valid user creation link' do
       setup do
-        @user = User.create_unfinished("a@b.no", "speaker")
+        @user = User.create_unfinished("a@b.no", TicketType.speaker)
         @user.save(:validate => false)
         get :from_reference, :reference => @user.registration.unique_reference
       end
