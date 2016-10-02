@@ -4,7 +4,7 @@ class Registration < ActiveRecord::Base
   acts_as_paranoid
 
   attr_accessible :comments, :includes_dinner, :description,
-                  :ticket_type_old, :free_ticket, :user_id, :paid_amount, :payment_reference,
+                  :free_ticket, :user_id, :paid_amount, :payment_reference,
                   :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete,
                   :speakers_dinner
 

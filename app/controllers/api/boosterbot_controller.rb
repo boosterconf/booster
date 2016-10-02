@@ -58,8 +58,8 @@ module Api
       message << "Total: #{Talk.count} submissions\n\n"
 
       message << "Participant statistics:\n"
-      message << "Early bird tickets: #{Registration.where(ticket_type_old: "early_bird").count}\n"
-      message << "Full price tickets: #{Registration.where(ticket_type_old: "full_price").count}\n"
+      message << "Early bird tickets: #{Registration.includes(:ticket_type).where(ticket_type: {reference: "early_bird"}).count}\n"
+      message << "Full price tickets: #{Registration.includes(:ticket_type).where(ticket_type: {reference: "full_price"}).count}\n"
 
       answer(message)
     end

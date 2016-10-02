@@ -44,8 +44,8 @@
             </td>
             <td><%= time_ago_in_words(registration.created_at) %> ago</td>
             <td>
-              <%= h registration.ticket_type_old %>
-              <% if %w(lightning speaker).include?(registration.ticket_type_old) %>
+              <%= h registration.ticket_type.reference   %>
+              <% if registration.ticket_type.present? %>
                   (<%= registration.user.talks.with_deleted.size %> abstracts)
               <% end %>
             </td>
@@ -62,3 +62,4 @@
     <p>There are no deleted users.</p>
 <% end %>
 </table>
+</article>

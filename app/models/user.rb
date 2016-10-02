@@ -173,13 +173,6 @@ class User < ActiveRecord::Base
   end
 
   def update_to_paying_user
-
-    puts "-------------------"
-    puts self.registration.ticket_type.inspect
-    puts self.registration.inspect
-    puts self.inspect
-    puts "----------"
-
     if self.registration.ticket_type.speaker?
       if self.is_early_bird?
         self.registration.ticket_type = TicketType.early_bird

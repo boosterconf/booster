@@ -11,7 +11,6 @@ class RegisterShortTalkController < ApplicationController
   def create_user
     @user = User.new(params[:user])
     @user.registration = Registration.new
-    @user.registration.ticket_type_old = 'lightning'
     @user.registration.ticket_type = TicketType.lightning
     @user.registration.manual_payment = true
     @user.accepted_privacy_guidelines = true

@@ -75,22 +75,17 @@ class NametagPdf < Prawn::Document
       ticket_type_text = ''
       if registration == nil
         ticket_type_text = ''
-      elsif registration.ticket_type_old == 'organizer'
+      elsif registration.ticket_type.organizer?
         ticket_type_text = 'ORGANIZER'
       elsif registration.user.confirmed_speaker?
         ticket_type_text = 'SPEAKER'
-      elsif registration.ticket_type_old == 'volunteer'
+      elsif registration.ticket_type.volunteer?
         ticket_type_text = 'VOLUNTEER'
-      elsif registration.ticket_type_old == 'student'
+      elsif registration.ticket_type.student?
         ticket_type_text ='STUDENT'
-      elsif registration.ticket_type_old == 'academic'
-        ticket_type_text ='ACADEMIC'
-      elsif registration.ticket_type_old == 'guest'
-        ticket_type_text ='GUEST - LIMITED ACCESS'
       end
 
       text_box ticket_type_text, :at => [0, 30], :align => :center
-
 
       if index < users.size - 1
         start_new_page

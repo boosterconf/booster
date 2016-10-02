@@ -11,6 +11,14 @@ class TicketType < ActiveRecord::Base
     reference == "organizer"
   end
 
+  def volunteer?
+    reference == "volunteer"
+  end
+
+  def student?
+    reference == "student"
+  end
+
   def special_ticket?
     %w(sponsor volunteer organizer).include? reference
   end
