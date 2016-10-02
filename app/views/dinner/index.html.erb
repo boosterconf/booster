@@ -14,7 +14,7 @@
       <%= form_for(registration) do |f| %>
         <% if registration.user.present? %>
           <tr>
-            <td><%= link_to registration.user.present? registration.user.full_name, user_path(registration.user) %></td>
+            <td><%= link_to registration.user.full_name, user_path(registration.user) %></td>
             <td><%= registration.ticket_type.name %></td>
             <td>
               <div class="checkbox">
