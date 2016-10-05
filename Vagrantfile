@@ -61,6 +61,10 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
-  config.vm.provision "shell", path: "bootstrap_vagrant.sh"
-
+  config.vm.provision :shell, path: "provision/bootstrap-ubuntu.sh", privileged: true
+  config.vm.provision :shell, path: "provision/install-postgres.sh", privileged: true
+  config.vm.provision :shell, path: "provision/install-node.sh", privileged: true
+  config.vm.provision :shell, path: "provision/install-rvm.sh", args: "stable", privileged: false
+  config.vm.provision :shell, path: "provision/install-ruby.sh", args: "2.2.2", privileged: false  
+  config.vm.provision :shell, path: "provision/install-heroku.sh", privileged: true
 end
