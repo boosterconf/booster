@@ -12,4 +12,4 @@ host    all             all             0.0.0.0/0            trust
 host    all             all             ::/0                 trust' | sudo tee /etc/postgresql/9.4/main/pg_hba.conf
 sudo sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/g" /etc/postgresql/9.4/main/postgresql.conf
 sudo /etc/init.d/postgresql restart
-sudo su - postgres -c 'createuser -s vagrant'
+sudo -u postgres psql -tAc "SELECT 1 FROM pg_roles WHERE rolname='vagrant'"  | grep -q 1 || sudo -u postgres -c 'createuser -s vagrant'
