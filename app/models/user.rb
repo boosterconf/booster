@@ -247,7 +247,7 @@ class User < ActiveRecord::Base
   end
 
   def self.all_organizers
-    User.joins(registration: :ticket_type).where("ticket_types.reference" == "organizer")
+    User.includes(:registration).to_a.select {|u| u.registration.ticket_type.reference == 'organizer'}
   end
 
   def self.all_organizers_and_volunteers
