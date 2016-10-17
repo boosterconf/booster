@@ -53,6 +53,13 @@ test:
   ticket_type: lightning
   created_at: 2010-10-10
 
+reviewer:
+  user: reviewer
+  comments: MyText
+  price: 19.99
+  ticket_type: organizer_price
+  created_at: 2012-10-10
+
 late_registration:
   user: late_registration
   comments: MyText
