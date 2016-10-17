@@ -31,8 +31,6 @@ gem 'rails-observers'
 gem 'protected_attributes'
 gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'
 
-gem 'sendregning', :git => "git://github.com/karianne/sendregning.git"
-
 gem 'prawn'
 gem 'rails_12factor'
 
