@@ -61,7 +61,7 @@ class Registration < ActiveRecord::Base
   end
 
   def show_bio?
-    ticket_type.speaker?
+    ticket_type.speaker? || ticket_type.organizer?
   end
 
   def speaker?
