@@ -1,44 +1,13 @@
-<p id="notice"><%= notice %></p>
+<article>
 
-<p>
-  <strong>Name:</strong>
-  <%= @ticket.name %>
-</p>
+  <h3>Welcome!</h3>
 
-<p>
-  <strong>Email:</strong>
-  <%= @ticket.email %>
-</p>
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Feedback:</strong>
-  <%= @ticket.feedback %>
-</p>
+  <h3>See you soon!</h3>
 
-<p>
-  <strong>Company:</strong>
-  <%= @ticket.company %>
-</p>
+  <a href="/" class="btn btn-primary">
+    Go to front page
+  </a>
 
-<p>
-  <strong>Attend dinner:</strong>
-  <%= @ticket.attend_dinner %>
-</p>
-
-<p>
-  <strong>Dietary info:</strong>
-  <%= @ticket.dietary_info %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @ticket.gender %>
-</p>
-
-<p>
-  <strong>Roles:</strong>
-  <%= @ticket.roles %>
-</p>
-
-<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
-<%= link_to 'Back', tickets_path %>
+</article>

@@ -3,6 +3,10 @@ class TicketType < ActiveRecord::Base
   has_many :registrations
   attr_accessible :name, :reference, :price, :dinner_included
 
+  def price_with_vat
+    price * 1.25;
+  end
+
   def speaker?
     %w(lightning speaker).include? reference
   end
