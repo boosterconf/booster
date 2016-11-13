@@ -10,28 +10,27 @@
 
 
   <p id="price_info">
-    Price: NOK <%= @ticket.ticket_type.price %>,- (excluding VAT).
+    Price: NOK <%= number_with_precision(@ticket.ticket_type.price, precision: 0) %>,- (excluding VAT).
   </p>
 
   <%= form_for(@ticket) do |f| %>
-
       <fieldset class="form-group">
         <%= f.label :name, "Name" %>
-        <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control', required: true) %>
+        <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>
       </fieldset>
 
       <fieldset class="form-group">
         <%= f.label :email %>
-        <%= email_field(:user, :email, placeholder: "Where can we email you?", class: 'form-control', required: true) %>
+        <%= email_field(:user, :email, placeholder: "Where can we email you?", class: 'form-control input-short', required: true) %>
       </fieldset>
 
       <fieldset class="form-group">
         <%= f.label :company, "Where do you work?" %>
-        <%= text_field(:user, :company, placeholder: "Company", class: 'form-control', required: true) %>
+        <%= text_field(:user, :company, placeholder: "Company", class: 'form-control input-short', required: true) %>
       </fieldset>
 
       <label>What role(s) do you have?</label>
-      <fieldset class="form-group" class="checkbox-group">
+      <fieldset class="form-group">
         <% Roles.all.each do |role| %>
             <span class="checkbox-btn">
               <%= check_box_tag "roles[]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
@@ -48,12 +47,12 @@
       </div>
       <fieldset class="form-group">
         <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
-        <%= f.text_area :dietary_info, :class => "form-control" %>
+        <%= f.text_area :dietary_info, :class => "form-control input-md" %>
       </fieldset>
 
       <fieldset class="form-group">
         <%= f.label :feedback, "How did you hear about us?" %>
-        <%= f.text_area :feedback, :class => "form-control" %>
+        <%= f.text_area :feedback, :class => "form-control input-md" %>
       </fieldset>
 
       <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>

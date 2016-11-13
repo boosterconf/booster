@@ -2,12 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.checkbox-group {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-}
 .checkbox-btn {
   display: inline-block;
   margin-bottom: 0.75rem;
@@ -36,4 +30,12 @@
 
 label {
   font-weight: bold;
+}
+
+.input-short {
+  max-width: 440px;
+}
+
+.input-md {
+  max-width: 540px;
 }
