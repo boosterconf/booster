@@ -1,0 +1,4 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+# We need to keep lf line endings when checking out to a win computer,
+# regardless of core.autocrlf settings. 
+* text=auto
