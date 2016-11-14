@@ -234,4 +234,20 @@ class BoosterMailer < ActionMailer::Base
          cc: FROM_EMAIL
     )
   end
+
+  def ticket_confirmation_paid(ticket)
+    @name = ticket.name
+    mail(to: ticket.email, from: FROM_EMAIL,
+        subject: "Your ticket to Booster is confirmed",
+        cc: FROM_EMAIL)
+  end
+
+  def ticket_confirmation_invoice(ticket)
+    @name = ticket.name
+    @amount_due = ticket.ticket_type.price_with_vat
+    @email = ticket.email
+    mail(to: ticket.email, from: FROM_EMAIL,
+         subject: "Your ticket to Booster is confirmed",
+         cc: FROM_EMAIL)
+  end
 end

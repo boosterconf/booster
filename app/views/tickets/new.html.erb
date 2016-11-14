@@ -66,9 +66,9 @@
 
       <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
 
-      <% if flash[:error].present? %>
+      <% if flash[:stripe_error].present? %>
           <div id="error_explanation">
-            <p><%= flash[:error] %></p>
+            <p><%= flash[:stripe_error] %></p>
           </div>
       <% end %>
 
@@ -76,13 +76,15 @@
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
                 data-description="<%=@ticket.ticket_type.name%>"
-                data-name="FORENINGEN BOOSTERKONFERANSEN"
+                data-name="BOOSTERKONFERANSEN"
                 data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
                 data-locale="auto"
                 data-zip-code="true"
                 data-currency="nok"></script>
 
-        <%= f.submit "I'd rather get an invoice", class: 'btn btn-default' %>
+        <button class="btn btn-default" id="submit_invoice">I'd rather get an invoice</button>
+
       </div>
+
   <% end %>
 </article>

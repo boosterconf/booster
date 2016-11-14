@@ -21,5 +21,6 @@
 //= require tag.it
 //= require tether
 //= require program
+//= require tickets
 //= require selectize
 //= require_tree .

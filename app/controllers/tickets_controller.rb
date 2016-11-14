@@ -1,4 +1,5 @@
 class TicketsController < ApplicationController
+  before_filter :require_admin, :only => [:index, :destroy]
   before_action :set_ticket, only: [:show, :edit, :update, :destroy]
 
   # GET /tickets
@@ -16,10 +17,6 @@ class TicketsController < ApplicationController
     @ticket.ticket_type = TicketType.current_normal_ticket
   end
 
-  # GET /tickets/1/edit
-  def edit
-  end
-
   # POST /tickets
   def create
     @ticket = Ticket.new(ticket_params)
@@ -27,46 +24,39 @@ class TicketsController < ApplicationController
     @ticket.ticket_type = TicketType.current_normal_ticket
     @ticket.roles = params[:roles].join(",") if params[:roles]
 
-    puts @ticket.inspect
-
-    if (params[:stripeToken])
-      puts "Received stripe token, pay with card"
-      customer = Stripe::Customer.create(
-          :email => params[:stripeEmail],
-          :source  => params[:stripeToken]
-      )
-
-      charge = Stripe::Charge.create(
-          :customer    => customer.id,
-          :amount      => (@ticket.ticket_type.price_with_vat * 100).to_int,
-          :description => @ticket.ticket_type.name,
-          :currency    => 'nok'
-      )
-      # We might consider storing the charge id on the ticket perhaps? Or on an invoice of sorts.
-    else
-      puts "Create an invoice instead"
-    end
-
-    if @ticket.save
-      #Send email.
-      redirect_to @ticket, notice: 'Ticket was successfully created.'
-    else
+    unless @ticket.save
       render :new
+    else
+      if (params[:stripeToken])
+        puts "Received stripe token, pay with card"
+        customer = Stripe::Customer.create(
+            :email => params[:stripeEmail],
+            :source  => params[:stripeToken]
+        )
+
+        charge = Stripe::Charge.create(
+            :customer    => customer.id,
+            :amount      => (@ticket.ticket_type.price_with_vat * 100).to_int,
+            :description => @ticket.ticket_type.name,
+            :currency    => 'nok'
+        )
+        Invoice.create_stripe_payment(@ticket, charge)
+        notice = "Your ticket is paid for!"
+        BoosterMailer.ticket_confirmation_paid(@ticket).deliver_now
+      else
+        puts "Create an invoice instead"
+        Invoice.create_ticket_invoice(@ticket, params[:payment_info], params[:payment_zip])
+        notice = "An invoice will be sent to #{@ticket.email}."
+        BoosterMailer.ticket_confirmation_invoice(@ticket).deliver_now
+      end
+
+      redirect_to @ticket, notice: notice
     end
 
     rescue Stripe::CardError => e
-      flash[:error] = e.message
+      flash[:stripe_error] = e.message
       redirect_to new_ticket_path
 
-  end
-
-  # PATCH/PUT /tickets/1
-  def update
-    if @ticket.update(ticket_params)
-      redirect_to @ticket, notice: 'Ticket was successfully updated.'
-    else
-      render :edit
-    end
   end
 
   # DELETE /tickets/1
