@@ -3,6 +3,7 @@ development:
   max_users_limit: 2000
   tutorial_registration_open: true
   lightning_registration_open: true
+  proposals_visible: true
   program_released: true
   speakers_released: true
   early_bird_ends: 2017-02-07 23:59:59 +1
@@ -13,6 +14,7 @@ test:
   max_users_limit: 2000
   tutorial_registration_open: false
   lightning_registration_open: false
+  proposals_visible: true
   program_released: false
   early_bird_ends: 2017-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
@@ -22,6 +24,7 @@ staging:
   max_users_limit: 2000
   tutorial_registration_open: true
   lightning_registration_open: true
+  proposals_visible: true
   program_released: false
   speakers_released: false
   early_bird_ends: 2017-02-07 23:59:59 +1
@@ -30,8 +33,9 @@ staging:
 production:
   year: 2017
   max_users_limit: 300
-  tutorial_registration_open: true
-  lightning_registration_open: true
+  tutorial_registration_open: false
+  lightning_registration_open: false
+  proposals_visible: true
   program_released: false
   speakers_released: false
   early_bird_ends: 2017-02-07 23:59:59 +1
