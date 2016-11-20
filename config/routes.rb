@@ -1,7 +1,5 @@
  Booster2013::Application.routes.draw do
 
-   mount LetsencryptHttpChallenge::Engine => "/" unless ENV['LE_HTTP_CHALLENGE_RESPONSE'].blank?
-   
    resources :rooms
   resources :periods
   resources :slots
