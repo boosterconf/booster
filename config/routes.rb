@@ -1,15 +1,12 @@
  Booster2013::Application.routes.draw do
 
-  resources :rooms
-
+   mount LetsencryptHttpChallenge::Engine => "/" unless ENV['LE_HTTP_CHALLENGE_RESPONSE'].blank?
+   
+   resources :rooms
   resources :periods
-
   resources :slots
-
   resources :reviews
-
   resources :ticket_types
-
   resources :group_registrations, only: [:new, :create]
 
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference

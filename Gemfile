@@ -41,6 +41,8 @@ gem 'test-unit'
 
 gem 'virtus'
 
+gem 'letsencrypt_http_challenge'
+
 group :production do
   gem 'heroku-deflater'
   gem 'pg'
