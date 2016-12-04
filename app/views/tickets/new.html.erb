@@ -66,6 +66,12 @@
 
       <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
 
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+
       <% if flash[:stripe_error].present? %>
           <div id="error_explanation">
             <p><%= flash[:stripe_error] %></p>

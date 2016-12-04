@@ -250,4 +250,11 @@ class BoosterMailer < ActionMailer::Base
          subject: "Your ticket to Booster is confirmed",
          cc: FROM_EMAIL)
   end
+
+  def invoice_to_fiken(order_pdf)
+    attachments['invoice_details.pdf'] = { :mime_type => 'application/pdf', :content => order_pdf }
+    mail(to: "kjersti.berg@gmail.com", from: FROM_EMAIL,
+        subject: "Invoice details Booster tickets")
+  end
+
 end

@@ -4,7 +4,11 @@ class TicketType < ActiveRecord::Base
   attr_accessible :name, :reference, :price, :dinner_included
 
   def price_with_vat
-    price * 1.25;
+    price * 1.25
+  end
+
+  def vat
+    price * 0.25
   end
 
   def speaker?
