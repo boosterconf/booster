@@ -45,6 +45,8 @@ conference is for all IT professionals seeking to learn from each other and from
         <% end %>
         <% if AppConfig.tutorial_registration_open || AppConfig.lightning_registration_open %>
             <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
+        <% end %>
+        <% if AppConfig.proposals_visible %>
             <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
         <% end %>
         <li class="nav-item"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>

@@ -1,18 +1,11 @@
  Booster2013::Application.routes.draw do
 
   resources :tickets
-  resources :charges
-
   resources :rooms
-
   resources :periods
-
   resources :slots
-
   resources :reviews
-
   resources :ticket_types
-
   resources :group_registrations, only: [:new, :create]
 
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference

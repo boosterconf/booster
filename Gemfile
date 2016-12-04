@@ -20,7 +20,7 @@ end
 gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
-gem 'aws-sdk', '~> 1.3.4'
+gem 'aws-sdk', '~> 1.66.0'
 
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.0.3'

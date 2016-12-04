@@ -3,6 +3,7 @@ s3: &s3
   s3_credentials: <%= Rails.root %>/config/s3.yml
   path: ":attachment/:id/:basename_:style.:extension"
   url: ":s3_domain_url"
+  s3_protocol: "https"
 
 test:
   storage: filesystem
