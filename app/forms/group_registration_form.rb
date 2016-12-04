@@ -11,22 +11,21 @@ class GroupRegistrationForm
   attribute :your_reference
   attribute :text
   attribute :company
-  attribute :emails
 
-  attr_reader :invoice
-  attr_reader :registrations
+  attribute :tickets, Array[Ticket]
+
+  attribute :total
 
   validates :delivery_method, presence: true
   validates :zip, presence: true
   validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
 
-  validates :valid_emails, presence: true
   validates :email, presence: true, if: lambda { |gr| gr.delivery_method == 'email' }
   validates :adress, presence: true, if: lambda { |gr| gr.delivery_method == 'snail_mail' }
 
   def valid_emails
-    emails_string_to_array.each do |email|
-      errors.add(:emails, "#{email} is not a valid email") unless email.match(Authlogic::Regex.email)
+    tickets.each do |ticket|
+      errors.add(:tickets, "#{ticket.email} is not a valid email") unless ticket.email.match(Authlogic::Regex.email)
     end
   end
 
@@ -44,38 +43,23 @@ class GroupRegistrationForm
   end
 
   def persist!
-    @invoice = Invoice.create!(
-        email: email,
-        adress: adress,
-        zip: zip,
-        your_reference: your_reference,
-        text: text
-    )
+    puts "I am in persist"
+    puts tickets.inspect
 
-    @registrations = []
-
-    new_user_emails = emails_string_to_array.reject { |email| user_already_exists(email) }
-    new_user_emails.each do |email|
-      user = User.create_unfinished(email, TicketType.current_normal_ticket)
-      user.company = company
-      user.registration.invoice = @invoice
-      @invoice.add_user(user)
-      user.save!(validate: false)
-      registrations << user.registration
-      BoosterMailer.ticket_assignment(user).deliver_now
-    end
+    tickets.each { |ticket|
+      puts "ticket is of class" + ticket.class.name
+      ticket.company = company
+      ticket.ticket_type = TicketType.current_normal_ticket
+      ticket.attend_dinner = TicketType.current_normal_ticket.dinner_included
+      ticket.save
+      BoosterMailer.ticket_assignment(ticket).deliver_now
+    }
+    payment_info = { :payment_info => your_reference,
+                     :payment_zip => zip,
+                     :payment_address => delivery_method == 'email' ? email : adress,
+                     :extra_info => text }
+    pdf = InvoicePdf.generate(tickets, nil, payment_info)
+    #BoosterMailer.group_ticket_confirmation_invoice(tickets, email, pdf).deliver_now
+    BoosterMailer.invoice_to_fiken(pdf).deliver_now
   end
-
-  def emails_string_to_array
-    if emails
-      emails.gsub(/[,;:\n]/, " ").split
-    else
-      []
-    end
-  end
-
-  def user_already_exists(email)
-    User.find_by_email(email)
-  end
-
 end

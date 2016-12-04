@@ -1,13 +1,15 @@
 <html>
-<body><p>Hi,</p>
+<body>
+<p>Hi <%= @name %>,</p>
 
 <p>
-  You have been assigned a ticket to Booster <%= Dates::CONFERENCE_YEAR %>! However, we need to know a little bit more about you.
-  Please go to <%= link_to 'here', @create_user_url %> and provide us with the information we need.
+  You have been assigned a ticket to Booster <%= Dates::CONFERENCE_YEAR %>! If you have any special dietary
+  constraints, allergies or the like, or if you do not plan to attend the conference dinner on Wednesday, please
+  send us an email and let us know, at <%= link_to 'kontakt@boosterconf.no', "mailto:kontakt@boosterconf.no" %>.
 </p>
 
 <p>
-  If you think that there has been made a mistake, we would really
+  If you think that you have been registered in error, we would
   appreciate it if you <%= link_to 'let us know', "mailto:kontakt@boosterconf.no" %>.
 </p>
 

@@ -8,6 +8,7 @@ development:
   speakers_released: true
   early_bird_ends: 2017-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
+  fiken_email: "kjersti.berg@gmail.com"
 
 test:
   year: 2017
@@ -18,6 +19,7 @@ test:
   program_released: false
   early_bird_ends: 2017-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
+  fiken_email: "kjersti.berg@gmail.com"
 
 staging:
   year: 2017
@@ -29,6 +31,7 @@ staging:
   speakers_released: false
   early_bird_ends: 2017-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
+  fiken_email: "kontakt@boosterconf.no"
 
 production:
   year: 2017
@@ -40,3 +43,4 @@ production:
   speakers_released: false
   early_bird_ends: 2017-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
+  fiken_email: "foreningen-boosterkonferansen@bilag.fiken.no"

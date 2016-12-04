@@ -1,6 +1,7 @@
  Booster2013::Application.routes.draw do
 
-   resources :rooms
+  resources :tickets
+  resources :rooms
   resources :periods
   resources :slots
   resources :reviews
