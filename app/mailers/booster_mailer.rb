@@ -2,8 +2,8 @@ class BoosterMailer < ActionMailer::Base
 
   FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
   SUBJECT_PREFIX = "[boosterconf]"
-
-
+  FIKEN_EMAIL = AppConfig.fiken_email
+  
   def registration_confirmation(user)
     @name = user.first_name
     @email = user.email
@@ -253,7 +253,7 @@ class BoosterMailer < ActionMailer::Base
 
   def invoice_to_fiken(order_pdf)
     attachments['invoice_details.pdf'] = { :mime_type => 'application/pdf', :content => order_pdf }
-    mail(to: "kjersti.berg@gmail.com", from: FROM_EMAIL,
+    mail(to: FIKEN_EMAIL, from: FROM_EMAIL,
         subject: "Invoice details Booster tickets")
   end
 
