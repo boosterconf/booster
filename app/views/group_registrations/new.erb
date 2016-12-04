@@ -54,16 +54,30 @@
 
       <div class='form-group'>
         <%= f.label :company %>
-        <%= f.text_field :company, class: 'form-control', placeholder: "Your company's name", required: true, class: 'form-control' %>
+        <%= f.text_field :company, placeholder: "Your company's name", required: true, class: 'form-control' %>
       </div>
 
-      <div class='form-group'>
-        <%= f.label :emails %>
-        <%= f.text_area :emails, cols: 20, rows: 5, :placeholder => 'me@company.com, you@company.com...', required: true, class: 'form-control' %>
-      </div>
+        <fieldset id="participants">
+        <legend>Participants</legend>
+          <% @group_registration.tickets.each_with_index { |ticket, index| %>
+              <div class="form-inline" style="padding-bottom: 10px;">
+                <div class="form-group form-group-inline" >
+                  <input name="group_registration_form[tickets][][name]"
+                         placeholder="Name" type="text"
+                         class="form-control form-control-inline" value="<%=ticket[:name]%>">
+                </div>
+                <div class="form-group form-group-inline">
+                  <input name="group_registration_form[tickets][][email]"
+                         placeholder="Email" type="text"
+                         class="form-control form-control-inline" value="<%=ticket[:email]%>">
+                </div>
+              </div>
+          <% } %>
+      </fieldset>
 
-      <div class='form-group'>
+      <div class='form-group form-actions'>
         <%= f.submit "Send me an invoice", :class => "btn btn-primary" %>
+        <button type="submit" class="btn btn-default" id="add_participants_handler">Add more participants</button>
       </div>
   <% end %>
 
@@ -92,6 +106,24 @@
               console.log("delivery method snail mail!!")
           });
       </script>
+
+      <script>
+        var template = "<div class='form-inline' style='padding-bottom: 10px;'>" +
+            "<div class='form-group form-group-inline' >" +
+            "<input name='group_registration_form[tickets][][name]' placeholder='Name' type='text' class='form-control form-control-inline'>" +
+            "</div>\n" +
+            "<div class='form-group form-group-inline'> " +
+            "<input name='group_registration_form[tickets][][email]' placeholder='Email' type='text' class='form-control form-control-inline'>" +
+            "</div></div>";
+
+        $("#add_participants_handler").click(function (event) {
+          event.preventDefault();
+          $("#participants").append(template);
+        });
+
+
+      </script>
+
 
   <% end %>
 </article>

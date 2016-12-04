@@ -3,7 +3,7 @@ class BoosterMailer < ActionMailer::Base
   FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
   SUBJECT_PREFIX = "[boosterconf]"
   FIKEN_EMAIL = AppConfig.fiken_email
-  
+
   def registration_confirmation(user)
     @name = user.first_name
     @email = user.email
@@ -189,11 +189,9 @@ class BoosterMailer < ActionMailer::Base
          :subject => "#{SUBJECT_PREFIX} You have been added as a speaker to a workshop")
   end
 
-  def ticket_assignment(user)
-    @user = user
-    @create_user_url = user_from_reference_url(user.registration.unique_reference)
-
-    mail(:to => user.email,
+  def ticket_assignment(ticket)
+    @name = ticket.name
+    mail(:to => ticket.email,
          :from => FROM_EMAIL,
          :cc => FROM_EMAIL,
          :subject => "#{SUBJECT_PREFIX} You have been assigned a ticket to Booster #{Dates::CONFERENCE_YEAR}")
@@ -248,6 +246,15 @@ class BoosterMailer < ActionMailer::Base
     @email = ticket.email
     mail(to: ticket.email, from: FROM_EMAIL,
          subject: "Your ticket to Booster is confirmed",
+         cc: FROM_EMAIL)
+  end
+
+  def group_ticket_confirmation_invoice(tickets, email, invoice_pdf)
+    @amount_due = tickets.inject(0) { |sum, t| sum + t.ticket_type.price_with_vat }
+    @email = email
+    attachments['invoice_details.pdf'] = { :mime_type => 'application/pdf', :content => invoice_pdf }
+    mail(to: email, from: FROM_EMAIL,
+         subject: "Your tickets to Booster are confirmed",
          cc: FROM_EMAIL)
   end
 

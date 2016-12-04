@@ -39,3 +39,13 @@ label {
 .input-md {
   max-width: 540px;
 }
+
+@media (min-width: 544px) {
+  #participants .form-group-inline {
+    padding-right: 10px;
+    width: 35%;
+  }
+  #participants .form-control-inline {
+    width: 100%;
+  }
+}

@@ -1,6 +1,6 @@
 class Ticket < ActiveRecord::Base
 
-  attr_accessible :name, :email, :company, :feedback, :gender, :roles, :attend_dinner, :dietary_info
+  attr_accessible :name, :email, :company, :feedback, :roles, :attend_dinner, :dietary_info
 
   belongs_to :ticket_type
 

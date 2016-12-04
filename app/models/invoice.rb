@@ -58,37 +58,4 @@ class Invoice < ActiveRecord::Base
     )
   end
 
-  def self.create_stripe_payment(ticket, charge)
-    invoice = create!(
-        {
-            email: ticket.email,
-            recipient_name: ticket.name,
-            our_reference: charge.id,
-            your_reference: "kontakt@boosterconf.no",
-            status: "paid",
-            paid_at: DateTime.now
-        })
-
-    invoice.invoice_lines.create!(
-        text: "#{ticket.ticket_type.name } for Booster #{AppConfig.year} - Stripe Payment",
-        price: ticket.ticket_type.price
-    )
-  end
-
-  def self.create_ticket_invoice(ticket, payment_info, payment_zip)
-    invoice = create!(
-        {
-            email: ticket.email,
-            recipient_name: ticket.name,
-            our_reference: ticket.email,
-            your_reference: "kontakt@boosterconf.no",
-            text: payment_info,
-            zip: payment_zip
-        })
-    invoice.invoice_lines.create!(
-        text: "#{ticket.ticket_type.name } for Booster #{AppConfig.year} - Invoice",
-        price:  ticket.ticket_type.price
-    )
-  end
-
 end
