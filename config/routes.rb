@@ -18,7 +18,6 @@
   get 'users/current/attending_speakers_dinner' => 'users#attending_speakers_dinner', :as => :attending_speakers_dinner_url
   get 'users/current/not_attending_speakers_dinner' => 'users#not_attending_speakers_dinner', :as => :not_attending_speakers_dinner_url
 
-
   get 'program/' => 'program#index'
   get 'program/lightningtalks1' => 'program#lightningtalks1'
   get 'program/lightningtalks2' => 'program#lightningtalks2'
@@ -41,6 +40,9 @@
       get :could_not_attend
       get :unconfirm
       get :send_mail
+    end
+    collection do
+      post :create_tickets
     end
   end
 

@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_filter :require_admin, :only => [:index, :destroy]
+  before_filter :require_admin, :only => [:index, :destroy, :speaker_tickets]
   before_action :set_ticket, only: [:show, :edit, :update]
 
   # GET /tickets
