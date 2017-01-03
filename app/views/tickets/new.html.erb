@@ -77,7 +77,7 @@
             <p><%= flash[:stripe_error] %></p>
           </div>
       <% end %>
-
+      <% if AppConfig.stripe_on %>
       <div class="form-actions">
         <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                 data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
@@ -87,7 +87,7 @@
                 data-locale="auto"
                 data-zip-code="true"
                 data-currency="nok"></script>
-
+        <% end %>
         <button class="btn btn-default" id="submit_invoice">I'd rather get an invoice</button>
 
       </div>

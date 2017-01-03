@@ -5,6 +5,10 @@ class TicketsController < ApplicationController
   # GET /tickets
   def index
     @tickets = Ticket.all
+    by_ticket_type = @tickets.group_by {|ticket| ticket.ticket_type.name}
+    @stats = {}
+    by_ticket_type.each_pair {|k, v| @stats[k] = v.count }
+    @stats['Attending dinner'] = @tickets.count {|ticket| ticket.attend_dinner }
   end
 
   # GET /tickets/1
@@ -91,7 +95,7 @@ class TicketsController < ApplicationController
 
   # DELETE /tickets/1
   def destroy
-    @ticket.destroy
+    Ticket.delete(params[:id])
     redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'
   end
 
