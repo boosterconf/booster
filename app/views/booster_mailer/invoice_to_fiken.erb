@@ -27,7 +27,7 @@
     <% @tickets.each {|ticket| %>
         <tr>
           <td><%= ticket.ticket_type.name %></td>
-          <td><%= "#{@ticket.ticket_type.vat} NOK" %></td>
+          <td><%= "#{ticket.ticket_type.vat} NOK" %></td>
           <td> <%= "#{ticket.ticket_type.price} NOK" %> </td>
         </tr>
     <% } %>
