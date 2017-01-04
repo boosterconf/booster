@@ -7,22 +7,23 @@
   <h2>Invoice details Booster <%= Dates::CONFERENCE_YEAR %> tickets</h2>
   <hr/>
   <% if @stripe_charge.present? %>
-    <strong>Stripe payment id <%=@stripe_charge.id %>: <%= "#{@stripe_charge.paid ? 'Paid' : 'Payment failed'}" %></strong>
+    <table>
+      <tr><td>Stripe reference</td><td><%=@stripe_charge.id %></td></tr>
+      <tr><td>Payment status</td><td><%= "#{@stripe_charge.paid ? 'Paid' : 'Payment failed'}" %></td></tr>
+    </table>
   <% else %>
-    <strong>Invoice reference:  <%= @invoice_details[:payment_info] %></strong>
-    <dl>
-      <dd>Invoice ZIP</dd>
-      <dt><%= @invoice_details[:payment_zip]%></dt>
-      <dd>Send to</dd>
-      <dt><%= @invoice_details[:payment_email] %></dt>
-    </dl>
+    <table>
+      <tr><td>Invoice reference</td><td><%= @invoice_details[:payment_info] %></td></tr>
+      <tr><td>Invoice ZIP</td><td><%= @invoice_details[:payment_zip]%></td></tr>
+      <tr><td>Send to</td><td><%= @invoice_details[:payment_email] %></td></tr>
+    </table>
   <% end %>
   <hr />
   <table>
     <tr>
-      <th>Description</th>
-      <th>VAT</th>
-      <th>Amount</th>
+      <td>Description</td>
+      <td>VAT</td>
+      <td>Amount</td>
     </tr>
     <% @tickets.each {|ticket| %>
         <tr>
