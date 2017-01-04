@@ -4,7 +4,39 @@
 <p>
   Ticket order for Booster. See attachment for details.
 </p>
-
+  <h2>Invoice details Booster <%= Dates::CONFERENCE_YEAR %> tickets</h2>
+  <hr/>
+  <% if @stripe_charge.present? %>
+    <strong>Stripe payment id <%=@stripe_charge.id %>: <%= "#{stripe_charge.paid ? 'Paid' : 'Payment failed'}" %></strong>
+  <% else %>
+    <strong>Invoice reference:  <%= @invoice_details[:payment_info] %></strong>
+    <dl>
+      <dd>Invoice ZIP</dd>
+      <dt><%= @invoice_details[:payment_zip]%></dt>
+      <dd>Send to</dd>
+      <dt><%= @invoice_details[:payment_email] %></dt>
+    </dl>
+  <% end %>
+  <hr />
+  <table>
+    <tr>
+      <th>Description</th>
+      <th>VAT</th>
+      <th>Amount</th>
+    </tr>
+    <% @tickets.each {|ticket| %>
+        <tr>
+          <td><%= ticket.ticket_type.name %></td>
+          <td><%= "#{@ticket.ticket_type.vat} NOK" %></td>
+          <td> <%= "#{ticket.ticket_type.price} NOK" %> </td>
+        </tr>
+    <% } %>
+    <tr>
+      <td>Total (incl. VAT)</td>
+      <td></td>
+      <td><%= @tickets.inject(0) {|sum, t| sum + t.ticket_type.price_with_vat } %></td>
+    </tr>
+  </table>
 
 <p>- The Booster robot serf</p>
 </body>

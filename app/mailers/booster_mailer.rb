@@ -249,17 +249,10 @@ class BoosterMailer < ActionMailer::Base
          cc: FROM_EMAIL)
   end
 
-  def group_ticket_confirmation_invoice(tickets, email, invoice_pdf)
-    @amount_due = tickets.inject(0) { |sum, t| sum + t.ticket_type.price_with_vat }
-    @email = email
-    attachments['invoice_details.pdf'] = { :mime_type => 'application/pdf', :content => invoice_pdf }
-    mail(to: email, from: FROM_EMAIL,
-         subject: "Your tickets to Booster are confirmed",
-         cc: FROM_EMAIL)
-  end
-
-  def invoice_to_fiken(order_pdf)
-    attachments['invoice_details.pdf'] = { :mime_type => 'application/pdf', :content => order_pdf }
+  def invoice_to_fiken(tickets, stripe_charge, invoice_details)
+    @tickets = tickets
+    @stripe_charge = stripe_charge
+    @invoice_details = invoice_details
     mail(to: FIKEN_EMAIL, from: FROM_EMAIL,
         subject: "Invoice details Booster tickets")
   end

@@ -30,3 +30,5 @@ latest.dump
 .env
 
 /.vagrant
+
+set_env_vars.sh

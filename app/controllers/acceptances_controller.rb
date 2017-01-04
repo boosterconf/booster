@@ -129,13 +129,12 @@ class AcceptancesController < ApplicationController
           ticket.email = user.email
           ticket.save!
 
-          if (ticket.ticket_type.paying_ticket?)
+          if ticket.ticket_type.paying_ticket?
             BoosterMailer.ticket_confirmation_invoice(ticket).deliver_now
-            BoosterMailer.invoice_to_fiken(InvoicePdf.generate([ticket], nil,
-                                                               {   :payment_email => ticket.email,
-                                                                   :payment_info => ticket.ticket_type.name,
-                                                                   :payment_zip => user.zip})
-            ).deliver_now
+            BoosterMailer.invoice_to_fiken([ticket], nil,
+                                           {   :payment_email => ticket.email,
+                                               :payment_info => ticket.ticket_type.name,
+                                               :payment_zip => user.zip}).deliver_now
           end
         end
       }

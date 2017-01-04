@@ -58,8 +58,6 @@ class GroupRegistrationForm
                      :payment_zip => zip,
                      :payment_address => delivery_method == 'email' ? email : adress,
                      :extra_info => text }
-    pdf = InvoicePdf.generate(tickets, nil, payment_info)
-    #BoosterMailer.group_ticket_confirmation_invoice(tickets, email, pdf).deliver_now
-    BoosterMailer.invoice_to_fiken(pdf).deliver_now
+    BoosterMailer.invoice_to_fiken(tickets, nil, payment_info).deliver_now
   end
 end
