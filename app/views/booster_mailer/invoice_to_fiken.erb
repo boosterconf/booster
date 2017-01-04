@@ -7,7 +7,7 @@
   <h2>Invoice details Booster <%= Dates::CONFERENCE_YEAR %> tickets</h2>
   <hr/>
   <% if @stripe_charge.present? %>
-    <strong>Stripe payment id <%=@stripe_charge.id %>: <%= "#{stripe_charge.paid ? 'Paid' : 'Payment failed'}" %></strong>
+    <strong>Stripe payment id <%=@stripe_charge.id %>: <%= "#{@stripe_charge.paid ? 'Paid' : 'Payment failed'}" %></strong>
   <% else %>
     <strong>Invoice reference:  <%= @invoice_details[:payment_info] %></strong>
     <dl>
