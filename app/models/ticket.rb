@@ -1,6 +1,6 @@
 class Ticket < ActiveRecord::Base
 
-  attr_accessible :name, :email, :company, :feedback, :roles, :attend_dinner, :dietary_info
+  attr_accessible :name, :email, :company, :feedback, :roles, :attend_dinner, :dietary_info, :reference
 
   belongs_to :ticket_type
 
@@ -9,4 +9,5 @@ class Ticket < ActiveRecord::Base
   def self.has_ticket(email)
     Ticket.exists?(:email => email)
   end
+
 end

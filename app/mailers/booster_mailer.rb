@@ -257,4 +257,11 @@ class BoosterMailer < ActionMailer::Base
         subject: "Invoice details Booster tickets")
   end
 
+  def send_ticket_link(sponsor, ticket_url)
+    @ticket_url = ticket_url
+    @sponsor = sponsor
+    mail(to: sponsor.email, from: FROM_EMAIL,
+         subject: "Booster partnerbilletter")
+  end
+
 end

@@ -2,38 +2,6 @@
   <div class="header-join">
 <h2>Users</h2>
 </div>
-<div>
-<h3>Requires follow-up</h3>
-
-<ul>
-  <li><%= link_to "Paypal users that haven't paid yet", :filter => 'skal_foelges_opp' %>. These must be contacted to
-    hear if they will try to pay again, receive an invoice, or not participate at all. Note: Paypal is no longer a payment option.
-  </li>
-  <li><%= link_to "To be invoiced", :filter => 'skal_faktureres' %>. Send to André to invoice (for now).
-  </li>
-  <li><%= link_to "Has been invoiced", :filter => 'er_fakturert' %>. When we receive a payment, we need to update these users.
-  </li>
-</ul>
-</div>
-
-<h3>Other searches</h3>
-
-<ul>
-  <li><%= link_to "All" %></li>
-  <% @ticket_types.each do |ticket_type| %>
-      <li><%= link_to ticket_type.reference, :conditions => {:ticket_type => ticket_type} %></li>
-  <% end %>
-  <li><%= link_to "Completed", :filters => 'completed' %></li>
-  <li><%= link_to "Not completed", :filters => 'not_completed' %></li>
-  <li><%= link_to "Dinner registrations", :conditions => {:includes_dinner => true} %></li>
-  <li><%= link_to 'Deleted users', :deleted_registrations  %></li>
-</ul>
-
-<h3>Emails</h3>
-<ul>
-  <li><%=  link_to "Send welcome email", :send_welcome_email_url %></li>
-  <li><%=  link_to "Send speakers dinner email", :send_speakers_dinner_email_url %></li>
-</ul>
 
 <% if @registrations.length > 0 %>
 
@@ -47,8 +15,6 @@
         <th>Registered</th>
         <th>Ticket</th>
         <th>Status</th>
-        <th>Paid</th>
-        <th>Invoice</th>
         <th>&nbsp;</th>
       </tr>
       <% for registration in @registrations %>
@@ -83,14 +49,6 @@
             </td>
             <td>
               <%= h registration.status %>
-            </td>
-            <td>
-              <%= registration.paid_amount %>
-            </td>
-            <td>
-              <% if registration.invoice.present? %>
-                <%= link_to('Invoice', registration.invoice) %>
-              <% end %>
             </td>
             <td>
               <%= link_to_unless(registration.paid?, 'Delete user', { :controller => "registrations", :action => "destroy", :id => registration.id }, :method => :delete) %>

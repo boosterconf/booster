@@ -98,6 +98,39 @@ class TicketsController < ApplicationController
     redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'
   end
 
+  def from_reference
+    ref = params[:reference]
+    unless ref.present?
+      flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
+      redirect_to root_path
+    end
+    @tickets = Ticket.include(:ticket_types).where(:reference => ref)
+    @sponsor = Sponsor.all_accepted.where(:name => @tickets.first.company)
+    @reference = ref
+  end
+
+  def create_from_reference
+    ref = params[:reference]
+    unless ref.present?
+      flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
+      redirect_to root_path
+    end
+    @tickets = Ticket.include(:ticket_types).where(:reference => ref)
+    @sponsor = Sponsor.all_accepted.where(:name => @tickets.first.company)
+    @tickets.each_with_index { |ticket, index|
+      ticket.name = params[:tickets][index].name
+      ticket.email = params[:tickets][index].email
+      ticket.save!
+    }
+    render action: 'confirm_from_reference'
+
+  rescue => e
+    puts e
+    flash[:error] = e.message
+    @reference = ref
+    render action: 'from_reference'
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_ticket

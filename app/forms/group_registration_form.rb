@@ -43,11 +43,7 @@ class GroupRegistrationForm
   end
 
   def persist!
-    puts "I am in persist"
-    puts tickets.inspect
-
     tickets.each { |ticket|
-      puts "ticket is of class" + ticket.class.name
       ticket.company = company
       ticket.ticket_type = TicketType.current_normal_ticket
       ticket.attend_dinner = TicketType.current_normal_ticket.dinner_included
