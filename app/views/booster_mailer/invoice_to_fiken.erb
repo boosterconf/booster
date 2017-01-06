@@ -22,11 +22,11 @@
   <hr />
   <table>
     <tr>
-      <td>Company</td>
-      <td>Participant name</td>
-      <td>Description</td>
-      <td>VAT</td>
-      <td>Amount</td>
+      <td><strong>Company</strong></td>
+      <td><strong>Participant name</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>VAT</strong></td>
+      <td><strong>Amount</strong></td>
     </tr>
     <% @tickets.each {|ticket| %>
         <tr>
@@ -39,7 +39,7 @@
     <% } %>
     <tr>
       <td colspan="4">Total (incl. VAT)</td>
-      <td><%= @tickets.inject(0) {|sum, t| sum + t.ticket_type.price_with_vat } %></td>
+      <td><%= @tickets.inject(0) {|sum, t| sum + t.ticket_type.price_with_vat } %> NOK</td>
     </tr>
   </table>
 

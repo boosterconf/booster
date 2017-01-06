@@ -52,7 +52,7 @@ class GroupRegistrationForm
     }
     payment_info = { :payment_info => your_reference,
                      :payment_zip => zip,
-                     :payment_address => delivery_method == 'email' ? email : adress,
+                     :payment_email => delivery_method == 'email' ? email : adress,
                      :extra_info => text }
     BoosterMailer.invoice_to_fiken(tickets, nil, payment_info).deliver_now
   end
