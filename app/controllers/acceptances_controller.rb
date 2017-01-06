@@ -134,7 +134,8 @@ class AcceptancesController < ApplicationController
             BoosterMailer.invoice_to_fiken([ticket], nil,
                                            {   :payment_email => ticket.email,
                                                :payment_info => ticket.ticket_type.name,
-                                               :payment_zip => user.zip}).deliver_now
+                                               :payment_zip => user.zip,
+                                               :extra_info => ""}).deliver_now
           end
         end
       }

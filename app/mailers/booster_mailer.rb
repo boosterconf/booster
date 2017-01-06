@@ -234,7 +234,7 @@ class BoosterMailer < ActionMailer::Base
   end
 
   def ticket_confirmation_paid(ticket)
-    @name = ticket.name
+    @ticket = ticket
     mail(to: ticket.email, from: FROM_EMAIL,
         subject: "Your ticket to Booster is confirmed",
         cc: FROM_EMAIL)

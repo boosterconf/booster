@@ -57,7 +57,8 @@ class TicketsController < ApplicationController
         BoosterMailer.invoice_to_fiken([@ticket], nil,
                                         {   :payment_email => @ticket.email,
                                             :payment_info => @payment_reference,
-                                            :payment_zip => @payment_zip}).deliver_now
+                                            :payment_zip => @payment_zip,
+                                            :extra_info => ""}).deliver_now
       end
       @ticket.save!
       redirect_to @ticket, notice: notice

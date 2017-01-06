@@ -14,19 +14,24 @@
   <% else %>
     <table>
       <tr><td>Invoice reference</td><td><%= @invoice_details[:payment_info] %></td></tr>
-      <tr><td>Invoice ZIP</td><td><%= @invoice_details[:payment_zip]%></td></tr>
+      <tr><td>Extra text needed on the invoice</td><td><%= @invoice_details[:extra_info] %></td></tr>
+      <tr><td>Zipcode for the paying company</td><td><%= @invoice_details[:payment_zip]%></td></tr>
       <tr><td>Send to</td><td><%= @invoice_details[:payment_email] %></td></tr>
     </table>
   <% end %>
   <hr />
   <table>
     <tr>
+      <td>Company</td>
+      <td>Participant name</td>
       <td>Description</td>
       <td>VAT</td>
       <td>Amount</td>
     </tr>
     <% @tickets.each {|ticket| %>
         <tr>
+          <td><%= ticket.company %></td>
+          <td><%= ticket.name %></td>
           <td><%= ticket.ticket_type.name %></td>
           <td><%= "#{ticket.ticket_type.vat} NOK" %></td>
           <td> <%= "#{ticket.ticket_type.price} NOK" %> </td>

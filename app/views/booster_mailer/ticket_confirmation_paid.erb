@@ -1,16 +1,47 @@
 <html>
-<body><p>Hi, <%= @name %>.</p>
+<body>
+<p>Hi, <%= @ticket.name %>.</p>
+
+<table>
+  <tr><td><strong>Foreningen Boosterkonferansen</strong></td><td><strong>Epost</strong></td><td>kontakt@boosterconf.no</td></tr>
+  <tr><td>v/ Kjell Iver Breistøl</td><td><strong>Tlf</strong></td><td>+4740829563</td></tr>
+  <tr><td>Michael Krohns gate 105</td><td><strong>Org.nr</strong></td><td>NO 9974482343 MVA</td></tr>
+  <tr><td>5057 BERGEN</td><td></td><td></td></tr>
+</table>
 
 <p>
   This is a confirmation of your payment to <a href="http://www.boosterconf.no">the Booster conference</a>.
+  The ticket is registered to <%= @ticket.name %> at <%= @ticket.company %>.
 </p>
 
 <p>
   We look forward to seeing you at the conference! You will pick up your name tag at the conference venue.
 </p>
 
-<p>If you experience any problems,
-  please contact us at kontakt@boosterconf.no.</p>
+<p><strong>Invoice details</strong></p>
+<table>
+  <thead>
+  <tr>
+    <th>Description</th>
+    <th>Unit cost</th>
+    <th>Count</th>
+    <th>VAT</th>
+    <th>Sum</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><%= @ticket.ticket_type.name%></td>
+    <td><%= @ticket.ticket_type.price %></td>
+    <td>1</td>
+    <td>25%</td>
+    <td><%= @ticket.ticket_type.price_with_vat %></td>
+  </tr>
+  <tr><td colspan="4"><strong>Total</strong></td><td><%= @ticket.ticket_type.price_with_vat %></td></tr>
+  </tbody>
+</table>
+
+<p>If you experience any problems, please contact us at kontakt@boosterconf.no.</p>
 
 <p>- The Booster conference organizers</p>
 </body>
