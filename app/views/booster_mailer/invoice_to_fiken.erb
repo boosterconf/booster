@@ -38,8 +38,7 @@
         </tr>
     <% } %>
     <tr>
-      <td>Total (incl. VAT)</td>
-      <td></td>
+      <td colspan="4">Total (incl. VAT)</td>
       <td><%= @tickets.inject(0) {|sum, t| sum + t.ticket_type.price_with_vat } %></td>
     </tr>
   </table>
