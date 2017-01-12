@@ -33,6 +33,12 @@ class TicketsController < ApplicationController
     unless @ticket.valid?
       render :new
     else
+      # Avoiding duplicate registrations
+      if Ticket.has_ticket(@ticket.email)
+        existing_ticket = Ticket.where(email: @ticket.email).take
+        redirect_to existing_ticket, notice: "You are registered for Booster!" and return
+      end
+
       if (params[:stripeToken])
         puts "Received stripe token, pay with card"
         customer = Stripe::Customer.create(
