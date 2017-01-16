@@ -26,6 +26,7 @@
   get 'program/lightningtalks2' => 'program#lightningtalks2'
   get 'program/workshops' => 'program#workshops'
   get 'program/lightning' => 'program#lightning'
+  get '/blifrivillig', to: 'blifrivillig#get'
 
   resources :users do
     collection do
