@@ -35,9 +35,7 @@ class UsersController < ApplicationController
       @user.invited = true
       @user.build_bio
     else
-      # Default to manual payment. Paypal is expensive, and sendregning.no works fine.
-      @user.registration.manual_payment = true
-      @user.registration.ticket_type = TicketType.current_normal_ticket
+      redirect_to_front_page
     end
 
     @user.registration.includes_dinner = @user.registration.ticket_type.dinner_included
