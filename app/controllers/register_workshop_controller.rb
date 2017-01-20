@@ -5,6 +5,11 @@ class RegisterWorkshopController < ApplicationController
   before_filter :setup_talk_types, only: [:talk, :create_talk]
 
   def start
+    if DateTime.now > Dates::CFP_TUTORIAL_ENDS
+      redirect_to '/'
+      return
+    end
+
     if current_user
       redirect_to register_workshop_talk_url
     end
@@ -13,6 +18,11 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def create_user
+    if DateTime.now > Dates::CFP_TUTORIAL_ENDS
+      redirect_to '/'
+      return
+    end
+
     @user = User.new(params[:user])
     @user.create_registration
     @user.registration.ticket_type = TicketType.speaker
@@ -32,10 +42,20 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def talk
+    if DateTime.now > Dates::CFP_TUTORIAL_ENDS
+      redirect_to '/'
+      return
+    end
+
     @workshop = Workshop.new
   end
 
   def create_talk
+    if DateTime.now > Dates::CFP_TUTORIAL_ENDS
+      redirect_to '/'
+      return
+    end
+
     @workshop = Workshop.new(params[:talk])
     @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @workshop.users << current_user

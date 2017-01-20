@@ -1,6 +1,11 @@
 class RegisterLightningTalkController < ApplicationController
 
   def start
+    if DateTime.now > Dates::CFP_LIGHTNING_ENDS
+      redirect_to '/'
+      return
+    end
+
     if current_user
       redirect_to '/register_lightning_talk/talk'
     end
@@ -9,6 +14,11 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_user
+    if DateTime.now > Dates::CFP_LIGHTNING_ENDS
+      redirect_to '/'
+      return
+    end
+
     @user = User.new(params[:user])
     @user.registration = Registration.new
     @user.registration.ticket_type = TicketType.lightning
@@ -33,6 +43,11 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_talk
+    if DateTime.now > Dates::CFP_LIGHTNING_ENDS
+      redirect_to '/'
+      return
+    end
+    
     @talk = LightningTalk.new(params[:talk])
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.year = AppConfig.year
