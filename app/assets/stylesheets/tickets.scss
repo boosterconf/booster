@@ -1,0 +1,51 @@
+// Place all the styles related to the Tickets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.checkbox-btn {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+.btn-checkbox {
+  background-color: $gray-lighter;
+  width: auto;
+}
+
+.btn-checkbox:hover  {
+  background: $brand-primary;
+}
+
+.checkbox-btn label {
+  display: inline;
+  background-color: $gray-lighter;
+}
+
+.checkbox-btn input {
+  display: none;
+}
+
+.checkbox-btn input:checked + label {
+  background-color: $brand-primary;
+}
+
+label {
+  font-weight: bold;
+}
+
+.input-short {
+  max-width: 440px;
+}
+
+.input-md {
+  max-width: 540px;
+}
+
+@media (min-width: 544px) {
+  #participants .form-group-inline {
+    padding-right: 10px;
+    width: 35%;
+  }
+  #participants .form-control-inline {
+    width: 100%;
+  }
+}

@@ -1,11 +1,17 @@
  Booster2013::Application.routes.draw do
 
-   resources :rooms
+   get '/.well-known/acme-challenge/Yzat3bQHDvEwN2ATI3gNmlJHxnpmIQvm8RjC63EXyiY' => 'pages#letsencrypt'
+
+  resources :tickets
+  resources :rooms
   resources :periods
   resources :slots
   resources :reviews
   resources :ticket_types
   resources :group_registrations, only: [:new, :create]
+
+  get 'tickets/ref/:reference' => 'tickets#from_reference', :as => :tickets_from_reference
+  post'tickets/ref/:reference' => 'tickets#create_from_reference', :as => :tickets_create_from_reference
 
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
   get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
@@ -17,12 +23,12 @@
   get 'users/current/attending_speakers_dinner' => 'users#attending_speakers_dinner', :as => :attending_speakers_dinner_url
   get 'users/current/not_attending_speakers_dinner' => 'users#not_attending_speakers_dinner', :as => :not_attending_speakers_dinner_url
 
-
   get 'program/' => 'program#index'
   get 'program/lightningtalks1' => 'program#lightningtalks1'
   get 'program/lightningtalks2' => 'program#lightningtalks2'
   get 'program/workshops' => 'program#workshops'
   get 'program/lightning' => 'program#lightning'
+  get '/blifrivillig', to: 'blifrivillig#get'
 
   resources :users do
     collection do
@@ -40,6 +46,9 @@
       get :could_not_attend
       get :unconfirm
       get :send_mail
+    end
+    collection do
+      post :create_tickets
     end
   end
 
@@ -66,6 +75,9 @@
     resources :events
     member do
       post :email
+    end
+    collection do
+      post :email_tickets
     end
   end
 
@@ -162,64 +174,6 @@
 
   match 'admin' => 'admin#index', via: :all
 
-
-# You can have the root of your site routed with "root"
-# just remember to delete public/index.html.
-# root :to => 'welcome#index'
-
   root :to => 'info#index' #'/' resolves to info/index.html
 
-# The priority is based upon order of creation:
-# first created -> highest priority.
-
-# Sample of regular route:
-#   match 'products/:id' => 'catalog#view'
-# Keep in mind you can assign values other than :controller and :action
-
-# Sample of named route:
-#   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
-# This route can be invoked with purchase_url(:id => product.id)
-
-# Sample resource route (maps HTTP verbs to controller actions automatically):
-#   resources :products
-
-# Sample resource route with options:
-#   resources :products do
-#     member do
-#       get 'short'
-#       post 'toggle'
-#     end
-#
-#     collection do
-#       get 'sold'
-#     end
-#   end
-
-# Sample resource route with sub-resources:
-#   resources :products do
-#     resources :comments, :sales
-#     resource :seller
-#   end
-
-# Sample resource route with more complex sub-resources
-#   resources :products do
-#     resources :comments
-#     resources :sales do
-#       get 'recent', :on => :collection
-#     end
-#   end
-
-# Sample resource route within a namespace:
-#   namespace :admin do
-#     # Directs /admin/products/* to Admin::ProductsController
-#     # (app/controllers/admin/products_controller.rb)
-#     resources :products
-#   end
-
-
-# See how all your routes lay out with "rake routes"
-
-# This is a legacy wild controller route that's not recommended for RESTful applications.
-# Note: This route will make all actions in every controller accessible via GET requests.
-# match ':controller(/:action(/:id))(.:format)'
 end

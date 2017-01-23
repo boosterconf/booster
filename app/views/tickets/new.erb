@@ -1,0 +1,97 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Get your ticket for Booster <%= Dates::CONFERENCE_YEAR %></h2>
+  </div>
+
+  <p>
+    Registering several people and want a common invoice? Use our
+    <%= link_to 'group registration', new_group_registration_url %>!
+  </p>
+
+
+  <p id="price_info">
+    Price: NOK <%= number_with_precision(@ticket.ticket_type.price, precision: 0) %>,- (excluding VAT).
+  </p>
+
+  <%= form_for(@ticket) do |f| %>
+      <fieldset class="form-group">
+        <%= f.label :name, "Name" %>
+        <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <%= f.label :email %>
+        <%= email_field(:ticket, :email, placeholder: "Where can we email you?", class: 'form-control input-short', required: true) %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <%= f.label :company, "Where do you work?" %>
+        <%= text_field(:ticket, :company, placeholder: "Company", class: 'form-control input-short', required: true) %>
+      </fieldset>
+
+      <label>What role(s) do you have?</label>
+      <fieldset class="form-group">
+        <% Roles.all.each do |role| %>
+            <span class="checkbox-btn">
+              <%= check_box_tag "roles[]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
+              <label for="roles_<%=role%>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
+            </span>
+        <% end %>
+      </fieldset>
+
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :attend_dinner, class: "checkbox" %>
+          I'd like to attend the conference dinner on Wednesday
+        </label>
+      </div>
+      <fieldset class="form-group">
+        <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
+        <%= f.text_area :dietary_info, :class => "form-control input-md" %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <%= f.label :feedback, "How did you hear about us?" %>
+        <%= f.text_area :feedback, :class => "form-control input-md" %>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label>Payment reference (optional)</label>
+        <%= text_field_tag "payment_reference", "", placeholder: "Reference used if you choose to pay by invoice", class: 'form-control input-short' %>
+      </fieldset>
+      <fieldset class="form-group">
+        <label>Zip code for the paying company (optional)</label>
+        <%= text_field_tag "payment_zip_code", "", placeholder: "If paying by invoice, we need the company zip code", class: 'form-control input-short' %>
+      </fieldset>
+
+      <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
+
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+
+      <% if flash[:stripe_error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:stripe_error] %></p>
+          </div>
+      <% end %>
+
+
+      <div class="form-actions">
+
+        <% if AppConfig.stripe_on %>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                data-description="<%=@ticket.ticket_type.name%>"
+                data-name="BOOSTERKONFERANSEN"
+                data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
+                data-locale="auto"
+                data-zip-code="true"
+                data-currency="nok"></script>
+        <% end %>
+        <%= button_to "I'd rather get an invoice", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-default", id: "submit_invoice" %>
+      </div>
+  <% end %>
+</article>

@@ -2,7 +2,7 @@ class BoosterMailer < ActionMailer::Base
 
   FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
   SUBJECT_PREFIX = "[boosterconf]"
-
+  FIKEN_EMAIL = AppConfig.fiken_email
 
   def registration_confirmation(user)
     @name = user.first_name
@@ -189,11 +189,9 @@ class BoosterMailer < ActionMailer::Base
          :subject => "#{SUBJECT_PREFIX} You have been added as a speaker to a workshop")
   end
 
-  def ticket_assignment(user)
-    @user = user
-    @create_user_url = user_from_reference_url(user.registration.unique_reference)
-
-    mail(:to => user.email,
+  def ticket_assignment(ticket)
+    @name = ticket.name
+    mail(:to => ticket.email,
          :from => FROM_EMAIL,
          :cc => FROM_EMAIL,
          :subject => "#{SUBJECT_PREFIX} You have been assigned a ticket to Booster #{Dates::CONFERENCE_YEAR}")
@@ -234,4 +232,36 @@ class BoosterMailer < ActionMailer::Base
          cc: FROM_EMAIL
     )
   end
+
+  def ticket_confirmation_paid(ticket)
+    @ticket = ticket
+    mail(to: ticket.email, from: FROM_EMAIL,
+        subject: "Your ticket to Booster is confirmed",
+        cc: FROM_EMAIL)
+  end
+
+  def ticket_confirmation_invoice(ticket)
+    @name = ticket.name
+    @amount_due = ticket.ticket_type.price_with_vat
+    @email = ticket.email
+    mail(to: ticket.email, from: FROM_EMAIL,
+         subject: "Your ticket to Booster is confirmed",
+         cc: FROM_EMAIL)
+  end
+
+  def invoice_to_fiken(tickets, stripe_charge, invoice_details)
+    @tickets = tickets
+    @stripe_charge = stripe_charge
+    @invoice_details = invoice_details
+    mail(to: FIKEN_EMAIL, from: FROM_EMAIL,
+        subject: "Invoice details Booster tickets")
+  end
+
+  def send_ticket_link(sponsor, ticket_url)
+    @ticket_url = ticket_url
+    @sponsor = sponsor
+    mail(to: sponsor.email, from: FROM_EMAIL,
+         subject: "Booster partnerbilletter")
+  end
+
 end

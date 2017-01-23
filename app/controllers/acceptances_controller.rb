@@ -114,6 +114,62 @@ class AcceptancesController < ApplicationController
     redirect_to acceptances_path, notice: "Sent mail about '#{@talk.title}'"
   end
 
+  def create_tickets
+    talks = Talk.all_with_speakers.where(acceptance_status: 'accepted', speakers_confirmed: true)
+    talks.each { |talk|
+      talk.users.each { |user|
+        unless Ticket.has_ticket(user.email)
+          ticket = Ticket.new
+          ticket.ticket_type = user.registration.ticket_type
+          ticket.attend_dinner = true
+          ticket.roles = user.roles
+          ticket.dietary_info = user.dietary_requirements
+          ticket.name = "#{user.first_name} #{user.last_name}"
+          ticket.company = user.company
+          ticket.email = user.email
+          ticket.save!
+
+          if ticket.ticket_type.paying_ticket?
+            BoosterMailer.ticket_confirmation_invoice(ticket).deliver_now
+            BoosterMailer.invoice_to_fiken([ticket], nil,
+                                           {   :payment_email => ticket.email,
+                                               :payment_info => ticket.ticket_type.name,
+                                               :payment_zip => user.zip,
+                                               :extra_info => ""}).deliver_now
+          end
+        end
+      }
+    }
+
+    organizers = User.all_organizers
+    invited = User.all.where(invited: true)
+    organizers.concat invited
+    organizers.each { |user|
+        unless Ticket.has_ticket(user.email)
+          ticket = Ticket.new
+          ticket.ticket_type = user.registration.ticket_type
+          ticket.attend_dinner = true
+          ticket.roles = user.roles
+          ticket.dietary_info = user.dietary_requirements
+          ticket.name = "#{user.first_name} #{user.last_name}"
+          ticket.company = user.company
+          ticket.email = user.email
+          ticket.save!
+
+          if ticket.ticket_type.paying_ticket?
+            BoosterMailer.ticket_confirmation_invoice(ticket).deliver_now
+            BoosterMailer.invoice_to_fiken([ticket], nil,
+                                           {   :payment_email => ticket.email,
+                                               :payment_info => ticket.ticket_type.name,
+                                               :payment_zip => user.zip,
+                                               :extra_info => ""}).deliver_now
+          end
+        end
+    }
+
+    redirect_to acceptances_path, notice: 'Created tickets for confirmed speakers'
+  end
+
   private
   def redirect_on_email_sent
     redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Email already sent!"

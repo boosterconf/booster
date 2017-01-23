@@ -1,0 +1,76 @@
+<script type="text/javascript">
+  $(document).ready(function () {
+
+    $("#tickets").tablesorter({
+      theme: 'blue',
+      // use save sort widget
+      widgets: ["saveSort"]
+    });
+
+    $("#tickets").sieve({
+      itemSelector: 'tbody tr',
+      textSelector: 'td:not(.no-filter), td select option[selected]',
+      searchTemplate: "<div><label>Search: <input type='text'></label></div>"
+    });
+  });
+</script>
+<article class="inner">
+  <div class="header-join">
+    <h2>Tickets</h2>
+  </div>
+<p id="notice"><%= notice %></p>
+
+  <p>
+    <%= link_to 'New Ticket', new_ticket_path %>
+  </p>
+
+  <div>
+    <h4>Stats</h4>
+    <table class="table table-condensed table-striped">
+      <tbody>
+        <% @stats.each_key { |ticket_type| %>
+          <tr>
+            <th><%= ticket_type %></th>
+            <td><%= @stats[ticket_type] %></td>
+          </tr>
+          <%  } %>
+      </tbody>
+    </table>
+  </div>
+
+<table id="tickets" class="table table-condensed table-sortable">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Company</th>
+      <th>Ticket type</th>
+      <th>Dinner?</th>
+      <th>Dietary req</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.id %></td>
+        <td><%= ticket.name %></td>
+        <td><%= ticket.email %></td>
+        <td><%= ticket.company %></td>
+        <td><%= ticket.ticket_type.name %></td>
+        <td>
+          <% if ticket.attend_dinner %>
+            <i class="fa fa-check success"></i>
+          <%end %>
+        </td>
+        <td><%= ticket.dietary_info %></td>
+        <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
+        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</article>

@@ -4,7 +4,7 @@ class Invoice < ActiveRecord::Base
                   :email, :status, :delivery_method, :text, :created_at, :invoiced_at
 
   validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
-  validates :status, inclusion: { in: %w(not_invoiced invoiced) }
+  validates :status, inclusion: { in: %w(not_invoiced invoiced paid) }
   has_many :invoice_lines
 
   def delivery_method

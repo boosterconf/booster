@@ -1,0 +1,48 @@
+<html>
+<body>
+
+<p>
+  Ticket order for Booster. See attachment for details.
+</p>
+  <h2>Invoice details Booster <%= Dates::CONFERENCE_YEAR %> tickets</h2>
+  <hr/>
+  <% if @stripe_charge.present? %>
+    <table>
+      <tr><td>Stripe reference</td><td><%=@stripe_charge.id %></td></tr>
+      <tr><td>Payment status</td><td><%= "#{@stripe_charge.paid ? 'Paid' : 'Payment failed'}" %></td></tr>
+    </table>
+  <% else %>
+    <table>
+      <tr><td>Invoice reference</td><td><%= @invoice_details[:payment_info] %></td></tr>
+      <tr><td>Extra text needed on the invoice</td><td><%= @invoice_details[:extra_info] %></td></tr>
+      <tr><td>Zipcode for the paying company</td><td><%= @invoice_details[:payment_zip]%></td></tr>
+      <tr><td>Send to</td><td><%= @invoice_details[:payment_email] %></td></tr>
+    </table>
+  <% end %>
+  <hr />
+  <table>
+    <tr>
+      <td><strong>Company</strong></td>
+      <td><strong>Participant name</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>VAT</strong></td>
+      <td><strong>Amount</strong></td>
+    </tr>
+    <% @tickets.each {|ticket| %>
+        <tr>
+          <td><%= ticket.company %></td>
+          <td><%= ticket.name %></td>
+          <td><%= ticket.ticket_type.name %></td>
+          <td><%= "#{ticket.ticket_type.vat} NOK" %></td>
+          <td> <%= "#{ticket.ticket_type.price} NOK" %> </td>
+        </tr>
+    <% } %>
+    <tr>
+      <td colspan="4">Total (incl. VAT)</td>
+      <td><%= @tickets.inject(0) {|sum, t| sum + t.ticket_type.price_with_vat } %> NOK</td>
+    </tr>
+  </table>
+
+<p>- The Booster robot serf</p>
+</body>
+</html>

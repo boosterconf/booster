@@ -258,7 +258,7 @@ class User < ActiveRecord::Base
     potential_speakers = User.includes(:bio, :talks).where(featured_speaker: true).order('created_at DESC')
     speakers = []
     potential_speakers.each do |sp|
-      if sp.is_featured?
+      if sp.is_featured? && sp.bio.picture.present?
         speakers << sp
       end
     end

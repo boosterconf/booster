@@ -7,6 +7,8 @@ gem 'rails', '4.2.5'
 gem "authlogic", '~> 3.4.2'
 gem 'paperclip', '~>4.3'
 
+gem 'stripe'
+
 gem 'responders', '~> 2.0'
 
 gem 'bootstrap', '~> 4.0.0.alpha2'

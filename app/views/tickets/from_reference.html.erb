@@ -1,0 +1,41 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Partner ticket registration</h2>
+  </div>
+
+  <% if flash[:error] %>
+      <div id='notifications'>
+        <div class='alert alert-warning'><%= flash[:error] %></div>
+      </div>
+  <% end %>
+
+  <p>
+    By providing the name and email of the people who will use the partner tickets in the form below, we
+    will be able to give them timely information via email, and a personalized name tag at the conference.
+  </p>
+
+  <%= form_for @tickets, url: tickets_create_from_reference_path do |f| %>
+      <%= f.hidden_field :reference, value: @reference %>
+      <fieldset id="participants">
+        <legend>Participants</legend>
+        <% @tickets.each_with_index { |ticket, index| %>
+            <div class="form-inline" style="padding-bottom: 10px;">
+              <div class="form-group form-group-inline" >
+                <input name="tickets[][name]"
+                       placeholder="Name" type="text"
+                       class="form-control form-control-inline" value="<%=ticket[:name]%>">
+              </div>
+              <div class="form-group form-group-inline">
+                <input name="tickets[][email]"
+                       placeholder="Email" type="text"
+                       class="form-control form-control-inline" value="<%=ticket[:email]%>">
+              </div>
+            </div>
+        <% } %>
+      </fieldset>
+
+      <div class='form-group form-actions'>
+        <%= f.submit "Register", :class => "btn btn-primary" %>
+      </div>
+  <% end %>
+</article>

@@ -44,6 +44,9 @@
 <div style="margin-bottom: 20px;">
 <%= link_to 'New partner', new_sponsor_path, class: '' %>
 </div>
+  <p>
+    <%= button_to "Send ticket link by email to all accepted partners", email_tickets_sponsors_path %>
+  </p>
 <table id="sponsors" class="table table-striped">
   <thead>
   <tr>

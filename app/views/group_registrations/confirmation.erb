@@ -3,34 +3,34 @@
 <h2>Thank you for registering!</h2>
 </div>
 <p>
-  We've now registered <%= @group_registration.registrations.count %> tickets for you. They have been assigned
+  We've now registered <%= @group_registration.tickets.count %> tickets for you. They have been assigned
   to the following
   email addresses:
 </p>
 
 <ul>
-  <% @group_registration.registrations.each do |registration| %>
+  <% @group_registration.tickets.each do |ticket| %>
       <li>
-        <%= registration.user.email %> (<%= registration.ticket_description %> - NOK <%= registration.ticket_price %>)
+        <%= ticket.email %> (<%= ticket.ticket_type.name%> - NOK <%= ticket.ticket_type.price %>)
       </li>
   <% end %>
 </ul>
-<p><strong>This invoice has a total of NOK <%= @group_registration.invoice.total %> (excluding VAT).</strong></p>
+<p><strong>This invoice has a total of NOK <%= @group_registration.tickets.inject(0) {|sum, t| sum + t.ticket_type.price } %>
+  (excluding VAT).</strong></p>
 
-<p>If not already registered, they will each have received an email with instructions for completing the
-  registrations.</p>
+<p>They have each have received an email confirming the registration.</p>
 
 <p>We have also prepared an invoice that will be sent soon
-  by <%= @group_registration.invoice.email.present? ? "email" : "snail mail" %>
+  by <%= @group_registration.email.present? ? "email" : "snail mail" %>
   to the address
-  <b><%= @group_registration.invoice.email.present? ? @group_registration.invoice.email : @group_registration.invoice.adress %></b>.
+  <b><%= @group_registration.email.present? ? @group_registration.email : @group_registration.adress %></b>.
 </p>
 <p>
-  <% if @group_registration.invoice.your_reference.present? %>
-      Your reference is "<%= @group_registration.invoice.your_reference %>".
+  <% if @group_registration.your_reference.present? %>
+      Your reference is "<%= @group_registration.your_reference %>".
   <% end %>
-  <% if @group_registration.invoice.text.present? %>
-      The invoice text is "<%= @group_registration.invoice.text %>".
+  <% if @group_registration.text.present? %>
+      The invoice text is "<%= @group_registration.text %>".
   <% end %>
 </p>
 </article>
