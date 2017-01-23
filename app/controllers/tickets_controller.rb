@@ -24,6 +24,9 @@ class TicketsController < ApplicationController
     unless @ticket.valid?
       render :edit
     else
+      if params[:ticket_change]
+        @ticket.ticket_type = TicketType.find_by_id(params[:ticket][:ticket_type_id])
+      end
       @ticket.save
     end
   end
