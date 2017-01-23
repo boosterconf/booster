@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   before_filter :require_admin, only: [:index, :delete_bio, :phone_list, :dietary_requirements]
   before_filter :require_admin_or_self, only: [:show, :edit, :update]
   before_filter :require_unauthenticated_or_admin, only: [:new, :create]
-  before_filter :registration_is_open, only: [:new, :create]
 
   # GET /users
   # GET /users.json
@@ -237,15 +236,5 @@ class UsersController < ApplicationController
       per_date << total
     end
     per_date
-  end
-
-  def registration_is_open
-    if no_more_registrations_allowed
-      return redirect_to_front_page
-    end
-  end
-
-  def no_more_registrations_allowed
-    User.count >= AppConfig.max_users_limit
   end
 end
