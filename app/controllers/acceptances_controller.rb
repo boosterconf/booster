@@ -116,7 +116,6 @@ class AcceptancesController < ApplicationController
 
   def create_tickets
     talks = Talk.all_with_speakers.where(acceptance_status: 'accepted', speakers_confirmed: true)
-    talks.concat Talk.all_with_speakers.where(invited: true)
     talks.each { |talk|
       talk.users.each { |user|
         unless Ticket.has_ticket(user.email)
@@ -143,6 +142,8 @@ class AcceptancesController < ApplicationController
     }
 
     organizers = User.all_organizers
+    invited = User.all.where(invited: true)
+    organizers.concat invited
     organizers.each { |user|
         unless Ticket.has_ticket(user.email)
           ticket = Ticket.new
