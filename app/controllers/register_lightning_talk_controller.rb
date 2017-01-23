@@ -47,7 +47,7 @@ class RegisterLightningTalkController < ApplicationController
       redirect_to '/'
       return
     end
-    
+
     @talk = LightningTalk.new(params[:talk])
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.year = AppConfig.year

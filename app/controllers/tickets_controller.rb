@@ -135,25 +135,33 @@ class TicketsController < ApplicationController
       flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
       redirect_to root_path
     end
-    @tickets = Ticket.include(:ticket_types).where(:reference => ref)
-    @sponsor = Sponsor.all_accepted.where(:name => @tickets.first.company)
+    @ticket = Ticket.includes(:ticket_types).where(:reference => ref).first
+    puts @ticket.inspect
+    @sponsor = Sponsor.all_accepted.where(:name => @ticket.company).first
     @reference = ref
+
+    rescue
+      flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
+      redirect_to root_path
   end
 
   def create_from_reference
     ref = params[:reference]
+    puts "create from " + ref
     unless ref.present?
       flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
       redirect_to root_path
     end
-    @tickets = Ticket.include(:ticket_types).where(:reference => ref)
-    @sponsor = Sponsor.all_accepted.where(:name => @tickets.first.company)
-    @tickets.each_with_index { |ticket, index|
-      ticket.name = params[:tickets][index].name
-      ticket.email = params[:tickets][index].email
-      ticket.save!
-    }
-    render action: 'confirm_from_reference'
+    @ticket = Ticket.includes(:ticket_types).where(:reference => ref).first
+    puts @ticket.inspect
+    @sponsor = Sponsor.all_accepted.where(:name => @ticket.company).first
+    @ticket.name = params[:ticket][name]
+    @ticket.email = params[:ticket][email]
+    @ticket.attend_dinner = params[:ticket][attend_dinner]
+    @ticket.roles = params[:roles].join(",") if params[:roles]
+    @ticket.dietary_info = params[:ticket][dietary_info]
+    @ticket.save!
+    render action: 'show'
 
   rescue => e
     puts e
@@ -173,6 +181,5 @@ class TicketsController < ApplicationController
     params.require(:ticket).permit(:name, :email, :feedback, :company,
                                    :attend_dinner, :dietary_info)
   end
-
 
 end

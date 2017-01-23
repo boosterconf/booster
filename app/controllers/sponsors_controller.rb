@@ -116,8 +116,7 @@ class SponsorsController < ApplicationController
   def email_tickets
     sponsors = Sponsor.all_accepted
     sponsors.each { |sponsor|
-      ref = SecureRandom.urlsafe_base64
-      create_tickets_for(sponsor, ref)
+      create_tickets_for(sponsor)
 
     }
     redirect_to sponsors_url, notice: "Emails with partner ticket registration links was sent."
@@ -171,10 +170,14 @@ class SponsorsController < ApplicationController
   end
 
   NUMBER_OF_TICKETS_PER_SPONSOR = 2
-  def create_tickets_for(sponsor, ref)
+  def create_tickets_for(sponsor)
     existing_ticket_count = Ticket.joins(:ticket_type).where(:company => sponsor.name, :ticket_type => TicketType.sponsor).count
+    puts existing_ticket_count
     if existing_ticket_count < NUMBER_OF_TICKETS_PER_SPONSOR
+      refs = []
       (NUMBER_OF_TICKETS_PER_SPONSOR - existing_ticket_count).times do
+        ref = SecureRandom.urlsafe_base64
+        puts ref
         ticket = Ticket.new
         ticket.ticket_type = TicketType.sponsor
         ticket.company = sponsor.name
@@ -182,8 +185,10 @@ class SponsorsController < ApplicationController
         ticket.email = ""
         ticket.reference = ref
         ticket.save!
+        puts "tickets/ref/" + ref
+        refs.push tickets_from_reference_url(ref)
       end
-      BoosterMailer.send_ticket_link(sponsor, tickets_from_reference_url(ref)).deliver_now
+      BoosterMailer.send_ticket_link(sponsor, refs).deliver_now
     end
     true
   end

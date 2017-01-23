@@ -10,32 +10,53 @@
   <% end %>
 
   <p>
-    By providing the name and email of the people who will use the partner tickets in the form below, we
-    will be able to give them timely information via email, and a personalized name tag at the conference.
+    Fill in the form below, and we will be able to give you a personalized name tag at the conference venue, and send you
+    any necessary information about the conference via email.
   </p>
 
-  <%= form_for @tickets, url: tickets_create_from_reference_path do |f| %>
+  <%= form_for @ticket, url: tickets_create_from_reference_path do |f| %>
       <%= f.hidden_field :reference, value: @reference %>
-      <fieldset id="participants">
-        <legend>Participants</legend>
-        <% @tickets.each_with_index { |ticket, index| %>
-            <div class="form-inline" style="padding-bottom: 10px;">
-              <div class="form-group form-group-inline" >
-                <input name="tickets[][name]"
-                       placeholder="Name" type="text"
-                       class="form-control form-control-inline" value="<%=ticket[:name]%>">
-              </div>
-              <div class="form-group form-group-inline">
-                <input name="tickets[][email]"
-                       placeholder="Email" type="text"
-                       class="form-control form-control-inline" value="<%=ticket[:email]%>">
-              </div>
-            </div>
-        <% } %>
+      <fieldset class="form-group">
+        <%= f.label :name, "Name" %>
+        <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>
       </fieldset>
 
-      <div class='form-group form-actions'>
-        <%= f.submit "Register", :class => "btn btn-primary" %>
+      <fieldset class="form-group">
+        <%= f.label :email %>
+        <%= email_field(:ticket, :email, placeholder: "Where can we email you?", class: 'form-control input-short', required: true) %>
+      </fieldset>
+
+      <label>What role(s) do you have?</label>
+      <fieldset class="form-group">
+        <% Roles.all.each do |role| %>
+        <span class="checkbox-btn">
+          <%= check_box_tag "roles[]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
+          <label for="roles_<%=role%>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
+        </span>
+        <% end %>
+      </fieldset>
+
+      <div class="checkbox">
+        <label>
+          <%= f.check_box :attend_dinner, class: "checkbox" %>
+          I'd like to attend the conference dinner on Wednesday
+        </label>
+      </div>
+      <fieldset class="form-group">
+        <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
+        <%= f.text_area :dietary_info, :class => "form-control input-md" %>
+      </fieldset>
+
+      <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
+
+      <% if flash[:error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:error] %></p>
+          </div>
+      <% end %>
+
+      <div class="form-actions">
+        <%= button_to "Save", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary" %>
       </div>
   <% end %>
 </article>

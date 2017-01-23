@@ -3,8 +3,11 @@
 
 <h2>Registrere partnerbillettene</h2>
 <p>
-  Dersom dere ikke allerede har gjort det, er det på tide å registrere partnerbillettene. Partnere har to gratis billetter til konferansen.
-  Klikk <a href="<%= @ticket_url %>">her</a> for å registrere dine deltagere.
+  Dersom dere ikke allerede har gjort det, er det på tide å registrere partnerbillettene.
+  Partnere har to gratis billetter til konferansen.
+  <% @ticket_urls.each_with_index { |url, index | %>
+      Klikk <a href="<%= url %>">her</a> for å registrere deltager <%= index + 1 %>.
+  <% } %>
 </p>
 
 <p>
