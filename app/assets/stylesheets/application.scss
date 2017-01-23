@@ -2,11 +2,11 @@
 
 $enable-flex: true;
 
-$gray-dark: #36404D;
+$gray-dark: #2E3E4D;
 $gray-lightest: #F2F2F2;
 $gray-lighter: #E5E5E5;
 
-$brand-primary: #F29C75;
+$brand-primary: #A5ECDE;
 $brand-success: #E1F28C;
 $brand-info: $gray-dark;
 $brand-warning: #DD9B77;
@@ -18,9 +18,11 @@ $nav-tabs-border-color: transparent;
 $nav-tabs-border-width: 0;
 $link-color: #36404D;
 
-$font-family-sans-serif: 'VAG Rounded';
-$headings-font-family: 'Fira Sans';
-$headings-font-weight: 800;
+$font-family-sans-serif: 'fira-sans';
+$headings-font-family: 'freight-display-pro';
+$headings-font-style: normal;
+$headings-font-weight: normal;
+$headings-line-height: 1.4;
 
 $border-radius: 0;
 $btn-border-radius: 2rem;

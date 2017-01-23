@@ -23,6 +23,9 @@ conference is for all IT professionals seeking to learn from each other and from
   <%= csrf_meta_tag %>
   <%= tinymce_assets %>
 
+  <script src="https://use.typekit.net/aoh3kia.js"></script>
+  <script>try{Typekit.load({ async: true });}catch(e){}</script>
+
 </head>
 
 <body class="<%= "#{controller.controller_name}-#{controller.action_name}" %>">
@@ -90,15 +93,13 @@ conference is for all IT professionals seeking to learn from each other and from
 </div>
 
 <footer>
-  <div class="jumbotron m-b-0">
-    <div class="container">
-      <%= image_tag "icons/spread.svg", id: "footer-image" %>
-      <h2 id="footer-text">You are awesome.<br/>Hope to see you soon!</h2>
+  <div id="footer-image"></div>
+  <div class="container">
+    <h2 id="footer-text">You are awesome.<br/>Hope to see you soon!</h2>
 
-      <p class="centered-text">
-        <a href="#">Return to top</a>
-      </p>
-    </div>
+    <p class="centered-text">
+      <a href="#">Return to top</a>
+    </p>
   </div>
 </footer>
 

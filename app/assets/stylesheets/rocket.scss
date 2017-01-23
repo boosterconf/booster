@@ -2,82 +2,49 @@
   height: 80%;
   min-height: 300px;
   max-height: 400px;
-  position:relative;
-  background: linear-gradient(#EFF9CF, #BBEBDE); /* Standard syntax */
-  display: flex;
-  flex-direction: column;
-
-  background: image-url("icons/cloud2.svg") left -100px top -30px/190px no-repeat, image-url("icons/cloud2.svg") center top 20px/100px no-repeat, image-url("icons/cloud2.svg") right -65px top -30px/180px no-repeat, image-url("icons/cloud1.svg") 95% 90%/50px no-repeat, image-url("icons/smoke.svg") bottom center/1000px no-repeat, linear-gradient(#EFF9CF, #BBEBDE);
+  position: relative;
+  background-color: $gray-dark;
+  background-image: image-url("supersonic.svg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center 100px;
 
   @include media-breakpoint-up(md) {
-    min-height: 620px;
-    max-height: 800px;
-    background: image-url("icons/cloud2.svg") left -100px top -30px/190px no-repeat, image-url("icons/cloud2.svg") center top 20px/100px no-repeat, image-url("icons/cloud2.svg") right -65px top -30px/180px no-repeat, image-url("icons/cloud1.svg") 95% 90%/50px no-repeat, image-url("icons/smoke.svg") bottom center no-repeat, linear-gradient(#EFF9CF, #BBEBDE);
+      min-height: 620px;
+      max-height: 800px;
   }
 
   .middle-of-image {
-    width: 100%;
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    text-align: center;
-    transform: translateX(-50%);
-    font-size: 15px;
-    margin: 0 auto;
+      max-width: 900px;
+      margin: auto;      
 
-    @include media-breakpoint-up(md) {
-      bottom: 270px;
-      font-size: 45px;
-    }
-
-    .font-page-conference-dates {
-      margin-right: 20px;
-    }
-
-    .rocket-image {
-      width: 45px;
-      height: 350px;
-      bottom: -65px;
       position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+
+      width: 70%;
+      color: white;
+
+      h1 {
+	  font-size: 25px;
+      }
 
       @include media-breakpoint-up(md) {
-	width: 100px;
-	bottom: -115px;
+	  h1 {
+	      font-size: 42px;
+	  }
       }
-    }
 
-    .front-page-location {
-      margin-left: 20px;
-    }
+      .dates-location {
+	  margin-top: 50px;
 
+	  span {
+	      display: block;
+	      font-size: 14px;
+	      letter-spacing: 1px;
+	      text-transform: uppercase;
+	      font-weight: 600;
+	  }
+      }
   }
-
-  .smoke-image {
-    position:absolute;
-    /* Changed this to 0, from -10%, to prevent the smoke to hide the call to action bar.*/
-    bottom: 0;
-    /*bottom: -10%;*/
-    left: -18.5%;
-    width: 130%;
-  }
-
-  .rocket-title {
-    width: 220px;
-    position: absolute;
-    bottom: 8px;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    font-weight: normal;
-    font-family: VAG Rounded;
-    font-style: normal;
-    font-size: 18px;
-
-    @include media-breakpoint-up(md) {
-      bottom: 30px;
-      width: 500px;
-      font-size: 40px;
-    }
-  }
-
 }
