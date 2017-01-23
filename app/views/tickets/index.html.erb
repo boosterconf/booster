@@ -41,9 +41,11 @@
 <table id="tickets" class="table table-condensed table-sortable">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Name</th>
       <th>Email</th>
       <th>Company</th>
+      <th>Ticket type</th>
       <th>Dinner?</th>
       <th>Dietary req</th>
       <th colspan="2"></th>
@@ -53,9 +55,11 @@
   <tbody>
     <% @tickets.each do |ticket| %>
       <tr>
+        <td><%= ticket.id %></td>
         <td><%= ticket.name %></td>
         <td><%= ticket.email %></td>
         <td><%= ticket.company %></td>
+        <td><%= ticket.ticket_type.name %></td>
         <td>
           <% if ticket.attend_dinner %>
             <i class="fa fa-check success"></i>
