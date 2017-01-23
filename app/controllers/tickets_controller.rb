@@ -21,13 +21,21 @@ class TicketsController < ApplicationController
 
   # POST /tickets/1
   def update
-    unless @ticket.valid?
-      render :edit
-    else
+    @ticket = Ticket.find(params[:id])
+    if @ticket.valid?
       if params[:ticket_change]
         @ticket.ticket_type = TicketType.find_by_id(params[:ticket][:ticket_type_id])
       end
+      @ticket.name = params[:ticket][:name]
+      @ticket.company = params[:ticket][:company]
+      @ticket.attend_dinner = params[:ticket][:attend_dinner]
+      @ticket.dietary_info = params[:ticket][:dietary_info]
       @ticket.save
+      flash[:notice] = "Information updated"
+      redirect_to '/tickets'
+    else
+      flash.now[:error] = 'Unable to update ticket'
+      render :action => "edit"
     end
   end
 
