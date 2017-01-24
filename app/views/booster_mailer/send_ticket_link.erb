@@ -5,8 +5,8 @@
 <p>
   Dersom dere ikke allerede har gjort det, er det på tide å registrere partnerbillettene.
   Partnere har to gratis billetter til konferansen.
-  <% @ticket_urls.each_with_index { |url, index | %>
-      Klikk <a href="<%= url %>">her</a> for å registrere deltager <%= index + 1 %>.
+  <% @tickets.each_with_index { |ticket, index | %>
+      Klikk <%= link_to "her", tickets_from_reference_url(ticket.reference) %> for å registrere deltager <%= index + 1 %>.
   <% } %>
 </p>
 

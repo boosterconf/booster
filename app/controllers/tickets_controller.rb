@@ -135,9 +135,10 @@ class TicketsController < ApplicationController
       flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
       redirect_to root_path
     end
-    @ticket = Ticket.includes(:ticket_types).where(:reference => ref).first
+    @ticket = Ticket.includes(:ticket_types).where(reference: ref).to_a.first
+    puts "Found ticket ? " + @ticket.present?
     puts @ticket.inspect
-    @sponsor = Sponsor.all_accepted.where(:name => @ticket.company).first
+    @sponsor = Sponsor.all_accepted.where(name: @ticket.company).to_a.first
     @reference = ref
 
     rescue
@@ -152,9 +153,9 @@ class TicketsController < ApplicationController
       flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
       redirect_to root_path
     end
-    @ticket = Ticket.includes(:ticket_types).where(:reference => ref).first
-    puts @ticket.inspect
-    @sponsor = Sponsor.all_accepted.where(:name => @ticket.company).first
+    @ticket = Ticket.includes(:ticket_types).where(reference: ref).to_a.first
+    puts @ticket
+    @sponsor = Sponsor.all_accepted.where(name: @ticket.company).to_a.first
     @ticket.name = params[:ticket][name]
     @ticket.email = params[:ticket][email]
     @ticket.attend_dinner = params[:ticket][attend_dinner]

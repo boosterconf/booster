@@ -174,21 +174,18 @@ class SponsorsController < ApplicationController
     existing_ticket_count = Ticket.joins(:ticket_type).where(:company => sponsor.name, :ticket_type => TicketType.sponsor).count
     puts existing_ticket_count
     if existing_ticket_count < NUMBER_OF_TICKETS_PER_SPONSOR
-      refs = []
+      tickets = []
       (NUMBER_OF_TICKETS_PER_SPONSOR - existing_ticket_count).times do
-        ref = SecureRandom.urlsafe_base64
-        puts ref
         ticket = Ticket.new
         ticket.ticket_type = TicketType.sponsor
         ticket.company = sponsor.name
         ticket.name = ""
         ticket.email = ""
-        ticket.reference = ref
+        ticket.reference = SecureRandom.urlsafe_base64
         ticket.save!
-        puts "tickets/ref/" + ref
-        refs.push tickets_from_reference_url(ref)
+        tickets.push ticket
       end
-      BoosterMailer.send_ticket_link(sponsor, refs).deliver_now
+      BoosterMailer.send_ticket_link(sponsor, tickets).deliver_now
     end
     true
   end
