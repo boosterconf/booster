@@ -11,7 +11,7 @@ class InfoController < ApplicationController
 #  end
 
   def speakers
-    @speakers = User.all_accepted_speakers
+    @speakers = User.all_confirmed_speakers
   end
 
   def index

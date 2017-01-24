@@ -151,6 +151,11 @@ class User < ActiveRecord::Base
     talks = self.talks.find_all { |talk| talk.accepted? }
     !talks.empty?
   end
+  
+   def has_confirmed_talk?
+    talks = self.talks.find_all { |talk| talk.confirmed? }
+    !talks.empty?
+  end 
 
   def has_all_talks_refused?
     refused_talks = self.talks.find_all { |talk| talk.refused? }
@@ -236,6 +241,10 @@ class User < ActiveRecord::Base
 
   def self.all_accepted_speakers
     self.all.select { |u| u.has_accepted_talk? || u.invited == true }
+  end
+  
+  def self.all_confirmed_speakers
+    self.all.select { |u| u.has_confirmed_talk? || u.invited == true }
   end
 
   def self.all_tutorial_speakers

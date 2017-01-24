@@ -63,6 +63,10 @@ class Talk < ActiveRecord::Base
     self.acceptance_status == 'accepted'
   end
 
+  def confirmed?
+   self.acceptance_status == 'accepted' && self.speakers_confirmed == true
+  end
+  
   def pending?
     self.acceptance_status == 'pending'
   end
