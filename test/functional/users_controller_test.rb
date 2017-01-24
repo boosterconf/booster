@@ -71,23 +71,6 @@ class UsersControllerTest < ActionController::TestCase
 
 
     end
-
-    context 'trying to create a new user with limit for number of users reached' do
-      setup do
-        User.stubs(:count).returns(500)
-        AppConfig.stubs(:max_users_limit).returns(500)
-      end
-
-      should 'get an error message when create is called' do
-        post :create, user: create_user_params
-        assert flash[:error]
-      end
-
-      should 'get an error message when new is called' do
-        get :new
-        assert flash[:error]
-      end
-    end
   end
 
   context 'An unfinished user updating his profile info' do
