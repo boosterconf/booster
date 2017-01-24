@@ -130,19 +130,14 @@ class TicketsController < ApplicationController
   end
 
   def from_reference
-    ref = params[:reference]
-    unless ref.present?
-      flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
-      redirect_to root_path
-    end
-    @ticket = Ticket.includes(:ticket_types).where(reference: ref).to_a.first
+    @ticket = Ticket.includes(:ticket_types).where(reference: params[:reference]).to_a.first
     puts "Found ticket ? " + @ticket.present?
     puts @ticket.inspect
     @sponsor = Sponsor.all_accepted.where(name: @ticket.company).to_a.first
-    @reference = ref
+    @reference = params[:reference]
 
     rescue
-      flash[:error] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
+      flash[:notice] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
       redirect_to root_path
   end
 
