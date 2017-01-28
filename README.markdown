@@ -50,7 +50,18 @@ checkout (both will save to repo with LF-endings).
 
 #### Setting up SSH certificates
 
-    Get started with the help of GitHub: https://help.github.com/articles/set-up-git/
+    We get our certificates from letsencrypt. To generate new certs, start the vagrant instance, and install
+    certbot-auto. See https://certbot.eff.org/#ubuntutrusty-other.
+
+    When installed, run certbot-auto certonly --manual. The domain we use is www.boosterconf.no.
+    You will be presented with some long string that needs to be served
+    from www.boosterconf.no. Check out routes.rb and PagesController for putting the required secrets in place.
+    Push these changes to production, and press enter in the certbot-auto command line. After verifying that we control
+    the domain, certbot will generate new certs under /etc/letsencrypt. Copy these files to the host machine, somewhere
+    you can access them later.
+
+    Log in to Heroku and upload the full chain pem file, and the private key pem file generated.
+    Easy - peasy - lemon squeezy.
 
 
 ## Getting started
