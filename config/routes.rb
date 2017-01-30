@@ -1,6 +1,6 @@
  Booster2013::Application.routes.draw do
 
-   get '/.well-known/acme-challenge/Yzat3bQHDvEwN2ATI3gNmlJHxnpmIQvm8RjC63EXyiY' => 'pages#letsencrypt'
+   get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
 
   resources :tickets
   resources :rooms
