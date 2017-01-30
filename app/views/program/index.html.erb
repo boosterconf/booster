@@ -25,23 +25,6 @@
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
       <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[917] %>
-      <!--div class="program-row">
-        <section class="period">
-          <header>
-            <time class="time"><%= '09:15-10:15' %></time>
-            <span class="location"><%= 'Dragefjellet' %></span>
-          </header>
-          <a class="single-talk" href="# %>">
-            <div class="slot">
-              <div class="plenary-type talk">
-                <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= "TBA" %></h4>
-                <span class='author'><%= "TBA" %></span>
-                <div class='description'><%= "TBA" %></div>
-              </div>
-            </div>
-          </a>
-        </section>
-      </div-->
 
       <div class='program-row'>
         <% period = @periods.pop %>
