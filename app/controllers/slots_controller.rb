@@ -18,8 +18,7 @@ class SlotsController < ApplicationController
 
   # GET /slots/new
   def new
-    #@talks = Talk.all_unassigned_tutorials
-
+    @talks = Talk.all_unassigned_tutorials
     @slot = Slot.new(params[:slot])
     @position = params[:position]
   end
@@ -30,8 +29,9 @@ class SlotsController < ApplicationController
 
   # POST /slots
   def create
+    puts params
     @slot = Slot.where(params[:slot]).first_or_initialize
-    @slot.talk_positions.build(talk_id: params[:talk_id], position: params[:position])
+    @slot.talk_positions.build(talk_id: params[:talk_id], position: params[:position] )
 
     if @slot.save
       redirect_to(slots_url, notice: 'Slot was successfully created.')

@@ -13,8 +13,8 @@
 </p>
 
 <p>
-  <b>Talk:</b>
-  <%=h @slot.talk.title %>
+  <b>Talks:</b>
+  <%=h @slot.talks.map {|talk| talk.title } %>
 </p>
 
 <%= link_to 'Edit', edit_slot_path(@slot) %> |
