@@ -10,8 +10,8 @@
   background-position: center 100px;
 
   @include media-breakpoint-up(md) {
-      min-height: 620px;
-      max-height: 800px;
+      min-height: 450px;
+      max-height: 60vh;
   }
 
   .middle-of-image {
