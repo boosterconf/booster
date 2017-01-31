@@ -42,7 +42,7 @@ production:
   tutorial_registration_open: false
   lightning_registration_open: false
   proposals_visible: false
-  program_released: false
+  program_released: true
   speakers_released: true
   early_bird_ends: 2017-02-14 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
