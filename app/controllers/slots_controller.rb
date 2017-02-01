@@ -18,9 +18,15 @@ class SlotsController < ApplicationController
 
   # GET /slots/new
   def new
-    @talks = Talk.all_unassigned_tutorials
     @slot = Slot.new(params[:slot])
     @position = params[:position]
+    if @slot.period.period_type == 'workshop'
+      @talks = Talk.all_unassigned_tutorials
+    elsif @slot.period.period_type == 'short_talk'
+      @talks = Talk.all_accepted_lightning_talks
+    else
+      @talks = Talk.all_accepted_lightning_talks
+    end
   end
 
   # GET /slots/1/edit
@@ -29,7 +35,6 @@ class SlotsController < ApplicationController
 
   # POST /slots
   def create
-    puts params
     @slot = Slot.where(params[:slot]).first_or_initialize
     @slot.talk_positions.build(talk_id: params[:talk_id], position: params[:position] )
 
