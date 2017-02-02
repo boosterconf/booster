@@ -34,7 +34,7 @@ class UsersController < ApplicationController
       @user.invited = true
       @user.build_bio
     else
-      redirect_to_front_page
+      redirect_to root_path
     end
 
     @user.registration.includes_dinner = @user.registration.ticket_type.dinner_included
@@ -81,13 +81,6 @@ class UsersController < ApplicationController
 
   def login(user)
     UserSession.create(user)
-  end
-
-  def redirect_to_front_page
-    flash[:error] = "We have reached the limit on the number of participants for this conference. Please contact us at kontakt@boosterconf.no and we will see what we can do."
-    logger.error("Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.")
-    BoosterMailer.error_mail("Error on boosterconf.no", "Hard limit for number of users (#{AppConfig.max_users_limit}) has been reached. Please take action.").deliver_now
-    redirect_to root_path
   end
 
   def create_bio
