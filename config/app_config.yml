@@ -1,6 +1,5 @@
 development:
   year: 2017
-  max_users_limit: 2000
   tutorial_registration_open: true
   lightning_registration_open: true
   proposals_visible: true
@@ -13,7 +12,6 @@ development:
 
 test:
   year: 2017
-  max_users_limit: 2000
   tutorial_registration_open: false
   lightning_registration_open: false
   proposals_visible: true
@@ -25,7 +23,6 @@ test:
 
 staging:
   year: 2017
-  max_users_limit: 2000
   tutorial_registration_open: false
   lightning_registration_open: false
   proposals_visible: false
@@ -38,7 +35,6 @@ staging:
 
 production:
   year: 2017
-  max_users_limit: 300
   tutorial_registration_open: false
   lightning_registration_open: false
   proposals_visible: false
