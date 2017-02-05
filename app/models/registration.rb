@@ -60,10 +60,6 @@ class Registration < ActiveRecord::Base
     ticket_description + ' ' + (registration_complete ? ' (Paid)' : '')
   end
 
-  def show_bio?
-    ticket_type.speaker? || ticket_type.organizer?
-  end
-
   def speaker?
     ticket_type.speaker?
   end

@@ -52,9 +52,7 @@
 
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
-        <% if @user.registration.show_bio? %>
-          <%= render :partial => 'bio', :locals => {:f => f } %>
-        <% end %>
+        <%= render :partial => 'bio', :locals => {:f => f } %>
 
         <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
 
