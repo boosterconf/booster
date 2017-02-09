@@ -140,13 +140,14 @@ class TicketsController < ApplicationController
       redirect_to root_path
     end
     @ticket = Ticket.find_by(reference: params[:reference])
-    @ticket.name = params[:ticket][name]
-    @ticket.email = params[:ticket][email]
-    @ticket.attend_dinner = params[:ticket][attend_dinner]
+    @ticket.name = ticket_params.name
+    @ticket.email = ticket_params.email
+    @ticket.attend_dinner = ticket_params.attend_dinner
+    @ticket.dietary_info = ticket_params.dietary_info
     @ticket.roles = params[:roles].join(",") if params[:roles]
-    @ticket.dietary_info = params[:ticket][dietary_info]
     @ticket.save!
-    redirect_to tickets_path(@ticket)
+    puts tickets_path(@ticket)
+    redirect_to @ticket
   end
 
   private
