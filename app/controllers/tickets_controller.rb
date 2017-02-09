@@ -8,7 +8,8 @@ class TicketsController < ApplicationController
     by_ticket_type = @tickets.group_by {|ticket| ticket.ticket_type.name}
     @stats = {}
     by_ticket_type.each_pair {|k, v| @stats[k] = v.count }
-    @stats['Attending dinner'] = @tickets.count {|ticket| ticket.attend_dinner }
+    @stats['Attending dinner'] = @tickets.count(:attend_dinner)
+    @total_ticket_count = @tickets.count
   end
 
   # GET /tickets/1
