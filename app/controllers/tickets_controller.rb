@@ -130,15 +130,8 @@ class TicketsController < ApplicationController
   end
 
   def from_reference
-    @ticket = Ticket.includes(:ticket_types).where(reference: params[:reference]).to_a.first
-    puts "Found ticket ? " + @ticket.present?
-    puts @ticket.inspect
-    @sponsor = Sponsor.all_accepted.where(name: @ticket.company).to_a.first
+    @ticket = Ticket.find_by(reference: params[:reference])
     @reference = params[:reference]
-
-    rescue
-      flash[:notice] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
-      redirect_to root_path
   end
 
   def create_from_reference
@@ -146,9 +139,7 @@ class TicketsController < ApplicationController
       flash[:notice] = "We could not find the tickets. Send an email to kontakt@boosterconf.no and we will fix it."
       redirect_to root_path
     end
-    @ticket = Ticket.includes(:ticket_types).where(reference: params[:reference]).to_a.first
-    puts @ticket
-    @sponsor = Sponsor.all_accepted.where(name: @ticket.company).to_a.first
+    @ticket = Ticket.find_by(reference: params[:reference])
     @ticket.name = params[:ticket][name]
     @ticket.email = params[:ticket][email]
     @ticket.attend_dinner = params[:ticket][attend_dinner]
@@ -156,12 +147,6 @@ class TicketsController < ApplicationController
     @ticket.dietary_info = params[:ticket][dietary_info]
     @ticket.save!
     render action: 'show'
-
-  rescue => e
-    puts e
-    flash[:error] = e.message
-    @reference = params[:reference]
-    render action: 'from_reference'
   end
 
   private
