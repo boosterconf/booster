@@ -11,7 +11,7 @@
   resources :group_registrations, only: [:new, :create]
 
   get 'tickets/ref/:reference' => 'tickets#from_reference', :as => :tickets_from_reference
-  post'tickets/ref/:reference' => 'tickets#create_from_reference', :as => :tickets_create_from_reference
+  patch 'tickets/ref/:reference' => 'tickets#create_from_reference', :as => :tickets_create_from_reference
 
   get 'users/ref/:reference' => 'users#from_reference', :as => :user_from_reference
   get 'users/new_skeleton' => 'users#new_skeleton', :as => :new_skeleton_user
