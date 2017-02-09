@@ -146,7 +146,7 @@ class TicketsController < ApplicationController
     @ticket.roles = params[:roles].join(",") if params[:roles]
     @ticket.dietary_info = params[:ticket][dietary_info]
     @ticket.save!
-    redirect_to @ticket, notice: notice
+    redirect_to @ticket
   end
 
   private
