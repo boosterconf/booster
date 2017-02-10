@@ -31,15 +31,15 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
           <% period.slots.each do |slot| %>
-          <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
-                     talks: slot.talk_positions.map(&:talk) %>
+              <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                         talks: slot.talk_positions.map(&:talk) %>
           <% end %>
         </div>
       </div>
 
       <%= render 'break_section', location: 'Downstairs', time: '11:15-11:30', title: 'Coffee break' %>
 
-      
+
 
       <div class='program-row'>
         <% period = @periods.pop %>
@@ -80,7 +80,8 @@
         <section class="period">
           <header class="break">
             <time class="time">19:00-00:00</time>
-            <span class="location">Galleri Nygaten (<%= link_to "map", "https://goo.gl/maps/Ngp2CXdQB5m", target: "_new" %>)</span>
+            <span class="location">Galleri Nygaten (<%= link_to "map", "https://goo.gl/maps/Ngp2CXdQB5m", target: "_new" %>
+              )</span>
             <span>&mdash; Conference dinner</span>
           </header>
         </section>
@@ -143,15 +144,16 @@
       </div>
 
       <!-- <%= render 'open_space_section', location: 'Dragefjellet', time: '20:00-01:00', title: 'Fishbowl / Community Night' %> -->
-    </div>
-    <div class="program-row">
-      <section class="period">
-        <header class="break">
-          <time class="time">19:00-00:00</time>
-          <span class="location">Restaurant BOHA (<%= link_to "map", "https://www.google.no/maps/place/Boha+Restaurant/@60.3915881,5.3210691,20z/data=!4m12!1m6!3m5!1s0x463cfc0263962ebb:0x5d5f3cf1942329c3!2sBoha+Restaurant!8m2!3d60.3915066!4d5.3211683!3m4!1s0x463cfc0263962ebb:0x5d5f3cf1942329c3!8m2!3d60.3915066!4d5.3211683?hl=no", target: "_new" %>)</span>
-          <span>&mdash; Speaker's dinner - Only for speakers but everyone can join us at the bar "Kråken" afterwards </span>
-        </header>
-      </section>
+      <div class="program-row">
+        <section class="period">
+          <header class="break">
+            <time class="time">19:00-00:00</time>
+            <span class="location">Restaurant BOHA (<%= link_to "map", "https://www.google.no/maps/place/Boha+Restaurant/@60.3915881,5.3210691,20z/data=!4m12!1m6!3m5!1s0x463cfc0263962ebb:0x5d5f3cf1942329c3!2sBoha+Restaurant!8m2!3d60.3915066!4d5.3211683!3m4!1s0x463cfc0263962ebb:0x5d5f3cf1942329c3!8m2!3d60.3915066!4d5.3211683?hl=no", target: "_new" %>)</span>
+            <span>&mdash;
+              Speaker's dinner - Only for speakers but everyone can join us at the bar "Kråken" afterwards </span>
+          </header>
+        </section>
+      </div>
     </div>
 
     <div id="day3">
