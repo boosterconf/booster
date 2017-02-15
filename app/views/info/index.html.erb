@@ -13,12 +13,9 @@
 <% end %>
 
 <div class="calltoaction">
-  <span>The ticket sale is open! 
-    <% if DateTime.now < AppConfig.early_bird_ends %> 
-      Early bird prices until Feb 14. Buy now and save 2000 NOK.
-    <% end %>
+  <span>Follow <a href="https://twitter.com/boosterconf">@boosterconf</a> on Twitter to get notified when the next batch of tickets is available.    
   </span>
-  <a class="btn btn-info" href="/tickets/new">Buy a ticket</a>
+  <a class="btn btn-info" href="/tickets/new" disabled>Buy a ticket</a>
 </div>
 
 <div class="jumbotron m-b-0">
