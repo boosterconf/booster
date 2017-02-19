@@ -13,7 +13,7 @@
         </span>
         </h5>
         <span class='author'><%= talk.speaker_name %></span>
-
+        <%= render partial: 'volunteer', locals: {talk: talk} %>
         <div class='description'><%= talk.description.html_safe %></div>
 
         <span class='location-small'><%= location %></span>

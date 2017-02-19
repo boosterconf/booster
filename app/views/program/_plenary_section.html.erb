@@ -9,6 +9,7 @@
         <div class="plenary-type talk">
           <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= talk.title %></h4>
           <span class='author'><%= talk.speaker_name %></span>
+          <%= render partial: 'volunteer', locals: {talk: talk} %>
           <div class='description'><%= talk.description.html_safe %></div>
         </div>
       </div>
