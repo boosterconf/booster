@@ -1,0 +1,7 @@
+<% if admin? %>
+    <% @volunteer = talk.volunteers.first() %>
+    <% if @volunteer != nil %>
+        <div class="volunteer">Frivillig:
+          <%= @volunteer.full_name %></div>
+    <% end %>
+<% end %>
