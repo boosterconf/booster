@@ -9,9 +9,10 @@
             <h4><%= talk.title %></h4>
             <span class='author'><%= talk.speaker_name %></span>
             <% if admin? %>
-                <h3>Vakt: Anders</h3>
-                <% talk.volunteers.each do |volunteer| %>
-                    <%= volunteer.first_name %>
+                <% @volunteer = talk.volunteers.first() %>
+                <% if @volunteer != nil %>
+                    <div class="volunteer">Frivillig:
+                      <%= @volunteer.full_name %></div>
                 <% end %>
             <% end %>
           </div>
