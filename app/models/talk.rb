@@ -13,6 +13,7 @@ class Talk < ActiveRecord::Base
   has_many :reviews, -> { order 'created_at desc'}
   has_attached_file :slide, PAPERCLIP_CONFIG
   has_and_belongs_to_many :slots, join_table: 'talk_positions'
+  has_and_belongs_to_many :volunteers, join_table: 'talks_volunteers'
 
   validates_attachment_content_type :slide,
                                     :content_type => [

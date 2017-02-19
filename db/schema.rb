@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104182823) do
+ActiveRecord::Schema.define(version: 20170219195432) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -280,6 +280,14 @@ ActiveRecord::Schema.define(version: 20170104182823) do
   add_index "talks", ["id", "type"], name: "index_talks_on_id_and_type", using: :btree
   add_index "talks", ["talk_type_id"], name: "index_talks_on_talk_type_id", using: :btree
 
+  create_table "talks_volunteers", id: false, force: :cascade do |t|
+    t.integer "volunteer_id", null: false
+    t.integer "talk_id",      null: false
+  end
+
+  add_index "talks_volunteers", ["talk_id", "volunteer_id"], name: "index_talks_volunteers_on_talk_id_and_volunteer_id", using: :btree
+  add_index "talks_volunteers", ["volunteer_id", "talk_id"], name: "index_talks_volunteers_on_volunteer_id_and_talk_id", using: :btree
+
   create_table "ticket_types", force: :cascade do |t|
     t.string   "reference",       limit: 255
     t.string   "name",            limit: 255
@@ -346,6 +354,13 @@ ActiveRecord::Schema.define(version: 20170104182823) do
   end
 
   add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
+
+  create_table "volunteers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.string "phone_number"
+  end
 
   add_foreign_key "registrations", "ticket_types"
   add_foreign_key "tickets", "ticket_types"
