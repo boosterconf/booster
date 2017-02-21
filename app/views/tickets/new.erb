@@ -14,6 +14,14 @@
   </p>
 
   <%= form_for(@ticket) do |f| %>
+      <% if current_user && current_user.is_admin %>
+          <div class="form-group">
+            <%= hidden_field_tag :ticket_change %>
+            <label for="ticket_type">Ticket type</label>
+            <%= f.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
+          </div>
+      <% end %>
+
       <fieldset class="form-group">
         <%= f.label :name, "Name" %>
         <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>

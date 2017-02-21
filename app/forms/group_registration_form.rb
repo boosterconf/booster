@@ -45,8 +45,8 @@ class GroupRegistrationForm
   def persist!
     tickets.each { |ticket|
       ticket.company = company
-      ticket.ticket_type = TicketType.current_normal_ticket
-      ticket.attend_dinner = TicketType.current_normal_ticket.dinner_included
+
+      ticket.attend_dinner = ticket.ticket_type.dinner_included
       ticket.save
       BoosterMailer.ticket_assignment(ticket).deliver_now
     }

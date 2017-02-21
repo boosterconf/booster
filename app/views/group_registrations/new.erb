@@ -17,6 +17,13 @@
 
   <%= form_for @group_registration, url: group_registrations_path do |f| %>
 
+      <% if current_user && current_user.is_admin %>
+          <div class="form-group">
+            <label for="ticket_type">Ticket type</label>
+            <%= f.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
+          </div>
+      <% end %>
+
       <div class='form-group'>
         <label>How do you want to receive the invoice?</label>
 
