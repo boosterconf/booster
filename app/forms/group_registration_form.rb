@@ -11,7 +11,8 @@ class GroupRegistrationForm
   attribute :your_reference
   attribute :text
   attribute :company
-
+  attribute :ticket_type_id
+  
   attribute :tickets, Array[Ticket]
 
   attribute :total
