@@ -5,7 +5,9 @@
   This is a confirmation of your registration to <a href="http://www.boosterconf.no">the Booster conference</a>.
 </p>
 
-<p>We will send you an invoice for NOK <%= @amount_due %> to <%= @email %>.</p>
+<% if @amount_due > 0 %>
+  <p>We will send you an invoice for NOK <%= @amount_due %> to <%= @email %>.</p>
+<% end %>
 
 <p>
   We look forward to seeing you at the conference! You will pick up your name tag at the conference venue.

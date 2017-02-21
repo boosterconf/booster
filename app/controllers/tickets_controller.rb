@@ -94,7 +94,9 @@ class TicketsController < ApplicationController
         )
         notice = "Your ticket is paid for!"
         BoosterMailer.ticket_confirmation_paid(@ticket).deliver_now
-        BoosterMailer.invoice_to_fiken([@ticket], charge, nil).deliver_now
+        if @ticket.ticket_type.paying_ticket?
+          BoosterMailer.invoice_to_fiken([@ticket], charge, nil).deliver_now
+        end
       else
         notice = "An invoice will be sent to #{@ticket.email}."
         BoosterMailer.ticket_confirmation_invoice(@ticket).deliver_now

@@ -45,7 +45,6 @@ class GroupRegistrationForm
   def persist!
     tickets.each { |ticket|
       ticket.company = company
-
       ticket.attend_dinner = ticket.ticket_type.dinner_included
       ticket.save
       BoosterMailer.ticket_assignment(ticket).deliver_now
@@ -54,6 +53,9 @@ class GroupRegistrationForm
                      :payment_zip => zip,
                      :payment_email => delivery_method == 'email' ? email : adress,
                      :extra_info => text }
-    BoosterMailer.invoice_to_fiken(tickets, nil, payment_info).deliver_now
+    total = tickets.inject {|sum, ticket| sum + ticket.price_with_vat }
+    if total > 0
+      BoosterMailer.invoice_to_fiken(tickets, nil, payment_info).deliver_now
+    end
   end
 end

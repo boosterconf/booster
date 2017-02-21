@@ -21,7 +21,7 @@ class GroupRegistrationsController < ApplicationController
                   .map { |ticket_params|
       Ticket.new(ticket_params)
     }
-    
+
     ticket_type = TicketType.current_normal_ticket
     if current_user && current_user.is_admin
       ticket_type = TicketType.find_by_id(params[:group_registration_form][:ticket_type_id])
