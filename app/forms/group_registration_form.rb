@@ -54,8 +54,7 @@ class GroupRegistrationForm
                      :payment_zip => zip,
                      :payment_email => delivery_method == 'email' ? email : adress,
                      :extra_info => text }
-    total = tickets.inject {|sum, ticket| sum + ticket.ticket_type.price_with_vat }
-    if total > 0
+    if tickets.first && tickets.first.ticket_type.paying_ticket?
       BoosterMailer.invoice_to_fiken(tickets, nil, payment_info).deliver_now
     end
   end
