@@ -53,6 +53,7 @@
       <th>Ticket type</th>
       <th>Dinner?</th>
       <th>Dietary req</th>
+      <th>Ticket link</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -71,6 +72,11 @@
           <%end %>
         </td>
         <td><%= ticket.dietary_info %></td>
+        <td>
+          <% if ticket.reference.present? %>
+            <%= link_to ticket.reference, tickets_from_reference_url(ticket.reference) %>
+          <% end %>
+        </td>
         <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
         <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
