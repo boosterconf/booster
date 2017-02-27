@@ -1,17 +1,26 @@
 <html>
 <body>
 
-<h2>Registrere partnerbillettene</h2>
+<h2>Do we have the correct info?</h2>
 <p>
-  Dersom dere ikke allerede har gjort det, er det på tide å registrere partnerbillettene.
-  Partnere har to gratis billetter til konferansen.
-  <% @tickets.each_with_index { |ticket, index | %>
-      Klikk <%= link_to "her", tickets_from_reference_url(ticket.reference) %> for å registrere deltager <%= index + 1 %>.
-  <% } %>
+  The conference is soon approaching, and we need to know who will take part in the conference dinner. If you have any
+  special dietary requirements, we need to know in advance, so we can let the kitchen now.
+</p>
+<p>
+  <%if @ticket.attend_dinner %>
+    You are registered for the conference dinner. Dietary requirements: <%= @ticket.dietary_info %>
+  <% else %>
+    You are not registered for the conference dinner.
+  <% end %>
+</p>
+<p>
+  If this information is correct, you do not need to do anything. If you would like to update or add anything,
+  click on the following link.
+  <%= link_to "Link to ticket", tickets_from_reference_url(@ticket.reference) %>
 </p>
 
 <p>
-  Vennlig hilsen <br/>
+  Cheers, <br/>
   Booster
 </p>
 </body>

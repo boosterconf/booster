@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_filter :require_admin, :only => [:index, :destroy,:edit, :update]
+  before_filter :require_admin, :only => [:index, :destroy,:edit, :update, :send_ticket_email]
   before_action :set_ticket, only: [:show, :edit, :update]
 
   # GET /tickets
@@ -10,6 +10,21 @@ class TicketsController < ApplicationController
     by_ticket_type.each_pair {|k, v| @stats[k] = v.count }
     @stats['Attending dinner'] = @tickets.where(attend_dinner: true).count
     @total_ticket_count = @tickets.count
+  end
+
+  def send_ticket_email
+    @tickets = Ticket.all
+
+    @tickets.each { |ticket|
+      if (!ticket.reference.present?)
+        ticket.reference = SecureRandom.urlsafe_base64
+        ticket.save!
+      end
+
+      BoosterMailer.send_ticket_link(ticket).deliver_now
+    }
+    flash[:notice] = "Eposter sendt."
+    redirect_to tickets_path
   end
 
   # GET /tickets/1

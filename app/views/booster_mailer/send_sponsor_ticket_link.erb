@@ -1,0 +1,18 @@
+<html>
+<body>
+
+<h2>Registrere partnerbillettene</h2>
+<p>
+  Dersom dere ikke allerede har gjort det, er det på tide å registrere partnerbillettene.
+  Partnere har to gratis billetter til konferansen.
+  <% @tickets.each_with_index { |ticket, index | %>
+      Klikk <%= link_to "her", tickets_from_reference_url(ticket.reference) %> for å registrere deltager <%= index + 1 %>.
+  <% } %>
+</p>
+
+<p>
+  Vennlig hilsen <br/>
+  Booster
+</p>
+</body>
+</html>

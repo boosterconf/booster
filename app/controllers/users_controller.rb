@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :require_user, except: [:new, :create, :from_reference]
-  before_filter :require_admin, only: [:index, :delete_bio, :phone_list, :dietary_requirements]
+  before_filter :require_admin, only: [:index, :delete_bio]
   before_filter :require_admin_or_self, only: [:show, :edit, :update]
   before_filter :require_unauthenticated_or_admin, only: [:new, :create]
 
@@ -141,16 +141,6 @@ class UsersController < ApplicationController
       flash[:notice] = "Couldn't remove bio"
     end
     redirect_to @user
-  end
-
-  def phone_list
-    @users = User.all_organizers_and_volunteers
-  end
-
-  def dietary_requirements
-    @users = User.all(:order => "last_name",
-                      :include => :registration,
-                      :conditions => "dietary_requirements IS NOT NULL AND dietary_requirements != ''")
   end
 
   def new_skeleton

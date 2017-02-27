@@ -185,7 +185,7 @@ class SponsorsController < ApplicationController
         ticket.save!
         tickets.push ticket
       end
-      BoosterMailer.send_ticket_link(sponsor, tickets).deliver_now
+      BoosterMailer.send_sponsor_ticket_link(sponsor, tickets).deliver_now
     end
     true
   end

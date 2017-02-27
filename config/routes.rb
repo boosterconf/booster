@@ -2,7 +2,11 @@
 
    get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
 
-  resources :tickets
+  resources :tickets do
+    collection do
+      get :send_ticket_email
+    end
+  end
   resources :rooms
   resources :periods
   resources :slots
@@ -30,12 +34,7 @@
   get 'program/lightning' => 'program#lightning'
   get '/blifrivillig', to: 'blifrivillig#get'
 
-  resources :users do
-    collection do
-      get :dietary_requirements
-      get :phone_list
-    end
-  end
+  resources :users
 
   resources :acceptances do
     member do
