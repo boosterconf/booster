@@ -21,7 +21,7 @@ class RegisterShortTalkController < ApplicationController
 
     @user = User.new(params[:user])
     @user.registration = Registration.new
-    @user.registration.ticket_type = TicketType.lightning
+    @user.registration.ticket_type = TicketType.short_talk
     @user.registration.manual_payment = true
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?

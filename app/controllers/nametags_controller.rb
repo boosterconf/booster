@@ -3,12 +3,12 @@ class NametagsController < ApplicationController
   before_filter :require_admin
 
   def index
-    @users = User.all(:include => :registration, :order => "last_name, created_at DESC")
+    @tickets = Ticket.all(:include => :ticket_type)
 
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = NametagPdf.new(@users, view_context)
+        pdf = NametagPdf.new(@tickets, view_context)
         send_data pdf.render,
                   filename: "nametags.pdf",
                   type: "application/pdf"
@@ -17,14 +17,14 @@ class NametagsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @ticket = Ticket.find(params[:id])
 
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = NametagPdf.new([@user], view_context)
+        pdf = NametagPdf.new([@ticket], view_context)
         send_data pdf.render,
-                  filename: "invoice_#{@user.id}.pdf",
+                  filename: "nametag_#{@ticket.id}.pdf",
                   type: "application/pdf"
       end
     end
@@ -33,7 +33,7 @@ class NametagsController < ApplicationController
 end
 
 class NametagPdf < Prawn::Document
-  def initialize(users, view)
+  def initialize(tickets, view)
     super(:page_size => "A6", :margin => 20)
 
 
@@ -45,7 +45,7 @@ class NametagPdf < Prawn::Document
         :normal => "#{Rails.root}/app/assets/fonts/FiraSans-HeavyItalic.ttf"
     })
 
-    users.each_with_index do |user, index|
+    tickets.each_with_index do |ticket, index|
       image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 40, :at => [-20, bounds.height + 20]
 
       move_down 210
@@ -53,17 +53,17 @@ class NametagPdf < Prawn::Document
       font 'VAGRounded'
       fill_color "303030"
 
-      if user.full_name
+      if ticket.name
         font_size 30
-        text user.full_name, :align => :center
+        text ticket.name, :align => :center
       else
         font_size 20
-        text user.email || '', :align => :center
+        text ticket.email || '', :align => :center
       end
 
       move_down 10
       font_size 15
-      text user.company || '', :align => :center, :style => :normal
+      text ticket.company || '', :align => :center, :style => :normal
 
       move_up bounds.height
 
@@ -71,23 +71,20 @@ class NametagPdf < Prawn::Document
       font_size 23
 
       fill_color "FF9966"
-      registration = user.registration
       ticket_type_text = ''
-      if registration == nil
-        ticket_type_text = ''
-      elsif registration.ticket_type.organizer?
+      if ticket.ticket_type.organizer?
         ticket_type_text = 'ORGANIZER'
-      elsif registration.user.confirmed_speaker?
+      elsif ticket.ticket_type.speaker?
         ticket_type_text = 'SPEAKER'
-      elsif registration.ticket_type.volunteer?
+      elsif ticket.ticket_type.volunteer?
         ticket_type_text = 'VOLUNTEER'
-      elsif registration.ticket_type.student?
+      elsif ticket.ticket_type.student?
         ticket_type_text ='STUDENT'
       end
 
       text_box ticket_type_text, :at => [0, 30], :align => :center
 
-      if index < users.size - 1
+      if index < tickets.size - 1
         start_new_page
       end
     end

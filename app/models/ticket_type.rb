@@ -12,7 +12,7 @@ class TicketType < ActiveRecord::Base
   end
 
   def speaker?
-    %w(lightning speaker).include? reference
+    %w(lightning speaker short_talk).include? reference
   end
 
   def organizer?
@@ -57,6 +57,10 @@ class TicketType < ActiveRecord::Base
 
   def self.lightning
     find_by_reference("lightning")
+  end
+
+  def self.short_talk
+    find_by_reference("short_talk")
   end
 
   def self.early_bird
