@@ -21,7 +21,9 @@ class TicketsController < ApplicationController
         ticket.save!
       end
 
-      BoosterMailer.send_ticket_link(ticket).deliver_now
+      if ticket.email.present?
+        BoosterMailer.send_ticket_link(ticket).deliver_now
+      end
     }
     flash[:notice] = "Eposter sendt."
     redirect_to tickets_path
