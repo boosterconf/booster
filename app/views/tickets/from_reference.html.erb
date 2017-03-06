@@ -57,20 +57,7 @@
 
       <div class="form-actions">
 
-        <% if AppConfig.stripe_on %>
-            <div class="alert alert-info">
-              If you would like to pay with a credit card, click on the button below.
-              If you have already paid, please don't pay again, but use the Save button right next to it! :)
-            </div>
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                    data-description="<%=@ticket.ticket_type.name%>"
-                    data-name="BOOSTERKONFERANSEN"
-                    data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
-                    data-locale="auto"
-                    data-zip-code="true"
-                    data-currency="nok"></script>
-        <% end %>
+        
         <%= button_to "Save", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary" %>
       </div>
 
