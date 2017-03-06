@@ -59,7 +59,8 @@
 
         <% if AppConfig.stripe_on %>
             <div class="alert alert-info">
-              If you would like to pay with a credit card, click on this button. If you have already paid, please don't pay again! :)
+              If you would like to pay with a credit card, click on the button below.
+              If you have already paid, please don't pay again, but use the Save button right next to it! :)
             </div>
             <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
