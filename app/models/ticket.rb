@@ -10,4 +10,16 @@ class Ticket < ActiveRecord::Base
     Ticket.exists?(:email => email)
   end
 
+  def self.to_csv
+    attributes = %w{email name company}
+
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+
+      all.each do |ticket|
+        csv << attributes.map{ |attr| ticket.send(attr) }
+      end
+    end
+  end
+
 end

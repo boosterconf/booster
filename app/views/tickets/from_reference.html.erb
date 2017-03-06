@@ -59,6 +59,7 @@
         <%= button_to "Save", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary", id: "primary_submit" %>
       </div>
 
+      <% if @ticket.ticket_type.paying_ticket? %>
       <div class="form-actions">
 
         <% if AppConfig.stripe_on %>
@@ -78,6 +79,7 @@
         <% end %>
 
       </div>
+      <% end %>
 
   <% end %>
 </article>

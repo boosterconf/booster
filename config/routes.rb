@@ -5,6 +5,7 @@
   resources :tickets do
     collection do
       get :send_ticket_email
+      get :download_emails
     end
   end
   resources :rooms
@@ -162,8 +163,7 @@
   match 'info/cfp' => 'info#cfp', via: :all
   match 'info/partners' => 'info#partners', via: :all
   match 'info/about' => 'info#about', via: :all
-   match 'info/kids' => 'info#kids', via: :all
-  match 'info/tickets' => 'info#tickets', via: :all
+  match 'info/kids' => 'info#kids', via: :all
   match 'info/speakers' => 'info#speakers', via: :all
   match 'info/openspaces' => 'info#openspaces', via: :all
   match 'info/fishbowl' => 'info#fishbowl', via: :all

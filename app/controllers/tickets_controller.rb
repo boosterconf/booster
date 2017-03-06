@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_filter :require_admin, :only => [:index, :destroy,:edit, :update, :send_ticket_email]
+  before_filter :require_admin, :only => [:index, :destroy,:edit, :update, :send_ticket_email, :download_emails]
   before_action :set_ticket, only: [:show, :edit, :update]
 
   # GET /tickets
@@ -10,6 +10,15 @@ class TicketsController < ApplicationController
     by_ticket_type.each_pair {|k, v| @stats[k] = v.count }
     @stats['Attending dinner'] = @tickets.where(attend_dinner: true).count
     @total_ticket_count = @tickets.count
+  end
+
+  def download_emails
+    @tickets = Ticket.all
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @tickets.to_csv, filename: "tickets-#{Date.today}.csv" }
+    end
   end
 
   def send_ticket_email

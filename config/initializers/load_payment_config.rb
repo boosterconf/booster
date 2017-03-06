@@ -5,6 +5,3 @@ require 'yaml'
 # Dette gjør det mulig å mocke kall til konfigurasjonen.
 config = OpenStruct.new(YAML.load_file("#{Rails.root}/config/app_config.yml"))
 ::AppConfig = OpenStruct.new(config.send(Rails.env))
-
-PAYMENT_CONFIG = YAML.load(ERB.new(File.read("#{Rails.root}/config/payment_config.yml")).result)[Rails.env].symbolize_keys
-
