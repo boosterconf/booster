@@ -56,9 +56,27 @@
       <% end %>
 
       <div class="form-actions">
+        <%= button_to "Save", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary", id: "primary_submit" %>
+      </div>
 
-        
-        <%= button_to "Save", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary" %>
+      <div class="form-actions">
+
+        <% if AppConfig.stripe_on %>
+            <p> You are registered with a <%= @ticket.ticket_type.name %> ticket, at a price of <strong><%= @ticket.ticket_type.price_with_vat %> NOK, incl. VAT</strong> .</p>
+            <div class="alert alert-success">
+              If you haven't paid already, and would like to pay with a credit card, click on the button below.
+              If you have paid, please don't pay again! :)
+            </div>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-description="<%=@ticket.ticket_type.name%>"
+                    data-name="BOOSTERKONFERANSEN"
+                    data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
+                    data-locale="auto"
+                    data-zip-code="true"
+                    data-currency="nok"></script>
+        <% end %>
+
       </div>
 
   <% end %>

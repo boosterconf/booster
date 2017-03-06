@@ -178,6 +178,26 @@ class TicketsController < ApplicationController
     @ticket.attend_dinner = ticket_params[:attend_dinner]
     @ticket.dietary_info = ticket_params[:dietary_info]
     @ticket.roles = params[:roles].join(",") if params[:roles]
+
+    if (params[:stripeToken])
+      puts "Received stripe token, pay with card"
+      customer = Stripe::Customer.create(
+          :email => params[:stripeEmail],
+          :source => params[:stripeToken]
+      )
+
+      charge = Stripe::Charge.create(
+          :customer => customer.id,
+          :amount => (@ticket.ticket_type.price_with_vat * 100).to_int,
+          :description => @ticket.ticket_type.name,
+          :statement_descriptor => @ticket.ticket_type.name.slice(0, ([@ticket.ticket_type.name.length, 22].min)),
+          :currency => 'nok'
+      )
+      notice = "Your ticket is paid for!"
+      BoosterMailer.ticket_confirmation_paid(@ticket).deliver_now
+      BoosterMailer.invoice_to_fiken([@ticket], charge, nil).deliver_now
+    end
+
     @ticket.save!
     redirect_to @ticket
   end
