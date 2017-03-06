@@ -62,6 +62,12 @@
       <% if @ticket.ticket_type.paying_ticket? %>
       <div class="form-actions">
 
+        <% if flash[:stripe_error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:stripe_error] %></p>
+            </div>
+        <% end %>
+
         <% if AppConfig.stripe_on %>
             <p> You are registered with a <%= @ticket.ticket_type.name %> ticket, at a price of <strong><%= @ticket.ticket_type.price_with_vat %> NOK, incl. VAT</strong> .</p>
             <div class="alert alert-success">
