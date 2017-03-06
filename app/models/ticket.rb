@@ -1,3 +1,5 @@
+require 'csv'
+
 class Ticket < ActiveRecord::Base
 
   attr_accessible :name, :email, :company, :feedback, :roles, :attend_dinner, :dietary_info, :reference
@@ -11,15 +13,14 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.to_csv
-    attributes = %w{email name company}
+    attributes = %w{email name company ticket_type price vat}
 
     CSV.generate(headers: true) do |csv|
       csv << attributes
 
       all.each do |ticket|
-        csv << attributes.map{ |attr| ticket.send(attr) }
+        csv << [ticket.email, ticket.name, ticket.company, ticket.ticket_type.name, ticket.ticket_type.price, ticket.ticket_type.vat]
       end
     end
   end
-
 end
