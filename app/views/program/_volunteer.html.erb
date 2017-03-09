@@ -1,7 +1,10 @@
 <% if admin? %>
-    <% @volunteer = talk.volunteers.first() %>
-    <% if @volunteer != nil %>
-        <div class="volunteer">Frivillig:
-          <%= @volunteer.full_name %></div>
+    <% if talk.volunteers.any? %>
+        <div class="volunteers">
+          <% talk.volunteers.each do |volunteer| %>
+              <div class="volunteer">Frivillig:
+                <%= volunteer.full_name %></div>
+          <% end %>
+        </div>
     <% end %>
 <% end %>
