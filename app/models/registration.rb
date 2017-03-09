@@ -65,7 +65,7 @@ class Registration < ActiveRecord::Base
   end
 
   def may_attend_speakers_dinner?
-    user != nil && user.confirmed_speaker? || organizer?
+    user != nil && ticket_type != nil && (ticket_type.speaker? || ticket_type.organizer?)
   end
 
   def free_ticket
