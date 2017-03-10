@@ -34,55 +34,66 @@ end
 
 class NametagPdf < Prawn::Document
   def initialize(tickets, view)
-    super(:page_size => "A6", :margin => 20)
+    super(:page_size => "A6", :margin => 35)
 
 
-    font_families.update("VAGRounded" => {
-        :normal => "#{Rails.root}/app/assets/fonts/VAGRounded-Light.ttf"
+    font_families.update("FreigDisMed" => {
+        :normal => "#{Rails.root}/app/assets/fonts/FreigDisMed.ttf"
     })
 
     font_families.update("FiraSans" => {
-        :normal => "#{Rails.root}/app/assets/fonts/FiraSans-HeavyItalic.ttf"
+        :normal => "#{Rails.root}/app/assets/fonts/FiraSans-Heavy.ttf"
+    })
+
+    font_families.update("FiraSansMedium" => {
+        :normal => "#{Rails.root}/app/assets/fonts/FiraSans-Medium.ttf"
     })
 
     tickets.each_with_index do |ticket, index|
-      image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 40, :at => [-20, bounds.height + 20]
+      image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 70, :at => [-35, bounds.height + 35]
 
-      move_down 210
-
-      font 'VAGRounded'
-      fill_color "303030"
+      font 'FreigDisMed'
+      fill_color "FFFFFF"
 
       if ticket.name
-        font_size 30
-        text ticket.name, :align => :center
+        font_size 35
+        text ticket.name, :width => 250
       else
-        font_size 20
-        text ticket.email || '', :align => :center
+        font_size 35
+        text ticket.email || ''
       end
 
       move_down 10
+
+      font 'FiraSans'
       font_size 15
-      text ticket.company || '', :align => :center, :style => :normal
+
+      text ticket.company || '', :style => :normal
 
       move_up bounds.height
 
-      font 'FiraSans'
-      font_size 23
+      font 'FiraSansMedium'
 
-      fill_color "FF9966"
-      ticket_type_text = ''
+      font_size 15
+
+      fill_color 'D8DFDE'
+      ticket_type_text = 'PARTICIPANT'
       if ticket.ticket_type.organizer?
         ticket_type_text = 'ORGANIZER'
       elsif ticket.ticket_type.speaker?
+        fill_color 'DE9777'
         ticket_type_text = 'SPEAKER'
       elsif ticket.ticket_type.volunteer?
+        fill_color 'A8D1C5'
         ticket_type_text = 'VOLUNTEER'
       elsif ticket.ticket_type.student?
         ticket_type_text ='STUDENT'
       end
 
-      text_box ticket_type_text, :at => [0, 30], :align => :center
+      fill_rectangle [-35, 0], 300, 80
+
+      fill_color "29363E"
+      text_box ticket_type_text, :at => [0, -10], :align => :center, :height => 50
 
       if index < tickets.size - 1
         start_new_page
