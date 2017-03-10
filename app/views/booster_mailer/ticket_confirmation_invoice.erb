@@ -6,11 +6,13 @@
 </p>
 
 <% if @amount_due > 0 %>
-  <p>We will send you an invoice for NOK <%= @amount_due %> to <%= @email %>.</p>
+  <p>We will send you an invoice for NOK <%= @amount_due %> to <%= @email %>, or you can pay with a credit card by clicking on the link below.</p>
 <% end %>
 
 <p>
   We look forward to seeing you at the conference! You will pick up your name tag at the conference venue.
+  Please make sure we have the correct information here. We need to know if you plan to attend the conference dinner, and if you have any special dietary requirements.
+  <%= link_to "Link to ticket", tickets_from_reference_url(@ticket.reference) %>
 </p>
 
 <p>If you experience any problems,

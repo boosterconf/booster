@@ -244,6 +244,7 @@ class BoosterMailer < ActionMailer::Base
     @name = ticket.name
     @amount_due = ticket.ticket_type.price_with_vat
     @email = ticket.email
+    @ticket = ticket
     mail(to: ticket.email, from: FROM_EMAIL,
          subject: "Your ticket to Booster is confirmed",
          cc: FROM_EMAIL)
