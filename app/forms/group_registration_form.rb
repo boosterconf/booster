@@ -47,6 +47,7 @@ class GroupRegistrationForm
     tickets.each { |ticket|
       ticket.company = company
       ticket.attend_dinner = ticket.ticket_type.dinner_included
+      ticket.reference = SecureRandom.urlsafe_base64
       ticket.save
       BoosterMailer.ticket_assignment(ticket).deliver_now
     }
