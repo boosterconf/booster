@@ -1,11 +1,9 @@
 <html>
 <body>
 <p>Hi <%= @name %>,</p>
-
-<p>
-  You have been assigned a ticket to Booster <%= Dates::CONFERENCE_YEAR %>! If you have any special dietary
-  constraints, allergies or the like, or if you do not plan to attend the conference dinner on Wednesday, please
-  send us an email and let us know, at <%= link_to 'kontakt@boosterconf.no', "mailto:kontakt@boosterconf.no" %>.
+  <p>
+    You have been assigned a ticket to Booster <%= Dates::CONFERENCE_YEAR %>! Make sure the information we have is correct. 
+    Click on the link for your ticket information. <%= link_to "Link to ticket", tickets_from_reference_url(@ticket.reference) %>
 </p>
 
 <p>
