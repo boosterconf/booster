@@ -28,10 +28,9 @@ class TicketsController < ApplicationController
       if (!ticket.reference.present?)
         ticket.reference = SecureRandom.urlsafe_base64
         ticket.save!
-      end
-
-      if ticket.email.present?
-        BoosterMailer.send_ticket_link(ticket).deliver_now
+        if ticket.email.present?
+          BoosterMailer.send_ticket_link(ticket).deliver_now
+        end
       end
     }
     flash[:notice] = "Eposter sendt."
@@ -94,6 +93,7 @@ class TicketsController < ApplicationController
     @payment_reference = params[:payment_reference]
     @payment_zip = params[:payment_zip_code]
     @ticket.roles = params[:roles].join(",") if params[:roles]
+    @ticket.reference = SecureRandom.urlsafe_base64
 
     unless @ticket.valid?
       render :new
