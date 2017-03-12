@@ -1,0 +1,37 @@
+<% if admin? %>
+    <% if talk.volunteers.any? %>
+        <div class="volunteers">
+          <% talk.volunteers.each do |volunteer| %>
+              <div class="volunteer">Frivillig:
+                <%= volunteer.full_name %></div>
+          <% end %>
+        </div>
+    <% end %>
+    <% if talk.equipment && talk.equipment.length > 0 %>
+        <a role="button" data-toggle="modal" data-target="#equipmentModal-<%= talk.id %>">
+          <div>
+            <u>Equipment</u>
+          </div>
+        </a>
+        <div class="modal fade" id="equipmentModal-<%= talk.id %>" tabindex="-1" role="dialog">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                <div>
+                  <p><%= talk.equipment %></p>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+<% end %>
