@@ -8,7 +8,7 @@
           <div class='talk' data-talkid='<%= talk.id %>'>
             <h4><%= talk.title %></h4>
             <span class='author'><%= talk.speaker_name %></span>
-            <%= render partial: 'volunteer', locals: {talk: talk} %>
+            <%= render partial: 'adminInformation', locals: {talk: talk} %>
           </div>
         </a>
     <% end %>
