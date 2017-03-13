@@ -76,21 +76,23 @@ class NametagPdf < Prawn::Document
 
       font_size 15
 
-      fill_color 'D8DFDE'
-      ticket_type_text = 'PARTICIPANT'
+      ticket_type_text = ''
       if ticket.ticket_type.organizer?
+        fill_color 'DE9777'
+        fill_rectangle [-35, 0], 300, 80
         ticket_type_text = 'ORGANIZER'
       elsif ticket.ticket_type.speaker?
-        fill_color 'DE9777'
+        fill_color 'D8DFDE'
+        fill_rectangle [-35, 0], 300, 80
         ticket_type_text = 'SPEAKER'
       elsif ticket.ticket_type.volunteer?
         fill_color 'A8D1C5'
+        fill_rectangle [-35, 0], 300, 80
         ticket_type_text = 'VOLUNTEER'
       elsif ticket.ticket_type.student?
-        ticket_type_text ='STUDENT'
+        ticket_type_text = ''
       end
 
-      fill_rectangle [-35, 0], 300, 80
 
       fill_color "29363E"
       text_box ticket_type_text, :at => [0, -10], :align => :center, :height => 50
