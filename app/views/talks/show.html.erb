@@ -50,6 +50,12 @@
 
 <% end %>
 
+  <% if @talk.video_url.present? %>
+      <p>
+        <iframe src="https://player.vimeo.com/video/<%= @talk.video_url.split("/").last %>" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </p>
+  <% end %>
+
 <div class="description">
   <% if contains_html @talk.description %>
       <%= sanitize @talk.description %>

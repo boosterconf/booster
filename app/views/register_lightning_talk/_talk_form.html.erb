@@ -46,6 +46,13 @@
       <%= f.text_area :equipment, :class => 'form-control', :rows => 5  %>
     </fieldset>
 
+    <% if admin? %>
+    <fieldset class="form-group">
+      <%= f.label :video_url, "Vimeo URL" %>
+      <%= f.text_field :video_url, :size => "80", :class => "form-control" %>
+    </fieldset>
+    <% end %>
+
       Please be aware that by submitting a talk to Booster, you agree to follow our
       <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
     <div class="form-actions">

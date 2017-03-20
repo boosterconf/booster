@@ -27,6 +27,7 @@
     <% end %>
     <h4>Upload presentation slides</h4>
     <%= render :partial => 'upload_slide' %>
+
   <% end %>
 
   <%= render partial: 'register_lightning_talk/talk_form', locals: { post_to: talk_url(@talk) } %>
