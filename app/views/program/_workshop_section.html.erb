@@ -6,6 +6,9 @@
     <a class="single-talk" href="<%= talk_path(talk.id) %>">
       <div class='talk' data-talkid='<%= talk.id %>'>
         <h5><%= talk.title %>
+          <% if talk.video_url.present? %>
+              <%= fa_icon("film") %>
+          <% end %>
           <span class="parts">
         <% if period.start_time > talk.start_time %>
             (cont.)
