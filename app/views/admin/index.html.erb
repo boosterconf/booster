@@ -16,7 +16,7 @@
   <li><%= link_to 'Register an invited speaker', new_user_path(invited: true) %></li>
   <li><%= link_to 'Create a skeleton user', new_skeleton_user_path %></li>
   <li><%= link_to 'Download nametags', nametags_path(:format => 'pdf') %></li>
-  <li><%= link_to 'Send dinner registration reminder email', send_ticket_email_tickets_path %></li>
+  <li><%= link_to 'Send dinner registration reminder email (NB! sends immediately!)"', send_ticket_email_tickets_path %></li>
   <li><%= link_to 'Download all participant emails', download_emails_tickets_path(:format => 'csv') %></li>
 
   <!--

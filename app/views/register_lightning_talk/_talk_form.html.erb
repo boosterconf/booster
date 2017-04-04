@@ -48,7 +48,7 @@
 
     <% if admin? %>
     <fieldset class="form-group">
-      <%= f.label :video_url, "Vimeo URL" %>
+      <%= f.label :video_url, "Vimeo URL (admins only)" %>
       <%= f.text_field :video_url, :size => "80", :class => "form-control" %>
     </fieldset>
     <% end %>
