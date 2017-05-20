@@ -1,7 +1,7 @@
 class RegisterLightningTalkController < ApplicationController
   include CfpClosedRedirect
 
-  before_filter 'redirect_when_cfp_closed', only: [:start, :create_user, :create_talk]
+  before_filter 'redirect_when_cfp_closed_for_lightning_talks', only: [:start, :create_user, :create_talk]
   def start
     if current_user
       redirect_to '/register_lightning_talk/talk'
