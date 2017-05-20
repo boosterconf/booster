@@ -27,6 +27,25 @@ If failure, reach out to us on Slack. :)
 * RubyMine, like IDEA for all you lame java developers ;) or TextMate
 * git
 
+### Database connection with Vagrant
+    Applies to RubyMine:
+    * Databases -> New connection (The pluss sign).
+    * In the General tab
+        * Host: 127.0.0.1
+        * Database: boosterconf
+        * User: vagrant
+        * Pw: vagrant
+        * URL: jdbc:postgresql://127.0.0.1/boosterconf
+        
+    *In the SSL / SSH tab:
+        * Check Use SSH tunnel
+        * Proxy Host: localhost
+        * Port: 2222
+        * Proxy user: vagrant
+        * Auth type: Password
+        * PW: vagrant
+        * check remember password if you want to
+
 ### Windows
 
 Install the following tools or the equivalent.
