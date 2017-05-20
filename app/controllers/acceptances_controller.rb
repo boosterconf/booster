@@ -169,14 +169,6 @@ class AcceptancesController < ApplicationController
     redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Email already sent!"
   end
 
-  #TODO: Temp method, delete this
-  def load_talk(id)
-    Talk.includes(users: [{ registration: [:ticket_type]}]).find(id)
-  end
-
-
-  private
-
   def save_talk_and_update_speaker user
     @talk.save
     @talk.update_speakers!(user)
