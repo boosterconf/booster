@@ -11,7 +11,7 @@ Install Vagrant and VirtualBox, and checkout this repository. Then do the follow
     $ vagrant up # Wait for some time for this to complete
     $ vagrant ssh
     $ cd /vagrant
-    $ ./init.sh  # Wait for even longer. At the end of this script, you will be prompted for your heroku credentials, before the production database is pulled down.
+    $ sh ./init.sh  # Wait for even longer. At the end of this script, you will be prompted for your heroku credentials, before the production database is pulled down.
     $ # If the previous steps have succeeded, continue
     $ heroku config --app booster2017 # Lists all the config variables from prod. 
     $ export s3_access_key_id=<value from above>
