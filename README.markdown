@@ -21,12 +21,6 @@ Install Vagrant and VirtualBox, and checkout this repository. Then do the follow
 Test app in your host system browser, and verify that the booster conf home page is shown on localhost:3000. 
 If failure, reach out to us on Slack. :)
 
-### OSX / Linux
-
-* Ruby 2.2.2
-* RubyMine, like IDEA for all you lame java developers ;) or TextMate
-* git
-
 ### Database connection with Vagrant
     Applies to RubyMine:
     * Databases -> New connection (The pluss sign).
@@ -46,70 +40,7 @@ If failure, reach out to us on Slack. :)
         * PW: vagrant
         * check remember password if you want to
 
-### Windows
-
-Install the following tools or the equivalent.
-
-* git
-* [RubyInstaller](http://rubyinstaller.org)
-* [Rubyinstaller DevKit](http://rubyinstaller.org/downloads/) [Howto here](https://github.com/oneclick/rubyinstaller/wiki/Development-Kit)
-* [Rubymine](http://www.jetbrains.com/ruby/download/download_thanks.jsp?os=win) (IDE) - we have an OS licence, ask Karianne
-* [PgAdmin](https://www.pgadmin.org/download/windows.php) 
-
-#### Configure line endings
-
-Because Windows has its own line endings (CRLF \r\n) as opposed to Unix / Linux (LF), it is advised
-to align these line endings on commits, so that all line endings in GitHub are LF only.
-
-Windows users can do so either with:
-<code>git config --global core.autocrlf true</code> if they prefer Windows file endings locally. Or
-with <code>git config --global core.autocrlf input</code> if they prefer to keep whatever they 
-checkout (both will save to repo with LF-endings).
-
-
-#### Setting up SSH certificates
-
-    We get our certificates from letsencrypt. To generate new certs, start the vagrant instance, and install
-    certbot-auto. See https://certbot.eff.org/#ubuntutrusty-other.
-
-    When installed, run certbot-auto certonly --manual. The domain we use is www.boosterconf.no.
-    You will be presented with some long string that needs to be served
-    from www.boosterconf.no. Check out routes.rb and PagesController for putting the required secrets in place.
-    Push these changes to production, and press enter in the certbot-auto command line. After verifying that we control
-    the domain, certbot will generate new certs under /etc/letsencrypt. Copy these files to the host machine, somewhere
-    you can access them later.
-
-    Log in to Heroku and upload the full chain pem file, and the private key pem file generated.
-    Easy - peasy - lemon squeezy.
-
-
-## Getting started
-
-    You need to be added as a collaborator on the project. Ask on Slack for help.
-    Check out the code: git clone git@github.com:boosterconf/booster.git
-    $ gem update --system
-    $ gem install bundler
-    $ gem install rails --version 4.2.5
-    # In application directory
-    $ bundle install
-
-    You need to install Postgres on you machine. Follow this guide
-    https://devcenter.heroku.com/articles/heroku-postgresql#local-setup
-    It works sometimes.
-
-    $ heroku pg:pull jade booster2014 --app booster2015
-    $ rake test
-    # Start the server
-    $ rails s
-    Go to http://localhost:3000
-
-## Checking in
-
-You need to be a collaborator (at github.com) of the conference site, otherwise commit to your own fork, and make a pull request.
-
 ## Deploying to Heroku
-
-Contact boosterconf(at)gmail.com in order to be added as a collaborator (at heroku.com)
 
 Setup:
 
@@ -118,7 +49,7 @@ Setup:
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
     $ cd booster
-    $ git remote add production git@heroku.com:booster2015.git
+    $ git remote add production git@heroku.com:booster2017.git
     $ git remote add staging git@heroku.com:staging-boosterconf.git
 
 Fool around:
@@ -126,27 +57,15 @@ Fool around:
     $ gem install taps
     # remote console
     $ heroku console --app staging-boosterconf
-    $ heroku console --app booster2015
+    $ heroku console --app booster2017
     # Pull data from the heroku app to your local db
-    $ heroku pg:pull jade booster2014 --app booster2015
 
 Update (push):
 
     $ git push [production|staging|master]
     #DB changes? remember to migrate the server
-    $ heroku rake db:migrate --app [staging-boosterconf|booster2015]
-
-Heroku app-owner privileges:
-
-    For å switche mellom dine heroku-identiteter (som 'oma', eller 'tech@tindetech.no') kan du følge dennne
-    http://www.aeonscope.net/2010/02/22/managing-multiple-heroku-accounts/
-    for å kunne bruke det på kommandolinjen.
-    Det meste (unntatt app create) kan styres ved å logge inn som app-owner på heroku.com
+    $ heroku rake db:migrate --app [staging-boosterconf|booster2017]
 
 Heroku SendGrid:
     # For å sjekke user/pass:
-    $ heroku config --long --app booster2015
-
-# Are you having problems? 
-
-Ask on Slack (boosterconf.slack.com), and we will figure it out.
+    $ heroku config --long --app booster2017
