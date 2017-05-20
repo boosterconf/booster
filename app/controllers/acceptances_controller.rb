@@ -21,8 +21,7 @@ class AcceptancesController < ApplicationController
     return redirect_on_email_sent if @talk.email_sent
 
     @talk.accept!
-    @talk.save
-    @talk.update_speakers!(current_user)
+    save_talk_and_update_speaker(current_user)
 
     redirect_to acceptances_path, notice: "#{@talk.speaker_name}'s talk '#{@talk.title}' accepted."
   end
@@ -33,8 +32,7 @@ class AcceptancesController < ApplicationController
     return redirect_on_email_sent if @talk.email_sent
 
     @talk.refuse!
-    @talk.save!
-    @talk.update_speakers!(current_user)
+    save_talk_and_update_speaker(current_user)
 
     redirect_to acceptances_path, notice: "#{@talk.speaker_name}'s talk '#{@talk.title}' refused."
   end
@@ -45,8 +43,7 @@ class AcceptancesController < ApplicationController
     return redirect_on_email_sent if @talk.email_sent
 
     @talk.regret! #Set to pending :)
-    @talk.save
-    @talk.update_speakers!(current_user)
+    save_talk_and_update_speaker(current_user)
 
     redirect_to acceptances_path, notice: "#{@talk.speaker_name}'s talk '#{@talk.title}' put on hold."
   end
@@ -56,8 +53,7 @@ class AcceptancesController < ApplicationController
 
     @talk.could_not_attend!
     @talk.speakers_confirmed = false
-    @talk.save!
-    @talk.update_speakers!(current_user)
+    save_talk_and_update_speaker(current_user)
 
     return render :thanks unless current_user.is_admin?
 
@@ -72,8 +68,7 @@ class AcceptancesController < ApplicationController
     end
 
     @talk.speakers_confirmed = true
-    @talk.save
-    @talk.update_speakers!(current_user)
+    save_talk_and_update_speaker(current_user)
 
 
     return render :thanks unless current_user.is_admin?
@@ -89,8 +84,7 @@ class AcceptancesController < ApplicationController
     end
 
     @talk.speakers_confirmed = false
-    @talk.save
-    @talk.update_speakers!(current_user)
+    save_talk_and_update_speaker(current_user)
 
     redirect_to acceptances_path, notice: "#{@talk.speaker_name} cancelled for talk '#{@talk.title}'"
   end
@@ -178,5 +172,13 @@ class AcceptancesController < ApplicationController
   #TODO: Temp method, delete this
   def load_talk(id)
     Talk.includes(users: [{ registration: [:ticket_type]}]).find(id)
+  end
+
+
+  private
+
+  def save_talk_and_update_speaker user
+    @talk.save
+    @talk.update_speakers!(user)
   end
 end
