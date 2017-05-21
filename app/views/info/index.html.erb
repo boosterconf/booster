@@ -1,22 +1,16 @@
 <% content_for :pre_content do %>
-<div class="rocket">
+    <div class="rocket">
 
-  <div class="middle-of-image">
-    <h1>The software conference for the whole team</h1>
-    <div class="dates-location">
-      <span class="font-page-conference-dates">March 15 - 17</span>
-      <span class="front-page-location">Bergen, Norway</span>
+      <div class="middle-of-image">
+        <h1>The software conference for the whole team</h1>
+        <div class="dates-location">
+          <span class="font-page-conference-dates">March 15 - 17</span>
+          <span class="front-page-location">Bergen, Norway</span>
+        </div>
+      </div>
+
     </div>
-  </div>
-
-</div>
 <% end %>
-
-<div class="calltoaction">
-  <span>
-    We are all sold out now, but if you send us an email at <a class="" href="mailto:kontakt@boosterconf.no">kontakt@boosterconf.no</a> we'll put you on a waiting list in case of any cancellations.  
-  </span>
-</div>
 
 <div class="jumbotron m-b-0">
   <div class="container text-xs-center">
@@ -44,7 +38,7 @@
       <% @featured_speakers.each do |speaker| %>
           <div class="col-xs-3 minor-block-body">
             <div class="minor-block-body-inner">
-              <h2><a href="info/speakers/#<%=speaker.full_name %>"><%= speaker.full_name %></a></h2>
+              <h2><a href="info/speakers/#<%= speaker.full_name %>"><%= speaker.full_name %></a></h2>
 
               <p class="lead"><%= speaker.bio.title %></p>
             </div>
@@ -80,7 +74,8 @@
   <div class="container imagetron-text-over-background">
     <h2>Beautiful city of Bergen</h2>
 
-    <p>Bergen "the city of seven mountains" is the proud home of Booster. Norwegian beauty surrounds the historic coastal city located in the city fjord.</p>
+    <p>Bergen "the city of seven mountains" is the proud home of Booster. Norwegian beauty surrounds the historic
+      coastal city located in the city fjord.</p>
   </div>
 </div>
 
@@ -88,32 +83,32 @@
     headline: "Workshops",
     path_to_image: "/images/workshops.jpg",
     text: "We strongly believe in learning by doing. Join a workshop and bring back practical knowledge to your workplace."
-    } %>
+} %>
 
 <%= render partial: 'frontpage_element', locals: {
     headline: "Lightning talks",
     path_to_image: "/images/talk.jpg",
     text: "Lightning talks are fast-paced 10-minute talks about all the latest trends, buzzwords and more."
-    } %>
+} %>
 
 <%= render partial: 'frontpage_element', locals: {
     headline: "Short talks",
     path_to_image: "/images/short_talk.jpg",
     text: "Short talks are 30-minute talks meant to give you a deeper understanding of a subject and acts as a supplement for our lightning talks."
-    } %>
+} %>
 
 <%= render partial: 'frontpage_element', locals: {
     headline: 'Open spaces',
     path_to_image: '/images/open_spaces.jpg',
     text: "Open spaces is about conversations. Join an open space, or suggest an open space about your favorite topic."
-    } %>
+} %>
 
 <div class="imagetron">
-  <div class="imagetron-bg"  style='background-image: url("/images/coffee.jpg")'>
+  <div class="imagetron-bg" style='background-image: url("/images/coffee.jpg")'>
     <%= image_tag '/images/coffee.jpg', class: 'img-superfluid' %>
   </div>
   <div class="container imagetron-text-over-background">
-  
+
     <%= image_tag '/images/tedragen.png', class: 'imagetron-img' %>
     <h2>Our very own baristas</h2>
     <p>
