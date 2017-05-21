@@ -4,7 +4,7 @@ class RegisterWorkshopController < ApplicationController
   include CfpClosedRedirect
 
   before_filter :setup_talk_types, only: [:talk, :create_talk]
-  before_filter :redirect_when_cfp_closed_for_workshops, only: [:start, :create_user, :create_talk]
+  before_filter :redirect_when_cfp_closed_for_workshops, only: [:start, :create_user, :create_talk, :talk]
 
   def start
     if current_user
@@ -35,11 +35,6 @@ class RegisterWorkshopController < ApplicationController
   end
 
   def talk
-    if DateTime.now > Dates::CFP_TUTORIAL_ENDS
-      redirect_to '/'
-      return
-    end
-
     @workshop = Workshop.new
   end
 
