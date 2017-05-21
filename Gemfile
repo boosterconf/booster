@@ -54,6 +54,8 @@ group :development, :test do
   gem 'quiet_assets'
   gem 'taps'
   gem 'dotenv-rails'
+  gem 'sql_queries_count'
+  gem 'bullet'
 end
 
 group :test do

@@ -32,6 +32,9 @@ Booster2013::Application.configure do
 
   config.after_initialize do
       Rails.application.routes.default_url_options[:host] = 'localhost:3000'
+      Bullet.enable = true
+      Bullet.console = true
+      Bullet.rails_logger = true
   end
 
   config.before_configuration do
