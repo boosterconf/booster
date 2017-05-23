@@ -1,12 +1,14 @@
 Booster2013::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
+  if ENV['FORCE_SSL'] == 'true'
+    config.force_ssl = true
+  end
   # Code is not reloaded between requests
-  config.force_ssl = true
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   config.log_level = :info
@@ -76,6 +78,6 @@ Booster2013::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
 
   config.after_initialize do
-        Rails.application.routes.default_url_options[:host] = 'www.boosterconf.no'
-    end
+    Rails.application.routes.default_url_options[:host] = 'www.boosterconf.no'
+  end
 end
