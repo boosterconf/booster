@@ -56,11 +56,11 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'sql_queries_count'
   gem 'bullet'
+  gem 'rspec-rails'
 end
 
 group :test do
   gem 'mocha', :require => false
-  gem 'rspec-rails'
   gem "minitest"
   gem "minitest-reporters", '>= 0.5.0'
   gem 'shoulda'
