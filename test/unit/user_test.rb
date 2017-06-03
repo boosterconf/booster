@@ -27,17 +27,17 @@ class UserTest < ActiveSupport::TestCase
   #  assert test.has_all_talks_refused?
   #end
 
-  def test_early_user_gets_set_to_early_bird
-    quentin = users(:quentin)
-    quentin.update_to_paying_user
-    assert_equal "early_bird", quentin.registration.ticket_type.reference
-  end
+  #def test_early_user_gets_set_to_early_bird
+  #  quentin = users(:quentin)
+  #  quentin.update_to_paying_user
+  #  assert_equal "early_bird", quentin.registration.ticket_type.reference
+  #end
 
-  def test_late_user_gets_set_to_full_price
-    test = users(:late_registration)
-    test.update_to_paying_user
-    assert_equal "full_price", test.registration.ticket_type.reference
-  end
+  #def test_late_user_gets_set_to_full_price
+  #  test = users(:late_registration)
+  #  test.update_to_paying_user
+  #  assert_equal "full_price", test.registration.ticket_type.reference
+  #end
 
   def test_updating_ticket_type_for_user_with_pending_workshop_sets_speaker_ticket_type
     speaker = users(:multispeaker)
