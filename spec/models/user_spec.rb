@@ -34,21 +34,21 @@ describe User, type: :model do
     end
 
 
-    it "is attending dinner" do
+    it "is attending participants dinner" do
       attending_user = create_valid_user
       attending_user.attending_dinner!
 
       expect(attending_user.attending_dinner?).to be_truthy
     end
 
-    it "is not attending dinner" do
+    it "is not attending participants dinner" do
       non_attending_user = create_valid_user
       non_attending_user.not_attending_dinner!
 
       expect(non_attending_user.attending_dinner?).to be_falsey
     end
 
-    it "is not attending dinner when not explicitly set" do
+    it "is not attending dinner participants when not explicitly set" do
       attendance_not_set_user = create_valid_user
 
       expect(attendance_not_set_user.attending_dinner?).to be_falsey
