@@ -131,7 +131,7 @@ describe User, type: :model do
       expect(user.valid?).to be_truthy
     end
 
-    it "not valid if things are missing" do
+    it "is not valid if things are missing" do
       user = User.new
       expect(user.valid?).to be_falsey
     end
