@@ -75,14 +75,40 @@ describe User, type: :model do
       expect(early_registration_speaker.registration.ticket_type.reference).to eq("early_bird")
     end
 
-  it "speaker registrations gets set to full price when when updated to paying user after early bird has ended" do
-    late_registration_speaker = create_speaker
-    AppConfig.early_bird_ends = Time.now - 1.day
+    it "speaker registrations gets set to full price when when updated to paying user after early bird has ended" do
+      late_registration_speaker = create_speaker
+      AppConfig.early_bird_ends = Time.now - 1.day
 
-    late_registration_speaker.update_to_paying_user
+      late_registration_speaker.update_to_paying_user
 
-    expect(late_registration_speaker.registration.ticket_type.reference).to eq("full_price")
+      expect(late_registration_speaker.registration.ticket_type.reference).to eq("full_price")
+    end
   end
 
+  describe "#update_ticket_type!" do
+    it "updating ticket for user with pending workshop sets ticket type to speaker" do
+      speaker = create_speaker
+      speaker.talks << Talk.new({:acceptance_status => "pending", :talk_type => TalkType.new({:name => "Workshop"})})
+
+      speaker.update_ticket_type!
+      expect(speaker.registration.ticket_type.reference).to eq('speaker')
+    end
+
+    it "updating ticket for user with pending lightning talk sets ticket type to lightning" do
+      speaker = create_speaker
+      speaker.talks << Talk.new({:acceptance_status => "pending", :talk_type => TalkType.new({:name => "Lightning talk"})})
+
+      speaker.update_ticket_type!
+      expect(speaker.registration.ticket_type.reference).to eq('lightning')
+    end
+
+    it "updating ticket for user with pending short talk sets ticket type to lightning" do
+      speaker = create_speaker
+      speaker.talks << Talk.new({:acceptance_status => "pending", :talk_type => TalkType.new({:name => "Short talk"})})
+
+      speaker.update_ticket_type!
+      expect(speaker.registration.ticket_type.reference).to eq('lightning')
+    end
+    
   end
 end
