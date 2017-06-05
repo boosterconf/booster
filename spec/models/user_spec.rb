@@ -109,6 +109,31 @@ describe User, type: :model do
       speaker.update_ticket_type!
       expect(speaker.registration.ticket_type.reference).to eq('lightning')
     end
-    
+
+  end
+
+  describe "#has_valid_email?" do
+    it "accepts a valid email address" do
+      user = User.new({:email => "valid.email@example.com"})
+      expect(user.has_valid_email?).to be_truthy
+    end
+
+    it "does not accept an invalid email address" do
+      user = User.new({:email => "not a valid email"})
+      expect(user.has_valid_email?).to be_falsey
+    end
+
+  end
+
+  describe "#valid?" do
+    it "is valid if it contains all the necessary things" do
+      user = create_valid_user
+      expect(user.valid?).to be_truthy
+    end
+
+    it "not valid if things are missing" do
+      user = User.new
+      expect(user.valid?).to be_falsey
+    end
   end
 end
