@@ -86,10 +86,6 @@ class Sponsor < ActiveRecord::Base
     self.publish_logo && self.logo.exists? && self.accepted?
   end
 
-  def contact_person_full_name
-    contact_person_first_name + " " + contact_person_last_name
-  end
-
   def not_invoiced?
     invoice_line.nil?
   end

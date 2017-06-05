@@ -48,7 +48,7 @@ class Invoice < ActiveRecord::Base
     invoice = create!(
         email: sponsor.email,
         our_reference: sponsor.user.try(:full_name),
-        your_reference: sponsor.contact_person_full_name
+        your_reference: sponsor.contact_person_name
     )
 
     invoice.invoice_lines.create!(
