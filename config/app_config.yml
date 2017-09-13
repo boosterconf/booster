@@ -1,42 +1,37 @@
 development:
-  year: 2017
-  tutorial_registration_open: true
-  lightning_registration_open: true
+  year: 2018
+  cfp_open: true
   proposals_visible: true
   program_released: true
   speakers_released: true
-  early_bird_ends: 2017-02-07 23:59:59 +1
+  early_bird_ends: 2018-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
-  fiken_email: "kjersti.berg@gmail.com"
+  fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
 
 test:
-  year: 2017
-  tutorial_registration_open: false
-  lightning_registration_open: false
+  year: 2018
   proposals_visible: true
   program_released: false
-  early_bird_ends: 2017-02-07 23:59:59 +1
+  early_bird_ends: 2018-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
-  fiken_email: "kjersti.berg@gmail.com"
+  fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
 
 staging:
-  year: 2017
-  tutorial_registration_open: false
-  lightning_registration_open: false
+  year: 2018
+  cfp_open: true
   proposals_visible: false
   program_released: true
   speakers_released: true
-  early_bird_ends: 2017-02-07 23:59:59 +1
+  early_bird_ends: 2018-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
-  fiken_email: "kjersti.berg@gmail.com"
+  fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
 
 production:
   year: 2018
-  tutorial_registration_open: false
-  lightning_registration_open: false
+  cfp_open: true
   proposals_visible: false
   program_released: false
   speakers_released: false
