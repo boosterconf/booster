@@ -14,7 +14,18 @@ class ApplicationController < ActionController::Base
   end
 
   def load_sponsors
-    @our_sponsors = Sponsor.all_accepted.select { |sponsor| sponsor.should_show_logo? }
+    @our_sponsors = Rails.cache.fetch("#our_sponsors", expires_in: 24.hours) do
+      dbSponsors = Sponsor.all_accepted.select {|sponsor| sponsor.should_show_logo?}.to_a
+      @our_sponsors = []
+      dbSponsors.each {|spons|
+        s = SponsorTesting.new
+        s.name = spons.name
+        s.website = spons.website
+        s.logoUrl = spons.logo.url
+        @our_sponsors << s
+      }
+      @our_sponsors
+    end
   end
 
   def current_user
@@ -105,7 +116,7 @@ class ApplicationController < ActionController::Base
   private
   def cached_sponsors
     Rails.cache.fetch('all_accepted_sponsors', expires_in: 4.hours) do
-      Sponsor.all_accepted.select { |sponsor| sponsor.should_show_logo? }
+      Sponsor.all_accepted.select {|sponsor| sponsor.should_show_logo?}
     end
   end
 end
