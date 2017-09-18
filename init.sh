@@ -4,4 +4,4 @@ bundle config build.nokogiri --use-system-libraries
 bundle install
 heroku login
 # Note, you need to be logged in to heroku for this to work
-heroku pg:pull copper boosterconf --app booster2017
+heroku pg:pull maroon boosterconf --app booster2018
