@@ -13,7 +13,7 @@ Install Vagrant and VirtualBox, and checkout this repository. Then do the follow
     $ cd /vagrant
     $ sh ./init.sh  # Wait for even longer. At the end of this script, you will be prompted for your heroku credentials, before the production database is pulled down.
     $ # If the previous steps have succeeded, continue
-    $ heroku config --app booster2017 # Lists all the config variables from prod. 
+    $ heroku config --app booster2018 # Lists all the config variables from prod.
     $ export s3_access_key_id=<value from above>
     $ export s3_secret_access_key=<value from above>
     $ rails s -b 0.0.0.0 # We need to run rails on this ip, to get port forwarding from the vagrant machine. 
@@ -49,7 +49,7 @@ Setup:
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
     $ cd booster
-    $ git remote add production git@heroku.com:booster2017.git
+    $ git remote add production git@heroku.com:booster2018.git
     $ git remote add staging git@heroku.com:staging-boosterconf.git
 
 Fool around:
@@ -57,15 +57,15 @@ Fool around:
     $ gem install taps
     # remote console
     $ heroku console --app staging-boosterconf
-    $ heroku console --app booster2017
+    $ heroku console --app booster2018
     # Pull data from the heroku app to your local db
 
 Update (push):
 
     $ git push [production|staging|master]
     #DB changes? remember to migrate the server
-    $ heroku rake db:migrate --app [staging-boosterconf|booster2017]
+    $ heroku rake db:migrate --app [staging-boosterconf|booster2018]
 
 Heroku SendGrid:
     # For å sjekke user/pass:
-    $ heroku config --long --app booster2017
+    $ heroku config --long --app booster2018
