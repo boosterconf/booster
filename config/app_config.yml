@@ -2,8 +2,8 @@ development:
   year: 2018
   cfp_open: true
   proposals_visible: true
-  program_released: true
-  speakers_released: true
+  program_released: false
+  speakers_released: false
   early_bird_ends: 2018-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
@@ -22,10 +22,10 @@ staging:
   year: 2018
   cfp_open: true
   proposals_visible: false
-  program_released: true
-  speakers_released: true
-  early_bird_ends: 2018-02-07 23:59:59 +1
-  partner_price_in_nok_before_vat: 29000
+  program_released: false
+  speakers_released: false
+  early_bird_ends: 2018-02-14 23:59:59 +1
+  partner_price_in_nok_before_vat: 31000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
 
@@ -36,6 +36,6 @@ production:
   program_released: false
   speakers_released: false
   early_bird_ends: 2018-02-14 23:59:59 +1
-  partner_price_in_nok_before_vat: 29000
+  partner_price_in_nok_before_vat: 31000
   fiken_email: "foreningen-boosterkonferansen@bilag.fiken.no"
   stripe_on: true
