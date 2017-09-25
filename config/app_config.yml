@@ -21,7 +21,7 @@ test:
 staging:
   year: 2018
   cfp_open: true
-  proposals_visible: false
+  proposals_visible: true
   program_released: false
   speakers_released: false
   early_bird_ends: 2018-02-14 23:59:59 +1
@@ -32,7 +32,7 @@ staging:
 production:
   year: 2018
   cfp_open: true
-  proposals_visible: false
+  proposals_visible: true
   program_released: false
   speakers_released: false
   early_bird_ends: 2018-02-14 23:59:59 +1
