@@ -170,6 +170,7 @@
   match 'info/conference_dinner' => 'info#conference_dinner', via: :all
   match 'info/coc' => 'info#coc', via: :all
   match 'info/preconf' => 'info#preconf', via: :all
+   match 'info/agile-at-scale' => 'info#agileatscale', via: :get
 
   match 'admin' => 'admin#index', via: :all
 

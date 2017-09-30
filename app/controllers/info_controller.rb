@@ -6,9 +6,9 @@ class InfoController < ApplicationController
   # See http://www.railsenvy.com/2007/2/28/rails-caching-tutorial for details
   #caches_page :index, :arrangoerene, :lyntaler, :openspace
 
-#  def applyCacheControl
-#    response.headers['Cache-Control'] = 'public, max-age=3600'
-#  end
+  #  def applyCacheControl
+  #    response.headers['Cache-Control'] = 'public, max-age=3600'
+  #  end
 
   def speakers
     @speakers = User.all_confirmed_speakers
@@ -20,6 +20,10 @@ class InfoController < ApplicationController
 
   def about
     @organizers = User.featured_organizers.shuffle
+  end
+
+  def agileatscale
+
   end
 
 end
