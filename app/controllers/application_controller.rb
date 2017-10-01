@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def load_sponsors
     @our_sponsors = []
-    @our_sponsors = Rails.cache.fetch("#our_sponsors", expires_in: 24.hours) do
+    @our_sponsors = Rails.cache.fetch(Cache::PartnerCacheKey, expires_in: 24.hours) do
       sponsors = Sponsor.all_accepted.select {|sponsor| sponsor.should_show_logo?}.to_a
       sponsors.each do |s|
         sponsor = CachedSponsor.new(s.name, s.website, s.logo.url)

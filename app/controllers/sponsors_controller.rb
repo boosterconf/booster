@@ -50,7 +50,7 @@ class SponsorsController < ApplicationController
     User.transaction do
       Sponsor.transaction do
 
-        Rails.cache.delete('all_accepted_sponsors')
+        Rails.cache.delete(Cache::PartnerCacheKey)
 
         respond_to do |format|
           format.html {
