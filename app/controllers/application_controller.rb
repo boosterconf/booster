@@ -2,8 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user_session, :current_user, :logged_in?, :admin?, :admin_or_talk_owner?
-
+  before_filter :ensure_redirect_to_subdomain
   before_filter :load_sponsors
+
 
   private
   LOOKS_NUMBER_LIKE = /^[-+]?[1-9]([0-9]*)?$/
@@ -11,6 +12,13 @@ class ApplicationController < ActionController::Base
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
+  end
+
+  def ensure_redirect_to_subdomain
+    if request.host == 'www.boosterconflocalhost.no'
+      redirect_url = "#{Dates::CONFERENCE_YEAR}.boosterconflocalhost.no#{request.fullpath}"
+      redirect_to redirect_url,:status => 307
+    end
   end
 
   def load_sponsors
