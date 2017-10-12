@@ -1,0 +1,22 @@
+<article class="inner">
+  <div class="header-join">
+    <h2 class="page_title">Edit your short talk</h2>
+  </div>
+  
+  <% if @talk.accepted? %>
+      <p><%= image_tag("approved_talk.png") %> Approved</p>
+      <% if @talk.slide_file_name.present? %>
+          <h4>Presentation slides</h4>
+          <p>
+            <%= link_to image_tag("icon_slides.gif"), @talk.slide.url %>
+            <%= link_to "Download", @talk.slide.url %>
+          </p>
+      <% end %>
+      <h4>Upload presentation slides</h4>
+      <%= render :partial => 'upload_slide' %>
+
+  <% end %>
+
+  <%= render partial: 'register_short_talk/talk_form', locals: {post_to: talk_url(@talk)} %>
+
+</article>
