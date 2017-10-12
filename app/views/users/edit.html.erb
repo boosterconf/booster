@@ -37,7 +37,7 @@
                   <%= reg.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
                 <% end %>
 
-                <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+                <%#= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
             </fieldset>
 
         <% end %>
