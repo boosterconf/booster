@@ -42,8 +42,15 @@ class TalksController < ApplicationController
     @tags = Tag.all
     @user = User.new
     @types = TalkType.all
-
-    render action: @talk.is_workshop? ? 'edit_tutorial' : 'edit_lightning_talk'
+    action = ''
+    if (@talk.talk_type.is_short_talk?)
+      action= 'edit_short_talk'
+    elsif @talk.talk_type.is_lightning_talk?
+      action = 'edit_lightning_talk'
+    elsif @talk.is_workshop?
+      action= 'edit_tutorial'
+    end
+    render action: action
   end
 
   def assign
@@ -54,7 +61,7 @@ class TalksController < ApplicationController
   end
 
   def create_assigned
-    params[:talk].merge!({ acceptance_status: 'accepted', language: 'english' })
+    params[:talk].merge!({acceptance_status: 'accepted', language: 'english'})
 
     @talk = Talk.new(params[:talk])
     @user = User.find(params[:user_id])
