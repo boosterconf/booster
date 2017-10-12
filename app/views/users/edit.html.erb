@@ -37,17 +37,9 @@
                   <%= reg.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
                 <% end %>
 
-                <%= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
+                <%#= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
             </fieldset>
 
-        <% end %>
-
-        <% if @user.registration.ticket_type.dinner_included %>
-        <fieldset class="form-group">
-          <%= f.label :dietary_requirements, "Dietary requirements (allergy, vegetarian etc)" %>
-          <%= text_area(:user, :dietary_requirements, placeholder: "Do you need something special for dinner?",
-                        rows: 4, class: 'form-control') %>
-        </fieldset>
         <% end %>
 
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
