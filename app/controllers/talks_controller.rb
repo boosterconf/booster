@@ -42,13 +42,15 @@ class TalksController < ApplicationController
     @tags = Tag.all
     @user = User.new
     @types = TalkType.all
+    action = ''
     if (@talk.talk_type.is_short_talk?)
-      render action: 'edit_short_talk'
+      action= 'edit_short_talk'
     elsif @talk.talk_type.is_lightning_talk?
-      render action: 'edit_lightning_talk'
+      action = 'edit_lightning_talk'
     elsif @talk.is_workshop?
-      render action: 'edit_tutorial'
+      action= 'edit_tutorial'
     end
+    render action: action
   end
 
   def assign
