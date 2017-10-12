@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def ensure_redirect_to_subdomain
     if request.host == 'www.boosterconf.no'
       redirect_url = "#{Dates::CONFERENCE_YEAR}.boosterconf.no#{request.fullpath}"
-      redirect_to redirect_url,:status => 307
+      redirect_to subdomain: 2018 ,:status => 307
     end
   end
 
