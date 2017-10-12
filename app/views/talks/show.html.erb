@@ -1,54 +1,54 @@
 <article class="inner">
-<%= content_for :title, h(@talk.title) %>
-<div class="header-join">
-<h2><%= h @talk.title %></h2>
-</div>
-<% if admin? %>
-  <h4><%= render :partial => @talk.users %></h4>
-<% end %>
-
-<% @talk.users.collect do | user | %>
-  <% if !admin? && @talk.accepted? && @talk.speakers_confirmed? %>
-      <h4><a href="../info/speakers/#<%=user.full_name %>"><%= user.full_name %></a></h4>
-    <% else %>
-      <h4><%= user.full_name %></h4>
+  <%= content_for :title, h(@talk.title) %>
+  <div class="header-join">
+    <h2><%= h @talk.title %></h2>
+  </div>
+  <% if admin? %>
+      <h4><%= render :partial => @talk.users %></h4>
   <% end %>
-<% end %>
-<p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
-<% if @talk.users.include?(current_user) || admin? %>
-    <p><%= link_to 'Edit your talk', edit_talk_path(@talk) %></p>
+  <% @talk.users.collect do |user| %>
+      <% if !admin? && @talk.accepted? && @talk.speakers_confirmed? %>
+          <h4><a href="../info/speakers/#<%= user.full_name %>"><%= user.full_name %></a></h4>
+      <% else %>
+          <h4><%= user.full_name %></h4>
+      <% end %>
+  <% end %>
+  <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
 
-    <% if @talk.accepted? && @talk.speakers_confirmed? %>
-      <p><%= image_tag("approved_talk.png") %> approved</p>
-    <% end %>
+  <% if @talk.users.include?(current_user) || admin? %>
+      <p><%= link_to 'Edit your talk', edit_talk_path(@talk), class: "btn btn-primary" %></p>
 
-    <% if @talk.slide_file_name.present? %>
-        <h4>Presentation slides</h4>
-        <p>
-          <%= link_to image_tag("icon_slides.gif"), @talk.slide.url %>
-          <%= link_to "Download", @talk.slide.url %>
-        </p>
-    <% end %>
+      <% if @talk.accepted? && @talk.speakers_confirmed? %>
+          <p><%= image_tag("approved_talk.png") %> approved</p>
+      <% end %>
 
-    <% if @talk.talk_type.is_workshop %>
-        <p>
-          <strong>Extra equipment:</strong>
-          <%= h @talk.equipment %>
-        </p>
+      <% if @talk.slide_file_name.present? %>
+          <h4>Presentation slides</h4>
+          <p>
+            <%= link_to image_tag("icon_slides.gif"), @talk.slide.url %>
+            <%= link_to "Download", @talk.slide.url %>
+          </p>
+      <% end %>
 
-        <p>
-          <strong>Room setup:</strong>
-          <%= h @talk.room_setup %>
-        </p>
+      <% if @talk.talk_type.is_workshop %>
+          <p>
+            <strong>Extra equipment:</strong>
+            <%= h @talk.equipment %>
+          </p>
 
-        <p>
-          <strong>Maximum number of participants:</strong>
-          <%= h @talk.max_participants %>
-        </p>
-    <% end %>
+          <p>
+            <strong>Room setup:</strong>
+            <%= h @talk.room_setup %>
+          </p>
 
-<% end %>
+          <p>
+            <strong>Maximum number of participants:</strong>
+            <%= h @talk.max_participants %>
+          </p>
+      <% end %>
+
+  <% end %>
 
   <% if @talk.video_url.present? %>
       <p>
@@ -56,62 +56,62 @@
       </p>
   <% end %>
 
-<div class="description">
-  <% if contains_html @talk.description %>
-      <%= sanitize @talk.description %>
-  <% else %>
-      <%= simple_format h(@talk.description) %>
+  <div class="description">
+    <% if contains_html @talk.description %>
+        <%= sanitize @talk.description %>
+    <% else %>
+        <%= simple_format h(@talk.description) %>
+    <% end %>
+  </div>
+
+  <% if @talk.talk_type.is_workshop %>
+
+      <% if admin_or_talk_owner?(@talk) %>
+          <p class="outline">
+            <strong>Outline</strong>
+            <% if contains_html(@talk.outline) %>
+                <%= sanitize @talk.outline %>
+            <% else %>
+                <%= simple_format h(@talk.outline) %>
+            <% end %>
+          </p>
+      <% end %>
+
+      <p>
+        <strong>Primarily for:</strong>
+        <%
+          roles = @talk.appropriate_for_roles ? @talk.appropriate_for_roles.split(',') : []
+          role_names = roles.map {|role| Roles.label[role.to_sym].pluralize}
+        %>
+        <%= role_names.join(', ') %>
+      </p>
+
+      <p>
+        <strong>Participant requirements:</strong>
+        <%= h @talk.participant_requirements %>
+      </p>
+
   <% end %>
-</div>
 
-<% if @talk.talk_type.is_workshop %>
+  <% if admin_or_talk_owner?(@talk) %>
+      <% if @talk.speaking_history.present? %>
+          <div id="speaking_history">
+            <h4>Speaking history</h4>
 
-    <% if admin_or_talk_owner?(@talk) %>
-        <p class="outline">
-          <strong>Outline</strong>
-          <% if contains_html(@talk.outline) %>
-              <%= sanitize @talk.outline %>
-          <% else %>
-              <%= simple_format h(@talk.outline) %>
-          <% end %>
-        </p>
-    <% end %>
+            <p><%= h(@talk.speaking_history) %></p>
+          </div>
+      <% end %>
 
-    <p>
-      <strong>Primarily for:</strong>
-      <%
-         roles = @talk.appropriate_for_roles ? @talk.appropriate_for_roles.split(',') : []
-         role_names = roles.map { |role| Roles.label[role.to_sym].pluralize }
-      %>
-      <%= role_names.join(', ') %>
-    </p>
+      <% if @talk.equipment.present? %>
+          <div id="equipment">
+            <h4>Comment to organizers</h4>
 
-    <p>
-      <strong>Participant requirements:</strong>
-      <%= h @talk.participant_requirements %>
-    </p>
+            <p><%= h(@talk.equipment) %></p>
+          </div>
+      <% end %>
 
-<% end %>
-
-<% if admin_or_talk_owner?(@talk) %>
-    <% if @talk.speaking_history.present? %>
-        <div id="speaking_history">
-          <h4>Speaking history</h4>
-
-          <p><%= h(@talk.speaking_history) %></p>
-        </div>
-    <% end %>
-
-    <% if @talk.equipment.present? %>
-        <div id="equipment">
-          <h4>Comment to organizers</h4>
-
-          <p><%= h(@talk.equipment) %></p>
-        </div>
-    <% end %>
-
-    <div id="reviews">
-      <%= render partial: 'review_form' %>
-    </div>
-<% end %>
+      <div id="reviews">
+        <%= render partial: 'review_form' %>
+      </div>
+  <% end %>
 </article>
