@@ -21,7 +21,7 @@
           <div class="clearfix">&nbsp;</div>
 
           <div class="form-actions">
-            <%= f.submit "Next", :class => "btn btn-primary", :disable_with => 'Please wait' %>
+            <%= f.submit "Next", :class => "btn btn-primary", data: {disable_with: "Submitting..."} %>
           </div>
       <% end %>
     </div>
