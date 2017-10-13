@@ -1,15 +1,15 @@
 <article class="inner">
-<%= render :partial => 'steps', :locals => {:active_id => "details"} %>
+  <%= render :partial => 'steps', :locals => {:active_id => "details"} %>
 
-<h2>What shall we tell the world?</h2>
+  <h2>What shall we tell the world?</h2>
 
-<%= form_for @user, :url => '/register_workshop/create_details' do |f| %>
+  <%= form_for @user, :url => '/register_workshop/create_details' do |f| %>
 
-    <%= render :partial => 'users/bio', :locals => {:f => f} %>
-    <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
-    
+      <%= render :partial => 'users/bio', :locals => {:f => f} %>
+      <%= render :partial => 'users/user_stats', :locals => {:f => f} %>
+
       <div class="form-actions">
-        <%= f.submit "Finish", :class => "btn btn-primary" %>
+        <%= f.submit "Finish", :class => "btn btn-primary", data: {disable_with: "Submitting..."} %>
       </div>
-<% end %>
+  <% end %>
 </article>
