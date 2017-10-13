@@ -3,14 +3,14 @@
     <% @talk.errors.full_messages.each do |msg| %>
         <p class="has-error"><%= msg %></p>
     <% end %>
-      <p>
-    Short talks must be given in english.
+    <p>
+      Short talks must be given in english.
     </p>
     <legend>Talk details</legend>
-      The abstract will be published on the website as soon
-      as you submit it, and will be used by the organizers during talk selection. It is therefore important that you
-      provide a detailed abstract. This will help us to select in the selection process and increase the chances
-      of your talk being selected.
+    The abstract will be published on the website as soon
+    as you submit it, and will be used by the organizers during talk selection. It is therefore important that you
+    provide a detailed abstract. This will help us to select in the selection process and increase the chances
+    of your talk being selected.
     <fieldset class="form-group">
       <%= f.label :title, "Title" %>
 
@@ -20,9 +20,9 @@
       <%= f.label :description, "Abstract" %>
       <%= f.text_area :description, :class => "tinymce span10" %>
       <% if @talk.errors[:description].present? %>
-        <div class="error-message">
-          You must provide an abstract.
-        </div>
+          <div class="error-message">
+            You must provide an abstract.
+          </div>
       <% end %>
     </fieldset>
 
@@ -30,7 +30,7 @@
 
     <fieldset class="form-group">
       <%= f.label :equipment, "Leave comments for the organizers here." %>
-      <%= f.text_area :equipment, :class => 'form-control', :rows => 5  %>
+      <%= f.text_area :equipment, :class => 'form-control', :rows => 5 %>
     </fieldset>
 
     <% if admin? %>
@@ -40,9 +40,9 @@
         </fieldset>
     <% end %>
 
-      Please be aware that by submitting a talk to Booster, you agree to follow our
-      <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
+    Please be aware that by submitting a talk to Booster, you agree to follow our
+    <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
     <div class="form-actions">
-      <%= f.submit @talk.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary' %>
+      <%= f.submit @talk.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
     </div>
 <% end %>

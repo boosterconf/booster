@@ -8,10 +8,10 @@
     </fieldset>
 
     <legend>Information visible for everyone</legend>
-      The abstract will be published on the website as soon
-      as you submit it, and will be used by the committee during talk selection. It is therefore important that you
-      provide a detailed abstract. This will help us to select in the selection process and increase the chances
-      of your talk being selected.
+    The abstract will be published on the website as soon
+    as you submit it, and will be used by the committee during talk selection. It is therefore important that you
+    provide a detailed abstract. This will help us to select in the selection process and increase the chances
+    of your talk being selected.
     <fieldset class="form-group">
       <%= f.label :title, "Title" %>
 
@@ -31,14 +31,14 @@
 
     <fieldset class="form-group">
       <%= f.label :appropriate_for_roles, 'What role(s) is this workshop appropriate for?' %>
-          <% Roles.all.each do |role| %>
-              <div class="checkbox">
-              <label>
-                <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
-                <%= Roles.label[role]  %>
-              </label>
-              </div>
-          <% end %>
+      <% Roles.all.each do |role| %>
+          <div class="checkbox">
+            <label>
+              <%= check_box_tag "appropriate_for_roles[]", role, @workshop.appropriate_for_role?(role.to_s), :id => "appropriate_for_roles_#{role}" %>
+              <%= Roles.label[role] %>
+            </label>
+          </div>
+      <% end %>
     </fieldset>
 
     <legend>Information visible only for the organizing committee and yourself</legend>
@@ -79,13 +79,13 @@
     <% end %>
 
     <% if @workshop.new_record? %>
-        <%= render :partial => 'talks/additional', :locals => { :f => f } %>
+        <%= render :partial => 'talks/additional', :locals => {:f => f} %>
     <% end %>
 
-      Please be aware that by submitting a talk to Booster, you agree to follow our
-      <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
+    Please be aware that by submitting a talk to Booster, you agree to follow our
+    <%= link_to 'Code of Conduct', info_coc_path, target: '_new' %>.
 
     <div class="form-actions">
-      <%= f.submit @workshop.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary' %>
+      <%= f.submit @workshop.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
     </div>
 <% end %>
