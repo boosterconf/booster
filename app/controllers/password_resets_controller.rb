@@ -26,7 +26,7 @@ class PasswordResetsController < ApplicationController
     else
       render :action => :edit
     end
-  en
+  end
 
   private
 
