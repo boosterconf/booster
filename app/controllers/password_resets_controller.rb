@@ -26,14 +26,14 @@ class PasswordResetsController < ApplicationController
     else
       render :action => :edit
     end
-  end
+  en
 
   private
 
   def load_user_using_perishable_token
     @user = User.find_by_perishable_token(params[:id])
     if not @user
-      flash[:notice] = "We're sorry, but we couldn't find the account you requested. Please try again and contact kontakt@rootsconf.no if the problem persists."
+      flash[:notice] = "Sorry we did not recognize this link. Please try again and contact kontakt@boosterconf.no if the problem persists."
       redirect_to root_url
     end
   end
