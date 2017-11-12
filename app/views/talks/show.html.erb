@@ -11,7 +11,9 @@
       <% if !admin? && @talk.accepted? && @talk.speakers_confirmed? %>
           <h4><a href="../info/speakers/#<%= user.full_name %>"><%= user.full_name %></a></h4>
       <% else %>
-          <h4><%= user.full_name %></h4>
+          <h4>
+            <%= user.name_or_email %>
+          </h4>
       <% end %>
   <% end %>
   <p class="muted"><%= @talk.talk_type.name %> - in <%= @talk.language.capitalize %></p>
