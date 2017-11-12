@@ -115,9 +115,7 @@
       post :attend_conference_dinner
     end
   end
-
-  match '/stuff' => 'talks_stuff#index', via: :all
-
+   
   match '/register_lightning_talk/start' => 'register_lightning_talk#start', via: :all
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user', via: :all
   match '/register_lightning_talk/talk' => 'register_lightning_talk#talk', via: :all
