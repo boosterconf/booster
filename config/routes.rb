@@ -1,6 +1,6 @@
- Booster2013::Application.routes.draw do
+Booster2013::Application.routes.draw do
 
-   get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
+  get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
 
   resources :tickets do
     collection do
@@ -8,11 +8,7 @@
       get :download_emails
     end
   end
-  resources :rooms
-  resources :periods
-  resources :slots
-  resources :reviews
-  resources :ticket_types
+  resources :rooms, :periods, :slots, :reviews, :ticket_types, :user_sessions, :users, :nametags, :receipts, :password_resets
   resources :group_registrations, only: [:new, :create]
 
   get 'tickets/ref/:reference' => 'tickets#from_reference', :as => :tickets_from_reference
@@ -35,7 +31,6 @@
   get 'program/lightning' => 'program#lightning'
   get '/blifrivillig', to: 'blifrivillig#get'
 
-  resources :users
 
   resources :acceptances do
     member do
@@ -55,8 +50,6 @@
   resources :statistics, only: [:index] do
     get :users_by_company, on: :collection
   end
-
-  resources :user_sessions
 
   match 'login' => 'user_sessions#new', :as => :login, via: :all
   match 'logout' => 'user_sessions#destroy', :as => :logout, via: :all
@@ -102,12 +95,6 @@
     match 'boosterbot/slash_bot' => 'boosterbot#slash_bot', :via => :post, :as => :slash_bot
   end
 
-  resources :nametags
-
-  resources :receipts
-
-  resources :password_resets
-
 
   resources :dinner do
     collection do
@@ -115,7 +102,7 @@
       post :attend_conference_dinner
     end
   end
-   
+
   match '/register_lightning_talk/start' => 'register_lightning_talk#start', via: :all
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user', via: :all
   match '/register_lightning_talk/talk' => 'register_lightning_talk#talk', via: :all
@@ -160,7 +147,7 @@
   match 'info/conference_dinner' => 'info#conference_dinner', via: :all
   match 'info/coc' => 'info#coc', via: :all
   match 'info/preconf' => 'info#preconf', via: :all
-   match 'info/agile-at-scale' => 'info#agileatscale', via: :get
+  match 'info/agile-at-scale' => 'info#agileatscale', via: :get
 
   match 'admin' => 'admin#index', via: :all
 
