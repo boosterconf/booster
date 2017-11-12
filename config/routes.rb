@@ -133,18 +133,18 @@ Booster2013::Application.routes.draw do
   get 'users/:user_id/assign_talk' => 'talks#assign', as: :assign_talk
   post 'users/:user_id/assign_talk' => 'talks#create_assigned', as: :create_assigned_talk
 
-  match 'info/organizers' => 'info#organizers', via: :all
-  match 'info/monetary_policy' => 'info#monetary_policy', via: :all
-  match 'info/cfp' => 'info#cfp', via: :all
-  match 'info/partners' => 'info#partners', via: :all
-  match 'info/about' => 'info#about', via: :all
-  match 'info/kids' => 'info#kids', via: :all
-  match 'info/speakers' => 'info#speakers', via: :all
-  match 'info/openspaces' => 'info#openspaces', via: :all
-  match 'info/fishbowl' => 'info#fishbowl', via: :all
+  match 'info/organizers' => 'info#organizers', via: :get
+  match 'info/monetary_policy' => 'info#monetary_policy', via: :get
+  match 'info/cfp' => 'info#cfp', via: :get
+  match 'info/partners' => 'info#partners', via: :get
+  match 'info/about' => 'info#about', via: :get
+  match 'info/kids' => 'info#kids', via: :get
+  match 'info/speakers' => 'info#speakers', via: :get
+  match 'info/openspaces' => 'info#openspaces', via: :get
+  match 'info/fishbowl' => 'info#fishbowl', via: :get
   match 'info/conference_dinner' => 'info#conference_dinner', via: :all
-  match 'info/coc' => 'info#coc', via: :all
-  match 'info/preconf' => 'info#preconf', via: :all
+  match 'info/coc' => 'info#coc', via: :get
+  match 'info/preconf' => 'info#preconf', via: :get
   match 'info/agile-at-scale' => 'info#agileatscale', via: :get
 
   match 'admin' => 'admin#index', via: :get
