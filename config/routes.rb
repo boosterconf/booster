@@ -126,7 +126,7 @@ Booster2013::Application.routes.draw do
   match '/register_short_talk/details' => 'register_short_talk#details', via: :all
   match '/register_short_talk/create_details' => 'register_short_talk#create_details', via: :all
   match '/register_short_talk/finish' => 'register_short_talk#finish', via: :all
-  
+
   match 'users/current' => 'users#current', :as => :current_user, via: :all
   match 'users/:id/create_bio' => 'users#create_bio', via: :all
   match 'users/:id/delete_bio' => 'users#delete_bio', via: :all
@@ -147,7 +147,7 @@ Booster2013::Application.routes.draw do
   match 'info/preconf' => 'info#preconf', via: :all
   match 'info/agile-at-scale' => 'info#agileatscale', via: :get
 
-  match 'admin' => 'admin#index', via: :all
+  match 'admin' => 'admin#index', via: :get
 
   root :to => 'info#index' #'/' resolves to info/index.html
 
