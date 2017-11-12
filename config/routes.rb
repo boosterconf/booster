@@ -108,14 +108,6 @@
 
   resources :password_resets
 
-  resources :invoices do
-    member do
-      post :add_user
-      post :remove_line
-      post :invoiced
-      post :paid
-    end
-  end
 
   resources :dinner do
     collection do
