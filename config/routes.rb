@@ -126,9 +126,7 @@ Booster2013::Application.routes.draw do
   match '/register_short_talk/details' => 'register_short_talk#details', via: :all
   match '/register_short_talk/create_details' => 'register_short_talk#create_details', via: :all
   match '/register_short_talk/finish' => 'register_short_talk#finish', via: :all
-
-#match 'login' => 'user_sessions#new', :as => :login
-#match 'logout' => 'user_sessions#destroy', :as => :logout
+  
   match 'users/current' => 'users#current', :as => :current_user, via: :all
   match 'users/:id/create_bio' => 'users#create_bio', via: :all
   match 'users/:id/delete_bio' => 'users#delete_bio', via: :all
