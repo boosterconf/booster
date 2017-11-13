@@ -59,6 +59,8 @@ Fool around:
     $ heroku console --app staging-boosterconf
     $ heroku console --app booster2018
     # Pull data from the heroku app to your local db
+    $ dropdb boosterconf
+    $ heroku pg:pull DATABASE_URL boosterconf --app booster2018
 
 Update (push):
 
