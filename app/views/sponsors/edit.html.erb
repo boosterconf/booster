@@ -2,11 +2,6 @@
   <div class="header-join">
     <h2>Edit <%= @sponsor.name %></h2>
   </div>
-<% if @sponsor.invoice_line %>
-    <p>
-      <%= link_to "Go to sponsor invoice", @sponsor.invoice_line.invoice %>
-    </p>
-<% end %>
 <div>
 <% if @sponsor.accepted? %>
     Sponsor tickets: TBD? Not sure what is supposed to be here. 
