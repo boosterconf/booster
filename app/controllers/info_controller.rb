@@ -22,8 +22,4 @@ class InfoController < ApplicationController
     @organizers = User.featured_organizers.shuffle
   end
 
-  def agileatscale
-
-  end
-
 end
