@@ -164,7 +164,7 @@ class Talk < ActiveRecord::Base
   end
 
   def self.all_pending_and_approved
-    self.includes(:talk_type)
+    self.includes(:talk_type,:users)
         .where(year: AppConfig.year)
         .where('acceptance_status != ?', 'refused')
         .order('acceptance_status, id desc')
