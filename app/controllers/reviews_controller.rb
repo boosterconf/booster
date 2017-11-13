@@ -7,7 +7,7 @@ class ReviewsController < ApplicationController
   before_filter :find_review, only: [:update, :destroy]
 
   def index
-    talks = Talk.all_pending_and_approved
+    talks = Talk.talks_for_review
 
     @workshops, @lightning_talks = talks.partition {|t| t.is_workshop? }
 

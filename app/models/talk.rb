@@ -170,6 +170,13 @@ class Talk < ActiveRecord::Base
         .order('acceptance_status, id desc')
   end
 
+  def self.talks_for_review
+    self.includes(:reviews,:talk_type)
+        .where(year: AppConfig.year)
+        .where('acceptance_status != ?', 'refused')
+        .order('acceptance_status, id desc')
+  end
+
   def self.all_accepted
     Talk.includes(:talk_type)
         .where(acceptance_status: 'accepted')
