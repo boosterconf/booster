@@ -4,7 +4,7 @@ class Bio < ActiveRecord::Base
   has_attached_file :picture, PAPERCLIP_CONFIG.merge({
               styles: {
                   quad: {
-                    geometry: '400x400',
+                    geometry: '400x400#',
                     convert_options: '-colorspace Gray -colorspace sRGB',
                     s3_headers: {
                         'Cache-Control' => 'max-age=2592000',

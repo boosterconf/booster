@@ -44,7 +44,7 @@
 
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
-        <%= render :partial => 'bio', :locals => {:f => f } %>
+        <%= render :partial => 'bio', :locals => {:f => f, :show_warning => true } %>
 
         <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
 
