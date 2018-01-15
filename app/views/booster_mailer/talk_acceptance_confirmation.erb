@@ -24,21 +24,12 @@
       dinner.</p>
 <% end %>
 <% if @talk.is_lightning_talk? %>
-    <p>The lightning talks are scheduled for Wednesday March 15.</p>
+    <p>The lightning talks are scheduled for Wednesday March 14.</p>
 <% end %>
 <% if @talk.is_short_talk? %>
-    <p>The short talks are scheduled for Thursday March 16.</p>
+    <p>The short talks are scheduled for Thursday March 15.</p>
 <% end %>
-<% unless @speaker.has_accepted_tutorial? %>
-    <p>Because you have an accepted talk, you are entitled to a discounted
-      ticket price, but you still need to buy a ticket. We will send an
-      invoice to your email when you confirm that you'll be presenting at the
-      conference.
-    </p>
 
-    <p>If you have already paid for a normal ticket, the difference between the
-      discounted ticket price and the price you paid will be refunded.</p>
-<% end %>
 <% unless @speaker.invited? %>
     <p>We will cover the cost of travel and stay only in some cases.
       Confer with our <a href="http://www.boosterconf.no/info/monetary_policy">monetary policy</a> for the details,
