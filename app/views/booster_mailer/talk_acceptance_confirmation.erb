@@ -16,20 +16,19 @@
    Please let us know if you cannot attend the whole conference and if we need to accommodate this when
    assigning days and timeslots.
   </p>
-    <p>
-      It is still possible to edit your talk by using this url: <%= edit_talk_url(@talk, :host => 'boosterconf.no') %>
-    </p>
-
-    <p>You are entitled to free entrance to the conference and conference
-      dinner.</p>
+    
 <% end %>
-<% if @talk.is_lightning_talk? %>
+  
+  <% if @talk.is_lightning_talk? %>
     <p>The lightning talks are scheduled for Wednesday March 14.</p>
 <% end %>
 <% if @talk.is_short_talk? %>
     <p>The short talks are scheduled for Thursday March 15.</p>
 <% end %>
-
+  
+ <p>You are entitled to free entrance to the conference and conference
+      dinner.</p>
+  
 <% unless @speaker.invited? %>
     <p>We will cover the cost of travel and stay only in some cases.
       Confer with our <a href="http://www.boosterconf.no/info/monetary_policy">monetary policy</a> for the details,
@@ -43,8 +42,8 @@
   this time slot to someone else.</p>
 
 <p>If you want to make any changes to the description of your talk, it is
-  still possible to do so until the conference starts. However, please be
-  aware that we will begin publishing information about the program in a few days.</p>
+  still possible to do so until the conference starts by using this url: <%= edit_talk_url(@talk, :host => 'boosterconf.no') %>
+  However, please be aware that we will begin publishing information about the program in a few days.</p>
 
 <p>Best regards,<br>
 The Booster conference organizers</p>
