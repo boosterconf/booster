@@ -2,7 +2,7 @@
     width: calc(100%);
     padding: 1.0rem 1.5rem;
     z-index: 10;
-    color: white;
+    color: $text-color;
 
     @include media-breakpoint-down(xs) {
         [class^="navbar-toggleable"] {
@@ -31,7 +31,7 @@
     }
 
     a {
-      color: white;
+      color: $text-color;
     }
 
     .nav-link {

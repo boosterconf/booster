@@ -1,29 +1,59 @@
 @font-face {
   font-family: 'Fira Sans';
-  src:font-url('FiraSans-Heavy.eot');
-  src:font-url('FiraSans-Heavy.eot?#iefix') format('embedded-opentype'),
-    font-url('FiraSans-Heavy.woff') format('woff'),
-    font-url('FiraSans-Heavy.ttf') format('truetype');
+  src: font-url('FiraSans-Heavy.eot');
+  src: font-url('FiraSans-Heavy.eot?#iefix') format('embedded-opentype'),
+  font-url('FiraSans-Heavy.woff') format('woff'),
+  font-url('FiraSans-Heavy.ttf') format('truetype');
   font-weight: 800;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src:font-url('FiraSans-HeavyItalic.eot');
-  src:font-url('FiraSans-HeavyItalic.eot?#iefix') format('embedded-opentype'),
-    font-url('FiraSans-HeavyItalic.woff') format('woff'),
-    font-url('FiraSans-HeavyItalic.ttf') format('truetype');
+  src: font-url('FiraSans-HeavyItalic.eot');
+  src: font-url('FiraSans-HeavyItalic.eot?#iefix') format('embedded-opentype'),
+  font-url('FiraSans-HeavyItalic.woff') format('woff'),
+  font-url('FiraSans-HeavyItalic.ttf') format('truetype');
   font-weight: 800;
   font-style: italic;
 }
 
 @font-face {
   font-family: 'VAG Rounded';
-  src:font-url('VAGRounded-Light.eot');
-  src:font-url('VAGRounded-Light.eot?#iefix') format('embedded-opentype'),
-    font-url('VAGRounded-Light.woff') format('woff'),
-    font-url('VAGRounded-Light.ttf') format('truetype');
+  src: font-url('VAGRounded-Light.eot');
+  src: font-url('VAGRounded-Light.eot?#iefix') format('embedded-opentype'),
+  font-url('VAGRounded-Light.woff') format('woff'),
+  font-url('VAGRounded-Light.ttf') format('truetype');
   font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Light';
+  src: font-url("FiraSans-Light.eot");
+  src: font-url('FiraSans-Light.eot?#iefix') format('embedded-opentype'),
+  font-url("FiraSans-Light.woff") format("woff"),
+  font-url("FiraSans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Regular';
+  src: font-url("FiraSans-Regular.eot");
+  src: font-url('FiraSans-Regular?#iefix') format('embedded-opentype'),
+  font-url("FiraSans-Regular.woff") format("woff"),
+  font-url("FiraSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans Medium';
+  src: font-url("FiraSans-Medium.eot");
+  src: font-url('FiraSans-Medium.eot?#iefix') format('embedded-opentype'),
+  font-url("FiraSans-Medium.woff") format("woff"),
+  font-url("FiraSans-Medium.ttf") format("truetype");
+  font-weight: 500;
   font-style: normal;
 }

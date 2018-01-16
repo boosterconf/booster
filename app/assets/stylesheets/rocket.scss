@@ -20,13 +20,19 @@
       position: relative;
       top: 50%;
       transform: translateY(-50%);
-
+    @media (max-width: 767px) {
+      width: 90%;
+    }
+    @media (min-width: 768px) {
       width: 70%;
-      color: white;
+    }
+    color: $text-color;
 
-      h1 {
-	  font-size: 25px;
-      }
+    h1 {
+      font-size: 25px;
+      font-family: $font-family-firasans-light;
+      text-align: center;
+    }
 
       @include media-breakpoint-up(md) {
 	  h1 {
@@ -40,9 +46,11 @@
 	  span {
 	      display: block;
 	      font-size: 14px;
-	      letter-spacing: 1px;
+          font-family: $font-family-firasans-regular;
+          letter-spacing: 1px;
 	      text-transform: uppercase;
 	      font-weight: 600;
+          text-align: center;
 	  }
       }
   }
