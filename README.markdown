@@ -68,6 +68,11 @@ Update (push):
     #DB changes? remember to migrate the server
     $ heroku rake db:migrate --app [staging-boosterconf|booster2018]
 
+Run tests:
+
+    $ rake db:test:prepare RAILS_ENV=test
+    $ rake test
+
 Heroku SendGrid:
     # For å sjekke user/pass:
     $ heroku config --long --app booster2018
