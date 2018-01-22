@@ -108,3 +108,8 @@ article .btn-group > button {
 .organizer-image {
 	max-width: 200px;
 }
+
+.btn-primary {
+  background-color: $button-color;
+  border-color: $button-color;
+}
