@@ -45,6 +45,7 @@ $btn-border-radius: 2rem;
 
 html, body {
   height: 100%;
+  font-family: $font-family-firasans-regular;
 }
 
 p, article {
@@ -109,8 +110,4 @@ article .btn-group > button {
 
 p.white {
   color: white;
-}
-
-.jumbotron {
-  background-color: $background-white;
 }
