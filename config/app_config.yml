@@ -8,6 +8,7 @@ development:
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
+  ticket_sales_open: true
 
 test:
   year: 2018
@@ -17,6 +18,7 @@ test:
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
+  ticket_sales_open: true
 
 staging:
   year: 2018
@@ -28,6 +30,7 @@ staging:
   partner_price_in_nok_before_vat: 31000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
+  ticket_sales_open: true
 
 production:
   year: 2018
@@ -39,3 +42,4 @@ production:
   partner_price_in_nok_before_vat: 31000
   fiken_email: "foreningen-boosterkonferansen@bilag.fiken.no"
   stripe_on: true
+  ticket_sales_open: true
