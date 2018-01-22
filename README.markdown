@@ -72,6 +72,7 @@ Run tests:
 
     $ rake db:test:prepare RAILS_ENV=test
     $ rake test
+    # After tests have run, open up coverage/index.html in your browser for a coverage report by SimpleCov
 
 Heroku SendGrid:
     # For å sjekke user/pass:

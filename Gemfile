@@ -67,6 +67,7 @@ group :test do
   gem "factory_girl_rails", "~> 3.0"
 	gem 'ruby-prof'
   gem 'rake'
+  gem 'simplecov'
 end
 
 # Gems used only for assets and not required
