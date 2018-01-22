@@ -46,6 +46,7 @@ $btn-border-radius: 2rem;
 html, body {
   height: 100%;
   font-family: $font-family-firasans-regular;
+  color: $eden;
 }
 
 p, article {
@@ -54,8 +55,8 @@ p, article {
   }
 }
 
-h5, h6 {
-    font-family: $font-family-base;
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-firasans-regular;
 }
 
 .nav-tabs {
@@ -106,8 +107,4 @@ article .btn-group > button {
 
 .organizer-image {
 	max-width: 200px;
-}
-
-p.white {
-  color: white;
 }
