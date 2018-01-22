@@ -1,5 +1,5 @@
 class TicketsController < ApplicationController
-  before_filter :require_admin, :only => [:index, :destroy,:edit, :update, :send_ticket_email, :download_emails]
+  before_filter :require_admin, :only => [:index, :destroy, :edit, :update, :send_ticket_email, :download_emails]
   before_action :set_ticket, only: [:show, :edit, :update]
 
   # GET /tickets
@@ -7,7 +7,7 @@ class TicketsController < ApplicationController
     @tickets = Ticket.all
     by_ticket_type = @tickets.group_by {|ticket| ticket.ticket_type.name}
     @stats = {}
-    by_ticket_type.each_pair {|k, v| @stats[k] = v.count }
+    by_ticket_type.each_pair {|k, v| @stats[k] = v.count}
     @stats['Attending dinner'] = @tickets.where(attend_dinner: true).count
     @total_ticket_count = @tickets.count
   end
@@ -17,14 +17,14 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv { send_data @tickets.to_csv, filename: "tickets-#{Date.today}.csv" }
+      format.csv {send_data @tickets.to_csv, filename: "tickets-#{Date.today}.csv"}
     end
   end
 
   def send_ticket_email
     @tickets = Ticket.all
 
-    @tickets.each { |ticket|
+    @tickets.each {|ticket|
       if (!ticket.reference.present?)
         ticket.reference = SecureRandom.urlsafe_base64
         ticket.save!
@@ -67,22 +67,12 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    unless current_user && current_user.is_admin
-      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-      redirect_to root_path
-    end
-
     @ticket = Ticket.new
     @ticket.ticket_type = TicketType.current_normal_ticket
   end
 
   # POST /tickets
   def create
-    unless current_user && current_user.is_admin
-      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-      redirect_to root_path
-    end
-
     @ticket = Ticket.new(ticket_params)
     if current_user && current_user.is_admin
       @ticket.ticket_type = TicketType.find_by_id(params[:ticket][:ticket_type_id])
@@ -126,10 +116,10 @@ class TicketsController < ApplicationController
         if @ticket.ticket_type.paying_ticket?
           notice = "An invoice will be sent to #{@ticket.email}."
           BoosterMailer.invoice_to_fiken([@ticket], nil,
-                                          {   :payment_email => @ticket.email,
-                                              :payment_info => @payment_reference,
-                                              :payment_zip => @payment_zip,
-                                              :extra_info => ""}).deliver_now
+                                         {:payment_email => @ticket.email,
+                                          :payment_info => @payment_reference,
+                                          :payment_zip => @payment_zip,
+                                          :extra_info => ""}).deliver_now
         end
       end
       @ticket.save!
