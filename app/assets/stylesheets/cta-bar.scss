@@ -2,7 +2,7 @@
   margin: 0 auto;
   z-index: 999;
   padding: 10px 0;
-  background-color: $brand-primary;
+  background-color: $gray-lightest;
   color: white;
   text-align: center;
   font-size: 18px;
@@ -13,10 +13,18 @@
   color: black;
 }
 
-.calltoaction button {
+.calltoaction p {
+  color:#0E3E4D;
+}
+
+.calltoaction a {
   border-radius: 40px;
   border: 0;
   margin: 5px 20px;
   padding: 4px 25px;
-  background-color: #373a3c;
+  background-color: $brand-warning;
+}
+
+.calltoaction a:hover {
+  background-color: $brand-info;
 }

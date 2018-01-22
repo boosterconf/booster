@@ -1,16 +1,26 @@
 <% content_for :pre_content do %>
-    <div class="rocket">
+  <div class="rocket">
 
-      <div class="middle-of-image">
-        <h1>The software conference for the whole team</h1>
-        <div class="dates-location">
-          <span class="font-page-conference-dates"><%= Dates::CONFERENCE_DATES %></span>
-          <span class="front-page-location">Bergen, Norway - Venue: Scandic Bergen City </span>
-        </div>
+    <div class="middle-of-image">
+      <h1>The software conference for the whole team</h1>
+      <div class="dates-location">
+        <span class="font-page-conference-dates"><%= Dates::CONFERENCE_DATES %></span>
+        <span class="front-page-location">Bergen, Norway - Venue: Scandic Bergen City </span>
       </div>
-
     </div>
+
+  </div>
 <% end %>
+<div class="calltoaction">
+  <p>The ticket sale is open!</p>
+  <% if DateTime.now < AppConfig.early_bird_ends %>
+    <p>Early bird prices until Feb 14. Buy now and save 2000 NOK.</p>
+  <% end %>
+  <div>
+    <a class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
+  </div>
+
+</div>
 <div class="jumbotron m-b-0">
   <div class="container text-xs-center">
     We're working hard on making Booster 2018!
@@ -24,21 +34,21 @@
   <div class="quad-list-big hidden-md-down">
     <div class="row">
       <% @featured_speakers.each do |speaker| %>
-          <div class="col-xs-3">
-            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
-          </div>
+        <div class="col-xs-3">
+          <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+        </div>
       <% end %>
     </div>
 
     <div class="row">
       <% @featured_speakers.each do |speaker| %>
-          <div class="col-xs-3 minor-block-body">
-            <div class="minor-block-body-inner">
-              <h2><a href="info/speakers/#<%= speaker.full_name %>"><%= speaker.full_name %></a></h2>
+        <div class="col-xs-3 minor-block-body">
+          <div class="minor-block-body-inner">
+            <h2><a href="info/speakers/#<%= speaker.full_name %>"><%= speaker.full_name %></a></h2>
 
-              <p class="lead"><%= speaker.bio.title %></p>
-            </div>
+            <p class="lead"><%= speaker.bio.title %></p>
           </div>
+        </div>
       <% end %>
     </div>
   </div>
@@ -46,17 +56,17 @@
   <div class="quad-list-small hidden-lg-up">
     <div class="row">
       <% @featured_speakers.each do |speaker| %>
-          <div class="col-xs-3">
-            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
-          </div>
+        <div class="col-xs-3">
+          <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+        </div>
 
-          <div class="col-xs-9 minor-block-body">
-            <div class="minor-block-body-inner">
-              <h2><%= speaker.full_name %></h2>
+        <div class="col-xs-9 minor-block-body">
+          <div class="minor-block-body-inner">
+            <h2><%= speaker.full_name %></h2>
 
-              <p class="lead"><%= speaker.bio.title %></p>
-            </div>
+            <p class="lead"><%= speaker.bio.title %></p>
           </div>
+        </div>
       <% end %>
     </div>
   </div>
