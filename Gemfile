@@ -11,7 +11,7 @@ gem 'stripe'
 
 gem 'responders', '~> 2.0'
 
-gem 'bootstrap', '~> 4.0.0.alpha2'
+gem 'bootstrap', '= 4.0.0.alpha2'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
@@ -42,10 +42,10 @@ gem "paranoia", "~> 2.1.3"
 gem 'test-unit'
 
 gem 'virtus'
+gem 'pg', "= 0.21.0"
 
 group :production do
   gem 'heroku-deflater'
-  gem 'pg'
   gem 'thin'
 end
 
