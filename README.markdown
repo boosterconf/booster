@@ -71,7 +71,10 @@ Update (push):
 Run tests:
 
     $ rake db:test:prepare RAILS_ENV=test
+    # Run "old" tests"
     $ rake test
+    # Run "spec" based tests: 
+    $ rake spec
     # After tests have run, open up coverage/index.html in your browser for a coverage report by SimpleCov
 
 Heroku SendGrid:
