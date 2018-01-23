@@ -8,10 +8,19 @@ class TalksController < ApplicationController
   respond_to :html
 
   def index
-    @talks = Talk.all_pending_and_approved
-    @lightning_talks = @talks.select(&:is_lightning_talk?)
-    @workshops = @talks.select(&:is_workshop?)
-    @short_talks = @talks.select(&:is_short_talk?)
+    talks = Rails.cache.fetch(Cache::TalksCacheKey, expires_in: 24.hours) do
+      temp_talks = Talk.all_pending_and_approved
+      cachedTalks = CachedTalks.new(
+          temp_talks.select(&:is_workshop?),
+          temp_talks.select(&:is_lightning_talk?),
+          temp_talks.select(&:is_short_talk?)
+      )
+      cachedTalks
+    end
+
+    @lightning_talks = talks.lightning_talks
+    @workshops = talks.workshops
+    @short_talks = talks.short_talks
   end
 
   def article_tags
@@ -44,11 +53,11 @@ class TalksController < ApplicationController
     @types = TalkType.all
     action = ''
     if (@talk.talk_type.is_short_talk?)
-      action= 'edit_short_talk'
+      action = 'edit_short_talk'
     elsif @talk.talk_type.is_lightning_talk?
       action = 'edit_lightning_talk'
     elsif @talk.is_workshop?
-      action= 'edit_tutorial'
+      action = 'edit_tutorial'
     end
     render action: action
   end
