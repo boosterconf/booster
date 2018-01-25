@@ -9,7 +9,7 @@
   background-position: center 100px;
 
   @include media-breakpoint-up(md) {
-      min-height: 450px;
+      min-height: 500px;
       max-height: 60vh;
   }
 
@@ -58,5 +58,10 @@
         font-size: 20px;
       }
     }
+  }
+  .bottom-image {
+      position: absolute;
+      bottom: 0;
+      padding: 0 10px;
   }
 }
