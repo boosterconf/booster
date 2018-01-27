@@ -1,8 +1,7 @@
 #main-header {
   width: 100%;
   padding-bottom: $spacer-y;
-  background-color: $gray-dark;
-  background-image: image-url("supersonic.svg");
+  background-color: $brand-primary;
 
   & > * {
     max-width: 900px;
@@ -12,9 +11,8 @@
 
 .header-join {
   max-width: 100% !important;
-  background: #BBEBDE;
+  background: $eden;
   margin-bottom: $spacer-y;
-
   & > * {
     max-width: 900px;
     margin: auto;
@@ -23,5 +21,7 @@
   h2 {
     padding-top: $spacer-y;
     padding-bottom: $spacer-y;
+    color: white;
+    font-family: $font-family-firasans-light;
   }
 }

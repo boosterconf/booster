@@ -1,0 +1,11 @@
+.jumbotron {
+  background-color: $background-white;
+
+  .text-xs-center{
+    font-size: 20px;
+
+    .lead{
+      font-family: $font-family-firasans-medium;
+    }
+  }
+}

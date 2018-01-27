@@ -1,29 +1,23 @@
-@import "./fonts";
+@import "fonts";
+@import "colors";
 
 $enable-flex: true;
-
-$gray-dark: #2E3E4D;
-$gray-lightest: #F2F2F2;
-$gray-lighter: #E5E5E5;
-
-$brand-primary: #A5ECDE;
-$brand-success: #E1F28C;
-$brand-info: $gray-dark;
-$brand-warning: #DD9B77;
+$nav-tabs-border-width: 0;
 
 $navbar-light-active-color: $gray-dark;
 $nav-tabs-active-link-hover-border-color: transparent;
 $nav-tabs-justified-link-border-color: transparent;
 $nav-tabs-border-color: transparent;
-$nav-tabs-border-width: 0;
-$link-color: #36404D;
+
+$font-family-firasans-light: 'Fira Sans Light';
+$font-family-firasans-medium: 'Fira Sans Medium';
+$font-family-firasans-regular: 'Fira Sans Regular';
 
 $font-family-sans-serif: 'fira-sans';
 $headings-font-family: 'freight-display-pro';
 $headings-font-style: normal;
 $headings-font-weight: normal;
 $headings-line-height: 1.4;
-
 $border-radius: 0;
 $btn-border-radius: 2rem;
 
@@ -47,9 +41,12 @@ $btn-border-radius: 2rem;
 @import "acceptances";
 @import "registration";
 @import "tickets";
+@import "jumbotron";
 
 html, body {
   height: 100%;
+  font-family: $font-family-firasans-regular;
+  color: $eden;
 }
 
 p, article {
@@ -58,8 +55,8 @@ p, article {
   }
 }
 
-h5, h6 {
-    font-family: $font-family-base;
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-firasans-regular;
 }
 
 .nav-tabs {
@@ -112,6 +109,7 @@ article .btn-group > button {
 	max-width: 200px;
 }
 
-p.white {
-  color: white;
+.btn-primary {
+  background-color: $button-color;
+  border-color: $button-color;
 }

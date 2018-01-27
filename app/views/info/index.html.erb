@@ -1,12 +1,16 @@
 <% content_for :pre_content do %>
   <div class="rocket">
-
     <div class="middle-of-image">
-      <h1>The software conference for the whole team</h1>
+      <h1>THE SOFTWARE CONFERENCE<br/>FOR THE WHOLE TEAM</h1>
       <div class="dates-location">
         <span class="font-page-conference-dates"><%= Dates::CONFERENCE_DATES %></span>
-        <span class="front-page-location">Bergen, Norway - Venue: Scandic Bergen City </span>
+        <span class="front-page-location">Bergen, Norway<br/>Venue: Scandic Bergen City </span>
       </div>
+    </div>
+
+
+    <div class="bottom-image">
+      <%= image_tag '/images/figures.png', class: 'img-superfluid' %>
     </div>
 
   </div>
@@ -17,19 +21,9 @@
     <p>Early bird prices until Feb 14. Buy now and save 2000 NOK.</p>
   <% end %>
   <div>
-    <a class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
-  </div>
-
-</div>
-<div class="jumbotron m-b-0">
-  <div class="container text-xs-center">
-    We're working hard on making Booster 2018!
-    <p class="lead">
-      <a href="https://vimeo.com/boosterconf">Meanwhile, check out the videos from 2017</a>
-    </p>
+    <a id="buyaticket" class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
   </div>
 </div>
-
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
     <div class="row">

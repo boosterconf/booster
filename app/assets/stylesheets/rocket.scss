@@ -3,30 +3,36 @@
   min-height: 300px;
   max-height: 400px;
   position: relative;
-  background-color: $gray-dark;
+  background-color: $brand-primary;
   background-size: 100% auto;
   background-repeat: no-repeat;
   background-position: center 100px;
 
   @include media-breakpoint-up(md) {
-      min-height: 450px;
+      min-height: 500px;
       max-height: 60vh;
   }
 
   .middle-of-image {
       max-width: 900px;
-      margin: auto;      
+      margin: auto;
 
       position: relative;
       top: 50%;
       transform: translateY(-50%);
-
+    @media (max-width: 767px) {
+      width: 90%;
+    }
+    @media (min-width: 768px) {
       width: 70%;
-      color: white;
+    }
+    color: $text-color;
 
-      h1 {
-	  font-size: 25px;
-      }
+    h1 {
+      font-size: 25px;
+      font-family: $font-family-firasans-light;
+      text-align: center;
+    }
 
       @include media-breakpoint-up(md) {
 	  h1 {
@@ -37,13 +43,25 @@
       .dates-location {
 	  margin-top: 50px;
 
-	  span {
-	      display: block;
-	      font-size: 14px;
-	      letter-spacing: 1px;
-	      text-transform: uppercase;
-	      font-weight: 600;
-	  }
+      span {
+        display: block;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
       }
+
+      .font-page-conference-dates {
+        font-size: 30px;
+      }
+
+      .front-page-location {
+        font-size: 20px;
+      }
+    }
+  }
+  .bottom-image {
+      position: absolute;
+      bottom: 0;
+      padding: 0 10px;
   }
 }

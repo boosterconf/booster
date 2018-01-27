@@ -17,7 +17,7 @@
   color:#0E3E4D;
 }
 
-.calltoaction a {
+.calltoaction #buyaticket {
   border-radius: 40px;
   border: 0;
   margin: 5px 20px;
@@ -25,6 +25,6 @@
   background-color: $brand-warning;
 }
 
-.calltoaction a:hover {
-  background-color: $brand-info;
+#buyaticket:hover {
+  background-color: $button-hover-color;
 }
