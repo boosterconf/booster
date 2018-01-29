@@ -36,7 +36,11 @@ conference is for all IT professionals seeking to learn from each other and from
       &#9776;
     </button>
 
-    <a class="navbar-brand" href="/"><%= image_tag "icons/logo.svg", height: 40 %></a>
+    <% if current_page?('/') %>
+      <a class="navbar-brand" href="/"><%= image_tag "icons/booster_logo2018.svg" %></a>
+    <% else %>
+      <a class="navbar-brand" href="/"><%= image_tag "icons/booster_logo2018_dato.svg" %></a>
+    <% end %>
 
     <div id="main-nav-collapse" class="collapse navbar-toggleable-xs">
       <ul class="nav navbar-nav pull-sm-right">
@@ -70,8 +74,6 @@ conference is for all IT professionals seeking to learn from each other and from
     </div>
     <!--/.nav-collapse -->
   </nav>
-
-  <p class="p-l-1 white"><%= Dates::CONFERENCE_DATES %> - Bergen, Norway</p>
 
 </header>
 
