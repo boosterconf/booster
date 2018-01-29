@@ -4,6 +4,9 @@
   z-index: 10;
   color: $text-color;
 
+  .pull-xs-right {
+    float:right;
+  }
   @include media-breakpoint-down(xs) {
     [class^="navbar-toggleable"] {
       width: 100%;
