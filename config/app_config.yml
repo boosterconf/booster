@@ -1,6 +1,6 @@
 development:
   year: 2018
-  cfp_open: true
+  cfp_open: false
   proposals_visible: true
   program_released: false
   speakers_released: false
@@ -22,7 +22,7 @@ test:
 
 staging:
   year: 2018
-  cfp_open: true
+  cfp_open: false
   proposals_visible: true
   program_released: false
   speakers_released: false
@@ -34,7 +34,7 @@ staging:
 
 production:
   year: 2018
-  cfp_open: true
+  cfp_open: false
   proposals_visible: true
   program_released: false
   speakers_released: false
