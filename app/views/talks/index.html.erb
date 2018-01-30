@@ -27,8 +27,9 @@
     <%= render partial: @short_talks %>
   <% end %>
 
-  <p>Missing anything?
-    <br/>  <%= link_to 'Suggest your own talk!', info_cfp_url, :class => "btn btn-primary btn-large" %>
-  </p>
-
+  <% if AppConfig.cfp_open %>
+    <p>Missing anything?
+      <br/>  <%= link_to 'Suggest your own talk!', info_cfp_url, :class => "btn btn-primary btn-large" %>
+    </p>
+  <% end %>
 </article>
