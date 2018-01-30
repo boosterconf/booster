@@ -7,6 +7,10 @@
   .pull-xs-right {
     float:right;
   }
+  .nav {
+    margin-bottom: 1rem;
+  }
+
   @include media-breakpoint-down(xs) {
     [class^="navbar-toggleable"] {
       width: 100%;
@@ -47,7 +51,7 @@
     margin-top:-15px;
 
     @include media-breakpoint-up(md) {
-      width: 220px;
+      width: 270px;
       margin-right: 20px;
       margin-left: -20px;
     }
