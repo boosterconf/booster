@@ -109,7 +109,14 @@ article .btn-group > button {
 	max-width: 200px;
 }
 
-.btn-primary {
-  background-color: $button-color;
-  border-color: $button-color;
+#main-content {
+
+  .btn-primary {
+    background-color: $button-color;
+    border-color: $button-color;
+
+    &:hover {
+      background-color: $button-hover-color;
+    }
+  }
 }
