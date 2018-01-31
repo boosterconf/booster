@@ -99,7 +99,13 @@
                 data-zip-code="true"
                 data-currency="nok"></script>
         <% end %>
-        <%= button_to "I'd rather get an invoice", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary", id: "primary_submit" %>
+        <script>
+            // Remove the default stripe button as it is so damn ugly
+            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
+        </script>
+        <button type="submit" class="btn btn-primary">Pay with card</button>
+        <span>&nbsp;&nbsp;or&nbsp;&nbsp;</span>
+        <%= button_to "I'd rather get an invoice", tickets_path, class: "btn btn-primary", id: "primary_submit" %>
 
       </div>
   <% end %>
