@@ -50,3 +50,13 @@ label {
     width: 100%;
   }
 }
+
+
+#primary_submit {
+  background-color: $button-color;
+  color: #fff;
+}
+
+#primary_submit:hover {
+  background-color: $button-hover-color;
+}
