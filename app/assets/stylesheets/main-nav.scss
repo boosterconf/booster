@@ -60,10 +60,18 @@
   }
 }
 
-li.nav-item.current {
-  border-bottom: 3px solid $button-color;
+@media (min-width: 544px) {
+  li.nav-item.current {
+    border-bottom: 3px solid $button-color;
 
-  > a {
-    padding-bottom: 0;
+    > a {
+      padding-bottom: 0;
+    }
   }
 }
+@media (max-width: 543px) {
+  li.nav-item.current {
+    background-color: $button-color;
+  }
+}
+
