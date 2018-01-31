@@ -15,4 +15,8 @@ module ApplicationHelper
   def self.to_date(a_string)
     DateTime.strptime(a_string, "%Y-%m-%d %H:%M:%S").to_time
   end
+
+  def cp(path)
+    "current" if current_page?(path)
+  end
 end

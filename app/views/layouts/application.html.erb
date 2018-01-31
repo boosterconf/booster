@@ -45,30 +45,30 @@ conference is for all IT professionals seeking to learn from each other and from
     <div id="main-nav-collapse" class="collapse navbar-toggleable-xs">
       <ul class="nav navbar-nav pull-sm-right">
         <% if AppConfig.program_released %>
-            <li class="nav-item"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
+            <li class="nav-item <%= cp("/program") %>"><%= link_to 'Program', '/program', class: 'nav-link' %></li>
         <% end %>
         <% if AppConfig.speakers_released %>
-            <li class="nav-item"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(info_speakers_url) %>"><%= link_to 'Speakers', info_speakers_url, class: 'nav-link' %></li>
         <% end %>
         <% if AppConfig.cfp_open %>
-            <li class="nav-item"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(info_cfp_url) %>"><%= link_to 'Call for presentations', info_cfp_url, class: 'nav-link' %></li>
         <% end %>
         <% if AppConfig.proposals_visible %>
-            <li class="nav-item"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(talks_url) %>"><%= link_to 'Proposals', talks_url, class: 'nav-link' %></li>
         <% end %>
-        <li class="nav-item"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>
-        <li class="nav-item"><%= link_to 'About us', info_about_url, class: 'nav-link' %></li>
+        <li class="nav-item <%= cp(info_coc_url) %>"><%= link_to 'Code of Conduct', info_coc_url, class: 'nav-link' %></li>
+        <li class="nav-item <%= cp(info_about_url) %>"><%= link_to 'About us', info_about_url, class: 'nav-link' %></li>
 
-        <li class="nav-item"><%= link_to 'Kids', info_kids_url, class: 'nav-link' %></li>
+        <li class="nav-item <%= cp(info_kids_url) %>"><%= link_to 'Kids', info_kids_url, class: 'nav-link' %></li>
         <% if logged_in %>
-            <li class="nav-item"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
-            <li class="nav-item"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(current_user_url) %>"><%= link_to 'My profile', current_user_url, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(logout_path) %>"><%= link_to_unless_current "Log out", logout_path, class: 'nav-link' %></li>
         <% else %>
             <!--li><%#= link_to 'Register', new_user_url, class: 'nav-link' %></li-->
-            <li class="nav-item"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(login_url) %>"><%= link_to 'Log in', login_url, class: 'nav-link' %></li>
         <% end %>
         <% if admin? %>
-            <li class="nav-item"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
+            <li class="nav-item <%= cp(admin_path) %>"><%= link_to 'Admin', admin_path, class: 'nav-link' %></li>
         <% end %>
       </ul>
     </div>

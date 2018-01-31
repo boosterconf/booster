@@ -5,7 +5,7 @@
   color: $text-color;
 
   .pull-xs-right {
-    float:right;
+    float: right;
   }
   .nav {
     margin-bottom: 1rem;
@@ -34,26 +34,36 @@
         border-top: 1px solid $gray-lightest;
       }
     }
+
   }
 
   a {
     color: $text-color;
+    padding-left: 2px;
+    padding-right: 2px;
   }
 
   .nav-link {
     line-height: 40px;
     font-family: $font-family-firasans-medium;
-
   }
 
   .navbar-brand img {
     width: 170px;
-    margin-top:-15px;
+    margin-top: -15px;
 
     @include media-breakpoint-up(md) {
       width: 270px;
       margin-right: 20px;
       margin-left: -20px;
     }
+  }
+}
+
+li.nav-item.current {
+  border-bottom: 3px solid $button-color;
+
+  > a {
+    padding-bottom: 0;
   }
 }

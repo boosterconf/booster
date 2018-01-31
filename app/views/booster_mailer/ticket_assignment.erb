@@ -1,9 +1,10 @@
 <html>
 <body>
 <p>Hi <%= @name %>,</p>
-  <p>
-    You have been assigned a ticket to Booster <%= Dates::CONFERENCE_YEAR %>! Make sure the information we have is correct. 
-    Click on the link for your ticket information. <%= link_to "Link to ticket", tickets_from_reference_url(@ticket.reference) %>
+<p>
+  You have been assigned a ticket to Booster <%= Dates::CONFERENCE_YEAR %>! Make sure the information we have is
+  correct.
+  Click on the link for your ticket information. <%= link_to "Link to ticket", tickets_from_reference_url(@reference) %>
 </p>
 
 <p>
