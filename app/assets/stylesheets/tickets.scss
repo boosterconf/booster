@@ -54,9 +54,21 @@ label {
 
 #primary_submit {
   background-color: $button-color;
+  border-color: $button-color;
   color: #fff;
-}
 
-#primary_submit:hover {
-  background-color: $button-hover-color;
+  &:hover {
+    background-color: $button-hover-color;
+    border-color: $button-hover-color;
+  }
+
+  &:active:focus {
+    background-color: $button-hover-color;
+    border-color: $button-hover-color;
+  }
+
+  &:focus {
+    background-color: $button-hover-color;
+    border-color: $button-hover-color;
+  }
 }

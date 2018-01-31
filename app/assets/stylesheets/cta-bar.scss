@@ -23,8 +23,20 @@
   margin: 5px 20px;
   padding: 4px 25px;
   background-color: $button-color;
-}
+  border-color: $button-color;
 
-#buyaticket:hover {
-  background-color: $button-hover-color;
+  &:hover {
+    background-color: $button-hover-color;
+    border-color: $button-hover-color;
+  }
+
+  &:active:focus {
+    background-color: $button-hover-color;
+    border-color: $button-hover-color;
+  }
+
+  &:focus {
+    background-color: $button-hover-color;
+    border-color: $button-hover-color;
+  }
 }

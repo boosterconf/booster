@@ -115,16 +115,16 @@ article .btn-group > button {
 
   &:hover {
     background-color: $button-hover-color;
-    border-color: $button-color;
+    border-color: $button-hover-color;
   }
 
   &:active:focus {
     background-color: $button-hover-color;
-    border-color: $button-color;
+    border-color: $button-hover-color;
   }
 
   &:focus {
     background-color: $button-hover-color;
-    border-color: $button-color;
+    border-color: $button-hover-color;
   }
 }
