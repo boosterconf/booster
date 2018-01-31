@@ -191,6 +191,7 @@ class BoosterMailer < ActionMailer::Base
 
   def ticket_assignment(ticket)
     @name = ticket.name
+    @reference = ticket.reference
     mail(:to => ticket.email,
          :from => FROM_EMAIL,
          :cc => FROM_EMAIL,
@@ -236,8 +237,8 @@ class BoosterMailer < ActionMailer::Base
   def ticket_confirmation_paid(ticket)
     @ticket = ticket
     mail(to: ticket.email, from: FROM_EMAIL,
-        subject: "Your ticket to Booster is confirmed",
-        cc: FROM_EMAIL)
+         subject: "Your ticket to Booster is confirmed",
+         cc: FROM_EMAIL)
   end
 
   def ticket_confirmation_invoice(ticket)
@@ -255,7 +256,7 @@ class BoosterMailer < ActionMailer::Base
     @stripe_charge = stripe_charge
     @invoice_details = invoice_details
     mail(to: FIKEN_EMAIL, from: FROM_EMAIL,
-        subject: "Invoice details Booster tickets")
+         subject: "Invoice details Booster tickets")
   end
 
   def send_sponsor_ticket_link(sponsor, tickets)
