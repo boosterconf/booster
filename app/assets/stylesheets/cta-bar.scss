@@ -16,6 +16,11 @@
   #bold-span{
     font-weight: bold;
   }
+  @media (max-width: 544px) {
+    #bold-span{
+      display: block;
+    }
+  }
 }
 
 
