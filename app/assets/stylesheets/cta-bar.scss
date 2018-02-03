@@ -1,42 +1,52 @@
 .calltoaction {
   margin: 0 auto;
+  font-family: $font-family-firasans-light;
   z-index: 999;
-  padding: 10px 0;
+  padding: 30px 0 65px;
   background-color: $gray-lightest;
-  color: white;
   text-align: center;
-  font-size: 18px;
 }
 
-.calltoaction span {
-  padding: 4px 25px;
+.calltoaction .early-bird-text {
+  padding: 4px;
   color: black;
+  font-size: 15px;
+  border-bottom: 1px solid $button-color;
+
+  #bold-span{
+    font-weight: bold;
+  }
 }
+
 
 .calltoaction p {
   color:#0E3E4D;
+  font-size: 22px;
+  font-weight: bold;
 }
+
 
 .calltoaction #buyaticket {
   border-radius: 40px;
   border: 0;
   margin: 5px 20px;
-  padding: 4px 25px;
-  background-color: $button-color;
-  border-color: $button-color;
-
+  padding: 7px 70px;
+  background-color: $button-buy-color;
+  border-color: $button-buy-color;
+  text-decoration: none;
+  font-weight: bold;
   &:hover {
-    background-color: $button-hover-color;
-    border-color: $button-hover-color;
+    background-color: $button-buy-hover-color;
+    border-color: $button-buy-hover-color;
   }
 
   &:active:focus {
-    background-color: $button-hover-color;
-    border-color: $button-hover-color;
+    background-color: $button-buy-hover-color;
+    border-color: $button-buy-hover-color;
   }
 
   &:focus {
-    background-color: $button-hover-color;
-    border-color: $button-hover-color;
+    background-color: $button-buy-hover-color;
+    border-color: $button-buy-hover-color;
   }
 }
