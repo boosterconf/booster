@@ -8,6 +8,10 @@ ul.sponsorlogos {
   list-style: none;
   width:80%;
   -webkit-padding-start:0;
+
+  @media (max-width: 544px) {
+    padding: 0;
+  }
 }
 
 ul.sponsorlogos li {

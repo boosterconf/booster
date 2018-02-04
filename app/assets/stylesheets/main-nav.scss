@@ -21,10 +21,6 @@
       clear: both;
     }
 
-    .navbar-nav a {
-      color: $gray-dark;
-    }
-
     .nav-item {
       width: 100%;
       float: none;
@@ -45,7 +41,8 @@
 
   .nav-link {
     line-height: 40px;
-    font-family: $font-family-firasans-medium;
+    font-size: 20px;
+    font-family: $font-family-firasans-regular;
   }
 
   .navbar-brand img {
@@ -62,6 +59,7 @@
 
 @media (min-width: 544px) {
   li.nav-item.current {
+    font-weight: bold;
     border-bottom: 3px solid $button-color;
 
     > a {

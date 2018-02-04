@@ -9,13 +9,13 @@ $gray-lightest: #F2F2F2;
 $gray-lighter: #E5E5E5;
 
 /* ======== New design colors ======== */
-$eden: #0E3E4D;
+$primary-text-color: #2E3E4D;
 $background-white: #F2F2F2;
 $button-color: #DD9B77;
 $brand-primary: #A5ECDE;
 $button-hover-color: #d6875c;
-$button-buy-color: #D56657;
-$button-buy-hover-color: #c74432;
+$button-buy-color: #F15F5A;
+$button-buy-hover-color: #ed312b;
 /* =================================== */
 
 $brand-success: #E1F28C;
@@ -24,5 +24,5 @@ $brand-warning: #DD9B77;
 
 $link-color: #36404D;
 
-$text-color: $eden;
+$text-color: $primary-text-color;
 $text-color-negative: #ffffff;
