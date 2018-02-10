@@ -35,14 +35,14 @@ class ReviewsControllerTest < ActionController::TestCase
 
     should 'be able to create a review' do
       assert_difference('Review.count') do
-        post :create, valid_review_params
+        post :create, review: valid_review_params, talk_id: talks(:one).id, format: :js
       end
 
       assert_response :success
     end
 
     should 'be able to should update a review' do
-      put :update, id: @review, review: valid_review_params
+      put :update, id: @review, review: valid_review_params, talk_id: talks(:one).id
       assert_redirected_to review_path(assigns(:review))
     end
 
@@ -64,12 +64,12 @@ class ReviewsControllerTest < ActionController::TestCase
     should 'send notification' do
       ReviewNotifier.any_instance.expects(:notify_create)
 
-      post :create, valid_review_params
+      post :create, review: valid_review_params, talk_id: talks(:one).id, format: :js
     end
 
   end
 
   def valid_review_params
-    { review: { subject: 'More stuff!', text: "This needs more stuff" }, talk_id: talks(:one), format: :js }
+    { subject: 'More stuff!', text: "This needs more stuff" }
   end
 end

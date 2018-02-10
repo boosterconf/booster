@@ -48,6 +48,6 @@ class SponsorsControllerTest < ActionController::TestCase
 
   private
   def valid_sponsor_params
-    { sponsor: { email: "a@b.no"} }
+    { email: "a@b.no"}
   end
 end

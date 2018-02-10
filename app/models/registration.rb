@@ -1,5 +1,4 @@
 class Registration < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   acts_as_paranoid
 

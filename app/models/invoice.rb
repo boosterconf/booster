@@ -1,5 +1,4 @@
 class Invoice < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
   validates :status, inclusion: { in: %w(not_invoiced invoiced paid) }

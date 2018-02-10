@@ -1,5 +1,4 @@
 class Period < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :slots, -> {order 'room_id'}
 

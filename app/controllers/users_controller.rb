@@ -229,6 +229,7 @@ class UsersController < ApplicationController
                                  :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
                                  :invited, :is_admin,
                                  :phone_number, :registration_ip, :roles,
-                                 :registration_attributes, :bio_attributes, :first_name, :last_name, :hear_about)
+                                 :bio_attributes, :first_name, :last_name, :hear_about,
+                                 registration_attributes: [:includes_dinner] )
   end
 end

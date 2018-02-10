@@ -56,10 +56,10 @@ class TalksControllerTest < ActionController::TestCase
 
   private
   def valid_talk_params
-    { talk: { "audience_level"=>"novice", "title"=>"Assigned", "talk_type_id"=>"4", "language"=>"English", "accepted_guidelines"=>"1", "max_participants"=>"999", "description"=>"<p>test</p>"}}
+    { audience_level: "novice", title: "Assigned", talk_type_id: talk_types(:lightning_talk).id, language: "English", max_participants: "999", description: "<p>test</p>" }
   end
 
   def invalid_talk_params
-    { talk: { "audience_level"=>"novice", "title"=>"Assigned", "talk_type_id"=>"4", "accepted_guidelines"=>"1", "max_participants"=>"999", "description"=>"<p>test</p>"}}
+    { audience_level: "novice", title: "Assigned", talk_type_id: talk_types(:lightning_talk).id, max_participants: "999", description: "<p>test</p>" }
   end
 end

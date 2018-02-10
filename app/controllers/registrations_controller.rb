@@ -173,7 +173,7 @@ class RegistrationsController < ApplicationController
     params.require(:registration).permit(:comments, :includes_dinner, :description,
                                          :free_ticket, :user_id, :paid_amount, :payment_reference,
                                          :manual_payment, :invoice_address, :invoice_description,
-                                         :invoiced, :registration_complete, :speakers_dinner)
+                                         :invoiced, :registration_complete, :speakers_dinner, :ticket_type_id)
   end
 
 end

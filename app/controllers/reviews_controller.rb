@@ -34,9 +34,11 @@ class ReviewsController < ApplicationController
       if @review.update_attributes(review_params)
         format.html { redirect_to @review, notice: 'Review was successfully updated.' }
         format.json { head :no_content }
+        format.js { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @review.errors, status: :unprocessable_entity }
+        format.js { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,7 +55,8 @@ class ReviewsController < ApplicationController
 
   private
   def review_params
-    params.require(:review).permit(:subject, :text)
+    params.require(:review).permit(:id, :subject, :text)
+#    params.permit(:talk_id)
   end
 
   def find_review

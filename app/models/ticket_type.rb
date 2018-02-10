@@ -1,5 +1,4 @@
 class TicketType < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :registrations
 

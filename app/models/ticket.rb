@@ -1,7 +1,6 @@
 require 'csv'
 
 class Ticket < ActiveRecord::Base
-  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :ticket_type
 

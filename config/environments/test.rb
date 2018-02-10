@@ -33,8 +33,9 @@ Booster2013::Application.configure do
   # ActionMailer::Base.deliveries array.
   config.action_mailer.delivery_method = :test
 
-
   config.active_support.test_order = :sorted
+
+  config.action_controller.action_on_unpermitted_parameters = :raise
   
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr

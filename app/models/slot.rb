@@ -1,7 +1,5 @@
 class Slot < ActiveRecord::Base
 
-  attr_accessible :period_id, :room_id
-
   has_many :talk_positions
   has_many :talks, through: :talk_positions
   belongs_to :period

@@ -160,15 +160,15 @@ class UsersControllerTest < ActionController::TestCase
 
   def update_user_params
     { 'accepted_privacy_guidelines' => '1', 'company' => 'Test', 'first_name' => 'Test', 'last_name' => 'Osteron', 'accept_optional_email' => '1',
-      'password' => 'fjasepass', 'password_confirmation' => 'fjasepass', 'phone_number' => '92043382', 'role' => 'Developer', 'birthyear' => 1984, 'hometown' => 'Bergen',
-      'registration_attributes' => { 'manual_payment' => '', 'free_ticket' => 'false', 'includes_dinner' => "1" }
+      'password' => 'fjasepass', 'password_confirmation' => 'fjasepass', 'phone_number' => '92043382', 'birthyear' => 1984, 'hometown' => 'Bergen',
+      'registration_attributes' => { 'includes_dinner' => "1" }
     }
   end
 
   def create_speaker_params
     { 'company' => 'DRW', 'first_name' => 'Dan', 'last_name' => 'North', 'bio_attributes' =>
         { 'title' => 'Boss', 'blog' => 'dannorth.net', 'twitter_handle' => 'tastapod', 'bio' => 'Testtest' },
-      'gender' => 'M', 'password_confirmation' => 'test', 'role' => 'Developer', 'featured_speaker' => '0',
+      'gender' => 'M', 'password_confirmation' => 'test', 'featured_speaker' => '0',
       'phone_number' => '93400346', 'hometown' => 'London', 'registration_attributes' => { 'includes_dinner' => '1' },
       'password' => 'test', 'birthyear' => '1976', 'email' => 'dan@north.net' }
   end
