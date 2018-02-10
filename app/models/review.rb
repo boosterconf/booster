@@ -1,6 +1,5 @@
 class Review < ActiveRecord::Base
-
-  attr_accessible :subject, :text
+  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :reviewer, class_name: User
   belongs_to :talk

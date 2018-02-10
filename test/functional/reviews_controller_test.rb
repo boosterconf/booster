@@ -42,7 +42,7 @@ class ReviewsControllerTest < ActionController::TestCase
     end
 
     should 'be able to should update a review' do
-      put :update, id: @review, review: {}
+      put :update, id: @review, review: valid_review_params
       assert_redirected_to review_path(assigns(:review))
     end
 
@@ -70,6 +70,6 @@ class ReviewsControllerTest < ActionController::TestCase
   end
 
   def valid_review_params
-    {review: {}, talk_id: talks(:one), format: :js}
+    { review: { subject: 'More stuff!', text: "This needs more stuff" }, talk_id: talks(:one), format: :js }
   end
 end

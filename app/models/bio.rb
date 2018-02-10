@@ -1,6 +1,8 @@
 class Bio < ActiveRecord::Base
+  include ActiveModel::ForbiddenAttributesProtection
+
   belongs_to :user
-  attr_accessible :picture, :title, :twitter_handle, :blog, :bio
+
   has_attached_file :picture, PAPERCLIP_CONFIG.merge({
               styles: {
                   quad: {

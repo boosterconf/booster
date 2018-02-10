@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
 
   def create
 
-    @review = Review.new(params[:review])
+    @review = Review.new(review_params)
     @review.reviewer = current_user
     @review.talk_id = params[:talk_id]
 
@@ -31,7 +31,7 @@ class ReviewsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @review.update_attributes(params[:review])
+      if @review.update_attributes(review_params)
         format.html { redirect_to @review, notice: 'Review was successfully updated.' }
         format.json { head :no_content }
       else
@@ -52,6 +52,10 @@ class ReviewsController < ApplicationController
   end
 
   private
+  def review_params
+    params.require(:review).permit(:subject, :text)
+  end
+
   def find_review
     @review = Review.find(params[:id])
   end

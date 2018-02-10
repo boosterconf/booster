@@ -26,7 +26,7 @@ class RoomsController < ApplicationController
 
   # POST /rooms
   def create
-    @room = Room.new(params[:room])
+    @room = Room.new(room_params)
 
     if @room.save
       redirect_to :rooms, notice: 'Room was successfully created.'
@@ -39,7 +39,7 @@ class RoomsController < ApplicationController
   def update
     @room = Room.find(params[:id])
 
-    if @room.update_attributes(params[:room])
+    if @room.update_attributes(room_params)
       redirect_to @room, notice: 'Room was successfully updated.'
     else
       render action: :edit
@@ -52,5 +52,10 @@ class RoomsController < ApplicationController
     @room.destroy
 
     redirect_to rooms_url
+  end
+
+  private
+  def room_params
+    params.require(:room).permit(:capacity, :name)
   end
 end

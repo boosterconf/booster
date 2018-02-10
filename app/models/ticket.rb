@@ -1,8 +1,7 @@
 require 'csv'
 
 class Ticket < ActiveRecord::Base
-
-  attr_accessible :name, :email, :company, :feedback, :roles, :attend_dinner, :dietary_info, :reference
+  include ActiveModel::ForbiddenAttributesProtection
 
   belongs_to :ticket_type
 

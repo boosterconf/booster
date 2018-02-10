@@ -21,7 +21,7 @@ class TalksControllerTest < ActionController::TestCase
 
   def test_should_update_talk
     login_as :quentin
-    put :update, :id => talks(:one).id, :talk => {}
+    put :update, :id => talks(:one).id, :talk => valid_talk_params
     assert_redirected_to talk_path(assigns(:talk))
   end
 
@@ -36,13 +36,13 @@ class TalksControllerTest < ActionController::TestCase
 
   def test_users_cannot_update_other_peoples_talks
     login_as :other
-    put :update, :id => talks(:one).id, :talk => {}
+    put :update, :id => talks(:one).id, :talk => valid_talk_params
     assert_response 302
   end
 
   def test_admins_can_update_talks
     login_as :god
-    put :update, :id => talks(:one).id, :talk => {}
+    put :update, :id => talks(:one).id, :talk => valid_talk_params
     assert_redirected_to talk_path(assigns(:talk))
   end
 
@@ -55,11 +55,11 @@ class TalksControllerTest < ActionController::TestCase
   end
 
   private
-  def create_valid_talk_params
-    {"audience_level"=>"novice", "title"=>"Assigned", "talk_type_id"=>"4", "language"=>"English", "accepted_guidelines"=>"1", "max_participants"=>"999", "description"=>"<p>test</p>"}
+  def valid_talk_params
+    { talk: { "audience_level"=>"novice", "title"=>"Assigned", "talk_type_id"=>"4", "language"=>"English", "accepted_guidelines"=>"1", "max_participants"=>"999", "description"=>"<p>test</p>"}}
   end
 
-  def create_invalid_talk_params
-    {"audience_level"=>"novice", "title"=>"Assigned", "talk_type_id"=>"4", "accepted_guidelines"=>"1", "max_participants"=>"999", "description"=>"<p>test</p>"}
+  def invalid_talk_params
+    { talk: { "audience_level"=>"novice", "title"=>"Assigned", "talk_type_id"=>"4", "accepted_guidelines"=>"1", "max_participants"=>"999", "description"=>"<p>test</p>"}}
   end
 end

@@ -1,7 +1,5 @@
 class Invoice < ActiveRecord::Base
-
-  attr_accessible :adress, :city, :our_reference, :recipient_name, :your_reference, :zip, :country,
-                  :email, :status, :delivery_method, :text, :created_at, :invoiced_at
+  include ActiveModel::ForbiddenAttributesProtection
 
   validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
   validates :status, inclusion: { in: %w(not_invoiced invoiced paid) }

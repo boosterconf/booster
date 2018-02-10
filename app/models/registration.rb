@@ -1,12 +1,7 @@
 class Registration < ActiveRecord::Base
-
+  include ActiveModel::ForbiddenAttributesProtection
 
   acts_as_paranoid
-
-  attr_accessible :comments, :includes_dinner, :description,
-                  :free_ticket, :user_id, :paid_amount, :payment_reference,
-                  :manual_payment, :invoice_address, :invoice_description, :invoiced, :registration_complete,
-                  :speakers_dinner
 
   default_scope  { order('registrations.created_at desc') }
   belongs_to :user

@@ -16,9 +16,9 @@ class TicketTypesController < ApplicationController
   end
 
   def create
-    @ticket_type = TicketType.new(params[:ticket_type])
+    @ticket_type = TicketType.new(ticket_type_params)
     respond_to do |format|
-      if @ticket_type.update_attributes(params[:ticket_type])
+      if @ticket_type.update_attributes(ticket_type_params)
         flash[:notice] = 'Ticket type created.'
         format.html { redirect_to(ticket_types_url) }
         format.json  { head :ok }
@@ -32,7 +32,7 @@ class TicketTypesController < ApplicationController
   def update
     @ticket_type = TicketType.find(params[:id])
     respond_to do |format|
-      if @ticket_type.update_attributes(params[:ticket_type])
+      if @ticket_type.update_attributes(ticket_type_params)
         flash[:notice] = 'Ticket type updated.'
         format.html { redirect_to(ticket_types_url) }
         format.json  { head :ok }
@@ -41,5 +41,10 @@ class TicketTypesController < ApplicationController
         format.json  { render :json => @ticket_type.errors, :status => :unprocessable_entity }
       end
     end
+  end
+
+  private
+  def ticket_type_params
+    params.require(:ticket_type).permit(:name, :reference, :price, :dinner_included)
   end
 end

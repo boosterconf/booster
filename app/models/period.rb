@@ -1,6 +1,5 @@
 class Period < ActiveRecord::Base
-
-  attr_accessible :day, :start_time, :end_time, :period_type
+  include ActiveModel::ForbiddenAttributesProtection
 
   has_many :slots, -> {order 'room_id'}
 

@@ -1,5 +1,5 @@
 class Room < ActiveRecord::Base
-  attr_accessible :capacity, :name
+  include ActiveModel::ForbiddenAttributesProtection
 
   validates :name, presence: true
 end

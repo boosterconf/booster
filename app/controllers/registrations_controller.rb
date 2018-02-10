@@ -47,7 +47,6 @@ class RegistrationsController < ApplicationController
   def update
 
     @registration = Registration.find(params[:id])
-    puts params[:registration]
     if admin?
       if params[:ticket_change]
         @registration.ticket_type = TicketType.find_by_id(params[:registration][:ticket_type_id])
@@ -64,7 +63,7 @@ class RegistrationsController < ApplicationController
       end
     end
 
-    if @registration.update_attributes(params[:registration])
+    if @registration.update_attributes(registration_params)
       if admin? && @registration.registration_complete?
         flash[:notice] = "Information updated and confirmation mail sent"
 
@@ -167,6 +166,14 @@ class RegistrationsController < ApplicationController
       per_date << total
     end
     per_date
+  end
+
+  private
+  def registration_params
+    params.require(:registration).permit(:comments, :includes_dinner, :description,
+                                         :free_ticket, :user_id, :paid_amount, :payment_reference,
+                                         :manual_payment, :invoice_address, :invoice_description,
+                                         :invoiced, :registration_complete, :speakers_dinner)
   end
 
 end

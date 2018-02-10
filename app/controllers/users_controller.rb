@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   def create
     User.transaction do
-      @user = User.new(params[:user])
+      @user = User.new(user_params)
       @user.email.strip! if @user.email.present?
       @user.registration_ip = request.remote_ip
       @user.roles = params[:roles].join(",") if params[:roles]
@@ -97,7 +97,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.roles_will_change!
     @user.roles = params[:roles].join(",") if params[:roles]
-    @user.assign_attributes(params[:user])
+    @user.assign_attributes(user_params)
     @user.registration.unfinished = false
 
     if @user.save
@@ -219,5 +219,16 @@ class UsersController < ApplicationController
       per_date << total
     end
     per_date
+  end
+
+  private
+  def user_params
+    params.require(:user).permit(:accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
+                                 :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
+                                 :password, :password_confirmation, :city, :zip,
+                                 :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
+                                 :invited, :is_admin,
+                                 :phone_number, :registration_ip, :roles,
+                                 :registration_attributes, :bio_attributes, :first_name, :last_name, :hear_about)
   end
 end
