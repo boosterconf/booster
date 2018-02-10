@@ -1,4 +1,4 @@
-class Period < ActiveRecord::Base
+class Period < ApplicationRecord
 
   has_many :slots, -> {order 'room_id'}
 

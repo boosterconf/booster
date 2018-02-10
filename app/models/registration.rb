@@ -1,4 +1,4 @@
-class Registration < ActiveRecord::Base
+class Registration < ApplicationRecord
 
   acts_as_paranoid
 

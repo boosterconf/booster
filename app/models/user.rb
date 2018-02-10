@@ -1,5 +1,4 @@
-class User < ActiveRecord::Base
-
+class User < ApplicationRecord
   acts_as_paranoid
 
   has_one :registration, autosave: true

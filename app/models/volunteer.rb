@@ -1,4 +1,4 @@
-class Volunteer < ActiveRecord::Base
+class Volunteer < ApplicationRecord
 
   has_and_belongs_to_many :volunteers, join_table: 'talks_volunteers'
 

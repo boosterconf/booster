@@ -1,5 +1,4 @@
-class Bio < ActiveRecord::Base
-
+class Bio < ApplicationRecord
   belongs_to :user
 
   has_attached_file :picture, PAPERCLIP_CONFIG.merge({

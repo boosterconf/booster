@@ -1,4 +1,4 @@
-class TicketType < ActiveRecord::Base
+class TicketType < ApplicationRecord
 
   has_many :registrations
 

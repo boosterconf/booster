@@ -1,4 +1,4 @@
-class Sponsor < ActiveRecord::Base
+class Sponsor < ApplicationRecord
 
   belongs_to :user
   has_many :events, dependent: :destroy

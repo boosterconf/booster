@@ -1,5 +1,4 @@
-class Talk < ActiveRecord::Base
-
+class Talk < ApplicationRecord
   acts_as_paranoid
 
   has_many :speakers

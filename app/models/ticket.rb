@@ -1,6 +1,6 @@
 require 'csv'
 
-class Ticket < ActiveRecord::Base
+class Ticket < ApplicationRecord
 
   belongs_to :ticket_type
 
