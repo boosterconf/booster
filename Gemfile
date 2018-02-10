@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.2.2'
 
-gem 'railties', '4.2.5'
-gem 'rails', '4.2.5'
+gem 'railties', '5.0.6'
+gem 'rails', '5.0.6'
 gem "authlogic", '~> 3.4.2'
 gem 'paperclip', '~>4.3'
 
@@ -33,7 +33,7 @@ gem 'rails_12factor'
 
 gem 'rest-client'
 
-gem "paranoia", "~> 2.1.3"
+gem "paranoia", "~> 2.2"
 gem 'test-unit'
 
 gem 'virtus'
@@ -46,12 +46,12 @@ end
 
 group :development, :test do
   gem 'sqlite3'
-  gem 'quiet_assets'
+  #gem 'quiet_assets'
   gem 'taps'
   gem 'dotenv-rails'
-  gem 'sql_queries_count'
+  #gem 'sql_queries_count'
   gem 'bullet'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :test do

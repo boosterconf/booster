@@ -1,4 +1,4 @@
- Booster2013::Application.routes.draw do
+Rails.application.routes.draw do
 
    get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
 
