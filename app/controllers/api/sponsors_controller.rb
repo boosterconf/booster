@@ -3,7 +3,7 @@ module Api
 
     respond_to :json
 
-    before_filter :find_sponsor, only: [:email]
+    before_action :find_sponsor, only: [:email]
 
     def email
       @sponsors = Sponsor.all(:include => :user).sort

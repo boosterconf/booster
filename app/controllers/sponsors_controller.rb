@@ -1,9 +1,9 @@
 class SponsorsController < ApplicationController
 
-  before_filter :require_admin
-  before_filter :find_sponsor, only: [:update, :destroy, :email]
-  before_filter :find_sponsors, only: [:index, :update]
-  before_filter :find_events_and_stats, only: [:index, :update]
+  before_action :require_admin
+  before_action :find_sponsor, only: [:update, :destroy, :email]
+  before_action :find_sponsors, only: [:index, :update]
+  before_action :find_events_and_stats, only: [:index, :update]
 
   respond_to :html, :js
 

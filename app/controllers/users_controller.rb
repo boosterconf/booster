@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :require_user, except: [:new, :create, :from_reference]
-  before_filter :require_admin, only: [:index, :delete_bio]
-  before_filter :require_admin_or_self, only: [:show, :edit, :update]
-  before_filter :require_unauthenticated_or_admin, only: [:new, :create]
+  before_action :require_user, except: [:new, :create, :from_reference]
+  before_action :require_admin, only: [:index, :delete_bio]
+  before_action :require_admin_or_self, only: [:show, :edit, :update]
+  before_action :require_unauthenticated_or_admin, only: [:new, :create]
 
   # GET /users
   # GET /users.json

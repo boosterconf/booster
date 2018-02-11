@@ -3,8 +3,8 @@ require "securerandom"
 class RegisterWorkshopController < ApplicationController
   include CfpClosedRedirect
 
-  before_filter :setup_talk_types, only: [:talk, :create_talk]
-  before_filter :redirect_when_cfp_closed_for_workshops, only: [:start, :create_user, :create_talk, :talk]
+  before_action :setup_talk_types, only: [:talk, :create_talk]
+  before_action :redirect_when_cfp_closed_for_workshops, only: [:start, :create_user, :create_talk, :talk]
 
   def start
     if current_user

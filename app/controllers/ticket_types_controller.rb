@@ -1,7 +1,7 @@
 class TicketTypesController < ApplicationController
   respond_to :html, :js
 
-  before_filter :require_admin
+  before_action :require_admin
 
   def index
     @ticket_types = TicketType.all

@@ -2,9 +2,9 @@ class SlotsController < ApplicationController
 
   respond_to :html
 
-  before_filter :require_admin
-  before_filter :find_backing_data
-  before_filter :find_slot, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin
+  before_action :find_backing_data
+  before_action :find_slot, only: [:show, :edit, :update, :destroy]
 
   # GET /slots
   def index

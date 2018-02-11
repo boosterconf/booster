@@ -1,9 +1,9 @@
 class TalksController < ApplicationController
-  before_filter :require_user, :except => [:index, :show, :new, :article_tags, :workshops, :lightning_talks, :accepted]
-  before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
-  before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
+  before_action :require_user, :except => [:index, :show, :new, :article_tags, :workshops, :lightning_talks, :accepted]
+  before_action :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
+  before_action :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
-  before_filter :setup_talk_types, only: [:edit, :update]
+  before_action :setup_talk_types, only: [:edit, :update]
 
   respond_to :html
 

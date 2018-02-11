@@ -4,7 +4,7 @@ module Api
 
   @@auth_token = ENV['SLASH_COMMAND_TOKEN']
 
-  before_filter :token_authenticate!
+  before_action :token_authenticate!
 
     def slash_bot
       puts params

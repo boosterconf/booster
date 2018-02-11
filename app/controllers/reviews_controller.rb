@@ -2,9 +2,9 @@ class ReviewsController < ApplicationController
 
   respond_to :html, :js
 
-  before_filter :require_admin, only: [:index, :destroy]
-  before_filter :admin_or_talk_owner, only: [:create, :update]
-  before_filter :find_review, only: [:update, :destroy]
+  before_action :require_admin, only: [:index, :destroy]
+  before_action :admin_or_talk_owner, only: [:create, :update]
+  before_action :find_review, only: [:update, :destroy]
 
   def index
     talks = Talk.talks_for_review

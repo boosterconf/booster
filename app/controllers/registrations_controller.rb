@@ -1,7 +1,7 @@
 class RegistrationsController < ApplicationController
-  before_filter :require_user
-  before_filter :require_admin_or_owner, :except => [:index]
-  before_filter :require_admin, :only => [:index, :destroy, :restore, :send_welcome_email]
+  before_action :require_user
+  before_action :require_admin_or_owner, :except => [:index]
+  before_action :require_admin, :only => [:index, :destroy, :restore, :send_welcome_email]
 
   def index
     @registrations = Registration.includes(:ticket_type).find_by_params(params)
