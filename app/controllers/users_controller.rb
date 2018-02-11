@@ -227,10 +227,10 @@ class UsersController < ApplicationController
                                  :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
                                  :password, :password_confirmation, :city, :zip,
                                  :failed_login_count, :feature_as_organizer, :featured_speaker, :gender, :hometown,
-                                 :invited, :is_admin, :ticket_type_id, :id,
+                                 :invited, :is_admin,
                                  :phone_number, :registration_ip, :roles,
                                  :first_name, :last_name, :hear_about,
-                                 registration_attributes: [:includes_dinner],
+                                 registration_attributes: [:id, :includes_dinner, :ticket_type_id],
                                  bio_attributes: [
                                     :id, :picture, :tempfile, :original_filename, :content_type, :headers, :title,
                                     :twitter_handle, :blog, :bio

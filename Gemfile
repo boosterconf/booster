@@ -45,6 +45,8 @@ group :production do
 end
 
 group :development, :test do
+  gem "better_errors"
+  gem "binding_of_caller"
   gem 'rails-controller-testing'
   gem 'sqlite3'
   #gem 'quiet_assets'

@@ -6,7 +6,7 @@ module Api
     before_action :find_sponsor, only: [:email]
 
     def email
-      @sponsors = Sponsor.all(:include => :user).sort
+      @sponsors = Sponsor.includes(:user).sort
       @users = User.all_organizers
       @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
       @events = Event.last(15).reverse
