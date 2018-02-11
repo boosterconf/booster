@@ -5,7 +5,8 @@ ruby '2.2.2'
 gem 'railties', '5.0.6'
 gem 'rails', '5.0.6'
 gem "authlogic", '~> 3.8'
-gem 'paperclip', '~>4.3'
+gem 'paperclip', '~>5.0'
+gem 'aws-sdk', '~> 2.3.0'
 
 gem 'stripe'
 
@@ -20,7 +21,6 @@ end
 gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
-gem 'aws-sdk', '~> 1.66.0'
 
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.0.3'
