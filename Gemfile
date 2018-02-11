@@ -28,10 +28,6 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
 
-# The following group of gems are here to make transition from Rails 3.x to Rails 4.x easier
-gem 'rails-observers'
-gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'
-
 gem 'prawn'
 gem 'rails_12factor'
 

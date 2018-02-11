@@ -18,7 +18,7 @@ class SponsorsController < ApplicationController
 
   def edit
     @users = User.all_organizers
-    @sponsor = Sponsor.find(params[:id], include: :events)
+    @sponsor = Sponsor.includes(:events).find(params[:id])
 
     @event = Event.new(sponsor: @sponsor)
   end
