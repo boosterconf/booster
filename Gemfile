@@ -45,6 +45,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'rails-controller-testing'
   gem 'sqlite3'
   #gem 'quiet_assets'
   gem 'taps'
@@ -56,8 +57,8 @@ end
 
 group :test do
   gem 'mocha', :require => false
-  gem "minitest"
-  gem "minitest-reporters", '>= 0.5.0'
+  gem 'minitest', '~>5.10.3'
+  gem "minitest-reporters", '~> 1.1'
   gem 'shoulda'
   gem "factory_girl_rails", "~> 3.0"
 	gem 'ruby-prof'

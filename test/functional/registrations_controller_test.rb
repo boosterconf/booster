@@ -131,7 +131,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "not trigger an email if the registration is not completed" do
         subject = registrations(:one)
         params = create_registration_params
-        params["registration_complete"] = false
+        params[:registration_complete] = false
 
         assert_no_difference 'ActionMailer::Base.deliveries.size' do
           post :update, :registration => params, :id => subject.id
