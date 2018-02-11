@@ -8,7 +8,7 @@ class SlotsController < ApplicationController
 
   # GET /slots
   def index
-    periods = Period.all(include: :slots )
+    periods = Period.includes(:slots)
     @days = periods.group_by(&:day)
   end
 
@@ -18,7 +18,7 @@ class SlotsController < ApplicationController
 
   # GET /slots/new
   def new
-    @slot = Slot.new(params[:slot])
+    @slot = Slot.new(slot_params)
     @position = params[:position]
     if @slot.period.period_type == 'workshop'
       @talks = Talk.all_unassigned_tutorials
@@ -35,7 +35,7 @@ class SlotsController < ApplicationController
 
   # POST /slots
   def create
-    @slot = Slot.where(params[:slot]).first_or_initialize
+    @slot = Slot.where(slot_params).first_or_initialize
     @slot.talk_positions.build(talk_id: params[:talk_id], position: params[:position] )
 
     if @slot.save
@@ -47,7 +47,7 @@ class SlotsController < ApplicationController
 
   # PUT /slots/1
   def update
-    if @slot.update_attributes(params[:slot])
+    if @slot.update_attributes(slot_params)
       redirect_to(@slot, notice: 'Slot was successfully updated.')
     else
       render action: :edit
@@ -61,6 +61,10 @@ class SlotsController < ApplicationController
   end
 
   private
+  def slot_params
+    params.require(:slot).permit(:period_id, :room_id)
+  end
+
   def find_slot
     @slot = Slot.find(params[:id])
     render not_found unless @slot
