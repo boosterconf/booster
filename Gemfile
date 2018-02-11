@@ -4,7 +4,7 @@ ruby '2.2.2'
 
 gem 'railties', '5.0.6'
 gem 'rails', '5.0.6'
-gem "authlogic", '~> 3.4.2'
+gem "authlogic", '~> 3.8'
 gem 'paperclip', '~>4.3'
 
 gem 'stripe'
