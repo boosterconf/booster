@@ -3,7 +3,7 @@ class NametagsController < ApplicationController
   before_action :require_admin
 
   def index
-    @tickets = Ticket.all(:include => :ticket_type)
+    @tickets = Ticket.includes(:ticket_type)
 
     respond_to do |format|
       format.html
