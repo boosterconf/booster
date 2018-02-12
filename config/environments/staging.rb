@@ -5,11 +5,11 @@ Booster2013::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_files = false
+  config.public_file_server.enabled = false
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -74,6 +74,6 @@ Booster2013::Application.configure do
   ActionMailer::Base.delivery_method = :smtp
 
   config.after_initialize do
-          Rails.application.routes.default_url_options[:host] = 'staging-boosterconf.herokuapp.com'
-      end
+    Rails.application.routes.default_url_options[:host] = 'staging-boosterconf.herokuapp.com'
+  end
 end
