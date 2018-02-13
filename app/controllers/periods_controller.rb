@@ -1,6 +1,6 @@
 class PeriodsController < ApplicationController
 
-  before_filter :require_admin
+  before_action :require_admin
 
   respond_to :html
 
@@ -17,7 +17,7 @@ class PeriodsController < ApplicationController
   end
 
   def create
-    @period = Period.new(params[:period])
+    @period = Period.new(period_params)
 
     if @period.save
       redirect_to(periods_url, notice: 'Period was successfully created.')
@@ -29,7 +29,7 @@ class PeriodsController < ApplicationController
   def update
     @period = Period.find(params[:id])
 
-      if @period.update_attributes(params[:period])
+      if @period.update_attributes(period_params)
         redirect_to(periods_url, notice: 'Period was successfully updated.')
       else
         render action: :edit
@@ -41,6 +41,11 @@ class PeriodsController < ApplicationController
     @period.destroy
 
     redirect_to(periods_url)
+  end
+
+  private
+  def period_params
+    params.require(:period).permit(:start_time, :end_time, :day, :period_type)
   end
 
 end

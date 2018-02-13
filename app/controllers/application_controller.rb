@@ -2,8 +2,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user_session, :current_user, :logged_in?, :admin?, :admin_or_talk_owner?
-  before_filter :ensure_redirect_to_subdomain
-  before_filter :load_sponsors
+  before_action :ensure_redirect_to_subdomain
+  before_action :load_sponsors
 
 
   private

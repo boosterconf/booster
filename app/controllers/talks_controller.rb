@@ -1,9 +1,9 @@
 class TalksController < ApplicationController
-  before_filter :require_user, :except => [:index, :show, :new, :article_tags, :workshops, :lightning_talks, :accepted]
-  before_filter :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
-  before_filter :is_admin_or_owner, :only => [:edit, :update, :destroy]
+  before_action :require_user, :except => [:index, :show, :new, :article_tags, :workshops, :lightning_talks, :accepted]
+  before_action :require_admin, :only => [:assign, :create_assigned, :cheat_sheet]
+  before_action :is_admin_or_owner, :only => [:edit, :update, :destroy]
 
-  before_filter :setup_talk_types, only: [:edit, :update]
+  before_action :setup_talk_types, only: [:edit, :update]
 
   respond_to :html
 
@@ -63,7 +63,7 @@ class TalksController < ApplicationController
   def create_assigned
     params[:talk].merge!({acceptance_status: 'accepted', language: 'english'})
 
-    @talk = Talk.new(params[:talk])
+    @talk = Talk.new(talk_params)
     @user = User.find(params[:user_id])
     @types = TalkType.all
 
@@ -82,11 +82,7 @@ class TalksController < ApplicationController
   def update
     @talk = current_user.is_admin ? Talk.find(params[:id]) : current_user.talks.find(params[:id])
 
-    puts "---------------"
-    puts current_user.inspect
-    puts @talk.inspect
-
-    @talk.assign_attributes(params[:talk])
+    @talk.assign_attributes(talk_params)
     @talk.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @tags = Tag.all
     @types = TalkType.all
@@ -115,7 +111,7 @@ class TalksController < ApplicationController
     end
     @talk.tags = Tag.create_and_return_tags(tag_names)
 
-    if @talk.update_attributes(params[:talk])
+    if @talk.update_attributes(talk_params)
       flash[:notice] = 'Abstract updated.'
       redirect_to(@talk)
     else
@@ -160,5 +156,12 @@ class TalksController < ApplicationController
 
   def setup_talk_types
     @talk_types = current_user.is_admin? ? TalkType.all : TalkType.workshops
+  end
+
+  private
+  def talk_params
+    params.require(:talk).permit(:talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
+                                 :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status,
+                                 :slide, :outline, :appropriate_for_roles, :speakers_confirmed, :speaking_history, :video_url)
   end
 end

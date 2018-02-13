@@ -21,28 +21,33 @@ class SponsorsControllerTest < ActionController::TestCase
 
     should "be able to create new sponsor" do
       assert_difference('Sponsor.count', +1) do
-        post :create, :sponsor => {}
+        post :create, params: { sponsor: valid_sponsor_params }
       end
 
       assert_redirected_to sponsors_path
     end
 
-    should "be ble to show edit form" do
-      get :edit, :id => sponsors(:one).to_param
+    should "be able to show edit form" do
+      get :edit, params: { id: sponsors(:one).to_param }
       assert_response :success
     end
 
     should "be able to update sponsor" do
-      put :update, id: sponsors(:one).to_param, sponsor: {}
+      put :update, params: { id: sponsors(:one).to_param, sponsor: valid_sponsor_params }
       assert_redirected_to sponsors_path
     end
 
     should "be able to delete a sponsor" do
       assert_difference('Sponsor.count', -1) do
-        delete :destroy, :id => sponsors(:one).to_param
+        delete :destroy, params: { id: sponsors(:one).to_param }
       end
 
       assert_redirected_to sponsors_path
     end
+  end
+
+  private
+  def valid_sponsor_params
+    { email: "a@b.no"}
   end
 end

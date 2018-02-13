@@ -3,8 +3,6 @@ class Workshop < Talk
   validates :max_participants, presence: true,
             numericality: { only_integer: true, greater_than_or_equal: 20 }
 
-  attr_accessible :additional_speaker_email
-
   after_initialize do |workshop|
     workshop.acceptance_status ||= 'pending'
     workshop.language = 'english' # all workshops are english

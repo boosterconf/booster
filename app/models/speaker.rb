@@ -1,4 +1,4 @@
-class Speaker < ActiveRecord::Base
+class Speaker < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :talk

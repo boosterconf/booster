@@ -10,7 +10,7 @@ class UsersControllerTest < ActionController::TestCase
 
       setup do
         AppConfig.stubs(:early_bird_ends).returns(Time.now + 1.days)
-        post :create, :user => create_user_params
+        post :create, params: { user: create_user_params }
         @registration = Registration.unscoped.order("id asc").last
       end
 
@@ -24,7 +24,7 @@ class UsersControllerTest < ActionController::TestCase
 
       setup do
         AppConfig.stubs(:early_bird_ends).returns(Time.now - 1.days)
-        post :create, :user => create_user_params
+        post :create, params: { user: create_user_params }
         @registration = Registration.unscoped.order("id asc").last
       end
 
@@ -36,13 +36,13 @@ class UsersControllerTest < ActionController::TestCase
 
     should 'be able to create a new user' do
       assert_difference 'User.count', +1 do
-        post :create, :user => create_user_params
+        post :create, params: { user: create_user_params }
       end
     end
 
     context 'following an invalid user creation reference link' do
       setup do
-        get :from_reference, :reference => "bogus"
+        get :from_reference, params: { reference: "bogus" }
       end
 
       should 'get an error message' do
@@ -58,7 +58,7 @@ class UsersControllerTest < ActionController::TestCase
 
         kill_all_sessions # TODO: not sure why we have to do this, but we do.
 
-        get :from_reference, :reference => @user.registration.unique_reference
+        get :from_reference, params: { reference: @user.registration.unique_reference }
       end
 
       should 'be redirected to user edit page' do
@@ -80,7 +80,7 @@ class UsersControllerTest < ActionController::TestCase
     end
 
     should 'no longer be unfinished' do
-      post :update, :id => @user.id, :user => update_user_params
+      post :update, params: { id: @user.id, user: update_user_params }
 
       registration = User.find_by_email(SOME_EMAIL).registration
       assert !registration.unfinished
@@ -96,7 +96,7 @@ class UsersControllerTest < ActionController::TestCase
       setup do
         @user = User.create_unfinished("a@b.no", TicketType.speaker)
         @user.save(:validate => false)
-        get :from_reference, :reference => @user.registration.unique_reference
+        get :from_reference, params: { :reference => @user.registration.unique_reference }
       end
 
       should 'be redirected to profile page' do
@@ -110,7 +110,7 @@ class UsersControllerTest < ActionController::TestCase
 
       login_as :multispeaker
 
-      post :create_bio, id: users(:multispeaker).id
+      post :create_bio, params: { id: users(:multispeaker).id }
       assert_response 200
     end
   end
@@ -122,7 +122,7 @@ class UsersControllerTest < ActionController::TestCase
 
     should 'be able to create bio' do
       assert_difference 'Bio.count', +1 do
-        post :create_bio, id: users(:singlespeaker).id
+        post :create_bio, params: { id: users(:singlespeaker).id }
       end
 
       assert_response 200
@@ -133,7 +133,7 @@ class UsersControllerTest < ActionController::TestCase
       bio = Bio.new(title: 'test')
       User.update(q.id, { bio: bio })
 
-      post :delete_bio, :id => q.id
+      post :delete_bio, params: { id: q.id }
 
       assert_response 302
       assert q.bio.nil?
@@ -146,7 +146,7 @@ class UsersControllerTest < ActionController::TestCase
 
       should 'not send an email' do
         assert_no_difference('ActionMailer::Base.deliveries.size') do
-          post :create, user: @invited_speaker_params
+          post :create, params: { user: @invited_speaker_params }
         end
       end
 
@@ -160,15 +160,15 @@ class UsersControllerTest < ActionController::TestCase
 
   def update_user_params
     { 'accepted_privacy_guidelines' => '1', 'company' => 'Test', 'first_name' => 'Test', 'last_name' => 'Osteron', 'accept_optional_email' => '1',
-      'password' => 'fjasepass', 'password_confirmation' => 'fjasepass', 'phone_number' => '92043382', 'role' => 'Developer', 'birthyear' => 1984, 'hometown' => 'Bergen',
-      'registration_attributes' => { 'manual_payment' => '', 'free_ticket' => 'false', 'includes_dinner' => "1" }
+      'password' => 'fjasepass', 'password_confirmation' => 'fjasepass', 'phone_number' => '92043382', 'birthyear' => 1984, 'hometown' => 'Bergen',
+      'registration_attributes' => { 'includes_dinner' => "1" }
     }
   end
 
   def create_speaker_params
     { 'company' => 'DRW', 'first_name' => 'Dan', 'last_name' => 'North', 'bio_attributes' =>
         { 'title' => 'Boss', 'blog' => 'dannorth.net', 'twitter_handle' => 'tastapod', 'bio' => 'Testtest' },
-      'gender' => 'M', 'password_confirmation' => 'test', 'role' => 'Developer', 'featured_speaker' => '0',
+      'gender' => 'M', 'password_confirmation' => 'test', 'featured_speaker' => '0',
       'phone_number' => '93400346', 'hometown' => 'London', 'registration_attributes' => { 'includes_dinner' => '1' },
       'password' => 'test', 'birthyear' => '1976', 'email' => 'dan@north.net' }
   end

@@ -1,4 +1,4 @@
-class BoosterMailer < ActionMailer::Base
+class BoosterMailer < ApplicationMailer
 
   FROM_EMAIL = 'Booster conference <kontakt@boosterconf.no>'
   SUBJECT_PREFIX = "[boosterconf]"

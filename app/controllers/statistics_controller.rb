@@ -1,6 +1,6 @@
 class StatisticsController < ApplicationController
 
-  before_filter :require_admin
+  before_action :require_admin
 
   def index
   end

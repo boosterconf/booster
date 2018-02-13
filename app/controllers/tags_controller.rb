@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
-  before_filter :require_user, :only => [:new, :create]
-  before_filter :require_admin, :only => [:index, :edit, :update, :destroy]
+  before_action :require_user, :only => [:new, :create]
+  before_action :require_admin, :only => [:index, :edit, :update, :destroy]
   # Anybody can see :show and :create
 
   # GET /tags

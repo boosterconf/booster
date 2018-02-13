@@ -2,9 +2,9 @@ class ReviewsController < ApplicationController
 
   respond_to :html, :js
 
-  before_filter :require_admin, only: [:index, :destroy]
-  before_filter :admin_or_talk_owner, only: [:create, :update]
-  before_filter :find_review, only: [:update, :destroy]
+  before_action :require_admin, only: [:index, :destroy]
+  before_action :admin_or_talk_owner, only: [:create, :update]
+  before_action :find_review, only: [:update, :destroy]
 
   def index
     talks = Talk.talks_for_review
@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
 
   def create
 
-    @review = Review.new(params[:review])
+    @review = Review.new(review_params)
     @review.reviewer = current_user
     @review.talk_id = params[:talk_id]
 
@@ -31,12 +31,14 @@ class ReviewsController < ApplicationController
 
   def update
     respond_to do |format|
-      if @review.update_attributes(params[:review])
+      if @review.update_attributes(review_params)
         format.html { redirect_to @review, notice: 'Review was successfully updated.' }
         format.json { head :no_content }
+        format.js { head :no_content }
       else
         format.html { render action: "edit" }
         format.json { render json: @review.errors, status: :unprocessable_entity }
+        format.js { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -52,6 +54,11 @@ class ReviewsController < ApplicationController
   end
 
   private
+  def review_params
+    params.require(:review).permit(:id, :subject, :text)
+#    params.permit(:talk_id)
+  end
+
   def find_review
     @review = Review.find(params[:id])
   end

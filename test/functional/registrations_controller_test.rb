@@ -13,7 +13,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "be able to" do
 
         assert_difference('Registration.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
         end
 
         assert_redirected_to registrations_path
@@ -22,7 +22,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "only soft delete it" do
 
         assert_no_difference('Registration.with_deleted.count') do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
         end
 
         assert_redirected_to registrations_path
@@ -31,7 +31,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "also delete the user" do
 
         assert_difference('User.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
         end
 
         assert_redirected_to registrations_path
@@ -40,7 +40,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "only soft delete the user" do
 
         assert_no_difference('User.with_deleted.count') do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
         end
 
         assert_redirected_to registrations_path
@@ -48,19 +48,19 @@ class RegistrationsControllerTest < ActionController::TestCase
 
       should "delete all users talks too" do
         assert_difference('Talk.count', -1) do
-          delete :destroy, :id => registrations(:six).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:six).id, name: "John H. Example" }
         end
       end
 
       should "only soft delete all users talks" do
         assert_no_difference('Talk.with_deleted.count') do
-          delete :destroy, :id => registrations(:six).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:six).id, name: "John H. Example" }
         end
       end
 
       should "not delete the talks of a user if the talk has several speakers" do
         assert_difference('Talk.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
         end
       end
     end
@@ -69,7 +69,7 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "not be able to if it hasn't been soft deleted" do
 
         assert_no_difference('Registration.with_deleted.count') do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :really => true
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example", really: true }
         end
 
         assert_redirected_to registrations_path
@@ -78,8 +78,8 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "be able to if it has been soft deleted" do
 
         assert_difference('Registration.with_deleted.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :really => true
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example", really: true }
         end
 
         assert_redirected_to deleted_registrations_path
@@ -88,19 +88,12 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "also really delete the user" do
 
         assert_difference('User.with_deleted.count', -1) do
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example"
-          delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :really => true
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example" }
+          delete :destroy, params: { id: registrations(:one).id, name: "John H. Example", really: true }
         end
 
         assert_redirected_to deleted_registrations_path
       end
-
-      # should "really delete all users talks too" do
-      #   assert_difference('Talk.with_deleted.count', -1) do
-      #     delete :destroy, :id => registrations(:six).id, :name => "John H. Example"
-      #     delete :destroy, :id => registrations(:six).id, :name => "John H. Example", :really => true
-      #   end
-      # end
     end
 
 
@@ -112,7 +105,7 @@ class RegistrationsControllerTest < ActionController::TestCase
         params["free_ticket"] = true
 
         assert_difference('ActionMailer::Base.deliveries.size', +1) do
-          post :update, :registration => params, :id => subject.id
+          post :update, params: { registration: params, id: subject.id }
         end
 
         assert last_email_sent.subject.include?("free ticket"), "Subject '#{last_email_sent.subject}' did not include 'free ticket'"
@@ -122,7 +115,7 @@ class RegistrationsControllerTest < ActionController::TestCase
         subject = registrations(:one)
 
         assert_difference('ActionMailer::Base.deliveries.size', +1) do
-          post :update, :registration => create_registration_params, :id => subject.id
+          post :update, params: { registration: create_registration_params, id: subject.id }
         end
 
         assert last_email_sent.subject.include?("Payment"), "Subject '#{last_email_sent.subject}' did not include 'Payment'"
@@ -131,10 +124,10 @@ class RegistrationsControllerTest < ActionController::TestCase
       should "not trigger an email if the registration is not completed" do
         subject = registrations(:one)
         params = create_registration_params
-        params["registration_complete"] = false
+        params[:registration_complete] = false
 
         assert_no_difference 'ActionMailer::Base.deliveries.size' do
-          post :update, :registration => params, :id => subject.id
+          post :update, params: { registration: params, id: subject.id }
         end
       end
     end
@@ -147,21 +140,21 @@ class RegistrationsControllerTest < ActionController::TestCase
     end
 
     should "not be able to delete_registrations" do
-      delete :destroy, :id => registrations(:one).id, :name => "John H. Example", :confirmation => "joh"
+      delete :destroy, params: { id: registrations(:six).id, name: "John H. Example", confirmation: "joh" }
       assert_response 302
     end
 
     should "not receive an email when s/he updates own registration" do
       assert_no_difference 'ActionMailer::Base.deliveries.size' do
-        post :update, :registration => create_registration_params, :id => registrations(:one).id
+        post :update, params: { registration: create_registration_params, id: registrations(:one).id }
       end
     end
   end
 
   private
   def create_registration_params
-    {"price"=>"6245", "includes_dinner" => true, "ticket_type_id" => ticket_types(:earlybird).id, "registration_complete" => true,
-     "free_ticket" => false}
+    { includes_dinner: true, ticket_type_id: ticket_types(:earlybird).id, registration_complete: true,
+      free_ticket: false }
   end
 
 end

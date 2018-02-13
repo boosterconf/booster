@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.4.0'
 
-gem 'railties', '4.2.5'
-gem 'rails', '4.2.5'
-gem "authlogic", '~> 3.4.2'
-gem 'paperclip', '~>4.3'
+gem 'railties', '5.0.6'
+gem 'rails', '5.0.6'
+gem "authlogic", '~> 3.8'
+gem 'paperclip', '~>5.0'
+gem 'aws-sdk', '~> 2.3.0'
 
 gem 'stripe'
 
@@ -20,7 +21,6 @@ end
 gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
-gem 'aws-sdk', '~> 1.66.0'
 
 gem 'coffee-rails', '~> 4.1.0'
 gem 'uglifier', '>= 1.0.3'
@@ -28,17 +28,12 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
 
-# The following group of gems are here to make transition from Rails 3.x to Rails 4.x easier
-gem 'rails-observers'
-gem 'protected_attributes'
-gem 'activerecord-deprecated_finders', require: 'active_record/deprecated_finders'
-
 gem 'prawn'
 gem 'rails_12factor'
 
 gem 'rest-client'
 
-gem "paranoia", "~> 2.1.3"
+gem "paranoia", "~> 2.2"
 gem 'test-unit'
 
 gem 'virtus'
@@ -50,19 +45,22 @@ group :production do
 end
 
 group :development, :test do
+  gem "better_errors"
+  gem "binding_of_caller"
+  gem 'rails-controller-testing'
   gem 'sqlite3'
-  gem 'quiet_assets'
+  #gem 'quiet_assets'
   gem 'taps'
   gem 'dotenv-rails'
-  gem 'sql_queries_count'
+  #gem 'sql_queries_count'
   gem 'bullet'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.7'
 end
 
 group :test do
   gem 'mocha', :require => false
-  gem "minitest"
-  gem "minitest-reporters", '>= 0.5.0'
+  gem 'minitest', '~>5.10.3'
+  gem "minitest-reporters", '~> 1.1'
   gem 'shoulda'
   gem "factory_girl_rails", "~> 3.0"
 	gem 'ruby-prof'

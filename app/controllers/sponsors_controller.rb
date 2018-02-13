@@ -1,9 +1,9 @@
 class SponsorsController < ApplicationController
 
-  before_filter :require_admin
-  before_filter :find_sponsor, only: [:update, :destroy, :email]
-  before_filter :find_sponsors, only: [:index, :update]
-  before_filter :find_events_and_stats, only: [:index, :update]
+  before_action :require_admin
+  before_action :find_sponsor, only: [:update, :destroy, :email]
+  before_action :find_sponsors, only: [:index, :update]
+  before_action :find_events_and_stats, only: [:index, :update]
 
   respond_to :html, :js
 
@@ -18,13 +18,13 @@ class SponsorsController < ApplicationController
 
   def edit
     @users = User.all_organizers
-    @sponsor = Sponsor.find(params[:id], include: :events)
+    @sponsor = Sponsor.includes(:events).find(params[:id])
 
     @event = Event.new(sponsor: @sponsor)
   end
 
   def create
-    @sponsor = Sponsor.new(params[:sponsor])
+    @sponsor = Sponsor.new(sponsor_params)
 
     if @sponsor.save
       redirect_to sponsors_path, notice: 'Partner was successfully created.'
@@ -45,7 +45,7 @@ class SponsorsController < ApplicationController
                 )
             )
         )
-    @sponsor.assign_attributes(params[:sponsor])
+    @sponsor.assign_attributes(sponsor_params)
 
     User.transaction do
       Sponsor.transaction do
@@ -143,6 +143,12 @@ class SponsorsController < ApplicationController
   end
 
   private
+  def sponsor_params
+    params.require(:sponsor).permit(:comment, :contact_person_first_name, :contact_person_last_name, :contact_person_phone_number,
+                                    :email, :last_contacted_at, :location, :name, :status, :user_id,
+                                    :was_sponsor_last_year, :events, :logo, :publish_logo, :website)
+  end
+
   def find_sponsor
     @sponsor = Sponsor.find(params[:id])
   end

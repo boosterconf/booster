@@ -1,4 +1,4 @@
-class TalkType < ActiveRecord::Base
+class TalkType < ApplicationRecord
   has_many :talks
 
   def name_and_duration

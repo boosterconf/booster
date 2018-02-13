@@ -1,7 +1,6 @@
-class TicketType < ActiveRecord::Base
+class TicketType < ApplicationRecord
 
   has_many :registrations
-  attr_accessible :name, :reference, :price, :dinner_included
 
   def price_with_vat
     price * 1.25

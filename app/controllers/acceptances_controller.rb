@@ -1,7 +1,7 @@
 class AcceptancesController < ApplicationController
 
-  before_filter :require_admin, except: [:could_not_attend, :confirm]
-  before_filter :require_admin_or_talk_owner, only: [:could_not_attend, :confirm]
+  before_action :require_admin, except: [:could_not_attend, :confirm]
+  before_action :require_admin_or_talk_owner, only: [:could_not_attend, :confirm]
 
   def index
     @talks = Talk.all_with_speakers

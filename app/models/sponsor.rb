@@ -1,13 +1,8 @@
-class Sponsor < ActiveRecord::Base
+class Sponsor < ApplicationRecord
 
   belongs_to :user
   has_many :events, dependent: :destroy
   has_one :invoice_line
-
-  attr_accessible :comment, :contact_person_first_name, :contact_person_last_name, :contact_person_phone_number,
-                  :email, :last_contacted_at, :location, :name, :status, :user_id,
-                  :was_sponsor_last_year, :events, :logo, :publish_logo, :website
-
 
   has_attached_file :logo, PAPERCLIP_CONFIG.merge({
                                                       styles: {

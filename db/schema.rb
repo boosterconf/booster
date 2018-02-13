@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -29,9 +28,8 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.string   "picture_content_type", limit: 255
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.index ["user_id"], name: "index_bios_on_user_id", using: :btree
   end
-
-  add_index "bios", ["user_id"], name: "index_bios_on_user_id", using: :btree
 
   create_table "events", force: :cascade do |t|
     t.text     "comment"
@@ -39,10 +37,9 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sponsor_id"], name: "index_events_on_sponsor_id", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
   end
-
-  add_index "events", ["sponsor_id"], name: "index_events_on_sponsor_id", using: :btree
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "invitees", force: :cascade do |t|
     t.string   "name",               limit: 255
@@ -66,11 +63,10 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.integer  "invoice_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.index ["invoice_id"], name: "index_invoice_lines_on_invoice_id", using: :btree
+    t.index ["registration_id"], name: "index_invoice_lines_on_registration_id", using: :btree
+    t.index ["sponsor_id"], name: "index_invoice_lines_on_sponsor_id", using: :btree
   end
-
-  add_index "invoice_lines", ["invoice_id"], name: "index_invoice_lines_on_invoice_id", using: :btree
-  add_index "invoice_lines", ["registration_id"], name: "index_invoice_lines_on_registration_id", using: :btree
-  add_index "invoice_lines", ["sponsor_id"], name: "index_invoice_lines_on_sponsor_id", using: :btree
 
   create_table "invoices", force: :cascade do |t|
     t.string   "our_reference",  limit: 255
@@ -134,12 +130,11 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.boolean  "speakers_dinner"
     t.datetime "deleted_at"
     t.integer  "ticket_type_id",                          default: 2
+    t.index ["deleted_at"], name: "index_registrations_on_deleted_at", using: :btree
+    t.index ["invoice_id"], name: "index_registrations_on_invoice_id", using: :btree
+    t.index ["ticket_type_id"], name: "index_registrations_on_ticket_type_id", using: :btree
+    t.index ["user_id"], name: "index_registrations_on_user_id", using: :btree
   end
-
-  add_index "registrations", ["deleted_at"], name: "index_registrations_on_deleted_at", using: :btree
-  add_index "registrations", ["invoice_id"], name: "index_registrations_on_invoice_id", using: :btree
-  add_index "registrations", ["ticket_type_id"], name: "index_registrations_on_ticket_type_id", using: :btree
-  add_index "registrations", ["user_id"], name: "index_registrations_on_user_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "talk_id"
@@ -148,10 +143,9 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.text     "text"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.index ["reviewer_id"], name: "index_reviews_on_reviewer_id", using: :btree
+    t.index ["talk_id"], name: "index_reviews_on_talk_id", using: :btree
   end
-
-  add_index "reviews", ["reviewer_id"], name: "index_reviews_on_reviewer_id", using: :btree
-  add_index "reviews", ["talk_id"], name: "index_reviews_on_talk_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -166,22 +160,20 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "room_id"
+    t.index ["period_id"], name: "index_slots_on_period_id", using: :btree
+    t.index ["room_id"], name: "index_slots_on_room_id", using: :btree
+    t.index ["talk_id"], name: "index_slots_on_talk_id", using: :btree
   end
-
-  add_index "slots", ["period_id"], name: "index_slots_on_period_id", using: :btree
-  add_index "slots", ["room_id"], name: "index_slots_on_room_id", using: :btree
-  add_index "slots", ["talk_id"], name: "index_slots_on_talk_id", using: :btree
 
   create_table "speakers", force: :cascade do |t|
     t.integer  "talk_id"
     t.integer  "user_id"
     t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_speakers_on_deleted_at", using: :btree
+    t.index ["talk_id", "user_id"], name: "index_speakers_on_talk_id_and_user_id", using: :btree
+    t.index ["talk_id"], name: "index_speakers_on_talk_id", using: :btree
+    t.index ["user_id"], name: "index_speakers_on_user_id", using: :btree
   end
-
-  add_index "speakers", ["deleted_at"], name: "index_speakers_on_deleted_at", using: :btree
-  add_index "speakers", ["talk_id", "user_id"], name: "index_speakers_on_talk_id_and_user_id", using: :btree
-  add_index "speakers", ["talk_id"], name: "index_speakers_on_talk_id", using: :btree
-  add_index "speakers", ["user_id"], name: "index_speakers_on_user_id", using: :btree
 
   create_table "sponsors", force: :cascade do |t|
     t.string   "name",                        limit: 255
@@ -202,9 +194,8 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.datetime "logo_updated_at"
     t.boolean  "publish_logo",                            default: false
     t.string   "website",                     limit: 255
+    t.index ["user_id"], name: "index_sponsors_on_user_id", using: :btree
   end
-
-  add_index "sponsors", ["user_id"], name: "index_sponsors_on_user_id", using: :btree
 
   create_table "tags", force: :cascade do |t|
     t.string   "title",      limit: 255
@@ -215,9 +206,8 @@ ActiveRecord::Schema.define(version: 20170219195432) do
   create_table "tags_talks", id: false, force: :cascade do |t|
     t.integer "talk_id"
     t.integer "tag_id"
+    t.index ["tag_id", "talk_id"], name: "index_tags_talks_on_tag_id_and_talk_id", using: :btree
   end
-
-  add_index "tags_talks", ["tag_id", "talk_id"], name: "index_tags_talks_on_tag_id_and_talk_id", using: :btree
 
   create_table "talk_positions", force: :cascade do |t|
     t.integer "talk_id",              null: false
@@ -274,19 +264,17 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.boolean  "speakers_confirmed"
     t.text     "speaking_history"
     t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_talks_on_deleted_at", using: :btree
+    t.index ["id", "type"], name: "index_talks_on_id_and_type", using: :btree
+    t.index ["talk_type_id"], name: "index_talks_on_talk_type_id", using: :btree
   end
-
-  add_index "talks", ["deleted_at"], name: "index_talks_on_deleted_at", using: :btree
-  add_index "talks", ["id", "type"], name: "index_talks_on_id_and_type", using: :btree
-  add_index "talks", ["talk_type_id"], name: "index_talks_on_talk_type_id", using: :btree
 
   create_table "talks_volunteers", id: false, force: :cascade do |t|
     t.integer "volunteer_id", null: false
     t.integer "talk_id",      null: false
+    t.index ["talk_id", "volunteer_id"], name: "index_talks_volunteers_on_talk_id_and_volunteer_id", using: :btree
+    t.index ["volunteer_id", "talk_id"], name: "index_talks_volunteers_on_volunteer_id_and_talk_id", using: :btree
   end
-
-  add_index "talks_volunteers", ["talk_id", "volunteer_id"], name: "index_talks_volunteers_on_talk_id_and_volunteer_id", using: :btree
-  add_index "talks_volunteers", ["volunteer_id", "talk_id"], name: "index_talks_volunteers_on_volunteer_id_and_talk_id", using: :btree
 
   create_table "ticket_types", force: :cascade do |t|
     t.string   "reference",       limit: 255
@@ -310,9 +298,8 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "reference"
+    t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id", using: :btree
   end
-
-  add_index "tickets", ["ticket_type_id"], name: "index_tickets_on_ticket_type_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                       limit: 255,                 null: false
@@ -351,9 +338,8 @@ ActiveRecord::Schema.define(version: 20170219195432) do
     t.string   "last_name",                   limit: 255
     t.datetime "deleted_at"
     t.string   "hear_about",                              default: ""
+    t.index ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
   end
-
-  add_index "users", ["deleted_at"], name: "index_users_on_deleted_at", using: :btree
 
   create_table "volunteers", force: :cascade do |t|
     t.string "first_name"

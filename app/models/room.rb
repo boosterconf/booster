@@ -1,5 +1,4 @@
-class Room < ActiveRecord::Base
-  attr_accessible :capacity, :name
+class Room < ApplicationRecord
 
   validates :name, presence: true
 end

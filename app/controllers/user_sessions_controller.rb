@@ -1,13 +1,13 @@
 class UserSessionsController < ApplicationController
 
-  before_filter :require_user, :only => :destroy
+  before_action :require_user, :only => :destroy
 
   def new
     @user_session = UserSession.new
   end
 
   def create
-    @user_session = UserSession.new params[:user_session]
+    @user_session = UserSession.new(user_session_params)
     if @user_session.save
       redirect_back_or_default root_url
     else
@@ -20,4 +20,11 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     redirect_to root_url
   end
+
+  private
+
+  def user_session_params
+    params.require(:user_session).permit(:email, :password, :remember_me)
+  end
+
 end

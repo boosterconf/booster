@@ -1,6 +1,4 @@
-class Review < ActiveRecord::Base
-
-  attr_accessible :subject, :text
+class Review < ApplicationRecord
 
   belongs_to :reviewer, class_name: User
   belongs_to :talk

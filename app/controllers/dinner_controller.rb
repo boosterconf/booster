@@ -2,7 +2,7 @@ class DinnerController < ApplicationController
 
   respond_to :html
 
-  before_filter :require_admin
+  before_action :require_admin
 
   def index
     @registrations = Registration.includes(:ticket_type).all
