@@ -7,60 +7,61 @@
 
   <div class="speakers-body .container">
     <div class="row">
-        <% @speakers.shuffle.each_with_index do |speaker,index| %>
-            <div class="speaker <%= 'odd' if index%2 != 0 %> col-md-12">
-              <div class="row speaker-row">
-	      <div class="left col-sm-6">
+      <% @speakers.shuffle.each_with_index do |speaker, index| %>
+        <div class="speaker <%= 'odd' if index % 2 != 0 %> col-md-12">
+          <div class="row speaker-row">
+            <div class="left col-sm-6">
               <% unless speaker.bio == nil %>
                 <% if speaker.bio.picture_file_name.present? %>
-                    <%= image_tag speaker.bio.picture.url, class: 'speaker-image'%>
+                  <%= image_tag speaker.bio.picture.url, class: 'speaker-image' %>
                 <% else %>
-                    <%= image_tag('placeholder.jpg', class: 'speaker-image', style: 'width: 400px' ) %>
+                  <%= image_tag('placeholder.jpg', class: 'speaker-image', style: 'width: 400px') %>
                 <% end %>
               <% end %>
-	      </div>
-              <div class="right col-sm-6">
-                <div class="content">
-	          <h3><a name="<%= speaker.full_name %>"><%= speaker.full_name %></a></h3>
-		  <% unless speaker.bio == nil %>
-		  <div class="speaker-meta">
-		    <p>
+            </div>
+            <div class="right col-sm-6">
+              <div class="content">
+                <h3><a name="<%= speaker.full_name %>"><%= speaker.full_name %></a></h3>
+                <% unless speaker.bio == nil %>
+                  <div class="speaker-meta">
+                    <p>
                       <i><%= speaker.bio[:title] %></i>
 
                       <% if speaker.is_on_twitter? %>
-                            <br />
-			    <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-                              &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
-                            </a>
+                        <br/>
+                        <a href="http://twitter.com/<%= speaker.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+                          &#64;<%= speaker.bio[:twitter_handle].sub(/@/, '') %>
+                        </a>
                       <% end %>
-		    </p>
+                    </p>
                   </div>
 
                   <div class="speaker-bio">
                     <%= simple_format speaker.bio[:bio] %>
-		    <% if speaker.has_blog? %>
-		      <p>
-			<%= speaker[:first_name] %> blogs at <a href="<%= speaker.bio[:blog] %>" target="_blank"><%= speaker.bio[:blog] %></a>
-	              </p>
-		    <% end %>
-		 </div>
-		 <% end %>
-                 <% unless speaker.accepted_talks.empty? %>
-                   <p>
-                     <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
-                   </p>
-                   <ul style="list-style-type: none;">
-                     <% speaker.accepted_talks.each do |talk| %>
-                       <li><%= link_to h(talk.talk_type.name + ": " + talk.title), talk %></li>
-                     <% end %>
-                   </ul>
+                    <% if speaker.has_blog? %>
+                      <p>
+                        <%= speaker[:first_name] %> blogs at
+                        <a href="<%= speaker.bio[:blog] %>" target="_blank"><%= speaker.bio[:blog] %></a>
+                      </p>
+                    <% end %>
+                  </div>
+                <% end %>
+                <% unless speaker.accepted_talks.empty? %>
+                  <p>
+                    <b><%= pluralize speaker.accepted_talks.size, 'Presentation' %></b>
+                  </p>
+                  <ul style="list-style-type: none;">
+                    <% speaker.accepted_talks.each do |talk| %>
+                      <li><%= link_to h(talk.talk_type.name + ": " + talk.title), talk %></li>
+                    <% end %>
+                  </ul>
 
-                 <% end %>
-               </div>
+                <% end %>
               </div>
-                </div>
             </div>
-        <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 
