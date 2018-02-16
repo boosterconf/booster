@@ -51,12 +51,15 @@
     <div class="row">
       <% @featured_speakers.each do |speaker| %>
         <div class="col-xs-3">
-          <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+          <a href="info/speakers/#<%= speaker.full_name %>">
+            <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
+          </a>
         </div>
 
         <div class="col-xs-9 minor-block-body">
           <div class="minor-block-body-inner">
-            <h2><%= speaker.full_name %></h2>
+            <h2>
+              <a href="info/speakers/#<%= speaker.full_name %>"><%= speaker.full_name %></a></h2>
 
             <p class="lead"><%= speaker.bio.title %></p>
           </div>
