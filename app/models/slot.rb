@@ -19,14 +19,22 @@ class Slot < ApplicationRecord
     "\"#{talk.title}\" at #{period}"
   end
 
+  def talks?
+    if talks.count > 0
+      return true
+    else
+      return false
+    end
+  end
+
   private
   def talk_and_period_has_same_type
     talk = Talk.find(talk_positions.first.talk_id)
     case period.period_type
-    when "workshop"
-      errors.add(:talk, "You tried to add a #{talk.talk_type.name.downcase} to a #{period.period_type.humanize} period") unless talk.is_workshop?
-    when "short_talk"
-      errors.add(:talk, "You tried to add a #{talk.talk_type.name.downcase} to a #{period.period_type.humanize} period") unless talk.is_short_talk?
+      when "workshop"
+        errors.add(:talk, "You tried to add a #{talk.talk_type.name.downcase} to a #{period.period_type.humanize} period") unless talk.is_workshop?
+      when "short_talk"
+        errors.add(:talk, "You tried to add a #{talk.talk_type.name.downcase} to a #{period.period_type.humanize} period") unless talk.is_short_talk?
     end
   end
 

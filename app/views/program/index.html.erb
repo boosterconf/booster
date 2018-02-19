@@ -59,7 +59,9 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <% unless slot.talks? %>
+              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -138,7 +140,9 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Short talks</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <% unless slot.talks? %>
+              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -198,7 +202,7 @@
 
       <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
 
-      <%# render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[918] %>
+      <%- # render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[918] %>
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
     </div>
