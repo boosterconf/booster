@@ -24,15 +24,15 @@
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-      <%-# render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[917] %>
+      <%- # render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[917] %>
 
       <div class='program-row'>
         <% period = @periods.pop %>
         <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
           <% period.slots.each do |slot| %>
-              <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
-                         talks: slot.talk_positions.map(&:talk) %>
+            <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                       talks: slot.talk_positions.map(&:talk) %>
           <% end %>
         </div>
       </div>
@@ -46,8 +46,8 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Lightning talks</header>
         <div class="lightning-sections">
           <% period.slots.each do |slot| %>
-              <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
-                         talks: slot.talk_positions.map(&:talk) %>
+            <%= render 'lightning_talk_section', location: slot.room.try(:name), time: period.start_and_end_time,
+                       talks: slot.talk_positions.map(&:talk) %>
           <% end %>
         </div>
       </div>
@@ -59,7 +59,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -71,7 +71,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -98,7 +98,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -110,7 +110,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -126,7 +126,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Short talks</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -138,7 +138,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Short talks</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -148,9 +148,10 @@
         <section class="period">
           <header class="break">
             <time class="time">19:00-00:00</time>
-            <span class="location">Restaurant BOHA (<%= link_to "map", "https://www.google.no/maps/place/Boha+Restaurant/@60.3915881,5.3210691,20z/data=!4m12!1m6!3m5!1s0x463cfc0263962ebb:0x5d5f3cf1942329c3!2sBoha+Restaurant!8m2!3d60.3915066!4d5.3211683!3m4!1s0x463cfc0263962ebb:0x5d5f3cf1942329c3!8m2!3d60.3915066!4d5.3211683?hl=no", target: "_new" %>)</span>
+            <span class="location">Nøsteboden (<%= link_to "map", "https://www.google.no/maps/place/N%C3%B8steboden/@60.3918144,5.3124176,17z/data=!3m1!4b1!4m5!3m4!1s0x463cfc0383ae9f45:0x1cd4f3a1f68342e9!8m2!3d60.3918118!4d5.3146064?hl=no", target: "_new" %>
+              )</span>
             <span>&mdash;
-              Speaker's dinner - Only for speakers but everyone can join us at the bar "Kråken" afterwards </span>
+              Speaker's dinner</span>
           </header>
         </section>
       </div>
@@ -166,7 +167,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -178,7 +179,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
@@ -190,7 +191,7 @@
         <header class='time follow-me'><%= period.start_and_end_time %> - Workshops</header>
         <div class="workshop-slot">
           <% period.slots.each do |slot| %>
-              <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
+            <%= render 'workshop_section', location: slot.room.try(:name), time: period.start_and_end_time, talk: slot.talk, period: period %>
           <% end %>
         </div>
       </div>
