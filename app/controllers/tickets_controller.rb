@@ -67,18 +67,12 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-    redirect_to root_path
-
     @ticket = Ticket.new
     @ticket.ticket_type = TicketType.current_normal_ticket
   end
 
   # POST /tickets
   def create
-    flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-    redirect_to root_path
-
     @ticket = Ticket.new(ticket_params)
     if current_user && current_user.is_admin
       @ticket.ticket_type = TicketType.find_by_id(params[:ticket][:ticket_type_id])

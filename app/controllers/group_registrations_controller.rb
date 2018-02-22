@@ -1,20 +1,11 @@
 class GroupRegistrationsController < ApplicationController
 
   def new
-    unless current_user && current_user.is_admin
-      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-      redirect_to root_path
-    end
-
     @group_registration = GroupRegistrationForm.new
     @group_registration.tickets = [Ticket.new, Ticket.new, Ticket.new, Ticket.new]
   end
 
   def create
-    unless current_user && current_user.is_admin
-      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-      redirect_to root_path
-    end
     filtered_params = group_registration_params
     @group_registration = GroupRegistrationForm.new(group_registration_params)
     # TODO This stuff needs to go into the Form object - the whole point of it is to isolate logic like this
