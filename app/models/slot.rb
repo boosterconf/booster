@@ -18,15 +18,7 @@ class Slot < ApplicationRecord
   def to_s
     "\"#{talk.title}\" at #{period}"
   end
-
-  def talks?
-    if talks.count > 0
-      return true
-    else
-      return false
-    end
-  end
-
+  
   private
   def talk_and_period_has_same_type
     talk = Talk.find(talk_positions.first.talk_id)
