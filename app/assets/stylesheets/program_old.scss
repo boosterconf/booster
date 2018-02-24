@@ -32,7 +32,6 @@
     background-color: $light-neutral;
   }
 
-
   .nav-tabs li a:hover {
     background-color: $highlight-color;
   }
@@ -44,7 +43,7 @@
     .talk {
       background-color: $gray-lightest;
     }
-    
+
     &:nth-child(2n) {
       .talk {
         background-color: $gray-lighter;
@@ -311,4 +310,8 @@
   .program .follow-wrapper {
     margin-bottom: 0;
   }
+}
+
+.white {
+  color: white;
 }
