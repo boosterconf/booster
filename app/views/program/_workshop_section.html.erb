@@ -1,26 +1,29 @@
-<section class='period program-column'>
-  <header>
-    <span class='location'> <%= location %></span>
-  </header>
-  <div class='slot'>
-    <a class="single-talk" href="<%= talk_path(talk.id) %>">
-      <div class='talk' data-talkid='<%= talk.id %>'>
-        <h5><%= talk.title %>
-          <% if talk.video_url.present? %>
+<% if talk != nil %>
+  <section class='period program-column'>
+    <header>
+      <span class='location'> <%= location %></span>
+    </header>
+    <div class='slot'>
+      <a class="single-talk" href="<%= talk_path(talk.id) %>">
+        <div class='talk' data-talkid='<%= talk.id %>'>
+          <h5><%= talk.title %>
+            <% if talk.video_url.present? %>
               <%= fa_icon("film") %>
-          <% end %>
-          <span class="parts">
+            <% end %>
+            <span class="parts">
         <% if period.start_time > talk.start_time %>
             (cont.)
         <% end %>
         </span>
-        </h5>
-        <span class='author'><%= talk.speaker_name %></span>
-        <%= render partial: 'adminInformation', locals: {talk: talk} %>
-        <div class='description'><%= talk.description.html_safe %></div>
+          </h5>
+          <span class='author'><%= talk.speaker_name %></span>
+          <%= render partial: 'adminInformation', locals: {talk: talk} %>
+          <div class='description'><%= talk.description.html_safe %></div>
 
-        <span class='location-small'><%= location %></span>
-      </div>
-    </a>
-  </div>
-</section>
+          <span class='location-small'><%= location %></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+<% end %>
