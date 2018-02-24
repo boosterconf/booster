@@ -1,9 +1,9 @@
-<% if talk != nil %>
-  <section class='period program-column'>
-    <header>
-      <span class='location'> <%= location %></span>
-    </header>
-    <div class='slot'>
+<section class='period program-column'>
+  <header>
+    <span class='location'> <%= location %></span>
+  </header>
+  <div class='slot'>
+    <% if talk != nil %>
       <a class="single-talk" href="<%= talk_path(talk.id) %>">
         <div class='talk' data-talkid='<%= talk.id %>'>
           <h5><%= talk.title %>
@@ -23,7 +23,8 @@
           <span class='location-small'><%= location %></span>
         </div>
       </a>
-    </div>
-  </section>
+    <% end %>
+  </div>
+</section>
 
-<% end %>
+
