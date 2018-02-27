@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-   get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
+  get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
 
   resources :tickets do
     collection do
@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     end
     collection do
       post :create_tickets
+      post :create_tickets_organizers
     end
   end
 
@@ -115,7 +116,7 @@ Rails.application.routes.draw do
       post :attend_conference_dinner
     end
   end
-   
+
   match '/register_lightning_talk/start' => 'register_lightning_talk#start', via: :all
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user', via: :all
   match '/register_lightning_talk/talk' => 'register_lightning_talk#talk', via: :all
@@ -159,7 +160,7 @@ Rails.application.routes.draw do
   match 'info/fishbowl' => 'info#fishbowl', via: :all
   match 'info/conference_dinner' => 'info#conference_dinner', via: :all
   match 'info/coc' => 'info#coc', via: :all
-   match 'info/agile-at-scale' => 'info#agileatscale', via: :get
+  match 'info/agile-at-scale' => 'info#agileatscale', via: :get
 
   match 'admin' => 'admin#index', via: :all
 

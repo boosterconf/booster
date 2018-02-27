@@ -17,7 +17,7 @@ class AcceptancesController < ApplicationController
 
   def accept
     @talk = Talk.find_by_id(params[:id])
-    
+
     return redirect_on_email_sent if @talk.email_sent
 
     @talk.accept!
@@ -95,9 +95,9 @@ class AcceptancesController < ApplicationController
     return redirect_on_email_sent if @talk.email_sent
 
     if @talk.refused?
-      @talk.speakers.each { |speaker| BoosterMailer.talk_refusation_confirmation(@talk, speaker.user, current_user_url).deliver_now }
+      @talk.speakers.each {|speaker| BoosterMailer.talk_refusation_confirmation(@talk, speaker.user, current_user_url).deliver_now}
     elsif @talk.accepted?
-      @talk.speakers.each { |speaker| BoosterMailer.talk_acceptance_confirmation(@talk, speaker.user, current_user_url).deliver_now }
+      @talk.speakers.each {|speaker| BoosterMailer.talk_acceptance_confirmation(@talk, speaker.user, current_user_url).deliver_now}
     else
       return redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Talk not accepted/refused yet!"
     end
@@ -108,10 +108,30 @@ class AcceptancesController < ApplicationController
     redirect_to acceptances_path, notice: "Sent mail about '#{@talk.title}'"
   end
 
+  def create_tickets_organizers
+    organizers = User.all_organizers
+    organizers.each {|user|
+      unless Ticket.has_ticket(user.email)
+        ticket = Ticket.new
+        ticket.ticket_type = user.registration.ticket_type
+        ticket.attend_dinner = true
+        ticket.roles = user.roles
+        ticket.dietary_info = user.dietary_requirements
+        ticket.name = "#{user.first_name} #{user.last_name}"
+        ticket.company = user.company
+        ticket.email = user.email
+        ticket.reference = SecureRandom.urlsafe_base64
+        ticket.save!
+        BoosterMailer.ticket_confirmation_speakers_and_organizers(ticket).deliver_now
+      end
+    }
+    redirect_to acceptances_path, notice: 'Created tickets for organizers'
+  end
+
   def create_tickets
     talks = Talk.all_with_speakers.where(acceptance_status: 'accepted', speakers_confirmed: true)
-    talks.each { |talk|
-      talk.users.each { |user|
+    talks.each {|talk|
+      talk.users.each {|user|
         unless Ticket.has_ticket(user.email)
           ticket = Ticket.new
           ticket.ticket_type = user.registration.ticket_type
@@ -121,46 +141,28 @@ class AcceptancesController < ApplicationController
           ticket.name = "#{user.first_name} #{user.last_name}"
           ticket.company = user.company
           ticket.email = user.email
+          ticket.reference = SecureRandom.urlsafe_base64
           ticket.save!
-
-          BoosterMailer.ticket_confirmation_invoice(ticket).deliver_now
-          if ticket.ticket_type.paying_ticket?
-            BoosterMailer.invoice_to_fiken([ticket], nil,
-                                           {   :payment_email => ticket.email,
-                                               :payment_info => ticket.ticket_type.name,
-                                               :payment_zip => user.zip,
-                                               :extra_info => ""}).deliver_now
-          end
+          BoosterMailer.ticket_confirmation_speakers_and_organizers(ticket).deliver_now
         end
       }
     }
-
-    organizers = User.all_organizers
     invited = User.all.where(invited: true)
-    organizers.concat invited
-    organizers.each { |user|
-        unless Ticket.has_ticket(user.email)
-          ticket = Ticket.new
-          ticket.ticket_type = user.registration.ticket_type
-          ticket.attend_dinner = true
-          ticket.roles = user.roles
-          ticket.dietary_info = user.dietary_requirements
-          ticket.name = "#{user.first_name} #{user.last_name}"
-          ticket.company = user.company
-          ticket.email = user.email
-          ticket.save!
-
-          BoosterMailer.ticket_confirmation_invoice(ticket).deliver_now
-          if ticket.ticket_type.paying_ticket?
-            BoosterMailer.invoice_to_fiken([ticket], nil,
-                                           {   :payment_email => ticket.email,
-                                               :payment_info => ticket.ticket_type.name,
-                                               :payment_zip => user.zip,
-                                               :extra_info => ""}).deliver_now
-          end
-        end
+    invited.each {|user|
+      unless Ticket.has_ticket(user.email)
+        ticket = Ticket.new
+        ticket.ticket_type = user.registration.ticket_type
+        ticket.attend_dinner = true
+        ticket.roles = user.roles
+        ticket.dietary_info = user.dietary_requirements
+        ticket.name = "#{user.first_name} #{user.last_name}"
+        ticket.company = user.company
+        ticket.email = user.email
+        ticket.reference = SecureRandom.urlsafe_base64
+        ticket.save!
+        BoosterMailer.ticket_confirmation_speakers_and_organizers(ticket).deliver_now
+      end
     }
-
     redirect_to acceptances_path, notice: 'Created tickets for confirmed speakers'
   end
 

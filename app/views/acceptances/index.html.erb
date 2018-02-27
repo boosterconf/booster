@@ -1,49 +1,52 @@
 <article class="inner">
-<script type="text/javascript">
-    $(document).ready(function () {
-      $("#acceptances").tablesorter({
-           // use save sort widget
-          widgets: ["saveSort"]
+  <script type="text/javascript">
+      $(document).ready(function () {
+              $("#acceptances").tablesorter({
+                  // use save sort widget
+                  widgets: ["saveSort"]
 
-        });
+              });
 
-        $("#acceptances").sieve({
-            itemSelector: 'tbody tr',
-            textSelector: 'td:not(.no-filter), td select option[selected]',
-            searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
-        });
+              $("#acceptances").sieve({
+                  itemSelector: 'tbody tr',
+                  textSelector: 'td:not(.no-filter), td select option[selected]',
+                  searchTemplate: "<div style='float: right;'><label>Search: <input type='text'></label></div>"
+              });
 
-        $(".email").bind("ajax:error", function (evt, data, status, xhr) {
-            $.notify("Oops! an error occurred.", "error");
-        });
-        $(".email").bind("ajax:success", function (evt, data, status, xhr) {
-            $.notify("Email sent", "success");
-            $(evt.target).remove();
-        });
-      }
-    );
-</script>
-<div class="header-join">
-<h2>Approval of talks</h2>
-</div>
-<p>
-  Total number of submitted talks: <%= @talks.size %><br><br>
+              $(".email").bind("ajax:error", function (evt, data, status, xhr) {
+                  $.notify("Oops! an error occurred.", "error");
+              });
+              $(".email").bind("ajax:success", function (evt, data, status, xhr) {
+                  $.notify("Email sent", "success");
+                  $(evt.target).remove();
+              });
+          }
+      );
+  </script>
+  <div class="header-join">
+    <h2>Approval of talks</h2>
+  </div>
+  <p>
+    Total number of submitted talks: <%= @talks.size %><br><br>
 
   <ul>
-  <% @types.each_pair { |status, count| %>
-    <li>
-      <img src="images/<%= status %>.gif" alt="<%= status %>"/> : <%= count %>
-      <%= status.to_s.humanize.downcase %>
-    </li>
-  <% } %>
-</ul>
-</p>
+    <% @types.each_pair {|status, count| %>
+      <li>
+        <img src="images/<%= status %>.gif" alt="<%= status %>"/> : <%= count %>
+        <%= status.to_s.humanize.downcase %>
+      </li>
+    <% } %>
+  </ul>
+  </p>
 
   <p>
     <%= button_to "Generate tickets for confirmed speakers", create_tickets_acceptances_path %>
   </p>
-<table id="acceptances" class="table table-striped table-sortable">
-  <thead>
+  <p>
+    <%= button_to "Generate tickets for organizers", create_tickets_organizers_acceptances_path %>
+  </p>
+  <table id="acceptances" class="table table-striped table-sortable">
+    <thead>
     <tr>
       <th>Speaker</th>
       <th>Title</th>
@@ -54,28 +57,28 @@
       <th>&nbsp;</th>
       <th>&nbsp;</th>
     </tr>
-  </thead>
-  <tbody>
-  <% for talk in @talks %>
+    </thead>
+    <tbody>
+    <% for talk in @talks %>
       <tr>
         <td>
           <%= h(talk.speaker_name) %>
         </td>
         <td>
           <%= link_to h(talk.title), talk %>
-	</td>
+        </td>
         <td>
-	  <%= talk.talk_type.name %>
+          <%= talk.talk_type.name %>
         </td>
         <td>
           <img src="images/<%= talk.status %>.gif" alt="<%= talk.status %>"/>
-            <%= talk.status.humanize %>
+          <%= talk.status.humanize %>
         </td>
         <% if talk.invited? %>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
         <% else %>
           <td>
             <% unless talk.pending? || talk.email_sent? %>
@@ -83,19 +86,19 @@
             <% end %>
           </td>
           <% if talk.pending? %>
-              <td>
-                <%= link_to 'Accept', :action => 'accept', :id => talk.id %>
-              </td>
-              <td>
-                <%= link_to 'Reject', :action => 'refuse', :id => talk.id %>
-              </td>
-          <% elsif talk.accepted?%>
             <td>
-                <% if talk.speakers_confirmed? %>
-                  <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
-                <% else %>
-                  <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %>
-                <% end %>
+              <%= link_to 'Accept', :action => 'accept', :id => talk.id %>
+            </td>
+            <td>
+              <%= link_to 'Reject', :action => 'refuse', :id => talk.id %>
+            </td>
+          <% elsif talk.accepted? %>
+            <td>
+              <% if talk.speakers_confirmed? %>
+                <%= link_to 'Cancel', :action => 'unconfirm', :id => talk.id %>
+              <% else %>
+                <%= link_to 'Confirm', :action => 'confirm', :id => talk.id %>
+              <% end %>
             </td>
             <td>
               <% unless talk.could_not_attend? %>
@@ -103,19 +106,19 @@
               <% end %>
             </td>
           <% else %>
-            <td> </td>
-            <td> </td>
+            <td></td>
+            <td></td>
           <% end %>
           <td>
             <% if !talk.email_sent? && (talk.accepted? || talk.refused?) %>
               <%= link_to send_mail_acceptance_path(talk.id), remote: true, class: "email" do %>
-                    <i class='fa fa-envelope'></i>
+                <i class='fa fa-envelope'></i>
               <% end %>
             <% end %>
           </td>
         <% end %>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+    <% end %>
+    </tbody>
+  </table>
 </article>

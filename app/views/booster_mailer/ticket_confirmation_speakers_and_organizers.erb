@@ -1,0 +1,20 @@
+<html>
+<body><p>Hi, <%= @name %>.</p>
+
+<p>
+  This is a confirmation of your registration to <a href="http://www.boosterconf.no">the Booster conference</a>.
+</p>
+
+<p>
+  We look forward to seeing you at the conference! You will pick up your name tag at the conference venue.
+  Please make sure we have the correct information here. We need to know if you plan to attend the conference dinner,
+  and if you have any special dietary requirements.
+  <%= link_to "Link to ticket", tickets_from_reference_url(@ticket.reference) %>
+</p>
+
+<p>If you experience any problems,
+  please contact us at kontakt@boosterconf.no.</p>
+
+<p>- The Booster conference organizers</p>
+</body>
+</html>

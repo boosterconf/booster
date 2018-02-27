@@ -251,6 +251,15 @@ class BoosterMailer < ApplicationMailer
          cc: FROM_EMAIL)
   end
 
+  def ticket_confirmation_speakers_and_organizers(ticket)
+    @name = ticket.name
+    @email = ticket.email
+    @ticket = ticket
+    mail(to: ticket.email, from: FROM_EMAIL,
+         subject: "Your ticket to Booster is confirmed",
+         cc: FROM_EMAIL)
+  end
+
   def invoice_to_fiken(tickets, stripe_charge, invoice_details)
     @tickets = tickets
     @stripe_charge = stripe_charge
