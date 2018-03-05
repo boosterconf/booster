@@ -49,29 +49,38 @@ class NametagPdf < Prawn::Document
         :normal => "#{Rails.root}/app/assets/fonts/FiraSans-Medium.ttf"
     })
 
+    font_families.update("FiraSansLight" => {
+        :normal => "#{Rails.root}/app/assets/fonts/FiraSans-Light.ttf"
+    })
+
     tickets.each_with_index do |ticket, index|
       image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 70, :at => [-35, bounds.height + 35]
 
-      font 'FreigDisMed'
-      fill_color "FFFFFF"
+
+      move_down 30
+
+      fill_color "00333f"
+      font 'FiraSansLight'
+
 
       if ticket.name
         font_size 35
-        text ticket.name, :width => 250
+        text ticket.name, :align => :center, :width => 250
       else
         font_size 35
-        text ticket.email || ''
+        text ticket.email || '', :align => :center
       end
 
-      move_down 10
+      move_down 15
 
-      font 'FiraSans'
-      font_size 15
+      font 'FiraSansMedium'
+      font_size 17
 
-      text ticket.company || '', :style => :normal
+      text ticket.company || '', :style => :normal, :align => :center
 
       move_up bounds.height
 
+      fill_color "FFFFFF"
       font 'FiraSansMedium'
 
       font_size 15
@@ -94,7 +103,7 @@ class NametagPdf < Prawn::Document
       end
 
 
-      fill_color "29363E"
+      fill_color "FFFFFF"
       text_box ticket_type_text, :at => [0, -10], :align => :center, :height => 50
 
       if index < tickets.size - 1
