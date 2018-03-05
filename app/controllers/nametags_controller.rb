@@ -36,11 +36,6 @@ class NametagPdf < Prawn::Document
   def initialize(tickets, view)
     super(:page_size => "A6", :margin => 35)
 
-
-    font_families.update("FreigDisMed" => {
-        :normal => "#{Rails.root}/app/assets/fonts/FreigDisMed.ttf"
-    })
-
     font_families.update("FiraSans" => {
         :normal => "#{Rails.root}/app/assets/fonts/FiraSans-Heavy.ttf"
     })
