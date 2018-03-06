@@ -2,7 +2,7 @@
   margin: 0 auto;
   font-family: $font-family-firasans-medium;
   z-index: 999;
-  padding: 57px 0 95px;
+  padding: 57px 0 40px;
   background-color: $gray-lightest;
   text-align: center;
 
@@ -10,6 +10,17 @@
   p {
     color:$primary-text-color;
     font-size: 34px;
+  }
+
+  #speakerInfo{
+    margin-top: 40px;
+    p, a{
+      font-size: 20px;
+    }
+
+    a{
+      text-decoration: underline;
+    }
   }
 }
 

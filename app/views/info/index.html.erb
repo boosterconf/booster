@@ -22,12 +22,16 @@
   <% if DateTime.now < AppConfig.early_bird_ends %>
     <span class="early-bird-text">Early bird prices until Feb 19. <span id="bold-span">Buy now and save 2000 NOK.</span></span>
   <% end %>
+  <div id="speakerInfo">
+    <p>Our speakers come from all over the world to teach, learn and delight.</p>
+    <%= link_to "View all", info_speakers_path %>
+  </div>
 </div>
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
     <div class="row">
       <% @featured_speakers.each do |speaker| %>
-        <div class="col-xs-3">
+        <div class="col-xs-2">
           <a href="info/speakers/#<%= speaker.full_name %>">
             <%= image_tag speaker.bio.picture.url, class: "img-superfluid" %>
           </a>
@@ -37,7 +41,7 @@
 
     <div class="row">
       <% @featured_speakers.each do |speaker| %>
-        <div class="col-xs-3 minor-block-body">
+        <div class="col-xs-2 minor-block-body">
           <div class="minor-block-body-inner">
             <h2><a href="info/speakers/#<%= speaker.full_name %>"><%= speaker.full_name %></a></h2>
             <p class="lead"><%= speaker.bio.title %></p>
