@@ -303,4 +303,9 @@ class User < ApplicationRecord
     Talk.unscoped { super }
   end
 
+  def self.all_from_ticket_email
+    User.find_by_sql("SELECT * FROM
+  (SELECT * FROM users INNER JOIN bios ON users.id = bios.user_id) as foo
+  INNER JOIN tickets ON foo.email=tickets.email")
+  end
 end
