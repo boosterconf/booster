@@ -66,7 +66,7 @@ class NametagPdf < Prawn::Document
 
       if ticket.name
         font_size 35
-        text ticket.name, :align => :center, :width => 250
+        text ticket.name, :align => :center, :width => 400
       else
         font_size 35
         text ticket.email || '', :align => :center
@@ -79,14 +79,24 @@ class NametagPdf < Prawn::Document
 
       text ticket.company || '', :style => :normal, :align => :center
 
-      puts users.select{|u| u.email = ticket.email}.first().twitter_handle
-      if users.to_a.select{|u| u.email = ticket.email}.first().twitter_handle
-        move_down 15
+      @user = users.to_a.bsearch{|u| u.email == ticket.email}
 
-        font 'FiraSansMedium'
-        font_size 17
 
-        text users.to_a.select{|u| u.email = ticket.email}.first().twitter_handle || '', :style => :normal, :align => :center
+
+      if @user
+        if @user.twitter_handle
+
+          move_down 15
+
+          font 'FiraSansMedium'
+          font_size 17
+
+          if @user.twitter_handle.include? "@"
+            text @user.twitter_handle || '', :style => :normal, :align => :center
+          else
+            text "@" + @user.twitter_handle || '', :style => :normal, :align => :center
+          end
+        end
       end
 
 
