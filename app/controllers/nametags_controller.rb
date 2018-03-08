@@ -4,7 +4,7 @@ class NametagsController < ApplicationController
 
   def index
     @tickets = Ticket.includes(:ticket_type)
-    @users = User.all_from_ticket_email
+    @users = User.all_from_ticket_email.to_a
 
     respond_to do |format|
       format.html
@@ -79,10 +79,7 @@ class NametagPdf < Prawn::Document
 
       text ticket.company || '', :style => :normal, :align => :center
 
-      @user = users.to_a.bsearch{|u| u.email == ticket.email}
-
-
-
+      @user = users.bsearch{|u| u.email == ticket.email}
       if @user
         if @user.twitter_handle
 
