@@ -100,6 +100,9 @@ Rails.application.routes.draw do
     resources :sponsors do
       post :email
     end
+    resources :program do
+      get :index
+    end
     match 'boosterbot/slash_bot' => 'boosterbot#slash_bot', :via => :post, :as => :slash_bot
   end
 
