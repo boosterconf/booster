@@ -112,7 +112,7 @@ class NametagPdf < Prawn::Document
       elsif ticket.ticket_type.speaker?
         ticket_type_text = 'SPEAKER'
       elsif ticket.ticket_type.volunteer?
-        ticket_type_text = 'VOLUNTEER'
+        ticket_type_text = 'CREW'
       elsif ticket.ticket_type.student?
         ticket_type_text = ''
       end
