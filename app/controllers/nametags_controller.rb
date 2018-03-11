@@ -58,17 +58,17 @@ class NametagPdf < Prawn::Document
       image "#{Rails.root}/app/assets/images/nametag-background-blue.png", :width => bounds.width + 70, :at => [-35, bounds.height + 35]
 
 
-      move_down 30
+      move_down 25
 
       fill_color "00333f"
       font 'FiraSansLight'
 
 
       if ticket.name
-        font_size 35
-        text ticket.name, :align => :center, :width => 400
+        font_size 32
+        text ticket.name, :align => :center , :width => bounds.width
       else
-        font_size 35
+        font_size 32
         text ticket.email || '', :align => :center
       end
 
@@ -79,7 +79,7 @@ class NametagPdf < Prawn::Document
 
       text ticket.company || '', :style => :normal, :align => :center
 
-      @user = users.bsearch{|u| u.email == ticket.email}
+      @user = users.select{|u| u.email == ticket.email}.first
       if @user
         if @user.twitter_handle
 
@@ -90,8 +90,10 @@ class NametagPdf < Prawn::Document
 
           if @user.twitter_handle.include? "@"
             text @user.twitter_handle || '', :style => :normal, :align => :center
-          else
+          elsif @user.twitter_handle.length > 0
             text "@" + @user.twitter_handle || '', :style => :normal, :align => :center
+          else
+            text '' , :align => :center
           end
         end
       end
