@@ -131,7 +131,7 @@ GEM
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
     json (2.1.0)
-    loofah (2.1.1)
+    loofah (2.2.2)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -191,8 +191,8 @@ GEM
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
-    rails-html-sanitizer (1.0.3)
-      loofah (~> 2.0)
+    rails-html-sanitizer (1.0.4)
+      loofah (~> 2.2, >= 2.2.2)
     rails_12factor (0.0.3)
       rails_serve_static_assets
       rails_stdout_logging
@@ -321,6 +321,7 @@ DEPENDENCIES
   jquery-rails
   jquery-tablesorter
   jquery-ui-rails
+  loofah (~> 2.2.2)
   minitest (~> 5.10.3)
   minitest-reporters (~> 1.1)
   mocha
@@ -331,6 +332,7 @@ DEPENDENCIES
   rails (= 5.0.6)
   rails-assets-tether (>= 1.1.0)!
   rails-controller-testing
+  rails-html-sanitizer (~> 1.0.4)
   rails_12factor
   railties (= 5.0.6)
   rake
