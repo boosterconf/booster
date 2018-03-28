@@ -1,12 +1,13 @@
-language: ruby
-rvm:
-  - 2.4.0
+#language: ruby
+#rvm:
+#  - 2.4.0
 sudo: false
-env:
-  - DB=postgresql
+#env:
+#  - DB=postgresql
 jobs:
   include:
-    - stage: test
+    - stage: build
+      script: bundle install --jobs=3 --retry=3
 #script:
 #  - RAILS_ENV=test bundle exec rake db:schema:load
 #  - RAILS_ENV=test bundle exec rake db:seed
@@ -16,6 +17,6 @@ jobs:
 #before_script:
 #  - cp config/database.yml.travis config/database.yml
 #  - psql -c 'create database travis_ci_test' -U postgres
-notifications:
-  slack:
-    secure: DE7RFYp6wElEvl1MtxhtmLJlgvMhLQeRnIuLOn+BGli6xtzqO8wGO5N3gkq/CrLQTN0wKUJbuZwtxX3m30248sromR3A2R0KeJ5KkoDqTCubmkPT0aEsz6HlCkQPdnOe5bBvGXsHFKvEuPCXc+FRQugDMPk+AGRcACoS9faCmsE=
+#notifications:
+#  slack:
+#    secure: DE7RFYp6wElEvl1MtxhtmLJlgvMhLQeRnIuLOn+BGli6xtzqO8wGO5N3gkq/CrLQTN0wKUJbuZwtxX3m30248sromR3A2R0KeJ5KkoDqTCubmkPT0aEsz6HlCkQPdnOe5bBvGXsHFKvEuPCXc+FRQugDMPk+AGRcACoS9faCmsE=
