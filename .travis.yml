@@ -4,6 +4,9 @@ rvm:
 sudo: false
 env:
   - DB=postgresql
+jobs:
+  include:
+    - stage: test
 #script:
 #  - RAILS_ENV=test bundle exec rake db:schema:load
 #  - RAILS_ENV=test bundle exec rake db:seed
