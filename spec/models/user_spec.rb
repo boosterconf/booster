@@ -15,6 +15,7 @@ describe User, type: :model do
 
   def create_speaker
     user = create_valid_user
+    user.registration = Registration.new
     user.registration.created_at = Time.now
     user.registration.ticket_type = TicketType.new({:reference => "speaker"})
     user
