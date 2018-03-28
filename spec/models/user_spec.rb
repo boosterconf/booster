@@ -8,8 +8,8 @@ describe User, type: :model do
                         :last_name => "lastname",
                         :company => "companyname",
                         :email => "email@example.com",
-                        :password => "pass123",
-                        :password_confirmation => "pass123"
+                        :password => "password12345",
+                        :password_confirmation => "password12345"
                     })
   end
 
