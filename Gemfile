@@ -8,6 +8,11 @@ gem "authlogic", '~> 3.8'
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
 
+# Lock these gems to
+gem 'loofah', '~> 2.2.2'
+gem 'rails-html-sanitizer', '~> 1.0.4'
+
+
 gem 'stripe'
 
 gem 'responders', '~> 2.0'
