@@ -1,34 +1,24 @@
-#language: ruby
+language: ruby
+
 rvm:
   - 2.4.0
-sudo: false
-#env:
-#  - DB=postgresql
-jobs:
-  include:
-    - stage: build
-      install: bundle install --jobs=3 --retry=3
-      script: skip
-    - stage: test
-      install: skip
-      script:
-        - cp config/database.yml.travis config/database.yml
-        - psql -c 'create database travis_ci_test' -U postgres
-        - RAILS_ENV=test bundle exec rake db:schema:load
-        - RAILS_ENV=test bundle exec rake db:seed
-        - RAILS_ENV=test bundle exec rake db:test:prepare
-        - RAILS_ENV=test bundle exec rake test
-        - RAILS_ENV=test bundle exec rake spec
 
-#script:
-#  - RAILS_ENV=test bundle exec rake db:schema:load
-#  - RAILS_ENV=test bundle exec rake db:seed
-#  - RAILS_ENV=test bundle exec rake db:test:prepare
-#  - RAILS_ENV=test bundle exec rake test
-#  - RAILS_ENV=test bundle exec rake spec
-#before_script:
-#  - cp config/database.yml.travis config/database.yml
-#  - psql -c 'create database travis_ci_test' -U postgres
-#notifications:
-#  slack:
-#    secure: DE7RFYp6wElEvl1MtxhtmLJlgvMhLQeRnIuLOn+BGli6xtzqO8wGO5N3gkq/CrLQTN0wKUJbuZwtxX3m30248sromR3A2R0KeJ5KkoDqTCubmkPT0aEsz6HlCkQPdnOe5bBvGXsHFKvEuPCXc+FRQugDMPk+AGRcACoS9faCmsE=
+sudo: false
+
+env:
+  - DB=postgresql
+
+before_script:
+  - cp config/database.yml.travis config/database.yml
+  - psql -c 'create database travis_ci_test' -U postgres
+
+script:
+  - RAILS_ENV=test bundle exec rake db:schema:load
+  - RAILS_ENV=test bundle exec rake db:seed
+  - RAILS_ENV=test bundle exec rake db:test:prepare
+  - RAILS_ENV=test bundle exec rake test
+  - RAILS_ENV=test bundle exec rake spec
+
+notifications:
+  slack:
+    secure: DE7RFYp6wElEvl1MtxhtmLJlgvMhLQeRnIuLOn+BGli6xtzqO8wGO5N3gkq/CrLQTN0wKUJbuZwtxX3m30248sromR3A2R0KeJ5KkoDqTCubmkPT0aEsz6HlCkQPdnOe5bBvGXsHFKvEuPCXc+FRQugDMPk+AGRcACoS9faCmsE=
