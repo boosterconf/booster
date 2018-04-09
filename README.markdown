@@ -13,10 +13,8 @@ Install Vagrant and VirtualBox, and checkout this repository. Then do the follow
     $ cd /vagrant
     $ sh ./init.sh  # Wait for even longer. At the end of this script, you will be prompted for your heroku credentials, before the production database is pulled down.
     $ # If the previous steps have succeeded, continue
-    $ heroku config --app booster2018 # Lists all the config variables from prod.
-    $ export s3_access_key_id=<value from above>
-    $ export s3_secret_access_key=<value from above>
-    $ rails s -b 0.0.0.0 # We need to run rails on this ip, to get port forwarding from the vagrant machine. 
+    $ ./getsecrets.sh #This will get S3 secrets from Heroku and store them in secrets.sh 
+    $ ./start.sh
 
 Test app in your host system browser, and verify that the booster conf home page is shown on localhost:3000. 
 If failure, reach out to us on Slack. :)

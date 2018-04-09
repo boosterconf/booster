@@ -35,3 +35,4 @@ latest.dump
 /.vagrant
 
 set_env_vars.sh
+secrets.sh
