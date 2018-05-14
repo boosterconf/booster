@@ -50,14 +50,7 @@ If failure, reach out to us on Slack. :)
         * Auth type: Password
         * PW: vagrant
         * check remember password if you want to
-## WSL
 
-Install RVM : https://github.com/rvm/ubuntu_rvm
-
-When adding remote SDK in rubymine select WSL, provide path to rvm instead of directly to the rub executuable. E.g: /usr/share/rvm/bin/rvm if you have used the ubuntu package above.
-If not, your life will be miserable while you try to find out why rubymine does not download your gems properly.
-
-Make sure you have a local instance of postgresql with a clean db running.
 ## Deploying to Heroku
 
 Setup:
@@ -67,23 +60,24 @@ Setup:
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
     $ cd booster
-    $ git remote add production git@heroku.com:booster2019.git
+    $ git remote add production git@heroku.com:booster2018.git
     $ git remote add staging git@heroku.com:staging-boosterconf.git
 
 Fool around:
 
+    $ gem install taps
     # remote console
     $ heroku console --app staging-boosterconf
-    $ heroku console --app booster2019
+    $ heroku console --app booster2018
     # Pull data from the heroku app to your local db
     $ dropdb boosterconf
-    $ heroku pg:pull DATABASE_URL boosterconf --app booster2019
+    $ heroku pg:pull DATABASE_URL boosterconf --app booster2018
 
 Update (push):
 
     $ git push [production|staging|master]
     #DB changes? remember to migrate the server
-    $ heroku rake db:migrate --app [staging-boosterconf|booster2019]
+    $ heroku rake db:migrate --app [staging-boosterconf|booster2018]
 
 Run tests:
 
@@ -96,4 +90,4 @@ Run tests:
 
 Heroku SendGrid:
     # For å sjekke user/pass:
-    $ heroku config --long --app booster2019
+    $ heroku config --long --app booster2018
