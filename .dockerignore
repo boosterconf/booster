@@ -3,7 +3,6 @@
 .gitignore
 
 # Ignore docker and environment files:
-*Dockerfile
 docker-compose*.yml
 *.env
 development-entrypoint
