@@ -1,7 +1,8 @@
 FROM ruby:2.4.0
 ENV APPDIR=/booster
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs && \ 
-groupadd -g 999 boosterconf && useradd -r -u 999 -g boosterconf boosterconf && mkdir /booster 
+groupadd -g 999 boosterconf && useradd -r -u 999 -g boosterconf boosterconf && \
+mkdir /booster && mkdir /temp && mkdir /home/boosterconf && chown boosterconf:boosterconf /home/boosterconf
 WORKDIR $APPDIR
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
