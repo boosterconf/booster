@@ -87,6 +87,9 @@ GEM
     concurrent-ruby (1.0.5)
     crass (1.0.3)
     daemons (1.2.6)
+    debase (0.2.2)
+      debase-ruby_core_source (>= 0.10.2)
+    debase-ruby_core_source (0.10.3)
     debug_inspector (0.0.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
@@ -232,6 +235,8 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.0)
+    ruby-debug-ide (0.6.1)
+      rake (>= 0.8.1)
     ruby-prof (0.17.0)
     ruby-progressbar (1.9.0)
     sass (3.5.5)
@@ -314,6 +319,7 @@ DEPENDENCIES
   bootstrap (= 4.0.0.alpha2)
   bullet
   coffee-rails (~> 4.1.0)
+  debase
   dotenv-rails
   factory_girl_rails (~> 3.0)
   font-awesome-rails
@@ -339,6 +345,7 @@ DEPENDENCIES
   responders (~> 2.0)
   rest-client
   rspec-rails (~> 3.7)
+  ruby-debug-ide
   ruby-prof
   sass-rails
   selectize-rails
