@@ -52,7 +52,6 @@ Setup:
 
 Fool around:
 
-    $ gem install taps
     # remote console
     $ heroku console --app staging-boosterconf
     $ heroku console --app booster2018

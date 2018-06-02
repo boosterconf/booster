@@ -36,7 +36,7 @@ gem 'jquery-tablesorter'
 gem 'prawn'
 gem 'rails_12factor'
 
-gem 'rest-client'
+gem 'rest-client', '~> 2.0.2'
 
 gem "paranoia", "~> 2.2"
 gem 'test-unit'
@@ -55,7 +55,6 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'sqlite3'
   #gem 'quiet_assets'
-  gem 'taps'
   gem 'dotenv-rails'
   #gem 'sql_queries_count'
   gem 'bullet'
