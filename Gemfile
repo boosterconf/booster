@@ -35,7 +35,6 @@ gem 'jquery-tablesorter'
 
 gem 'prawn'
 gem 'rails_12factor'
-
 gem 'rest-client', '~> 2.0.2'
 
 gem "paranoia", "~> 2.2"
