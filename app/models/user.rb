@@ -8,8 +8,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :registration, :bio
 
-  default_scope { includes({registration: [:ticket_type]}).order('users.created_at desc')}
-
   acts_as_authentic do |c|
     c.login_field = :email
     c.validate_login_field = false
@@ -21,7 +19,6 @@ class User < ApplicationRecord
   validates_presence_of :company, :message => "You have to specify a company."
 
   # A user always has a registration, so no more null checks
-  after_initialize { |user| user.build_registration unless user.registration }
 
   def full_name
     if read_attribute(:first_name)
@@ -237,7 +234,7 @@ class User < ApplicationRecord
   end
   
   def self.all_confirmed_speakers
-    self.all.select { |u| u.has_confirmed_talk? || u.invited == true }
+    self.all.includes(:talks).select { |u| u.has_confirmed_talk? || u.invited == true }
   end
 
   def self.all_tutorial_speakers
@@ -257,7 +254,7 @@ class User < ApplicationRecord
   end
 
   def self.featured_speakers
-    potential_speakers = User.includes(:bio, :talks).where(featured_speaker: true).order('created_at DESC')
+    potential_speakers = User.includes(:bio).where(featured_speaker: true).order('created_at DESC')
     speakers = []
     potential_speakers.each do |sp|
       if sp.is_featured? && sp.bio.picture.present?
