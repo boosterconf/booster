@@ -47,23 +47,23 @@ Setup:
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
     $ cd booster
-    $ git remote add production git@heroku.com:booster2018.git
+    $ git remote add production git@heroku.com:booster2019.git
     $ git remote add staging git@heroku.com:staging-boosterconf.git
 
 Fool around:
 
     # remote console
     $ heroku console --app staging-boosterconf
-    $ heroku console --app booster2018
+    $ heroku console --app booster2019
     # Pull data from the heroku app to your local db
     $ dropdb boosterconf
-    $ heroku pg:pull DATABASE_URL boosterconf --app booster2018
+    $ heroku pg:pull DATABASE_URL boosterconf --app booster2019
 
 Update (push):
 
     $ git push [production|staging|master]
     #DB changes? remember to migrate the server
-    $ heroku rake db:migrate --app [staging-boosterconf|booster2018]
+    $ heroku rake db:migrate --app [staging-boosterconf|booster2019]
 
 Run tests:
 
@@ -76,4 +76,4 @@ Run tests:
 
 Heroku SendGrid:
     # For å sjekke user/pass:
-    $ heroku config --long --app booster2018
+    $ heroku config --long --app booster2019

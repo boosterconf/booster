@@ -129,7 +129,7 @@ class BoosterMailer < ApplicationMailer
 
   def welcome_email(user)
     @user = user
-    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster #{Dates::CONFERENCE_YEAR} at Scandic Hotel Bergen City, Wednesday March 11.")
+    mail(:to => user.email, :from => FROM_EMAIL, :subject => "Welcome to Booster #{Dates::CONFERENCE_YEAR} at Scandic Hotel Bergen City, Wednesday March 13.")
   end
 
   def promo_email(user)
