@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 ruby '2.4.0'
 
-gem 'railties', '5.0.6'
-gem 'rails', '5.0.6'
+gem 'railties', '5.2.0'
+gem 'rails', '5.2.0'
 gem "authlogic", '~> 3.8'
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
@@ -27,7 +27,7 @@ gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
 
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
