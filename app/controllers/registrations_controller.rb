@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, :only => [:index, :destroy, :restore, :send_welcome_email]
 
   def index
-    @registrations = Registration.includes(:ticket_type).find_by_params(params)
+    @registrations = Registration.includes(:ticket_type, :user).find_by_params(params)
 
     @ticket_types = TicketType.all
 

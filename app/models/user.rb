@@ -18,8 +18,6 @@ class User < ApplicationRecord
   validates_presence_of :last_name, :message => "You have to specify a last name."
   validates_presence_of :company, :message => "You have to specify a company."
 
-  # A user always has a registration, so no more null checks
-
   def full_name
     if read_attribute(:first_name)
       (read_attribute(:first_name) or "") + ' ' + (read_attribute(:last_name) or "")
@@ -41,15 +39,18 @@ class User < ApplicationRecord
   end
 
   def attending_speakers_dinner(will_attend)
+    self.build_registration unless self.registration
     self.registration.speakers_dinner = will_attend
     save!
   end
 
   def attending_dinner?
+    self.build_registration unless self.registration
     self.registration ? self.registration.includes_dinner? : false
   end
 
   def attend_dinner(have_dinner)
+    self.build_registration unless self.registration
     self.registration.includes_dinner = have_dinner if self.registration
     save!
   end
@@ -92,12 +93,14 @@ class User < ApplicationRecord
   end
 
   def invite_speaker
+    self.build_registration unless self.registration
     self.registration.registration_complete = true
     self.registration.ticket_type = TicketType.speaker
     self.registration.manual_payment = false
   end
 
   def update_ticket_type!(current_user='Unknown')
+    self.build_registration unless self.registration
     unless self.registration.special_ticket?
       if self.has_accepted_or_pending_tutorial?
         self.registration.ticket_type = TicketType.speaker
@@ -164,10 +167,12 @@ class User < ApplicationRecord
   end
 
   def update_to_lightning_talk_speaker
+    self.build_registration unless self.registration
     self.registration.ticket_type = TicketType.lightning
   end
 
   def update_to_paying_user
+    self.build_registration unless self.registration
     if self.registration.ticket_type.speaker?
       if self.is_early_bird?
         self.registration.ticket_type = TicketType.early_bird
@@ -178,6 +183,7 @@ class User < ApplicationRecord
   end
 
   def is_early_bird?
+    self.build_registration unless self.registration
     self.registration.created_at < AppConfig.early_bird_ends
   end
 
@@ -246,11 +252,11 @@ class User < ApplicationRecord
   end
 
   def self.all_organizers
-    User.includes(:registration).to_a.select {|u| u.registration.ticket_type.reference == 'organizer'}
+    User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.reference == 'organizer'}
   end
 
   def self.all_organizers_and_volunteers
-    User.includes(:registration).to_a.select {|u| ['organizer', 'volunteer'].include? u.registration.ticket_type.reference}
+    User.includes(:registration).to_a.select {|u| u.registration != nil && (['organizer', 'volunteer'].include? u.registration.ticket_type.reference)}
   end
 
   def self.featured_speakers
@@ -269,7 +275,7 @@ class User < ApplicationRecord
   end
 
   def self.all_normal_participants
-    User.includes(:registration).to_a.select {|u| u.registration.ticket_type.normal_ticket? }
+    User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.normal_ticket? }
   end
 
   def self.all_participants
@@ -277,7 +283,7 @@ class User < ApplicationRecord
   end
 
   def self.all_speakers
-      User.includes(:registration).to_a.select {|u| u.registration.ticket_type.speaker? }
+      User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.speaker? }
   end
 
   def self.create_unfinished(email, ticket_type, first_name=nil, last_name=nil)

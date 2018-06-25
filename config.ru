@@ -2,4 +2,4 @@
 $stdout.sync = true
 
 require ::File.expand_path('../config/environment',  __FILE__)
-run Booster2013::Application
+run Rails.application
