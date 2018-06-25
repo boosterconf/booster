@@ -49,6 +49,7 @@ group :production do
 end
 
 group :development, :test do
+  gem 'debase'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'rails-controller-testing'
