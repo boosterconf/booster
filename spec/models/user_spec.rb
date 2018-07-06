@@ -21,7 +21,7 @@ describe User, type: :model do
     user
   end
 
-  describe  "#has_all_talks_refused?" do
+  describe "#has_all_talks_refused?" do
     it "is true if user has only refused talks" do
       user_with_refused_talk = User.new
       user_with_refused_talk.talks << Talk.new({:acceptance_status => "refused"})
@@ -38,31 +38,7 @@ describe User, type: :model do
       expect(user.has_all_talks_refused?).to be_falsey
     end
   end
-
-  describe "#attending_dinner" do
-
-    it "is attending participants dinner" do
-      attending_user = create_valid_user
-      attending_user.attending_dinner!
-
-      expect(attending_user.attending_dinner?).to be_truthy
-    end
-
-    it "is not attending participants dinner" do
-      non_attending_user = create_valid_user
-      non_attending_user.not_attending_dinner!
-
-      expect(non_attending_user.attending_dinner?).to be_falsey
-    end
-
-    it "is not attending dinner participants when not explicitly set" do
-      attendance_not_set_user = create_valid_user
-
-      expect(attendance_not_set_user.attending_dinner?).to be_falsey
-    end
-
-  end
-
+  
   describe "#update_to_paying_user" do
     #denne metoden er bare i bruk internt i User. Burde ikke testene i stedet være for update_ticket_type!
     # som er den eneste metoden som bruker denne?
