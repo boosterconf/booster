@@ -1,20 +1,12 @@
 class GroupRegistrationsController < ApplicationController
+  before_action :ticket_sales_open?, only: [:new, :create]
 
   def new
-    unless current_user && current_user.is_admin
-      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-      redirect_to root_path
-    end
-
     @group_registration = GroupRegistrationForm.new
     @group_registration.tickets = [Ticket.new, Ticket.new, Ticket.new, Ticket.new]
   end
 
   def create
-    unless current_user && current_user.is_admin
-      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-      redirect_to root_path
-    end
     filtered_params = group_registration_params
     @group_registration = GroupRegistrationForm.new(group_registration_params)
     # TODO This stuff needs to go into the Form object - the whole point of it is to isolate logic like this
@@ -43,4 +35,17 @@ class GroupRegistrationsController < ApplicationController
     params.require(:group_registration_form).permit(:ticket_type_id, :delivery_method, :email, :adress, :zip,
                                                     :your_reference, :text, :company, tickets: [:name, :email])
   end
+
+  def ticket_sales_open?
+    if current_user && current_user.is_admin
+      true
+    else
+      if AppConfig.ticket_sales_open
+        return true
+      end
+      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
+      redirect_to root_path
+    end
+  end
+
 end
