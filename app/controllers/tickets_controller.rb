@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   before_action :require_admin, :only => [:index, :destroy, :edit, :update, :send_ticket_email, :download_emails]
   before_action :set_ticket, only: [:show, :edit, :update]
+  before_action :ticket_sales_open?, only: [:new, :create]
 
   # GET /tickets
   def index
@@ -67,18 +68,12 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-    redirect_to root_path
-
     @ticket = Ticket.new
     @ticket.ticket_type = TicketType.current_normal_ticket
   end
 
   # POST /tickets
   def create
-    flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
-    redirect_to root_path
-
     @ticket = Ticket.new(ticket_params)
     if current_user && current_user.is_admin
       @ticket.ticket_type = TicketType.find_by_id(params[:ticket][:ticket_type_id])
@@ -219,4 +214,15 @@ class TicketsController < ApplicationController
                                    :attend_dinner, :dietary_info)
   end
 
+  def ticket_sales_open?
+    if current_user && current_user.is_admin
+      true
+    else
+      if AppConfig.ticket_sales_open
+        return true
+      end
+      flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
+      redirect_to root_path
+    end
+  end
 end
