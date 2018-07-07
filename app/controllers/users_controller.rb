@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json {render json: @users}
     end
   end
 
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @user }
+      format.json {render json: @user}
     end
   end
 
@@ -36,8 +36,6 @@ class UsersController < ApplicationController
     else
       redirect_to root_path
     end
-
-    @user.registration.includes_dinner = @user.registration.ticket_type.dinner_included
   end
 
   def edit
@@ -198,7 +196,7 @@ class UsersController < ApplicationController
 
   protected
   def total_by_date(users, date_range)
-    users_by_date = users.group_by { |u| u.created_at.to_date }
+    users_by_date = users.group_by {|u| u.created_at.to_date}
     per_date = []
     total = 0
     for day in date_range do
@@ -209,7 +207,7 @@ class UsersController < ApplicationController
   end
 
   def total_price_per_date(users, date_range)
-    users_by_date = users.group_by { |u| u.created_at.to_date }
+    users_by_date = users.group_by {|u| u.created_at.to_date}
     per_date = []
     total = 0
     for day in date_range do
@@ -230,10 +228,10 @@ class UsersController < ApplicationController
                                  :invited, :is_admin,
                                  :phone_number, :registration_ip, :roles,
                                  :first_name, :last_name, :hear_about,
-                                 registration_attributes: [:id, :includes_dinner, :ticket_type_id],
+                                 registration_attributes: [:id, :ticket_type_id],
                                  bio_attributes: [
-                                    :id, :picture, :tempfile, :original_filename, :content_type, :headers, :title,
-                                    :twitter_handle, :blog, :bio
-                                 ] )
+                                     :id, :picture, :tempfile, :original_filename, :content_type, :headers, :title,
+                                     :twitter_handle, :blog, :bio
+                                 ])
   end
 end

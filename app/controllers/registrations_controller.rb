@@ -9,8 +9,8 @@ class RegistrationsController < ApplicationController
     @ticket_types = TicketType.all
 
     if @registrations.length > 0
-      first_registration = @registrations.min { |x, y| x.created_at.to_date <=> y.created_at.to_date }
-      @date_range = (first_registration.created_at.to_date-1..Date.today).to_a
+      first_registration = @registrations.min {|x, y| x.created_at.to_date <=> y.created_at.to_date}
+      @date_range = (first_registration.created_at.to_date - 1..Date.today).to_a
       @all_per_date = total_by_date(@registrations, @date_range)
       @paid_per_date = total_by_date(@registrations, @date_range)
 
@@ -50,7 +50,6 @@ class RegistrationsController < ApplicationController
     if admin?
       if params[:ticket_change]
         @registration.ticket_type = TicketType.find_by_id(params[:registration][:ticket_type_id])
-        @registration.includes_dinner = params[:registration][:includes_dinner]
         @registration.update_payment_info
       else
         @registration.registration_complete = params[:registration][:registration_complete]
@@ -145,7 +144,7 @@ class RegistrationsController < ApplicationController
   end
 
   def total_by_date(registrations, date_range)
-    registrations_by_date = registrations.group_by { |u| u.created_at.to_date }
+    registrations_by_date = registrations.group_by {|u| u.created_at.to_date}
     per_date = []
     total = 0
     for day in date_range do
@@ -156,7 +155,7 @@ class RegistrationsController < ApplicationController
   end
 
   def total_price_per_date(registrations, date_range)
-    registrations_by_date = registrations.group_by { |u| u.created_at.to_date }
+    registrations_by_date = registrations.group_by {|u| u.created_at.to_date}
     per_date = []
     total = 0
     for day in date_range do
@@ -170,10 +169,10 @@ class RegistrationsController < ApplicationController
 
   private
   def registration_params
-    params.require(:registration).permit(:comments, :includes_dinner, :description,
+    params.require(:registration).permit(:comments, :description,
                                          :free_ticket, :user_id, :paid_amount, :payment_reference,
                                          :manual_payment, :invoice_address, :invoice_description,
-                                         :invoiced, :registration_complete, :speakers_dinner, :ticket_type_id)
+                                         :invoiced, :registration_complete, :ticket_type_id)
   end
 
 end

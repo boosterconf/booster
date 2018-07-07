@@ -9,28 +9,11 @@ class DinnerController < ApplicationController
     respond_with @registrations
   end
 
+  # todo fix attending listing
   def attend_conference_dinner
-    registration = User.find(params[:user_id]).registration
-
-    registration.includes_dinner = params[:attend]
-    registration.save
-
-    render :json => {
-        :id => registration.user.id,
-        :attend => registration.includes_dinner
-    }
   end
 
+  # todo fix attend speakers dinner listing
   def attend_speakers_dinner
-    registration = User.find(params[:user_id]).registration
-
-    registration.speakers_dinner = params[:attend]
-    registration.save
-
-    render :json => {
-        :id => registration.user.id,
-        :attend => registration.speakers_dinner
-    }
   end
-
 end

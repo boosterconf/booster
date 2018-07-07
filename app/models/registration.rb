@@ -2,7 +2,7 @@ class Registration < ApplicationRecord
 
   acts_as_paranoid
 
-  default_scope  { order('registrations.created_at desc') }
+  default_scope {order('registrations.created_at desc')}
   belongs_to :user
   belongs_to :invoice
   has_one :invoice_line
@@ -58,16 +58,8 @@ class Registration < ApplicationRecord
     ticket_type.speaker?
   end
 
-  def may_attend_speakers_dinner?
-    user != nil && ticket_type != nil && (ticket_type.speaker? || ticket_type.organizer?)
-  end
-
   def free_ticket
     !ticket_type.paying_ticket?
-  end
-
-  def dinner_included?
-    ticket_type.dinner_included
   end
 
   def discounted_ticket?
@@ -121,34 +113,32 @@ class Registration < ApplicationRecord
     elsif params[:filter]
       case params[:filter]
         when 'completed'
-          return where( { :registration_complete => true })
+          return where({:registration_complete => true})
         when 'not_completed'
-          return where( { :registration_complete => false })
+          return where({:registration_complete => false})
         when 'er_fakturert'
           return where(
-            {
-              :free_ticket => false,
-              :registration_complete => false,
-              :manual_payment => true,
-              :invoiced => true
-            })
+              {
+                  :free_ticket => false,
+                  :registration_complete => false,
+                  :manual_payment => true,
+                  :invoiced => true
+              })
         when 'skal_foelges_opp'
           return where(
-            {
-              :free_ticket => false,
-              :registration_complete => false,
-              :manual_payment => false
-            })
+              {
+                  :free_ticket => false,
+                  :registration_complete => false,
+                  :manual_payment => false
+              })
         when 'skal_faktureres'
           return where(
-            {
-              :free_ticket => false,
-              :registration_complete => false,
-              :manual_payment => true,
-              :invoiced => false
-            })
-        when 'dinner'
-          return where(:includes_dinner => true)
+              {
+                  :free_ticket => false,
+                  :registration_complete => false,
+                  :manual_payment => true,
+                  :invoiced => false
+              })
         else
           return []
       end
@@ -176,6 +166,6 @@ class Registration < ApplicationRecord
   end
 
   def user
-    User.unscoped { super }
+    User.unscoped {super}
   end
 end
