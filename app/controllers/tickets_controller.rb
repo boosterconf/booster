@@ -176,6 +176,7 @@ class TicketsController < ApplicationController
     @ticket.name = ticket_params[:name]
     @ticket.email = ticket_params[:email]
     @ticket.attend_dinner = ticket_params[:attend_dinner]
+    @ticket.attend_speakers_dinner = ticket_params[:attend_speakers_dinner]
     @ticket.dietary_info = ticket_params[:dietary_info]
     @ticket.roles = params[:roles].join(",") if params[:roles]
 
@@ -211,7 +212,7 @@ class TicketsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def ticket_params
     params.require(:ticket).permit(:name, :email, :feedback, :company,
-                                   :attend_dinner, :attend_speakers_dinner, :dietary_info,:ticket_type_id)
+                                   :attend_dinner, :attend_speakers_dinner, :dietary_info, :ticket_type_id, :reference)
   end
 
   def ticket_sales_open?
