@@ -211,7 +211,7 @@ class TicketsController < ApplicationController
   # Only allow a trusted parameter "white list" through.
   def ticket_params
     params.require(:ticket).permit(:name, :email, :feedback, :company,
-                                   :attend_dinner, :attend_speakers_dinner, :dietary_info)
+                                   :attend_dinner, :attend_speakers_dinner, :dietary_info,:ticket_type_id)
   end
 
   def ticket_sales_open?
