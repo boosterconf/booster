@@ -56,6 +56,7 @@ class TicketsController < ApplicationController
       @ticket.name = params[:ticket][:name]
       @ticket.company = params[:ticket][:company]
       @ticket.attend_dinner = params[:ticket][:attend_dinner]
+      @ticket.attend_speakers_dinner = params[:ticket][:attend_speakers_dinner]
       @ticket.dietary_info = params[:ticket][:dietary_info]
       @ticket.save
       flash[:notice] = "Information updated"
