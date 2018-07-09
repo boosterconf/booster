@@ -235,12 +235,15 @@ class User < ApplicationRecord
   end
 
   def self.featured_speakers
-    potential_speakers = User.includes(:bio).where(featured_speaker: true).order('created_at DESC')
-    speakers = []
-    potential_speakers.each do |sp|
-      if sp.is_featured? && sp.bio.picture.present?
-        speakers << sp
+    speakers = Rails.cache.fetch("featured_speakers", expires_in: 30.minute) do
+      potential_speakers = User.includes(:bio).where(featured_speaker: true).order('created_at DESC')
+      speakers = []
+      potential_speakers.each do |sp|
+        if sp.is_featured? && sp.bio.picture.present?
+          speakers << sp
+        end
       end
+      speakers
     end
     speakers
   end
