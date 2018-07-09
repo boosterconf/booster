@@ -12,7 +12,7 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_user
-    @user = User.new(params[:user])
+    @user = User.new(create_user_params)
     @user.registration = Registration.new
     @user.registration.ticket_type = TicketType.lightning
     @user.registration.manual_payment = true
@@ -36,7 +36,7 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_talk
-    @talk = LightningTalk.new(params[:talk])
+    @talk = LightningTalk.new(talk_params)
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.year = AppConfig.year
     @talk.users << current_user
@@ -63,7 +63,7 @@ class RegisterLightningTalkController < ApplicationController
 
   def create_details
     @user = current_user
-    @user.update_attributes(params[:user])
+    @user.update_attributes(create_details_params)
 
     if @user.save
       redirect_to '/register_lightning_talk/finish'
@@ -71,4 +71,24 @@ class RegisterLightningTalkController < ApplicationController
       render action: :details
     end
   end
+
+  private
+  def talk_params
+    (current_user&.is_admin?) ?
+        params.permit! :
+        params.require(:talk).permit(:language, :title, :description, :equipment)
+  end
+
+  def create_user_params
+    (current_user&.is_admin?) ?
+        params.permit! :
+        params.require(:user).permit(:first_name,:last_name,:company,:email,:phone_number,:password,:password_confirmation,:roles)
+  end
+
+  def create_details_params
+    (current_user&.is_admin?) ?
+        params.permit! :
+        params.require(:user).permit(:gender,:birthyear,:hear_about,bio_attributes: [:title,:twitter_handle,:blog,:bio,:id])
+  end
 end
+
