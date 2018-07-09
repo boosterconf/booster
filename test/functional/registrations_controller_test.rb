@@ -153,7 +153,7 @@ class RegistrationsControllerTest < ActionController::TestCase
 
   private
   def create_registration_params
-    { includes_dinner: true, ticket_type_id: ticket_types(:earlybird).id, registration_complete: true,
+    { ticket_type_id: ticket_types(:earlybird).id, registration_complete: true,
       free_ticket: false }
   end
 
