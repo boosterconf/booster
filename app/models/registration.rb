@@ -31,47 +31,6 @@ class Registration < ApplicationRecord
     end
   end
 
-  def self.find_by_params(params)
-    puts params
-    if params[:conditions]
-      return where(params[:conditions])
-    elsif params[:filter]
-      case params[:filter]
-        when 'completed'
-          return where({:registration_complete => true})
-        when 'not_completed'
-          return where({:registration_complete => false})
-        when 'er_fakturert'
-          return where(
-              {
-                  :free_ticket => false,
-                  :registration_complete => false,
-                  :manual_payment => true,
-                  :invoiced => true
-              })
-        when 'skal_foelges_opp'
-          return where(
-              {
-                  :free_ticket => false,
-                  :registration_complete => false,
-                  :manual_payment => false
-              })
-        when 'skal_faktureres'
-          return where(
-              {
-                  :free_ticket => false,
-                  :registration_complete => false,
-                  :manual_payment => true,
-                  :invoiced => false
-              })
-        else
-          return []
-      end
-    else
-      all
-    end
-  end
-
   def user
     User.unscoped {super}
   end

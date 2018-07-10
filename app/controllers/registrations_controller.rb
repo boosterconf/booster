@@ -4,7 +4,7 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, :only => [:index, :destroy, :restore, :send_welcome_email]
 
   def index
-    @registrations = Registration.includes(:user).find_by_params(params)
+    @registrations = Registration.includes(:user)
   end
 
   def deleted
