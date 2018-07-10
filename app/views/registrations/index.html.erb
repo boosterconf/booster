@@ -13,12 +13,13 @@
         <th>User</th>
         <th>Email</th>
         <th>Registered</th>
-        <th>Status</th>
-        <th>&nbsp;</th>
+        <th>Evil delete</th>
       </tr>
       <% for registration in @registrations %>
         <% if registration.user.nil? %>
-          BAD DATA for this registration with id <%= registration.id %> at <%= registration.updated_at %>
+          BAD DATA for this registration with id <%= registration.id %> at <%= registration.updated_at %> . This means
+          that the user on the registration is nil. This might mean
+          that a co-speaker has not registered yet.
           <br/>
           <% next %>
         <% end %>
