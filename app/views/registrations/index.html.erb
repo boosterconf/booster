@@ -1,9 +1,9 @@
 <article class="inner">
   <div class="header-join">
-<h2>Users</h2>
-</div>
+    <h2>Users</h2>
+  </div>
 
-<% if @registrations.length > 0 %>
+  <% if @registrations.length > 0 %>
 
     <h3><%= @registrations.length %> users:</h3>
 
@@ -13,51 +13,40 @@
         <th>User</th>
         <th>Email</th>
         <th>Registered</th>
-        <th>Ticket</th>
         <th>Status</th>
         <th>&nbsp;</th>
       </tr>
       <% for registration in @registrations %>
-          <% if registration.user.nil? %>
-              BAD DATA for this registration with id <%= registration.id %> at <%= registration.updated_at %>
-              <br/>
-              <% next %>
-          <% end %>
-          <tr>
-            <td>
-              <%= registration.user.id %>
-            </td>
-            <td>
-              <% if registration.unfinished %>
+        <% if registration.user.nil? %>
+          BAD DATA for this registration with id <%= registration.id %> at <%= registration.updated_at %>
+          <br/>
+          <% next %>
+        <% end %>
+        <tr>
+          <td>
+            <%= registration.user.id %>
+          </td>
+          <td>
+            <% if registration.unfinished %>
                   <span style="color: red; font-weight: bold">
                     <%= link_to h('[U]'), registration.user %>
                   </span>
-              <% else %>
-                <%= link_to h(registration.user.full_name), registration.user %>
-              <% end %>
-              (<%= h registration.user.company %>)
-            </td>
-            <td>
-              <%= link_to h(registration.user.email), "mailto:#{h(registration.user.email)}" %>
-            </td>
-            <td><%= time_ago_in_words(registration.created_at) %> ago</td>
-            <td>
-              <%= h registration.ticket_type.reference %>
-              <% if registration.ticket_type.speaker? %>
-                  (<%= registration.user.talks.size %> abstracts)
-              <% end %>
-            </td>
-            <td>
-              <%= h registration.status %>
-            </td>
-            <td>
-              <%= link_to_unless(registration.paid?, 'Delete user', { :controller => "registrations", :action => "destroy", :id => registration.id }, :method => :delete) %>
-            </td>
-          </tr>
+            <% else %>
+              <%= link_to h(registration.user.full_name), registration.user %>
+            <% end %>
+            (<%= h registration.user.company %>)
+          </td>
+          <td>
+            <%= link_to h(registration.user.email), "mailto:#{h(registration.user.email)}" %>
+          </td>
+          <td><%= time_ago_in_words(registration.created_at) %> ago</td>
+          <td>
+            <%= link_to_unless(registration.paid?, 'Delete user', {:controller => "registrations", :action => "destroy", :id => registration.id}, :method => :delete) %>
+          </td>
+        </tr>
       <% end %>
-
-<% else %>
+  <% else %>
     <p>No users found</p>
-<% end %>
-</table>
+  <% end %>
+  </table>
 </article>

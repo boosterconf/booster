@@ -4,22 +4,11 @@ class RegistrationsController < ApplicationController
   before_action :require_admin, :only => [:index, :destroy, :restore, :send_welcome_email]
 
   def index
-    @registrations = Registration.includes(:ticket_type, :user).find_by_params(params)
-
-    @ticket_types = TicketType.all
-
-    if @registrations.length > 0
-      first_registration = @registrations.min {|x, y| x.created_at.to_date <=> y.created_at.to_date}
-      @date_range = (first_registration.created_at.to_date - 1..Date.today).to_a
-      @all_per_date = total_by_date(@registrations, @date_range)
-      @paid_per_date = total_by_date(@registrations, @date_range)
-
-      @income_per_date = total_price_per_date(@registrations, @date_range)
-    end
+    @registrations = Registration.includes(:user).find_by_params(params)
   end
 
   def deleted
-    @registrations = Registration.includes(:ticket_type).only_deleted
+    @registrations = Registration.only_deleted
   end
 
   def send_welcome_email
@@ -36,50 +25,16 @@ class RegistrationsController < ApplicationController
     end
     redirect_to registrations_url
   end
-
-  def edit
-    @registration = Registration.find(params[:id])
-    @ticket_types = TicketType.all
-  end
-
-  # PUT /registrations/1
-  # PUT /registrations/1.xml
+  
   def update
-
     @registration = Registration.find(params[:id])
     if admin?
-      if params[:ticket_change]
-        @registration.ticket_type = TicketType.find_by_id(params[:registration][:ticket_type_id])
-        @registration.update_payment_info
-      else
-        @registration.registration_complete = params[:registration][:registration_complete]
-        @registration.completed_by = current_user.email if @registration.registration_complete
-        @registration.payment_reference = params[:registration][:payment_reference]
-        @registration.paid_amount = params[:registration][:paid_amount]
-        @registration.invoiced = params[:registration][:invoiced]
-        @registration.user.is_admin = TicketType.find_by_id(params[:registration][:ticket_type_id]).organizer?
-        @registration.user.save!
-      end
+      @registration.registration_complete = params[:registration][:registration_complete]
+      @registration.completed_by = current_user.email if @registration.registration_complete
+      @registration.user.save!
     end
-
-    if @registration.update_attributes(registration_params)
-      if admin? && @registration.registration_complete?
-        flash[:notice] = "Information updated and confirmation mail sent"
-
-        if @registration.free_ticket?
-          BoosterMailer.free_registration_completion(@registration.user).deliver_now
-        else
-          BoosterMailer.payment_confirmation(@registration).deliver_now
-        end
-      else
-        flash[:notice] = "Information updated"
-      end
-
-      redirect_to @registration.user
-    else
-      flash.now[:error] = 'Unable to update registration'
-      render :action => "edit"
-    end
+    flash[:notice] = "Information updated"
+    redirect_to @registration.user
   end
 
   def destroy
@@ -169,10 +124,8 @@ class RegistrationsController < ApplicationController
 
   private
   def registration_params
-    params.require(:registration).permit(:comments, :description,
-                                         :free_ticket, :user_id, :paid_amount, :payment_reference,
-                                         :manual_payment, :invoice_address, :invoice_description,
-                                         :invoiced, :registration_complete, :ticket_type_id)
+    params.require(:registration).permit(:comments, :description, :user_id, :registration_complete)
   end
-
 end
+
+

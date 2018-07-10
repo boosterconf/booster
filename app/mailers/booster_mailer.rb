@@ -63,14 +63,7 @@ class BoosterMailer < ApplicationMailer
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket confirmation")
   end
-
-  def payment_confirmation(registration)
-    @name = registration.user.email
-    @payment_text = registration.description
-    @amount = registration.price
-    mail(:to => registration.user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} Payment receipt for #{registration.user.email}")
-  end
-
+  
   def talk_confirmation(speaker, talk, talk_url)
     @speaker = speaker.first_name
     @email = speaker.email

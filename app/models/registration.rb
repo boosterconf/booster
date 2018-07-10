@@ -147,24 +147,6 @@ class Registration < ApplicationRecord
     end
   end
 
-  def update_payment_info
-    if paid?
-      raise 'Cannot change a completed payment!'
-    end
-    self.registration_complete = false
-    update_price
-    true
-  end
-
-  def update_price
-    self.price = ticket_price
-    self.free_ticket = price == 0
-  end
-
-  def self.current_normal_ticket_type
-    TicketType.current_normal_ticket.reference
-  end
-
   def user
     User.unscoped {super}
   end
