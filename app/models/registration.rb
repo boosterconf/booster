@@ -6,17 +6,8 @@ class Registration < ApplicationRecord
   belongs_to :user
   belongs_to :invoice
   has_one :invoice_line
-  belongs_to :ticket_type
 
-  before_create :set_default_values
   before_destroy :destroy_talks_and_user
-  before_restore :restore_talks_and_user
-
-  def set_default_values
-    self.manual_payment ||= true
-    self.ticket_type_old ||= self.class.current_normal_ticket_type
-    self.ticket_type ||= TicketType.current_normal_ticket
-  end
 
   def destroy_talks_and_user
     # This is necessary because the callback does not discriminate between
@@ -40,70 +31,6 @@ class Registration < ApplicationRecord
     self.user.talks.only_deleted.each do |talk|
       talk.restore
     end
-  end
-
-  def ticket_description
-    ticket_type.name
-  end
-
-  def ticket_price
-    ticket_type.price
-  end
-
-  def description
-    ticket_description + ' ' + (registration_complete ? ' (Paid)' : '')
-  end
-
-  def speaker?
-    ticket_type.speaker?
-  end
-
-  def free_ticket
-    !ticket_type.paying_ticket?
-  end
-
-  def discounted_ticket?
-    ticket_type.discounted?
-  end
-
-  def special_ticket?
-    ticket_type.special_ticket?
-  end
-
-  def organizer?
-    ticket_type.organizer?
-  end
-
-  def has_paying_ticket?
-    ticket_type.paying_ticket?
-  end
-
-  def paid?
-    paid_amount && paid_amount > 0
-  end
-
-  def self.find_by_invoice(invoice_id)
-    if invoice_id =~ /^2016t?-(\d+)$/
-      Registration.find($1.to_i)
-    else
-      raise 'Invalid invoice_id #{invoice_id}'
-    end
-  end
-
-  def invoice_id
-    return '2016-#{id}' if Rails.env == 'production'
-    '2016t-#{id}'
-  end
-
-  def price_including_vat
-    price * 1.25
-  end
-
-  def status
-    paid? ? 'Paid' : (
-    registration_complete? ? 'Approved' : (
-    manual_payment? && !invoiced ? 'To be invoiced' : (
-    manual_payment? ? 'Already invoiced' : 'Must follow up')))
   end
 
   def self.find_by_params(params)

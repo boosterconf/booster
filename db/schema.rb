@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_07_215428) do
+ActiveRecord::Schema.define(version: 2018_07_10_184120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -53,36 +53,6 @@ ActiveRecord::Schema.define(version: 2018_07_07_215428) do
     t.datetime "updated_at"
     t.datetime "departs_at"
     t.datetime "arrives_at"
-  end
-
-  create_table "invoice_lines", id: :serial, force: :cascade do |t|
-    t.string "text", limit: 255
-    t.integer "price"
-    t.integer "sponsor_id"
-    t.integer "registration_id"
-    t.integer "invoice_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["invoice_id"], name: "index_invoice_lines_on_invoice_id"
-    t.index ["registration_id"], name: "index_invoice_lines_on_registration_id"
-    t.index ["sponsor_id"], name: "index_invoice_lines_on_sponsor_id"
-  end
-
-  create_table "invoices", id: :serial, force: :cascade do |t|
-    t.string "our_reference", limit: 255
-    t.string "your_reference", limit: 255
-    t.string "recipient_name", limit: 255
-    t.string "adress", limit: 255
-    t.string "zip", limit: 255
-    t.string "city", limit: 255
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "email", limit: 255
-    t.string "country", limit: 255
-    t.string "status", limit: 255, default: "not_invoiced"
-    t.datetime "invoiced_at"
-    t.datetime "paid_at"
-    t.string "text", limit: 255
   end
 
   create_table "participants", id: :serial, force: :cascade do |t|

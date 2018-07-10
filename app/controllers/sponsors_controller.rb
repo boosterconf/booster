@@ -37,12 +37,10 @@ class SponsorsController < ApplicationController
     @users = User.all_organizers
     @sponsor =
         SponsorAcceptedSlackNotifier.new(
-            SponsorInvoiceCreator.new(
-                SponsorStatusEventCreator.new(
-                    user: current_user, sponsor: SponsorTicketCreator.new(
-                                          Sponsor.find(params[:id])
-                                      )
-                )
+            SponsorStatusEventCreator.new(
+                user: current_user, sponsor: SponsorTicketCreator.new(
+                Sponsor.find(params[:id])
+            )
             )
         )
     @sponsor.assign_attributes(sponsor_params)
@@ -63,22 +61,22 @@ class SponsorsController < ApplicationController
           }
 
           format.js {
-	    notice = "I have no idea what just happened." #obvs should not actually ever happen..
-	    if params[:sponsor].has_key?(:user_id)
-	      unless @sponsor.user.nil?
-	        notice = "Responsible for #{@sponsor.name} changed to #{@sponsor.user.full_name}"
-	      else
-	        notice = "Nobody is responsible for #{@sponsor.name} anymore."
-	      end
-	    elsif params[:sponsor].has_key?(:status)
-	      notice = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]}"
-	    end
+            notice = "I have no idea what just happened." #obvs should not actually ever happen..
+            if params[:sponsor].has_key?(:user_id)
+              unless @sponsor.user.nil?
+                notice = "Responsible for #{@sponsor.name} changed to #{@sponsor.user.full_name}"
+              else
+                notice = "Nobody is responsible for #{@sponsor.name} anymore."
+              end
+            elsif params[:sponsor].has_key?(:status)
+              notice = "Status for #{@sponsor.name} changed to #{Sponsor::STATES[@sponsor.status]}"
+            end
 
-	    if @sponsor.save
+            if @sponsor.save
               flash[:notice] = notice
             else
               flash[:error] = "#{@sponsor.name} was NOT updated!"
-	    end
+            end
             render
           }
         end
@@ -115,7 +113,7 @@ class SponsorsController < ApplicationController
 
   def email_tickets
     sponsors = Sponsor.all_accepted
-    sponsors.each { |sponsor|
+    sponsors.each {|sponsor|
       create_tickets_for(sponsor)
 
     }
@@ -158,7 +156,7 @@ class SponsorsController < ApplicationController
   end
 
   def find_events_and_stats
-    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map { |user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length] }.sort { |a, b| a[1] <=> b[1] }.reverse!
+    @number_of_sponsors_per_user = @sponsors.group_by(&:user).map {|user, sponsors| [user != nil ? user.full_name : "(none)", sponsors.length]}.sort {|a, b| a[1] <=> b[1]}.reverse!
     @stats = {
         'Accepted' => Sponsor.where(status: 'accepted').count,
         'Declined' => Sponsor.where(status: 'declined').count,
@@ -176,6 +174,7 @@ class SponsorsController < ApplicationController
   end
 
   NUMBER_OF_TICKETS_PER_SPONSOR = 2
+
   def create_tickets_for(sponsor)
     existing_ticket_count = Ticket.joins(:ticket_type).where(:company => sponsor.name, :ticket_type => TicketType.sponsor).count
     puts existing_ticket_count
