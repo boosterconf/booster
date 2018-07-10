@@ -4,8 +4,6 @@ class Registration < ApplicationRecord
 
   default_scope {order('registrations.created_at desc')}
   belongs_to :user
-  belongs_to :invoice
-  has_one :invoice_line
 
   before_destroy :destroy_talks_and_user
 
