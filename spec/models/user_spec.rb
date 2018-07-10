@@ -38,56 +38,6 @@ describe User, type: :model do
       expect(user.has_all_talks_refused?).to be_falsey
     end
   end
-  
-  describe "#update_to_paying_user" do
-    #denne metoden er bare i bruk internt i User. Burde ikke testene i stedet være for update_ticket_type!
-    # som er den eneste metoden som bruker denne?
-
-    it "speaker registrations gets set to early bird price when updated to paying user before early bird ends" do
-      early_registration_speaker = create_speaker
-      AppConfig.early_bird_ends = Time.now + 1.day
-
-      early_registration_speaker.update_to_paying_user
-
-      expect(early_registration_speaker.registration.ticket_type.reference).to eq("early_bird")
-    end
-
-    it "speaker registrations gets set to full price when when updated to paying user after early bird has ended" do
-      late_registration_speaker = create_speaker
-      AppConfig.early_bird_ends = Time.now - 1.day
-
-      late_registration_speaker.update_to_paying_user
-
-      expect(late_registration_speaker.registration.ticket_type.reference).to eq("full_price")
-    end
-  end
-
-  describe "#update_ticket_type!" do
-    it "updating ticket for user with pending workshop sets ticket type to speaker" do
-      speaker = create_speaker
-      speaker.talks << Talk.new({:acceptance_status => "pending", :talk_type => TalkType.new({:name => "Workshop"})})
-
-      speaker.update_ticket_type!
-      expect(speaker.registration.ticket_type.reference).to eq('speaker')
-    end
-
-    it "updating ticket for user with pending lightning talk sets ticket type to lightning" do
-      speaker = create_speaker
-      speaker.talks << Talk.new({:acceptance_status => "pending", :talk_type => TalkType.new({:name => "Lightning talk"})})
-
-      speaker.update_ticket_type!
-      expect(speaker.registration.ticket_type.reference).to eq('lightning')
-    end
-
-    it "updating ticket for user with pending short talk sets ticket type to lightning" do
-      speaker = create_speaker
-      speaker.talks << Talk.new({:acceptance_status => "pending", :talk_type => TalkType.new({:name => "Short talk"})})
-
-      speaker.update_ticket_type!
-      expect(speaker.registration.ticket_type.reference).to eq('lightning')
-    end
-
-  end
 
   describe "#has_valid_email?" do
     it "accepts a valid email address" do
