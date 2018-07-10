@@ -42,7 +42,7 @@
           </td>
           <td><%= time_ago_in_words(registration.created_at) %> ago</td>
           <td>
-            <%= link_to_unless(registration.paid?, 'Delete user', {:controller => "registrations", :action => "destroy", :id => registration.id}, :method => :delete) %>
+            <%= link_to('Delete user', {:controller => "registrations", :action => "destroy", :id => registration.id}, :method => :delete) %>
           </td>
         </tr>
       <% end %>
