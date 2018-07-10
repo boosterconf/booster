@@ -25,7 +25,7 @@ class RegistrationsController < ApplicationController
     end
     redirect_to registrations_url
   end
-  
+
   def update
     @registration = Registration.find(params[:id])
     if admin?
@@ -97,31 +97,7 @@ class RegistrationsController < ApplicationController
       false
     end
   end
-
-  def total_by_date(registrations, date_range)
-    registrations_by_date = registrations.group_by {|u| u.created_at.to_date}
-    per_date = []
-    total = 0
-    for day in date_range do
-      total += registrations_by_date[day].size if registrations_by_date[day]
-      per_date << total
-    end
-    per_date
-  end
-
-  def total_price_per_date(registrations, date_range)
-    registrations_by_date = registrations.group_by {|u| u.created_at.to_date}
-    per_date = []
-    total = 0
-    for day in date_range do
-      for reg in registrations_by_date[day] || []
-        total += reg.paid_amount.to_i || 0
-      end
-      per_date << total
-    end
-    per_date
-  end
-
+  
   private
   def registration_params
     params.require(:registration).permit(:comments, :description, :user_id, :registration_complete)
