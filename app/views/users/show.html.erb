@@ -43,14 +43,7 @@
           <td>-</td>
         <% end %>
       </tr>
-      <% if admin? %>
-        <tr>
-          <th>Status:</th>
-          <td><%= @user.registration.status %></td>
-        </tr>
-      <% end %>
-
-      <% if admin? && @user.registration.unfinished %>
+      <% if admin? && @user.registration&.unfinished %>
         <th>Registration url:</th>
         <td><%= user_from_reference_url(@user.registration.unique_reference) %></td>
       <% end %>
