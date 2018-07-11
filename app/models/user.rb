@@ -70,34 +70,6 @@ class User < ApplicationRecord
   def invite_speaker
     self.build_registration unless self.registration
     self.registration.registration_complete = true
-    self.registration.ticket_type = TicketType.speaker
-    self.registration.manual_payment = false
-  end
-
-  def update_ticket_type!(current_user = 'Unknown')
-    self.build_registration unless self.registration
-    unless self.registration.special_ticket?
-      if self.has_accepted_or_pending_tutorial?
-        self.registration.ticket_type = TicketType.speaker
-      elsif self.has_all_tutorials_refused? && self.has_pending_or_accepted_talk?
-        self.update_to_lightning_talk_speaker
-      elsif self.has_all_talks_refused?
-        self.update_to_paying_user
-      end
-
-      if self.has_accepted_tutorial?
-        unless self.registration.registration_complete?
-          self.registration.registration_complete = true
-          self.registration.completed_by = current_user.email
-        end
-      else
-        self.registration.registration_complete = false
-        self.registration.completed_by = ""
-      end
-
-      self.registration.update_price
-      self.registration.save
-    end
   end
 
   def has_accepted_or_pending_tutorial?
