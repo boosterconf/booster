@@ -14,8 +14,6 @@ class RegisterLightningTalkController < ApplicationController
   def create_user
     @user = User.new(create_user_params)
     @user.registration = Registration.new
-    @user.registration.ticket_type = TicketType.lightning
-    @user.registration.manual_payment = true
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
