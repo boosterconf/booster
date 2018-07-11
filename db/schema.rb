@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_184120) do
+ActiveRecord::Schema.define(version: 2018_07_11_174231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -267,7 +267,9 @@ ActiveRecord::Schema.define(version: 2018_07_10_184120) do
     t.datetime "updated_at", null: false
     t.string "reference"
     t.boolean "attend_speakers_dinner"
+    t.bigint "user_id"
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
+    t.index ["user_id"], name: "index_tickets_on_user_id"
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -308,6 +310,7 @@ ActiveRecord::Schema.define(version: 2018_07_10_184120) do
     t.datetime "deleted_at"
     t.string "hear_about", default: ""
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
+
   end
 
   create_table "volunteers", id: :serial, force: :cascade do |t|
@@ -319,4 +322,5 @@ ActiveRecord::Schema.define(version: 2018_07_10_184120) do
 
   add_foreign_key "registrations", "ticket_types"
   add_foreign_key "tickets", "ticket_types"
+  add_foreign_key "tickets", "users"
 end

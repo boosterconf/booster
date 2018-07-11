@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   acts_as_paranoid
-
+  has_one :ticket
   has_one :registration, autosave: true
   has_one :bio, autosave: true
   has_many :speakers
