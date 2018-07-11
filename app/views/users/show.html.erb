@@ -43,25 +43,6 @@
           <td>-</td>
         <% end %>
       </tr>
-
-      <tr>
-        <th>Ticket type:</th>
-        <td><%= h @user.registration.ticket_description %></td>
-      </tr>
-      <tr>
-        <th>Price:</th>
-        <td><%= @user.registration.ticket_price %></td>
-      </tr>
-      <% if @user.registration.manual_payment %>
-        <tr>
-          <th>Invoice address:</th>
-          <td><%= @user.registration.invoice_address %></td>
-        </tr>
-        <tr>
-          <th>Invoice information:</th>
-          <td><%= @user.registration.invoice_description %></td>
-        </tr>
-      <% end %>
       <% if admin? %>
         <tr>
           <th>Status:</th>
