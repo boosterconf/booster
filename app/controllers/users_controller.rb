@@ -193,32 +193,7 @@ class UsersController < ApplicationController
 
     redirect_to edit_user_path registration.user
   end
-
-  protected
-  def total_by_date(users, date_range)
-    users_by_date = users.group_by {|u| u.created_at.to_date}
-    per_date = []
-    total = 0
-    for day in date_range do
-      total += users_by_date[day].size if users_by_date[day]
-      per_date << total
-    end
-    per_date
-  end
-
-  def total_price_per_date(users, date_range)
-    users_by_date = users.group_by {|u| u.created_at.to_date}
-    per_date = []
-    total = 0
-    for day in date_range do
-      for user in users_by_date[day] || []
-        total += user.registration.price || 0 if user.registration.paid?
-      end
-      per_date << total
-    end
-    per_date
-  end
-
+  
   private
   def user_params
     params.require(:user).permit(:accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,

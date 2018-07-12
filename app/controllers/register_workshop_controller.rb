@@ -108,7 +108,7 @@ class RegisterWorkshopController < ApplicationController
     (current_user&.is_admin?) ?
         params.require(:talk).permit! :
         params.require(:talk).permit(:title, :description, :equipment, :appropriate_for_roles,
-                                     :outline, :max_participants, :speaking_history, :participant_requirements, :equipment,:additional_speaker_email)
+                                     :outline, :max_participants, :speaking_history, :participant_requirements, :equipment, :additional_speaker_email)
   end
 
 end
