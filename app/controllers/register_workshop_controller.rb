@@ -18,8 +18,6 @@ class RegisterWorkshopController < ApplicationController
 
     @user = User.new(params[:user])
     @user.create_registration
-    @user.registration.ticket_type = TicketType.speaker
-    @user.registration.manual_payment = true
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
@@ -40,11 +38,10 @@ class RegisterWorkshopController < ApplicationController
 
   def create_talk
 
-    @workshop = Workshop.new(params[:talk])
+    @workshop = Workshop.new(talk_params)
     @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @workshop.users << current_user
     if @workshop.save
-      current_user.update_ticket_type!
 
       if has_entered_additional_speaker_email(@workshop)
         additional_speaker = find_additional_speaker(@workshop)
@@ -105,6 +102,13 @@ class RegisterWorkshopController < ApplicationController
   private
   def setup_talk_types
     @talk_types = TalkType.workshops
+  end
+
+  def talk_params
+    (current_user&.is_admin?) ?
+        params.require(:talk).permit! :
+        params.require(:talk).permit(:title, :description, :equipment, :appropriate_for_roles,
+                                     :outline, :max_participants, :speaking_history, :participant_requirements, :equipment,:additional_speaker_email)
   end
 
 end
