@@ -14,8 +14,6 @@ class RegisterShortTalkController < ApplicationController
   def create_user
     @user = User.new(params[:user])
     @user.registration = Registration.new
-    @user.registration.ticket_type = TicketType.short_talk
-    @user.registration.manual_payment = true
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
@@ -35,16 +33,13 @@ class RegisterShortTalkController < ApplicationController
   end
 
   def create_talk
-    @talk = ShortTalk.new(params[:talk])
+    @talk = ShortTalk.new(talk_params)
     @talk.talk_type = TalkType.find_by_name("Short talk")
     @talk.year = AppConfig.year
     @talk.users << current_user
     if @talk.save
-      current_user.update_ticket_type!
-
       BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now
       SlackNotifier.notify_talk(@talk)
-
       if current_user.has_all_statistics? && current_user.bio && current_user.bio.good_enough?
         redirect_to '/register_short_talk/finish'
       else
@@ -69,6 +64,13 @@ class RegisterShortTalkController < ApplicationController
     else
       render action: :details
     end
+  end
+
+  private
+  def talk_params
+    (current_user&.is_admin?) ?
+        params.require(:talk).permit! :
+        params.require(:talk).permit(:language, :title, :description, :equipment)
   end
 
 end
