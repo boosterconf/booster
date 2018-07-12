@@ -39,7 +39,6 @@ class RegisterLightningTalkController < ApplicationController
     @talk.year = AppConfig.year
     @talk.users << current_user
     if @talk.save
-      current_user.update_ticket_type!
 
       BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now
       SlackNotifier.notify_talk(@talk)
@@ -73,19 +72,19 @@ class RegisterLightningTalkController < ApplicationController
   private
   def talk_params
     (current_user&.is_admin?) ?
-        params.permit! :
+        params.require(:talk).permit! :
         params.require(:talk).permit(:language, :title, :description, :equipment)
   end
 
   def create_user_params
     (current_user&.is_admin?) ?
-        params.permit! :
+        params.require(:user).permit! :
         params.require(:user).permit(:first_name,:last_name,:company,:email,:phone_number,:password,:password_confirmation,:roles)
   end
 
   def create_details_params
     (current_user&.is_admin?) ?
-        params.permit! :
+        params.require(:user).permit! :
         params.require(:user).permit(:gender,:birthyear,:hear_about,bio_attributes: [:title,:twitter_handle,:blog,:bio,:id])
   end
 end
