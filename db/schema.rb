@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_11_174231) do
+ActiveRecord::Schema.define(version: 2018_07_12_191231) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -74,33 +74,15 @@ ActiveRecord::Schema.define(version: 2018_07_11_174231) do
   create_table "registrations", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.text "comments"
-    t.decimal "price"
-    t.date "invoiced_at"
-    t.date "paid_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean "is_earlybird"
     t.string "description", limit: 255
-    t.text "ticket_type_old"
-    t.text "payment_notification_params"
-    t.datetime "payment_complete_at"
-    t.decimal "paid_amount"
-    t.text "payment_reference"
     t.boolean "registration_complete", default: false
-    t.boolean "manual_payment"
-    t.text "invoice_address"
-    t.text "invoice_description"
-    t.boolean "free_ticket", default: false
     t.string "completed_by", limit: 255
-    t.boolean "invoiced", default: false
     t.boolean "unfinished"
     t.string "unique_reference", limit: 255
-    t.integer "invoice_id"
     t.datetime "deleted_at"
-    t.integer "ticket_type_id", default: 2
     t.index ["deleted_at"], name: "index_registrations_on_deleted_at"
-    t.index ["invoice_id"], name: "index_registrations_on_invoice_id"
-    t.index ["ticket_type_id"], name: "index_registrations_on_ticket_type_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
@@ -310,7 +292,6 @@ ActiveRecord::Schema.define(version: 2018_07_11_174231) do
     t.datetime "deleted_at"
     t.string "hear_about", default: ""
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
-
   end
 
   create_table "volunteers", id: :serial, force: :cascade do |t|
@@ -320,7 +301,6 @@ ActiveRecord::Schema.define(version: 2018_07_11_174231) do
     t.string "phone_number"
   end
 
-  add_foreign_key "registrations", "ticket_types"
   add_foreign_key "tickets", "ticket_types"
   add_foreign_key "tickets", "users"
 end
