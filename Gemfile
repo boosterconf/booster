@@ -42,7 +42,7 @@ gem 'test-unit'
 
 gem 'virtus'
 gem 'pg', "= 0.21.0"
-gem 'webpacker'
+#gem 'webpacker'
 gem 'react-rails'
 
 group :production do
