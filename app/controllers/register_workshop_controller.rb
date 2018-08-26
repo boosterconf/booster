@@ -16,7 +16,7 @@ class RegisterWorkshopController < ApplicationController
 
   def create_user
 
-    @user = User.new(params[:user])
+    @user = User.new(create_user_params)
     @user.create_registration
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
@@ -109,6 +109,12 @@ class RegisterWorkshopController < ApplicationController
         params.require(:talk).permit! :
         params.require(:talk).permit(:title, :description, :equipment, :appropriate_for_roles,
                                      :outline, :max_participants, :speaking_history, :participant_requirements, :equipment, :additional_speaker_email)
+  end
+
+  def create_user_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:first_name,:last_name,:company,:email,:phone_number,:password,:password_confirmation,:roles)
   end
 
 end
