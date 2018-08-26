@@ -11,27 +11,14 @@ class UsersControllerTest < ActionController::TestCase
       setup do
         AppConfig.stubs(:early_bird_ends).returns(Time.now + 1.days)
         post :create, params: { user: create_user_params }
-        @registration = Registration.unscoped.order("id asc").last
       end
-
-      should 'get an early bird ticket' do
-        assert @registration.ticket_type.reference = 'early_bird'
-      end
-
-    end
 
     context 'creating a new user after early bird is over' do
 
       setup do
         AppConfig.stubs(:early_bird_ends).returns(Time.now - 1.days)
         post :create, params: { user: create_user_params }
-        @registration = Registration.unscoped.order("id asc").last
       end
-
-      should 'get a full price ticket' do
-        assert @registration.ticket_type.reference = 'full_price'
-      end
-
     end
 
     should 'be able to create a new user' do
