@@ -49,8 +49,6 @@ class UsersController < ApplicationController
       @user.registration_ip = request.remote_ip
       @user.roles = params[:roles].join(",") if params[:roles]
 
-      @user.registration.ticket_type = TicketType.current_normal_ticket
-
       if @user.invited && current_user.is_admin?
         @user.invite_speaker
       end
@@ -59,15 +57,6 @@ class UsersController < ApplicationController
 
         if @user.invited
           flash[:notice] = "You have registered #{@user.email}"
-          redirect_to @user
-        elsif @user.registration.manual_payment
-          flash[:notice] = "We will contact you to confirm the details."
-          BoosterMailer.manual_registration_confirmation(@user).deliver_now
-          BoosterMailer.manual_registration_notification(@user, user_url(@user)).deliver_now
-          redirect_to @user
-        elsif @user.registration.free_ticket
-          flash[:notice] = "We will contact you to confirm the details."
-          BoosterMailer.free_registration_notification(current_user, @user, user_url(@user)).deliver_now
           redirect_to @user
         end
       else
@@ -96,7 +85,6 @@ class UsersController < ApplicationController
     @user.roles_will_change!
     @user.roles = params[:roles].join(",") if params[:roles]
     @user.assign_attributes(user_params)
-    @user.registration.unfinished = false
 
     if @user.save
       flash[:notice] = 'Updated profile.'
@@ -133,11 +121,11 @@ class UsersController < ApplicationController
 
   def delete_bio
     @user = User.find(params[:id])
-    if @user.bio.delete
-      flash[:notice] = 'Removed bio'
-    else
-      flash[:notice] = "Couldn't remove bio"
-    end
+    var = if @user.bio.delete
+            flash[:notice] = 'Removed bio'
+          else
+            flash[:notice] = "Couldn't remove bio"
+          end
     redirect_to @user
   end
 
@@ -146,6 +134,7 @@ class UsersController < ApplicationController
   end
 
   def create_skeleton
+    # TODO put unique reference in user table instead of registration for skeleton users.
     email = params[:user][:email]
 
     if email.present? && User.find_by_email(email)
@@ -194,8 +183,9 @@ class UsersController < ApplicationController
     #
     # redirect_to edit_user_path registration.user
   end
-  
+
   private
+
   def user_params
     params.require(:user).permit(:accept_optional_email, :accepted_privacy_guidelines, :birthyear, :company, :crypted_password,
                                  :current_login_at, :current_login_ip, :description, :dietary_requirements, :email,
