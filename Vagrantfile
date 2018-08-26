@@ -67,6 +67,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, path: "provision/install-postgres.sh", privileged: true
   config.vm.provision :shell, path: "provision/install-node.sh", privileged: true
   config.vm.provision :shell, path: "provision/install-rvm.sh", args: "stable", privileged: false
-  config.vm.provision :shell, path: "provision/install-ruby.sh", args: "2.4.0", privileged: false
+  config.vm.provision :shell, path: "provision/install-ruby.sh", args: "2.5.1", privileged: false
   config.vm.provision :shell, path: "provision/install-heroku.sh", privileged: true
 end
