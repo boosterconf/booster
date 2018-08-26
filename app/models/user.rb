@@ -1,12 +1,11 @@
 class User < ApplicationRecord
   acts_as_paranoid
   has_one :ticket
-  has_one :registration, autosave: true
   has_one :bio, autosave: true
   has_many :speakers
   has_many :talks, :through => :speakers
 
-  accepts_nested_attributes_for :registration, :bio
+  accepts_nested_attributes_for :bio
 
   acts_as_authentic do |c|
     c.login_field = :email

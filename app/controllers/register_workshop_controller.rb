@@ -11,13 +11,10 @@ class RegisterWorkshopController < ApplicationController
       redirect_to register_workshop_talk_url
     end
     @user = User.new
-    @user.registration = Registration.new
   end
 
   def create_user
-
     @user = User.new(create_user_params)
-    @user.create_registration
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
@@ -25,7 +22,6 @@ class RegisterWorkshopController < ApplicationController
 
     if @user.save
       UserSession.create(login: @user.email, password: @user.password)
-      @user.registration.save!
       redirect_to register_workshop_talk_url
     else
       render action: :start
@@ -100,6 +96,7 @@ class RegisterWorkshopController < ApplicationController
   end
 
   private
+
   def setup_talk_types
     @talk_types = TalkType.workshops
   end
@@ -114,7 +111,7 @@ class RegisterWorkshopController < ApplicationController
   def create_user_params
     (current_user&.is_admin?) ?
         params.require(:user).permit! :
-        params.require(:user).permit(:first_name,:last_name,:company,:email,:phone_number,:password,:password_confirmation,:roles)
+        params.require(:user).permit(:first_name, :last_name, :company, :email, :phone_number, :password, :password_confirmation, :roles)
   end
 
 end

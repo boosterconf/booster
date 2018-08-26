@@ -8,12 +8,10 @@ class RegisterLightningTalkController < ApplicationController
       redirect_to '/register_lightning_talk/talk'
     end
     @user = User.new
-    @user.registration = Registration.new
   end
 
   def create_user
     @user = User.new(create_user_params)
-    @user.registration = Registration.new
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip

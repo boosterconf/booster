@@ -1,10 +1,10 @@
 development:
   year: 2019
-  cfp_open: false
-  proposals_visible: false
+  cfp_open: true
+  proposals_visible: true
   program_released: false
   speakers_released: false
-  early_bird_ends: 2018-02-07 23:59:59 +1
+  early_bird_ends: 2019-02-07 23:59:59 +1
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true

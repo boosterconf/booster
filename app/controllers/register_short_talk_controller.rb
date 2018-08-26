@@ -8,12 +8,10 @@ class RegisterShortTalkController < ApplicationController
       redirect_to '/register_short_talk/talk'
     end
     @user = User.new
-    @user.registration = Registration.new
   end
 
   def create_user
     @user = User.new(params[:user])
-    @user.registration = Registration.new
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
