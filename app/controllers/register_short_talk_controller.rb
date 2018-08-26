@@ -11,7 +11,7 @@ class RegisterShortTalkController < ApplicationController
   end
 
   def create_user
-    @user = User.new(params[:user])
+    @user = User.new(create_user_params)
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
@@ -69,6 +69,12 @@ class RegisterShortTalkController < ApplicationController
     (current_user&.is_admin?) ?
         params.require(:talk).permit! :
         params.require(:talk).permit(:language, :title, :description, :equipment)
+  end
+
+  def create_user_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:first_name, :last_name, :company, :email, :phone_number, :password, :password_confirmation, :roles)
   end
 
 end
