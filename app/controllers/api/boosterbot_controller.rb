@@ -46,7 +46,7 @@ module Api
     def command_hello
       answer("Hello, #{params[:user_name]}. How are you?")
     end
-    
+
     def command_sponsors(text)
       if text.empty?
         count_accepted = Sponsor.where(status: 'accepted').count
