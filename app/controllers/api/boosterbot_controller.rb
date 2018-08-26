@@ -46,24 +46,7 @@ module Api
     def command_hello
       answer("Hello, #{params[:user_name]}. How are you?")
     end
-
-    def command_stats(text)
-      message = "OK, #{params[:user_name]}, here are some statistics for you.\n"
-      talk_type_to_number = Talk.includes(:talk_type).group_by { |t| t.talk_type.name}.map { |k,v| [k, v.size]}.to_h
-
-      message << "Submission statistics: \n"
-      talk_type_to_number.each do |talk_type, number|
-        message << "#{talk_type}: #{number}\n"
-      end
-      message << "Total: #{Talk.count} submissions\n\n"
-
-      message << "Participant statistics:\n"
-      message << "Early bird tickets: #{Registration.includes(:ticket_type).where(ticket_type: {reference: "early_bird"}).count}\n"
-      message << "Full price tickets: #{Registration.includes(:ticket_type).where(ticket_type: {reference: "full_price"}).count}\n"
-
-      answer(message)
-    end
-
+    
     def command_sponsors(text)
       if text.empty?
         count_accepted = Sponsor.where(status: 'accepted').count
