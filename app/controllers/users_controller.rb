@@ -141,14 +141,11 @@ class UsersController < ApplicationController
       flash[:error] = "This email already has a user"
       render action: 'new_skeleton'
     else
-
-      ticket_type = TicketType.find_by_id(params[:user][:registration_attributes][:ticket_type_id])
-
-      @user = User.create_unfinished(email, ticket_type, params[:user][:first_name], params[:user][:last_name])
+      @user = User.create_unfinished(email, params[:user][:first_name], params[:user][:last_name])
       @user.company = params[:user][:company]
       @user.save!(:validate => false)
 
-      flash[:notice] = "Skeleton user created - creation link is #{user_from_reference_url(@user.registration.unique_reference)}"
+      flash[:notice] = "Skeleton user created - creation link is #{user_from_reference_url(@user.unique_reference)}"
       redirect_to new_skeleton_user_path
 
     end

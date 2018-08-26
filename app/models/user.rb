@@ -235,17 +235,14 @@ class User < ApplicationRecord
     User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.speaker?}
   end
 
-  def self.create_unfinished(email, ticket_type, first_name = nil, last_name = nil)
+  def self.create_unfinished(email, first_name = nil, last_name = nil)
     user = User.new
-    user.build_registration
     user.email = email.present? ? email : ""
     user.first_name = first_name if first_name.present?
     user.last_name = last_name if last_name.present?
     user.password = SecureRandom.urlsafe_base64 # må sette passord, av grunner bare authlogic forstår
-    user.registration.ticket_type = ticket_type
-    user.registration.manual_payment = true
-    user.registration.unfinished = true
-    user.registration.unique_reference = SecureRandom.urlsafe_base64
+    user.skeleton_user_registration_finished = false
+    user.unique_reference = SecureRandom.urlsafe_base64
     user.create_bio
     user
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_12_191231) do
+ActiveRecord::Schema.define(version: 2018_08_26_115208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -291,6 +291,8 @@ ActiveRecord::Schema.define(version: 2018_07_12_191231) do
     t.string "last_name", limit: 255
     t.datetime "deleted_at"
     t.string "hear_about", default: ""
+    t.string "unique_reference"
+    t.boolean "skeleton_user_registration_finished"
     t.index ["deleted_at"], name: "index_users_on_deleted_at"
   end
 
