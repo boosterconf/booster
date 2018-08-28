@@ -15,11 +15,10 @@ class RegisterShortTalkController < ApplicationController
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
-    @user.roles = params[:roles].join(',') unless params[:roles] == nil
+    @user.roles = params[:roles].join(',') if params[:roles]
 
     if @user.save
-      UserSession.create(:login => @user.email, :password => @user.password)
-      @user.registration.save!
+      UserSession.create(login: @user.email, password: @user.password)
       redirect_to '/register_short_talk/talk'
     else
       render action: :start
