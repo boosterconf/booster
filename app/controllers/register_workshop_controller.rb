@@ -86,7 +86,7 @@ class RegisterWorkshopController < ApplicationController
   def create_details
 
     @user = current_user
-    @user.update_attributes(create_detais_params)
+    @user.update_attributes(create_details_params)
 
     if @user.save
       redirect_to register_workshop_finish_url
