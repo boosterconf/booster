@@ -54,7 +54,7 @@ class RegisterShortTalkController < ApplicationController
 
   def create_details
     @user = current_user
-    @user.update_attributes(params[:user])
+    @user.update_attributes(create_details_params)
 
     if @user.save
       redirect_to '/register_short_talk/finish'
@@ -74,6 +74,12 @@ class RegisterShortTalkController < ApplicationController
     (current_user&.is_admin?) ?
         params.require(:user).permit! :
         params.require(:user).permit(:first_name, :last_name, :company, :email, :phone_number, :password, :password_confirmation, :roles)
+  end
+
+  def create_details_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:gender,:birthyear,:hear_about,bio_attributes: [:title,:twitter_handle,:blog,:bio,:id])
   end
 
 end
