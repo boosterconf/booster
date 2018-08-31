@@ -169,13 +169,7 @@ class UsersController < ApplicationController
     end
 
     @user = User.find_by(unique_reference: params[:reference])
-    #registration = Registration.includes(:user).where(unique_reference: params[:reference]).to_a.first
 
-    # unless registration.present?
-    #   flash[:error] = "This link does no longer work"
-    #   return
-    # end
-    #
      login @user
      redirect_to edit_user_path @user
   end
