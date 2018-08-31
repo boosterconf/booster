@@ -134,7 +134,6 @@ class UsersController < ApplicationController
   end
 
   def create_skeleton
-    # TODO put unique reference in user table instead of registration for skeleton users.
     email = params[:user][:email]
 
     if email.present? && User.find_by_email(email)
