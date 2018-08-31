@@ -243,7 +243,7 @@ class User < ApplicationRecord
     user.password = SecureRandom.urlsafe_base64 # må sette passord, av grunner bare authlogic forstår
     user.skeleton_user_registration_finished = false
     user.unique_reference = SecureRandom.urlsafe_base64
-    user.save!
+    user.save(:validate => false)
     user.create_bio
     user
   end
