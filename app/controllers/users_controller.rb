@@ -176,8 +176,7 @@ class UsersController < ApplicationController
     #   return
     # end
     #
-    # login registration.user
-    #
+     login @user
      redirect_to edit_user_path @user
   end
 
