@@ -174,7 +174,7 @@ class BoosterMailer < ApplicationMailer
   def additional_speaker(primary_speaker, additional_speaker, talk)
     @primary_speaker = primary_speaker
     @talk = talk
-    @create_user_url = user_from_reference_url(additional_speaker.registration.unique_reference)
+    @create_user_url = user_from_reference_url(additional_speaker.unique_reference)
 
     mail(:to => additional_speaker.email,
          :from => FROM_EMAIL,
