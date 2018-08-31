@@ -163,12 +163,12 @@ class UsersController < ApplicationController
   end
 
   def from_reference
-    # TODO investigate if from_reference is still used or can be removed.
     if current_user
       redirect_to current_user_url
       return
     end
 
+    @user = User.find_by(unique_reference: params[:reference])
     #registration = Registration.includes(:user).where(unique_reference: params[:reference]).to_a.first
 
     # unless registration.present?
@@ -178,7 +178,7 @@ class UsersController < ApplicationController
     #
     # login registration.user
     #
-    # redirect_to edit_user_path registration.user
+     redirect_to edit_user_path @user
   end
 
   private
