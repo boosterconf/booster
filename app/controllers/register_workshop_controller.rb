@@ -62,7 +62,7 @@ class RegisterWorkshopController < ApplicationController
     additional_speaker_email = workshop.additional_speaker_email
 
     unless additional_speaker_already_has_registered_user(additional_speaker_email)
-      additional_speaker = User.create_unfinished(additional_speaker_email, TicketType.speaker)
+      additional_speaker = User.create_unfinished(additional_speaker_email)
       additional_speaker.save(:validate => false)
       BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver_now
     end
