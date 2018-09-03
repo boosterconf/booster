@@ -12,6 +12,7 @@ class UsersControllerTest < ActionController::TestCase
         AppConfig.stubs(:early_bird_ends).returns(Time.now + 1.days)
         post :create, params: { user: create_user_params }
       end
+    end
 
     context 'creating a new user after early bird is over' do
 
