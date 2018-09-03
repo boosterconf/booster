@@ -37,7 +37,14 @@ If failure, reach out to us on Slack. :)
         * Auth type: Password
         * PW: vagrant
         * check remember password if you want to
+## WSL
 
+Install RVM : https://github.com/rvm/ubuntu_rvm
+
+When adding remote SDK in rubymine select WSL, provide path to rvm instead of directly to the rub executuable. E.g: /usr/share/rvm/bin/rvm if you have used the ubuntu package above.
+If not, your life will be miserable while you try to find out why rubymine does not download your gems properly.
+
+Make sure you have a local instance of postgresql with a clean db running.
 ## Deploying to Heroku
 
 Setup:
