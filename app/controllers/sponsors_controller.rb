@@ -8,7 +8,7 @@ class SponsorsController < ApplicationController
   respond_to :html, :js
 
   def index
-    @users = User.all_organizers
+    @users = User.where(is_admin: true)
   end
 
   def new
