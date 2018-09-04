@@ -228,11 +228,11 @@ class User < ApplicationRecord
   end
 
   def self.all_participants
-    User.includes(:registration).to_a
+    User.joins(:ticket).to_a
   end
 
   def self.all_speakers
-    User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.speaker?}
+    User.joins(:ticket).select {|u| !u.is_admin}
   end
 
   def self.create_unfinished(email, first_name = nil, last_name = nil)
