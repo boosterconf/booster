@@ -198,7 +198,7 @@ class User < ApplicationRecord
   end
 
   def self.all_organizers
-    User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.reference == 'organizer'}
+    User.all.select { |u| u.is_admin}
   end
 
   def self.all_organizers_and_volunteers
