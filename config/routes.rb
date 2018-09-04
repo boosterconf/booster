@@ -62,15 +62,6 @@ Rails.application.routes.draw do
   match 'login' => 'user_sessions#new', :as => :login, via: :all
   match 'logout' => 'user_sessions#destroy', :as => :logout, via: :all
 
-  match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url, via: :all
-  match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url, via: :all
-
-  resources :registrations do
-    get :deleted, on: :collection
-    member do
-      get :restore
-    end
-  end
 
   resources :sponsors, except: [:show] do
     resources :events
