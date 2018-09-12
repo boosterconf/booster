@@ -76,13 +76,13 @@ class RegisterLightningTalkController < ApplicationController
   def create_user_params
     (current_user&.is_admin?) ?
         params.require(:user).permit! :
-        params.require(:user).permit(:first_name,:last_name,:company,:email,:phone_number,:password,:password_confirmation,:roles)
+        params.require(:user).permit(:opt_in_to_email_list, :first_name, :last_name, :company, :email, :phone_number, :password, :password_confirmation, :roles)
   end
 
   def create_details_params
     (current_user&.is_admin?) ?
         params.require(:user).permit! :
-        params.require(:user).permit(:gender,:birthyear,:hear_about,bio_attributes: [:title,:twitter_handle,:blog,:bio,:id])
+        params.require(:user).permit(:gender, :birthyear, :hear_about, bio_attributes: [:title, :twitter_handle, :blog, :bio, :id])
   end
 end
 
