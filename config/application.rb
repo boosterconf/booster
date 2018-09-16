@@ -7,9 +7,9 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Dates
-	CFP_LIGHTNING_BEGINS = Date.parse("2019-09-01")
+	CFP_LIGHTNING_BEGINS = Date.parse("2019-09-15")
 	CFP_LIGHTNING_ENDS = Date.parse("2019-11-01")
-	CFP_TUTORIALS_BEGINS = Date.parse("2019-09-01")
+	CFP_TUTORIALS_BEGINS = Date.parse("2019-09-15")
 	CFP_TUTORIAL_ENDS = Date.parse("2019-11-01")
   CONFERENCE_YEAR = 2019
   CONFERENCE_DATES = "March 13-15 #{CONFERENCE_YEAR}"
