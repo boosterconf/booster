@@ -57,10 +57,12 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "booster2013_#{Rails.env}"
+
+  default_host = 'www.boosterconf.no'
   config.action_mailer.perform_caching = false
 
   config.action_mailer.default_url_options = {
-      :host => 'www.boosterconf.no',
+      :host => default_host,
   }
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -89,4 +91,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.after_initialize do
+    Rails.application.routes.default_url_options[:host] = default_host
+  end
 end
