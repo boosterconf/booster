@@ -86,7 +86,7 @@
       </div>
 
       <div class="control-group">
-        <%= image_tag @sponsor.logo if @sponsor.logo.present? %>
+        <%= image_tag @sponsor.logo.url if @sponsor.logo.present? %>
         <%= f.label :logo, :class => 'control-label' %>
         <div class="controls">
           <%= f.file_field :logo %>
