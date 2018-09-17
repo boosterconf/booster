@@ -82,11 +82,11 @@
 
 		    <div class="organizer-meta">
 	        	<b><%= organizer.full_name %></b>
-
-	        	<% if organizer.bio[:twitter_handle] && organizer.bio[:twitter_handle].length > 0 %>
-	        	<a href="http://twitter.com/<%= organizer.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
-	            	&#64;<%= organizer.bio[:twitter_handle].sub(/@/, '') %>
-	        	</a>
+<div></div>
+              <% if organizer.bio[:twitter_handle] && organizer.bio[:twitter_handle].length > 0 %>
+              <a href="http://twitter.com/<%= organizer.bio[:twitter_handle].sub(/@/, '') %>" title="Twitter" target="_blank">
+                  &#64;<%= organizer.bio[:twitter_handle].sub(/@/, '') %>
+              </a>
 	        	<% end %>
 		    </div>
 		  </div>
