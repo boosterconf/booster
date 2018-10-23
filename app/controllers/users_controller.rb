@@ -49,10 +49,6 @@ class UsersController < ApplicationController
       @user.registration_ip = request.remote_ip
       @user.roles = params[:roles].join(",") if params[:roles]
 
-      if @user.invited && current_user.is_admin?
-        @user.invite_speaker
-      end
-
       if @user.save
 
         if @user.invited

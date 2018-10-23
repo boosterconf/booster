@@ -66,11 +66,6 @@ class User < ApplicationRecord
     self.has_accepted_lightning_talk? || self.has_accepted_tutorial?
   end
 
-  def invite_speaker
-    self.build_registration unless self.registration
-    self.registration.registration_complete = true
-  end
-
   def has_accepted_or_pending_tutorial?
     tutorials = self.talks.find_all {|talk| talk.is_workshop? && (talk.accepted? || talk.pending?)}
     !tutorials.empty?
