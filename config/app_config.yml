@@ -34,7 +34,7 @@ staging:
 
 production:
   year: 2019
-  cfp_open: true
+  cfp_open: false
   proposals_visible: true
   program_released: false
   speakers_released: false
