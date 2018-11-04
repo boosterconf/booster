@@ -173,6 +173,5 @@ class AcceptancesController < ApplicationController
 
   def save_talk_and_update_speaker user
     @talk.save
-    @talk.update_speakers!(user)
   end
 end

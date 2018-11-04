@@ -108,12 +108,6 @@ class Talk < ApplicationRecord
   end
 =end
 
-  def update_speakers!(current_user)
-    self.users.each do |speaker|
-      speaker.update_ticket_type!(current_user)
-    end
-  end
-
   def is_in_one_of_these(periods)
     self.periods.each do |period|
       if periods.include? period
