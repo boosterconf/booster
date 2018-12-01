@@ -11,15 +11,10 @@ class RegisterWorkshopController < ApplicationController
       redirect_to register_workshop_talk_url
     end
     @user = User.new
-    @user.registration = Registration.new
   end
 
   def create_user
-
-    @user = User.new(params[:user])
-    @user.create_registration
-    @user.registration.ticket_type = TicketType.speaker
-    @user.registration.manual_payment = true
+    @user = User.new(create_user_params)
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
@@ -27,7 +22,6 @@ class RegisterWorkshopController < ApplicationController
 
     if @user.save
       UserSession.create(login: @user.email, password: @user.password)
-      @user.registration.save!
       redirect_to register_workshop_talk_url
     else
       render action: :start
@@ -40,11 +34,10 @@ class RegisterWorkshopController < ApplicationController
 
   def create_talk
 
-    @workshop = Workshop.new(params[:talk])
+    @workshop = Workshop.new(talk_params)
     @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
     @workshop.users << current_user
     if @workshop.save
-      current_user.update_ticket_type!
 
       if has_entered_additional_speaker_email(@workshop)
         additional_speaker = find_additional_speaker(@workshop)
@@ -69,7 +62,7 @@ class RegisterWorkshopController < ApplicationController
     additional_speaker_email = workshop.additional_speaker_email
 
     unless additional_speaker_already_has_registered_user(additional_speaker_email)
-      additional_speaker = User.create_unfinished(additional_speaker_email, TicketType.speaker)
+      additional_speaker = User.create_unfinished(additional_speaker_email)
       additional_speaker.save(:validate => false)
       BoosterMailer.additional_speaker(current_user, additional_speaker, @workshop).deliver_now
     end
@@ -93,7 +86,7 @@ class RegisterWorkshopController < ApplicationController
   def create_details
 
     @user = current_user
-    @user.update_attributes(params[:user])
+    @user.update_attributes(create_details_params)
 
     if @user.save
       redirect_to register_workshop_finish_url
@@ -103,8 +96,28 @@ class RegisterWorkshopController < ApplicationController
   end
 
   private
+
   def setup_talk_types
     @talk_types = TalkType.workshops
+  end
+
+  def talk_params
+    (current_user&.is_admin?) ?
+        params.require(:talk).permit! :
+        params.require(:talk).permit(:talk_type_id, :title, :description, :equipment, :appropriate_for_roles,
+                                     :outline, :max_participants, :speaking_history, :participant_requirements, :equipment, :additional_speaker_email)
+  end
+
+  def create_user_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:opt_in_to_email_list, :first_name, :last_name, :company, :email, :phone_number, :password, :password_confirmation, :roles)
+  end
+
+  def create_details_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:gender, :birthyear, :hear_about, bio_attributes: [:title, :twitter_handle, :blog, :bio, :id])
   end
 
 end

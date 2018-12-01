@@ -1,14 +1,11 @@
 class User < ApplicationRecord
   acts_as_paranoid
-
-  has_one :registration, autosave: true
+  has_one :ticket
   has_one :bio, autosave: true
   has_many :speakers
   has_many :talks, :through => :speakers
 
-  accepts_nested_attributes_for :registration, :bio
-
-  default_scope { includes({registration: [:ticket_type]}).order('users.created_at desc')}
+  accepts_nested_attributes_for :bio
 
   acts_as_authentic do |c|
     c.login_field = :email
@@ -19,9 +16,6 @@ class User < ApplicationRecord
   validates_presence_of :first_name, :message => "You have to specify a first name."
   validates_presence_of :last_name, :message => "You have to specify a last name."
   validates_presence_of :company, :message => "You have to specify a company."
-
-  # A user always has a registration, so no more null checks
-  after_initialize { |user| user.build_registration unless user.registration }
 
   def full_name
     if read_attribute(:first_name)
@@ -43,28 +37,6 @@ class User < ApplicationRecord
     end
   end
 
-  def attending_speakers_dinner(will_attend)
-    self.registration.speakers_dinner = will_attend
-    save!
-  end
-
-  def attending_dinner?
-    self.registration ? self.registration.includes_dinner? : false
-  end
-
-  def attend_dinner(have_dinner)
-    self.registration.includes_dinner = have_dinner if self.registration
-    save!
-  end
-
-  def attending_dinner!
-    attend_dinner(true)
-  end
-
-  def not_attending_dinner!
-    attend_dinner(false)
-  end
-
   def user_status
     registration ? registration.description : "Unknown"
   end
@@ -75,14 +47,14 @@ class User < ApplicationRecord
 
   def roles_description
     if roles
-      roles.split(",").map { |r| Roles.label[r.to_sym] }.join(", ")
+      roles.split(",").map {|r| Roles.label[r.to_sym]}.join(", ")
     else
       ""
     end
   end
 
   def talks_this_year
-    talks.select { |talk| talk.year == AppConfig.year }
+    talks.select {|talk| talk.year == AppConfig.year}
   end
 
   def deliver_password_reset_instructions!
@@ -94,83 +66,54 @@ class User < ApplicationRecord
     self.has_accepted_lightning_talk? || self.has_accepted_tutorial?
   end
 
-  def invite_speaker
-    self.registration.registration_complete = true
-    self.registration.ticket_type = TicketType.speaker
-    self.registration.manual_payment = false
-  end
-
-  def update_ticket_type!(current_user='Unknown')
-    unless self.registration.special_ticket?
-      if self.has_accepted_or_pending_tutorial?
-        self.registration.ticket_type = TicketType.speaker
-      elsif self.has_all_tutorials_refused? && self.has_pending_or_accepted_talk?
-        self.update_to_lightning_talk_speaker
-      elsif self.has_all_talks_refused?
-        self.update_to_paying_user
-      end
-
-      if self.has_accepted_tutorial?
-        unless self.registration.registration_complete?
-          self.registration.registration_complete = true
-          self.registration.completed_by = current_user.email
-        end
-      else
-        self.registration.registration_complete = false
-        self.registration.completed_by = ""
-      end
-
-      self.registration.update_price
-      self.registration.save
-    end
-  end
-
   def has_accepted_or_pending_tutorial?
-    tutorials = self.talks.find_all { |talk| talk.is_workshop? && (talk.accepted? || talk.pending?) }
+    tutorials = self.talks.find_all {|talk| talk.is_workshop? && (talk.accepted? || talk.pending?)}
     !tutorials.empty?
   end
 
   def has_accepted_lightning_talk?
-    talks = self.talks.find_all { |talk| talk.is_lightning_talk? && talk.accepted? }
+    talks = self.talks.find_all {|talk| talk.is_lightning_talk? && talk.accepted?}
     !talks.empty?
   end
 
   def has_accepted_tutorial?
-    talks = self.talks.find_all { |talk| talk.is_workshop? && talk.accepted? }
+    talks = self.talks.find_all {|talk| talk.is_workshop? && talk.accepted?}
     !talks.empty?
   end
 
   def has_accepted_talk?
-    talks = self.talks.find_all { |talk| talk.accepted? }
+    talks = self.talks.find_all {|talk| talk.accepted?}
     !talks.empty?
   end
-  
-   def has_confirmed_talk?
-    talks = self.talks.find_all { |talk| talk.confirmed? }
+
+  def has_confirmed_talk?
+    talks = self.talks.find_all {|talk| talk.confirmed?}
     !talks.empty?
-  end 
+  end
 
   def has_all_talks_refused?
-    refused_talks = self.talks.find_all { |talk| talk.refused? }
+    refused_talks = self.talks.find_all {|talk| talk.refused?}
     self.talks.size == refused_talks.size
   end
 
   def has_all_tutorials_refused?
-    refused_tutorials = self.talks.find_all { |talk| talk.refused? && talk.is_workshop? }
-    all_tutorials = self.talks.find_all { |talk| talk.is_workshop? }
+    refused_tutorials = self.talks.find_all {|talk| talk.refused? && talk.is_workshop?}
+    all_tutorials = self.talks.find_all {|talk| talk.is_workshop?}
     all_tutorials.size == refused_tutorials.size
   end
 
   def has_pending_or_accepted_talk?
-    talks = self.talks.find_all { |talk| (talk.is_lightning_talk? || talk.is_short_talk?) && (talk.accepted? || talk.pending?) }
+    talks = self.talks.find_all {|talk| (talk.is_lightning_talk? || talk.is_short_talk?) && (talk.accepted? || talk.pending?)}
     !talks.empty?
   end
 
   def update_to_lightning_talk_speaker
+    self.build_registration unless self.registration
     self.registration.ticket_type = TicketType.lightning
   end
 
   def update_to_paying_user
+    self.build_registration unless self.registration
     if self.registration.ticket_type.speaker?
       if self.is_early_bird?
         self.registration.ticket_type = TicketType.early_bird
@@ -181,6 +124,7 @@ class User < ApplicationRecord
   end
 
   def is_early_bird?
+    self.build_registration unless self.registration
     self.registration.created_at < AppConfig.early_bird_ends
   end
 
@@ -209,7 +153,7 @@ class User < ApplicationRecord
   end
 
   def accepted_talks
-    all_talks =[]
+    all_talks = []
     talks.each do |talk|
       all_talks << talk if (talk) and (talk.accepted?)
     end
@@ -225,7 +169,7 @@ class User < ApplicationRecord
   end
 
   def self.find_by_email(email)
-   self.where('lower(email) = ?', email.downcase).first
+    self.where('lower(email) = ?', email.downcase).first
   end
 
   def self.all_but_invited_speakers
@@ -233,36 +177,39 @@ class User < ApplicationRecord
   end
 
   def self.all_accepted_speakers
-    self.all.select { |u| u.has_accepted_talk? || u.invited == true }
+    self.all.select {|u| u.has_accepted_talk? || u.invited == true}
   end
-  
+
   def self.all_confirmed_speakers
-    self.all.select { |u| u.has_confirmed_talk? || u.invited == true }
+    self.all.includes(:talks).select {|u| u.has_confirmed_talk? || u.invited == true}
   end
 
   def self.all_tutorial_speakers
-    self.all.select { |u| u.has_accepted_tutorial? }
+    self.all.select {|u| u.has_accepted_tutorial?}
   end
 
   def self.all_lightning_speakers
-    self.all.select { |u| u.has_accepted_lightning_talk? }
+    self.all.select {|u| u.has_accepted_lightning_talk?}
   end
 
   def self.all_organizers
-    User.includes(:registration).to_a.select {|u| u.registration.ticket_type.reference == 'organizer'}
+    User.where(is_admin: true)
   end
 
   def self.all_organizers_and_volunteers
-    User.includes(:registration).to_a.select {|u| ['organizer', 'volunteer'].include? u.registration.ticket_type.reference}
+    User.includes(:registration).to_a.select {|u| u.registration != nil && (['organizer', 'volunteer'].include? u.registration.ticket_type.reference)}
   end
 
   def self.featured_speakers
-    potential_speakers = User.includes(:bio, :talks).where(featured_speaker: true).order('created_at DESC')
-    speakers = []
-    potential_speakers.each do |sp|
-      if sp.is_featured? && sp.bio.picture.present?
-        speakers << sp
+    speakers = Rails.cache.fetch("featured_speakers", expires_in: 30.minute) do
+      potential_speakers = User.includes(:bio).where(featured_speaker: true).order('created_at DESC')
+      speakers = []
+      potential_speakers.each do |sp|
+        if sp.is_featured? && sp.bio.picture.present?
+          speakers << sp
+        end
       end
+      speakers
     end
     speakers
   end
@@ -272,35 +219,32 @@ class User < ApplicationRecord
   end
 
   def self.all_normal_participants
-    User.includes(:registration).to_a.select {|u| u.registration.ticket_type.normal_ticket? }
+    User.includes(:registration).to_a.select {|u| u.registration != nil && u.registration.ticket_type.normal_ticket?}
   end
 
   def self.all_participants
-    User.includes(:registration).to_a
+    User.joins(:ticket).to_a
   end
 
   def self.all_speakers
-      User.includes(:registration).to_a.select {|u| u.registration.ticket_type.speaker? }
+    User.joins(:ticket).select {|u| !u.is_admin}
   end
 
-  def self.create_unfinished(email, ticket_type, first_name=nil, last_name=nil)
+  def self.create_unfinished(email, first_name = nil, last_name = nil)
     user = User.new
-    user.build_registration
     user.email = email.present? ? email : ""
     user.first_name = first_name if first_name.present?
     user.last_name = last_name if last_name.present?
     user.password = SecureRandom.urlsafe_base64 # må sette passord, av grunner bare authlogic forstår
-    user.registration.ticket_type = ticket_type
-    user.registration.manual_payment = true
-    user.registration.includes_dinner = ticket_type.dinner_included
-    user.registration.unfinished = true
-    user.registration.unique_reference = SecureRandom.urlsafe_base64
+    user.skeleton_user_registration_finished = false
+    user.unique_reference = SecureRandom.urlsafe_base64
+    user.save(:validate => false)
     user.create_bio
     user
   end
 
   def talks
-    Talk.unscoped { super }
+    Talk.unscoped {super}
   end
 
   def self.all_from_ticket_email

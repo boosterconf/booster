@@ -1,21 +1,3 @@
-<% if @user.registration.dinner_included? %>
-    <div class="checkbox">
-      <label>
-        <%= reg.check_box :includes_dinner, class: "checkbox" %>
-        I'd like to attend the conference dinner on Wednesday
-      </label>
-    </div>
-<% end %>
-
-<% if @user.registration.may_attend_speakers_dinner? %>
-    <div class="checkbox">
-      <label>
-        <%= reg.check_box :speakers_dinner %>
-        I'd like to attend the speaker's dinner on Thursday
-      </label>
-    </div>
-<% end %>
-
 <div class="checkbox">
   <label>
     <%= f.check_box 'accept_optional_email' %>

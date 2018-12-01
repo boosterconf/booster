@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.5.1'
 
-gem 'railties', '5.0.6'
-gem 'rails', '5.0.6'
+gem 'railties', '5.2.0'
+gem 'rails', '5.2.0'
 gem "authlogic", '~> 3.8'
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
@@ -27,7 +27,7 @@ gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
 
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -35,14 +35,15 @@ gem 'jquery-tablesorter'
 
 gem 'prawn'
 gem 'rails_12factor'
-
-gem 'rest-client'
+gem 'rest-client', '~> 2.0.2'
 
 gem "paranoia", "~> 2.2"
 gem 'test-unit'
 
 gem 'virtus'
 gem 'pg', "= 0.21.0"
+#gem 'webpacker'
+gem 'react-rails'
 
 group :production do
   gem 'heroku-deflater'
@@ -50,18 +51,17 @@ group :production do
 end
 
 group :development, :test do
+  gem 'debase'
   gem "better_errors"
   gem "binding_of_caller"
   gem 'rails-controller-testing'
   gem 'sqlite3'
   #gem 'quiet_assets'
-  gem 'taps'
   gem 'dotenv-rails'
   #gem 'sql_queries_count'
   gem 'bullet'
   gem 'rspec-rails', '~> 3.7'
   gem 'ruby-debug-ide'
-  gem 'debase'
 end
 
 group :test do

@@ -8,22 +8,17 @@ class RegisterLightningTalkController < ApplicationController
       redirect_to '/register_lightning_talk/talk'
     end
     @user = User.new
-    @user.registration = Registration.new
   end
 
   def create_user
-    @user = User.new(params[:user])
-    @user.registration = Registration.new
-    @user.registration.ticket_type = TicketType.lightning
-    @user.registration.manual_payment = true
+    @user = User.new(create_user_params)
     @user.accepted_privacy_guidelines = true
     @user.email.strip! if @user.email.present?
     @user.registration_ip = request.remote_ip
-    @user.roles = params[:roles].join(',') unless params[:roles] == nil
+    @user.roles = params[:roles].join(',') if params[:roles]
 
     if @user.save
-      UserSession.create(:login => @user.email, :password => @user.password)
-      @user.registration.save!
+      UserSession.create(login: @user.email, password: @user.password)
       redirect_to '/register_lightning_talk/talk'
     else
       render action: :start
@@ -36,12 +31,11 @@ class RegisterLightningTalkController < ApplicationController
   end
 
   def create_talk
-    @talk = LightningTalk.new(params[:talk])
+    @talk = LightningTalk.new(talk_params)
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.year = AppConfig.year
     @talk.users << current_user
     if @talk.save
-      current_user.update_ticket_type!
 
       BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now
       SlackNotifier.notify_talk(@talk)
@@ -63,7 +57,7 @@ class RegisterLightningTalkController < ApplicationController
 
   def create_details
     @user = current_user
-    @user.update_attributes(params[:user])
+    @user.update_attributes(create_details_params)
 
     if @user.save
       redirect_to '/register_lightning_talk/finish'
@@ -71,4 +65,24 @@ class RegisterLightningTalkController < ApplicationController
       render action: :details
     end
   end
+
+  private
+  def talk_params
+    (current_user&.is_admin?) ?
+        params.require(:talk).permit! :
+        params.require(:talk).permit(:language, :title, :description, :equipment)
+  end
+
+  def create_user_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:opt_in_to_email_list, :first_name, :last_name, :company, :email, :phone_number, :password, :password_confirmation, :roles)
+  end
+
+  def create_details_params
+    (current_user&.is_admin?) ?
+        params.require(:user).permit! :
+        params.require(:user).permit(:gender, :birthyear, :hear_about, bio_attributes: [:title, :twitter_handle, :blog, :bio, :id])
+  end
 end
+

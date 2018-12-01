@@ -10,32 +10,27 @@
 
   <%= form_for(@user) do |f| %>
 
-      <%= render :partial => 'price_info', :locals => { :f => f } %>
+    <%= render :partial => 'price_info', :locals => {:f => f} %>
 
-          <%= render partial: 'personal_details', locals: { f: f } %>
+    <%= render partial: 'personal_details', locals: {f: f} %>
 
-          <%= render partial: 'passwords', locals: { f: f } %>
+    <%= render partial: 'passwords', locals: {f: f} %>
 
-          <%= f.hidden_field :invited %>
+    <%= f.hidden_field :invited %>
 
 
-          <%= f.fields_for :registration do |reg| %>
+    <%= f.fields_for :registration do |reg| %>
 
-              <%= render partial: 'confirmations', locals: { reg: reg, f: f } %>
+      <%= render partial: 'confirmations', locals: {reg: reg, f: f} %>
 
-              <%= render partial: 'roles', locals: { f: f } %>
-              <%= render partial: 'user_stats', locals: { f: f } %>
+      <%= render partial: 'roles', locals: {f: f} %>
+      <%= render partial: 'user_stats', locals: {f: f} %>
+      
+      <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
 
-              <% unless @user.invited %>
-                  <%= reg.hidden_field :manual_payment, value: 'true' %>
-                  <%= render partial: 'payment_details', locals: { reg: reg, f: f } %>
-              <% end %>
-
-                <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
-
-              <div id="register_submit">
-                <%= f.submit "Register", class: 'btn btn-primary' %>
-              </div>
-          <% end %>
+      <div id="register_submit">
+        <%= f.submit "Register", class: 'btn btn-primary' %>
+      </div>
+    <% end %>
   <% end %>
 </article>

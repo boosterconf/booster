@@ -1,63 +1,47 @@
 <article class="inner">
-<% content_for :title, @user.full_name %>
-<div class="header-join">
-<h2 class="page_title">Change your registration</h2>
-</div>
+  <% content_for :title, @user.full_name %>
+  <div class="header-join">
+    <h2 class="page_title">Change your registration</h2>
+  </div>
 
-<% if @user.bio == nil && admin? %>
-<p>
-    <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
-  </p>
-<% end %>
+  <% if @user.bio == nil && admin? %>
+    <p>
+      <%= link_to "Add user bio", :controller => 'users', :action => 'create_bio', :id => params[:id] %>
+    </p>
+  <% end %>
 
 
-<% @user.errors.full_messages.each do |msg| %>
+  <% @user.errors.full_messages.each do |msg| %>
     <p class="has-error"><%= msg %></p>
-<% end %>
+  <% end %>
 
-<div class="row">
-  <div class="span12">
-    <%= form_for(@user) do |f| %>
+  <div class="row">
+    <div class="span12">
+      <%= form_for(@user) do |f| %>
 
 
         <%= render :partial => 'price_info', :locals => {:f => f} %>
 
         <%= render :partial => 'personal_details', :locals => {:f => f} %>
 
-        <% if @user.registration.unfinished %>
-            <%= render :partial => 'passwords', :locals => {:f => f} %>
-        <% end %>
-
         <%= render :partial => 'roles', :locals => {:f => f} %>
-
-        <%= f.fields_for :registration do |reg| %>
-            <fieldset id="registration_details">
-                <% if admin? %>
-                  <label for="ticket_type">Ticket type</label>
-                  <%= reg.collection_select :ticket_type_id, TicketType.all, :id, :name, {},  class: 'form-control admin' %>
-                <% end %>
-
-                <%#= render :partial => 'confirmations', :locals => {:reg => reg, :f => f} %>
-            </fieldset>
-
-        <% end %>
 
         <%= render :partial => 'user_stats', :locals => {:f => f} %>
 
-        <%= render :partial => 'bio', :locals => {:f => f, :show_warning => true } %>
+        <%= render :partial => 'bio', :locals => {:f => f, :show_warning => true} %>
 
         <div><%= f.submit "Update", :class => "btn btn-primary" %></div>
 
-    <% end %>
+      <% end %>
 
       Accepted abstracts that will be displayed on speaker page:
       <ul style="list-style-type: none;">
         <% @user.talks.each do |talk| %>
-            <% if   talk.accepted? %>
-                <li><%= link_to h(talk.title), talk %></li>
-            <%end %>
+          <% if talk.accepted? %>
+            <li><%= link_to h(talk.title), talk %></li>
+          <% end %>
         <% end %>
       </ul>
+    </div>
   </div>
-</div>
 </article>

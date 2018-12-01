@@ -35,4 +35,8 @@ latest.dump
 /.vagrant
 
 set_env_vars.sh
-secrets.sh
+secrets.sh/public/packs
+/public/packs-test
+/node_modules
+yarn-debug.log*
+.yarn-integrity

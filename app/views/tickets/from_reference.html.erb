@@ -4,91 +4,101 @@
   </div>
 
   <% if flash[:error] %>
-      <div id='notifications'>
-        <div class='alert alert-warning'><%= flash[:error] %></div>
-      </div>
+    <div id='notifications'>
+      <div class='alert alert-warning'><%= flash[:error] %></div>
+    </div>
   <% end %>
 
   <p>
-    Fill in the form below, and we will be able to give you a personalized name tag at the conference venue, and send you
+    Fill in the form below, and we will be able to give you a personalized name tag at the conference venue, and send
+    you
     any necessary information about the conference via email.
   </p>
 
   <%= form_for @ticket, url: tickets_create_from_reference_path do |f| %>
-      <%= f.hidden_field :reference, value: @reference %>
-      <fieldset class="form-group">
-        <%= f.label :name, "Name" %>
-        <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>
-      </fieldset>
+    <%= f.hidden_field :reference, value: @reference %>
+    <fieldset class="form-group">
+      <%= f.label :name, "Name" %>
+      <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>
+    </fieldset>
 
-      <fieldset class="form-group">
-        <%= f.label :email %>
-        <%= email_field(:ticket, :email, placeholder: "Where can we email you?", class: 'form-control input-short', required: true) %>
-      </fieldset>
+    <fieldset class="form-group">
+      <%= f.label :email %>
+      <%= email_field(:ticket, :email, placeholder: "Where can we email you?", class: 'form-control input-short', required: true) %>
+    </fieldset>
 
-      <fieldset class="form-group">
-        <%= f.label :company, "Where do you work?" %>
-        <%= text_field(:ticket, :company, placeholder: "Company", class: 'form-control input-short', required: true) %>
-      </fieldset>
+    <fieldset class="form-group">
+      <%= f.label :company, "Where do you work?" %>
+      <%= text_field(:ticket, :company, placeholder: "Company", class: 'form-control input-short', required: true) %>
+    </fieldset>
 
-      <label>What role(s) do you have?</label>
-      <fieldset class="form-group">
-        <% Roles.all.each do |role| %>
+    <label>What role(s) do you have?</label>
+    <fieldset class="form-group">
+      <% Roles.all.each do |role| %>
         <span class="checkbox-btn">
           <%= check_box_tag "roles[]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
-          <label for="roles_<%=role%>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
+          <label for="roles_<%= role %>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
         </span>
-        <% end %>
-      </fieldset>
+      <% end %>
+    </fieldset>
 
+    <div class="checkbox">
+      <label>
+        <%= f.check_box :attend_dinner, class: "checkbox" %>
+        I'd like to attend the conference dinner on Wednesday
+      </label>
+    </div>
+    <% if @ticket.ticket_type.speaker? || @ticket.ticket_type.organizer? %>
       <div class="checkbox">
         <label>
-          <%= f.check_box :attend_dinner, class: "checkbox" %>
-          I'd like to attend the conference dinner on Wednesday
+          <%= f.check_box :attend_speakers_dinner, class: "checkbox" %>
+          I'd like to attend the speakers' dinner on Thursday
         </label>
       </div>
-      <fieldset class="form-group">
-        <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
-        <%= f.text_area :dietary_info, :class => "form-control input-md" %>
-      </fieldset>
+    <% end %>
+    <fieldset class="form-group">
+      <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
+      <%= f.text_area :dietary_info, :class => "form-control input-md" %>
+    </fieldset>
 
-      <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
+    <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
 
-      <% if flash[:error].present? %>
-          <div id="error_explanation">
-            <p><%= flash[:error] %></p>
-          </div>
-      <% end %>
-
-
-      <div class="form-actions">
-        <% if @ticket.ticket_type.paying_ticket? %>
-
-          <% if flash[:stripe_error].present? %>
-              <div id="error_explanation">
-                <p><%= flash[:stripe_error] %></p>
-              </div>
-          <% end %>
-
-          <% if AppConfig.stripe_on %>
-              <p> You are registered with a <%= @ticket.ticket_type.name %> ticket, at a price of <strong><%= @ticket.ticket_type.price_with_vat %> NOK, incl. VAT</strong> .</p>
-              <div class="alert alert-success">
-                If you haven't paid already, and would like to pay with a credit card, click on the button below.
-                If you have paid, please don't pay again! :)
-              </div>
-              <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                      data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                      data-description="<%=@ticket.ticket_type.name%>"
-                      data-name="BOOSTERKONFERANSEN"
-                      data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
-                      data-locale="auto"
-                      data-zip-code="true"
-                      data-currency="nok"></script>
-          <% end %>
-
-        <% end %>
-        <%= button_to "Save", tickets_path, data: { disable_with: 'Saving..' }, class: "btn btn-primary", id: "primary_submit" %>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
       </div>
+    <% end %>
+
+
+    <div class="form-actions">
+      <% if @ticket.ticket_type.paying_ticket? %>
+
+        <% if flash[:stripe_error].present? %>
+          <div id="error_explanation">
+            <p><%= flash[:stripe_error] %></p>
+          </div>
+        <% end %>
+
+        <% if AppConfig.stripe_on %>
+          <p> You are registered with a <%= @ticket.ticket_type.name %> ticket, at a price of
+            <strong><%= @ticket.ticket_type.price_with_vat %> NOK, incl. VAT</strong> .</p>
+          <div class="alert alert-success">
+            If you haven't paid already, and would like to pay with a credit card, click on the button below.
+            If you have paid, please don't pay again! :)
+          </div>
+          <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description="<%= @ticket.ticket_type.name %>"
+                  data-name="BOOSTERKONFERANSEN"
+                  data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
+                  data-locale="auto"
+                  data-zip-code="true"
+                  data-currency="nok"></script>
+        <% end %>
+
+      <% end %>
+      <%= button_to "Save", tickets_path, data: {disable_with: 'Saving..'}, class: "btn btn-primary", id: "primary_submit" %>
+    </div>
 
   <% end %>
 </article>

@@ -7,14 +7,14 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Dates
-	CFP_LIGHTNING_BEGINS = Date.parse("2017-09-01")
-	CFP_LIGHTNING_ENDS = Date.parse("2017-11-21")
-	CFP_TUTORIALS_BEGINS = Date.parse("2017-09-01")
-	CFP_TUTORIAL_ENDS = Date.parse("2017-11-21")
-  CONFERENCE_YEAR = 2018
-  CONFERENCE_DATES = "March 14-16 #{CONFERENCE_YEAR}"
-  CONFERENCE_DATES_NO = "14-16 mars #{CONFERENCE_YEAR}"
-  CONFERENCE_DATE_KIDS = "11. mars #{CONFERENCE_YEAR}"
+	CFP_LIGHTNING_BEGINS = Date.parse("2018-09-15")
+	CFP_LIGHTNING_ENDS = Date.parse("2018-11-01")
+	CFP_TUTORIALS_BEGINS = Date.parse("2018-09-15")
+	CFP_TUTORIAL_ENDS = Date.parse("2018-11-01")
+  CONFERENCE_YEAR = 2019
+  CONFERENCE_DATES = "March 13-15 #{CONFERENCE_YEAR}"
+  CONFERENCE_DATES_NO = "13-15 mars #{CONFERENCE_YEAR}"
+  CONFERENCE_DATE_KIDS = "10. mars #{CONFERENCE_YEAR}"
 end
 
 module Booster2013
@@ -27,6 +27,7 @@ module Booster2013
     # Custom directories with classes and modules you want to be autoloadable.
     #config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib/cache)
+    config.autoload_paths += %W(#{config.root}/app/models/user)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
@@ -69,6 +70,7 @@ module Booster2013
     config.generators do |g|
       g.test_framework :rspec
     end
+    config.active_record.sqlite3.represent_boolean_as_integer = true
 
   end
 end
