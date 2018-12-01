@@ -11,7 +11,7 @@ Vagrant can be a hassle, especially for windows users who are dependent on hyper
 To use the dockerfile, do the following:
 
 1. Navigate to the root of the repo.
-2. Run docker build -t booster. The entire application is copied to the container and bundle install will be ran.
+2. Run docker build -t booster . The entire application is copied to the container and bundle install will be ran.
 3. Setup a version of postgresql on the host machine.
 4. Grab a copy of a database, or seed a new one with migrations. heroku pg:pull is great for pulling an existing copy, or try pg_restore -d boosterconf latest.dump --port 5432 --host localhost after creating a dump of the database. Note that the target database needs to be created first.
 5. Run the container: docker run -p 3000:3000 -e s3_access_key_id=keyid -e s3_secret_access_key=secretaccesskey booster
