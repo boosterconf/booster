@@ -370,6 +370,7 @@ DEPENDENCIES
   ruby-debug-ide
   ruby-prof
   sass-rails
+  scrypt (~> 3.0.6)
   selectize-rails
   shoulda
   simplecov
