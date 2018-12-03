@@ -24,10 +24,10 @@ describe TicketType, type: :model do
 
   describe "VAT calculations" do
     it "VAT amount" do
-      create_with_price(200).vat.should be_within(0.1).of(50)
+      expect(create_with_price(200).vat).to be_within(0.1).of(50)
     end
     it "is total price including VAT" do
-      create_with_price(200).price_with_vat.should be_within(0.1).of(250)
+      expect(create_with_price(200).price_with_vat).to be_within(0.1).of(250)
     end
   end
 
