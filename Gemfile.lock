@@ -79,6 +79,7 @@ GEM
     bullet (5.7.5)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.11.0)
+    byebug (10.0.2)
     climate_control (0.2.0)
     coderay (1.1.2)
     coercible (1.0.0)
@@ -339,6 +340,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap (= 4.0.0.alpha2)
   bullet
+  byebug
   coffee-rails (~> 4.2.2)
   debase
   dotenv-rails
@@ -385,4 +387,4 @@ RUBY VERSION
    ruby 2.5.1p57
 
 BUNDLED WITH
-   1.16.4
+   1.17.1
