@@ -21,4 +21,8 @@ class Ticket < ApplicationRecord
       end
     end
   end
+
+  def self.count_by_ticket_type(ticket_type)
+    Ticket.count(:conditions => ["ticket_type_id == ?", ticket_type.id])
+  end
 end
