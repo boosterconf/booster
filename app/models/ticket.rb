@@ -23,6 +23,6 @@ class Ticket < ApplicationRecord
   end
 
   def self.count_by_ticket_type(ticket_type)
-    Ticket.count(:conditions => ["ticket_type_id == ?", ticket_type.id])
+    Ticket.where(ticket_type_id: ticket_type.id).count
   end
 end
