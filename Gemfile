@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.5.1'
+ruby '~>2.5'
 
 gem 'railties', '5.2.0'
 gem 'rails', '5.2.0'
@@ -9,7 +9,7 @@ gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
 
 # Lock these gems to
-gem 'loofah', '~> 2.2.2'
+gem 'loofah', '~> 2.2.3'
 gem 'rails-html-sanitizer', '~> 1.0.4'
 
 
@@ -62,6 +62,7 @@ group :development, :test do
   gem 'bullet'
   gem 'rspec-rails', '~> 3.7'
   gem 'ruby-debug-ide'
+  gem 'byebug'
 end
 
 group :test do

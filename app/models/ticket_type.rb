@@ -1,7 +1,5 @@
 class TicketType < ApplicationRecord
 
-  has_many :registrations
-
   def price_with_vat
     price * 1.25
   end
