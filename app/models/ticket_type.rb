@@ -37,11 +37,11 @@ class TicketType < ApplicationRecord
   end
 
   def discounted?
-    price < TicketType.find_by_reference("full_price").price
+    price < TicketType.full_price.price
   end
 
   def self.current_normal_ticket
-    early_bird_is_active? ? find_by_reference("early_bird") : find_by_reference("full_price")
+    early_bird_is_active? ? TicketType.early_bird : TicketType.full_price
   end
 
   def self.speaker
@@ -69,6 +69,6 @@ class TicketType < ApplicationRecord
   end
 
   def self.early_bird_is_active?
-    Time.now < AppConfig.early_bird_ends
+    Time.now < AppConfig.early_bird_ends && Ticket.count_by_ticket_type(TicketType.early_bird) < AppConfig.early_bird_ticket_limit
   end
 end
