@@ -16,14 +16,16 @@
   </div>
 <% end %>
 <div class="calltoaction">
-	<p>Thanks for all the great submissions!</p>
-	<span
-	>We're working hard on making Booster 2019 our best conference ever!</span>
-	<br/><br/>
-	<small>Meanwhile, check out the <span style="text-decoration: underline;"><a href="https://vimeo.com/boosterconf">videos from 2018</a></span></small>
-	<br/><br/>
-	<p>Here are some of the amazing speakers that will be at Booster 2019!</p>
-	<%= link_to "View all", info_speakers_path %>	
+  <p>The ticket sale is open!</p>
+  <% if DateTime.now < AppConfig.early_bird_ends %>
+    <p>Early bird prices until Feb 14. Buy now and save 2000 NOK.</p>
+  <% end %>
+  <div>
+    <a class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
+  </div>
+ <br/><br/>
+  <p>Here are some of the amazing speakers that will be at Booster 2019!</p>
+  <%= link_to "View all", info_speakers_path %>
 </div>
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
