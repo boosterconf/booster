@@ -18,7 +18,7 @@
 <div class="calltoaction">
   <p>The ticket sale is open!</p>
   <% if TicketType.early_bird_is_active? %>
-    <p>Early bird prices for the 100 first tickets! Currently <%= @remaining_early_bird_ticket_count%> left. Buy now and save 2000 NOK.</p>
+    <p>Early bird prices for the 100 first tickets! Buy now and save 2000 NOK.</p>
   <% end %>
   <div>
     <a class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
