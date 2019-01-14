@@ -5,7 +5,7 @@
 <p>
   You must be prepared to present the workshop in English, as there might be English speaking participants.
 </p>
-
-<%= render partial: 'workshop_form', locals: { post_to: '/register_workshop/create_talk' } %>
-
+<%= form_for @workshop, url: '/register_workshop/create_talk' do |f| %>
+	<%= render partial: 'form_fields', locals: { f: f } %>
+<%- end %>
 </article>

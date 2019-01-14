@@ -1,5 +1,3 @@
-<%= form_for @talk, url: post_to do |f| %>
-
     <fieldset class="form-group">
       <legend>Language</legend>
       In what language will you deliver your talk? Please select the language you are most comfortable with.
@@ -58,4 +56,3 @@
     <div class="form-actions">
       <%= f.submit @talk.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
     </div>
-<% end %>

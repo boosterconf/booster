@@ -16,6 +16,10 @@
 
   <% end %>
 
-  <%= render partial: 'register_lightning_talk/talk_form', locals: {post_to: talk_url(@talk)} %>
+<%= form_for @talk, url: talk_url(@talk) do |f| %>
+
+<%= render partial: 'register_lightning_talk/form_fields', locals: { f: f } %>
+
+<% end %>
 
 </article>

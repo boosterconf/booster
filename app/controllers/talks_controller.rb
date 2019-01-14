@@ -48,7 +48,7 @@ class TalksController < ApplicationController
     elsif @talk.talk_type.is_lightning_talk?
       action = 'edit_lightning_talk'
     elsif @talk.is_workshop?
-      action= 'edit_tutorial'
+      action= 'edit_workshop'
     end
     render action: action
   end

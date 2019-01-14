@@ -1,6 +1,7 @@
 class RegisterLightningTalkController < ApplicationController
   include CfpClosedRedirect
 
+  before_action :require_admin, :only => [:invited_talk, :create_invited_talk]
   before_action :redirect_when_cfp_closed_for_lightning_talks, only: [:start, :create_user, :create_talk]
 
   def start
@@ -63,6 +64,27 @@ class RegisterLightningTalkController < ApplicationController
       redirect_to '/register_lightning_talk/finish'
     else
       render action: :details
+    end
+  end
+
+  def invited_talk
+    @talk = LightningTalk.new
+    @talk.talk_type = TalkType.find_by_name("Lightning talk")
+  end
+
+  def create_invited_talk
+    @talk = LightningTalk.new(talk_params)
+    @talk.talk_type = TalkType.find_by_name("Lightning talk")
+    @talk.year = AppConfig.year
+    if @talk.save
+      if(params[:notify_speaker] == "1")
+        BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now
+      end
+      SlackNotifier.notify_talk(@talk)
+
+      redirect_to talk_path(@talk)
+    else
+      render action: :invited_talk
     end
   end
 

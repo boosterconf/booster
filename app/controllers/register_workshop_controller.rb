@@ -3,7 +3,8 @@ require "securerandom"
 class RegisterWorkshopController < ApplicationController
   include CfpClosedRedirect
 
-  before_action :setup_talk_types, only: [:talk, :create_talk]
+  before_action :require_admin, :only => [:invited_talk, :create_invited_talk]
+  before_action :setup_talk_types, only: [:talk, :create_talk, :invited_talk, :create_invited_talk]
   before_action :redirect_when_cfp_closed_for_workshops, only: [:start, :create_user, :create_talk, :talk]
 
   def start
@@ -55,6 +56,27 @@ class RegisterWorkshopController < ApplicationController
       end
     else
       render action: :talk
+    end
+  end
+
+
+  def invited_talk
+    @workshop = Workshop.new
+  end
+
+  def create_invited_talk
+
+    @workshop = Workshop.new(talk_params)
+    @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
+    if @workshop.save
+      if(params[:notify_speaker] == "1")
+        BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver_now
+      end
+      SlackNotifier.notify_talk(@workshop)
+
+      redirect_to talk_path(@workshop)
+    else
+      render action: :invited_talk
     end
   end
 

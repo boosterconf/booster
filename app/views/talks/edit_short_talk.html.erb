@@ -2,7 +2,7 @@
   <div class="header-join">
     <h2 class="page_title">Edit your short talk</h2>
   </div>
-  
+
   <% if @talk.accepted? %>
       <p><%= image_tag("approved_talk.png") %> Approved</p>
       <% if @talk.slide_file_name.present? %>
@@ -17,6 +17,8 @@
 
   <% end %>
 
-  <%= render partial: 'register_short_talk/talk_form', locals: {post_to: talk_url(@talk)} %>
+<%= form_for @talk, url: talk_url(@talk) do |f| %>
+  <%= render partial: 'register_short_talk/form_fields', locals: { f: f } %>
+<%- end %>
 
 </article>

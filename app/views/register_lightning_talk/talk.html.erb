@@ -2,6 +2,10 @@
 <%= render :partial => 'steps', :locals => {:active_id => "talk"} %>
 <h2>What's your passion?</h2>
 
-<%= render partial: 'talk_form', locals: { post_to: '/register_lightning_talk/create_talk' } %>
+<%= form_for @talk, url: "/register_lightning_talk/create_talk" do |f| %>
+
+<%= render partial: 'form_fields', locals: { f: f } %>
+
+<% end %>
 
 </article>

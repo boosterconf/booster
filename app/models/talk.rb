@@ -28,6 +28,7 @@ class Talk < ApplicationRecord
   validates :description, presence: true
   validates :language, presence: true
   validates :talk_type_id, presence: true
+  validates :user_ids, length: { minimum: 1, maximum: 3 }
 
   after_initialize do |talk|
     talk.acceptance_status ||= 'pending'
@@ -62,7 +63,7 @@ class Talk < ApplicationRecord
   def confirmed?
    self.acceptance_status == 'accepted' && self.speakers_confirmed == true
   end
-  
+
   def pending?
     self.acceptance_status == 'pending'
   end

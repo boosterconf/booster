@@ -16,6 +16,9 @@
   <%= render :partial => 'upload_slide' %>
   <br />
 <% end %>
-<%= render partial: 'register_workshop/workshop_form', locals: { post_to: talk_url(@talk) } %>
+
+<%= form_for @workshop, url: talk_url(@talk) do |f| %>
+  <%= render partial: 'register_workshop/form_fields', locals: { f: f } %>
+<%- end %>
 
 </article>

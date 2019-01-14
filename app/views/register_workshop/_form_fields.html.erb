@@ -1,4 +1,5 @@
-<%= form_for @workshop, url: post_to do |f| %>
+<%# ...We're sorry... %>
+<% hide_additional_speaker_email_fields ||= false %>
     <% @workshop.errors.full_messages.each do |msg| %>
         <p class="has-error"><%= msg %></p>
     <% end %>
@@ -78,7 +79,7 @@
         </fieldset>
     <% end %>
 
-    <% if @workshop.new_record? %>
+    <% if @workshop.new_record? && !hide_additional_speaker_email_fields %>
         <%= render :partial => 'talks/additional', :locals => {:f => f} %>
     <% end %>
 
@@ -88,4 +89,3 @@
     <div class="form-actions">
       <%= f.submit @workshop.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
     </div>
-<% end %>
