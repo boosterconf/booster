@@ -113,7 +113,7 @@ class AcceptancesController < ApplicationController
     organizers.each {|user|
       unless Ticket.has_ticket(user.email)
         ticket = Ticket.new
-        ticket.ticket_type = user.registration.ticket_type
+        ticket.ticket_type = TicketType.organizer
         ticket.attend_dinner = true
         ticket.roles = user.roles
         ticket.dietary_info = user.dietary_requirements
@@ -134,7 +134,7 @@ class AcceptancesController < ApplicationController
       talk.users.each {|user|
         unless Ticket.has_ticket(user.email)
           ticket = Ticket.new
-          ticket.ticket_type = user.registration.ticket_type
+          ticket.ticket_type = TicketType.speaker
           ticket.attend_dinner = true
           ticket.roles = user.roles
           ticket.dietary_info = user.dietary_requirements
@@ -151,7 +151,7 @@ class AcceptancesController < ApplicationController
     invited.each {|user|
       unless Ticket.has_ticket(user.email)
         ticket = Ticket.new
-        ticket.ticket_type = user.registration.ticket_type
+        ticket.ticket_type = TicketType.speaker
         ticket.attend_dinner = true
         ticket.roles = user.roles
         ticket.dietary_info = user.dietary_requirements
