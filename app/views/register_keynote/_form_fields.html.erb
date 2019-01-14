@@ -1,0 +1,35 @@
+    <% @keynote.errors.full_messages.each do |msg| %>
+        <p class="has-error"><%= msg %></p>
+    <% end %>
+    <legend>Information visible for everyone</legend>
+    The abstract will be published on the website as soon
+    as you submit it, and will be used by the committee during talk selection. It is therefore important that you
+    provide a detailed abstract. This will help us to select in the selection process and increase the chances
+    of your talk being selected.
+    <fieldset class="form-group">
+      <%= f.label :title, "Title" %>
+
+      <%= f.text_field :title, :class => "form-control", required: '' %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.label :description, "Abstract" %>
+
+      <%= f.text_area :description, :class => "tinymce span10" %>
+      <% if @keynote.errors[:description].present? %>
+          <div class="error-message">
+            You must provide an abstract.
+          </div>
+      <% end %>
+    </fieldset>
+    <%= tinymce %>
+    <% if admin? %>
+        <fieldset class="form-group">
+          <%= f.label :video_url, "Vimeo URL (admins only)" %>
+          <%= f.text_field :video_url, :size => "80", :class => "form-control" %>
+        </fieldset>
+    <% end %>
+
+    <div class="form-actions">
+      <%= f.submit @keynote.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
+    </div>

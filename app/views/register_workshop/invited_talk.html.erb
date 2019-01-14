@@ -6,7 +6,10 @@
 <label for="notify_speaker">Notify speaker</label>
 <%= check_box_tag(:notify_speaker) %>
 </p>
+<p>
+<label for="talk_user_ids">Speakers</label><br />
 <%= f.select :user_ids, User.all.map {|u| [u.full_name, u.id]}, {}, {:multiple => true} %>
+</p>
 <%= render partial: 'form_fields', locals: { f: f, hide_additional_speaker_email_fields: true } %>
 
 <% end %>

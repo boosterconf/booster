@@ -2,6 +2,7 @@ class Keynote < Talk
 
   after_initialize do |talk|
     talk.acceptance_status ||= 'accepted'
+    talk.language = 'english' # all workshops are english
   end
 
   def is_lightning_talk?

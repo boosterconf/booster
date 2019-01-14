@@ -56,6 +56,7 @@ class RegisterShortTalkController < ApplicationController
     @talk = ShortTalk.new(talk_params)
     @talk.talk_type = TalkType.find_by_name("Short talk")
     @talk.year = AppConfig.year
+    @keynote.accept!
     if @talk.save
       if(params[:notify_speaker] == "1")
         BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now

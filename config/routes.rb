@@ -125,7 +125,7 @@ Rails.application.routes.draw do
   match '/register_lightning_talk/create_user' => 'register_lightning_talk#create_user', via: :all
   match '/register_lightning_talk/talk' => 'register_lightning_talk#talk', via: :all
   match '/register_lightning_talk/create_talk' => 'register_lightning_talk#create_talk', via: :all
-  get   '/register_lightning_talk/invited_talk' => 'register_lightning_talk#invited_talk'
+  get   '/register_lightning_talk/invited_talk' => 'register_lightning_talk#invited_talk', as: "register_invited_lightning_talk"
   post  '/register_lightning_talk/invited_talk' => 'register_lightning_talk#create_invited_talk'
   match '/register_lightning_talk/details' => 'register_lightning_talk#details', via: :all
   match '/register_lightning_talk/create_details' => 'register_lightning_talk#create_details', via: :all
@@ -135,7 +135,7 @@ Rails.application.routes.draw do
   match '/register_workshop/create_user' => 'register_workshop#create_user', via: :all
   match '/register_workshop/talk' => 'register_workshop#talk', via: :all
   match '/register_workshop/create_talk' => 'register_workshop#create_talk', via: :all
-  get   '/register_workshop/invited_talk' => 'register_workshop#invited_talk'
+  get   '/register_workshop/invited_talk' => 'register_workshop#invited_talk', as: "register_invited_short_talk"
   post  '/register_workshop/invited_talk' => 'register_workshop#create_invited_talk'
   match '/register_workshop/details' => 'register_workshop#details', via: :all
   match '/register_workshop/create_details' => 'register_workshop#create_details', via: :all
@@ -145,11 +145,15 @@ Rails.application.routes.draw do
   match '/register_short_talk/create_user' => 'register_short_talk#create_user', via: :all
   match '/register_short_talk/talk' => 'register_short_talk#talk', via: :all
   match '/register_short_talk/create_talk' => 'register_short_talk#create_talk', via: :all
-  get   '/register_short_talk/invited_talk' => 'register_short_talk#invited_talk'
+  get   '/register_short_talk/invited_talk' => 'register_short_talk#invited_talk', as: "register_invited_workshop"
   post  '/register_short_talk/invited_talk' => 'register_short_talk#create_invited_talk'
   match '/register_short_talk/details' => 'register_short_talk#details', via: :all
   match '/register_short_talk/create_details' => 'register_short_talk#create_details', via: :all
   match '/register_short_talk/finish' => 'register_short_talk#finish', via: :all
+
+
+  get   '/register_keynote/invited_talk' => 'register_keynote#invited_talk', as: "register_invited_keynote"
+  post  '/register_keynote/invited_talk' => 'register_keynote#create_invited_talk'
 
 #match 'login' => 'user_sessions#new', :as => :login
 #match 'logout' => 'user_sessions#destroy', :as => :logout
