@@ -8,8 +8,9 @@ USER boosterconf
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 RUN bundle install
+COPY . /home/boosterconf
 EXPOSE 3000
 ENV DATABASE_URL=postgres://boosterconf:boosterconf@host.docker.internal:5432/boosterconf
 ENTRYPOINT ["bundle", "exec"]
 CMD ["rails", "server", "-b", "0.0.0.0"]
-COPY . /home/boosterconf
+
