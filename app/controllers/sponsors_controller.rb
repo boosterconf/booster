@@ -38,9 +38,8 @@ class SponsorsController < ApplicationController
     @sponsor =
         SponsorAcceptedSlackNotifier.new(
             SponsorStatusEventCreator.new(
-                user: current_user, sponsor: SponsorTicketCreator.new(
-                Sponsor.find(params[:id])
-            )
+                user: current_user,
+                sponsor: Sponsor.find(params[:id])
             )
         )
     @sponsor.assign_attributes(sponsor_params)

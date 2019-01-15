@@ -16,7 +16,6 @@ class SponsorStatusEventCreator < SimpleDelegator
     if @sponsor.status != @old_status
       Event.create!(user: @user, sponsor_id: @sponsor.id, comment: "Partner status changed to #{@sponsor.status_text}")
     end
-
     true
   end
 
