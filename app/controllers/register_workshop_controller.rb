@@ -68,7 +68,7 @@ class RegisterWorkshopController < ApplicationController
 
     @workshop = Workshop.new(talk_params)
     @workshop.appropriate_for_roles = params[:appropriate_for_roles].join(',') if params[:appropriate_for_roles]
-    @keynote.accept!
+    @workshop.accept!
     if @workshop.save
       if(params[:notify_speaker] == "1")
         BoosterMailer.talk_confirmation(current_user, @workshop, talk_url(@workshop)).deliver_now
