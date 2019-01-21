@@ -22,9 +22,8 @@
       <h2>Wednesday</h2>
 
       <%= render 'break_section', location: 'Reception area', time: '08:00-09:00', title: 'Registration' %>
-
       <%= render 'open_space_section', location: 'Dragefjellet', time: '09:00-09:15', title: 'Welcome from the organizers' %>
-      <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[1185] %>
+      <%= render 'plenary_section', location: 'Dragefjellet', time: '09:15-10:15', talk: @talks[1364] %>
 
       <div class='program-row'>
         <% period = @periods.pop %>
@@ -198,7 +197,7 @@
 
       <%= render 'break_section', location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break' %>
 
-      <%= render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[1182] %>
+      <%# render 'plenary_section', location: 'Dragefjellet', time: '15:15-16:15', talk: @talks[1182] %>
 
       <%= render 'open_space_section', location: 'Dragefjellet', time: '16:15-16:30', title: 'See you next year' %>
     </div>
