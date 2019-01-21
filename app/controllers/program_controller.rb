@@ -5,10 +5,16 @@ class ProgramController < ApplicationController
       return redirect_to root_path
     end
 
-    all_talks = Talk.all
     @talks = {}
-    all_talks.each {|talk| @talks[talk.id] = talk}
+    @talks = Rails.cache.fetch(Cache::AllTalksCacheKey, expires_in: 30.minutes) do
+      Talk.all.each {|talk| @talks[talk.id] = talk}
+      @talks
+    end
 
-    @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
+    @periods = {}
+    @periods = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey, expires_in: 30.minutes) do
+      @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
+      @periods
+    end
   end
 end
