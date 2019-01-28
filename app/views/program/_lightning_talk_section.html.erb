@@ -1,16 +1,20 @@
-<section class='period lightning-talk'>
-  <header>
-    <span class='location'><%= location %></span>
-  </header>
-  <div class='slot lightning-talk-slot'>
-    <% talks.each do |talk| %>
+<% cache_unless admin?, talks do %>
+  <section class='period lightning-talk'>
+    <header>
+      <span class='location'><%= location %></span>
+    </header>
+    <div class='slot lightning-talk-slot'>
+      <% talks.each do |talk| %>
         <a class="single-talk" href="<%= talk_path(talk.id) %>">
           <div class='talk' data-talkid='<%= talk.id %>'>
-            <h4><%= talk.title %> <% if talk.video_url.present? %><%= fa_icon("film") %><% end %></h4>
+            <h4><%= talk.title %>
+              <% if talk.video_url.present? %><%= fa_icon("film") %>
+              <% end %></h4>
             <span class='author'><%= talk.speaker_name %></span>
             <%= render partial: 'adminInformation', locals: {talk: talk} %>
           </div>
         </a>
-    <% end %>
-  </div>
-</section>
+      <% end %>
+    </div>
+  </section>
+<% end %>

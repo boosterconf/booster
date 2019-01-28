@@ -1,18 +1,22 @@
-<div class="program-row">
-  <section class="period">
-    <header>
-      <time class="time"><%= time %></time>
-      <span class="location"><%= location %></span>
-    </header>
-    <a class="single-talk" href="<%= talk_path(talk.id) %>">
-      <div class="slot">
-        <div class="plenary-type talk">
-          <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= talk.title %> <% if talk.video_url.present? %><%= fa_icon("film") %><% end %></h4>
-          <span class='author'><%= talk.speaker_name %></span>
-          <%= render partial: 'adminInformation', locals: {talk: talk} %>
-          <div class='description'><%= talk.description.html_safe %></div>
+<% cache_unless admin?, talk do %>
+  <div class="program-row">
+    <section class="period">
+      <header>
+        <time class="time"><%= time %></time>
+        <span class="location"><%= location %></span>
+      </header>
+      <a class="single-talk" href="<%= talk_path(talk.id) %>">
+        <div class="slot">
+          <div class="plenary-type talk">
+            <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= talk.title %>
+              <% if talk.video_url.present? %><%= fa_icon("film") %>
+              <% end %></h4>
+            <span class='author'><%= talk.speaker_name %></span>
+            <%= render partial: 'adminInformation', locals: {talk: talk} %>
+            <div class='description'><%= talk.description.html_safe %></div>
+          </div>
         </div>
-      </div>
-    </a>
-  </section>
-</div>
+      </a>
+    </section>
+  </div>
+<% end %>
