@@ -10,7 +10,7 @@
 
 
   <p id="price_info">
-    Price: NOK <%= number_with_precision(@ticket.ticket_type.price, precision: 0) %>,- (excluding VAT).
+    Price: NOK <%= number_with_precision(@ticket.ticket_type.price, precision: 0) %>,- (excluding VAT, <%= number_with_precision(@ticket.ticket_type.price_with_vat, precision: 0) %> including VAT).
   </p>
 
   <%= form_for(@ticket) do |f| %>
