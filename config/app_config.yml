@@ -38,8 +38,8 @@ staging:
 production:
   year: 2019
   cfp_open: false
-  proposals_visible: true
-  program_released: false
+  proposals_visible: false
+  program_released: true
   speakers_released: false
   early_bird_ends: 2019-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
