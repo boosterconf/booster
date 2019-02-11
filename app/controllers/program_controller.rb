@@ -6,15 +6,20 @@ class ProgramController < ApplicationController
     end
 
     @talks = {}
-    @talks = Rails.cache.fetch(Cache::AllTalksCacheKey, expires_in: 30.minutes) do
-      Talk.all.each {|talk| @talks[talk.id] = talk}
-      @talks
-    end
-
     @periods = {}
-    @periods = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey, expires_in: 30.minutes) do
+
+    if (params.has_key?(:cache) && params[:cache] == false)
+      @talks = Talk.all.each {|talk| @talks[talk.id] = talk}
       @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
-      @periods
+    else
+      @talks = Rails.cache.fetch(Cache::AllTalksCacheKey, expires_in: 30.minutes) do
+         Talk.all.each {|talk| @talks[talk.id] = talk}
+        @talks
+      end
+      @periods = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey, expires_in: 30.minutes) do
+        @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
+        @periods
+      end
     end
   end
 end
