@@ -3,6 +3,9 @@
     padding: 5px;
     table-layout: fixed;
 }
+#main-content > article > .program-editor {
+    max-width: 1300px;
+}
 
 .program-editor td, .program-editor th {
     width: 11.1%;
