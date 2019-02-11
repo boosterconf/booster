@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     collection do
       post :create_tickets
       post :create_tickets_organizers
+      post :create_tickets_partners
     end
   end
 
