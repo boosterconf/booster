@@ -1,4 +1,4 @@
-<% cache_unless admin?, [location, talk, period] do %>
+<% cache_unless admin?, talk do %>
   <section class='period program-column'>
     <header>
       <span class='location'> <%= location %></span>
@@ -20,11 +20,13 @@
             <span class='author'><%= talk.speaker_name %></span>
             <%= render partial: 'adminInformation', locals: {talk: talk} %>
             <div class='description'><%= talk.description.html_safe %></div>
-    
+
             <span class='location-small'><%= location %></span>
           </div>
         </a>
       <% end %>
     </div>
   </section>
-<%- end -%>
+<% end %>
+
+
