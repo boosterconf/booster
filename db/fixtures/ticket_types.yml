@@ -1,0 +1,25 @@
+sponsor:
+  reference: "sponsor"
+  name: "Sponsor"
+  price: 0
+  dinner_included: true
+speaker:
+  reference: "speaker"
+  name: "Speak"
+  price: 0
+  dinner_included: true
+lightning:
+  reference: "lightning"
+  name: "Lightning"
+  price: 0
+  dinner_included: true
+full_price:
+  reference: "full_price"
+  name: "Full price"
+  price: 0
+  dinner_included: true
+organizer:
+  reference: "organizer"
+  name: "Organizer"
+  price: 0
+  dinner_included: true

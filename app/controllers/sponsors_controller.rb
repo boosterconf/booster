@@ -111,10 +111,25 @@ class SponsorsController < ApplicationController
   end
 
   def email_tickets
-    sponsors = Sponsor.all_accepted
-    sponsors.each {|sponsor|
-      create_tickets_for(sponsor)
-
+    sponsors_getting_tickets = Sponsor.all_accepted
+    sponsors_getting_tickets.each { |sponsor|
+      if (sponsor.has_email?)
+        current_ticket_count = Ticket.where(email: sponsor.email).count
+        while current_ticket_count < 2
+          ticket = Ticket.new
+          ticket.ticket_type = TicketType.sponsor
+          ticket.attend_dinner = true
+          ticket.name = "Please fill in name of attendee"
+          ticket.company = sponsor.name
+          ticket.email = sponsor.email
+          ticket.reference = SecureRandom.urlsafe_base64
+          ticket.save!
+          BoosterMailer.ticket_confirmation_speakers_and_organizers(ticket).deliver_now
+          current_ticket_count += 1
+        end
+      else
+        puts "#{sponsor.name} has no email, cannot generate partner tickets with no contact person to send them to!"
+      end
     }
     redirect_to sponsors_url, notice: "Emails with partner ticket registration links was sent."
   end

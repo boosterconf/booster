@@ -166,30 +166,6 @@ class AcceptancesController < ApplicationController
     redirect_to acceptances_path, notice: 'Created tickets for confirmed speakers'
   end
 
-  def create_tickets_partners
-    sponsors_getting_tickets = Sponsor.all_accepted
-    sponsors_getting_tickets.each {|sponsor|
-      if (sponsor.has_email?)
-        current_ticket_count = Ticket.count(email: sponsor.email)
-        while current_ticket_count < 2
-          ticket = Ticket.new
-          ticket.ticket_type = TicketType.sponsor
-          ticket.attend_dinner = true
-          ticket.roles = user.roles
-          ticket.name = "Please fill in name of attendee"
-          ticket.company = sponsor.name
-          ticket.email = sponsor.email
-          ticket.reference = SecureRandom.urlsafe_base64
-          ticket.save!
-          BoosterMailer.ticket_confirmation_speakers_and_organizers(ticket).deliver_now
-          current_ticket_count += 1
-        end
-      else
-        puts "#{sponsor.name} has no email, cannot generate partner tickets with no contact person to send them to!"
-      end
-    }
-  end
-
   private
   def redirect_on_email_sent
     redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Email already sent!"
