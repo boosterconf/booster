@@ -46,4 +46,4 @@ production:
   partner_price_in_nok_before_vat: 31000
   fiken_email: "foreningen-boosterkonferansen@bilag.fiken.no"
   stripe_on: true
-  ticket_sales_open: true 
+  ticket_sales_open: false
