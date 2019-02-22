@@ -15,7 +15,9 @@
 
   </div>
 <% end %>
+
 <div class="calltoaction">
+<%- if(AppConfig.ticket_sales_open) -%>
   <p>The ticket sale is open!</p>
   <% if TicketType.early_bird_is_active? %>
     <p>Early bird prices for the 100 first tickets! Buy now and save 2000 NOK.</p>
@@ -24,6 +26,7 @@
     <a class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
   </div>
  <br/><br/>
+<%- end -%>
   <p>Here are some of the amazing speakers that will be at Booster 2019!</p>
   <%= link_to "View all", info_speakers_path %>
 </div>
