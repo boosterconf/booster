@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_22_123619) do
+ActiveRecord::Schema.define(version: 2019_02_24_093733) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -106,13 +106,12 @@ ActiveRecord::Schema.define(version: 2019_02_22_123619) do
 
   create_table "slots", id: :serial, force: :cascade do |t|
     t.integer "period_id"
-    t.integer "talk_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "room_id"
+    t.integer "talk_id"
     t.index ["period_id"], name: "index_slots_on_period_id"
     t.index ["room_id"], name: "index_slots_on_room_id"
-    t.index ["talk_id"], name: "index_slots_on_talk_id"
   end
 
   create_table "speakers", id: :serial, force: :cascade do |t|
@@ -130,6 +129,7 @@ ActiveRecord::Schema.define(version: 2019_02_22_123619) do
     t.integer "sponsor_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_sponsor_tickets_on_ticket_id", unique: true
   end
 
   create_table "sponsors", id: :serial, force: :cascade do |t|
