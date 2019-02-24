@@ -29,20 +29,23 @@
     <h4>Stats</h4>
     <table class="table table-condensed table-striped">
       <tbody>
-        <% @stats.each_key { |ticket_type| %>
+        <% @stats.each { |stat,value| %>
           <tr>
-            <th><%= ticket_type %></th>
-            <td><%= @stats[ticket_type] %></td>
+            <th><%= stat %></th>
+            <td><%= value %></td>
           </tr>
           <%  } %>
-          <tr>
-            <th>Total</th>
-            <td><%= @total_ticket_count %></td>
-          </tr>
       </tbody>
     </table>
   </div>
-
+      <%- if(@filters.any?) -%>
+<p>
+      Filters:
+      <%- @filters.each { |filter_key, value| %>
+        <%= filter_key %> = <%= value %> <%= link_to "(remove)", url_for(@filters.merge(filter_key => nil)) %><br />
+      <%- } -%>
+</p>
+      <%- end %>
 <table id="tickets" class="table table-condensed table-sortable">
   <thead>
     <tr>
@@ -59,7 +62,7 @@
   </thead>
 
   <tbody>
-    <% @tickets.each do |ticket| %>
+    <% @filtered_tickets.each do |ticket| %>
       <tr>
         <td><%= ticket.id %></td>
         <td><%= ticket.name %></td>
@@ -78,7 +81,7 @@
           <% end %>
         </td>
         <td><%= link_to 'Edit', edit_ticket_path(ticket) %></td>
-        <td><%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', ticket_path(ticket, filters: @filters), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

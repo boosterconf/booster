@@ -4,6 +4,8 @@ class Sponsor < ApplicationRecord
   has_many :events, dependent: :destroy
   has_one :invoice_line
 
+  has_many :sponsor_tickets, dependent: :destroy
+
   has_attached_file :logo, PAPERCLIP_CONFIG.merge({
                                                       styles: {
                                                           normal: {
@@ -13,7 +15,7 @@ class Sponsor < ApplicationRecord
                                                                 'Cache-Control' => 'max-age=2592000',
                                                                 'Expires' => 30.days.from_now.httpdate
                                                             }
-                                                          },  
+                                                          },
                                                           bigger: {
                                                               geometry: '240x',
                                                               s3_headers: {

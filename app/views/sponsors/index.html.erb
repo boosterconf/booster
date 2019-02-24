@@ -45,7 +45,7 @@
 <%= link_to 'New partner', new_sponsor_path, class: '' %>
 </div>
   <p>
-    <%= button_to "Send ticket link by email to all accepted partners", email_tickets_sponsors_path %>
+    <%= button_to "Create sponsor tickets and send them by email", email_tickets_sponsors_path %>
   </p>
 <table id="sponsors" class="table table-striped">
   <thead>
@@ -55,6 +55,7 @@
     <th class="extractor-select">Status</th>
     <th>Has email?</th>
     <th>Partner last year</th>
+    <th>Partner tickets generated</th>
     <th colspan="4"></th>
   </tr>
   </thead>

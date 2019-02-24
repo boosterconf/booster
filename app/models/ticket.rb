@@ -3,6 +3,7 @@ require 'csv'
 class Ticket < ApplicationRecord
 
   belongs_to :ticket_type
+  has_one :sponsor_ticket, dependent: :destroy
 
   default_scope  { order('tickets.created_at desc') }
 

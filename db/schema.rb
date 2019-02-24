@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_12_191107) do
+ActiveRecord::Schema.define(version: 2019_02_22_123619) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -123,6 +123,13 @@ ActiveRecord::Schema.define(version: 2018_09_12_191107) do
     t.index ["talk_id", "user_id"], name: "index_speakers_on_talk_id_and_user_id"
     t.index ["talk_id"], name: "index_speakers_on_talk_id"
     t.index ["user_id"], name: "index_speakers_on_user_id"
+  end
+
+  create_table "sponsor_tickets", force: :cascade do |t|
+    t.integer "ticket_id"
+    t.integer "sponsor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "sponsors", id: :serial, force: :cascade do |t|
@@ -304,6 +311,8 @@ ActiveRecord::Schema.define(version: 2018_09_12_191107) do
     t.string "phone_number"
   end
 
+  add_foreign_key "sponsor_tickets", "sponsors"
+  add_foreign_key "sponsor_tickets", "tickets"
   add_foreign_key "tickets", "ticket_types"
   add_foreign_key "tickets", "users"
 end

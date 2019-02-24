@@ -1,6 +1,6 @@
 
     <td><%= h sponsor.name[0..25] %></td>
-    
+
     <% if sponsor.user != nil %>
     <td class='no-filter' data-sort='<%= sponsor.user.full_name %>' data-filter='<%= sponsor.user.full_name %>'>
     <% else %>
@@ -24,6 +24,7 @@
 
     <td class='sp-email'><%= YesNo.new(sponsor.has_email?) %></td>
     <td><%= YesNo.new(sponsor.was_sponsor_last_year?) %></td>
+    <td><%= sponsor.sponsor_tickets.count %> (<%= link_to "show", tickets_path(sponsor_id: sponsor.id) %>)</td>
     <td class='no-filter'>
       <%= link_to edit_sponsor_path(sponsor) do %>
           <i class='fa fa-pencil'></i>

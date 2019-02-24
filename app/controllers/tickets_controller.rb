@@ -3,14 +3,16 @@ class TicketsController < ApplicationController
   before_action :set_ticket, only: [:show, :edit, :update]
   before_action :ticket_sales_open?, only: [:new, :create]
 
+  @@filter_params = [:sponsor_id]
   # GET /tickets
   def index
-    @tickets = Ticket.all
-    by_ticket_type = @tickets.group_by {|ticket| ticket.ticket_type.name}
-    @stats = {}
-    by_ticket_type.each_pair {|k, v| @stats[k] = v.count}
-    @stats['Attending dinner'] = @tickets.where(attend_dinner: true).count
-    @total_ticket_count = @tickets.count
+    @tickets = Ticket.includes(:ticket_type).all
+    @stats = build_ticket_stats(@tickets)
+    @filters = {}
+    if(params[:sponsor_id])
+      @filters[:sponsor_id] = params[:sponsor_id].to_i
+    end
+    @filtered_tickets = filter_tickets(@tickets, @filters)
   end
 
   def download_emails
@@ -159,8 +161,9 @@ class TicketsController < ApplicationController
 
   # DELETE /tickets/1
   def destroy
-    Ticket.delete(params[:id])
-    redirect_to tickets_url, notice: 'Ticket was successfully destroyed.'
+    Ticket.destroy(params[:id])
+    filters = params[:filters].permit(@@filter_params) || {}
+    redirect_to tickets_url(filters), notice: 'Ticket was successfully destroyed.'
   end
 
   def from_reference
@@ -226,5 +229,25 @@ class TicketsController < ApplicationController
       flash[:notice] = "Follow @boosterconf on Twitter to be notified when the next batch of tickets is available."
       redirect_to root_path
     end
+  end
+
+  def filter_tickets(tickets, filters)
+    filtered_tickets = tickets
+    if(filters[:sponsor_id])
+      filtered_tickets = SponsorTicket.where(sponsor_id: filters[:sponsor_id]).includes(:ticket).map(&:ticket)
+    end
+    return filtered_tickets
+  end
+
+  def build_ticket_stats(tickets)
+    stats = {}
+
+    by_ticket_type = tickets.group_by {|ticket| ticket.ticket_type.name}
+    by_ticket_type.each_pair {|k, v| stats[k] = v.count}
+
+    stats['Attending dinner'] = tickets.select { |t| t.attend_dinner == true }.count
+    stats['Total'] = tickets.count
+
+    return stats
   end
 end

@@ -114,16 +114,19 @@ class SponsorsController < ApplicationController
     sponsors_getting_tickets = Sponsor.all_accepted
     sponsors_getting_tickets.each { |sponsor|
       if (sponsor.has_email?)
-        current_ticket_count = Ticket.where(email: sponsor.email).count
+        current_ticket_count = sponsor.sponsor_tickets.count
         while current_ticket_count < 2
-          ticket = Ticket.new
+          sponsor_ticket = sponsor.sponsor_tickets.build
+
+          ticket = sponsor_ticket.build_ticket
           ticket.ticket_type = TicketType.sponsor
           ticket.attend_dinner = true
           ticket.name = "Please fill in name of attendee"
           ticket.company = sponsor.name
           ticket.email = sponsor.email
           ticket.reference = SecureRandom.urlsafe_base64
-          ticket.save!
+
+          sponsor_ticket.save!
           BoosterMailer.ticket_confirmation_speakers_and_organizers(ticket).deliver_now
           current_ticket_count += 1
         end
