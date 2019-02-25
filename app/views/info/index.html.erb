@@ -26,11 +26,8 @@
     <a class="btn btn-primary" href="/tickets/new">Buy a ticket</a>
   </div>
  <br/><br/>
-<%- else -%>
-  <p>Looking for tickets? We are sold out, please contact us on kontakt@boosterkonf.no if you want us to put you on the waiting list.</p><br /><br />
 <%- end -%>
   <p>Here are some of the amazing speakers that will be at Booster 2019!</p>
-  <%= link_to "View all", info_speakers_path %>
 </div>
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
@@ -78,6 +75,12 @@
   </div>
 </div>
 
+<div class="viewall">
+  <%= link_to "View all", info_speakers_path %>
+</div>
+<%- if(!AppConfig.ticket_sales_open) -%>
+<p class="soldout">Looking for tickets? We are sold out, please contact us on kontakt@boosterkonf.no if you want us to put you on the waiting list.</p>
+<%- end -%>
 
 <div class="imagetron">
   <div class="imagetron-bg" style='background-image: url("/images/bergen1920.jpg")'>

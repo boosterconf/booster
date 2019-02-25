@@ -8,6 +8,21 @@
   width: 100%;
 }
 
+.soldout {
+    background: #F2F2F2;
+    text-align: center;
+    margin: 0;
+    padding: 1rem;
+}
+
+.viewall {
+    font-family: "Fira Sans Medium";
+    z-index: 999;
+    padding: 24px 0 20px;
+    background-color: #F2F2F2;
+    text-align: center;
+}
+
 .frontpage-element {
   position: relative;
   background: $gray-lightest;
