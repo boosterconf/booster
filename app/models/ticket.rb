@@ -26,4 +26,19 @@ class Ticket < ApplicationRecord
   def self.count_by_ticket_type(ticket_type)
     Ticket.where(ticket_type_id: ticket_type.id).count
   end
+
+  def self.all_unordered
+    Ticket.where(order_id: nil)
+  end
+
+  def self.build_prefilled_for_sponsor(sponsor, ticket_type)
+    ticket = Ticket.new
+    ticket.ticket_type = ticket_type
+    ticket.attend_dinner = true
+    ticket.name = "Please fill in name of attendee"
+    ticket.company = sponsor.name
+    ticket.email = sponsor.email
+    ticket.reference = SecureRandom.urlsafe_base64
+    return ticket
+  end
 end
