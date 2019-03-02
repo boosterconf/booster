@@ -31,7 +31,7 @@ class Ticket < ApplicationRecord
     Ticket.where(order_id: nil)
   end
 
-  def self.build_sponsor_ticket(sponsor, ticket_type)
+  def self.build_prefilled_for_sponsor(sponsor, ticket_type)
     ticket = Ticket.new
     ticket.ticket_type = ticket_type
     ticket.attend_dinner = true

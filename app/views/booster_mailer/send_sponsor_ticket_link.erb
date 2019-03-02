@@ -1,18 +1,16 @@
 <html>
-<body>
+<body><p>Registrere partnerbillett</p>
 
-<h2>Registrere partnerbillettene</h2>
 <p>
-  Dersom dere ikke allerede har gjort det, er det på tide å registrere partnerbillettene.
-  Partnere har to gratis billetter til konferansen.
-  <% @tickets.each_with_index { |ticket, index | %>
-      Klikk <%= link_to "her", tickets_from_reference_url(ticket.reference) %> for å registrere deltager <%= index + 1 %>.
-  <% } %>
+	Dette er en bekreftelse på en partnerbillett til <a href="http://www.boosterconf.no">the Boosterkonferansen</a>.
 </p>
 
 <p>
-  Vennlig hilsen <br/>
-  Booster
+	Vi ser frem til å se deg på konferansen! Navneskilt hentes på konferansen. For å få riktig informasjon på navneskiltene og eventuelle diettbehov er det viktig å oppdatere informasjonen ved hjelp av følgende skjema: <%= link_to "Din billett", tickets_from_reference_url(@ticket.reference) %>
 </p>
+
+<p>Dersom det oppstår noe ikke nøl med å ta kontakt med oss på kontakt@boosterconf.no.</p>
+
+<p>- Boosterkonferansekomiteen</p>
 </body>
 </html>
