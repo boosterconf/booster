@@ -162,7 +162,11 @@ class TicketsController < ApplicationController
   # DELETE /tickets/1
   def destroy
     Ticket.destroy(params[:id])
-    filters = params[:filters].permit(@@filter_params) || {}
+    if(params[:filter])
+      filters = params[:filters].permit(@@filter_params)
+    else
+      filters = {}
+    end
     redirect_to tickets_url(filters), notice: 'Ticket was successfully destroyed.'
   end
 
