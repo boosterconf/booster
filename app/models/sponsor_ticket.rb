@@ -8,4 +8,5 @@ class SponsorTicket < ApplicationRecord
 
 	validates :sponsor, :ticket, presence: true
 
+	scope :with_ticket_type, ->(ticket_type) { joins(:ticket).where(tickets: {ticket_type_id: ticket_type.id}) }
 end

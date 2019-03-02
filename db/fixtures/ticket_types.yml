@@ -1,3 +1,13 @@
+full_price:
+  reference: "full_price"
+  name: "Full price"
+  price: 8000
+  dinner_included: true
+early_bird:
+  reference: "early_bird"
+  name: "Early bird"
+  price: 6000
+  dinner_included: true
 sponsor:
   reference: "sponsor"
   name: "Sponsor"
@@ -13,13 +23,13 @@ lightning:
   name: "Lightning"
   price: 0
   dinner_included: true
-full_price:
-  reference: "full_price"
-  name: "Full price"
-  price: 0
-  dinner_included: true
 organizer:
   reference: "organizer"
   name: "Organizer"
+  price: 0
+  dinner_included: true
+one_day:
+  reference: "one_day"
+  name: "One day ticket"
   price: 0
   dinner_included: true

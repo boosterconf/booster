@@ -71,6 +71,11 @@ class TicketType < ApplicationRecord
   def self.organizer
     find_by_reference("organizer")
   end
+
+  def self.one_day
+    find_by_reference("one_day")
+  end
+
   def self.early_bird_is_active?
     Time.now < AppConfig.early_bird_ends && Ticket.count_by_ticket_type(TicketType.early_bird) < AppConfig.early_bird_ticket_limit
   end

@@ -63,7 +63,7 @@ class BoosterMailer < ApplicationMailer
     @email = user.email
     mail(:to => user.email, :from => FROM_EMAIL, :subject => "#{SUBJECT_PREFIX} User #{user.email} free ticket confirmation")
   end
-  
+
   def talk_confirmation(speaker, talk, talk_url)
     @speaker = speaker.first_name
     @email = speaker.email
@@ -263,6 +263,13 @@ class BoosterMailer < ApplicationMailer
 
   def send_sponsor_ticket_link(sponsor, tickets)
     @tickets = tickets
+    @sponsor = sponsor
+    mail(to: sponsor.email, from: FROM_EMAIL,
+         subject: "Booster partnerbilletter")
+  end
+
+  def send_sponsor_leader_ticket_link(sponsor, ticket)
+    @ticket = ticket
     @sponsor = sponsor
     mail(to: sponsor.email, from: FROM_EMAIL,
          subject: "Booster partnerbilletter")
