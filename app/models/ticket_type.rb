@@ -40,6 +40,10 @@ class TicketType < ApplicationRecord
     price < TicketType.full_price.price
   end
 
+  def has_fiken_product_reference?
+    fiken_product_uri.present?
+  end
+
   def self.current_normal_ticket
     early_bird_is_active? ? TicketType.early_bird : TicketType.full_price
   end

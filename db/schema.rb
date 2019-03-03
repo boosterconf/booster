@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_093733) do
+ActiveRecord::Schema.define(version: 2019_03_03_191053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -53,6 +53,17 @@ ActiveRecord::Schema.define(version: 2019_02_24_093733) do
     t.datetime "updated_at"
     t.datetime "departs_at"
     t.datetime "arrives_at"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "fiken_sale_uri"
+    t.string "stripe_charge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "reference"
+    t.index ["fiken_sale_uri"], name: "index_orders_on_fiken_sale_uri"
+    t.index ["reference"], name: "index_orders_on_reference"
+    t.index ["stripe_charge_id"], name: "index_orders_on_stripe_charge_id"
   end
 
   create_table "participants", id: :serial, force: :cascade do |t|
@@ -241,6 +252,8 @@ ActiveRecord::Schema.define(version: 2019_02_24_093733) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "dinner_included", default: true
+    t.string "fiken_product_uri"
+    t.index ["fiken_product_uri"], name: "index_ticket_types_on_fiken_product_uri"
   end
 
   create_table "tickets", id: :serial, force: :cascade do |t|
@@ -257,6 +270,8 @@ ActiveRecord::Schema.define(version: 2019_02_24_093733) do
     t.string "reference"
     t.boolean "attend_speakers_dinner"
     t.bigint "user_id"
+    t.bigint "order_id"
+    t.index ["order_id"], name: "index_tickets_on_order_id"
     t.index ["ticket_type_id"], name: "index_tickets_on_ticket_type_id"
     t.index ["user_id"], name: "index_tickets_on_user_id"
   end
@@ -313,6 +328,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_093733) do
 
   add_foreign_key "sponsor_tickets", "sponsors"
   add_foreign_key "sponsor_tickets", "tickets"
+  add_foreign_key "tickets", "orders"
   add_foreign_key "tickets", "ticket_types"
   add_foreign_key "tickets", "users"
 end

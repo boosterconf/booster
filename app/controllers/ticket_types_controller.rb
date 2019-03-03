@@ -13,6 +13,7 @@ class TicketTypesController < ApplicationController
 
   def edit
     @ticket_type = TicketType.find(params[:id])
+    @fiken = Fiken.get_current
   end
 
   def create
@@ -45,6 +46,6 @@ class TicketTypesController < ApplicationController
 
   private
   def ticket_type_params
-    params.require(:ticket_type).permit(:name, :reference, :price, :dinner_included)
+    params.require(:ticket_type).permit(:name, :reference, :price, :dinner_included, :fiken_product_uri)
   end
 end

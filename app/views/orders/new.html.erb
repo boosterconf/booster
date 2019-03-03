@@ -1,0 +1,77 @@
+<article class="inner" id="new-order">
+  <div class="header-join">
+    <h2>New order</h2>
+  </div>
+  <p id="notice"><%= notice %></p>
+  <%= form_for(@new_order_request, url: orders_path, method: :post) do |f| %>
+  <div>
+    <h4>Orders</h4>
+    <%- if(@new_order_request.errors.any?) -%>
+    <ul class="errors">
+      <%- @new_order_request.errors.full_messages.each do |message| -%>
+      <li><%= message %></li>
+      <%- end -%>
+    </ul>
+    <%- end -%>
+
+    <div class="form-group">
+      <%= f.label :tickets, "Tickets to include in order" %>
+      <table id="orders" class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Ticket type</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%- Ticket.all_unordered.each do |ticket| %>
+          <tr>
+            <td><%= check_box_tag "order_creation_form[ticket_ids][]", ticket.id, @new_order_request.tickets.include?(ticket) %></td>
+            <td><%= ticket.id %></td>
+            <td><%= ticket.name %></td>
+            <td><%= ticket.email %></td>
+            <td><%= ticket.company %></td>
+            <td><%= ticket.ticket_type.name %></td>
+          </tr>
+          <%- end -%>
+        </tbody>
+      </table>
+    </div>
+
+    <label>New or existing order in fiken?</label>
+    <fieldset class="form-group">
+      <span class="checkbox-btn">
+        <%= f.radio_button :new_order, true, id: "new_sale", :class => "input-checkbox new-order-field" %>
+        <label for="new_sale" class="btn btn-checkbox">New</label>
+      </span>
+      <span class="checkbox-btn">
+        <%= f.radio_button :new_order, false, id: "existing_sale", :class => "input-checkbox new-order-field" %>
+        <label for="existing_sale" class="btn btn-checkbox">Existing</label>
+      </span>
+    </fieldset>
+
+    <fieldset id="existing-sale-fieldset">
+      <div class="form-group">
+        <%= f.label :fiken_existing_sale_invoice_id, "Existing fiken sale \"fakturanummer\"" %>
+        <%= f.text_field :fiken_existing_sale_invoice_id, :class => "form-control"%>
+      </div>
+    </fieldset>
+
+    <fieldset id="new-sale-fieldset">
+      <div class="form-group">
+        <%= f.label :fiken_customer_uri, "Customer: " %><br />
+        <%= f.select :fiken_customer_uri, @customers, :class => "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= f.label :fiken_bank_account_uri, "Payment to bank account: " %><br />
+        <%= f.select :fiken_bank_account_uri, @bank_accounts, :class => "form-control"%>
+      </div>
+    </fieldset>
+  </div>
+  <%= f.submit "Create order from selected tickets" %>
+  <%- end -%>
+</article>

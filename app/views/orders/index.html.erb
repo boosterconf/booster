@@ -1,0 +1,36 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Orders</h2>
+  </div>
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <%= link_to 'New order from existing tickets', new_order_path %>
+  </p>
+
+  <div>
+    <h4>Orders</h4>
+    <table id="orders" class="table table-condensed table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Number of tickets</th>
+          <th>Fiken</th>
+          <th>Stripe charge ID</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <%- @orders.each do |order| -%>
+        <tr>
+          <td><%= order.id %></td>
+          <td><%= order.tickets.count %></td>
+          <td><%= link_to "Fiken order", @sales_urls_map[order.fiken_sale_uri] %></td>
+          <td><%= order.stripe_charge_id %></td>
+          <td><%= link_to "Destroy", order_path(order), method: :delete %></td>
+        </tr>
+      <%- end -%>
+      </tbody>
+    </table>
+  </div>
+</article>
