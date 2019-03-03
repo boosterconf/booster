@@ -23,7 +23,7 @@
 
       <div class="form-group">
         <%= f.label :fiken_product_uri, "Fiken product" %>
-        <%= f.select :fiken_product_uri, @fiken.products.map {|product| [product.name,product.href] }, :class => "form-control" %>
+        <%= f.select :fiken_product_uri, @fiken.products.map {|product| [product.name,product.href] }, :include_blank => true, :class => "form-control" %>
       </div>
 
       <div class="form-group">
