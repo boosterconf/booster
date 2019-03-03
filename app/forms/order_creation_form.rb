@@ -31,6 +31,13 @@ class OrderCreationForm
   validates :tickets, :presence => true
   validates_with TicketFikenProductValidator
 
+  attribute :fiken_existing_sale_invoice_id, String
+  validates_with OrderFikenInvoiceIdValidator, unless: Proc.new { |form| form.new_order }
+  attribute :new_order, Axiom::Types::Boolean, default: true
+
+  attribute :fiken_customer_uri, String
+  attribute :fiken_bank_account_uri, String
+
   def ticket_ids=(ids)
   	self.tickets = Ticket.where(id: ids).all
   end
@@ -38,13 +45,6 @@ class OrderCreationForm
   def ticket_ids
   	self.tickets.map(&:id)
   end
-
-  attribute :fiken_existing_sale_invoice_id, String
-  validates_with OrderFikenInvoiceIdValidator, unless: Proc.new { |form| form.new_order }
-  attribute :new_order, Axiom::Types::Boolean, default: true
-
-  attribute :fiken_customer_uri, String
-  attribute :fiken_bank_account_uri, String
 
   def fiken_existing_sale_uri
   	matching_sales = Fiken.get_current.sales.select { |sale| sale.identifier == fiken_existing_sale_invoice_id}
