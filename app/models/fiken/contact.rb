@@ -3,7 +3,7 @@ module Fiken
 		include Virtus.model
         include ActiveModel::Validations
 
-		def initialize(api_object)
+		def initialize(api_object = {})
 			@api_object = api_object
 			super(api_object)
 		end
