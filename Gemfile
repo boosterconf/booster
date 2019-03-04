@@ -14,6 +14,7 @@ gem 'rails-html-sanitizer', '~> 1.0.4'
 
 
 gem 'stripe'
+gem "agaon"
 
 gem 'responders', '~> 2.0'
 

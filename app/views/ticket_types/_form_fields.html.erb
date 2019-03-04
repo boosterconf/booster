@@ -1,0 +1,37 @@
+      <% if @ticket_type.errors %>
+          <ul>
+            <% @ticket_type.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+      <% end %>
+
+      <div class="form-group">
+        <%= f.label :reference %>
+        <%= f.text_field :reference, :class => "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :price %>
+        <%= f.text_field :price, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :fiken_product_uri, "Fiken product" %>
+        <%= f.select :fiken_product_uri, @fiken.products.map {|product| [product.name,product.href] }, :include_blank => true, :class => "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.check_box :dinner_included %>
+        <%= f.label :dinner_included, "Conference dinner included in ticket price" %>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit 'Update', :class => "btn btn-primary" %>
+        <%= link_to 'Back', ticket_types_path, :class => "btn btn-default" %>
+      </div>

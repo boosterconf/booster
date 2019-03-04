@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :download_emails
     end
   end
+  resources :orders
   resources :rooms
   resources :periods
   resources :slots

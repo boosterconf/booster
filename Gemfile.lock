@@ -43,6 +43,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    agaon (0.2.0)
+      hyperclient (= 0.8.5)
     ansi (1.5.0)
     arel (9.0.0)
     authlogic (3.8.0)
@@ -120,18 +122,34 @@ GEM
       railties (>= 3.0.0)
     faraday (0.15.2)
       multipart-post (>= 1.2, < 3)
+    faraday-digestauth (0.3.0)
+      faraday (~> 0.7)
+      net-http-digest_auth (~> 1.4)
+    faraday_hal_middleware (0.1.0)
+      faraday_middleware (~> 0.9)
+    faraday_middleware (0.13.1)
+      faraday (>= 0.7.4, < 1.0)
     ffi (1.9.25)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
+    futuroscope (0.1.11)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     heroku-deflater (0.6.3)
       rack (>= 1.4.5)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
+    hyperclient (0.8.5)
+      faraday (>= 0.9.0)
+      faraday-digestauth
+      faraday_hal_middleware
+      faraday_middleware
+      futuroscope
+      net-http-digest_auth
+      uri_template
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -169,6 +187,7 @@ GEM
     mocha (1.5.0)
       metaclass (~> 0.0.1)
     multipart-post (2.0.0)
+    net-http-digest_auth (1.4.1)
     netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.8.5)
@@ -321,6 +340,7 @@ GEM
       unf_ext
     unf_ext (0.0.7.5)
     uniform_notifier (1.11.0)
+    uri_template (0.7.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -334,6 +354,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  agaon
   authlogic (~> 3.8)
   aws-sdk (~> 2.3.0)
   better_errors
