@@ -28,7 +28,7 @@ class TicketOrderingService
 			invoice_request = Fiken::CreateInvoiceRequest.new(
 				ourReference: "#{order.reference}",
 				issueDate: issueDate,
-				dueDate: issueDate + 14,
+				dueDate: Date.today + 14,
 				lines: lines,
 				customer: customer,
 				bankAccountUrl: order_request_form.fiken_bank_account_uri
