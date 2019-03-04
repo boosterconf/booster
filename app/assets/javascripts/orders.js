@@ -10,4 +10,13 @@ $(document).ready(function() {
 			}
 		}
 	}).change();
+	$(".new-customer-field").change(function(){
+		if($(this).prop("checked")) {
+			if($(this).prop("value") == "true") {
+				$('#existing-customer-form-group').hide();
+			} else {
+				$('#existing-customer-form-group').show();
+			}
+		}
+	}).change();
 });

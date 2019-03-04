@@ -61,8 +61,19 @@
       </div>
     </fieldset>
 
+    <label>New or existing customer in fiken?</label>
     <fieldset id="new-sale-fieldset">
-      <div class="form-group">
+      <fieldset class="form-group">
+      <span class="checkbox-btn">
+        <%= f.radio_button :new_customer, true, id: "new_customer", :class => "input-checkbox new-customer-field" %>
+        <label for="new_customer" class="btn btn-checkbox">New customer</label>
+      </span>
+        <span class="checkbox-btn">
+          <%= f.radio_button :new_customer, false, id: "existing_customer", :class => "input-checkbox new-customer-field" %>
+          <label for="existing_customer" class="btn btn-checkbox">Existing customer</label>
+        </span>
+      </fieldset>
+      <div class="form-group" id="existing-customer-form-group">
         <%= f.label :fiken_customer_uri, "Customer: " %><br />
         <%= f.select :fiken_customer_uri, @customers, :class => "form-control"%>
       </div>

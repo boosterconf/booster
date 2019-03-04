@@ -35,6 +35,7 @@ class OrderCreationForm
   validates_with OrderFikenInvoiceIdValidator, unless: Proc.new { |form| form.new_order }
   attribute :new_order, Axiom::Types::Boolean, default: true
 
+  attribute :new_customer, Axiom::Types::Boolean, default: false
   attribute :fiken_customer_uri, String
   attribute :fiken_bank_account_uri, String
 
