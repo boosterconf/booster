@@ -29,7 +29,7 @@
           <td><%= @sales_customer_map[order.fiken_sale_uri].name %></td>
           <td><%= link_to "Fiken order", @sales_urls_map[order.fiken_sale_uri] %></td>
           <td><%= order.stripe_charge_id %></td>
-          <td><%= link_to "Destroy", order_path(order), method: :delete %></td>
+          <td><%= link_to "Destroy", order_path(order), method: :delete, :confirm => 'Are you sure? This will not do anything to the invoice in Fiken.' %></td>
         </tr>
       <%- end -%>
       </tbody>
