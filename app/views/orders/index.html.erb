@@ -15,6 +15,7 @@
         <tr>
           <th>Id</th>
           <th>Number of tickets</th>
+          <th>Customer name</th>
           <th>Fiken</th>
           <th>Stripe charge ID</th>
           <th></th>
@@ -25,6 +26,7 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= order.tickets.count %></td>
+          <td><%= @sales_customer_map[order.fiken_sale_uri].name %></td>
           <td><%= link_to "Fiken order", @sales_urls_map[order.fiken_sale_uri] %></td>
           <td><%= order.stripe_charge_id %></td>
           <td><%= link_to "Destroy", order_path(order), method: :delete %></td>

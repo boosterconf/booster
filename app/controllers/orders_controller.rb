@@ -2,8 +2,16 @@ class OrdersController < AdminController
 
 	def index
 		@orders = Order.includes(:tickets).all
-		@sales_urls_map = Fiken.get_current.sales.inject({}) do |result, sale|
+		fiken_company = Fiken.get_current
+		current_sales = fiken_company.sales
+		@sales_urls_map = current_sales.inject({}) do |result, sale|
 			result[sale.href] = sale.ui_url
+			result
+		end
+
+		current_contacts = fiken_company.contacts
+		@sales_customer_map = current_sales.inject({}) do |result, sale|
+			result[sale.href] = current_contacts.select { |contact| contact.href == sale.customer }.first
 			result
 		end
 	end

@@ -12,6 +12,10 @@ module Fiken
 			@api_object["href"]
 		end
 
+		def customer
+			@api_object["customer"]
+		end
+
 		# This is ugly but I see no other way to get it
 		def ui_url
 			href
