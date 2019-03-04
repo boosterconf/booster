@@ -20,7 +20,7 @@ test:
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
-  ticket_sales_open: true
+  ticket_sales_open: false
 
 staging:
   year: 2019
@@ -33,7 +33,7 @@ staging:
   partner_price_in_nok_before_vat: 31000
   fiken_email: "anders.rorvik@gmail.com"
   stripe_on: true
-  ticket_sales_open: true
+  ticket_sales_open: false
 
 production:
   year: 2019
