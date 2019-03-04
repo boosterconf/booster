@@ -55,7 +55,7 @@ class NametagPdf < Prawn::Document
     })
 
     tickets.each_with_index do |ticket, index|
-      image "#{Rails.root}/app/assets/images/nametag-background-blue.png", :width => bounds.width + 70, :at => [-35, bounds.height + 35]
+      image "#{Rails.root}/app/assets/images/nametag-background.png", :width => bounds.width + 70, :at => [-35, bounds.height + 35]
 
 
       move_down 25
