@@ -36,7 +36,7 @@ class OrderCreationForm
   attribute :new_order, Axiom::Types::Boolean, default: true
 
   attribute :new_customer, Axiom::Types::Boolean, default: false
-  attribute :customer_details, Fiken::Contact
+  attribute :customer_details, Fiken::Contact, default: lambda { |_,_| Fiken::Contact.new }
   validates :customer_details, presence: true, if: :new_customer
   validate :customer_details_must_be_valid, if: :new_customer
   attribute :fiken_customer_uri, String
