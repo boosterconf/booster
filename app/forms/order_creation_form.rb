@@ -36,8 +36,12 @@ class OrderCreationForm
   attribute :new_order, Axiom::Types::Boolean, default: true
 
   attribute :new_customer, Axiom::Types::Boolean, default: false
+  attribute :customer_details, Fiken::Contact
+  validates :customer_details, presence: true, if: :new_customer
   attribute :fiken_customer_uri, String
   attribute :fiken_bank_account_uri, String
+
+
 
   def ticket_ids=(ids)
   	self.tickets = Ticket.where(id: ids).all

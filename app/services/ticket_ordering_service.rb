@@ -10,7 +10,7 @@ class TicketOrderingService
 		if(order_request_form.new_order)
 
 			if(order_request_form.new_customer)
-				customer = {} #contact create request?
+				customer = { url: fiken_client.create_contact(order_request_form.customer_details)}
 			else
 				customer = { url: order_request_form.fiken_customer_uri }
 			end
