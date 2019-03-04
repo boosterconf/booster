@@ -22,13 +22,13 @@ $(document).ready(function() {
 		}
 	}).change();
 
-    $(".new-order #tickets").tablesorter({
+    $("#order-tickets").tablesorter({
       theme: 'blue',
       // use save sort widget
       widgets: ["saveSort"]
     });
 
-    $(".new-order #tickets").sieve({
+    $("#order-tickets").sieve({
       itemSelector: 'tbody tr',
       textSelector: 'td:not(.no-filter), td select option[selected]',
       searchTemplate: "<div><label>Search: <input type='text'></label></div>"
