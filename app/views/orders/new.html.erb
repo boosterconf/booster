@@ -78,6 +78,13 @@
         <%= f.select :fiken_customer_uri, @customers, :class => "form-control"%>
       </div>
       <fieldset id="new-customer-form-group">
+        <%- if(@new_order_request.customer_details.errors.any?) -%>
+        <ul class="errors">
+          <%- @new_order_request.customer_details.errors.full_messages.each do |message| -%>
+          <li><%= message %></li>
+          <%- end -%>
+        </ul>
+        <%- end -%>
         <%= f.fields_for :customer_details, @new_order_request.customer_details do |cf| %>
           <div class="form-group">
             <%= cf.label :name, "Customer name" %>
