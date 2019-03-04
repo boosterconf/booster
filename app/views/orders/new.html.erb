@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody>
-          <%- Ticket.all_unordered.each do |ticket| %>
+          <%- Ticket.all_unordered.includes(:ticket_type).select(&:has_fiken_product_reference?).each do |ticket| %>
           <tr class="<%= (ticket.ticket_type.has_fiken_product_reference?)? "" : "greyed-out" %>">
             <td><%= check_box_tag "order_creation_form[ticket_ids][]", ticket.id, @new_order_request.tickets.include?(ticket) if(ticket.ticket_type.has_fiken_product_reference?) %></td>
             <td><%= ticket.id %></td>
