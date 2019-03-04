@@ -68,6 +68,10 @@ class Talk < ApplicationRecord
     self.acceptance_status == 'pending'
   end
 
+  def room_capacity
+    self.slots.first&.room&.capacity
+  end
+
   def could_not_attend!
     self.acceptance_status = 'could_not_attend'
     self

@@ -34,4 +34,11 @@
           </div>
         </div>
     <% end %>
+
+    <% if talk.room_capacity %>
+        <p>
+	  <% if talk.max_participants %>Speaker max: <%= talk.max_participants %><br/><% end %>
+	  Room max: <%= talk.room_capacity %>
+	</p>
+    <% end %>
 <% end %>
