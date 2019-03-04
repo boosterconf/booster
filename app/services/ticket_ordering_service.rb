@@ -12,7 +12,7 @@ class TicketOrderingService
 			lines = order.tickets.map do |ticket|
 				Fiken::CreateInvoiceLine.new(
 						productUrl: ticket.ticket_type.fiken_product_uri,
-						description: "Ticket #{ticket.reference} for #{ticket.name}",
+						description: "#{ticket.ticket_type.name} for #{ticket.name}",
 					)
 			end
 			invoice_request = Fiken::CreateInvoiceRequest.new(
