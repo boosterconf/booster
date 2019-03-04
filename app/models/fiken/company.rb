@@ -33,8 +33,10 @@ module Fiken
 				return false
 			end
 
-			url = @api_object.contact(contact_details)
-			Fiken::Contact.new(@api_object.get_contact(url))
+			url = @api_object.contact(contact_details.as_json)
+			api_result = @api_object.get_contact(url)
+			api_result["href"] = url
+			Fiken::Contact.new(api_result)
 		end
 	end
 end

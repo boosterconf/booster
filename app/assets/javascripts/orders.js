@@ -14,7 +14,9 @@ $(document).ready(function() {
 		if($(this).prop("checked")) {
 			if($(this).prop("value") == "true") {
 				$('#existing-customer-form-group').hide();
+				$('#new-customer-form-group').show();
 			} else {
+				$('#new-customer-form-group').hide();
 				$('#existing-customer-form-group').show();
 			}
 		}
