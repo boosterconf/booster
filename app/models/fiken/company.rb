@@ -27,5 +27,16 @@ module Fiken
 			url = @api_object.create_invoice(invoice_request.as_json)
 			Fiken::Invoice.new(@api_object.get_invoice(url))
 		end
+
+		def create_contact(contact_details)
+			if(!contact_details.valid?)
+				return false
+			end
+
+			url = @api_object.contact(contact_details.as_json)
+			api_result = @api_object.get_contact(url)
+			api_result["href"] = url
+			Fiken::Contact.new(api_result)
+		end
 	end
 end

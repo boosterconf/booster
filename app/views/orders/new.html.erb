@@ -61,11 +61,41 @@
       </div>
     </fieldset>
 
+    <label>New or existing customer in fiken?</label>
     <fieldset id="new-sale-fieldset">
-      <div class="form-group">
+      <fieldset class="form-group">
+        <span class="checkbox-btn">
+          <%= f.radio_button :new_customer, true, id: "new_customer", :class => "input-checkbox new-customer-field" %>
+          <label for="new_customer" class="btn btn-checkbox">New customer</label>
+        </span>
+        <span class="checkbox-btn">
+          <%= f.radio_button :new_customer, false, id: "existing_customer", :class => "input-checkbox new-customer-field" %>
+          <label for="existing_customer" class="btn btn-checkbox">Existing customer</label>
+        </span>
+      </fieldset>
+      <div class="form-group" id="existing-customer-form-group">
         <%= f.label :fiken_customer_uri, "Customer: " %><br />
         <%= f.select :fiken_customer_uri, @customers, :class => "form-control"%>
       </div>
+      <fieldset id="new-customer-form-group">
+        <%- if(@new_order_request.customer_details.errors.any?) -%>
+        <ul class="errors">
+          <%- @new_order_request.customer_details.errors.full_messages.each do |message| -%>
+          <li><%= message %></li>
+          <%- end -%>
+        </ul>
+        <%- end -%>
+        <%= f.fields_for :customer_details, @new_order_request.customer_details do |cf| %>
+          <div class="form-group">
+            <%= cf.label :name, "Customer name" %>
+            <%= cf.text_field :name, :class => "form-control"%>
+          </div>
+          <div class="form-group">
+            <%= cf.label :email, "Customer email" %>
+            <%= cf.text_field :email, :class => "form-control"%>
+          </div>
+        <%- end -%>
+      </fieldset>
       <div class="form-group">
         <%= f.label :fiken_bank_account_uri, "Payment to bank account: " %><br />
         <%= f.select :fiken_bank_account_uri, @bank_accounts, :class => "form-control"%>

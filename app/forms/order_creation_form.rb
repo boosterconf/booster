@@ -35,8 +35,16 @@ class OrderCreationForm
   validates_with OrderFikenInvoiceIdValidator, unless: Proc.new { |form| form.new_order }
   attribute :new_order, Axiom::Types::Boolean, default: true
 
+  attribute :new_customer, Axiom::Types::Boolean, default: false
+  attribute :customer_details, Fiken::Contact
+  validates :customer_details, presence: true, if: :new_customer
+  validate :customer_details_must_be_valid, if: :new_customer
   attribute :fiken_customer_uri, String
   attribute :fiken_bank_account_uri, String
+
+  def customer_details_must_be_valid
+    errors.add(:base, "Customer details is not valid") unless customer_details.valid?
+  end
 
   def ticket_ids=(ids)
   	self.tickets = Ticket.where(id: ids).all

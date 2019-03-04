@@ -8,6 +8,16 @@ class TicketOrderingService
 
 		fiken_client = Fiken.get_current
 		if(order_request_form.new_order)
+
+			if(order_request_form.new_customer)
+				customer_details = order_request_form.customer_details
+				customer_details.customer = true
+				new_customer = fiken_client.create_contact(customer_details)
+				customer = { url: new_customer.href }
+			else
+				customer = { url: order_request_form.fiken_customer_uri }
+			end
+
 			issueDate = (order.tickets.one?)? order.tickets.first.created_at.to_date : Date.today
 			lines = order.tickets.map do |ticket|
 				Fiken::CreateInvoiceLine.new(
@@ -20,7 +30,7 @@ class TicketOrderingService
 				issueDate: issueDate,
 				dueDate: issueDate + 14,
 				lines: lines,
-				customer: { url: order_request_form.fiken_customer_uri },
+				customer: customer,
 				bankAccountUrl: order_request_form.fiken_bank_account_uri
 				)
 
