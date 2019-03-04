@@ -41,6 +41,7 @@ class OrderCreationForm
   validate :customer_details_must_be_valid, if: :new_customer
   attribute :fiken_customer_uri, String
   attribute :fiken_bank_account_uri, String
+  attribute :their_reference, String
 
   def customer_details_must_be_valid
     errors.add(:base, "Customer details is not valid") unless customer_details.valid?

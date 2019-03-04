@@ -100,6 +100,10 @@
         <%= f.label :fiken_bank_account_uri, "Payment to bank account: " %><br />
         <%= f.select :fiken_bank_account_uri, @bank_accounts, :class => "form-control"%>
       </div>
+      <div class="form-group">
+        <%= f.label :their_reference, "Their reference (not required): " %><br />
+        <%= f.text_field :their_reference, :class => "form-control"%>
+      </div>
     </fieldset>
   </div>
   <%= f.submit "Create order from selected tickets" %>
