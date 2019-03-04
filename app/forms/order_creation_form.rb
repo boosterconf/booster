@@ -37,8 +37,8 @@ class OrderCreationForm
 
   attribute :new_customer, Axiom::Types::Boolean, default: false
   attribute :customer_details, Fiken::Contact, default: lambda { |_,_| Fiken::Contact.new }
-  validates :customer_details, presence: true, if: :new_customer
-  validate :customer_details_must_be_valid, if: :new_customer
+  validates :customer_details, presence: true, if: Proc.new { |form| form.new_order && form.new_customer }
+  validate :customer_details_must_be_valid, if: Proc.new { |form| form.new_order && form.new_customer }
   attribute :fiken_customer_uri, String
   attribute :fiken_bank_account_uri, String
   attribute :their_reference, String
