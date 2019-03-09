@@ -3,7 +3,7 @@ class ProgramPdf < Prawn::Document
 	def initialize(opening_keynote, periods, talks, closing_keynote)
 		@periods = periods
 		@talks = talks
-		super(:page_size => "A4", :margin => 15)
+		super(:page_size => "A4", :margin => 15, :page_layout => :landscape)
 		setup
 		day_periods = @periods.group_by(&:day).each_pair.to_a.sort_by { |(day,_)| day}.map { |(_,periods)| periods.sort_by(&:start_time) }
 
@@ -95,11 +95,19 @@ class ProgramPdf < Prawn::Document
 		end
 	end
 	def period_headline(gridbox, text)
-		background_colored_gridbox_with_text(gridbox, text, "FFFFFF", dark_background_color)
+		background_colored_gridbox(gridbox, "FFFFFF", dark_background_color) do
+			indent(10,0) {
+				text text, size: 1*rem, valign: :center
+			}
+		end
 	end
 
 	def light_headline(gridbox, text)
-		background_colored_gridbox_with_text(gridbox, text, fill_color, light_background_color)
+		background_colored_gridbox(gridbox, fill_color, light_background_color) do
+			indent(10,0) {
+				text text, size: 1*rem, valign: :center
+			}
+		end
 	end
 
 	def draw_wednesday(opening_keynote, periods, include_start = true)
@@ -168,12 +176,12 @@ class ProgramPdf < Prawn::Document
 	end
 
 	def draw_day_title(title)
-		grid([row,0], [row,columns-1]).bounding_box do
+		grid([row,0], [row+1,columns-1]).bounding_box do
 			indent(10,0) {
 				text title, size: 2*rem, valign: :center
 			}
 		end
-		self.row += 1
+		self.row += 2
 	end
 
 	def draw_break_section(location:, time:, title:)
@@ -216,7 +224,7 @@ class ProgramPdf < Prawn::Document
 		# Check if we have space for the period
 		longest_period = period.slots.inject(0) { |current_max, slot| current_max = [slot.talks.count, current_max].max }
 		if(row + 2 + (longest_period * (rows_per_talk + 1)) > rows)
-			return false
+			throw Exception.new("Could not draw period #{period}")
 		end
 
 		type_text = case period.period_type
