@@ -69,41 +69,33 @@ class ProgramPdf < Prawn::Document
 		fill_rectangle [bounds.left, bounds.top], bounds.right, bounds.top
 		fill_color tmp_color
 	end
-	def background_colored_gridbox(gridbox, foreground_color, background_color)
-		gridbox.bounding_box do
+	def background_colored_gridbox(foreground_color, background_color)
 			fill_bounds background_color
 			tmp_color = fill_color
 			fill_color(foreground_color)
 			yield
 			fill_color tmp_color
-
-		end
 	end
-	def background_colored_gridbox_with_text(gridbox, text, foreground_color, background_color)
-		gridbox.bounding_box do
-			fill_bounds background_color
-			tmp_color = fill_color
-			fill_color(foreground_color)
-			indent(10,0) {
-				text text, size: 1*rem, valign: :center
-			}
-			fill_color tmp_color
 
-		end
-	end
-	def period_headline(gridbox, text)
-		background_colored_gridbox(gridbox, "FFFFFF", dark_background_color) do
+	def period_headline(text)
+		background_colored_gridbox("FFFFFF", dark_background_color) do
 			indent(10,0) {
 				text text, size: 1*rem, valign: :center
 			}
 		end
 	end
 
-	def light_headline(gridbox, text)
-		background_colored_gridbox(gridbox, fill_color, light_background_color) do
+	def light_headline(text)
+		background_colored_gridbox(fill_color, light_background_color) do
 			indent(10,0) {
 				text text, size: 1*rem, valign: :center
 			}
+		end
+	end
+
+	def pad_inside(left: 0, right: 0, top: 0, bottom: 0)
+		bounding_box([left, bounds.height-top], width: bounds.width - left - right, height: bounds.height - top - bottom) do
+			yield
 		end
 	end
 
@@ -182,37 +174,44 @@ class ProgramPdf < Prawn::Document
 	end
 
 	def draw_break_section(location:, time:, title:)
-		light_headline(grid([row,0], [row,columns-1]), "#{time} #{location} - #{title}")
+		grid([row,0], [row,columns-1]).bounding_box do
+			light_headline("#{time} #{location} - #{title}")
+		end
 		self.row += 1
 	end
 
 	def draw_open_space_section(location:, time:, title:)
-		period_headline(grid([row,0], [row,columns-1]), "#{time} #{location} - #{title}")
+		grid([row,0], [row,columns-1]).bounding_box do
+			period_headline("#{time} #{location} - #{title}")
+		end
 		self.row += 1
 
 	end
 
 	def draw_plenary_section(location:, time:, talk:)
-		period_headline(grid([row,0], [row,columns-1]), "#{time} #{location}")
+		grid([row,0], [row,columns-1]).bounding_box do
+			period_headline("#{time} #{location}")
+		end
 		self.row += 1
 
 		speakers = talk.speakers.map(&:user).map(&:full_name).join(" / ")
-
-		background_colored_gridbox(grid([row,0], [row,columns-1]), fill_color, "EEEEEE") do
-			bounding_box([10,bounds.height - rem/2], width: bounds.width-10, height: bounds.height-5){
-				formatted_text_box([
-						{
-							text: "Keynote: #{talk.title} ",
-							font: "FiraSansMedium",
-							size: 1*rem
-						},
-						{
-							text: speakers,
-							font: "FiraSans",
-							size: 0.8*rem
-						}
-				])
-			}
+		grid([row,0], [row,columns-1]).bounding_box do
+			background_colored_gridbox(fill_color, "EEEEEE") do
+				bounding_box([10,bounds.height - rem/2], width: bounds.width-10, height: bounds.height-5){
+					formatted_text_box([
+							{
+								text: "Keynote: #{talk.title} ",
+								font: "FiraSansMedium",
+								size: 1*rem
+							},
+							{
+								text: speakers,
+								font: "FiraSans",
+								size: 0.8*rem
+							}
+					])
+				}
+			end
 		end
 		self.row += 1
 	end
@@ -234,7 +233,9 @@ class ProgramPdf < Prawn::Document
 		end
 
 		# Headline for period
-		period_headline(grid([row,0], [row,columns-1]), "#{period.start_time.strftime("%H:%M")} - #{period.end_time.strftime("%H:%M")} #{type_text}")
+		grid([row,0], [row,columns-1]).bounding_box do
+			period_headline("#{period.start_time.strftime("%H:%M")} - #{period.end_time.strftime("%H:%M")} #{type_text}")
+		end
 		self.row += 1
 
 		# Tracks
@@ -242,19 +243,31 @@ class ProgramPdf < Prawn::Document
 		if(track_count == 0)
 			return
 		end
-		columns_per_track = columns/track_count
 		period.slots.each_with_index do |slot,index|
-			draw_talk slot, index, columns_per_track, rows_per_talk
+			draw_talk slot, index, track_count, rows_per_talk
 		end
 		self.row += 1 + (longest_period*rows_per_talk)
 		return true
 	end
 
-	def draw_talk(slot, column, columns_per_track, rows_per_talk)
+	def draw_talk(slot, track_number, track_count, rows_per_talk)
+		left_padding = 1
+		right_padding = 1
+		if(track_number == 0)
+			left_padding = 0
+		elsif(track_number == track_count - 1)
+			right_padding = 0
+		end
+
+		columns_per_track = columns/track_count
 		# Room headline
-		start_column = columns_per_track*column
-		end_column = columns_per_track*(column+1)-1
-		light_headline(grid([row,start_column], [row,end_column]), slot.room.name)
+		start_column = columns_per_track*track_number
+		end_column = columns_per_track*(track_number+1)-1
+		grid([row,start_column], [row,end_column]).bounding_box do
+			pad_inside(left: left_padding, right: right_padding) do
+				light_headline(slot.room.name)
+			end
+		end
 
 		# Talks
 		talks = slot.talk_positions.map(&:talk)
@@ -262,22 +275,25 @@ class ProgramPdf < Prawn::Document
 
 			speakers = talk.speakers.map(&:user).map(&:full_name).join(" / ")
 			grid_talk_start = row+(talk_index*rows_per_talk)+1
-			gridbox = grid([grid_talk_start,start_column], [grid_talk_start+(rows_per_talk-1),end_column])
-			background_colored_gridbox(gridbox, fill_color, (talk_index % 2 == 0)? "EEEEEE" : "CCCCCC") do
-				bounding_box([10, bounds.height - 10], width: bounds.width - 10, height: bounds.height - 10) do
-					formatted_text_box(
-						[
-							{
-								text: "#{talk.title} ",
-								font: "FiraSansMedium",
-								size: 0.9*rem
-							},
-							{
-								text: speakers,
-								font: "FiraSans",
-								size: 0.7*rem
-							}
-					])
+			grid([grid_talk_start,start_column], [grid_talk_start+(rows_per_talk-1),end_column]).bounding_box do
+				pad_inside(left: left_padding, right: right_padding) do
+					background_colored_gridbox(fill_color, (talk_index % 2 == 0)? "EEEEEE" : "CCCCCC") do
+						bounding_box([10, bounds.height - 10], width: bounds.width - 10, height: bounds.height - 10) do
+							formatted_text_box(
+								[
+									{
+										text: "#{talk.title} ",
+										font: "FiraSansMedium",
+										size: 0.9*rem
+									},
+									{
+										text: speakers,
+										font: "FiraSans",
+										size: 0.7*rem
+									}
+							])
+						end
+					end
 				end
 			end
 		end
