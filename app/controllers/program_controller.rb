@@ -8,16 +8,15 @@ class ProgramController < ApplicationController
     @periods = {}
 
     if (params.has_key?(:cache) && params[:cache] == false)
-      @talks = Talk.all.each {|talk| @talks[talk.id] = talk}
-      @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
+      @talks = fetch_talks.each {|talk| @talks[talk.id] = talk}
+      @periods = fetch_periods
     else
       @talks = Rails.cache.fetch(Cache::AllTalksCacheKey, expires_in: 30.minutes) do
-         Talk.all.each {|talk| @talks[talk.id] = talk}
+         fetch_talks.each {|talk| @talks[talk.id] = talk}
         @talks
       end
       @periods = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey, expires_in: 30.minutes) do
-        @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
-        @periods
+        fetch_periods
       end
     end
 
@@ -27,12 +26,23 @@ class ProgramController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = ProgramPdf.new(@opening_keynote, @periods, @talks, @closing_keynote)
-        send_data pdf.render,
-          filename: "booster_program_#{AppConfig.year}.pdf",
-                      type: 'application/pdf',
-                      disposition: 'inline'
+        pdf_data = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey + ".pdf", expires_in: 30.minutes) do
+          pdf = ProgramPdf.new(@opening_keynote, @periods, @talks, @closing_keynote)
+          pdf.render
+        end
+        send_data pdf_data, filename: "booster_program_#{AppConfig.year}.pdf",
+                                type: 'application/pdf',
+                                disposition: 'inline'
       end
     end
+  end
+
+  private
+  def fetch_talks
+    Talk.includes(:speakers => :user).all
+  end
+
+  def fetch_periods
+    Period.includes(:slots => [:room, :talks, :talk_positions => {:talk => {:speakers => :user }} ]).all.sort_by {|period| [period.day, period.start_time]}.reverse
   end
 end
