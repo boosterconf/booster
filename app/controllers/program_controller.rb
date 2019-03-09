@@ -1,5 +1,4 @@
 class ProgramController < ApplicationController
-
   def index
     unless AppConfig.program_released || current_user.is_admin?
       return redirect_to root_path
@@ -19,6 +18,20 @@ class ProgramController < ApplicationController
       @periods = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey, expires_in: 30.minutes) do
         @periods = Period.all.sort_by {|period| [period.day, period.start_time]}.reverse
         @periods
+      end
+    end
+
+    @opening_keynote = @talks[1364]
+    @closing_keynote = @talks[1368]
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = ProgramPdf.new(@opening_keynote, @periods, @talks, @closing_keynote)
+        send_data pdf.render,
+          filename: "booster_program_#{AppConfig.year}.pdf",
+                      type: 'application/pdf',
+                      disposition: 'inline'
       end
     end
   end
