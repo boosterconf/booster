@@ -114,9 +114,9 @@ class ProgramPdf < Prawn::Document
 		start_new_page
 		self.row = 0
 		draw_day_title "Wednesday after lunch"
-		draw_period periods[2], rows_per_talk: 3
+		draw_period periods[2], rows_per_talk: 4
 		draw_break_section(location: 'Downstairs', time: '15:00-15:15', title: 'Coffee break')
-		draw_period periods[3], rows_per_talk: 3
+		draw_period periods[3], rows_per_talk: 4
 		draw_break_section(location: 'Grand Selskapslokaler', time: '19:00-00:00', title: 'Conference dinner')
 	end
 
@@ -276,9 +276,17 @@ class ProgramPdf < Prawn::Document
 			speakers = talk.speakers.map(&:user).map(&:full_name).join(" / ")
 			grid_talk_start = row+(talk_index*rows_per_talk)+1
 			grid([grid_talk_start,start_column], [grid_talk_start+(rows_per_talk-1),end_column]).bounding_box do
+				# Spacing between tracks
 				pad_inside(left: left_padding, right: right_padding) do
 					background_colored_gridbox(fill_color, (talk_index % 2 == 0)? "EEEEEE" : "CCCCCC") do
-						bounding_box([10, bounds.height - 10], width: bounds.width - 10, height: bounds.height - 10) do
+						# Padding inside track box
+						top_padding = 0.7*rem
+						# If text would wrap, decrease margin in top
+						if(width_of("#{talk.title} ", size: 0.9*rem, font: "FiraSansMedium") + width_of(speakers, size: 0.7*rem, font: "FiraSans") > bounds.width)
+							top_padding = 2
+						end
+						pad_inside(left: 10, right: 10, top: top_padding) do
+						#bounding_box([10, bounds.height - 10], width: bounds.width - 15, height: bounds.height - 10) do
 							formatted_text_box(
 								[
 									{
