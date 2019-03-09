@@ -26,7 +26,7 @@ class ProgramController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        pdf_data = Rails.cache.fetch(Cache::ProgramPeriodsCacheKey + ".pdf", expires_in: 30.minutes) do
+        pdf_data = Rails.cache.fetch("booster_program_#{AppConfig.year}.pdf", expires_in: 30.minutes) do
           pdf = ProgramPdf.new(@opening_keynote, @periods, @talks, @closing_keynote)
           pdf.render
         end
