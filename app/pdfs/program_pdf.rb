@@ -12,9 +12,6 @@ class ProgramPdf < Prawn::Document
 		draw_thursday day_periods[1]
 		start_new_page
 		draw_friday closing_keynote, day_periods[2]
-    	#.to_a.reverse.each do |(day, periods_of_day)|
-		#	draw_program_day day.strftime("%A"), periods_of_day
-		#end
 	end
 	attr_accessor :row
 
@@ -205,7 +202,7 @@ class ProgramPdf < Prawn::Document
 			bounding_box([10,bounds.height - rem/2], width: bounds.width-10, height: bounds.height-5){
 				formatted_text_box([
 						{
-							text: "Keynote: #{talk.title}\n",
+							text: "Keynote: #{talk.title} ",
 							font: "FiraSansMedium",
 							size: 1*rem
 						},
@@ -222,7 +219,7 @@ class ProgramPdf < Prawn::Document
 
 	def draw_period(period, rows_per_talk: 1)
 		# Check if we have space for the period
-		longest_period = period.slots.inject(0) { |current_max, slot| current_max = [slot.talks.count, current_max].max }
+		longest_period = period.slots.inject(0) { |current_max, slot| current_max = [slot.talks.length, current_max].max }
 		if(row + 2 + (longest_period * (rows_per_talk + 1)) > rows)
 			throw Exception.new("Could not draw period #{period}")
 		end
@@ -241,7 +238,7 @@ class ProgramPdf < Prawn::Document
 		self.row += 1
 
 		# Tracks
-		track_count = period.slots.count
+		track_count = period.slots.length
 		if(track_count == 0)
 			return
 		end
