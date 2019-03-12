@@ -76,7 +76,7 @@ class RegisterLightningTalkController < ApplicationController
     @talk = LightningTalk.new(talk_params)
     @talk.talk_type = TalkType.find_by_name("Lightning talk")
     @talk.year = AppConfig.year
-    @keynote.accept!
+    @talk.accept!
     if @talk.save
       if(params[:notify_speaker] == "1")
         BoosterMailer.talk_confirmation(current_user, @talk, talk_url(@talk)).deliver_now
