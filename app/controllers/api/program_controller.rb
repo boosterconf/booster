@@ -11,34 +11,34 @@ module Api
       @periods = []
       @periods = Rails.cache.fetch(Cache::ProgramApiCacheKey, expires_in: 30.minutes) do
           # Onsdag
-          @periods << {:start_time => DateTime.parse("2000-01-01T09:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T09:15:00.000Z"), :day => Date.parse("2018-03-14"), :type => "organizers",
+          @periods << {:start_time => DateTime.parse("2000-01-01T09:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T09:15:00.000Z"), :day => Date.parse("2019-03-13"), :type => "organizers",
                        :talks => {"Dragefjellet" => {:title => "Welcome from the organizers", :speaker => "" }}}
-          @periods << {:start_time => DateTime.parse("2000-01-01T09:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T10:15:00.000Z"), :day => Date.parse("2018-03-14"), :type => "keynote",
-                       :talks => {"Dragefjellet" => {:title => "Keynote: Artificial Intelligence, Artificial Consciousness and Artificial Morality", :speaker => "Einar Duenger Bohn"}}}
-          @periods << {:start_time => DateTime.parse("2000-01-01T11:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T11:30:00.000Z"), :day => Date.parse("2018-03-14"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T12:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :day => Date.parse("2018-03-14"), :type => "Lunch", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T15:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:15:00.000Z"), :day => Date.parse("2018-03-14"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T19:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T00:00:00.000Z"), :day => Date.parse("2018-03-14"), :type => "Conference dinner - Galleri Nygaten", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T09:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T10:15:00.000Z"), :day => Date.parse("2019-03-13"), :type => "keynote",
+                       :talks => {"Dragefjellet" => {:title => "Keynote:Embidies vulnerabilities - Why I am hacking my own heart", :speaker => "Marie Moe"}}}
+          @periods << {:start_time => DateTime.parse("2000-01-01T11:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T11:30:00.000Z"), :day => Date.parse("2019-03-13"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T12:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :day => Date.parse("2019-03-13"), :type => "Lunch", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T15:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:15:00.000Z"), :day => Date.parse("2019-03-13"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T19:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T00:00:00.000Z"), :day => Date.parse("2019-03-13"), :type => "Conference dinner - Galleri Nygaten", :talks => nil}
 
           # Torsdag
-          @periods << {:start_time => DateTime.parse("2000-01-01T10:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T10:45:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T12:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Lunch", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T10:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T10:45:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T12:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Lunch", :talks => nil}
           # Open spaces
-          @periods << {:start_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T14:00:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Dragefjellet - Introduction to open spaces", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T14:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T14:45:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Dragefjellet and more - Open spaces 1", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T14:45:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:30:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Dragefjellet and more - Open spaces 2", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T14:00:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Dragefjellet - Introduction to open spaces", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T14:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T14:45:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Dragefjellet and more - Open spaces 1", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T14:45:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:30:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Dragefjellet and more - Open spaces 2", :talks => nil}
           # Short talks
-          @periods << {:start_time => DateTime.parse("2000-01-01T15:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:45:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T16:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T16:30:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T19:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T00:00:00.000Z"), :day => Date.parse("2018-03-15"), :type => "Speakers dinner - Nøsteboden", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T15:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:45:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T16:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T16:30:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T19:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T00:00:00.000Z"), :day => Date.parse("2019-03-14"), :type => "Speakers dinner - Grand Hotel Terminus", :talks => nil}
 
           #Fredag
-          @periods << {:start_time => DateTime.parse("2000-01-01T10:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T10:45:00.000Z"), :day => Date.parse("2018-03-16"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T12:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :day => Date.parse("2018-03-16"), :type => "Lunch", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T15:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:15:00.000Z"), :day => Date.parse("2018-03-16"), :type => "Coffee Break", :talks => nil}
-          @periods << {:start_time => DateTime.parse("2000-01-01T15:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T16:15:00.000Z"), :day => Date.parse("2018-03-16"), :type => "keynote",
-                       :talks => {"Dragefjellet" => {:title => "Keynote: Unleash Your Play Brain", :speaker => "Portia Tung"}}}
-          @periods << {:start_time => DateTime.parse("2000-01-01T16:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T16:30:00.000Z"), :day => Date.parse("2018-03-16"), :type => "organizers",
+          @periods << {:start_time => DateTime.parse("2000-01-01T10:30:00.000Z"), :end_time => DateTime.parse("2000-01-01T10:45:00.000Z"), :day => Date.parse("2019-03-15"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T12:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T13:30:00.000Z"), :day => Date.parse("2019-03-15"), :type => "Lunch", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T15:00:00.000Z"), :end_time => DateTime.parse("2000-01-01T15:15:00.000Z"), :day => Date.parse("2019-03-15"), :type => "Coffee Break", :talks => nil}
+          @periods << {:start_time => DateTime.parse("2000-01-01T15:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T16:15:00.000Z"), :day => Date.parse("2019-03-15"), :type => "keynote",
+                       :talks => {"Dragefjellet" => {:title => "Keynote: Meeting restistance and moving forward", :speaker => "Linda Rising"}}}
+          @periods << {:start_time => DateTime.parse("2000-01-01T16:15:00.000Z"), :end_time => DateTime.parse("2000-01-01T16:30:00.000Z"), :day => Date.parse("2019-03-15"), :type => "organizers",
                        :talks => {"Dragefjellet" => {:title => "See you next year", :speaker => "" }}}
 
 
