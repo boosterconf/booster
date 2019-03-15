@@ -1,25 +1,41 @@
 $(document).ready(function () {
+  var dayPatternRegex = /^#choose-day([0-9])/;
 
-  showAll();
+  function getSelectedDayFromUrl() {
+    var match = dayPatternRegex.exec(window.location.hash);
+    return match !== null ? parseInt(match[1]) : undefined;
+  }
+
+  var selectedDay = getSelectedDayFromUrl();
+  if (typeof selectedDay !== 'undefined') {
+    showDay(selectedDay);
+  }
+  else {
+    showAll();
+  }
 
   $('#choose-day1').on('click', function (e) {
     e.preventDefault();
     showDay(1);
+    history.pushState({}, '', '#' + this.id);
   });
 
   $('#choose-day2').on('click', function (e) {
     e.preventDefault();
     showDay(2);
+    history.pushState({}, '', '#' + this.id);
   });
 
   $('#choose-day3').on('click', function (e) {
     e.preventDefault();
     showDay(3);
+    history.pushState({}, '', '#' + this.id);
   });
 
   $('#choose-all').on('click', function (e) {
     e.preventDefault();
     showAll();
+    history.pushState({}, '', '#' + this.id);
   });
 
 });
