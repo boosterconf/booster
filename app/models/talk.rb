@@ -107,6 +107,10 @@ class Talk < ApplicationRecord
     talk_type.is_short_talk?
   end
 
+  def is_keynote?
+    talk_type.is_keynote?
+  end
+
 =begin
   def is_full?
     participants.size >= max_participants
