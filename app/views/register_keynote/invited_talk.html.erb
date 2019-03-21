@@ -1,7 +1,7 @@
 <article class="inner">
 <h1>Create invited keynote</h1>
 
-<%= form_for @keynote, url: "/register_keynote/invited_talk" do |f| %>
+<%= form_for @talk, url: "/register_keynote/invited_talk" do |f| %>
     <fieldset class="form-group">
       <%= f.label :user_ids, "Speaker" %>
 		<%= f.select :user_ids, User.all.map {|u| [u.full_name, u.id]} %>

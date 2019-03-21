@@ -1,4 +1,4 @@
-    <% @keynote.errors.full_messages.each do |msg| %>
+    <% @talk.errors.full_messages.each do |msg| %>
         <p class="has-error"><%= msg %></p>
     <% end %>
     <legend>Information visible for everyone</legend>
@@ -16,7 +16,7 @@
       <%= f.label :description, "Abstract" %>
 
       <%= f.text_area :description, :class => "tinymce span10" %>
-      <% if @keynote.errors[:description].present? %>
+      <% if @talk.errors[:description].present? %>
           <div class="error-message">
             You must provide an abstract.
           </div>
@@ -31,5 +31,5 @@
     <% end %>
 
     <div class="form-actions">
-      <%= f.submit @keynote.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
+      <%= f.submit @talk.new_record? ? 'Next' : 'Save changes', :class => 'btn btn-primary', data: {disable_with: "Submitting..."} %>
     </div>

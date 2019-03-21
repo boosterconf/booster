@@ -6,18 +6,18 @@ class RegisterKeynoteController < ApplicationController
   before_action :require_admin, :only => [:invited_talk, :create_invited_talk]
 
   def invited_talk
-    @keynote = Keynote.new
+    @talk = Keynote.new
   end
 
   def create_invited_talk
 
-    @keynote = Keynote.new(talk_params)
-    @keynote.talk_type = TalkType.find_by_name("Keynote")
-    @keynote.accept!
-    if @keynote.save
-      SlackNotifier.notify_talk(@keynote)
+    @talk = Keynote.new(talk_params)
+    @talk.talk_type = TalkType.find_by_name("Keynote")
+    @talk.accept!
+    if @talk.save
+      SlackNotifier.notify_talk(@talk)
 
-      redirect_to talk_path(@keynote)
+      redirect_to talk_path(@talk)
     else
       render action: :invited_talk
     end
