@@ -63,7 +63,7 @@
 
   <div class="description">
     <% if contains_html @talk.description %>
-        <%= sanitize @talk.description %>
+        <%= sanitize @talk.description_with_links %>
     <% else %>
         <%= simple_format h(@talk.description) %>
     <% end %>
