@@ -242,4 +242,8 @@ class Talk < ApplicationRecord
     "\"#{self.title}\" by #{self.speaker_name}"
   end
 
+  def description_with_links
+    self.description.gsub(URI.regexp(['http', 'https']), '<a href="\0">\0</a>')
+  end
+
 end
