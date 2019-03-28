@@ -10,7 +10,11 @@
           <div class="plenary-type talk">
             <h4><%= fa_icon("key") %>&nbsp;Keynote: <%= talk.title %>
               <% if talk.video_url.present? %><%= fa_icon("film") %>
-              <% end %></h4>
+              <% end %>
+              <% if talk.has_slides? %>
+                <i class="fa fa-sticky-note" title="Workshop has link to slides"></i>
+              <% end %>
+              </h4>
             <span class='author'><%= talk.speaker_name %></span>
             <%= render partial: 'adminInformation', locals: {talk: talk} %>
             <div class='description'><%= talk.description.html_safe %></div>

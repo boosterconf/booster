@@ -22,6 +22,14 @@
           </div>
       <% end %>
     </fieldset>
+
+    <fieldset class="form-group">
+      <%= f.check_box :hasSlides %>
+      <%= f.label :hasSlides, "Abstract contains link to slides" %>
+      <p>Checking this box will make a small icon appear next to the workshop in the program-view, so people can easily see which talks and workshops has slides. 
+      You can edit your abstract after your workshop to include a link to slides.</p>
+    </fieldset>
+
     <%= tinymce %>
     <% if admin? %>
         <fieldset class="form-group">

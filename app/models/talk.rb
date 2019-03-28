@@ -246,4 +246,8 @@ class Talk < ApplicationRecord
     self.description.gsub(URI.regexp(['http', 'https']), '<a href="\0">\0</a>')
   end
 
+  def has_slides
+    self.hasSlides == true
+  end
+
 end

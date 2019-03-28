@@ -10,6 +10,9 @@
             <h4><%= talk.title %>
               <% if talk.video_url.present? %><%= fa_icon("film") %>
               <% end %></h4>
+              <% if talk.has_slides? %>
+                <i class="fa fa-sticky-note" title="Talk has link to slides"></i>
+              <% end %>              
             <span class='author'><%= talk.speaker_name %></span>
             <%= render partial: 'adminInformation', locals: {talk: talk} %>
           </div>
