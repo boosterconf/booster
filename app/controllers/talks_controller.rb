@@ -164,6 +164,6 @@ class TalksController < ApplicationController
   def talk_params
     params.require(:talk).permit(:talk_type, :talk_type_id, :language, :title, :description, :audience_level, :max_participants,
                                  :participant_requirements, :equipment, :room_setup, :accepted_guidelines, :acceptance_status,
-                                 :slide, :outline, :appropriate_for_roles, :speakers_confirmed, :speaking_history, :video_url, :hasSlides)
+                                 :slide, :outline, :appropriate_for_roles, :speakers_confirmed, :speaking_history, :video_url, :has_slides)
   end
 end

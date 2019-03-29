@@ -247,7 +247,7 @@ class Talk < ApplicationRecord
   end
 
   def has_slides?
-    self.hasSlides == true
+    self.has_slides == true
   end
 
 end
