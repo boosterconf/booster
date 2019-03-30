@@ -93,7 +93,7 @@
 
       <p>
         <strong>Participant requirements:</strong>
-        <%= h @talk.participant_requirements %>
+        <%= sanitize @talk.participant_requirements_with_links %>
       </p>
 
   <% end %>

@@ -7,7 +7,7 @@
     <h3><%= link_to h(talk.title), talk %></h3>
     <ul>
       <li><strong>Room setup:</strong> <%= talk.room_setup %></li>
-      <li><strong>Participant requirements:</strong> <%= talk.participant_requirements %></li>
+      <li><strong>Participant requirements:</strong> <%= sanitize talk.participant_requirements_with_links %></li>
       <li><strong>Extra equipment needed:</strong> <%= talk.equipment %></li>
     </ul>
 
