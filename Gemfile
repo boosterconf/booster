@@ -27,6 +27,7 @@ end
 gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
+gem 'scrypt','~> 3.0.6'
 
 gem 'coffee-rails', '~> 4.2.2'
 gem 'uglifier', '>= 1.0.3'
