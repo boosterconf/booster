@@ -1,10 +1,10 @@
 development:
-  year: 2019
+  year: 2020
   cfp_open: true
   proposals_visible: true
-  program_released: false
+  program_released: true
   speakers_released: false
-  early_bird_ends: 2019-02-13 23:59:59 +1
+  early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
@@ -12,10 +12,10 @@ development:
   ticket_sales_open: false
 
 test:
-  year: 2019
+  year: 2020
   proposals_visible: false
   program_released: false
-  early_bird_ends: 2019-02-13 23:59:59 +1
+  early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
@@ -23,12 +23,12 @@ test:
   ticket_sales_open: false
 
 staging:
-  year: 2019
+  year: 2020
   cfp_open: true
   proposals_visible: true
   program_released: true
   speakers_released: false
-  early_bird_ends: 2019-02-13 23:59:59 +1
+  early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
   fiken_email: "anders.rorvik@gmail.com"
@@ -36,12 +36,12 @@ staging:
   ticket_sales_open: false
 
 production:
-  year: 2019
+  year: 2020
   cfp_open: false
   proposals_visible: false
-  program_released: true
+  program_released: false
   speakers_released: false
-  early_bird_ends: 2019-02-13 23:59:59 +1
+  early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
   fiken_email: "foreningen-boosterkonferansen@bilag.fiken.no"

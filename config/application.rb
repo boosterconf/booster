@@ -7,14 +7,14 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 module Dates
-	CFP_LIGHTNING_BEGINS = Date.parse("2018-09-15")
-	CFP_LIGHTNING_ENDS = Date.parse("2018-11-01")
-	CFP_TUTORIALS_BEGINS = Date.parse("2018-09-15")
-	CFP_TUTORIAL_ENDS = Date.parse("2018-11-01")
-  CONFERENCE_YEAR = 2019
-  CONFERENCE_DATES = "March 13-15 #{CONFERENCE_YEAR}"
-  CONFERENCE_DATES_NO = "13-15 mars #{CONFERENCE_YEAR}"
-  CONFERENCE_DATE_KIDS = "10. mars #{CONFERENCE_YEAR}"
+	CFP_LIGHTNING_BEGINS = Date.parse("2019-09-15")
+	CFP_LIGHTNING_ENDS = Date.parse("2019-11-01")
+	CFP_TUTORIALS_BEGINS = Date.parse("2019-09-15")
+	CFP_TUTORIAL_ENDS = Date.parse("2019-11-01")
+  CONFERENCE_YEAR = 2020
+  CONFERENCE_DATES = "March 18-20 #{CONFERENCE_YEAR}"
+  CONFERENCE_DATES_NO = "18-20 mars #{CONFERENCE_YEAR}"
+  CONFERENCE_DATE_KIDS = "15. mars #{CONFERENCE_YEAR}"
 end
 
 module Booster2013
@@ -28,6 +28,7 @@ module Booster2013
     #config.autoload_paths += %W(#{config.root}/extras)
     config.autoload_paths += %W(#{config.root}/lib/cache)
     config.autoload_paths += %W(#{config.root}/app/models/user)
+    config.autoload_paths += %W(#{config.root}/app/pdfs)
 
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
