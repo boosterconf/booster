@@ -206,7 +206,7 @@ GEM
     prawn (2.2.2)
       pdf-core (~> 0.7.0)
       ttfunk (~> 1.5)
-    rack (2.0.5)
+    rack (2.0.7)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
     rails (5.2.0)
