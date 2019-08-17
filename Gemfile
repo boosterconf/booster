@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 ruby '~>2.5'
 
-gem 'railties', '5.2.0'
-gem 'rails', '5.2.0'
+gem 'railties', '5.2.3'
+gem 'rails', '5.2.3'
 gem "authlogic", '~> 3.8'
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
@@ -18,7 +18,7 @@ gem "agaon"
 
 gem 'responders', '~> 2.0'
 
-gem 'bootstrap', '= 4.0.0.alpha2'
+gem 'bootstrap', '= 4.3.1'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>= 1.1.0'
@@ -72,7 +72,6 @@ group :test do
   gem "minitest-reporters", '~> 1.1'
   gem 'shoulda'
   gem "factory_girl_rails", "~> 3.0"
-	gem 'ruby-prof'
   gem 'rake'
   gem 'simplecov'
 end
