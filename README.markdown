@@ -18,7 +18,7 @@ To use the dockerfile, do the following:
 7. Configure rubymine to use the container as a remote interpreter.
 
 ### Vagrant
-Install Vagrant and VirtualBox, and checkout this repository. Then do the following steps. 
+Install Vagrant and VirtualBox, and checkout this repository. Then do the following steps.
 
     $ cd booster
     $ vagrant up # Wait for some time for this to complete
@@ -26,10 +26,10 @@ Install Vagrant and VirtualBox, and checkout this repository. Then do the follow
     $ cd /vagrant
     $ sh ./init.sh  # Wait for even longer. At the end of this script, you will be prompted for your heroku credentials, before the production database is pulled down.
     $ # If the previous steps have succeeded, continue
-    $ ./getsecrets.sh #This will get S3 secrets from Heroku and store them in secrets.sh 
+    $ ./getsecrets.sh #This will get S3 secrets from Heroku and store them in secrets.sh
     $ ./start.sh
 
-Test app in your host system browser, and verify that the booster conf home page is shown on localhost:3000. 
+Test app in your host system browser, and verify that the booster conf home page is shown on localhost:3000.
 If failure, reach out to us on Slack. :)
 
 ### Database connection with Vagrant
@@ -41,7 +41,7 @@ If failure, reach out to us on Slack. :)
         * User: vagrant
         * Pw: vagrant
         * URL: jdbc:postgresql://127.0.0.1/boosterconf
-        
+
     *In the SSL / SSH tab:
         * Check Use SSH tunnel
         * Proxy Host: localhost
@@ -67,33 +67,33 @@ Setup:
     # Install your SSH keys (Uses ~/.ssh/id_rsa.pub)
     $ heroku keys:add
     $ cd booster
-    $ git remote add production git@heroku.com:booster2019.git
+    $ git remote add production git@heroku.com:booster2020.git
     $ git remote add staging git@heroku.com:staging-boosterconf.git
 
 Fool around:
 
     # remote console
     $ heroku console --app staging-boosterconf
-    $ heroku console --app booster2019
+    $ heroku console --app booster2020
     # Pull data from the heroku app to your local db
     $ dropdb boosterconf
-    $ heroku pg:pull DATABASE_URL boosterconf --app booster2019
+    $ heroku pg:pull DATABASE_URL boosterconf --app booster2020
 
 Update (push):
 
     $ git push [production|staging|master]
     #DB changes? remember to migrate the server
-    $ heroku rake db:migrate --app [staging-boosterconf|booster2019]
+    $ heroku rake db:migrate --app [staging-boosterconf|booster2020]
 
 Run tests:
 
     $ rake db:test:prepare RAILS_ENV=test
     # Run "old" tests"
     $ rake test
-    # Run "spec" based tests: 
+    # Run "spec" based tests:
     $ rake spec
     # After tests have run, open up coverage/index.html in your browser for a coverage report by SimpleCov
 
 Heroku SendGrid:
     # For å sjekke user/pass:
-    $ heroku config --long --app booster2019
+    $ heroku config --long --app booster2020

@@ -27,7 +27,9 @@
   </div>
  <br/><br/>
 <%- end -%>
-  <p>Here are some of the amazing speakers that will be at Booster 2019!</p>
+<%- if(AppConfig.speakers_released) -%>
+  <p>Here are some of the amazing speakers that will be at Booster <%= AppConfig.year %>!</p>
+<%- end -%>
 </div>
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
