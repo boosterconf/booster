@@ -76,10 +76,11 @@
     </div>
   </div>
 </div>
-
+<%- if(AppConfig.speakers_released) -%>
 <div class="viewall">
   <%= link_to "View all", info_speakers_path %>
 </div>
+<%- end -%>
 
 <div class="imagetron">
   <div class="imagetron-bg" style='background-image: url("/images/bergen1920.jpg")'>
