@@ -80,7 +80,7 @@ class Sponsor < ApplicationRecord
   end
 
   def should_show_logo?
-    self.publish_logo && self.logo.exists? && self.accepted?
+    self.publish_logo && self.logo.file? && self.accepted?
   end
 
   def not_invoiced?

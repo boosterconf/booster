@@ -2,9 +2,11 @@ source 'https://rubygems.org'
 
 ruby '~>2.5'
 
-gem 'railties', '5.2.0'
-gem 'rails', '5.2.0'
-gem "authlogic", '~> 3.8'
+gem 'railties', '5.2.3'
+gem 'rails', '5.2.3'
+gem "devise", "~> 4.6.1"
+gem "devise-encryptable"
+gem 'devise-scrypt'
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
 
@@ -12,6 +14,8 @@ gem 'aws-sdk', '~> 2.3.0'
 gem 'loofah', '~> 2.2.3'
 gem 'rails-html-sanitizer', '~> 1.0.4'
 
+# Security requirement
+gem "nokogiri", ">= 1.10.4"
 
 gem 'stripe'
 gem "agaon"
@@ -34,7 +38,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
 
-gem 'prawn'
+gem 'prawn', "~>2.2.2"
 gem 'rails_12factor'
 gem 'rest-client', '~> 2.0.2'
 
@@ -64,6 +68,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'ruby-debug-ide'
   gem 'byebug'
+
+  gem 'flamegraph'
+  gem 'rack-mini-profiler'
+  gem 'stackprof'
 end
 
 group :test do
@@ -72,7 +80,6 @@ group :test do
   gem "minitest-reporters", '~> 1.1'
   gem 'shoulda'
   gem "factory_girl_rails", "~> 3.0"
-	gem 'ruby-prof'
   gem 'rake'
   gem 'simplecov'
 end

@@ -62,10 +62,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def login(user)
-    UserSession.create(user)
-  end
-
   def create_bio
     @user = User.find(params[:id])
 
