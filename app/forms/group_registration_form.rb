@@ -19,14 +19,14 @@ class GroupRegistrationForm
 
   validates :delivery_method, presence: true
   validates :zip, presence: true
-  validates :email, format: { with: Authlogic::Regex.email }, allow_blank: true
+  validates :email, format: { with: Devise.email_regexp }, allow_blank: true
 
   validates :email, presence: true, if: lambda { |gr| gr.delivery_method == 'email' }
   validates :adress, presence: true, if: lambda { |gr| gr.delivery_method == 'snail_mail' }
 
   def valid_emails
     tickets.each do |ticket|
-      errors.add(:tickets, "#{ticket.email} is not a valid email") unless ticket.email.match(Authlogic::Regex.email)
+      errors.add(:tickets, "#{ticket.email} is not a valid email") unless ticket.email.match(Devise.email_regexp)
     end
   end
 

@@ -170,7 +170,7 @@ class User < ApplicationRecord
   end
 
   def has_valid_email?
-    email.match(Authlogic::Regex.email)
+    email.match(Devise.email_regexp)
   end
 
   def self.find_by_email(email)
