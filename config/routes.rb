@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   get '/.well-known/acme-challenge/T0USF7R5JLNo9xygAzV_mHXxetcd2HLWD3Gjz3uNSiU' => 'pages#letsencrypt'
 
   resources :tickets do
@@ -60,9 +61,6 @@ Rails.application.routes.draw do
   end
 
   resources :user_sessions
-
-  match 'login' => 'user_sessions#new', :as => :login, via: :all
-  match 'logout' => 'user_sessions#destroy', :as => :logout, via: :all
 
   match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url, via: :all
   match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url, via: :all
