@@ -1,5 +1,4 @@
 language: ruby
-dist: bionic
 
 sudo: false
 services:
