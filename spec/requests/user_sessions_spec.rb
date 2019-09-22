@@ -18,7 +18,7 @@ describe "user session spec" do
 	it "signs the user in" do
 		user = create_valid_user
 
-    post user_sessions_path, :params => { :user_session => { :email => user.email, :password => 'password12345' }}
+    post user_session_path, :params => { :user => { :email => user.email, :password => 'password12345' }}
     expect(response).to redirect_to(root_path)
 
     follow_redirect!

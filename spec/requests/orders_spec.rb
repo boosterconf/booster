@@ -10,17 +10,15 @@ def create_admin_user
                       :email => "email@example.com",
                       :password => "password12345",
                       :password_confirmation => "password12345",
-                      :admin => true
+                      :is_admin => true
                   })
 end
 
-describe "creating an order with a new customer" do
+describe "ordering a ticket" do
 
-	it "makes the tickets not orderable a second time" do
-		user = create_admin_user
-    sign_in user
+	it "is possible to order a ticket" do
 
-    get root_path
+
 
 	end
 end

@@ -46,7 +46,7 @@ class UsersControllerTest < ActionController::TestCase
 
         kill_all_sessions # TODO: not sure why we have to do this, but we do.
 
-        get :from_reference, params: { reference: @user.registration.unique_reference }
+        get :from_reference, params: { reference: @user.unique_reference }
       end
 
       should 'be redirected to user edit page' do
@@ -61,20 +61,6 @@ class UsersControllerTest < ActionController::TestCase
     end
   end
 
-  context 'An unfinished user updating his profile info' do
-    setup do
-      @user = User.create_unfinished(SOME_EMAIL, TicketType.speaker)
-      @user.save(:validate => false)
-    end
-
-    should 'no longer be unfinished' do
-      post :update, params: { id: @user.id, user: update_user_params }
-
-      registration = User.find_by_email(SOME_EMAIL).registration
-      assert !registration.unfinished
-    end
-  end
-
   context 'A normal user' do
     setup do
       @normal_user = login_quentin
@@ -84,7 +70,7 @@ class UsersControllerTest < ActionController::TestCase
       setup do
         @user = User.create_unfinished("a@b.no", TicketType.speaker)
         @user.save(:validate => false)
-        get :from_reference, params: { :reference => @user.registration.unique_reference }
+        get :from_reference, params: { :reference => @user.unique_reference }
       end
 
       should 'be redirected to profile page' do
@@ -162,13 +148,14 @@ class UsersControllerTest < ActionController::TestCase
 
   def login_quentin
     q = users(:quentin)
-    UserSession.create(q)
+    sign_in q
     q
   end
 
   def kill_all_sessions
-    session = UserSession.find
-    session.destroy if session.present?
+    for user in User.all
+      sign_out user
+    end
   end
 
 end

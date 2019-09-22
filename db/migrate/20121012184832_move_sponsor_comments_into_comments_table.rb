@@ -1,4 +1,4 @@
-class MoveSponsorCommentsIntoCommentsTable < ActiveRecord::Migration
+class MoveSponsorCommentsIntoCommentsTable < ActiveRecord::Migration[4.2]
   def change
     Sponsor.all.each { |sponsor|
       unless sponsor.comment.empty?

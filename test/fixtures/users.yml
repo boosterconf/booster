@@ -7,18 +7,16 @@ quentin:
   birthyear: 1984
   hometown: Bergen
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("quentin" + salt) %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "69dZnzHVcVYs_VKsewsX"
+  encrypted_password: "400$8$1e$20d4fe1c08df9326$42c51168feaad2250b604f0dae5ef0411615605ec3efda1c1f60800ef3811642" # password: quentin
 
 god:
   email: god@paradise.net
   first_name: Jahve
   last_name: the LORD
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("god" + salt) %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "kw_WtpQpWHJck4vwFgcJ"
+  encrypted_password: "400$8$1e$71d1507d0145c998$4eaafb651158c243ff15f2915bd3069e9d6762087ac6f5799860c26bf1ce4bb0" # password: god
   is_admin: true
 
 reviewer:
@@ -26,54 +24,53 @@ reviewer:
   first_name: Nitty
   last_name: Pickersen
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("reviewer" + salt) %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cDc9piRLAfwmscxwi4A8"
+  encrypted_password: "400$8$1e$c10ad9617189279e$a78d53ef6429a067134de72cb1382b5e50e2187fa5f594029cd9f140d652a739" # password: reviewer
 
 test:
   email: test@whatever.com
   first_name: Test
   last_name: Whatever
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cqkhtPrxGstL5oAXzLgX"
+  encrypted_password: "400$8$1e$f372444b4e592887$97af518f66459204986dd1b25aa6ff996e78f1dd87ba7d160fd3e20b808c6256" # password: test
+
 
 other:
   email: other@whatever.com
   first_name: Other
   last_name: Guy
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cqkhtPrxGstL5oAXzLgX"
+  encrypted_password: "400$8$1e$f372444b4e592887$97af518f66459204986dd1b25aa6ff996e78f1dd87ba7d160fd3e20b808c6256" # password: test
+
 
 sponsor:
   email: sponsor@whatever.com
   first_name: Sponsor
   last_name: Dude
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cqkhtPrxGstL5oAXzLgX"
+  encrypted_password: "400$8$1e$f372444b4e592887$97af518f66459204986dd1b25aa6ff996e78f1dd87ba7d160fd3e20b808c6256" # password: test
+
 
 multispeaker:
   email: very@expressive.com
   first_name: Talk
   last_name: Talkative, Esq.
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cqkhtPrxGstL5oAXzLgX"
+  encrypted_password: "400$8$1e$f372444b4e592887$97af518f66459204986dd1b25aa6ff996e78f1dd87ba7d160fd3e20b808c6256" # password: test
+
 
 singlespeaker:
   email: not@much.com
   first_name: C.
   last_name: Oncise
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cqkhtPrxGstL5oAXzLgX"
+  encrypted_password: "400$8$1e$f372444b4e592887$97af518f66459204986dd1b25aa6ff996e78f1dd87ba7d160fd3e20b808c6256" # password: test
+
 
 
 late_registration:
@@ -81,6 +78,5 @@ late_registration:
   first_name: S.O.
   last_name: Tardy
   accepted_privacy_guidelines: true
-  password_salt: <%= salt = Authlogic::Random.hex_token %>
-  crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test") %>
-  persistence_token: <%= Authlogic::Random.hex_token %>
+  password_salt: "cqkhtPrxGstL5oAXzLgX"
+  encrypted_password: "400$8$1e$f372444b4e592887$97af518f66459204986dd1b25aa6ff996e78f1dd87ba7d160fd3e20b808c6256" # password: test

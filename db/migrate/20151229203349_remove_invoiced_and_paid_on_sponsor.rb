@@ -1,4 +1,4 @@
-class RemoveInvoicedAndPaidOnSponsor < ActiveRecord::Migration
+class RemoveInvoicedAndPaidOnSponsor < ActiveRecord::Migration[4.2]
   def up
     remove_column :sponsors, :paid
     remove_column :sponsors, :invoiced

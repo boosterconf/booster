@@ -1,4 +1,4 @@
-class FixShortTalksWithWrongType < ActiveRecord::Migration
+class FixShortTalksWithWrongType < ActiveRecord::Migration[4.2]
   def up
 
     Talk.includes(:talk_type).where(talk_types: { name: "Short talk" }).each do |talk|

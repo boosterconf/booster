@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     get :users_by_company, on: :collection
   end
 
-  resources :user_sessions
+  # resources :user_sessions
 
   match 'registrations/send_welcome_email' => 'registrations#send_welcome_email', :as => :send_welcome_email_url, via: :all
   match 'registrations/send_speakers_dinner_email' => 'registrations#send_speakers_dinner_email', :as => :send_speakers_dinner_email_url, via: :all

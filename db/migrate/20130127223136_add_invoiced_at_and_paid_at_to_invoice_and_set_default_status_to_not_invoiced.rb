@@ -1,4 +1,4 @@
-class AddInvoicedAtAndPaidAtToInvoiceAndSetDefaultStatusToNotInvoiced < ActiveRecord::Migration
+class AddInvoicedAtAndPaidAtToInvoiceAndSetDefaultStatusToNotInvoiced < ActiveRecord::Migration[4.2]
   def change
     add_column :invoices, :invoiced_at, :timestamp
     add_column :invoices, :paid_at, :timestamp

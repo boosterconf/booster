@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     unless admin?
       store_location
-      redirect_to new_session_path, :notice => "You must be a magician to access this page."
+      redirect_to new_user_session_path, :notice => "You must be a magician to access this page."
       return false
     end
   end
@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
   def require_user
     unless user_signed_in?
       store_location
-      redirect_to new_session_path, :notice => "You must be logged in to access this page."
+      redirect_to new_user_session_path, :notice => "You must be logged in to access this page."
       return false
     end
   end

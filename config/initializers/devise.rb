@@ -111,7 +111,7 @@ Devise.setup do |config|
   # a value less than 10 in other environments. Note that, for bcrypt (the default
   # algorithm), the cost increases exponentially with the number of stretches (e.g.
   # a value of 20 is already extremely slow: approx. 60 seconds for 1 calculation).
-  config.stretches = Rails.env.test? ? 1 : 20
+  config.stretches = Rails.env.test? ? 1 : 20 # scrypt stretches is ignored
 
   # Set up a pepper to generate the hashed password.
   # config.pepper = '82b39759512bf8bc355cbc514a43157656a3948e80cdc6b5697ccc9041bcddf599f2a14967db33365e0a5b906a612580050bfb2682258ba3daf4a6d1423077a6'

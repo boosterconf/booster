@@ -1,4 +1,4 @@
-class SplitSponsorContactPersonNameIntoFirstNameAndLastName < ActiveRecord::Migration
+class SplitSponsorContactPersonNameIntoFirstNameAndLastName < ActiveRecord::Migration[4.2]
   def up
     add_column :sponsors, :contact_person_first_name, :string
     add_column :sponsors, :contact_person_last_name, :string
