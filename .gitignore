@@ -100,3 +100,7 @@ secrets.sh/public/packs
 /node_modules
 yarn-debug.log*
 .yarn-integrity
+
+secrets.sh
+.generators
+.rakeTasks
