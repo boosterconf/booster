@@ -2,17 +2,16 @@ source 'https://rubygems.org'
 
 ruby '~>2.5'
 
-gem 'railties', '5.2.3'
-gem 'rails', '5.2.3'
-gem "devise", "~> 4.6.1"
+gem 'rails', '~>6.0.0'
+gem "devise", ">= 4.6.1"
 gem "devise-encryptable"
-gem 'devise-scrypt'
+gem "devise-scrypt"
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
 
 # Lock these gems to
 gem 'loofah', '~> 2.2.3'
-gem 'rails-html-sanitizer', '~> 1.0.4'
+gem 'rails-html-sanitizer', '>= 1.2.0'
 
 # Security requirement
 gem "nokogiri", ">= 1.10.4"
@@ -20,7 +19,7 @@ gem "nokogiri", ">= 1.10.4"
 gem 'stripe'
 gem "agaon"
 
-gem 'responders', '~> 2.0'
+gem 'responders', '~> 3.0'
 
 gem 'bootstrap', '= 4.0.0.alpha2'
 
@@ -32,7 +31,7 @@ gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
 
-gem 'coffee-rails', '~> 4.2.2'
+gem 'coffee-rails'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
@@ -42,7 +41,7 @@ gem 'prawn', "~>2.2.2"
 gem 'rails_12factor'
 gem 'rest-client', '~> 2.0.2'
 
-gem "paranoia", "~> 2.2"
+gem "paranoia", "~> 2.4.2"
 gem 'test-unit'
 
 gem 'virtus'
