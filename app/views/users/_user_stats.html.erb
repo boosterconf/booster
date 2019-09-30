@@ -1,18 +1,11 @@
 <h2>Internal information</h2>
 To better understand our audience, and create a better conference, we hope you will indulge us and provide us with
 some additional information about yourself. This information will NOT be publicized or shared with any external party.
-<div class="radio">
-  <label>
-    <%= f.radio_button :gender, 'M' %>
-    Male
-  </label>
-</div>
-<div class="radio">
-  <label>
-    <%= f.radio_button :gender, 'F' %>
-    Female
-  </label>
-</div>
+
+<fieldset class="form-group">
+  <%= f.label :gender, "Gender" %>
+  <%= text_field(:user, :gender, placeholder: "Male / Female / etc.", class: 'form-control') %>
+</fieldset>
 
 <fieldset class="form-group">
   <%= f.label :birthyear, "Birth year" %>
