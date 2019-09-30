@@ -1,20 +1,19 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'authlogic/test_case'
+
 require 'simplecov'
 SimpleCov.start 'rails'
 
 class ActionController::TestCase
-  setup :activate_authlogic
-  # AuthLogic helper...
+  include Devise::Test::ControllerHelpers
 
-  def login_as(u)    
-    UserSession.create(users(u))
+  def login_as(u)
+    sign_in users(u)
   end
 
   def logout
-    UserSession.find.destroy if UserSession.find
+    sign_out
   end
 
   def last_email_sent
@@ -22,11 +21,11 @@ class ActionController::TestCase
   end
 
   def logged_in_user
-    UserSession.find.record
+    @controller.current_user
   end
 end
 
-class ActiveSupport::TestCase  
+class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
   # in a transaction that's rolled back on completion.  This ensures that the
   # test database remains unchanged so your fixtures don't have to be reloaded
@@ -40,7 +39,7 @@ class ActiveSupport::TestCase
   # don't care one way or the other, switching from MyISAM to InnoDB tables
   # is recommended.
   #
-  # The only drawback to using transactional fixtures is when you actually 
+  # The only drawback to using transactional fixtures is when you actually
   # need to test transactions.  Since your test is bracketed by a transaction,
   # any transactions started in your code will be automatically rolled back.
   self.use_transactional_tests = true

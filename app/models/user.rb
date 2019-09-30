@@ -1,4 +1,9 @@
 class User < ApplicationRecord
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :encryptable, :database_authenticatable,
+         :recoverable, :rememberable, :validatable
+
   acts_as_paranoid
   has_one :ticket
   has_one :bio, autosave: true
@@ -7,10 +12,10 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :bio
 
-  acts_as_authentic do |c|
-    c.login_field = :email
-    c.validate_login_field = false
-  end
+  #acts_as_authentic do |c|
+  #  c.login_field = :email
+  #  c.validate_login_field = false
+  #end
 
   validates_presence_of :phone_number, :message => "You have to specify a phone number"
   validates_presence_of :first_name, :message => "You have to specify a first name."
@@ -165,7 +170,7 @@ class User < ApplicationRecord
   end
 
   def has_valid_email?
-    email.match(Authlogic::Regex.email)
+    email.match(Devise.email_regexp)
   end
 
   def self.find_by_email(email)

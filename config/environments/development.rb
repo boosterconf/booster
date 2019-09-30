@@ -60,6 +60,7 @@ Rails.application.configure do
   config.action_controller.action_on_unpermitted_parameters = :raise
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.after_initialize do
     Rails.application.routes.default_url_options[:host] = 'localhost:3000'

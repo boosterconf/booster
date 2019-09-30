@@ -2,21 +2,24 @@ source 'https://rubygems.org'
 
 ruby '~>2.5'
 
-gem 'railties', '5.2.0'
-gem 'rails', '5.2.0'
-gem "authlogic", '~> 3.8'
+gem 'rails', '~>6.0.0'
+gem "devise", ">= 4.6.1"
+gem "devise-encryptable"
+gem "devise-scrypt"
 gem 'paperclip', '~>5.0'
 gem 'aws-sdk', '~> 2.3.0'
 
 # Lock these gems to
 gem 'loofah', '~> 2.2.3'
-gem 'rails-html-sanitizer', '~> 1.0.4'
+gem 'rails-html-sanitizer', '>= 1.2.0'
 
+# Security requirement
+gem "nokogiri", ">= 1.10.4"
 
 gem 'stripe'
 gem "agaon"
 
-gem 'responders', '~> 2.0'
+gem 'responders', '~> 3.0'
 
 gem 'bootstrap', '= 4.0.0.alpha2'
 
@@ -28,17 +31,17 @@ gem 'tinymce-rails'
 gem 'selectize-rails'
 gem "font-awesome-rails"
 
-gem 'coffee-rails', '~> 4.2.2'
+gem 'coffee-rails'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'jquery-tablesorter'
 
-gem 'prawn'
+gem 'prawn', "~>2.2.2"
 gem 'rails_12factor'
 gem 'rest-client', '~> 2.0.2'
 
-gem "paranoia", "~> 2.2"
+gem "paranoia", "~> 2.4.2"
 gem 'test-unit'
 
 gem 'virtus'
@@ -64,6 +67,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'ruby-debug-ide'
   gem 'byebug'
+
+  gem 'flamegraph'
+  gem 'rack-mini-profiler'
+  gem 'stackprof'
 end
 
 group :test do
@@ -72,7 +79,6 @@ group :test do
   gem "minitest-reporters", '~> 1.1'
   gem 'shoulda'
   gem "factory_girl_rails", "~> 3.0"
-	gem 'ruby-prof'
   gem 'rake'
   gem 'simplecov'
 end

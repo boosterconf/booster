@@ -1,4 +1,4 @@
-class AddTypeToTalk < ActiveRecord::Migration
+class AddTypeToTalk < ActiveRecord::Migration[4.2]
   def change
     add_column :talks, :type, :string
 

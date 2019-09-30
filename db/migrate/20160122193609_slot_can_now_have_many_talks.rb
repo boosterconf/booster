@@ -1,4 +1,4 @@
-class SlotCanNowHaveManyTalks < ActiveRecord::Migration
+class SlotCanNowHaveManyTalks < ActiveRecord::Migration[4.2]
   def up
     create_table :talk_positions do |t|
       t.integer :talk_id, null: false

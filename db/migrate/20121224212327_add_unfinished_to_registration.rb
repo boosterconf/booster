@@ -1,4 +1,4 @@
-class AddUnfinishedToRegistration < ActiveRecord::Migration
+class AddUnfinishedToRegistration < ActiveRecord::Migration[4.2]
   def change
     add_column :registrations, :unfinished, :boolean
   end

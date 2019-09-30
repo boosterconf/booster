@@ -19,7 +19,7 @@ class RegisterLightningTalkController < ApplicationController
     @user.roles = params[:roles].join(',') if params[:roles]
 
     if @user.save
-      UserSession.create(login: @user.email, password: @user.password)
+      sign_in @user
       redirect_to '/register_lightning_talk/talk'
     else
       render action: :start
@@ -93,7 +93,7 @@ class RegisterLightningTalkController < ApplicationController
   def talk_params
     (current_user&.is_admin?) ?
         params.require(:talk).permit! :
-        params.require(:talk).permit(:language, :title, :description, :equipment)
+        params.require(:talk).permit(:language, :title, :description, :equipment, :has_slides)
   end
 
   def create_user_params

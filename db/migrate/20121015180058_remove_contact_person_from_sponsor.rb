@@ -1,4 +1,4 @@
-class RemoveContactPersonFromSponsor < ActiveRecord::Migration
+class RemoveContactPersonFromSponsor < ActiveRecord::Migration[4.2]
   def up
     remove_column :sponsors, :contact_person
   end

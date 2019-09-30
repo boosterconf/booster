@@ -1,4 +1,4 @@
-class DropFeedback < ActiveRecord::Migration
+class DropFeedback < ActiveRecord::Migration[4.2]
   def change
     drop_table :feedback_votes
     drop_table :feedback_comments

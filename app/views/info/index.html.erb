@@ -17,6 +17,10 @@
 <% end %>
 
 <div class="calltoaction">
+<%- if(AppConfig.cfp_open) %>
+  <span>Call for presentations is now open!</span><br />
+  <a class="btn btn-primary btn-large" href="/info/cfp">Submit a talk / workshop</a>
+<%- end %>
 <%- if(AppConfig.ticket_sales_open) -%>
   <p>The ticket sale is open!</p>
   <% if TicketType.early_bird_is_active? %>
@@ -31,6 +35,16 @@
   <p>Here are some of the amazing speakers that will be at Booster <%= AppConfig.year %>!</p>
 <%- end -%>
 </div>
+<%- if(AppConfig.cfp_open || AppConfig.ticket_sales_open) %>
+<div class="jumbotron m-b-0">
+  <div class="container text-xs-center">
+    <h2>We're working hard on making Booster <%= AppConfig.year %>!</h2>
+    <p class="lead">
+      <a href="https://vimeo.com/boosterconf">Meanwhile, check out the videos from <%= AppConfig.year - 1 %></a>
+    </p>
+  </div>
+</div>
+<%- end %>
 <div class="quad-list container-fluid">
   <div class="quad-list-big hidden-md-down">
     <div class="row">
@@ -76,10 +90,11 @@
     </div>
   </div>
 </div>
-
+<%- if(AppConfig.speakers_released) -%>
 <div class="viewall">
   <%= link_to "View all", info_speakers_path %>
 </div>
+<%- end -%>
 
 <div class="imagetron">
   <div class="imagetron-bg" style='background-image: url("/images/bergen1920.jpg")'>

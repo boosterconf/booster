@@ -1,4 +1,4 @@
-class AddSponsorEvents < ActiveRecord::Migration
+class AddSponsorEvents < ActiveRecord::Migration[4.2]
   def change
 
     create_table :events do |t|

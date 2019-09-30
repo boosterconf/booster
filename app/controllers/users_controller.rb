@@ -62,10 +62,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def login(user)
-    UserSession.create(user)
-  end
-
   def create_bio
     @user = User.find(params[:id])
 
@@ -81,6 +77,7 @@ class UsersController < ApplicationController
     @user.roles_will_change!
     @user.roles = params[:roles].join(",") if params[:roles]
     @user.assign_attributes(user_params)
+    @user.skeleton_user_registration_finished = true
 
     if @user.save
       flash[:notice] = 'Updated profile.'
@@ -163,10 +160,14 @@ class UsersController < ApplicationController
       return
     end
 
-    @user = User.find_by(unique_reference: params[:reference])
-
-     login @user
-     redirect_to edit_user_path @user
+    user = User.find_by(unique_reference: params[:reference])
+    if(user)
+      sign_in user
+      redirect_to edit_user_path user
+    else
+      flash[:error] = "Could not find user with reference"
+      redirect_to root_path
+    end
   end
 
   private

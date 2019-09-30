@@ -1,4 +1,4 @@
-class AddRoomReferenceToSlot < ActiveRecord::Migration
+class AddRoomReferenceToSlot < ActiveRecord::Migration[4.2]
 
   def change
     change_table :slots do |t|

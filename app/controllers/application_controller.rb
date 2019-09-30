@@ -1,18 +1,13 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user_session, :current_user, :logged_in?, :admin?, :admin_or_talk_owner?
+  helper_method :logged_in?, :admin?, :admin_or_talk_owner?
   before_action :ensure_redirect_to_subdomain
   before_action :load_sponsors
 
 
   private
   LOOKS_NUMBER_LIKE = /^[-+]?[1-9]([0-9]*)?$/
-
-  def current_user_session
-    return @current_user_session if defined?(@current_user_session)
-    @current_user_session = UserSession.find
-  end
 
   def ensure_redirect_to_subdomain
     if request.host == 'www.boosterconf.no'
@@ -31,15 +26,6 @@ class ApplicationController < ActionController::Base
       @our_sponsors
     end
     @our_sponsors
-  end
-
-  def current_user
-    return @current_user if defined?(@current_user)
-    @current_user = current_user_session && current_user_session.record
-  end
-
-  def logged_in?
-    current_user
   end
 
   def admin?
@@ -61,7 +47,7 @@ class ApplicationController < ActionController::Base
   def require_admin
     unless admin?
       store_location
-      redirect_to new_user_session_url, :notice => "You must be a magician to access this page."
+      redirect_to new_user_session_path, :notice => "You must be a magician to access this page."
       return false
     end
   end
@@ -77,9 +63,9 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
-    unless current_user
+    unless user_signed_in?
       store_location
-      redirect_to new_user_session_url, :notice => "You must be logged in to access this page."
+      redirect_to new_user_session_path, :notice => "You must be logged in to access this page."
       return false
     end
   end

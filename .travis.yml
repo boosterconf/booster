@@ -1,9 +1,8 @@
 language: ruby
 
-rvm:
-  - 2.5.1
-
 sudo: false
+services:
+  - postgresql
 
 env:
   - DB=postgresql
@@ -11,6 +10,8 @@ env:
 before_script:
   - cp config/database.yml.travis config/database.yml
   - psql -c 'create database travis_ci_test' -U postgres
+  - gem install bundler
+cache: bundler
 
 script:
   - RAILS_ENV=test bundle exec rake db:schema:load
