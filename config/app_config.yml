@@ -38,7 +38,7 @@ staging:
 production:
   year: 2020
   cfp_open: true
-  proposals_visible: false
+  proposals_visible: true
   program_released: false
   speakers_released: false
   early_bird_ends: 2020-02-13 23:59:59 +1
