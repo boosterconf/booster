@@ -141,7 +141,7 @@ class UsersControllerTest < ActionController::TestCase
   def create_speaker_params
     { 'company' => 'DRW', 'first_name' => 'Dan', 'last_name' => 'North', 'bio_attributes' =>
         { 'title' => 'Boss', 'blog' => 'dannorth.net', 'twitter_handle' => 'tastapod', 'bio' => 'Testtest' },
-      'gender' => 'M', 'password_confirmation' => 'test', 'featured_speaker' => '0',
+      'gender' => 'Male', 'password_confirmation' => 'test', 'featured_speaker' => '0',
       'phone_number' => '93400346', 'hometown' => 'London',
       'password' => 'test', 'birthyear' => '1976', 'email' => 'dan@north.net' }
   end
