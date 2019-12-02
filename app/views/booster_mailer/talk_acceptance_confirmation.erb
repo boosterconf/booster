@@ -2,13 +2,16 @@
 <body>
 <p>Hello, <%= @speaker.first_name %></p>
 
-<p>We have the pleasure of informing you that your abstract
+<p>
+  We have the pleasure of informing you that your abstract
   "<%= @talk.title %>"
-  for Booster <%= Dates::CONFERENCE_YEAR %> has been accepted!</p>
+  for Booster <%= Dates::CONFERENCE_YEAR %> has been accepted!
+</p>
 
-<p>We would like you to confirm that you are still able to present at the
-  conference. Please do so by replying to this email as soon as possible,
-  so that we can publish the conference program.
+<p>
+  Are you still able to speak at Booster? <br/>
+  Please confirm or reject this acceptance by replying to this email. <br/> 
+  Deadline: Tuesday, 10th of December.
 </p>
 
 <% if @talk.is_workshop? %>
@@ -19,31 +22,30 @@
     
 <% end %>
   
-  <% if @talk.is_lightning_talk? %>
-    <p>The lightning talks are scheduled for Wednesday March 13.</p>
+<% if @talk.is_lightning_talk? %>
+    <p>The lightning talks are scheduled for Wednesday March 18.</p>
 <% end %>
+
 <% if @talk.is_short_talk? %>
-    <p>The short talks are scheduled for Thursday March 14.</p>
+    <p>The short talks are scheduled for Thursday March 19.</p>
 <% end %>
   
- <p>You are entitled to free entrance to the conference and conference
-      dinner.</p>
+ <p>You are entitled to free entrance to the conference and conference dinner.</p>
   
 <% unless @speaker.invited? %>
-    <p>We will cover the cost of travel and stay only in some cases.
+    <p>
+      We will cover the cost of travel and stay only in some cases.
       Confer with our <a href="http://www.boosterconf.no/info/monetary_policy">monetary policy</a> for the details,
-      and contact us on kontakt@boosterconf.no if you think you are eligible and have not yet applied. If you need a hotel room in Bergen, we recommend the
-      conference hotel,
-      Scandic Bergen City. Please contact them by telephone +47 55 30 90 80
-      or by email at bergencity@scandichotels.com.</p>
+      and contact us on kontakt@boosterconf.no if you think you are eligible and have not yet applied. If you need a hotel room in Bergen, we recommend the conference hotel, Scandic Bergen City. Please contact them by telephone +47 55 30 90 80 or by email at bergencity@scandichotels.com.
+    </p>
 <% end %>
-<p>If you are not able to present at the conference after all, please let
-  us know as soon as possible by replying to this email, so we can offer
-  this time slot to someone else.</p>
+<p>
+  If you are not able to speak at the conference after all, please let us know by Tuesday, 10th of Decemeber, so we can offer this time slot to someone else.
+</p>
 
-<p>If you want to make any changes to the description of your talk, it is
-  still possible to do so until the conference starts by using this url: <%= edit_talk_url(@talk, :host => 'boosterconf.no') %>
-  However, please be aware that we will begin publishing information about the program in a few days.</p>
+<p>
+  If you want to update the description of your talk found on our proposals page, then that is okay. This is possible to do until March 17th. Do so by using this url: <%= edit_talk_url(@talk, :host => 'boosterconf.no') %> 
+</p>
 
 <p>Best regards,<br>
 The Booster conference organizers</p>
