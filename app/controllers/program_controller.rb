@@ -20,8 +20,8 @@ class ProgramController < ApplicationController
       end
     end
 
-    @opening_keynote = @talks[1364]
-    @closing_keynote = @talks[1368]
+    @opening_keynote = @talks[1713]
+    @closing_keynote = @talks[1714]
 
     respond_to do |format|
       format.html
