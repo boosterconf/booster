@@ -95,4 +95,6 @@ Rails.application.configure do
   config.after_initialize do
     Rails.application.routes.default_url_options[:host] = default_host
   end
+
+  config.active_job.queue_adapter = :sidekiq
 end

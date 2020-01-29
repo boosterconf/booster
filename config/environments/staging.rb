@@ -76,4 +76,6 @@ Booster2013::Application.configure do
   config.after_initialize do
     Rails.application.routes.default_url_options[:host] = 'staging-boosterconf.herokuapp.com'
   end
+
+    config.active_job.queue_adapter = :sidekiq
 end

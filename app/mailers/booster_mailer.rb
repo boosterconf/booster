@@ -244,6 +244,24 @@ class BoosterMailer < ApplicationMailer
          cc: FROM_EMAIL)
   end
 
+  def ticket_confirmation_company_invoice(ticket)
+    @name = ticket.name
+    @amount_due = ticket.ticket_type.price_with_vat
+    @email = ticket.email
+    @ticket = ticket
+    mail(to: ticket.email, from: FROM_EMAIL,
+         subject: "Your ticket to Booster is confirmed",
+         cc: FROM_EMAIL)
+  end
+  def ticket_company_invoice_details(ticket, company_name)
+    @name = ticket.name
+    @email = ticket.email
+    @company_name = company_name
+    mail(to: FROM_EMAIL, from: FROM_EMAIL,
+         subject: "Company invoiced ticket created",
+         cc: FROM_EMAIL)
+  end
+
   def ticket_confirmation_speakers_and_organizers(ticket)
     @name = ticket.name
     @email = ticket.email

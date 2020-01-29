@@ -1,0 +1,10 @@
+<article class="inner">
+  <div class="header-join">
+    <h2>Order of <%= @order.tickets.count %> <%= "ticket".pluralize(@order.tickets.count) %></h2>
+  </div>
+  <p>Hurray, you have ordered your <%= "ticket".pluralize(@order.tickets.count) %>!</p>
+  <p>
+    We look forward to seeing you. Any questions? Send them to <a href="mailto:kontakt@boosterconf.no">kontakt@boosterconf.no</a>
+    and we will answer them as soon as we can.
+  </p>
+</article>

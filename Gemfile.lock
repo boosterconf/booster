@@ -232,6 +232,8 @@ GEM
     rack (2.0.7)
     rack-mini-profiler (1.0.2)
       rack (>= 1.2.0)
+    rack-protection (2.0.8.1)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.0)
@@ -280,6 +282,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
+    redis (4.1.3)
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -331,6 +334,11 @@ GEM
     shoulda-context (1.2.2)
     shoulda-matchers (3.1.3)
       activesupport (>= 4.0.0)
+    sidekiq (6.0.4)
+      connection_pool (>= 2.2.2)
+      rack (>= 2.0.0)
+      rack-protection (>= 2.0.0)
+      redis (>= 4.1.0)
     simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
@@ -345,7 +353,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.4.1)
     stackprof (0.2.12)
-    stripe (5.2.0)
+    stripe (5.14.0)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
     test-unit (3.3.3)
@@ -429,10 +437,11 @@ DEPENDENCIES
   sass-rails
   selectize-rails
   shoulda
+  sidekiq
   simplecov
   sqlite3
   stackprof
-  stripe
+  stripe (>= 5.14.0)
   test-unit
   thin
   tinymce-rails

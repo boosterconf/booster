@@ -1,0 +1,15 @@
+.attendee-form {
+	margin: 5px 0;
+	padding: 0;
+	background-color: #F6f6f6;
+	fieldset {
+		padding: 10px;
+		display: block;
+	}
+	.is_attending_dinner {
+		display: none;
+	}
+}
+#invoice_fields {
+	display: none;
+}

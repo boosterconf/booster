@@ -43,6 +43,7 @@ $btn-border-radius: 2rem;
 @import "tickets";
 @import "jumbotron";
 @import "orders";
+@import "ticket_order_form";
 
 html, body {
   height: 100%;
@@ -127,5 +128,11 @@ article .btn-group > button {
   &:focus {
     background-color: $button-hover-color;
     border-color: $button-hover-color;
+  }
+}
+
+form {
+  .error {
+    color: red;
   }
 }

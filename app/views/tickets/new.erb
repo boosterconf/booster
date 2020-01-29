@@ -10,9 +10,91 @@
 
 
   <p id="price_info">
-    Price: NOK <%= number_with_precision(@ticket.ticket_type.price, precision: 0) %>,- (excluding VAT, <%= number_with_precision(@ticket.ticket_type.price_with_vat, precision: 0) %> including VAT).
+    Price: NOK <%= number_with_precision(@ticket_type.price, precision: 0) %>,- (excluding VAT, <%= number_with_precision(@ticket_type.price_with_vat, precision: 0) %> including VAT).
   </p>
+  <%- if(notice) %>
+  <p><%= notice %></p>
+  <%- end %>
+    <%= form_for(@ticket_order_form, url: tickets_path, method: :post) do |f| %>
+    <fieldset class="attendee-form">
+      <%= fields_for "ticket_order_form[attendees][]", @ticket_order_form.attendees.first || TicketOrder::Attendee.new do |a_f| %>
+        <fieldset class="form-group">
+          <%= a_f.label :name, "Name" %>
+          <%= a_f.text_field :name, class: 'form-control input-short', required: true, placeholder: "Name" %>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= a_f.label :email, "Email" %>
+          <%= a_f.text_field :email, class: 'form-control input-short', required: true, placeholder: "Email" %>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= a_f.label :company, "Company" %>
+          <%= a_f.text_field :company, class: 'form-control input-short', required: true, placeholder: "Company" %>
+        </fieldset>
+      <fieldset class="form-group">
+      <label>What role(s) do you have?</label><br />
+        <% Roles.all.each do |role| %>
+            <span class="checkbox-btn">
+              <%= check_box_tag "ticket_order_form[attendees][][roles][]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
+              <label for="roles_<%=role%>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
+            </span>
+        <% end %>
+      </fieldset>
+        <fieldset class="checkbox is_attending_dinner">
+          <label>
+            <%= a_f.check_box :is_attending_conference_dinner, class: "checkbox" %>
+            I'd like to attend the conference dinner on Wednesday
+          </label>
+        </fieldset>
+        <fieldset class="form-group">
+          <%= a_f.label :dietary_requirements, "Dietary requirements (allergy/vegetarian)?" %>
+          <%= a_f.text_area :dietary_requirements, :class => "form-control input-md" %>
+        </fieldset>
+      <%- end -%>
+    </fieldset>
+    <% if current_user && current_user.is_admin %>
+        <fieldset class="form-group">
+          <label for="ticket_type">Ticket type</label>
+          <%= f.collection_select :ticket_type_reference, TicketType.all, :reference, :name, {},  class: 'form-control admin' %>
+        </fieldset>
+    <% end %>
 
+    <fieldset class="form-group">
+      <%= f.label :how_did_you_hear_about_us, "How did you hear about us?" %>
+      <%= f.text_area :how_did_you_hear_about_us, :class => "form-control input-md" %>
+    </fieldset>
+
+    <fieldset class="form-group" id="payment-method-select">
+      <label>What payment method do you prefer?</label><br />
+      <% TicketOrderForm.payment_method_types.each_with_index do |(payment_detail_type, label),i| %>
+          <span class="checkbox-btn">
+            <%= radio_button_tag "ticket_order_form[payment_details_type]", payment_detail_type, @ticket_order_form.payment_details_type == payment_detail_type, id: "payment_method_type_#{payment_detail_type}", :class => "input-radio" %>
+            <label for="payment_method_type_<%=payment_detail_type%>" class="btn btn-checkbox"><%= label %></label>
+          </span>
+      <% end %>
+    </fieldset>
+    <fieldset id="invoice_fields">
+      <%= f.fields_for :invoice_details, @ticket_order_form.invoice_details do |i_f| %>
+        <fieldset class="form-group">
+          <%= i_f.label :name, "Name" %>
+          <%= i_f.text_field :name, class: 'form-control input-short', placeholder: "Name" %>
+          <%= i_f.label :email, "Email" %>
+          <%= i_f.text_field :email, class: 'form-control input-short', placeholder: "Email" %>
+          <%= i_f.label :address, "Invoice address" %>
+          <%= i_f.text_field :address, class: 'form-control input-short', placeholder: "Address" %>
+        </fieldset>
+      <%- end %>
+    </fieldset>
+    <fieldset id="company_invoice_fields">
+      <%= f.fields_for :company_invoice_details, @ticket_order_form.company_invoice_details do |i_f| %>
+        <fieldset class="form-group">
+          <%= i_f.label :name, "Employer company name" %>
+          <%= i_f.text_field :name, class: 'form-control input-short', placeholder: "Company name" %>
+        </fieldset>
+      <%- end %>
+    </fieldset>
+    <button class="btn btn-primary">Order tickets</button>
+  <%- end %>
+<%- if(false) %>
   <%= form_for(@ticket) do |f| %>
       <% if current_user && current_user.is_admin %>
           <div class="form-group">
@@ -23,7 +105,7 @@
       <% end %>
 
       <fieldset class="form-group">
-        <%= f.label :name, "Name" %>
+        <%= f.label :name, "Company name" %>
         <%= text_field(:ticket, :name, placeholder: "What's your name", class: 'form-control input-short', required: true) %>
       </fieldset>
 
@@ -62,15 +144,10 @@
         <%= f.label :feedback, "How did you hear about us?" %>
         <%= f.text_area :feedback, :class => "form-control input-md" %>
       </fieldset>
-
       <fieldset class="form-group">
-        <label>Payment reference (optional)</label>
-        <%= text_field_tag "payment_reference", "", placeholder: "Reference used if you choose to pay by invoice", class: 'form-control input-short' %>
-      </fieldset>
-      <fieldset class="form-group">
-        <label>Zip code for the paying company (optional)</label>
-        <%= text_field_tag "payment_zip_code", "", placeholder: "If paying by invoice, we need the company zip code", class: 'form-control input-short' %>
-      </fieldset>
+       <label>Payment reference (optional)</label>
+       <%= text_field_tag "payment_reference", "", placeholder: "Reference used if you choose to pay by invoice", class: 'form-control input-short' %>
+     </fieldset>
 
       <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
 
@@ -88,25 +165,11 @@
 
 
       <div class="form-actions">
-
-        <% if AppConfig.stripe_on %>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                data-description="<%=@ticket.ticket_type.name%>"
-                data-name="BOOSTERKONFERANSEN"
-                data-amount="<%= (@ticket.ticket_type.price_with_vat * 100) %>"
-                data-locale="auto"
-                data-zip-code="true"
-                data-currency="nok"></script>
-        <% end %>
-        <script>
-            // Remove the default stripe button as it is so damn ugly
-            document.getElementsByClassName("stripe-button-el")[0].style.display = 'none';
-        </script>
-        <button type="submit" class="btn btn-primary">Pay with card</button>
+        <button type="submit" class="btn btn-primary" name="payment_type" value="card">Pay with card</button>
         <span>&nbsp;&nbsp;or&nbsp;&nbsp;</span>
-        <%= button_to "I'd rather get an invoice", tickets_path, class: "btn btn-primary", id: "primary_submit" %>
+        <button type="submit" class="btn" name="payment_type" value="invoice">I'd rather get an invoice</button>
 
       </div>
   <% end %>
+  <%- end -%>
 </article>

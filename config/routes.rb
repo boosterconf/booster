@@ -9,7 +9,13 @@ Rails.application.routes.draw do
       get :download_emails
     end
   end
-  resources :orders
+  resources :orders do
+    resource :invoice, only: [:new, :create]
+    resource :direct_payment, only: [:new, :completed] do
+      get :completed
+    end
+  end
+  post "/direct_payment/webhook" => "direct_payments#webhook"
   resources :rooms
   resources :periods
   resources :slots

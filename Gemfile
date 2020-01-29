@@ -16,7 +16,7 @@ gem 'rails-html-sanitizer', '>= 1.2.0'
 # Security requirement
 gem "nokogiri", ">= 1.10.4"
 
-gem 'stripe'
+gem 'stripe', ">= 5.14.0"
 gem "agaon"
 
 gem 'responders', '~> 3.0'
@@ -48,6 +48,8 @@ gem 'virtus'
 gem 'pg', "= 0.21.0"
 #gem 'webpacker'
 gem 'react-rails'
+
+gem 'sidekiq'
 
 group :production do
   gem 'heroku-deflater'

@@ -8,8 +8,10 @@ development:
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
+  fiken_invoice_bank_account_href: https://fiken.no/api/v1/companies/fiken-demo-venstre-og-fysisk-rakett-as/bank-accounts/756577080
+  fiken_stripe_account_code: "1960:10001"
   stripe_on: true
-  ticket_sales_open: false
+  ticket_sales_open: true
 
 test:
   year: 2020
@@ -19,6 +21,8 @@ test:
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 29000
   fiken_email: "anders.rorvik@gmail.com"
+  fiken_invoice_bank_account_href: https://fiken.no/api/v1/companies/fiken-demo-venstre-og-fysisk-rakett-as/bank-accounts/756577080
+  fiken_stripe_account_code: "1960:10001"
   stripe_on: true
   ticket_sales_open: false
 
@@ -32,6 +36,8 @@ staging:
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
   fiken_email: "anders.rorvik@gmail.com"
+  fiken_invoice_bank_account_href: https://fiken.no/api/v1/companies/fiken-demo-venstre-og-fysisk-rakett-as/bank-accounts/756577080
+  fiken_stripe_account_code: "1960:10001"
   stripe_on: true
   ticket_sales_open: false
 
@@ -45,5 +51,7 @@ production:
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
   fiken_email: "foreningen-boosterkonferansen@bilag.fiken.no"
+  fiken_invoice_bank_account_href: https://fiken.no/api/v1/companies/foreningen-boosterkonferansen/bank-accounts/253144070
+  fiken_stripe_account_code: "1960:10001"
   stripe_on: true
   ticket_sales_open: false

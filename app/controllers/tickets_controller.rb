@@ -71,92 +71,68 @@ class TicketsController < ApplicationController
 
   # GET /tickets/new
   def new
-    @ticket = Ticket.new
-    @ticket.ticket_type = TicketType.current_normal_ticket
+    #@ticket = Ticket.new
+    @ticket_order_form = TicketOrderForm.new
+    @ticket_type = TicketType.current_normal_ticket
+    @ticket_order_form.ticket_type_reference = @ticket_type.reference
+    #@ticket.ticket_type = TicketType.current_normal_ticket
   end
 
   # POST /tickets
   def create
-    @ticket = Ticket.new(ticket_params)
-    if current_user && current_user.is_admin
-      @ticket.ticket_type = TicketType.find_by_id(params[:ticket][:ticket_type_id])
-    else
-      @ticket.ticket_type = TicketType.current_normal_ticket
-    end
+    ActiveRecord::Base.transaction do
+      @ticket_order_form = TicketOrderForm.new(ticket_form_params)
+      @ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference) || TicketType.current_normal_ticket
 
-    @payment_reference = params[:payment_reference]
-    @payment_zip = params[:payment_zip_code]
-    @ticket.roles = params[:roles].join(",") if params[:roles]
-    @ticket.reference = SecureRandom.urlsafe_base64
-
-    unless @ticket.valid?
-      render :new
-    else
-      # Avoiding duplicate registrations
-      if Ticket.has_ticket(@ticket.email)
-        existing_ticket = Ticket.where(email: @ticket.email).take
-        redirect_to existing_ticket, notice: "You are registered for Booster!" and return
-      end
-
-      if (params[:stripeToken])
-        puts "Received stripe token, pay with card"
-        customer = Stripe::Customer.create(
-            :email => params[:stripeEmail],
-            :source => params[:stripeToken]
-        )
-
-        charge = Stripe::Charge.create(
-            :customer => customer.id,
-            :amount => (@ticket.ticket_type.price_with_vat * 100).to_int,
-            :description => @ticket.ticket_type.name,
-            :statement_descriptor => @ticket.ticket_type.name.slice(0, ([@ticket.ticket_type.name.length, 22].min)),
-            :currency => 'nok'
-        )
-        notice = "Your ticket is paid for!"
-        BoosterMailer.ticket_confirmation_paid(@ticket).deliver_now
-        BoosterMailer.invoice_to_fiken([@ticket], charge, nil).deliver_now
+      unless @ticket_order_form.valid?
+        render :new
       else
-        BoosterMailer.ticket_confirmation_invoice(@ticket).deliver_now
-        if @ticket.ticket_type.paying_ticket?
-          notice = "An invoice will be sent to #{@ticket.email}."
-          BoosterMailer.invoice_to_fiken([@ticket], nil,
-                                         {:payment_email => @ticket.email,
-                                          :payment_info => @payment_reference,
-                                          :payment_zip => @payment_zip,
-                                          :extra_info => ""}).deliver_now
+
+        if(@ticket_order_form.attendees.count > 1)
+          throw StandardError.new("We are not designed for more attendees on this flow")
+        end
+        attendee = @ticket_order_form.attendees.first
+        @ticket = Ticket.from_attendee_form(attendee)
+        if current_user && current_user.is_admin
+          @ticket.ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference)
+        else
+          @ticket.ticket_type = TicketType.current_normal_ticket
+        end
+
+        @ticket.roles = attendee.roles.join(",")
+        @ticket.reference = SecureRandom.urlsafe_base64
+
+
+        unless @ticket.valid?
+          render :new, notice: "Could not generate ticket from your info, please contact us!"
+        else
+
+          payment_type = @ticket_order_form.payment_details_type
+          if(["card", "invoice"].include?(payment_type))
+
+            order = Order.new
+            order.tickets << @ticket
+            order.payment_type = @ticket_order_form.payment_details_type
+            order.save!
+            if(payment_type == "card")
+              redirect_to new_order_direct_payment_path(order)
+            elsif(payment_type == "invoice")
+              invoice_details = @ticket_order_form.invoice_details
+              FikenOrderInvoiceCreationJob.perform_later(order.id, invoice_details.name, invoice_details.email, params[:payment_reference])
+              BoosterMailer.ticket_confirmation_invoice(@ticket).deliver_later
+              redirect_to order_path(order)
+            end
+
+          else
+            @ticket.save!
+            BoosterMailer.ticket_confirmation_company_invoice(@ticket).deliver_later
+            BoosterMailer.ticket_company_invoice_details(@ticket, @ticket_order_form.company_invoice_details.name).deliver_later
+            redirect_to ticket_path(@ticket)
+          end
+
         end
       end
-      @ticket.save!
-      redirect_to @ticket, notice: notice
     end
-
-  rescue Stripe::CardError => e
-    flash[:stripe_error] = e.message
-    render :new
-  rescue Stripe::RateLimitError => e
-    puts e
-    flash[:stripe_error] = "We were unable to process your payment via Stripe. Don't worry, choose invoice instead, and we'll sort it out."
-    redirect_to new_ticket_path
-  rescue Stripe::InvalidRequestError => e
-    puts e
-    flash[:stripe_error] = "We were unable to process your payment via Stripe. Don't worry, choose invoice instead, and we'll sort it out."
-    redirect_to new_ticket_path
-  rescue Stripe::AuthenticationError => e
-    puts e
-    flash[:stripe_error] = "We were unable to process your payment via Stripe. Don't worry, choose invoice instead, and we'll sort it out."
-    redirect_to new_ticket_path
-  rescue Stripe::APIConnectionError => e
-    puts e
-    flash[:stripe_error] = "We were unable to process your payment via Stripe. Don't worry, choose invoice instead, and we'll sort it out."
-    redirect_to new_ticket_path
-  rescue Stripe::StripeError => e
-    puts e
-    flash[:stripe_error] = "We were unable to process your payment via Stripe. Don't worry, choose invoice instead, and we'll sort it out."
-    redirect_to new_ticket_path
-  rescue => e
-    puts e
-    flash[:error] = "Something went wrong and I don't know what to do about it. I need to tell my human, so they can figure it out. Come back later."
-    render :new
   end
 
   # DELETE /tickets/1
@@ -221,6 +197,10 @@ class TicketsController < ApplicationController
   def ticket_params
     params.require(:ticket).permit(:name, :email, :feedback, :company,
                                    :attend_dinner, :attend_speakers_dinner, :dietary_info, :ticket_type_id, :reference)
+  end
+
+  def ticket_form_params
+    params.require(:ticket_order_form).permit!
   end
 
   def ticket_sales_open?

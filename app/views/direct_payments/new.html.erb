@@ -1,0 +1,9 @@
+<script type="text/javascript">
+	var stripe = Stripe('<%= Rails.configuration.stripe[:publishable_key] %>');
+	stripe.redirectToCheckout({
+	  sessionId: '<%= @session.id %>'
+	}).then(function (result) {
+	});
+
+</script>
+<p>Please wait while we redirect you to our payment provider!</p>

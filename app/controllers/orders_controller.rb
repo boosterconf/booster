@@ -1,7 +1,7 @@
 class OrdersController < AdminController
 
 	def index
-		@orders = Order.includes(:tickets).all
+		@orders = Order.all
 		fiken_company = Fiken.get_current
 		current_sales = fiken_company.sales
 		@sales_urls_map = current_sales.inject({}) do |result, sale|

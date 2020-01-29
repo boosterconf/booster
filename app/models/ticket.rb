@@ -2,8 +2,20 @@ require 'csv'
 
 class Ticket < ApplicationRecord
 
+  def self.from_attendee_form(form)
+    self.new({
+      name: form.name,
+      email: form.email,
+      company: form.company,
+      roles: form.roles,
+      attend_dinner: form.is_attending_conference_dinner,
+      dietary_info: form.dietary_requirements
+    })
+  end
+
   belongs_to :ticket_type
   has_one :sponsor_ticket, dependent: :destroy
+  belongs_to :order
 
   default_scope  { order('tickets.created_at desc') }
 
