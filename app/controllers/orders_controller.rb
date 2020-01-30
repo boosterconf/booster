@@ -1,4 +1,6 @@
-class OrdersController < AdminController
+class OrdersController < ApplicationController
+
+	before_action :require_admin, except: [:show]
 
 	def index
 		@orders = Order.all
@@ -41,6 +43,9 @@ class OrdersController < AdminController
 		redirect_to orders_path
 	end
 
+	def show
+		@order = Order.find_by_id!(params[:id])
+	end
 	private
 
 	def order_creation_form_params
