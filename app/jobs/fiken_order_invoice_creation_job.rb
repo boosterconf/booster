@@ -19,8 +19,7 @@ class FikenOrderInvoiceCreationJob < ApplicationJob
 				throw StandardError.new("Could not create invoice customer {name: #{customerName}, email: #{customerEmail}}")
 			end
 
-			# If a payment is already registered on the order, mark the sale as already paid to stripe account
-			if(payment_reference)
+			if(order.payment_type == "card")
 				payment_account = AppConfig.fiken_stripe_account_code
 				cash = true
 			else
