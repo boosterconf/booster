@@ -13,7 +13,7 @@ class Attendee
   attribute :dietary_requirements, String
 
   validates :name, presence: true
-  validates :email, presence: true
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :company, presence: true
   validate do
     errors.add :email, 'already has a ticket issued to it' if Ticket.where(email: email).any?
