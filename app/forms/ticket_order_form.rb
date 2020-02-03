@@ -42,4 +42,10 @@ class TicketOrderForm
   def persisted?
     false
   end
+
+  def attendees_attributes=(attributes)
+    self.attendees = attributes.values.map do |values|
+      TicketOrder::Attendee.new(values)
+    end
+  end
 end

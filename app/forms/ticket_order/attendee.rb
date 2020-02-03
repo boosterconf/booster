@@ -22,5 +22,6 @@ class Attendee
   def persisted?
     false
   end
+
 end
 end

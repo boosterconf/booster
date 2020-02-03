@@ -17,7 +17,7 @@
   <%- end %>
     <%= form_for(@ticket_order_form, url: tickets_path, method: :post) do |f| %>
     <fieldset class="attendee-form">
-      <%= fields_for "ticket_order_form[attendees][]", @ticket_order_form.attendees.first || TicketOrder::Attendee.new do |a_f| %>
+      <%= f.fields_for :attendees, [@ticket_order_form.attendees.first || TicketOrder::Attendee.new] do |a_f| %>
         <fieldset class="form-group">
           <%= a_f.label :name, "Name" %>
           <%= a_f.text_field :name, class: 'form-control input-short', required: true, placeholder: "Name" %>
@@ -30,15 +30,6 @@
           <%= a_f.label :company, "Company" %>
           <%= a_f.text_field :company, class: 'form-control input-short', required: true, placeholder: "Company" %>
         </fieldset>
-      <fieldset class="form-group">
-      <label>What role(s) do you have?</label><br />
-        <% Roles.all.each do |role| %>
-            <span class="checkbox-btn">
-              <%= check_box_tag "ticket_order_form[attendees][][roles][]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
-              <label for="roles_<%=role%>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
-            </span>
-        <% end %>
-      </fieldset>
         <fieldset class="checkbox is_attending_dinner">
           <label>
             <%= a_f.check_box :is_attending_conference_dinner, class: "checkbox" %>
