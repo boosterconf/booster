@@ -23,6 +23,7 @@
   <li><%= link_to 'Download nametags', nametags_path(:format => 'pdf') %></li>
   <li><%= link_to 'Send dinner registration reminder email (NB! sends immediately!)', send_ticket_email_tickets_path %></li>
   <li><%= link_to 'Download all participant emails', download_emails_tickets_path(:format => 'csv') %></li>
+  <li><%= link_to 'Download all accepted speakers emails', download_emails_accepted_speakers_path(:format => 'csv') %></li>
 
   <!--
   <li><%#= #link_to 'Invitees', :controller => 'invitees', :action => 'index' %></li>
