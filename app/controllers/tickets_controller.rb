@@ -81,6 +81,7 @@ class TicketsController < ApplicationController
   # POST /tickets
   def create
     ActiveRecord::Base.transaction do
+
       @ticket_order_form = TicketOrderForm.new(ticket_form_params)
       @ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference) || TicketType.current_normal_ticket
 
