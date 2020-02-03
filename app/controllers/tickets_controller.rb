@@ -23,7 +23,7 @@ class TicketsController < ApplicationController
       format.csv {send_data @tickets.to_csv, filename: "tickets-#{Date.today}.csv"}
     end
   end
-
+  
   def send_ticket_email
     @tickets = Ticket.all
 
