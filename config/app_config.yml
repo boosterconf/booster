@@ -44,9 +44,9 @@ staging:
 production:
   year: 2020
   cfp_open: false
-  proposals_visible: true
+  proposals_visible: false
   program_released: false
-  speakers_released: false
+  speakers_released: true
   early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
