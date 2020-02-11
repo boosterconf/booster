@@ -2,7 +2,7 @@
 <body>
 
 <p>
-  <%= @name %> has ordered a <%= link_to @ticket.ticket_type.name, ticket_url(@ticket.id) %> to be paid by their employer at <%= @company_name %> <%= @company_contact_email %> (<%= @company_organizational_identifier %>). Their email is: <%= @email %>
+  <%= @name %> has ordered a <%= @ticket.ticket_type.name %> (<%= @ticket.id %>) to be paid by their employer at <%= @company_name %> <%= @company_contact_email %> (<%= @company_organizational_identifier %>). Their email is: <%= @email %>
 </p>
 
 </body>
