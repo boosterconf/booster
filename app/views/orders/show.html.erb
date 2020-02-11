@@ -11,11 +11,10 @@
   	<%- if(@order.paid) -%>
   		<p>We have received your payment. If you already received an invoice you can consider it paid.</p>
   	<%- else -%>
-  	<p>You will soon receive an invoice from us. If you still want to pay by card you can do so <%= link_to "here", new_order_direct_payment_path(@order.reference) %></p>
+  	<p>You will soon receive an invoice from us. If you rather want to pay by card you can do so <%= link_to "here", new_order_direct_payment_path(@order.reference) %></p>
   	<%- end -%>
   <%- elsif(@order.payment_type == "card" && !@order.paid) -%>
   	<p>Haven't paid for your ticket yet? Click <%= link_to "here", new_order_direct_payment_path(@order.reference) %> to do so!</p>
-  <%- elsif(@order.payment_type == "company") -%>
   <%- end -%>
   <p></p>
 </article>
