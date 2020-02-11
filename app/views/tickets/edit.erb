@@ -34,10 +34,6 @@
       <%= f.label :company, "Where do you work?" %>
       <%= text_field(:ticket, :company, placeholder: "Company", class: 'form-control input-short', required: true) %>
     </fieldset>
-    <fieldset class="form-group">
-      <label>What role(s) do you have?</label>
-      <%= text_field(:ticket, :roles, class: 'form-control input-short', disabled: true) %>
-    </fieldset>
 
     <div class="checkbox">
       <label>
@@ -53,10 +49,6 @@
         </label>
       </div>
     <% end %>
-    <fieldset class="form-group">
-      <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
-      <%= f.text_area :dietary_info, :class => "form-control input-md" %>
-    </fieldset>
 
     <fieldset class="form-group">
       <%= f.label :feedback, "How did you hear about us?" %>
