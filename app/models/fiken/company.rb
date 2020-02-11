@@ -15,7 +15,7 @@ module Fiken
 		end
 
 		def bank_accounts
-			client["https://fiken.no/api/v1/rel/bank_accounts"]._get._embedded["https://fiken.no/api/v1/rel/bank_accounts"].map { |bank_account| Fiken::BankAccount.new(bank_account.to_hash) }
+			client["https://fiken.no/api/v1/rel/bank-accounts"]._get._embedded["https://fiken.no/api/v1/rel/bank-accounts"].map { |bank_account| Fiken::BankAccount.new(bank_account.to_hash) }
 			# @api_object.bank_accounts.map { |account_hash| Fiken::BankAccount.new(account_hash) }
 		end
 
