@@ -17,6 +17,7 @@
   <%- end %>
     <%= form_for(@ticket_order_form, url: tickets_path, method: :post) do |f| %>
     <fieldset class="attendee-form">
+      <h3>Attendee info</h3>
       <%= f.fields_for :attendees, [@ticket_order_form.attendees.first || TicketOrder::Attendee.new] do |a_f| %>
         <fieldset class="form-group">
           <%= a_f.label :name, "Name" %>
@@ -35,10 +36,6 @@
             <%= a_f.check_box :is_attending_conference_dinner, class: "checkbox" %>
             I'd like to attend the conference dinner on Wednesday
           </label>
-        </fieldset>
-        <fieldset class="form-group">
-          <%= a_f.label :dietary_requirements, "Dietary requirements (allergy/vegetarian)?" %>
-          <%= a_f.text_area :dietary_requirements, :class => "form-control input-md" %>
         </fieldset>
       <%- end -%>
     </fieldset>
@@ -64,25 +61,50 @@
       <% end %>
     </fieldset>
     <fieldset id="invoice_fields">
+      <h3>Invoice details</h3>
       <%= f.fields_for :invoice_details, @ticket_order_form.invoice_details do |i_f| %>
         <fieldset class="form-group">
-          <%= i_f.label :name, "Name" %>
+          <%= i_f.label :name, "Name on invoice (required)" %>
           <%= i_f.text_field :name, class: 'form-control input-short', placeholder: "Name" %>
-          <%= i_f.label :email, "Email" %>
+          <%= i_f.label :email, "Invoice email (required)" %>
           <%= i_f.text_field :email, class: 'form-control input-short', placeholder: "Email" %>
-          <%= i_f.label :address, "Invoice address" %>
-          <%= i_f.text_field :address, class: 'form-control input-short', placeholder: "Address" %>
+
+          <%= i_f.label :organizationIdentifier, "Organizational Identifier (org. nr.)" %>
+          <%= i_f.text_field :organizationIdentifier, class: 'form-control input-short', placeholder: "org. nr." %>
+
+          <%= i_f.label :invoice_reference, "Invoice reference" %>
+          <%= i_f.text_field :invoice_reference, class: 'form-control input-short', placeholder: "e.g. PO number" %>
+
+          <%= i_f.fields_for :address do |a_f| %>
+            <%= a_f.label :address1, "Invoice address" %>
+            <%= a_f.text_field :address1, class: 'form-control input-short', placeholder: "Address" %>
+
+            <%= a_f.label :postal_code, "Postal code" %>
+            <%= a_f.text_field :postal_code, class: 'form-control input-short', placeholder: "" %>
+
+            <%= a_f.label :postal_place, "Postal place" %>
+            <%= a_f.text_field :postal_place, class: 'form-control input-short', placeholder: "" %>
+
+            <%= a_f.label :country, "Country" %>
+            <%= a_f.text_field :country, class: 'form-control input-short' %>
+          <%- end -%>
         </fieldset>
       <%- end %>
     </fieldset>
     <fieldset id="company_invoice_fields">
+      <p>We will invoice your employer for your ticket. If multiple attendees register we will invoice as a group. Your ticket must be confirmed by your employer before it is valid.</p>
       <%= f.fields_for :company_invoice_details, @ticket_order_form.company_invoice_details do |i_f| %>
         <fieldset class="form-group">
           <%= i_f.label :name, "Employer company name" %>
           <%= i_f.text_field :name, class: 'form-control input-short', placeholder: "Company name" %>
+          <%= i_f.label :email, "Contact email" %>
+          <%= i_f.text_field :email, class: 'form-control input-short', placeholder: "contact@company.org" %>
+          <%= i_f.label :organizationIdentifier, "Organizational Identifier (org. nr.)" %>
+          <%= i_f.text_field :organizationIdentifier, class: 'form-control input-short', placeholder: "org. nr." %>
         </fieldset>
       <%- end %>
     </fieldset>
-    <button class="btn btn-primary">Order ticket</button>
+    <p>Your ticket will be created and reserved once the “book now” button is pressed.<br /> Proceed in order to reserve your ticket.</p>
+    <button class="btn btn-primary">Book now</button>
   <%- end %>
 </article>

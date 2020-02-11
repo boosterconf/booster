@@ -6,7 +6,7 @@ class FikenOrderInvoiceCreationJob < ApplicationJob
 			order = Order.find_by_id(order_id)
 			customer = fiken_client
 				.contacts
-				.find_all { |customer| customer.email.equal?(customerEmail)}
+				.find_all { |customer| customer.email == customerEmail}
 				.first
 			if(customer == nil)
 				customer = fiken_client.create_contact(Fiken::Contact.new(

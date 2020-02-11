@@ -9,7 +9,7 @@ Rails.application.routes.draw do
       get :download_emails
     end
   end
-  resources :orders do
+  resources :orders, param: :reference do
     resource :invoice, only: [:new, :create]
     resource :direct_payment, only: [:new, :completed] do
       get :completed

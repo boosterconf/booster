@@ -11,7 +11,7 @@ $(document).ready(function () {
 });
 
 function paymentDetailsChanged(input) {
-	if(input.val() == "invoice") {
+	if(input.val() == "invoice" || input.val() == "card") {
 		$("#invoice_fields").show();
 	} else {
 		$("#invoice_fields").hide();
@@ -34,6 +34,9 @@ $(document).ready(function() {
 	});
 	$("input[name='ticket_order_form[attendees_attributes][0][email]']").on("change keyup", function(e) {
 		$("#invoice_fields input[name='ticket_order_form[invoice_details][email]']").val($(this).val());
+	});
+	$("input[name='ticket_order_form[attendees_attributes][0][company]']").on("change keyup", function(e) {
+		$("#company_invoice_fields input[name='ticket_order_form[company_invoice_details][name]']").val($(this).val());
 	});
 
 })

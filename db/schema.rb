@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_28_162527) do
+ActiveRecord::Schema.define(version: 2020_02_11_170913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(version: 2020_01_28_162527) do
     t.datetime "updated_at", null: false
     t.string "reference"
     t.string "payment_type"
+    t.boolean "paid"
+    t.string "payment_intent_id"
+    t.string "invoice_email"
     t.index ["fiken_sale_uri"], name: "index_orders_on_fiken_sale_uri"
     t.index ["reference"], name: "index_orders_on_reference"
     t.index ["stripe_charge_id"], name: "index_orders_on_stripe_charge_id"

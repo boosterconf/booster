@@ -1,42 +1,67 @@
 module Fiken
 	class Company
-		def initialize(api_object)
-			@api_object = api_object
+		def initialize(data_object, client)
+			@data_object = data_object
+			@client = client
 		end
 
 		def sales
-			@api_object.sales.map { |sale_hash| Fiken::Sale.new(sale_hash) }
+			client["https://fiken.no/api/v1/rel/sales"]._get._embedded["https://fiken.no/api/v1/rel/sales"].map { |sale| Fiken::Sale.new(sale.to_hash, sale) }
 		end
 
 		def contacts
-			@api_object.contacts.map { |contact_hash| Fiken::Contact.new(contact_hash) }
+			client["https://fiken.no/api/v1/rel/contacts"]._get._embedded["https://fiken.no/api/v1/rel/contacts"].map { |contact| Fiken::Contact.new(contact.to_hash, contact) }
+			#@api_object.contacts.map { |contact_hash| Fiken::Contact.new(contact_hash) }
 		end
 
 		def bank_accounts
-			@api_object.bank_accounts.map { |account_hash| Fiken::BankAccount.new(account_hash) }
+			client["https://fiken.no/api/v1/rel/bank_accounts"]._get._embedded["https://fiken.no/api/v1/rel/bank_accounts"].map { |bank_account| Fiken::BankAccount.new(bank_account.to_hash) }
+			# @api_object.bank_accounts.map { |account_hash| Fiken::BankAccount.new(account_hash) }
 		end
 
 		def products
-			@api_object.products.map { |product_hash| Fiken::Product.new(product_hash) }
+			# @api_object.products.map { |product_hash| Fiken::Product.new(product_hash) }
+			client["https://fiken.no/api/v1/rel/products"]._get._embedded["https://fiken.no/api/v1/rel/products"].map { |product| Fiken::Product.new(product.to_hash) }
+		end
+
+		def sale(url)
+			sale = get(url)
+			Fiken::Sale.new(sale.to_hash, sale)
 		end
 
 		def create_invoice(invoice_request)
 			if(!invoice_request.valid?)
 				return false
 			end
-			url = @api_object.create_invoice(invoice_request.as_json)
-			Fiken::Invoice.new(@api_object.get_invoice(url))
+			response = client._links["https://fiken.no/api/v1/rel/create-invoice-service"]._post(invoice_request.as_json.to_json)
+			# url = @api_object.create_invoice(invoice_request.as_json)
+			Fiken::Invoice.new(get(response._response.headers[:location]).to_hash)
 		end
 
 		def create_contact(contact_details)
 			if(!contact_details.valid?)
 				return false
 			end
+			response = client._links["https://fiken.no/api/v1/rel/contacts"]._post(contact_details.as_json.to_json)
+			c = get(response._response.headers[:location])
+			Fiken::Contact.new(c.to_hash, c)
 
-			url = @api_object.contact(contact_details.as_json)
-			api_result = @api_object.get_contact(url)
-			api_result["href"] = url
-			Fiken::Contact.new(api_result)
+			#url = @api_object.contact(contact_details.as_json)
+			#api_result = @api_object.get_contact(url)
+			#api_result["href"] = url
+			#Fiken::Contact.new(api_result)
+		end
+
+		# private
+
+		attr_reader :client
+
+		def get(href)
+
+			api = Hyperclient.new(href) do |client|
+			  client.basic_auth(Rails.application.secrets.fiken[:username], Rails.application.secrets.fiken[:password])
+			end
+			api._get
 		end
 	end
 end

@@ -2,9 +2,16 @@
   <div class="header-join">
     <h2>Order of <%= @order.tickets.count %> <%= "ticket".pluralize(@order.tickets.count) %></h2>
   </div>
-  <p>Hurray, you have ordered your <%= "ticket".pluralize(@order.tickets.count) %>!</p>
+  <p>Hurray, we have reserved your <%= "ticket".pluralize(@order.tickets.count) %>!</p>
   <p>
     We look forward to seeing you. Any questions? Send them to <a href="mailto:kontakt@boosterconf.no">kontakt@boosterconf.no</a>
     and we will answer them as soon as we can.
   </p>
+  <%- if(@order.payment_type == "invoice") -%>
+  <p>You will soon receive an invoice from us. If you still want to pay by card you can do so <%= link_to "here", new_order_direct_payment_path(@order.reference) %></p>
+  <%- elsif(@order.payment_type == "card" && !@order.paid) -%>
+  <p>Haven't paid for your ticket yet? Click <%= link_to "here", new_order_direct_payment_path(@order.reference) %> to do so!</p>
+  <%- elsif(@order.payment_type == "company") -%>
+  <%- end -%>
+  <p></p>
 </article>

@@ -6,7 +6,7 @@
 </p>
 
 <% if @amount_due > 0 %>
-  <p>We will send you an invoice for NOK <%= @amount_due %> to <%= @email %>, or you can pay with a credit card by clicking on the link below.</p>
+  <p>We will send you an invoice for NOK <%= @amount_due %> to <%= @email %>, or you can pay with a credit card by clicking <%= link_to "here" order_url(@ticket.order.reference).</p>
 <% end %>
 
 <p>

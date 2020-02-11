@@ -1,6 +1,6 @@
 class DirectPaymentsController < ApplicationController
 	def new
-		order = Order.find_by_id(params[:order_id])
+		order = Order.find_by_reference!(params[:order_reference])
 		line_items = order.tickets.map do |ticket|
 			{
 				name: ticket.ticket_type.name.slice(0, ([ticket.ticket_type.name.length, 22].min)), # whut
@@ -10,13 +10,14 @@ class DirectPaymentsController < ApplicationController
 				quantity: 1,
 			}
 		end
+
 		@session = Stripe::Checkout::Session.create(
-		  customer_email: (order.tickets.count == 1)? order.tickets.first.email : nil,
+		  customer_email: order.invoice_email,
           payment_method_types: ['card'],
           client_reference_id: order.reference,
           line_items: line_items,
-          success_url: completed_order_direct_payment_url(order) + "?session_id={CHECKOUT_SESSION_ID}",
-          cancel_url: "https://boosterconf.no",
+          success_url: completed_order_direct_payment_url(order.reference) + "?session_id={CHECKOUT_SESSION_ID}",
+          cancel_url: order_url(order.reference),
         )
 	end
 
@@ -26,7 +27,7 @@ class DirectPaymentsController < ApplicationController
 		if(!order.stripe_charge_id.present?)
 			render "error"
 		else
-			redirect_to order_path(order)
+			redirect_to order_path(order.reference)
 		end
 	end
 
@@ -58,12 +59,15 @@ class DirectPaymentsController < ApplicationController
 
 			order = Order.find_by_reference!(session["client_reference_id"])
 		    order.stripe_charge_id = charge["id"]
+		    debugger
+		    order.paid = (payment_intent["amount"] == payment_intent["amount_received"])
 		    order.save
 
+		    FikenOrderCreatePaymentJob.perform_now(order.id, session["payment_intent"])
 		    if(order.tickets.count == 1)
 		    	ticket = order.tickets.first
-		    	FikenOrderInvoiceCreationJob.perform_later(order.id, ticket.name, ticket.email)
-		    	BoosterMailer.ticket_confirmation_paid(ticket).deliver_later
+		    	##FikenOrderInvoiceCreationJob.perform_later(order.id, ticket.name, ticket.email)
+		    	#BoosterMailer.ticket_confirmation_paid(ticket).deliver_later
 		    else
 		    	# We don't support direct payment of group orders yet, this should not happen
 		    end

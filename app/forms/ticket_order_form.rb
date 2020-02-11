@@ -9,8 +9,8 @@ class TicketOrderForm
     if(AppConfig.stripe_on)
   	  payment_types["card"] = "Card"
     end
-    payment_types["invoice"] = "Invoice"
-    payment_types["company_group_invoice"] = "Invoice my employer"
+    payment_types["invoice"] = "Invoice me"
+    payment_types["company_group_invoice"] = "Add me to a group invoice"
     return payment_types
   end
 
@@ -31,9 +31,15 @@ class TicketOrderForm
       errors.add(:attendees, :invalid, :value => attendees)
     end
 
-    if(payment_details_type == "invoice")
+    if(payment_details_type == "invoice" || payment_details_type == "card")
       if(!invoice_details.valid?)
         errors.add(:invoice_details, :invalid, :value => invoice_details)
+      end
+    end
+
+    if(payment_details_type == "company_group_invoice")
+      if(!company_invoice_details.valid?)
+        errors.add(:company_invoice_details, :invalid, :value => company_invoice_details)
       end
     end
 

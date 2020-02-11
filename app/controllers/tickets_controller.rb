@@ -23,7 +23,7 @@ class TicketsController < ApplicationController
       format.csv {send_data @tickets.to_csv, filename: "tickets-#{Date.today}.csv"}
     end
   end
-  
+
   def send_ticket_email
     @tickets = Ticket.all
 
@@ -108,27 +108,61 @@ class TicketsController < ApplicationController
           render :new, notice: "Could not generate ticket from your info, please contact us!"
         else
 
-          payment_type = @ticket_order_form.payment_details_type
-          if(["card", "invoice"].include?(payment_type))
-
+          if(@ticket_order_form.payment_details_type == "company_group_invoice")
+            @ticket.save!
+            invoice_details = @ticket_order_form.company_invoice_details
+            BoosterMailer.ticket_company_invoice_details(@ticket, invoice_details.name, invoice_details.email, invoice_details.organizationIdentifier).deliver_later
+            redirect_to ticket_path(@ticket.id)
+          else
             order = Order.new
             order.tickets << @ticket
             order.payment_type = @ticket_order_form.payment_details_type
-            order.save!
-            if(payment_type == "card")
-              redirect_to new_order_direct_payment_path(order)
-            elsif(payment_type == "invoice")
-              invoice_details = @ticket_order_form.invoice_details
-              FikenOrderInvoiceCreationJob.perform_later(order.id, invoice_details.name, invoice_details.email, params[:payment_reference])
-              BoosterMailer.ticket_confirmation_invoice(@ticket).deliver_later
-              redirect_to order_path(order)
+
+            invoice_details = @ticket_order_form.invoice_details
+            order.invoice_email = invoice_details.email
+
+            customer = fiken_client
+              .contacts
+              .find_all { |customer|
+                customer.email == invoice_details.email ||
+                customer.organizationIdentifier == invoice_details.organizationIdentifier
+              }
+              .first
+            if(customer == nil)
+              customer = fiken_client.create_contact(invoice_details.to_fiken_customer)
+            end
+            if(!customer || !customer.href || customer.href.empty?)
+              throw StandardError.new("Could not create invoice customer #{invoice_details.inspect}")
             end
 
-          else
-            @ticket.save!
-            BoosterMailer.ticket_confirmation_company_invoice(@ticket).deliver_later
-            BoosterMailer.ticket_company_invoice_details(@ticket, @ticket_order_form.company_invoice_details.name).deliver_later
-            redirect_to ticket_path(@ticket)
+
+            lines = order.tickets.map do |ticket|
+              Fiken::CreateInvoiceLine.new(
+                productUrl: @ticket.ticket_type.fiken_product_uri,
+                description: "#{@ticket.ticket_type.name} for #{@ticket.name}",
+                )
+            end
+            invoice_request = Fiken::CreateInvoiceRequest.new(
+              ourReference: "#{order.reference}",
+              theirReference: "#{invoice_details.invoice_reference}",
+              issueDate: Date.today,
+              dueDate: Date.today + 14,
+              lines: lines,
+              customer: { url: customer.href },
+              bankAccountUrl: AppConfig.fiken_invoice_bank_account_href
+              )
+            fiken_invoice = fiken_client.create_invoice(invoice_request)
+            order.fiken_sale_uri = fiken_invoice.sale_href
+
+
+            order.save!
+
+            BoosterMailer.ticket_assignment(@ticket).deliver_now
+            if(order.payment_type == "card")
+              redirect_to new_order_direct_payment_path(order.reference)
+            else
+              redirect_to order_path(order.reference)
+            end
           end
 
         end
@@ -189,6 +223,11 @@ class TicketsController < ApplicationController
   end
 
   private
+
+  def fiken_client
+    @fiken_client ||= Fiken.get_current
+  end
+
   # Use callbacks to share common setup or constraints between actions.
   def set_ticket
     @ticket = Ticket.find(params[:id])

@@ -3,9 +3,9 @@ module Fiken
 		include Virtus.model
         include ActiveModel::Validations
 
-		def initialize(api_object = {})
-			@api_object = api_object
-			super(api_object)
+		def initialize(data = {}, api = nil)
+			@api = api
+			super(data)
 		end
 
 		attribute :name,					String
@@ -25,11 +25,18 @@ module Fiken
 		validates :name, :email, presence: true
 
 		def href
-			@api_object["href"]
+			if(api)
+				api._links["self"].to_s
+			end
 		end
+
 
         def as_json(options={})
             super(options).reject { |k, v| v.nil? }
         end
+
+
+        private
+        attr_reader :api
 	end
 end

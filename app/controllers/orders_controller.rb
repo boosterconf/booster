@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
 	end
 
 	def show
-		@order = Order.find_by_id!(params[:id])
+		@order = Order.find_by_reference(params[:reference])
 	end
 	private
 

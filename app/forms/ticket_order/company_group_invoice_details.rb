@@ -6,6 +6,12 @@ class CompanyGroupInvoiceDetails
   include ActiveModel::Validations
 
   attribute :name, String
+  attribute :email, String
+  attribute :organizationIdentifier, String
+
+  validates :name, presence: true
+  validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :organizationIdentifier, presence: true, length: { is: 9 }
 
 end
 end

@@ -200,6 +200,18 @@ class BoosterMailer < ApplicationMailer
          :subject => "Booster #{Dates::CONFERENCE_YEAR} - viktig informasjon til partnere!")
   end
 
+  def order_confirmation(name, order)
+    @name = name
+    @order = order
+
+    mail(:to => order.invoice_email,
+         :from => FROM_EMAIL,
+         :cc => FROM_EMAIL,
+         :subject => "#{SUBJECT_PREFIX} Order confirmation")
+
+
+  end
+
   def organizer_notification(text)
     @text = text
 
@@ -253,10 +265,14 @@ class BoosterMailer < ApplicationMailer
          subject: "Your ticket to Booster is confirmed",
          cc: FROM_EMAIL)
   end
-  def ticket_company_invoice_details(ticket, company_name)
+  def ticket_company_invoice_details(ticket, company_name, company_email, company_identifier)
+    @ticket = ticket
     @name = ticket.name
     @email = ticket.email
+
     @company_name = company_name
+    @company_contact_email = company_email
+    @company_organizational_identifier = company_identifier
     mail(to: FROM_EMAIL, from: FROM_EMAIL,
          subject: "Company invoiced ticket created",
          cc: FROM_EMAIL)
