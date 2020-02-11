@@ -92,6 +92,7 @@
       <%- end %>
     </fieldset>
     <fieldset id="company_invoice_fields">
+      <h3>Employer info</h3>
       <p>We will invoice your employer for your ticket. If multiple attendees register we will invoice as a group. Your ticket must be confirmed by your employer before it is valid.</p>
       <%= f.fields_for :company_invoice_details, @ticket_order_form.company_invoice_details do |i_f| %>
         <fieldset class="form-group">
