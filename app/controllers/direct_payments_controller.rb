@@ -59,7 +59,6 @@ class DirectPaymentsController < ApplicationController
 
 			order = Order.find_by_reference!(session["client_reference_id"])
 		    order.stripe_charge_id = charge["id"]
-		    debugger
 		    order.paid = (payment_intent["amount"] == payment_intent["amount_received"])
 		    order.save
 
