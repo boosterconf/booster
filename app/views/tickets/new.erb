@@ -75,7 +75,7 @@
           <%= i_f.label :invoice_reference, "Invoice reference" %>
           <%= i_f.text_field :invoice_reference, class: 'form-control input-short', placeholder: "e.g. PO number" %>
 
-          <%= i_f.fields_for :address do |a_f| %>
+          <%= i_f.fields_for :address, @ticket_order_form.invoice_details.try(:address) do |a_f| %>
             <%= a_f.label :address1, "Invoice address" %>
             <%= a_f.text_field :address1, class: 'form-control input-short', placeholder: "Address" %>
 
@@ -83,7 +83,7 @@
             <%= a_f.text_field :postalCode, class: 'form-control input-short', placeholder: "" %>
 
             <%= a_f.label :postalPlace, "Postal place" %>
-            <%= a_f.text_field :postalCode, class: 'form-control input-short', placeholder: "" %>
+            <%= a_f.text_field :postalPlace, class: 'form-control input-short', placeholder: "" %>
 
             <%= a_f.label :country, "Country" %>
             <%= a_f.text_field :country, class: 'form-control input-short' %>
