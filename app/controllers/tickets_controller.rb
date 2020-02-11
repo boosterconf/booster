@@ -111,6 +111,7 @@ class TicketsController < ApplicationController
           if(@ticket_order_form.payment_details_type == "company_group_invoice")
             @ticket.save!
             invoice_details = @ticket_order_form.company_invoice_details
+            BoosterMailer.ticket_assignment(@ticket).deliver_later
             BoosterMailer.ticket_company_invoice_details(@ticket, invoice_details.name, invoice_details.email, invoice_details.organizationIdentifier).deliver_later
             redirect_to ticket_path(@ticket.id)
           else
@@ -157,7 +158,7 @@ class TicketsController < ApplicationController
 
             order.save!
 
-            BoosterMailer.ticket_assignment(@ticket).deliver_now
+            BoosterMailer.ticket_assignment(@ticket).deliver_later
             if(order.payment_type == "card")
               redirect_to new_order_direct_payment_path(order.reference)
             else
