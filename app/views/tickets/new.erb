@@ -64,8 +64,8 @@
       <h3>Invoice details</h3>
       <%= f.fields_for :invoice_details, @ticket_order_form.invoice_details do |i_f| %>
         <fieldset class="form-group">
-          <%= i_f.label :name, "Name on invoice (required)" %>
-          <%= i_f.text_field :name, class: 'form-control input-short', placeholder: "Name" %>
+          <%= i_f.label :name, "Name on invoice, your name or a company name (required)" %>
+          <%= i_f.text_field :name, class: 'form-control input-short', placeholder: "Your name or a company name" %>
           <%= i_f.label :email, "Invoice email (required)" %>
           <%= i_f.text_field :email, class: 'form-control input-short', placeholder: "Email" %>
 
