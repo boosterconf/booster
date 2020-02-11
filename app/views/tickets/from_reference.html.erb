@@ -32,16 +32,6 @@
       <%= text_field(:ticket, :company, placeholder: "Company", class: 'form-control input-short', required: true) %>
     </fieldset>
 
-    <label>What role(s) do you have?</label>
-    <fieldset class="form-group">
-      <% Roles.all.each do |role| %>
-        <span class="checkbox-btn">
-          <%= check_box_tag "roles[]", role, false, id: "roles_#{role}", :class => "input-checkbox" %>
-          <label for="roles_<%= role %>" class="btn btn-checkbox"><%= Roles.label[role] %></label>
-        </span>
-      <% end %>
-    </fieldset>
-
     <div class="checkbox">
       <label>
         <%= f.check_box :attend_dinner, class: "checkbox" %>
@@ -56,10 +46,6 @@
         </label>
       </div>
     <% end %>
-    <fieldset class="form-group">
-      <%= f.label :dietary_info, "Dietary requirements (allergy/vegetarian)?" %>
-      <%= f.text_area :dietary_info, :class => "form-control input-md" %>
-    </fieldset>
 
     <small class="text-muted">By registering, you accept that we can send you email about the conference.</small>
 
