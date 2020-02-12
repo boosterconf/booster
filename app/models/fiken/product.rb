@@ -1,15 +1,22 @@
 module Fiken
 	class Product
-		def initialize(api_object)
-			@api_object = api_object
+		def initialize(data, api = nil)
+			@data = data
+			@api = api
 		end
 
 		def name
-			@api_object["name"]
+			@data["name"]
 		end
 
 		def href
-			@api_object["href"]
+			if(api)
+				api._links["self"].to_s
+			end
 		end
+
+		private
+
+		attr_reader :api
 	end
 end

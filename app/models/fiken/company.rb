@@ -11,17 +11,14 @@ module Fiken
 
 		def contacts
 			client["https://fiken.no/api/v1/rel/contacts"]._get._embedded["https://fiken.no/api/v1/rel/contacts"].map { |contact| Fiken::Contact.new(contact.to_hash, contact) }
-			#@api_object.contacts.map { |contact_hash| Fiken::Contact.new(contact_hash) }
 		end
 
 		def bank_accounts
 			client["https://fiken.no/api/v1/rel/bank-accounts"]._get._embedded["https://fiken.no/api/v1/rel/bank-accounts"].map { |bank_account| Fiken::BankAccount.new(bank_account.to_hash) }
-			# @api_object.bank_accounts.map { |account_hash| Fiken::BankAccount.new(account_hash) }
 		end
 
 		def products
-			# @api_object.products.map { |product_hash| Fiken::Product.new(product_hash) }
-			client["https://fiken.no/api/v1/rel/products"]._get._embedded["https://fiken.no/api/v1/rel/products"].map { |product| Fiken::Product.new(product.to_hash) }
+			client["https://fiken.no/api/v1/rel/products"]._get._embedded["https://fiken.no/api/v1/rel/products"].map { |product| Fiken::Product.new(product.to_hash, product) }
 		end
 
 		def sale(url)
