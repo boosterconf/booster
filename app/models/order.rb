@@ -4,4 +4,8 @@ class Order < ApplicationRecord
 	def default_values
 		self.reference ||= SecureRandom.urlsafe_base64
 	end
+
+	def to_param
+		reference
+	end
 end
