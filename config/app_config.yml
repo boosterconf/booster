@@ -45,7 +45,7 @@ production:
   year: 2020
   cfp_open: false
   proposals_visible: false
-  program_released: false
+  program_released: true
   speakers_released: true
   early_bird_ends: 2020-02-16 23:59:59 +1
   early_bird_ticket_limit: 100
