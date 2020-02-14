@@ -44,6 +44,8 @@
           <label for="ticket_type">Ticket type</label>
           <%= f.collection_select :ticket_type_reference, TicketType.all, :reference, :name, {},  class: 'form-control admin' %>
         </fieldset>
+    <%- else -%>
+      <%= f.hidden_field :ticket_type_reference, value: TicketType.current_normal_ticket.reference %>
     <% end %>
 
     <fieldset class="form-group">
