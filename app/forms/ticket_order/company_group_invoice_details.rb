@@ -13,7 +13,7 @@ class CompanyGroupInvoiceDetails
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :organizationIdentifier, presence: true
 
-  validate :organizationIdentifier do
+  validate do
     if(organizationIdentifier.gsub(/[^\d]/, "").length != 9)
       errors.add :organizationIdentifier, 'should be exactly 9 digits'
     end

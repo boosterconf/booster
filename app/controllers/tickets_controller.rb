@@ -94,10 +94,12 @@ class TicketsController < ApplicationController
         end
         attendee = @ticket_order_form.attendees.first
         @ticket = Ticket.from_attendee_form(attendee)
-        if current_user && current_user.is_admin
-          @ticket.ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference)
+
+        # As a regular attendee I should not be able to create tikets of arbitrary type
+        if(!(current_user && current_user.is_admin) && @ticket_order_form.ticket_type_reference != TicketType.current_normal_ticket.reference)
+          @ticket.errors.add(:ticket_type_reference, "This ticket type is no longer available.")
         else
-          @ticket.ticket_type = TicketType.current_normal_ticket
+          @ticket.ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference)
         end
 
         @ticket.roles = attendee.roles.join(",")
