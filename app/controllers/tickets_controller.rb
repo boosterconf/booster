@@ -95,19 +95,18 @@ class TicketsController < ApplicationController
         attendee = @ticket_order_form.attendees.first
         @ticket = Ticket.from_attendee_form(attendee)
 
-        # As a regular attendee I should not be able to create tikets of arbitrary type
-        if(!(current_user && current_user.is_admin) && @ticket_order_form.ticket_type_reference != TicketType.current_normal_ticket.reference)
-          @ticket.errors.add(:ticket_type_reference, "This ticket type is no longer available.")
-        else
-          @ticket.ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference)
-        end
-
+        @ticket.ticket_type = TicketType.find_by_reference(@ticket_order_form.ticket_type_reference)
         @ticket.roles = attendee.roles.join(",")
         @ticket.reference = SecureRandom.urlsafe_base64
 
+        if(!(current_user && current_user.is_admin) && @ticket_order_form.ticket_type_reference != TicketType.current_normal_ticket.reference)
+          @ticket_order_form.errors.add(:ticket_type_reference, "This ticket type is no longer available.")
+          render :new, notice: "The ordered ticket type is no longer available"
+          return
+        end
 
         unless @ticket.valid?
-          render :new, notice: "Could not generate ticket from your info, please contact us!"
+          render :new
         else
 
           if(@ticket_order_form.payment_details_type == "company_group_invoice")
