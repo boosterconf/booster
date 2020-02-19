@@ -1,7 +1,6 @@
 Hei <%= @sponsor.contact_person_name %>!
 
-Vi sendte deg tidligere i uken deres partnerbilletter til Boosterkonferansen. De var dessverre litt dårlig merket, beklager om det skapte forvirring. De to e-postene du fikk da inneholder hver sin unike lenke til en av billettene, slik at de som skal ha dem kan fylle inn informasjonen vi trenger om navn, e-post og deltagelse på konferansemiddagen. Siden vi skal trykke navneskiltene i løpet av neste uke er det veldig fint om dere kan distribuere billettene og oppdatere dem med den nødvendige informasjonen så raskt som mulig.
+I tillegg til to ordinære billetter til konferansen får dere som partner også en en-dags billett spesielt tiltenkt ledere.
+<%= link_to "Den finner du her", tickets_from_reference_url(@ticket.reference) %>.
 
-I tillegg til to ordinære billetter til konferansen får dere som partner også en en-dags billett spesielt tiltenkt ledere. Den finner du <%= link_to "her", tickets_from_reference_url(@ticket.reference) %>. Endagsbilletten inkluderer tilgang til middagen onsdag og en valgfri konferansedag.
-
-Nå er det like før – og vi gleder oss veldig! Takk for at dere er med på å gjøre dette mulig!!
+Endagsbilletten inkluderer tilgang til middagen onsdag og en valgfri konferansedag.

@@ -306,7 +306,7 @@ class BoosterMailer < ApplicationMailer
     @ticket = ticket
     @sponsor = sponsor
     mail(to: sponsor.email, from: FROM_EMAIL,
-         subject: "Booster partnerbilletter")
+         subject: "Booster endagsbillett")
   end
 
   def send_ticket_link(ticket)
