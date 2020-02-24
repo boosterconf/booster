@@ -5,7 +5,7 @@
         <time class="time"><%= time %></time>
         <span class="location"><%= location %></span>
       </header>
-      <!--<a class="single-talk" href="<%= talk_path(talk.id) %>"> -->
+      <a class="single-talk" href="<%= talk_path(talk.id) %>">
 	  <a class="single-talk" href="#">
         <div class="slot">
           <div class="plenary-type talk">
@@ -16,7 +16,7 @@
                 <i class="fa fa-sticky-note" title="Talk has link to slides"></i>
               <% end %>
               </h4>
-            <span class='author'><%#= talk.speaker_name %></span>
+            <span class='author'><%= talk.speaker_name %></span>
             <%= render partial: 'adminInformation', locals: {talk: talk} %>
             <div class='description'><%= talk.description.html_safe %></div>
           </div>
