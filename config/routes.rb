@@ -64,6 +64,7 @@ Rails.application.routes.draw do
     collection do
       post :create_tickets
       post :create_tickets_organizers
+      get :download_speakers_list
     end
   end
 

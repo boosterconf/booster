@@ -166,6 +166,27 @@ class AcceptancesController < ApplicationController
     redirect_to acceptances_path, notice: 'Created tickets for confirmed speakers'
   end
 
+  require 'csv'
+  def download_speakers_list
+    @speakers = []
+    talks = Talk.all_with_speakers.where(acceptance_status: 'accepted', speakers_confirmed: true)
+    talks.each {|talk|
+      @speakers += talk.users
+    }
+    invited = User.all.where(invited: true)
+    @speakers += invited
+
+    data = CSV.generate do |csv|
+      csv << User.column_names
+      @speakers.each do |speaker|
+        csv << speaker.attributes.values_at(*User.column_names)
+      end
+    end
+    respond_to do |format|
+      format.csv { send_data data }
+    end
+  end
+
   private
   def redirect_on_email_sent
     redirect_to acceptances_path, error: "Cannot send email for talk '#{@talk.title}': Email already sent!"
