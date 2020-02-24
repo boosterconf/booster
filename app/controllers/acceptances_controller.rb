@@ -175,11 +175,11 @@ class AcceptancesController < ApplicationController
     }
     invited = User.all.where(invited: true)
     @speakers += invited
-
+    columns = [:id,:email,:company,:phone_number,:description,:first_name,:last_name,:hear_about,:opt_in_to_email_list]
     data = CSV.generate do |csv|
-      csv << User.column_names
+      csv << columns
       @speakers.each do |speaker|
-        csv << speaker.attributes.values_at(*User.column_names)
+        csv << speaker.attributes.values_at(*columns)
       end
     end
     respond_to do |format|
