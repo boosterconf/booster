@@ -54,4 +54,4 @@ production:
   fiken_invoice_bank_account_href: https://fiken.no/api/v1/companies/foreningen-boosterkonferansen/bank-accounts/253144070
   fiken_stripe_account_code: "1960:10001"
   stripe_on: true
-  ticket_sales_open: true
+  ticket_sales_open: false
