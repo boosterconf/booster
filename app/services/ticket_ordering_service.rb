@@ -32,7 +32,7 @@ class TicketOrderingService
 				dueDate: Date.today + 14,
 				lines: lines,
 				customer: customer,
-				bankAccountUrl: order_request_form.fiken_bank_account_uri
+				bankAccountUrl: AppConfig.fiken_invoice_bank_account_href
 				)
 
 			invoice = fiken_client.create_invoice(invoice_request)

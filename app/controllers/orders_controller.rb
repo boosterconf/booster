@@ -20,7 +20,6 @@ class OrdersController < ApplicationController
 
 	def new
 		@customers = find_customers
-		@bank_accounts = find_bank_accounts
 		@new_order_request = OrderCreationForm.new
 	end
 
@@ -28,7 +27,6 @@ class OrdersController < ApplicationController
 		service = TicketOrderingService.new
 
 		@customers = find_customers
-		@bank_accounts = find_bank_accounts
 		@new_order_request = OrderCreationForm.new(order_creation_form_params)
 		if(service.create_order_for_tickets(@new_order_request))
 			redirect_to orders_path
@@ -57,11 +55,5 @@ class OrdersController < ApplicationController
 					.contacts
 					.select {|c| c.customer_number.present? }
 					.map { |customer| [customer.name, customer.href]}
-	end
-
-	def find_bank_accounts
-		Fiken.get_current
-					.bank_accounts
-					.map { |bank_account| [bank_account.descriptive_name, bank_account.href]}
 	end
 end
