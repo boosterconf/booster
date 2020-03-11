@@ -1,20 +1,3 @@
-<% content_for :pre_content do %>
-  <div class="rocket">
-    <div class="middle-of-image">
-      <h1>THE SOFTWARE CONFERENCE<br/>FOR THE WHOLE TEAM</h1>
-      <div class="dates-location">
-        <span class="font-page-conference-dates"><%= Dates::CONFERENCE_DATES %></span>
-        <span class="front-page-location">Bergen, Norway<br/>Venue: Scandic Bergen City </span>
-      </div>
-    </div>
-
-
-    <div class="bottom-image">
-      <%= image_tag '/images/figures.png', class: 'img-superfluid' %>
-    </div>
-
-  </div>
-<% end %>
 <%- if(AppConfig.conference_cancelled) -%>
   <div class="cancellation">
   <h3>The conference is cancelled</h3>
@@ -32,7 +15,24 @@
   </p>
   </div>
   <div class="calltoaction"><p>Many thanks to our awesome partners:</p></div>
-  <%- end -%>
+  <%- else -%>
+  <% content_for :pre_content do %>
+  <div class="rocket">
+    <div class="middle-of-image">
+      <h1>THE SOFTWARE CONFERENCE<br/>FOR THE WHOLE TEAM</h1>
+      <div class="dates-location">
+        <span class="font-page-conference-dates"><%= Dates::CONFERENCE_DATES %></span>
+        <span class="front-page-location">Bergen, Norway<br/>Venue: Scandic Bergen City </span>
+      </div>
+    </div>
+
+
+    <div class="bottom-image">
+      <%= image_tag '/images/figures.png', class: 'img-superfluid' %>
+    </div>
+
+  </div>
+  <% end %>
 <div class="calltoaction">
 <%- if(AppConfig.cfp_open) %>
   <span>Call for presentations is now open!</span><br />
@@ -153,4 +153,4 @@
 
 <%# render partial: 'tedragen_advertisement' %>
 <%= render partial: 'kaffemisjonen_advertisement' %>
-<%- end # end of cancellation else %>
+<%- end  %> <%# End of cancellation %>
