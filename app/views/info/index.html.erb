@@ -1,4 +1,18 @@
 <%- if(AppConfig.conference_cancelled) -%>
+  <% content_for :pre_content do %>
+  <div class="rocket">
+    <div class="middle-of-image">
+      <h1>THE SOFTWARE CONFERENCE<br/>FOR THE WHOLE TEAM</h1>
+      <h2>CANCELLED!</h2>
+    </div>
+
+
+    <div class="bottom-image">
+      <%= image_tag '/images/figures.png', class: 'img-superfluid' %>
+    </div>
+
+  </div>
+  <% end %>
   <div class="cancellation">
   <h3>The conference is cancelled</h3>
   <p>
