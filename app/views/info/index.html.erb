@@ -15,23 +15,30 @@
 
   </div>
 <% end %>
-
+<%- if(AppConfig.conference_cancelled) -%>
+  <div class="cancellation">
+  <h3>The conference is cancelled</h3>
+  <p>
+    It is with deep regret that we announce Booster 2020 / Kids to be cancelled. The COVID-19 pandemic has affected our local and global communities, and in light of recent developments, the Booster Committee sees no other option but to cancel.</p>
+  <p>
+    Booster Conference enjoys the support of many great partners and a wonderful community. Next year we will be back to give you all the conference you deserve.
+  </p>
+  <p>
+    In the meantime, we are sure you have questions. Please be patient, cancelling a conference requires time and administration. We will provide you all with the necessary information as soon as possible.
+  </p>
+  <p>
+    Sincerely,
+    The Booster Committee
+  </p>
+  </div>
+  <div class="calltoaction"><p>Many thanks to our awesome partners:</p></div>
+  <%- end -%>
 <div class="calltoaction">
 <%- if(AppConfig.cfp_open) %>
   <span>Call for presentations is now open!</span><br />
   <a class="btn btn-primary btn-large" href="/info/cfp">Submit a talk / workshop</a>
 <%- end %>
-<%- if(AppConfig.conference_cancelled) -%>
-  <h3>The conference is cancelled</h3>
-  <p>
-  It is with deep regret that we announce Booster 2020 to be cancelled. The COVID-19 pandemic has affected our local and global communities, and in light of recent developments, the Booster Committee sees no other option but to cancel.</p>
-  <p>Booster Conference enjoys the support of many great partners and a wonderful community. Next year we will be back to give you all the conference you deserve.</p>
-  <p>In the meantime, we are sure you have questions. Please be patient, cancelling a conference requires time and administration. We will provide you all with the necessary information as soon as possible.</p>
-  <p>
-    Sincerely,
-    The Booster Committee
-  </p>
-<%- elsif(AppConfig.ticket_sales_open) -%>
+<%- if(AppConfig.ticket_sales_open) -%>
   <p>The ticket sale is open!</p>
   <% if TicketType.early_bird_is_active? %>
     <p>Early bird prices for the 100 first tickets! Buy now and save 2000 NOK.</p>
@@ -146,3 +153,4 @@
 
 <%# render partial: 'tedragen_advertisement' %>
 <%= render partial: 'kaffemisjonen_advertisement' %>
+<%- end # end of cancellation else %>
