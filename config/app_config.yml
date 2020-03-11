@@ -4,6 +4,7 @@ development:
   proposals_visible: true
   program_released: true
   speakers_released: false
+  conference_cancelled: false
   early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 29000
@@ -17,6 +18,7 @@ test:
   year: 2020
   proposals_visible: false
   program_released: false
+  conference_cancelled: false
   early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 29000
@@ -32,6 +34,7 @@ staging:
   proposals_visible: false
   program_released: true
   speakers_released: true
+  conference_cancelled: true
   early_bird_ends: 2020-02-13 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
@@ -47,6 +50,7 @@ production:
   proposals_visible: false
   program_released: true
   speakers_released: true
+  conference_cancelled: true
   early_bird_ends: 2020-02-16 23:59:59 +1
   early_bird_ticket_limit: 100
   partner_price_in_nok_before_vat: 31000
