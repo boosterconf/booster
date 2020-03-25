@@ -13,6 +13,11 @@
     padding: 20px;
 }
 
+.rocket.cancelled {
+  min-height: 200px;
+  max-height: 370px;
+}
+
 .soldout {
     background: #F2F2F2;
     text-align: center;
